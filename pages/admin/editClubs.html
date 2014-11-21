@@ -1,0 +1,62 @@
+    <div ng-controller="ClubDetailController">
+    <h1>Administrer klubber</h1>
+    <h3>Velg klubb under, eller legg til ny klubb</h3>
+    <span>Filter: <input ng-model="searchText"></span><br><br>
+    <table class="table table-hover">
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Melwin ID</th>
+                <th class="text-center">Navn</th>
+                <th class="text-center">Hovedinstruktør</th>
+                <th class="text-center">Aktiv?</th>
+
+            </tr>
+            <tr ng-repeat="club in clubs | filter:searchText" ng-click="editClub(club)">
+                    <td class="text-center">{{club.id}}</td>
+                    <td class="text-center">{{club.melwinId}}</td>
+                    <td class="text-center">{{club.name}}</td>
+                    <td class="text-center">{{club.chiefInstructorMelwinId}}</td>
+                    <td class="text-center"><input disabled="disabled" type="checkbox" ng-model="club.active"></td>
+
+                       
+            </tr>
+        </table>
+    
+         <a ng-click="newClubButton()">Tøm felter</a>
+         <h3>{{addOrEditClubText}}</h3>
+        <div>
+            <br>
+            <form role="form">
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <span>{{clubToEdit.id}}</span>
+                </div>
+                <div class="form-group">
+                    <label for="name">Navn på klubb</label>
+                    <input type="text" class="form-control" id="name" ng-model="clubToEdit.name" placeholder="Navn">
+                </div>
+                <div class="form-group">
+                    <label for="melwinId">MelwinID</label>
+                    <input type="text" class="form-control" id="melwinId" ng-model="clubToEdit.melwinId" placeholder="MelwinID">
+                </div>
+
+        <label class="control-label">Hovedinstruktør:</label> <br />
+        <p ng-show="clubToEdit.chiefInstructorMelwinId != null">{{clubToEdit.chiefInstructorMelwinId}}</p><p ng-show="clubToEdit.chiefInstructorMelwinId == null">Ingen HI registrert</p> <a ng-click="editChiefInstructor = !editChiefInstructor">(Endre)</a>
+        <div ng-show="editChiefInstructor">
+        <select ui-select2 data-placeholder="Velg HI" ng-model="chiefInstructorSelected" style="min-width: 300px;">
+            <option value=""></option>
+            <option ng-value="chiefInstructor.melwinId" ng-repeat="chiefInstructor in chiefInstructors track by chiefInstructor.id">
+                {{chiefInstructor.firstname}} {{chiefInstructor.lastname}} ({{chiefInstructor.melwinId}})
+            </option>    
+        </select>
+            </div>
+                <div class="checkbox">
+                    <label for="active">
+                        <input id="active" type="checkbox" ng-model="clubToEdit.active"> <b>Aktiv</b>
+                    </label>
+                </div>
+                <button class="btn btn-primary" ng-click="saveClub()">{{addOrEditClubButton}}</button>
+                <button class="btn btn-danger" ng-click="deleteClub()">Slett klubb</button>
+            </form>
+        </div>
+</div>

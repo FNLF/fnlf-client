@@ -1,0 +1,58 @@
+<div ng-controller="AdminController">
+    <h1>Administrer lokasjoner</h1>
+    <h3>Velg lokasjon under, eller legg til ny lokasjon</h3>
+    <select ui-select2 data-placeholder="Velg lokasjon" ng-model="locationSelected.id" style="min-width: 300px;">
+        <option value=""></option>
+        <option ng-value="location.id" ng-repeat="location in locations">
+            {{location.name}}
+        </option>    
+    </select><br><br>
+    <a ng-click="newClubButton()">Tøm felter</a>
+    <h3>{{addOrEditLocationText}}</h3>
+    <div>
+        <br>
+        <form role="form">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <span>{{locationSelected.id}}</span>
+            </div>
+            <div class="form-group">
+                <label for="name">Navn på lokasjon</label>
+                <input type="text" class="form-control" id="name" ng-model="locationToEdit.name" placeholder="Navn">
+            </div>
+            <div class="form-group">
+                <label for="latitude">Latitude</label>
+                <input type="text" class="form-control" id="latitude" ng-model="locationToEdit.latitude" placeholder="Latitude">
+            </div>
+            <div class="form-group">
+                <label for="longitude">Longitude</label>
+                <input type="text" class="form-control" id="longitude" ng-model="locationToEdit.longitude" placeholder="Longitude">
+            </div>
+            <div class="checkbox">
+                <label for="active">
+                    <input id="active" type="checkbox" ng-model="locationToEdit.active"> <b>Aktiv</b>
+                </label>
+            </div>
+            <button class="btn btn-primary" ng-click="saveLocation()">{{addOrEditLocationText}}</button>
+            <a class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" href="#">Slett lokasjon</a><br>
+        </form>
+
+    </div>
+
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Bekreft sletting
+                </div>
+                <div class="modal-body">
+                    Ønsker du virkelig å slette {{locationToEdit.name}}?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
+                    <a data-dismiss="modal" ng-click="deleteLocation()" class="btn btn-danger danger">Slett</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
