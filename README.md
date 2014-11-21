@@ -90,7 +90,7 @@ If you plan on contributing to this project, be sure to read the [contributing g
 *These contributing guidelines were proudly stolen from the 
 [Flight](https://github.com/flightjs/flight) project*
 
-Looking to contribute something to typeahead.js? Here's how you can help.
+Looking to contribute something? Here's how you can help.
 
 Bug Reports
 ------------
@@ -111,7 +111,7 @@ Guidelines for bug reports:
 
 4. Please try to be as detailed as possible in your report. Include specific
    information about the environment – operating system and version, browser
-   and version, version of typeahead.js – and steps required to reproduce the 
+   and version, version of avvik-klient – and steps required to reproduce the 
   issue.
 
 Feature Requests & Contribution Enquiries
@@ -147,11 +147,11 @@ project:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone https://github.com/<your-username>/typeahead.js
+   git clone https://github.com/<your-username>/avvik-klient
    # Navigate to the newly cloned directory
    cd <repo-name>
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream git://github.com/twitter/typeahead.js
+   git remote add upstream git://github.com/fnlf/avvik-klient
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
