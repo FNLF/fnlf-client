@@ -2,7 +2,7 @@
 F/NLF Client
 =======================
 
-An Angular client for  [avvik]
+An Angular client for  [fnlf-backend]
 
 * [Angular]
 * [Bootstrap]
@@ -20,7 +20,7 @@ Getting Started
 Download or clone the repository
 
 ```
-git clone https://github.com/fnlf/avvik-klient.git
+git clone https://github.com/fnlf/fnlf-client.git
 ```
 
 
@@ -39,7 +39,7 @@ Use your favorite webserver
 Backend
 --------
 
-The backend is located at [avvik]
+The backend is located at [fnlf-backend]
 
 Features
 --------
@@ -61,7 +61,7 @@ Issues
 
 Discovered a bug? Please create an issue here on GitHub!
 
-https://github.com/fnlf/avvik/issues
+https://github.com/fnlf/fnlf-client/issues
 
 Versioning
 ----------
@@ -111,7 +111,7 @@ Guidelines for bug reports:
 
 4. Please try to be as detailed as possible in your report. Include specific
    information about the environment – operating system and version, browser
-   and version, version of avvik-klient – and steps required to reproduce the 
+   and version, version of fnlf-client – and steps required to reproduce the 
   issue.
 
 Feature Requests & Contribution Enquiries
@@ -147,11 +147,11 @@ project:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone https://github.com/<your-username>/avvik-klient
+   git clone https://github.com/<your-username>/fnlf-client
    # Navigate to the newly cloned directory
    cd <repo-name>
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream git://github.com/fnlf/avvik-klient
+   git remote add upstream git://github.com/fnlf/fnlf-client
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
@@ -218,18 +218,18 @@ Copyright [F/NLF].
 
 Licensed under the MIT License
 
-[avvik-klient]: https://github.com/fnlf/avvik-klient
-[avvik]: https://github.com/fnlf/avvik
+[fnlf-client]: https://github.com/fnlf/fnlf-client
+[fnlf-backend]: https://github.com/fnlf/fnlf-backend
 [F/NLF Wiki]: https://nlf-az-db02.cloudapp.net/confluence
 [F/NLF]: http://www.nlf.no/fallskjerm
 
 <!-- assets -->
-[zipball]: http://fnlf.github.com/avvik-klient/releases/latest/avvik.zip
+[zipball]: http://fnlf.github.com/fnlf-client/releases/latest/fnlf-client.zip
 
 <!-- github links -->
-[contributing-guidelines]: https://github.com/fnlf/avvik/blob/master/CONTRIBUTING.md
-[contributors]: https://github.com/fnlf/avvik/contributors
-[issues]: https://github.com/fnlf/avvik/issues
+[contributing-guidelines]: https://github.com/fnlf/fnlf-client/blob/master/CONTRIBUTING.md
+[contributors]: https://github.com/fnlf/fnlf-client/contributors
+[issues]: https://github.com/fnlf/fnlf-client/issues
 
 <!-- deep links -->
 
