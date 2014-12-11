@@ -130,7 +130,7 @@ anomalyApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
 		    $httpProvider.interceptors.push(function ($q, $rootScope, $location) {
 		        return {
 		        	'request': function(config) {
-		        		var isRestCall = config.url.indexOf('https://nlf-az-db02.cloudapp.net/api/') == 0;
+		        		var isRestCall = config.url.indexOf('/api/') > -1;
 		        		if (isRestCall && angular.isDefined($rootScope.authToken)) {
 		        			var authToken = $rootScope.authToken;
 		        			if (appConfig.useAuthTokenHeader) {
@@ -150,7 +150,7 @@ anomalyApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
 	);
 
 anomalyApp.service('RestService', ['$http', function($http) {
-        var urlBase = 'https://nlf-az-db02.cloudapp.net/api';
+        var urlBase = '/api/v1';
 
         var persons = {};
         var licenses = {};
@@ -764,7 +764,7 @@ function LoginController($scope, $rootScope, $location, $cookieStore, UserServic
 var services = angular.module('anomalyApp.services', ['ngResource']);
 
 services.factory('UserService', function($resource) {	
-	return $resource('https://nlf-az-db02.cloudapp.net/api/user/:action', {},
+	return $resource('/api/v1/user/:action', {},
 			{
 				authenticate: {
 					method: 'POST',
