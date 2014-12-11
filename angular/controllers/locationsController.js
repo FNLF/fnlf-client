@@ -20,7 +20,7 @@ angular.module('anomalyApp')
                                     $scope.locations = locations;
                                 })
                                 .error(function(error) {
-                                    $scope.status = 'Fikk ikke hentet lokasjoner fra databasen: ' + error.message;
+                                    $scope.status = 'Fikk ikke hentet steder fra databasen: ' + error.message;
                                 });
                     }
                     getLocations();
