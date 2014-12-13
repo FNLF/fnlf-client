@@ -11,16 +11,14 @@ anomalyApp.service('UserService', ['$http','$location','$cookieStore','$rootScop
             .success(function(authenticationResult){
                 console.log(authenticationResult);
                 var authToken = authenticationResult.token;
-                $rootScope.authToken = authenticationResult.token;
-                $rootScope.token64 = authenticationResult.token64;
+                $rootScope.authToken = authenticationResult.token64;
+
 
                 if (rememberMe) {
                     $rootScope.rememberMe = true;
-                    $cookieStore.put('token64', authToken);
-                    $cookieStore.put('authToken', authToken);
+                    $cookieStore.put('authToken', authenticationResult.token64);
                     $cookieStore.put('username', username);
-                    $cookieStore.put('password', password);
-                    $cookieStore.put('rememberMe', rememberMe);
+
                 }
 
                $http.defaults.headers.common.Authorization = 'Basic ' + authenticationResult.token64;
@@ -30,7 +28,8 @@ anomalyApp.service('UserService', ['$http','$location','$cookieStore','$rootScop
                     user.roles=[];
                     user.roles.push('user');
                     $rootScope.user=user;
-                    $location.path('/');
+                    $rootScope.username=username;
+                  //  $location.path('/');
                }).error(function(error){
                 console.log(error);
                });
@@ -45,17 +44,21 @@ anomalyApp.service('UserService', ['$http','$location','$cookieStore','$rootScop
 
         this.tryLoginFromCookie = function(){
 
-        		 /* Try getting an authenticated user from cookie or go to login page */
-        		var originalPath = $location.path();
-        		//$location.path("/");
-        		var authToken = $cookieStore.get('authToken');
-        		var username = $cookieStore.get('username');
-                var password = $cookieStore.get('password');
+            var username = $cookieStore.get('username');
 
+            var token64 = $cookieStore.get('authToken');
 
-        		if (authToken !== undefined) {
-                   // authenticate(username,password,true);
-        		}
+            $http.defaults.headers.common.Authorization = 'Basic ' + token64;
+
+            $http.get('/api/v1/melwin/'+username)
+                       .success(function(user){
+                            user.roles=[];
+                            user.roles.push('user');
+                            $rootScope.user=user;
+                            $rootScope.username=username;
+                       }).error(function(error){
+                            $location.path("/");
+                       });
 
         }
 }]);

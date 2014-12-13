@@ -2,4 +2,5 @@
 
 # Rendered md files
 .*.md.html
+*.iml
 
