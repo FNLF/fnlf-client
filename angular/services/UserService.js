@@ -1,4 +1,30 @@
 anomalyApp.service('UserService', ['$http','$location','$cookieStore','$rootScope', function($http,$location,$cookieStore,$rootScope) {
+
+        $rootScope.hasRole = function(role) {
+
+            if ($rootScope.user === undefined) {
+                return false;
+            }
+               if(role==='user')
+                 return true;
+            if ($rootScope.user.roles[role] === undefined) {
+                return false;
+            }
+            return $rootScope.user.roles[role];
+        };
+
+        $rootScope.logout = function() {
+            delete $rootScope.user;
+            delete $rootScope.authToken;
+             $cookieStore.remove('authToken');
+            $location.path("/login");
+                         if(!$rootScope.rememberMe){
+                             $cookieStore.remove('username');
+                             $cookieStore.remove('password');
+                             $cookieStore.remove('rememberMe');
+                         }
+        };
+
         var urlBase = '/api/v1';
 
         this.getUser = function(username){
@@ -37,12 +63,18 @@ anomalyApp.service('UserService', ['$http','$location','$cookieStore','$rootScop
 
             }).error(function(error){
                 console.log(error);
+                $cookieStore.remove('authToken');
             });
         }
 
 
 
         this.tryLoginFromCookie = function(){
+
+            var authToken = $cookieStore.get('authToken');
+                if (authToken === undefined) {
+                    return;
+            }
 
             var username = $cookieStore.get('username');
 
@@ -57,6 +89,7 @@ anomalyApp.service('UserService', ['$http','$location','$cookieStore','$rootScop
                             $rootScope.user=user;
                             $rootScope.username=username;
                        }).error(function(error){
+                            $cookieStore.remove('authToken');
                             $location.path("/");
                        });
 

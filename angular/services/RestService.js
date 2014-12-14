@@ -3,16 +3,7 @@ anomalyApp.service('RestService', ['$http', function($http) {
 
         var persons = {};
         var licenses = {};
-       // getLicenses();
-
-        this.authenticate = function(username,password){
-            var data = {"username": username,"password": password};
-            return $http.post( '/api/v1/user/authenticate', data);
-        }
-
-        this.getUser = function(username){
-            return $http.get( '/api/v1/melwin/'+username);
-        }
+        getLicenses();
 
         //Club data
         this.saveClub = function(club) {

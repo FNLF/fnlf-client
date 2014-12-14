@@ -10,6 +10,7 @@
 angular.module('anomalyApp')
         .controller('MainController', function($scope, $location, DataService, RestService) {
             $scope.service = RestService;
+
             $scope.goToPage = function(url){
                 $location.path(url);
             };

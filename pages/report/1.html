@@ -30,7 +30,7 @@
             </select>
         </div>
         <div class="form-group" ng-controller="LocationsController">
-            <label class="control-label">Lokasjon der avviket fant sted:</label> <br />
+            <label class="control-label">Sted der avviket fant sted:</label> <br />
             <select ui-select2 data-placeholder="Velg lokasjon" ng-model="locationSelected.id" style="width: 40%; min-width: 200px;">
                 <option value=""></option>
                 <option ng-value="location.id" ng-repeat="location in locations">
@@ -47,12 +47,12 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Legg til  lokasjon</h4>
+                            <h4 class="modal-title" id="myModalLabel">Legg til sted</h4>
                         </div>
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="name">Navn på lokasjon</label>
+                                <label for="name">Navn på sted</label>
                                 <input type="text" class="form-control" id="name" ng-model="newLocation.name" placeholder="Navn">
                             </div>
                         </div>
