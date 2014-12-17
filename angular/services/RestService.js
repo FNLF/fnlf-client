@@ -1,4 +1,7 @@
-anomalyApp.service('RestService', ['$http', function($http) {
+(function(){
+
+angular.module('anomalyApp')
+	.service('RestService', ['$http', function($http) {
         var urlBase = '/api/v1';
 
         var persons = {};
@@ -344,3 +347,5 @@ anomalyApp.service('RestService', ['$http', function($http) {
             return $http.delete(urlBase + '/maincanopies/' + id);
         };
     }]);
+
+})();

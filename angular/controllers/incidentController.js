@@ -7,6 +7,8 @@
 * @since may.26.2014
 *
 */
+
+(function(){
 angular.module('anomalyApp')
         .controller('IncidentController',
                 function($scope, DataService, $location, RestService) {
@@ -165,3 +167,4 @@ angular.module('anomalyApp')
                     };
  
                 });
+})();

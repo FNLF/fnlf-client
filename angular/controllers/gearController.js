@@ -7,6 +7,8 @@
 * @since may.26.2014
 *
 */
+
+(function(){
 angular.module('anomalyApp')
         .controller('GearController',
                 function($scope, RestService) {
@@ -125,3 +127,5 @@ angular.module('anomalyApp')
                         };
                     }, true);
                 });
+
+})();

@@ -7,6 +7,7 @@
 * @since may.26.2014
 *
 */
+(function(){
 angular.module('anomalyApp')
         .controller('IncidentDetailController',
                 function($scope, RestService) {
@@ -72,3 +73,4 @@ angular.module('anomalyApp')
                         }
                     };
                 });
+})();

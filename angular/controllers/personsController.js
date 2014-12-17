@@ -1,3 +1,5 @@
+(function(){
+
 /**
 *
 * @author: Tore Buer, s180346
@@ -66,3 +68,5 @@ angular.module('anomalyApp')
                 };
 
             });
+
+})();

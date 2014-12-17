@@ -7,6 +7,7 @@
 * @since may.26.2014
 *
 */
+(function(){
 angular.module('anomalyApp')
         .controller('ClubDetailController',
                 function($scope, RestService) {
@@ -84,3 +85,4 @@ angular.module('anomalyApp')
                         $scope.clubToEdit = {}; 
                     };
                 });
+})();

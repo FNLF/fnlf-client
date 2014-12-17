@@ -1,4 +1,7 @@
-anomalyApp.service('UserService', ['$http','$location','$cookieStore','$rootScope', function($http,$location,$cookieStore,$rootScope) {
+(function(){
+
+angular.module('anomalyApp')
+	.service('UserService', ['$http','$location','$cookieStore','$rootScope', function($http,$location,$cookieStore,$rootScope) {
 
         $rootScope.hasRole = function(role) {
 
@@ -94,4 +97,6 @@ anomalyApp.service('UserService', ['$http','$location','$cookieStore','$rootScop
                        });
 
         }
-}]);
+	}]);
+
+})();
