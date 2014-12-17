@@ -217,10 +217,11 @@ anomalyApp.service('RestService', ['$http', function($http) {
             return nyperson;
         };
         function getPersonsFromDb() {
-            return $http.get(urlBase + '/persons');
+            return $http.get(urlBase + '/melwin');
         };
         this.getPersons = function() {
-            return $http.get(urlBase + '/persons');
+            return $http.get(urlBase + '/melwin');
+            return $http.get(urlBase + '/melwin');
         };
         this.updatePerson = function(person) {
             return $http.put(urlBase + '/persons/' + person.melwinId, person);
