@@ -23,8 +23,8 @@ angular.module('anomalyApp')
 
                     function getClubs() {
                         RestService.getClubs()
-                                .success(function(clubs) {
-                                    $scope.clubs = clubs;
+                                .success(function(response) {
+                                    $scope.clubs = response._items;
                                 })
                                 .error(function(error) {
                                     $scope.status = 'Fikk ikke hentet klubber fra databasen: ' + error.message;

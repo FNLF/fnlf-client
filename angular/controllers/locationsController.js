@@ -16,8 +16,8 @@ angular.module('anomalyApp')
 
                     function getLocations() {
                         RestService.getLocations()
-                                .success(function(locations) {
-                                    $scope.locations = locations;
+                                .success(function(response) {
+                                    $scope.locations = response._items;
                                 })
                                 .error(function(error) {
                                     $scope.status = 'Fikk ikke hentet steder fra databasen: ' + error.message;
