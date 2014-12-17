@@ -1,3 +1,5 @@
+(function(){
+var anomalyApp = angular.module('anomalyApp');
 anomalyApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
     function($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider
@@ -127,3 +129,4 @@ anomalyApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
 		} ]
 
 	);
+})();

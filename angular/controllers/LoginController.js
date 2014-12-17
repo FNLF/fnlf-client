@@ -1,8 +1,13 @@
+(function(){
 
-angular.module('anomalyApp')
-        .controller('LoginController', function($scope, $rootScope, $location, $cookieStore, UserService) {
+	var LoginController = function($scope, $rootScope, $location, $cookieStore, UserService) {
+		$scope.rememberMe=true;
+        $scope.username = $cookieStore.get('username');
 
-            $scope.login = function() {
-                UserService.authenticate($scope.username,$scope.password,$scope.rememberMe);
-            };
-        });
+		$scope.login = function() {
+        	UserService.authenticate($scope.username,$scope.password,$scope.rememberMe);
+		};
+	}
+
+	angular.module('anomalyApp').controller('LoginController',LoginController );
+})();

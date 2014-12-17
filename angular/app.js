@@ -7,9 +7,10 @@
 * @since may.26.2014
 *
 */
+(function(){
+
 var anomalyApp = angular.module('anomalyApp', [
     'ngRoute',
-    'ngResource',
     'ui',
     'ngCookies',
     'angular-loading-bar'
@@ -33,3 +34,4 @@ anomalyApp.run(function($rootScope, $location, $cookieStore, UserService) {
 	});
 
 
+})();
