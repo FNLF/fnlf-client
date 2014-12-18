@@ -23,7 +23,7 @@ angular.module('anomalyApp')
                        $scope.personsInvolved.push(involved.id); 
                     });
                 };
-                
+
                 $scope.$watch(function() {
                     return $scope.personsInvolved;
                 }, function() {  
@@ -46,7 +46,7 @@ angular.module('anomalyApp')
                     $scope.showLoader = true;
                     RestService.getPersons()
                             .success(function(persons) {
-                                $scope.personsFromDb= persons;
+                                $scope.personsFromDb= persons._items;
                                 $scope.choosePersons = "Velg involvert(e) person(er)";
                                 $scope.showLoader = false;
                             })
