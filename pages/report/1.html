@@ -31,7 +31,7 @@
         </div>
         <div class="form-group" ng-controller="LocationsController">
             <label class="control-label">Sted der avviket fant sted:</label> <br />
-            <select ui-select2 data-placeholder="Velg lokasjon" ng-model="locationSelected.id" style="width: 40%; min-width: 200px;">
+            <select ui-select2 data-placeholder="Velg sted" ng-model="locationSelected.id" style="width: 40%; min-width: 200px;">
                 <option value=""></option>
                 <option ng-value="location.id" ng-repeat="location in locations">
                     {{location.name}}
@@ -94,7 +94,7 @@
     <!--Select involved persons-->
     <div ng-controller="PersonsController">
         <label>Velg involvert(e) person(er):</label><br>
-        <select multiple ui-select2 style="width: 40%; min-width: 200px;" placeholder="{{choosePersons}}" ng-model="personsInvolved">
+        <select multiple ui-select2 style="width: 40%; min-width: 200px;" placeholder="{{choosePersons}}" ng-model="personsInvolved" ng-change="changed()">
             <option ng-repeat="person in personsFromDb" value="{{person.id.toString()}}">{{person.firstname}} {{person.lastname}} ({{person.melwinId}})</option>
         </select><span ng-show="showLoader"><img src="images/ajax-loader.gif" alt="Laster personer fra databasen"></span><br>
         <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModalPerson" style="width: 40%; min-width: 200px;">

@@ -22,7 +22,7 @@ angular.module('anomalyApp')
                                             $scope.licensesFromMelwin = licenses;
                                         })
                                         .error(function(error) {
-                                            $scope.status = 'Fikk ikke hentet lokasjoner fra databasen: ' + error.message;
+                                            $scope.status = 'Fikk ikke hentet lisenser fra databasen: ' + error.message;
                                         });
                             }
                     getLicensesFromMelwin();

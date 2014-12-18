@@ -26,7 +26,7 @@ angular.module('anomalyApp')
                                     $scope.manufacturers = m;
                                 })
                                 .error(function(error) {
-                                    $scope.status = 'Fikk ikke hentet lokasjoner fra databasen: ' + error.message;
+                                    $scope.status = 'Fikk ikke hentet produsenter fra databasen: ' + error.message;
                                 });
                     }
                     getManufacturers();
