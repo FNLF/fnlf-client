@@ -33,18 +33,12 @@
         <!--Angular Controllers-->
         <script src="angular/controllers/LoginController.js"></script>
         <script src="angular/controllers/clubController.js"></script>
-        <script src="angular/controllers/clubDetailController.js"></script>
         <script src="angular/controllers/mainController.js"></script>
         <script src="angular/controllers/locationsController.js"></script>
         <script src="angular/controllers/reportController.js"></script>
         <script src="angular/controllers/personsController.js"></script>
         <script src="angular/controllers/personDetailController.js"></script>
         <script src="angular/controllers/incidentController.js"></script>
-        <script src="angular/controllers/incidentDetailController.js"></script>
-        <script src="angular/controllers/hiController.js"></script>
-        <script src="angular/controllers/licensesController.js"></script>
-        <script src="angular/controllers/gearController.js"></script>
-        <script src="angular/controllers/adminController.js"></script>
 
 
 
@@ -63,14 +57,6 @@
         <script src="js/node_modules/angular-loading-bar/build/loading-bar.js"></script>
         <link href="js/node_modules/angular-loading-bar/build/loading-bar.css" rel="stylesheet">
 
-        <!--Bootstrap tooltip-->
-        <script type="text/javascript">
-            $(function() {
-                $("[data-toggle='tooltip']").tooltip();
-            });
-        </script>
-
-	
 
         <!-- Security-->
         <script src="angular/angular-cookies-1.2.3.js"></script>
@@ -99,57 +85,10 @@
 		        <span class="icon-bar"></span>
 		      </button>
 		        
-		        <!-- The application switcher -->
-		        <ul class="nav navbar-nav hidden-xs">
-			        <li class="dropdown">
-			        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-navicon"></i> </a>
-			          <ul class="dropdown-menu" role="menu">
-			            <li><a href="#">F/NLF forside</a></li>
-			            <li class="divider"></li>
-			            <li><a href="#">Klubbadministrasjon</a></li>
-			            <li><a href="#">Avviksrapportering</a></li>
-			            <li><a href="#">Utstyrsdatabase</a></li>
-			            
-			            <li><a href="#">Applikasjon</a></li>
-			            <li class="divider"></li>
-			            <li><a href="#">Applikasjon</a></li>
-			          </ul>
-			        </li>
-			      </ul>
+
 		      <a class="navbar-brand" ng-href="#!/"> F/NLF Avviksrapportering</a>
 		    </div>
-		
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-show="hasRole('user')">
-		      <ul class="nav navbar-nav navbar-right">
-		     
-		        <li ng-show="hasRole('user')"><a ng-href="#!/"><i class="fa fa-tachometer"></i> Dashboard</a></li>
-		        <li ng-show="hasRole('user')"><a ng-href="#!/report/1"><i class="fa fa-plus"></i> Opprett</a></li>
-		        <li ng-show="hasRole('user')"><a ng-href="#!/hi"><i class="fa fa-eye"></i> Utforsk</a></li>
-		        
-		        
-		        
-		        <li class="dropdown" ng-show="hasRole('user')">
-		          <a href class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Admin <span class="caret"></span></a>
-		          <ul class="dropdown-menu" role="menu">
-		            <li><a ng-href="#!/admin/clubs"><i class="fa fa-sitemap fa-fw"></i> Klubber</a></li>
-		            <li><a ng-href="#!/admin/locations"><i class="fa fa-map-marker fa-fw"></i> Lokalisasjoner</a></li>
-		            <li><a ng-href="#!/admin/licenses"><i class="fa fa-newspaper-o fa-fw"></i> Lisenser</a></li>
-		            <li class="divider"></li>
-		            
-		            <li><a ng-href="#!/admin/incidentTypes"><i class="fa fa-puzzle-piece fa-fw"></i> Faktorer</a></li>
-		            <li><a ng-href="#!/admin/jumpTypes"><i class="fa fa-filter fa-fw"></i> Hopptyper</a></li>
-		            <li class="divider"></li>
-		            <li><a ng-href="#!/admin/gear"><i class="fa fa-wrench fa-fw"></i> Utstyr</a></li>
-		          </ul>
-		        </li>
-		        
-		        
-		        <li ng-show="hasRole('user')"><a href ng-click="logout()" role="button"><i class="fa fa-power-off"></i> Logg ut</a></li>
-		        
-		      </ul>
 
-		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
         

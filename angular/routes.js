@@ -7,11 +7,6 @@ anomalyApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
                     templateUrl: 'pages/startPage.html',
                     controller: 'MainController'
                 })
-                .when('/anomalyMain', {
-                    templateUrl: 'pages/anomalyMain.html',
-                    controller: 'ReportController'
-
-                })
                 .when('/report/1', {
                     templateUrl: 'pages/report/1.html',
                     controller: 'ReportController'
@@ -34,53 +29,8 @@ anomalyApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
                 .when('/report/', {
                     templateUrl: 'pages/report/1.html',
                     controller: 'ReportController'
-
                 })
-                .when('/admin/1', {
-                    templateUrl: 'pages/admin/adminMain.html',
-                    controller: 'ReportController'
 
-                })
-                .when('/admin/clubs', {
-                    templateUrl: 'pages/admin/editClubs.html',
-                    controller: 'ClubController'
-
-                })
-                .when('/admin/licenses', {
-                    templateUrl: 'pages/admin/editLicenses.html',
-                    controller: 'ClubController'
-
-                })
-                .when('/admin/incidentTypes', {
-                    templateUrl: 'pages/admin/editIncidentTypes.html',
-                    controller: 'IncidentController'
-
-                })
-                .when('/admin/jumpTypes', {
-                    templateUrl: 'pages/admin/editJumpTypes.html',
-                    controller: 'IncidentController'
-
-                })
-                .when('/admin/locations', {
-                    templateUrl: 'pages/admin/editLocations.html',
-                    controller: 'LocationsController'
-
-                })
-                .when('/hi', {
-                    templateUrl: 'pages/hi/allAnomalies.html',
-                    controller: 'HiController'
-
-                })
-                .when('/hi/2', {
-                    templateUrl: 'pages/hi/anomalyDetails.html',
-                    controller: 'HiController'
-
-                })
-                .when('/admin/gear', {
-                    templateUrl: 'pages/admin/editGear.html',
-                    controller: 'GearController'
-
-                })
                 .otherwise({redirectTo: '/'});
 
         $locationProvider.hashPrefix('!');
