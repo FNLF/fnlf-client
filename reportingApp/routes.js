@@ -4,30 +4,30 @@ anomalyApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
     function($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider
                 .when('/', {
-                    templateUrl: 'pages/startPage.html',
+                    templateUrl: 'reportingApp/components/login/startPage.html',
                     controller: 'MainController'
                 })
                 .when('/report/1', {
-                    templateUrl: 'pages/report/1.html',
+                    templateUrl: 'reportingApp/components/report/1.html',
                     controller: 'ReportController'
 
                 })
                 .when('/report/2', {
-                    templateUrl: 'pages/report/2.html',
+                    templateUrl: 'reportingApp/components/report/report/2.html',
                     controller: 'ReportController'
                 })
                 .when('/report/3', {
-                    templateUrl: 'pages/report/3.html',
+                    templateUrl: 'reportingApp/components/report/report/3.html',
                     controller: 'ReportController'
 
                 })
                 .when('/report/4', {
-                    templateUrl: 'pages/report/4.html',
+                    templateUrl: 'reportingApp/components/report/report/4.html',
                     controller: 'MainController'
 
                 })
                 .when('/report/', {
-                    templateUrl: 'pages/report/1.html',
+                    templateUrl: 'reportingApp/components/report/report/1.html',
                     controller: 'ReportController'
                 })
 
