@@ -8,7 +8,7 @@
 *
 */
 (function(){
-angular.module('anomalyApp')
+angular.module('reportingApp')
         .controller('LocationsController',
                 function($scope, RestService, DataService) {
                     $scope.service = DataService;

@@ -1,6 +1,6 @@
 (function(){
-var anomalyApp = angular.module('anomalyApp');
-anomalyApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
+var reportingApp = angular.module('reportingApp');
+reportingApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
     function($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider
                 .when('/', {

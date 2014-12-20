@@ -9,7 +9,7 @@
 */
 
 (function(){
-angular.module('anomalyApp')
+angular.module('reportingApp')
         .controller('GearController',
                 function($scope, RestService) {
                     $scope.manufacturers = [];

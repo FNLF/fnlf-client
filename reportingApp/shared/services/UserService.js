@@ -1,6 +1,6 @@
 (function(){
 
-angular.module('anomalyApp')
+angular.module('reportingApp')
 	.service('UserService', ['$http','$location','$cookieStore','$rootScope', function($http,$location,$cookieStore,$rootScope) {
 
         $rootScope.hasRole = function(role) {

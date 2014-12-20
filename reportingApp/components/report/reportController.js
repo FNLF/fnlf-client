@@ -9,7 +9,7 @@
 * @since may.26.2014
 *
 */
-angular.module('anomalyApp')
+angular.module('reportingApp')
         .controller('ReportController',
                 function($scope, $location, DataService, RestService) {
                     $scope.anomalyType = DataService.getAnomalyType();

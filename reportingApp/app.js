@@ -9,7 +9,7 @@
 */
 (function(){
 
-var anomalyApp = angular.module('anomalyApp', [
+var reportingApp = angular.module('reportingApp', [
     'ngRoute',
     'ui',
     'ngCookies',
@@ -22,7 +22,7 @@ var anomalyApp = angular.module('anomalyApp', [
 
 
 
-anomalyApp.run(function($rootScope, $location, $cookieStore, UserService) {
+reportingApp.run(function($rootScope, $location, $cookieStore, UserService) {
 		
 		$rootScope.$on('$viewContentLoaded', function() {
 			delete $rootScope.error;

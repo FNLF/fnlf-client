@@ -9,5 +9,5 @@
 		};
 	}
 
-	angular.module('anomalyApp').controller('LoginController',LoginController );
+	angular.module('reportingApp').controller('LoginController',LoginController );
 })();

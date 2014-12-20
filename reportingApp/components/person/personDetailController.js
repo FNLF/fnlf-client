@@ -9,7 +9,7 @@
 * @since may.26.2014
 *
 */
-angular.module('anomalyApp')
+angular.module('reportingApp')
         .controller('PersonDetailController',
                 function($scope, RestService, DataService) {
                     $scope.licensesFromMelwin = DataService.getLicensesFromMelwin();

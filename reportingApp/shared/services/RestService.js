@@ -1,6 +1,6 @@
 (function(){
 
-angular.module('anomalyApp')
+angular.module('reportingApp')
 	.service('RestService', ['$http', function($http) {
         var urlBase = '/api/v1';
 

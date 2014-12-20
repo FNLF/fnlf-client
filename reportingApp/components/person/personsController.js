@@ -9,7 +9,7 @@
 * @since may.26.2014
 *
 */
-angular.module('anomalyApp')
+angular.module('reportingApp')
         .controller('PersonsController', 
             function($scope, RestService, DataService) {
                 $scope.service = DataService;

@@ -8,7 +8,7 @@
 * @since may.26.2014
 *
 */
-angular.module('anomalyApp')
+angular.module('reportingApp')
         .controller('MainController', function($scope, $location, DataService, RestService) {
             $scope.service = RestService;
 

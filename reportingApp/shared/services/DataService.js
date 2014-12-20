@@ -1,6 +1,6 @@
 (function(){
 
-angular.module('anomalyApp')
+angular.module('reportingApp')
 	.service('DataService', function(RestService) {
 		var anomaly = {};
 		var licensesFromMelwin = RestService.getLicenses();
