@@ -58,23 +58,6 @@ anomalyApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
 			    }
 		    );
 
-		    $httpProvider.interceptors.push(function ($q, $rootScope, $location) {
-		        return {
-		        	'request': function(config) {
-		        		var isRestCall = config.url.indexOf('/api/') > -1;
-		        		if (isRestCall && angular.isDefined($rootScope.authToken)) {
-		        			var authToken = $rootScope.authToken;
-		        			if (appConfig.useAuthTokenHeader) {
-		        				config.headers['X-Auth-Token'] = authToken;
-		        			} else {
-		        				config.url = config.url + "?token=" + authToken;
-		        			}
-		        		}
-		        		return config || $q.when(config);
-		        	}
-		        };
-		    }
-	    );
 
 		} ]
 
