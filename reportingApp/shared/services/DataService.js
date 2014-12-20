@@ -3,6 +3,7 @@
 angular.module('reportingApp')
 	.service('DataService', function(RestService) {
 		var anomaly = {};
+		anomaly.involvedPersons=[];
 		var licensesFromMelwin = RestService.getLicenses();
 
 		this.getLicensesFromMelwin = function(){

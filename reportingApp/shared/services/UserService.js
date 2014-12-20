@@ -38,7 +38,7 @@ angular.module('reportingApp')
             var data = {"username": username,"password": password};
             $http.post( '/api/v1/user/authenticate', data)
             .success(function(authenticationResult){
-                console.log(authenticationResult);
+
                 var authToken = authenticationResult.token;
                 $rootScope.authToken = authenticationResult.token64;
 

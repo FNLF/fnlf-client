@@ -28,7 +28,7 @@ angular.module('reportingApp')
                 $scope.$watch(function() {
                     return $scope.personsInvolved;
                 }, function() {  
-                	console.log($scope.personsInvolved);
+
                    var involved = [];
                     angular.forEach($scope.personsInvolved, function(selected) {
                         involved.push(getPersonById(selected));
@@ -57,16 +57,12 @@ angular.module('reportingApp')
 				};
 
 				$scope.personSelected = function(item,model){
-					console.log("Select "+model.firstname);
-console.log(model);
  					$scope.anomaly.involvedPersons.push(model);
-					console.log($scope.anomaly.involvedPersons);
 				};
 
 
 				$scope.personRemoved = function(item,model){
-					console.log("Remove "+model);
-					console.log(model);
+
 					var array = $scope.anomaly.involvedPersons;
 					for(var i = array.length - 1; i >= 0; i--) {
 						if(array[i] === model) {
