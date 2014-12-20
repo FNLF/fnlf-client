@@ -11,7 +11,8 @@
 */
 angular.module('reportingApp')
         .controller('PersonsController', 
-            function($scope, RestService, DataService) {
+            function($scope, RestService, DataService,PersonQueryService) {
+                $scope.personsFromDb = [];
                 $scope.service = DataService;
                 $scope.choosePersons = "Henter fra databasen...";
                 $scope.anomaly = DataService.readAnomaly();
@@ -20,13 +21,14 @@ angular.module('reportingApp')
                 function getInvolved(){
                     $scope.personsInvolved = [];
                     angular.forEach($scope.anomaly.involvedPersons, function(involved){
-                       $scope.personsInvolved.push(involved.id); 
+                       $scope.personsInvolved.push(involved.id);
                     });
                 };
 
                 $scope.$watch(function() {
                     return $scope.personsInvolved;
                 }, function() {  
+                	console.log($scope.personsInvolved);
                    var involved = [];
                     angular.forEach($scope.personsInvolved, function(selected) {
                         involved.push(getPersonById(selected));
@@ -34,11 +36,45 @@ angular.module('reportingApp')
                     $scope.anomaly.involvedPersons = involved;
                 }, true);
                 
-                getPersons();
+
 
                 $scope.$watch('service.readAnomaly()', function(newValue) {
                     $scope.anomaly = newValue;                    
                 });
+
+				$scope.getPersonsByName = function(name){
+					if(name.length>2){
+						$scope.showLoader = true;
+
+						PersonQueryService.getPersonsByName(name).success(function(data){
+							$scope.personsFromDb = data._items;
+
+							$scope.showLoader = false;
+						}).error(function(error){
+							$scope.showLoader = false;
+						});
+					}
+				};
+
+				$scope.personSelected = function(item,model){
+					console.log("Select "+model.firstname);
+console.log(model);
+ 					$scope.anomaly.involvedPersons.push(model);
+					console.log($scope.anomaly.involvedPersons);
+				};
+
+
+				$scope.personRemoved = function(item,model){
+					console.log("Remove "+model);
+					console.log(model);
+					var array = $scope.anomaly.involvedPersons;
+					for(var i = array.length - 1; i >= 0; i--) {
+						if(array[i] === model) {
+						   array.splice(i, 1);
+						}
+					}
+
+				};
 
                 function getPersons() {
                     $scope.personsFromDb = [];
@@ -57,7 +93,7 @@ angular.module('reportingApp')
 
                 function getPersonById(id) {
                     for (var i = 0; i < $scope.personsFromDb.length; i++) {
-                        if ($scope.personsFromDb[i].id == id) {
+                        if ($scope.personsFromDb[i].id === id) {
                             return $scope.personsFromDb[i];
                         }
                     }

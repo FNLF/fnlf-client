@@ -9,12 +9,9 @@
 */
 (function(){
 
-var reportingApp = angular.module('reportingApp', [
-    'ngRoute',
-    'ui',
-    'ngCookies',
-    'angular-loading-bar'
-]).config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+var reportingApp = angular.module('reportingApp', ['ngRoute','ui.bootstrap','ui.select','ngSanitize','ngCookies','angular-loading-bar']);
+
+reportingApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeBar = true;
     cfpLoadingBarProvider.includeSpinner = true;
 }]);

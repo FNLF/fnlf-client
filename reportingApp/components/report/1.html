@@ -11,13 +11,13 @@
 </script>
 
 <div class="container" ng-controller="ReportController">
-    <h1 style="width: 40%; min-width: 200px;">Avviksrapportering</h1>
+    <h1 style="width: 40%; min-width: 200px;">Rapportering av observasjon</h1>
 
     <form>
         <div class="form-group">
             <label class="control-label">Type avvik:</label><br/>
             <label class="radio-inline" ng-repeat="report in anomalyTypes" title="{{report.description}}">
-                <input type="radio" id="anomalyType.id" ng-model="anomalyType.id" ng-value="{{report.id}}"> {{report.name}} 
+                <input type="radio" id="anomalyType.id" ng-model="anomalyType.id" ng-value="{{report.id}}"> {{report.name}}
             </label>
         </div>
         <div class="form-group" ng-controller="ClubController">
@@ -26,7 +26,7 @@
                 <option value=""></option>
                 <option ng-value="club.melwinId" ng-repeat="club in clubs">
                     {{club.name}}
-                </option>    
+                </option>
             </select>
         </div>
         <div class="form-group" ng-controller="LocationsController">
@@ -35,7 +35,7 @@
                 <option value=""></option>
                 <option ng-value="location.id" ng-repeat="location in locations">
                     {{location.name}}
-                </option>    
+                </option>
             </select><br>
             <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" style="width: 40%; min-width: 200px;">
                 Legg til nytt sted i databasen
@@ -68,12 +68,6 @@
 
 
 
-
-
-
-
-
-
     <!--Select date-->
     <div class="form-group">
         <label  class="control-label">Velg dato og tidspunkt avviket fant sted:</label> <br />
@@ -90,27 +84,40 @@
                 <input ng-model="anomaly.time" type='text' class="form-control" id='timepicker' />
             </div>
         </div>-->
-
+    <br>
     <!--Select involved persons-->
     <div ng-controller="PersonsController">
         <label>Velg involvert(e) person(er):</label><br>
-        <select multiple ui-select2 style="width: 40%; min-width: 200px;" placeholder="{{choosePersons}}" ng-model="personsInvolved" ng-change="changed()">
-            <option ng-repeat="person in personsFromDb" value="{{person.id.toString()}}">{{person.firstname}} {{person.lastname}} ({{person.melwinId}})</option>
-        </select><span ng-show="showLoader"><img src="images/ajax-loader.gif" alt="Laster personer fra databasen"></span><br>
+
+        <ui-select  style="width: 40%; min-width: 200px;"  multiple ng-model="personsInvolved" theme="bootstrap" on-select="personSelected($item, $model)" on-remove="personRemoved($item, $model)">
+            <ui-select-match placeholder="Søk på fornavn...">{{$item.firstname}} {{$item.lastname}}</ui-select-match>
+            <ui-select-choices repeat="person in personsFromDb" refresh="getPersonsByName($select.search)" refresh-delay="0">
+                {{person.id}} {{person.firstname}} {{person.lastname}}
+            </ui-select-choices>
+        </ui-select>
+
+        <!--
         <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModalPerson" style="width: 40%; min-width: 200px;">
             Legg til ny person i databasen
         </button>
+        -->
+
+
+
     </div>
     <br>
     <!-- Create report-->
     <div ng-controller="ReportController">
         <button class="btn btn-success" ng-click="createNewReport(anomaly)">Opprett avviksrapport</button>
     </div>
+    <br>
 
 
     <div class="container">
 
     </div>
+
+    <div style="min-height:100px"></div>
     <!--    {{anomaly}}-->
 
     <!-- Modal-->

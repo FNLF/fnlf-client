@@ -224,7 +224,6 @@ angular.module('reportingApp')
         };
         this.getPersons = function() {
             return $http.get(urlBase + '/melwin');
-            return $http.get(urlBase + '/melwin');
         };
         this.updatePerson = function(person) {
             return $http.put(urlBase + '/persons/' + person.melwinId, person);
