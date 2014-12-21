@@ -90,9 +90,9 @@
         <label>Velg involvert(e) person(er):</label><br>
 
         <ui-select  style="width: 40%; min-width: 200px;"  multiple ng-model="personsInvolved" theme="bootstrap" on-select="personSelected($item, $model)" on-remove="personRemoved($item, $model)">
-            <ui-select-match placeholder="Søk på fornavn...">{{$item.firstname}} {{$item.lastname}}</ui-select-match>
-            <ui-select-choices repeat="person in personsFromDb" refresh="getPersonsByName($select.search)" refresh-delay="0">
-                 {{person.firstname}} {{person.lastname}} {{person.id}}
+            <ui-select-match placeholder="Søk på navn eller medlemsnummer...">{{$item.fullname}}</ui-select-match>
+            <ui-select-choices repeat="person in personsFromDb | filter:$select.search" refresh="getPersonsByName($select.search)" refresh-delay="0">
+                 {{person.fullname}} ({{person.id}})
             </ui-select-choices>
         </ui-select>
 
