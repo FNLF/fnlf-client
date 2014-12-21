@@ -52,7 +52,7 @@ angular.module('reportingApp')
 
                $http.defaults.headers.common.Authorization = 'Basic ' + authenticationResult.token64;
 
-               $http.get('/api/v1/melwin/'+username)
+               $http.get('/api/v1/user/self')
                .success(function(user){
                     user.roles=[];
                     user.roles.push('user');
