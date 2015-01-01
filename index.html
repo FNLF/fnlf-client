@@ -16,7 +16,7 @@
         <link href="css/app.css" rel="stylesheet">
 
         <!--AngularJS-->
-        <script src="angular/angular.min.js"></script>
+        <script src="angular/angular.js"></script>
         <script src="angular/angular-route.js"></script>
         <script src="reportingApp/app.js"></script>
         <script src="reportingApp/routes.js"></script>
@@ -35,17 +35,36 @@
         <script src="reportingApp/shared/services/DataService.js"></script>
 
 
-        <!--Angular Controllers-->
+
+
+        <!-- login -->
         <script src="reportingApp/components/login/LoginController.js"></script>
         <script src="reportingApp/components/login/mainController.js"></script>
+
+        <!-- club -->
         <script src="reportingApp/components/club/clubController.js"></script>
-
+        <script src="reportingApp/components/club/clubService.js"></script>
         <script src="reportingApp/components/club/locationsController.js"></script>
-        <script src="reportingApp/components/report/reportController.js"></script>
 
+        <!-- report -->
+        <script src="reportingApp/components/report/reportController.js"></script>
         <script src="reportingApp/components/report/incidentController.js"></script>
 
+        <!-- Observation -->
+        <script src="reportingApp/components/observation/controllers/ObservationController.js"></script>
+        <script src="reportingApp/components/observation/services/ObservationService.js"></script>
+        <script src="reportingApp/components/observation/directives/observationtype.js"></script>
+        <script src="reportingApp/components/observation/directives/clubselector.js"></script>
+        <script src="reportingApp/components/observation/directives/locationselector.js"></script>
+        <script src="reportingApp/components/observation/directives/observationdateselector.js"></script>
+        <script src="reportingApp/components/observation/directives/involvedpersonselector.js"></script>
+        <script src="reportingApp/components/observation/directives/incidentform.js"></script>
+        <script src="reportingApp/components/observation/directives/summary.js"></script>
 
+
+
+
+        <!-- person -->
         <script src="reportingApp/components/person/personDetailController.js"></script>
         <script src="reportingApp/components/person/personQueryService.js"></script>
         <script src="reportingApp/components/person/personsController.js"></script>
@@ -86,12 +105,12 @@
         <div class="container" >
         	
         	<div class="row">
-        
+
                 
                 	<div ng-view>
 
                 	</div>
-                
+
        		</div>
        		<div id="push"></div>
        </div>

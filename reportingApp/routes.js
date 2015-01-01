@@ -7,6 +7,10 @@ reportingApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
                     templateUrl: 'reportingApp/components/login/startPage.html',
                     controller: 'LoginController'
                 })
+                .when('/observation/1', {
+                 	templateUrl: 'reportingApp/components/observation/1.html',
+                 	controller: 'ObservationController'
+                })
                 .when('/report/1', {
                     templateUrl: 'reportingApp/components/report/1.html',
                     controller: 'ReportController'
