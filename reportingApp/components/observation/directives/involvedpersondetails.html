@@ -1,0 +1,54 @@
+<div>
+    <h1>Fyll ut informasjon om de involverte</h1>
+    <div class="row well" ng-repeat="person in anomaly.involvedPersons" ng-controller="PersonDetailController">
+        <form role="form">
+            <h3>{{person.fullname}}</h3>
+            <div class="form-group">
+                <div class="col-md-4 col-xs-12">
+                    <label>Lisenser registrert i MelWin <a ng-click="editLicenses = !editLicenses">(Endre)</a>:</label><br>
+                    <div ng-show="person.licenses.length == 0 && !editLicenses">Ingen lisenser registrert</div>
+                    <div ng-show="!editLicenses">
+                        <li ng-repeat="license in person.licenses track by license.id">
+                            {{license.licenseName}}
+                        </li>
+                    </div>
+                    <div class="form-group" ng-show="editLicenses">
+                        <span ng-repeat="license in licensesFromMelwin track by license.id">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="licensesSelected[license.id]" ng-checked="isChecked(license)" ng-value="license.id"/>
+                                {{license.licenseName}}
+                            </label>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <row>
+
+                        <label for="jumptype" class="col-xs-6">Hopptype</label>
+                        <div class="col-xs-6">
+                            <select id="jumptype" class="form-control" data-placeholder="Velg hopptype" ng-model="jumptypeSelected.id">
+                                <option value=""></option>
+                                <option ng-repeat="jumptype in jumptypes" ng-value="jumptype.id">
+                                    {{jumptype.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <label for="years" class="control-label ">Antall år i sporten</label>
+                        <div class="col-xs-6">
+                            <input id="years" class="form-control"  type="text" ng-model="person.yearsOfExperience" />
+                        </div>
+                        <label for="numberofjumps" class="control-label">Hopp totalt</label>
+                        <div class="col-xs-6">
+                            <input id="numberofjumps" class="form-control" type="text" ng-model="person.numberOfJumps" />
+                        </div>
+                    </row>
+
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <button class="btn btn-success" ng-click="updateAnomaly()">Neste side</button>
+</div>

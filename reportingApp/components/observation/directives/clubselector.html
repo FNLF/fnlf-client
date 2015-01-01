@@ -1,0 +1,12 @@
+<div>
+    <label class="control-label">Velg klubb som arrangerte hoppingen:</label><br>
+
+    <ui-select theme="bootstrap"
+               ng-disabled="disabled"
+               reset-search-input="false" ng-model="observation.club"  ng-init="clubs = getClubs()" on-select="clubSelected($item, $model)">
+        <ui-select-match placeholder="Søk på klubbnavn...">{{$item.name}}</ui-select-match>
+        <ui-select-choices repeat="club in clubs | filter:$select.search">
+            {{club.name}} Klubb
+        </ui-select-choices>
+    </ui-select>
+</div>

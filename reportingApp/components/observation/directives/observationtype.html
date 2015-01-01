@@ -1,0 +1,6 @@
+<div>
+    <label class="control-label">Type observasjon:</label><br/>
+    <label class="radio-inline" ng-repeat="report in available" title="{{report.description}}">
+        <input type="radio" name="observationType" id="anomalyType.id" ng-model="selected" ng-value="{{report.id}}"> {{report.name}}
+    </label>
+</div>

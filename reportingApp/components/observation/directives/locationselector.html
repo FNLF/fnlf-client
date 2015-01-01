@@ -1,0 +1,42 @@
+<div>
+    <div>
+        <label class="control-label">Velg sted for hendelsen:</label><br>
+
+        <ui-select multiple ng-model="selected" theme="bootstrap" ng-init="locations = getLocations()">
+            <ui-select-match placeholder="Søk på stedsnavn...">{{$item.name}}</ui-select-match>
+            <ui-select-choices repeat="location in locations | filter:$select.search">
+                {{location.name}}
+            </ui-select-choices>
+        </ui-select>
+
+
+
+        <br>
+        <button class="btn btn-primary btn-xs" ng-click="modal=true" >
+            Legg til nytt sted i databasen
+        </button>
+        <br>
+    </div>
+    <!-- Modal-->
+    <div ng-if="modal" class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="modal=false" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="locationModallLabel">Legg til sted</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="locationName">Navn på sted</label>
+                        <input type="text" class="form-control" id="locationName" ng-model="newLocation.name" placeholder="Navn">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="modal=false">Avbryt</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="saveNewLocation(newLocation)">Lagre</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
