@@ -4,7 +4,7 @@
         language: 'nb',
         autoclose: true
     });
-    $(function() {
+    $(function () {
         $("[data-toggle='tooltip']").tooltip();
         $("[data-toggle='popover']").popover();
     });
@@ -17,12 +17,14 @@
         <div class="form-group">
             <label class="control-label">Type avvik:</label><br/>
             <label class="radio-inline" ng-repeat="report in anomalyTypes" title="{{report.description}}">
-                <input type="radio" id="anomalyType.id" ng-model="anomalyType.id" ng-value="{{report.id}}"> {{report.name}}
+                <input type="radio" id="anomalyType.id" ng-model="anomalyType.id" ng-value="{{report.id}}">
+                {{report.name}}
             </label>
         </div>
         <div class="form-group" ng-controller="ClubController">
             <label class="control-label">Velg klubb som arrangerte hoppingen:</label><br>
-            <select ui-select2 data-placeholder="Velg klubb" ng-model="clubSelected.melwinId" style="width: 40%; min-width: 200px;">
+            <select ui-select2 data-placeholder="Velg klubb" ng-model="clubSelected.melwinId"
+                    style="width: 40%; min-width: 200px;">
                 <option value=""></option>
                 <option ng-value="club.melwinId" ng-repeat="club in clubs">
                     {{club.name}}
@@ -30,19 +32,22 @@
             </select>
         </div>
         <div class="form-group" ng-controller="LocationsController">
-            <label class="control-label">Sted der avviket fant sted:</label> <br />
-            <select ui-select2 data-placeholder="Velg sted" ng-model="locationSelected.id" style="width: 40%; min-width: 200px;">
+            <label class="control-label">Sted der avviket fant sted:</label> <br/>
+            <select ui-select2 data-placeholder="Velg sted" ng-model="locationSelected.id"
+                    style="width: 40%; min-width: 200px;">
                 <option value=""></option>
                 <option ng-value="location.id" ng-repeat="location in locations">
                     {{location.name}}
                 </option>
             </select><br>
-            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" style="width: 40%; min-width: 200px;">
+            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"
+                    style="width: 40%; min-width: 200px;">
                 Legg til nytt sted i databasen
             </button>
             <br>
             <!-- Modal-->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -53,12 +58,15 @@
 
                             <div class="form-group">
                                 <label for="name">Navn på sted</label>
-                                <input type="text" class="form-control" id="name" ng-model="newLocation.name" placeholder="Navn">
+                                <input type="text" class="form-control" id="name" ng-model="newLocation.name"
+                                       placeholder="Navn">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
-                            <button class="btn btn-primary" data-dismiss="modal" ng-click="saveNewLocation(newLocation)">Lagre</button>
+                            <button class="btn btn-primary" data-dismiss="modal"
+                                    ng-click="saveNewLocation(newLocation)">Lagre
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -67,11 +75,11 @@
     </form>
 
 
-
     <!--Select date-->
     <div class="form-group">
-        <label  class="control-label">Velg dato og tidspunkt avviket fant sted:</label> <br />
-        <div  style="width: 40%; min-width: 200px;" class='input-group date'>
+        <label class="control-label">Velg dato og tidspunkt avviket fant sted:</label> <br/>
+
+        <div style="width: 40%; min-width: 200px;" class='input-group date'>
             <input type='text' class="form-control" ng-model="pickDate" ng-blur="setDate()" id='datepicker'/>
         </div>
     </div>
@@ -89,10 +97,12 @@
     <div ng-controller="PersonsController">
         <label>Velg involvert(e) person(er):</label><br>
 
-        <ui-select  style="width: 40%; min-width: 200px;"  multiple ng-model="personsInvolved" theme="bootstrap" on-select="personSelected($item, $model)" on-remove="personRemoved($item, $model)">
+        <ui-select style="width: 40%; min-width: 200px;" multiple ng-model="personsInvolved" theme="bootstrap"
+                   on-select="personSelected($item, $model)" on-remove="personRemoved($item, $model)">
             <ui-select-match placeholder="Søk på navn eller medlemsnummer...">{{$item.fullname}}</ui-select-match>
-            <ui-select-choices repeat="person in personsFromDb | filter:$select.search" refresh="getPersonsByName($select.search)" refresh-delay="0">
-                 {{person.fullname}} ({{person.id}})
+            <ui-select-choices repeat="person in personsFromDb | filter:$select.search"
+                               refresh="getPersonsByName($select.search)" refresh-delay="0">
+                {{person.fullname}} ({{person.id}})
             </ui-select-choices>
         </ui-select>
 
@@ -101,7 +111,6 @@
             Legg til ny person i databasen
         </button>
         -->
-
 
 
     </div>
@@ -121,7 +130,8 @@
     <!--    {{anomaly}}-->
 
     <!-- Modal-->
-    <div class="modal fade" id="myModalPerson" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModalPerson" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -133,11 +143,13 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="firstname">Fornavn</label>
-                            <input type="text" class="form-control" id="firstname" ng-model="newPerson.firstname" placeholder="Fornavn">
+                            <input type="text" class="form-control" id="firstname" ng-model="newPerson.firstname"
+                                   placeholder="Fornavn">
                         </div>
                         <div class="form-group">
                             <label for="lastname">Etternavn</label>
-                            <input type="text" class="form-control" id="lastname" ng-model="newPerson.lastname" placeholder="Etternavn">
+                            <input type="text" class="form-control" id="lastname" ng-model="newPerson.lastname"
+                                   placeholder="Etternavn">
                         </div>
                     </form>
                 </div>

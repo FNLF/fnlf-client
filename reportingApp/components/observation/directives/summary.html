@@ -6,12 +6,14 @@
     <b>Dato og tidspunkt: </b>{{observation.dateTime| date:'dd.MM.yyyy HH.mm'}}<br>
 
     <h3>Involverte personer:</h3>
+
     <div ng-repeat="person in observation.involvedPersons">
         <b>Navn:</b> {{person.firstname}} {{person.lastname}} <br>
         <b>Medlemsnummer:</b> {{person.melwinId}}<br>
-        <b>Lisenser:</b> <li ng-repeat="license in person.licenses">
-        {{license.licenseName}}
-    </li>
+        <b>Lisenser:</b>
+        <li ng-repeat="license in person.licenses">
+            {{license.licenseName}}
+        </li>
         <b>Hopptype: </b>{{person.jumptype.name}}<br>
         <b>Erfaring år:</b> {{person.yearsOfExperience}}<br>
         <b>Erfaring hopp:</b> {{person.numberOfJumps}}<br>
@@ -19,6 +21,7 @@
 
         <div ng-show="person.gear != null || person.injury != null">
             <h3>Tilleggsinformasjon:</h3>
+
             <div ng-show="person.gear.harnessType != null">
                 <h4>Seletøy</h4>
                 <b>Type: </b> {{person.gear.harnessType}}<br>
@@ -48,8 +51,12 @@
         </div>
     </div>
     <h3>Hendelser:</h3>
+
     <div ng-repeat="incident in observation.incidents">
-        <b>Involverte:</b> <li ng-repeat="person in incident.involvedPersonsId">{{getPersonById(person).firstname}} {{getPersonById(person).lastname}}</li>
+        <b>Involverte:</b>
+        <li ng-repeat="person in incident.involvedPersonsId">{{getPersonById(person).firstname}}
+            {{getPersonById(person).lastname}}
+        </li>
         <b>Hendelse:</b> {{incident.incidentType.name}}<br>
         <b>Kommentar:</b> {{incident.commentFromHL}} <br><br>
     </div>

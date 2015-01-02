@@ -1,49 +1,54 @@
-
-
 <div class="col-md-4 col-sm-12" ng-controller="MainController" ng-hide="hasRole('user')">
 
-	<div class="account-wall col-xs-12">
-		<h1 class="text-center login-title">Logg inn startpage</h1>
-		<img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
-		<form class="form-signin" role="form" ng-submit="login()" ng-controller="LoginController">
+    <div class="account-wall col-xs-12">
+        <h1 class="text-center login-title">Logg inn startpage</h1>
+        <img class="profile-img"
+             src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+             alt="">
 
-			<input ng-model="username" type="text" class="form-control" placeholder="Medlemsnummer" required autofocus> <input ng-model="password" type="password" class="form-control"
-				placeholder="Passord" required>
+        <form class="form-signin" role="form" ng-submit="login()" ng-controller="LoginController">
 
-			<button class="btn btn-lg btn-primary btn-block" type="submit" >Logg inn</button>
+            <input ng-model="username" type="text" class="form-control" placeholder="Medlemsnummer" required autofocus>
+            <input ng-model="password" type="password" class="form-control"
+                   placeholder="Passord" required>
 
-			<label class="checkbox pull-left"> <input ng-model="rememberMe" type="checkbox" value="remember-me"> Husk meg
-			</label> <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Logg inn</button>
 
-		</form>
-	</div>
-	<!--  <a href="#" class="text-center new-account">Create an account </a> -->
+            <label class="checkbox pull-left"> <input ng-model="rememberMe" type="checkbox" value="remember-me"> Husk
+                meg
+            </label> <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+
+        </form>
+    </div>
+    <!--  <a href="#" class="text-center new-account">Create an account </a> -->
 </div>
 
 
 <div class="col-md-4 col-sm-12 pull right" ng-show="hasRole('user')">
 
-	<div class="alert alert-info" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-		<i class="fa fa-info-circle"></i> <strong>Du er logget inn som <i>{{username}}</i></strong>
-		<hr class="message-inner-separator">
+    <div class="alert alert-info" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <i class="fa fa-info-circle"></i> <strong>Du er logget inn som <i>{{username}}</i></strong>
+        <hr class="message-inner-separator">
 
-		<p>Det er <u>kun</u> opprettelse av avvik som er praktisk testbart og skal testes</p>
-
-
-	</div>
+        <p>Det er <u>kun</u> opprettelse av avvik som er praktisk testbart og skal testes</p>
 
 
-	<a ng-href="#!/report/1" class="btn btn-primary btn-lg btn-block"><i class="fa fa-plus"></i> Opprett observasjon</a>
-	
+    </div>
+
+
+    <a ng-href="#!/report/1" class="btn btn-primary btn-lg btn-block"><i class="fa fa-plus"></i> Opprett observasjon</a>
+
 
 </div>
 
 
 <div class=" col-md-7 col-sm-12 pull-left" ng-hide="hasRole('user')">
-	<h1>Fallskjermseksjonen / Norges Luftsportforbund</h1>
-	<h2>Observasjonsrapportering</h2>
-	<p>Dette er F/NLF's system for rapportering av observasjoner. Sidene er tilgjengelige for medlemmer i F/NLF.</p>
+    <h1>Fallskjermseksjonen / Norges Luftsportforbund</h1>
+
+    <h2>Observasjonsrapportering</h2>
+
+    <p>Dette er F/NLF's system for rapportering av observasjoner. Sidene er tilgjengelige for medlemmer i F/NLF.</p>
 </div>
 
 

@@ -3,7 +3,7 @@
 
         <div class='well'>
 
-            <div >
+            <div>
                 <label for="hlComment">HL's kommentar</label>
                 <textarea id="hlComment" class="form-control" ng-model="anomaly.jumpleaderComment"></textarea>
                 <b>Antall tegn igjen: {{255 - (anomaly.jumpleaderComment.length || 0)}}</b>
@@ -16,7 +16,8 @@
         </div>
 
         <!-- Modal-->
-        <div class="modal fade" id="myModal" modal-show modal-visible="showDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="myModal" modal-show modal-visible="showDialog" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -28,12 +29,14 @@
                         <form role="form">
                             <div class="form-group">
                                 <label for="name">Navn</label>
-                                <input type="text" class="form-control" id="name" ng-model="incidentType.name" placeholder="Navn">
+                                <input type="text" class="form-control" id="name" ng-model="incidentType.name"
+                                       placeholder="Navn">
                             </div>
                             <div class="form-group">
                                 <label>Gruppe</label><br>
                                 <!--<input type="text" class="form-control" id="group" ng-model="incidentType.group" placeholder="Gruppe">-->
-                                <select ui-select2 ng-model="incidentType.group" data-placeholder="Velg gruppe" style="min-width: 300px;">
+                                <select ui-select2 ng-model="incidentType.group" data-placeholder="Velg gruppe"
+                                        style="min-width: 300px;">
                                     <option value=""></option>
                                     <option ng-repeat="group in incidentGroups track by $index" ng-value="group">
                                         {{group}}
@@ -42,13 +45,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Beskrivelse</label>
-                                <input type="text" class="form-control" id="description" ng-model="incidentType.description" placeholder="Beskrivelse">
+                                <input type="text" class="form-control" id="description"
+                                       ng-model="incidentType.description" placeholder="Beskrivelse">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
-                        <button type="button" ng-click="saveNewIncident()" data-dismiss="modal" class="btn btn-primary">Lagre</button>
+                        <button type="button" ng-click="saveNewIncident()" data-dismiss="modal" class="btn btn-primary">
+                            Lagre
+                        </button>
                     </div>
                 </div>
             </div>

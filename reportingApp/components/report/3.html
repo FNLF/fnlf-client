@@ -1,8 +1,7 @@
-
 <div class="container" ng-controller="ReportController">
     <div ng-controller="IncidentController">
-        <div class="well" >
-            <div >
+        <div class="well">
+            <div>
                 <form role="form" name="addIncidentForm" ng-submit="addIncident(incident)">
                     <h3>{{addOrEditIncident}}</h3>
                     <table class="table table-striped">
@@ -17,17 +16,20 @@
                             <td>
                                 <span ng-repeat="person in anomaly.involvedPersons track by person.id">
                                     <label class="checkbox" for="{{person.id}}">
-                                        <input type="checkbox" id="{{person.id}}" ng-model="personsSelected[person.id]" ng-checked="isChecked(person.id)" ng-value="{{person.id}}"/>
+                                        <input type="checkbox" id="{{person.id}}" ng-model="personsSelected[person.id]"
+                                               ng-checked="isChecked(person.id)" ng-value="{{person.id}}"/>
                                         {{person.firstname}} {{person.lastname}}
                                     </label>
                                 </span>
                             </td>
                             <td>
-                                <select ui-select2 ng-model="incidentTypeSelected" ng-change="showForms()" data-placeholder="Velg hendelse" style="min-width: 300px;">
+                                <select ui-select2 ng-model="incidentTypeSelected" ng-change="showForms()"
+                                        data-placeholder="Velg hendelse" style="min-width: 300px;">
                                     <option value=""></option>
-                                    <option ng-repeat="incident in incidentTypes track by $index" ng-value="incident.id">
-                                        {{incident.name}} ({{incident.group}})   
-                                    </option>    
+                                    <option ng-repeat="incident in incidentTypes track by $index"
+                                            ng-value="incident.id">
+                                        {{incident.name}} ({{incident.group}})
+                                    </option>
                                 </select>
                                 <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">
                                     Ny
@@ -37,7 +39,9 @@
                                 <input ng-model="incident.commentFromHL" type="text"/>
 
                             </td>
-                            <td><button class="btn-primary" type="submit">{{addOrEditIncident}}</button></td>                    
+                            <td>
+                                <button class="btn-primary" type="submit">{{addOrEditIncident}}</button>
+                            </td>
                         </tr>
                     </table>
                 </form>
@@ -55,45 +59,66 @@
                         <tr ng-repeat="incident in anomaly.incidents">
                             <td class="text-center">{{incident.timelineIndex}}</td>
                             <td class="text-center"><p ng-repeat="person in incident.involvedPersonsId">
-                                    {{getPersonById(person).firstname}} {{getPersonById(person).lastname}}
-                                </p></td>
+                                {{getPersonById(person).firstname}} {{getPersonById(person).lastname}}
+                            </p></td>
                             <td class="text-center">{{incident.incidentType.name}}</td>
                             <td class="text-center">{{incident.commentFromHL}}</td>
-                            <td class="text-center"><button class="btn btn-default btn-xs up" ng-click="moveIncidentUp(incident.timelineIndex)" title="Flytt opp"><span class="glyphicon glyphicon-chevron-up"></span></button><button class="btn btn-default btn-xs down" ng-click="moveIncidentDown(incident.timelineIndex)" title="Flytt ned"><span class="glyphicon glyphicon-chevron-down"></span></button></td>
-                            <td class="text-center"><button class="btn-xs btn-warning" ng-click="editIncident(incident.timelineIndex)" title="Endre hendelse"><span class="glyphicon glyphicon-edit"></span></button><button class="btn-xs btn-danger" ng-click="deleteIncident(incident.timelineIndex)" title="Slett hendelse"><span class="glyphicon glyphicon-remove"></span></button></td>
+                            <td class="text-center">
+                                <button class="btn btn-default btn-xs up"
+                                        ng-click="moveIncidentUp(incident.timelineIndex)" title="Flytt opp"><span
+                                        class="glyphicon glyphicon-chevron-up"></span></button>
+                                <button class="btn btn-default btn-xs down"
+                                        ng-click="moveIncidentDown(incident.timelineIndex)" title="Flytt ned"><span
+                                        class="glyphicon glyphicon-chevron-down"></span></button>
+                            </td>
+                            <td class="text-center">
+                                <button class="btn-xs btn-warning" ng-click="editIncident(incident.timelineIndex)"
+                                        title="Endre hendelse"><span class="glyphicon glyphicon-edit"></span></button>
+                                <button class="btn-xs btn-danger" ng-click="deleteIncident(incident.timelineIndex)"
+                                        title="Slett hendelse"><span class="glyphicon glyphicon-remove"></span></button>
+                            </td>
                         </tr>
-                    </table>  
+                    </table>
                 </div>
 
                 <div ng-show="showHarnessForm">
                     <div ng-repeat="person in incident.involvedPersonsId">
                         <h3>{{getPersonById(person).firstname}} {{getPersonById(person).lastname}}:</h3>
+
                         <form role="form">
                             <div class="form-group">
                                 <label for="harnessType">Type seletøy</label>
-                                <input type="text" class="form-control" id="harnessType" ng-model="getPersonById(person).gear.harnessType" placeholder="Type seletøy">
+                                <input type="text" class="form-control" id="harnessType"
+                                       ng-model="getPersonById(person).gear.harnessType" placeholder="Type seletøy">
                             </div>
                             <div class="form-group">
                                 <label for="harnessExperience">Erfaring seletøy</label>
-                                <input type="text" class="form-control" id="harnessExperience" ng-model="getPersonById(person).gear.harnessExperience"placeholder="Erfaring seletøy">
+                                <input type="text" class="form-control" id="harnessExperience"
+                                       ng-model="getPersonById(person).gear.harnessExperience"
+                                       placeholder="Erfaring seletøy">
                             </div>
                             <div class="form-group">
                                 <label for="harnessReleaseSystem">Type utløsersystem</label>
-                                <input type="text" class="form-control" id="harnessReleaseSystem" ng-model="getPersonById(person).gear.harnessReleaseSystem" placeholder="Type utløsersystem">
+                                <input type="text" class="form-control" id="harnessReleaseSystem"
+                                       ng-model="getPersonById(person).gear.harnessReleaseSystem"
+                                       placeholder="Type utløsersystem">
                             </div>
                         </form>
                     </div>
-                </div>    
+                </div>
                 <div ng-show="showMalfunctionForm">
                     dette vises når feilfunksjon er valgt!
                 </div>
                 <div ng-show="showInjuryForm">
                     <div ng-repeat="person in incident.involvedPersonsId">
                         <h3>{{getPersonById(person).firstname}} {{getPersonById(person).lastname}}:</h3>
+
                         <form role="form">
                             <div class="form-group">
                                 <label for="injuryDescription">Beskrivelse av skade</label>
-                                <textarea rows="3" type="text" class="form-control" id="injuryDescription" ng-model="getPersonById(person).injury" placeholder="Beskriv skade"></textarea>
+                                <textarea rows="3" type="text" class="form-control" id="injuryDescription"
+                                          ng-model="getPersonById(person).injury"
+                                          placeholder="Beskriv skade"></textarea>
                             </div>
                         </form>
                     </div>
@@ -101,18 +126,25 @@
                 <div ng-show="showMainCanopyForm">
                     <div ng-repeat="person in incident.involvedPersonsId">
                         <h3>{{getPersonById(person).firstname}} {{getPersonById(person).lastname}}:</h3>
+
                         <form role="form">
                             <div class="form-group">
                                 <label for="mainCanopyType">Type hovedskjerm</label>
-                                <input type="text" class="form-control" id="mainCanopyType" ng-model="getPersonById(person).gear.mainCanopyType" placeholder="Type hovedskjerm">
+                                <input type="text" class="form-control" id="mainCanopyType"
+                                       ng-model="getPersonById(person).gear.mainCanopyType"
+                                       placeholder="Type hovedskjerm">
                             </div>
                             <div class="form-group">
                                 <label for="harnessExperience">Erfaring hovedskjerm</label>
-                                <input type="text" class="form-control" id="harnessExperience" ng-model="getPersonById(person).gear.mainCanopyExperience"placeholder="Erfaring hovedskjerm">
+                                <input type="text" class="form-control" id="harnessExperience"
+                                       ng-model="getPersonById(person).gear.mainCanopyExperience"
+                                       placeholder="Erfaring hovedskjerm">
                             </div>
                             <div class="form-group">
                                 <label for="mainCanopySize">Skjermstørrelse</label>
-                                <input type="text" class="form-control" id="mainCanopySize" ng-model="getPersonById(person).gear.mainCanopySize" placeholder="Skjermstørrelse">
+                                <input type="text" class="form-control" id="mainCanopySize"
+                                       ng-model="getPersonById(person).gear.mainCanopySize"
+                                       placeholder="Skjermstørrelse">
                             </div>
                         </form>
                     </div>
@@ -120,29 +152,37 @@
                 <div ng-show="showReserveCanopyForm">
                     <div ng-repeat="person in incident.involvedPersonsId">
                         <h3>{{getPersonById(person).firstname}} {{getPersonById(person).lastname}}:</h3>
+
                         <form role="form">
                             <div class="form-group">
                                 <label for="reserveCanopyType">Type reserveskjerm</label>
-                                <input type="text" class="form-control" id="reserveCanopyType" ng-model="getPersonById(person).gear.reserveCanopyType" placeholder="Type reserveskjerm">
+                                <input type="text" class="form-control" id="reserveCanopyType"
+                                       ng-model="getPersonById(person).gear.reserveCanopyType"
+                                       placeholder="Type reserveskjerm">
                             </div>
                             <div class="form-group">
                                 <label for="reserveCanopySize">Skjermstørrelse</label>
-                                <input type="text" class="form-control" id="reserveCanopySize" ng-model="getPersonById(person).gear.reserveCanopySize" placeholder="Skjermstørrelse">
+                                <input type="text" class="form-control" id="reserveCanopySize"
+                                       ng-model="getPersonById(person).gear.reserveCanopySize"
+                                       placeholder="Skjermstørrelse">
                             </div>
                         </form>
                     </div>
-                </div>    
+                </div>
                 <div ng-show="showAADForm">
                     <div ng-repeat="person in incident.involvedPersonsId">
                         <h3>{{getPersonById(person).firstname}} {{getPersonById(person).lastname}}:</h3>
+
                         <form role="form">
                             <div class="form-group">
                                 <label for="aadType">Type nødåpner</label>
-                                <input type="text" class="form-control" id="aadType" ng-model="getPersonById(person).gear.aadType" placeholder="Type nødåpner">
+                                <input type="text" class="form-control" id="aadType"
+                                       ng-model="getPersonById(person).gear.aadType" placeholder="Type nødåpner">
                             </div>
                             <div class="form-group">
                                 <label for="aadFireHeight">Fyringshøyde</label>
-                                <input type="text" class="form-control" id="aadFireHeight" ng-model="getPersonById(person).gear.aadFireHeight" placeholder="Fyringshøyde">
+                                <input type="text" class="form-control" id="aadFireHeight"
+                                       ng-model="getPersonById(person).gear.aadFireHeight" placeholder="Fyringshøyde">
                             </div>
                         </form>
                     </div>
@@ -151,7 +191,7 @@
         </div>
         <div class='well'>
 
-            <div >
+            <div>
                 <label for="hlComment">HL's kommentar</label>
                 <textarea id="hlComment" class="form-control" ng-model="anomaly.jumpleaderComment"></textarea>
                 <b>Antall tegn igjen: {{255 - (anomaly.jumpleaderComment.length || 0)}}</b>
@@ -164,7 +204,8 @@
         </div>
 
         <!-- Modal-->
-        <div class="modal fade" id="myModal" modal-show modal-visible="showDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="myModal" modal-show modal-visible="showDialog" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -176,31 +217,36 @@
                         <form role="form">
                             <div class="form-group">
                                 <label for="name">Navn</label>
-                                <input type="text" class="form-control" id="name" ng-model="incidentType.name" placeholder="Navn">
+                                <input type="text" class="form-control" id="name" ng-model="incidentType.name"
+                                       placeholder="Navn">
                             </div>
                             <div class="form-group">
                                 <label for="group">Gruppe</label><br>
                                 <!--<input type="text" class="form-control" id="group" ng-model="incidentType.group" placeholder="Gruppe">-->
-                                <select ui-select2 ng-model="incidentType.group" data-placeholder="Velg gruppe" style="min-width: 300px;">
+                                <select ui-select2 ng-model="incidentType.group" data-placeholder="Velg gruppe"
+                                        style="min-width: 300px;">
                                     <option value=""></option>
                                     <option ng-repeat="group in incidentGroups track by $index" ng-value="group">
-                                        {{group}}   
-                                    </option>    
+                                        {{group}}
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="description">Beskrivelse</label>
-                                <input type="text" class="form-control" id="description" ng-model="incidentType.description" placeholder="Beskrivelse">
+                                <input type="text" class="form-control" id="description"
+                                       ng-model="incidentType.description" placeholder="Beskrivelse">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
-                        <button type="button" ng-click="saveNewIncident()" data-dismiss="modal" class="btn btn-primary">Lagre</button>
+                        <button type="button" ng-click="saveNewIncident()" data-dismiss="modal" class="btn btn-primary">
+                            Lagre
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </div>
 

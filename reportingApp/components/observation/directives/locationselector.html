@@ -10,15 +10,15 @@
         </ui-select>
 
 
-
         <br>
-        <button class="btn btn-primary btn-xs" ng-click="modal=true" >
+        <button class="btn btn-primary btn-xs" ng-click="modal=true">
             Legg til nytt sted i databasen
         </button>
         <br>
     </div>
     <!-- Modal-->
-    <div ng-if="modal" class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div ng-if="modal" class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -29,12 +29,14 @@
 
                     <div class="form-group">
                         <label for="locationName">Navn på sted</label>
-                        <input type="text" class="form-control" id="locationName" ng-model="newLocation.name" placeholder="Navn">
+                        <input type="text" class="form-control" id="locationName" ng-model="newLocation.name"
+                               placeholder="Navn">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" ng-click="modal=false">Avbryt</button>
-                    <button class="btn btn-primary" data-dismiss="modal" ng-click="saveNewLocation(newLocation)">Lagre</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="saveNewLocation(newLocation)">Lagre
+                    </button>
                 </div>
             </div>
         </div>
