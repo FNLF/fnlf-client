@@ -52,7 +52,7 @@
 
 						$http.defaults.headers.common.Authorization = 'Basic ' + authenticationResult.token64;
 
-						$http.get('/api/v1/user/self')
+						$http.get('/api/v1/melwin/' + username)
 							.success(function (user) {
 								user.roles = [];
 								user.roles.push('user');

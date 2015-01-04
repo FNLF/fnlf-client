@@ -1,17 +1,14 @@
-<div class="container" ng-controller="ReportController">
-    <div ng-controller="IncidentController">
+<div>
+    <div>
 
         <div class='well'>
 
             <div>
                 <label for="hlComment">HL's kommentar</label>
-                <textarea id="hlComment" class="form-control" ng-model="anomaly.jumpleaderComment"></textarea>
-                <b>Antall tegn igjen: {{255 - (anomaly.jumpleaderComment.length || 0)}}</b>
+                <textarea id="hlComment" class="form-control" ng-model="observation.text"></textarea>
             </div>
 
-            <div>
-                <button class="btn btn-success" ng-click="saveAnomaly()">Neste side</button>
-            </div>
+
 
         </div>
 

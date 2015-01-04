@@ -1,6 +1,6 @@
 (function () {
 
-	var clubselector = function (ClubService, ObservationService) {
+	var clubselector = function (RestService, ObservationService) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -11,26 +11,16 @@
 		};
 
 		directive.link = function ($scope, element, attrs) {
-
 			$scope.clubs = [];
 			$scope.getClubs = function () {
-
-				return [{name: 'Voss Fallskjermklubb', id: 'F1'}, {
-					name: 'Bergen Fallskjermklubb',
-					id: 'F2'
-				}, {name: 'Grenland Fallskjermklubb', id: 'F3'}];
-				;
+				 RestService.getClubs()
+					.success(function(response){
+						$scope.clubs = response._items;
+					});
 			};
-
-			$scope.clubSelected = function ($item, $model) {
-				console.log($scope.observation.club);
-				console.log($scope.observation);
-				$scope.observation.club = $item;
-
-			};
+			$scope.getClubs();
 
 		};
-
 		return directive;
 	};
 

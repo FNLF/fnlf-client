@@ -14,23 +14,14 @@
 		function ($scope, $location, DataService, RestService) {
 			$scope.anomalyType = DataService.getAnomalyType();
 			$scope.anomaly = {};
-			$scope.anomaly.involvedPersons = DataService.getPersonsInvolvedInAnomaly();
+			//$scope.anomaly.involvedPersons = DataService.getPersonsInvolvedInAnomaly();
 			$scope.service = DataService;
 			$scope.pickDate = DataService.getDateTime();
 			$scope.incidents = {};
 
-			getAnomalyTypes();
+			//getAnomalyTypes();
 
-			$scope.$watch(function () {
-				return $scope.anomalyType;
-			}, function () {
-				for (var i = 0; i < $scope.anomalyTypes.length; i++) {
-					if ($scope.anomalyTypes[i].id == $scope.anomalyType.id) {
-						DataService.setAnomalyType($scope.anomalyTypes[i]);
-					}
-				}
-				;
-			}, true);
+
 
 			$scope.setDate = function () {
 				var day = $scope.pickDate.substring(0, 2);
@@ -44,9 +35,7 @@
 				DataService.setDateTime($scope.theDate);
 			};
 
-			$scope.$watch('service.readAnomaly()', function (anomaly) {
-				$scope.anomaly = anomaly;
-			});
+
 
 
 			$scope.updateAnomaly = function () {

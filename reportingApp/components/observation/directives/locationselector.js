@@ -15,6 +15,8 @@ angular.module('reportingApp').directive('locationselector', function (ClubServi
 			return [{name: 'Bømoen'}, {name: 'Stend'}, {name: 'Geiteryggen'}];
 		};
 
+		$scope.locations = $scope.getLocations();
+
 	};
 
 	return directive;

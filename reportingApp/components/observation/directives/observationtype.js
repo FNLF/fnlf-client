@@ -10,8 +10,8 @@ angular.module('reportingApp').directive('observationtype', function (Observatio
 
 	directive.link = function ($scope, element, attrs) {
 
-		$scope.available = ObservationService.getObservationTypes();
-
+		$scope.observationTypes = ObservationService.getObservationTypes();
+		$scope.observationTypeOptions = ObservationService.getObservationTypeOptions();
 	};
 
 	return directive;

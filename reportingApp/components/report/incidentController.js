@@ -109,16 +109,7 @@
 				$scope.incidentTypeSelected = null;
 			};
 
-			$scope.$watch(function () {
-				return $scope.incidentTypeSelected;
-			}, function () {
-				for (var i = 0; i < $scope.incidentTypes.length; i++) {
-					if ($scope.incidentTypeSelected == $scope.incidentTypes[i].id) {
-						$scope.incident.incidentType = $scope.incidentTypes[i];
-					}
-				}
-				;
-			}, true);
+
 
 			$scope.saveAnomaly = function () {
 				DataService.updateAnomaly($scope.anomaly);
@@ -137,7 +128,7 @@
 					});
 			}
 
-			getIncidentTypes();
+
 			var found = false;
 
 			function findIncidentGroups() {

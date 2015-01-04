@@ -23,7 +23,10 @@
 			};
 
 			$scope.getPersonsByName = function (name) {
-
+				PersonQueryService.getPersonsByName(name)
+				.success(function(response){
+					$scope.personsFromDb = response.data._items;
+				});
 			};
 
 		};

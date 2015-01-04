@@ -8,6 +8,11 @@
 				this.name = name;
 			};
 
+			function ObservationTypeOption(id, name) {
+				this.id = id;
+				this.name = name;
+			};
+
 			function Club(id, name) {
 				this.id = id;
 				this.name = name;
@@ -24,9 +29,9 @@
 			};
 
 			Observation.prototype.involvedPersons = [];
-			Observation.prototype.club = new Club("1", "BFSK");
-			Observation.prototype.location = {};
-			Observation.prototype.observationType = "";
+			Observation.prototype.club = new Club("", "");
+			Observation.prototype.location = new Location("","");
+			Observation.prototype.observationType = new ObservationType("","");
 			Observation.prototype.dateTime = new Date();
 			Observation.prototype.incidents = [];
 
@@ -59,15 +64,18 @@
 
 			this.getObservationTypes = function () {
 				var observationTypes = [];
-
-				observationTypes.push(new ObservationType('uflaks', 'Uflaks'));
-				observationTypes.push(new ObservationType('uforsiktighet', 'Uforsiktighet'));
-				observationTypes.push(new ObservationType('uomtenksomhet', 'Uomteksomhet'));
-				observationTypes.push(new ObservationType('uforstand', 'Uforstand'));
-				observationTypes.push(new ObservationType('ulovlighet', 'Ulovlighet'));
-
-
+				observationTypes.push(new ObservationType('1', 'Næruhell'));
+				observationTypes.push(new ObservationType('2', 'Uhell'));
+				observationTypes.push(new ObservationType('3', 'Ulykke'));
 				return observationTypes;
+			};
+
+			this.getObservationTypeOptions = function () {
+				var observationTypeOptions = [];
+				observationTypeOptions.push(new ObservationTypeOption('personskade', 'Personskade'));
+				observationTypeOptions.push(new ObservationTypeOption('reserveskjerm', 'Reserveskjerm benyttet'));
+				observationTypeOptions.push(new ObservationTypeOption('bevisst', 'Bevisst handling'));
+				return observationTypeOptions;
 			};
 
 		});
