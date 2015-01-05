@@ -18,8 +18,8 @@
         <!--AngularJS-->
         <script src="angular/angular.js"></script>
         <script src="angular/angular-route.js"></script>
-        <script src="reportingApp/app.js"></script>
-        <script src="reportingApp/routes.js"></script>
+        <script src="angular/http-auth-interceptor.js"></script>
+
         <script src="angular/ui-bootstrap/ui-bootstrap.min.js"></script>
         <script src="angular/ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src="angular/angular-loading-bar/loading-bar.min.js"></script>
@@ -27,9 +27,14 @@
         <script src="angular/ui-select/select.min.js"></script>
         <script src="angular/angular-sanitize.js"></script>
 
+        <!-- Auth -->
+        <script src="auth/app/loginServices.js"></script>
+
+        <!-- App -->
+        <script src="reportingApp/app.js"></script>
+        <script src="reportingApp/routes.js"></script>
 
 
-        <!-- Services -->
         <script src="reportingApp/shared/services/UserService.js"></script>
         <script src="reportingApp/shared/services/RestService.js"></script>
         <script src="reportingApp/shared/services/DataService.js"></script>
@@ -106,7 +111,6 @@
         	
         	<div class="row">
 
-                
                 	<div ng-view>
 
                 	</div>

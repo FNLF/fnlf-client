@@ -4,9 +4,9 @@
 <div class="center-block">
 <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
             
-            <img class="profile-img" src="http://nlf.no/sites/default/files/nlf_logo.png" alt="">
+
             
-            <div class="account-wall" ng-controller="LoginController">
+            <div class="account-wall">
             
             <h2 class="text-center">Innlogging Fallskjermseksjonen</h2>
             
@@ -35,10 +35,7 @@
     
                 <!-- <a href="#" class="pull-right need-help">Hjelp? </a><span class="clearfix"></span> -->
                 </form>
-                <div ng-controller="LoginModalController">
-                <!-- Modal - content burde bli hentet fra /api/v1/content?where={"slug": "hjelp-til-innlogging"}-->
-                <a href="#" class="text-center new-account" data-toggle="modal" data-target="#helpModal" ng-click="open()">Hjelp til innlogging</a>
-                </div>
+
                 
             </div>
             <!-- Modal with help? -->

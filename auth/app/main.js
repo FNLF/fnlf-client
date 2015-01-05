@@ -3,7 +3,7 @@
   angular.module('fnlf-auth', [
     'http-auth-interceptor',
     //'content-mocks',
-    'login',
+    'fnlf-login',
     'content',
     'ngRoute', 
     'ngCookies',
@@ -61,27 +61,7 @@
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
-  })
-  .factory('GlobalsService',
-	    ['$cookieStore', '$rootScope',
-	    function ($cookieStore, $rootScope) {
-	    	
-	    	var configs = {baseUrl : '/api/v1/'};
-	    	
-	    	var service = {};
-
-	        service.get = function (key) {
-	        	
-	        	return configs[key];
-	        };
-
-	        return service;
-	    	
-	    }])
-
-
-
-;
+  });
 
 
 })();
