@@ -6,7 +6,7 @@ An Angular client for  [fnlf-backend]
 
 * [Angular]
 * [Bootstrap]
-* [Jquery]
+
 
 
 Getting Started
@@ -14,8 +14,9 @@ Getting Started
 
 ### Requirements
 @todo
-* Npm
-* 
+* git
+* nginx or similar webserver/reverse proxy
+
 
 Download or clone the repository
 
@@ -23,18 +24,13 @@ Download or clone the repository
 git clone https://github.com/fnlf/fnlf-client.git
 ```
 
-
-
-### Install
-@todo: Write a package.json
-```
-npm install package.json
-```
-
-
 ### Running
 @todo
 Use your favorite webserver
+
+
+
+
 
 Backend
 --------
@@ -142,8 +138,6 @@ project:
 
 1. [Fork](http://help.github.com/fork-a-repo/) the project, clone your fork,
    and configure the remotes:
-   
-   **Note:** You should clone this into a virtualenv directory
 
    ```bash
    # Clone your fork of the repo into the current directory
@@ -236,5 +230,6 @@ Licensed under the MIT License
 
 <!-- links to third party projects -->
 [Angular]: https://angularjs.org/
-[Bootstrap]: https://getbootstrap.com
-[Jquery]: https://jquery.com
+[Ui-Bootstrap]: http://angular-ui.github.io/bootstrap/
+[Ui-select]: https://github.com/angular-ui/ui-select
+
