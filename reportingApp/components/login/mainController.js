@@ -9,26 +9,9 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope, $location, DataService, RestService) {
-			$scope.service = RestService;
-
+		.controller('MainController', function ($scope) {
 			$scope.goToPage = function (url) {
 				$location.path(url);
-			};
-			$scope.anomaly = DataService.readAnomaly();
-
-			$scope.getPersonById = function (id) {
-				for (var i = 0; i < $scope.anomaly.involvedPersons.length; i++) {
-					if ($scope.anomaly.involvedPersons[i].id == id) {
-						return $scope.anomaly.involvedPersons[i];
-					}
-				}
-			};
-			$scope.saveAnomaly = function () {
-				RestService.saveAnomaly($scope.anomaly);
-				$scope.anomaly = {};
-				DataService.resetSelectedAnomaly();
-				$location.path('/hi/1');
 			};
 		});
 

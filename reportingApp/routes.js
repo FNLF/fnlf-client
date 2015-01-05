@@ -42,7 +42,7 @@
 								var url = config.url;
 
 								if (status == 401) {
-									$location.path("/login");
+									$location.path("/");
 								}
 								if (status == 403) {
 									$rootScope.error = "Dont even try. You dont have the necessary roles to acces these datas!!";

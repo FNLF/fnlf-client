@@ -44,6 +44,14 @@
 	angular.module('fnlf-login')
 		.service('loginService', function($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore) {
 
+ 		$rootScope.$on('event:auth-loginRequired', function() {
+        	$rootScope.error = 'Login is required';
+        	$rootScope.currentUserSignedIn = false;
+        });
+        $rootScope.$on('event:auth-loginConfirmed', function() {
+        	$rootScope.currentUserSignedIn = true;
+        });
+
 
 			this.login = function(username,password) {
         			console.log('Manual login');
@@ -63,7 +71,7 @@
                         	$window.sessionStorage.username = username;
 
                         	$http.defaults.headers.common.Authorization = 'Basic ' + response.token64;
-
+ 							$rootScope.currentUserSignedIn = true;
                         	// Broadcast AND update tokens in buffers!
                         	authService.loginConfirmed('success', function(config){
                         		  config.headers["Authorization"] = 'Basic ' + response.token64;

@@ -17,13 +17,12 @@
 	}]);
 
 
-	reportingApp.run(function ($rootScope, $location, $cookieStore, UserService) {
+	reportingApp.run(function ($rootScope, $location, $cookieStore) {
 
 		$rootScope.$on('$viewContentLoaded', function () {
 			delete $rootScope.error;
 		});
 
-		UserService.tryLoginFromCookie();
 
 		$rootScope.initialized = true;
 	});

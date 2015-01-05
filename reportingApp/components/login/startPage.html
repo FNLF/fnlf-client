@@ -1,30 +1,9 @@
-<div class="col-md-4 col-sm-12" ng-controller="MainController" ng-hide="hasRole('user')">
-
-    <div class="account-wall col-xs-12">
-        <h1 class="text-center login-title">Logg inn startpage</h1>
-        <img class="profile-img"
-             src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-             alt="">
-
-        <form class="form-signin" role="form" ng-submit="login()" ng-controller="LoginController">
-
-            <input ng-model="username" type="text" class="form-control" placeholder="Medlemsnummer" required autofocus>
-            <input ng-model="password" type="password" class="form-control"
-                   placeholder="Passord" required>
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Logg inn</button>
-
-            <label class="checkbox pull-left"> <input ng-model="rememberMe" type="checkbox" value="remember-me"> Husk
-                meg
-            </label> <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
-
-        </form>
-    </div>
-    <!--  <a href="#" class="text-center new-account">Create an account </a> -->
+<div ng-hide="currentUserSignedIn">
+    <fnlf-login></fnlf-login>
 </div>
 
 
-<div class="col-md-4 col-sm-12 pull right" ng-show="hasRole('user')">
+<div class="col-md-4 col-sm-12 pull right" ng-show="currentUserSignedIn">
 
     <div class="alert alert-info" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
