@@ -1,59 +1,59 @@
 <div>
-    <div>
+	<div>
 
-        <div class='well'>
+		<div class='well'>
 
-            <div>
-                <label for="hlComment">HL's kommentar</label>
-                <textarea id="hlComment" class="form-control" ng-model="observation.text"></textarea>
-            </div>
+			<div>
+				<label for="hlComment">HL's kommentar</label>
+				<textarea id="hlComment" class="form-control" ng-model="observation.text"></textarea>
+			</div>
 
 
-        </div>
+		</div>
 
-        <!-- Modal-->
-        <div class="modal fade" id="myModal" modal-show modal-visible="showDialog" tabindex="-1" role="dialog"
-             aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Legg til hendelsestype</h4>
-                    </div>
-                    <div class="modal-body">
+		<!-- Modal-->
+		<div class="modal fade" id="myModal" modal-show modal-visible="showDialog" tabindex="-1" role="dialog"
+			 aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Legg til hendelsestype</h4>
+					</div>
+					<div class="modal-body">
 
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="name">Navn</label>
-                                <input type="text" class="form-control" id="name" ng-model="incidentType.name"
-                                       placeholder="Navn">
-                            </div>
-                            <div class="form-group">
-                                <label>Gruppe</label><br>
-                                <!--<input type="text" class="form-control" id="group" ng-model="incidentType.group" placeholder="Gruppe">-->
-                                <select ui-select2 ng-model="incidentType.group" data-placeholder="Velg gruppe"
-                                        style="min-width: 300px;">
-                                    <option value=""></option>
-                                    <option ng-repeat="group in incidentGroups track by $index" ng-value="group">
-                                        {{group}}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Beskrivelse</label>
-                                <input type="text" class="form-control" id="description"
-                                       ng-model="incidentType.description" placeholder="Beskrivelse">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
-                        <button type="button" ng-click="saveNewIncident()" data-dismiss="modal" class="btn btn-primary">
-                            Lagre
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						<form role="form">
+							<div class="form-group">
+								<label for="name">Navn</label>
+								<input type="text" class="form-control" id="name" ng-model="incidentType.name"
+									   placeholder="Navn">
+							</div>
+							<div class="form-group">
+								<label>Gruppe</label><br>
+								<!--<input type="text" class="form-control" id="group" ng-model="incidentType.group" placeholder="Gruppe">-->
+								<select ui-select2 ng-model="incidentType.group" data-placeholder="Velg gruppe"
+										style="min-width: 300px;">
+									<option value=""></option>
+									<option ng-repeat="group in incidentGroups track by $index" ng-value="group">
+										{{group}}
+									</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="description">Beskrivelse</label>
+								<input type="text" class="form-control" id="description"
+									   ng-model="incidentType.description" placeholder="Beskrivelse">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
+						<button type="button" ng-click="saveNewIncident()" data-dismiss="modal" class="btn btn-primary">
+							Lagre
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
