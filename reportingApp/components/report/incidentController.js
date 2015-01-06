@@ -110,7 +110,6 @@
 			};
 
 
-
 			$scope.saveAnomaly = function () {
 				DataService.updateAnomaly($scope.anomaly);
 				$location.path('/report/4');

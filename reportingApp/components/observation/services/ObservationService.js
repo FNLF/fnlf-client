@@ -30,8 +30,8 @@
 
 			Observation.prototype.involvedPersons = [];
 			Observation.prototype.club = new Club("", "");
-			Observation.prototype.location = new Location("","");
-			Observation.prototype.observationType = new ObservationType("","");
+			Observation.prototype.location = new Location("", "");
+			Observation.prototype.observationType = new ObservationType("", "");
 			Observation.prototype.dateTime = new Date();
 			Observation.prototype.incidents = [];
 

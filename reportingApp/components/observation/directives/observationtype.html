@@ -1,22 +1,22 @@
 <div>
     <label class="control-label">Type observasjon:</label><br/>
     <label class="radio-inline" ng-repeat="report in observationTypes">
-        <input type="radio" name="observationType"  ng-model="observation.observationType" ng-value="report">
+        <input type="radio" name="observationType" ng-model="observation.observationType" ng-value="report">
         {{report.name}}
     </label>
 
     <label class="checkbox-inline">
-        <input type="checkbox" name="injury"  ng-model="observation.observationType.injury" ng-value="report">
+        <input type="checkbox" name="injury" ng-model="observation.observationType.injury" ng-value="report">
         Personskade
     </label>
 
     <label class="checkbox-inline">
-        <input type="checkbox" name="reserve"  ng-model="observation.observationType.reserve" ng-value="report">
+        <input type="checkbox" name="reserve" ng-model="observation.observationType.reserve" ng-value="report">
         Reservetrekk
     </label>
 
     <label class="checkbox-inline">
-        <input type="checkbox" name="deliberate"  ng-model="observation.observationType.deliberate" ng-value="report">
+        <input type="checkbox" name="deliberate" ng-model="observation.observationType.deliberate" ng-value="report">
         Bevisst handling
     </label>
 

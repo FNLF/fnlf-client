@@ -13,8 +13,8 @@
 		directive.link = function ($scope, element, attrs) {
 			$scope.clubs = [];
 			$scope.getClubs = function () {
-				 RestService.getClubs()
-					.success(function(response){
+				RestService.getClubs()
+					.success(function (response) {
 						$scope.clubs = response._items;
 					});
 			};

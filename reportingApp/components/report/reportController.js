@@ -22,7 +22,6 @@
 			//getAnomalyTypes();
 
 
-
 			$scope.setDate = function () {
 				var day = $scope.pickDate.substring(0, 2);
 				var month = $scope.pickDate.substring(3, 5) - 1;
@@ -34,8 +33,6 @@
 				$scope.theDate = new Date(year, month, day, hour, minute);
 				DataService.setDateTime($scope.theDate);
 			};
-
-
 
 
 			$scope.updateAnomaly = function () {

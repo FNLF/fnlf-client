@@ -10,7 +10,6 @@
 			};
 
 
-
 			//Location Data
 			this.saveLocation = function (location) {
 				return $http.post(urlBase + '/locations', location);

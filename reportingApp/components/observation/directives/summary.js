@@ -1,4 +1,4 @@
-angular.module('reportingApp').directive('summary', function (ObservationService,RestService) {
+angular.module('reportingApp').directive('summary', function (ObservationService, RestService) {
 	var directive = {};
 
 	directive.restrict = 'E';
@@ -10,7 +10,7 @@ angular.module('reportingApp').directive('summary', function (ObservationService
 	};
 
 	directive.link = function ($scope, element, attrs) {
-		$scope.saveObservation = function(){
+		$scope.saveObservation = function () {
 			RestService.saveObservation($scope.observation);
 		};
 

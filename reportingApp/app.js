@@ -9,7 +9,7 @@
  */
 (function () {
 
-	var reportingApp = angular.module('reportingApp', ['ngRoute', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login']);
+	var reportingApp = angular.module('reportingApp', ['ngRoute', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar', 'fnlf-login']);
 
 	reportingApp.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeBar = true;
