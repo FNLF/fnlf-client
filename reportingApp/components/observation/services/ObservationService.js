@@ -28,7 +28,7 @@
 
 			};
 
-			Observation.prototype.involvedPersons = [];
+			Observation.prototype.involved = [];
 			Observation.prototype.club = new Club("", "");
 			Observation.prototype.location = new Location("", "");
 			Observation.prototype.observationType = new ObservationType("", "");

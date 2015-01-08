@@ -1,145 +1,147 @@
 <!DOCTYPE html>
 <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="reportingApp">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        
-        <title>F/NLF - Observasjonsrapportering</title>
-
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="angular/angular-loading-bar/loading-bar.min.css" rel="stylesheet">
-        <link href="angular/ui-select/select.min.css" rel="stylesheet">
-
-        <link href="css/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/app.css" rel="stylesheet">
-
-        <!--AngularJS-->
-        <script src="angular/angular.js"></script>
-        <script src="angular/angular-route.js"></script>
-        <script src="angular/http-auth-interceptor.js"></script>
-
-        <script src="angular/ui-bootstrap/ui-bootstrap.min.js"></script>
-        <script src="angular/ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
-        <script src="angular/angular-loading-bar/loading-bar.min.js"></script>
-        <script src="angular/angular-cookies-1.2.3.js"></script>
-        <script src="angular/ui-select/select.min.js"></script>
-        <script src="angular/angular-sanitize.js"></script>
-
-        <!-- Auth -->
-        <script src="auth/app/loginServices.js"></script>
-
-        <!-- App -->
-        <script src="reportingApp/app.js"></script>
-        <script src="reportingApp/routes.js"></script>
-
-        <script src="reportingApp/shared/services/RestService.js"></script>
-        <script src="reportingApp/shared/services/DataService.js"></script>
-
-        <!-- login -->
-
-        <script src="reportingApp/components/login/mainController.js"></script>
-
-        <!-- club -->
-        <script src="reportingApp/components/club/clubController.js"></script>
-        <script src="reportingApp/components/club/clubService.js"></script>
-        <script src="reportingApp/components/club/locationsController.js"></script>
-
-        <!-- report -->
-        <script src="reportingApp/components/report/reportController.js"></script>
-        <script src="reportingApp/components/report/incidentController.js"></script>
-
-        <!-- Observation -->
-        <script src="reportingApp/components/observation/controllers/ObservationController.js"></script>
-        <script src="reportingApp/components/observation/services/ObservationService.js"></script>
-        <script src="reportingApp/components/observation/directives/observationtype.js"></script>
-        <script src="reportingApp/components/observation/directives/clubselector.js"></script>
-        <script src="reportingApp/components/observation/directives/locationselector.js"></script>
-        <script src="reportingApp/components/observation/directives/observationdateselector.js"></script>
-        <script src="reportingApp/components/observation/directives/involvedpersonselector.js"></script>
-        <script src="reportingApp/components/observation/directives/incidentform.js"></script>
-        <script src="reportingApp/components/observation/directives/summary.js"></script>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
+	<title>F/NLF - Observasjonsrapportering</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="angular/angular-loading-bar/loading-bar.min.css" rel="stylesheet">
+	<link href="angular/ui-select/select.min.css" rel="stylesheet">
+
+	<link href="css/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/app.css" rel="stylesheet">
+
+	<!--AngularJS-->
+	<script src="angular/angular.js"></script>
+	<script src="angular/angular-route.js"></script>
+	<script src="angular/http-auth-interceptor.js"></script>
+
+	<script src="angular/ui-bootstrap/ui-bootstrap.min.js"></script>
+	<script src="angular/ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="angular/angular-loading-bar/loading-bar.min.js"></script>
+	<script src="angular/angular-cookies-1.2.3.js"></script>
+	<script src="angular/ui-select/select.min.js"></script>
+	<script src="angular/angular-sanitize.js"></script>
+	<!--
+	<script src="angular/angular-mocks.js"></script>
+	<script src="reportingApp/shared/services/RestServiceMock.js"></script>
+	-->
+	<!-- Auth -->
+	<script src="auth/app/loginServices.js"></script>
+
+	<!-- App -->
+	<script src="reportingApp/app.js"></script>
+	<script src="reportingApp/routes.js"></script>
+
+	<script src="reportingApp/shared/services/RestService.js"></script>
+	<script src="reportingApp/shared/services/DataService.js"></script>
+
+	<!-- login -->
+
+	<script src="reportingApp/components/login/mainController.js"></script>
+
+	<!-- club -->
+	<script src="reportingApp/components/club/clubController.js"></script>
+	<script src="reportingApp/components/club/clubService.js"></script>
+	<script src="reportingApp/components/club/locationsController.js"></script>
+
+	<!-- report -->
+	<script src="reportingApp/components/report/reportController.js"></script>
+	<script src="reportingApp/components/report/incidentController.js"></script>
+
+	<!-- Observation -->
+	<script src="reportingApp/components/observation/controllers/ObservationController.js"></script>
+	<script src="reportingApp/components/observation/services/ObservationService.js"></script>
+	<script src="reportingApp/components/observation/directives/observationtype.js"></script>
+	<script src="reportingApp/components/observation/directives/clubselector.js"></script>
+	<script src="reportingApp/components/observation/directives/locationselector.js"></script>
+	<script src="reportingApp/components/observation/directives/observationdateselector.js"></script>
+	<script src="reportingApp/components/observation/directives/involvedpersonselector.js"></script>
+	<script src="reportingApp/components/observation/directives/incidentform.js"></script>
+	<script src="reportingApp/components/observation/directives/summary.js"></script>
 
 
-        <!-- person -->
-        <script src="reportingApp/components/person/personDetailController.js"></script>
-        <script src="reportingApp/components/person/personQueryService.js"></script>
-        <script src="reportingApp/components/person/personsController.js"></script>
+	<!-- person -->
+	<script src="reportingApp/components/person/personDetailController.js"></script>
+	<script src="reportingApp/components/person/personQueryService.js"></script>
+	<script src="reportingApp/components/person/personsController.js"></script>
 
 
-
-
-
-    </head>
-    <body>
+</head>
+<body>
 
 <div id="wrap"> <!-- Wrap page content to have bar at bottom! -->
-        <!-- Navigationbar -->
-        
-        
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		  <div class="container">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-		        <span class="icon-bar">Meny</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		        
+	<!-- Navigationbar -->
 
-		      <a class="navbar-brand" ng-href="#!/"> F/NLF Observasjonsrapportering</a>
-		    </div>
 
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-show="hasRole('user')">
-                  <ul class="nav navbar-nav navbar-right">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1">
+					<span class="icon-bar">Meny</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 
-                      <li ng-show="currentUserSignedIn"><a ng-controller="LoginController" href ng-click="logout()" role="button"><i class="fa fa-power-off"></i> Logg ut</a></li>
 
-                  </ul>
+				<a class="navbar-brand" ng-href="#!/"> F/NLF Observasjonsrapportering</a>
+			</div>
 
-              </div><!-- /.navbar-collapse -->
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
 
-		  </div><!-- /.container-fluid -->
-		</nav>
-        
-        
-        <!-- END OF Navigationbar -->
+					<li ng-show="currentUserSignedIn"><a href ng-click="logout()" role="button"><i
+							class="fa fa-power-off"></i> Logg ut</a></li>
 
-        <!--Contains data from /pages appears in ng-view-->      
-        <div class="container" >
-        	
-        	<div class="row">
+				</ul>
 
-                	<div ng-view>
+			</div>
+			<!-- /.navbar-collapse -->
 
-                	</div>
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
 
-       		</div>
-       		<div id="push"></div>
-       </div>
 
-</div> <!-- END PAGE WRAP -->
+	<!-- END OF Navigationbar -->
 
-        <!--Footer-->
-   		<div id="footer">
-      		<div class="container">
-       	 		<address>
-                    <strong>Fallskjermseksjonen/Norges Luftsportforbund </strong> Møllergata 39, 0179 Oslo<br>
-                    Telefon: 23 01 04 50 Epost: <a href="mailto:jan.wang@nlf.no">jan.wang@nlf.no</a>
-                </address>
-      		</div>
-    	</div>
-        
-        
-       
-        <!--End footer-->
-        
-        
-    </body>
+	<!--Contains data from /pages appears in ng-view-->
+	<div class="container">
+
+		<div class="row">
+
+			<div ng-view>
+
+			</div>
+
+		</div>
+		<div id="push"></div>
+	</div>
+
+</div>
+<!-- END PAGE WRAP -->
+
+<!--Footer-->
+<div id="footer">
+	<div class="container">
+		<address>
+			<strong>Fallskjermseksjonen/Norges Luftsportforbund </strong> Møllergata 39, 0179 Oslo<br>
+			Telefon: 23 01 04 50 Epost: <a href="mailto:jan.wang@nlf.no">jan.wang@nlf.no</a>
+		</address>
+	</div>
+</div>
+
+
+<!--End footer-->
+
+
+</body>
 </html>

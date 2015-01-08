@@ -23,10 +23,12 @@
 			};
 
 			$scope.getPersonsByName = function (name) {
-				PersonQueryService.getPersonsByName(name)
+				if(name.length>2){
+					PersonQueryService.getPersonsByName(name)
 					.success(function (response) {
 						$scope.personsFromDb = response._items;
 					});
+				}
 			};
 
 		};

@@ -5,7 +5,7 @@
 				$routeProvider
 					.when('/', {
 						templateUrl: 'reportingApp/components/login/startPage.html',
-						controller: 'LoginController'
+						controller: 'MainController'
 					})
 					.when('/observation/1', {
 						templateUrl: 'reportingApp/components/observation/1.html',

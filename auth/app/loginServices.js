@@ -165,8 +165,8 @@
 				//Now just make sure to force login
 				authService.loginRequired('Login is mandatory');
 
-				$location.path("/");
-			};
+        	            $location.path("/");
+        	        };
 
 			//Call this every time its started
 			// Should be a login from cookie first, then if that dont work, broadcast a loginRequired
@@ -174,6 +174,7 @@
 
 				authService.loginRequired('Login is mandatory');
 			}
+
 
 
 		});
