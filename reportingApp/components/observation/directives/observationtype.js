@@ -1,4 +1,4 @@
-angular.module('reportingApp').directive('observationtype', function (ObservationService) {
+angular.module('reportingApp').directive('observationtype', function (Definitions) {
 	var directive = {};
 
 	directive.restrict = 'E';
@@ -10,8 +10,8 @@ angular.module('reportingApp').directive('observationtype', function (Observatio
 
 	directive.link = function ($scope, element, attrs) {
 
-		$scope.observationTypes = ObservationService.getObservationTypes();
-		$scope.observationTypeOptions = ObservationService.getObservationTypeOptions();
+		$scope.observationTypes = Definitions.getObservationTypes();
+		$scope.observationTypeOptions = Definitions.getObservationTypeOptions();
 	};
 
 	return directive;

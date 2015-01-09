@@ -1,15 +1,13 @@
 <div>
 	<label class="control-label">Velg dato og tidspunkt observasjonen fant sted:</label> <br/>
+	<div class="input-group">
 
-	<div class="row">
-		<div class="col-md-6">
-			<p class="input-group">
-				<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="observation.date" is-open="opened" min-date="minDate"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+		<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="observation.date"
+			   is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+			   ng-required="true" close-text="Close"/>
+        	      <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+						class="glyphicon glyphicon-calendar"></i></button>
               </span>
-			</p>
-		</div>
 	</div>
-
 </div>

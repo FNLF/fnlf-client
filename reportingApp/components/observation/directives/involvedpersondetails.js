@@ -1,4 +1,4 @@
-angular.module('reportingApp').directive('involvedpersondetails', function (ClubService) {
+angular.module('reportingApp').directive('involvedpersondetails', function () {
 	var directive = {};
 
 	directive.restrict = 'E';
