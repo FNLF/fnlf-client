@@ -32,7 +32,7 @@
 				this.audit = {};
 				this.acl = {};
 
-				this.location = {};
+
 
 			};
 

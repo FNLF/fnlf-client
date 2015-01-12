@@ -1,6 +1,6 @@
 (function () {
 
-	var involvedpersonselector = function (PersonQueryService) {
+	var involvedpersonselector = function (RestService) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -24,7 +24,7 @@
 
 			$scope.getPersonsByName = function (name) {
 				if(name.length>2){
-					PersonQueryService.getPersonsByName(name)
+					RestService.getUserByName(name)
 					.success(function (response) {
 						$scope.personsFromDb = response._items;
 					});

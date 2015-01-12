@@ -2,9 +2,9 @@
 	<h3>Fyll ut informasjon om de involverte</h3>
 
 	<div class="row well" ng-repeat="person in observation.involved">
-		<h3>{{person.fullname}}</h3>
-		<div class="col-md-6 col-xs-12">
-			<div class="form-group">
+		<h3 ng-init="getUserDetails(person)">{{person.fullname}}</h3>
+
+			<div class="form-group col-md-3 col-xs-6">
 				<label for="jumptype">Hopptype</label>
 				<select id="jumptype" class="form-control" data-placeholder="Velg hopptype"
 						ng-model="jumptypeSelected.id">
@@ -15,17 +15,17 @@
 				</select>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group col-md-3 col-xs-6">
 				<label for="years" class="control-label ">Antall år i sporten</label>
 				<input id="years" class="form-control" type="text" ng-model="person.yearsOfExperience"/>
 			</div>
-		</div>
-		<div class="col-md-6 col-xs-12">
-			<div class="form-group">
+
+
+			<div class="form-group col-md-3 col-xs-6">
 				<label for="numberofjumps" class="control-label">Hopp totalt</label>
 				<input id="numberofjumps" class="form-control" type="text" ng-model="person.numberOfJumps"/>
 			</div>
-			<div class="form-group">
+			<div class="form-group col-md-3 col-xs-6">
 				<label>Lisenser registrert i MelWin <a
 						ng-click="editLicenses = !editLicenses">(Endre)</a>:</label><br>
 
@@ -35,7 +35,7 @@
 						{{license.licenseName}}
 					</li>
 				</div>
-				<div class="form-group" ng-show="editLicenses">
+				<div class="form-group col-md-3 col-xs-6" ng-show="editLicenses">
                         <span ng-repeat="license in licensesFromMelwin track by license.id">
                             <label class="checkbox">
 								<input type="checkbox" ng-model="licensesSelected[license.id]"
@@ -45,7 +45,7 @@
                         </span>
 				</div>
 			</div>
-		</div>
+
 	</div>
 
 </div>
