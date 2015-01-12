@@ -1,4 +1,4 @@
-angular.module('reportingApp').directive('locationselector', function () {
+angular.module('reportingApp').directive('locationselector', function (LocationService) {
 	var directive = {};
 
 	directive.restrict = 'E';
@@ -12,6 +12,19 @@ angular.module('reportingApp').directive('locationselector', function () {
 
 		$scope.locations = [];
 
+		$scope.getLocations = function(name){
+			return LocationService.getPlaceNames(name).then(function(response){
+				if(response.data.stedsnavn){
+
+					var array = [].concat(response.data.stedsnavn);
+					return array.map(function(st){
+						return {name:st.stedsnavn,descr:st.navnetype+', '+st.kommunenavn,east:st.aust,north:st.nord};
+					});
+			}else{
+				return {};
+			}
+			});
+		};
 
 	};
 
