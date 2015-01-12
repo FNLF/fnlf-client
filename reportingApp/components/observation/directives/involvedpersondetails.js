@@ -19,13 +19,23 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 
 		$scope.jumptypes = [];
 
-		$scope.getJumpTypes = function(){
+		var getJumpTypes = function(){
 			RestService.getJumpTypes()
 				.success(function(data){
 					$scope.jumptypes = data._items;
 				});
 		};
-		$scope.getJumpTypes();
+		getJumpTypes();
+
+		$scope.licensesFromMelwin = [];
+
+		var getLicensesFromMelwin = function(){
+			RestService.getLicenses()
+				.success(function(data){
+					$scope.licensesFromMelwin = data._items;
+				});
+		};
+		getLicensesFromMelwin();
 
 	};
 

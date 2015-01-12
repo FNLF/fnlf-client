@@ -36,11 +36,11 @@
 					</li>
 				</div>
 				<div class="form-group col-md-3 col-xs-6" ng-show="editLicenses">
-                        <span ng-repeat="license in licensesFromMelwin track by license.id">
+                        <span ng-repeat="license in licensesFromMelwin">
                             <label class="checkbox">
 								<input type="checkbox" ng-model="licensesSelected[license.id]"
 									   ng-checked="isChecked(license)" ng-value="license.id"/>
-								{{license.licenseName}}
+								{{license.name}}
 							</label>
                         </span>
 				</div>
