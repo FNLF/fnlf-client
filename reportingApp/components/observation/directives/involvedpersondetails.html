@@ -4,6 +4,27 @@
 	<div class="row well" ng-repeat="person in observation.involved">
 		<h3 ng-init="getUserDetails(person)">{{person.fullname}}</h3>
 
+		<div class="form-group col-xs-12">
+			<label>Lisenser registrert i MelWin <a
+					ng-click="editLicenses = !editLicenses">(Endre)</a>:</label><br>
+
+			<div ng-show="person.licenses.length == 0 && !editLicenses">Ingen lisenser registrert</div>
+			<div ng-show="!editLicenses">
+				<li ng-repeat="license in person.licenses track by license.id">
+					{{license.licenseName}}
+				</li>
+			</div>
+			<div class="form-group col-md-3 col-xs-6" ng-show="editLicenses">
+                        <span ng-repeat="license in licensesFromMelwin">
+                            <label class="checkbox">
+								<input type="checkbox" ng-model="licensesSelected[license.id]"
+									   ng-checked="isChecked(license)" ng-value="license.id"/>
+								{{license.name}}
+							</label>
+                        </span>
+			</div>
+		</div>
+
 		<div class="form-group col-md-3 col-xs-6">
 			<label for="jumptype">Hopptype</label>
 			<select id="jumptype" class="form-control" data-placeholder="Velg hopptype"
@@ -25,26 +46,7 @@
 			<label for="numberofjumps" class="control-label">Hopp totalt</label>
 			<input id="numberofjumps" class="form-control" type="text" ng-model="person.numberOfJumps"/>
 		</div>
-		<div class="form-group col-md-3 col-xs-6">
-			<label>Lisenser registrert i MelWin <a
-					ng-click="editLicenses = !editLicenses">(Endre)</a>:</label><br>
 
-			<div ng-show="person.licenses.length == 0 && !editLicenses">Ingen lisenser registrert</div>
-			<div ng-show="!editLicenses">
-				<li ng-repeat="license in person.licenses track by license.id">
-					{{license.licenseName}}
-				</li>
-			</div>
-			<div class="form-group col-md-3 col-xs-6" ng-show="editLicenses">
-                        <span ng-repeat="license in licensesFromMelwin">
-                            <label class="checkbox">
-								<input type="checkbox" ng-model="licensesSelected[license.id]"
-									   ng-checked="isChecked(license)" ng-value="license.id"/>
-								{{license.name}}
-							</label>
-                        </span>
-			</div>
-		</div>
 
 		<div class="col-xs-12"></div>
 
@@ -60,15 +62,9 @@
 					   ng-model="person.gear.harnessExperience"
 					   placeholder="Erfaring seletøy">
 			</div>
-			<div class="form-group col-md-3 col-xs-6">
-				<label for="harnessReleaseSystem">Type utløsersystem</label>
-				<input type="text" class="form-control" id="harnessReleaseSystem"
-					   ng-model="person.gear.harnessReleaseSystem"
-					   placeholder="Type utløsersystem">
-			</div>
 		</div>
 
-		<div class="col-xs-12"></div>
+		<div class="clearfix"></div>
 		<div ng-hide="hideMainCanopyForm">
 
 
@@ -141,9 +137,9 @@
 		<div ng-if="observation.injury">
 
 
-			<div class="form-group col-md-3 col-xs-6">
+			<div class="form-group col-xs-12">
 				<label for="injuryDescription">Beskrivelse av skade</label>
-				<textarea rows="3" type="text" class="form-control" id="injuryDescription"
+				<textarea rows="6" type="text" class="form-control" id="injuryDescription"
 						  ng-model="person.injury"
 						  placeholder="Beskriv skade"></textarea>
 			</div>
