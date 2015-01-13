@@ -48,7 +48,7 @@
 
 		<div class="col-xs-12"></div>
 
-		<div ng-hide="showHarnessForm">
+		<div ng-hide="hideHarnessForm">
 			<div class="form-group col-md-3 col-xs-6">
 				<label for="harnessType">Type seletøy</label>
 				<input type="text" class="form-control" id="harnessType"
@@ -67,73 +67,78 @@
 					   placeholder="Type utløsersystem">
 			</div>
 		</div>
-		<div ng-hide="showMalfunctionForm">
 
-			<div class="form-group col-md-3 col-xs-6">
-				<label for="malfunction">Feilfunksjon</label>
-				<input type="text" class="form-control" id="malfunction"
-					   ng-model="person.gear.malfunction"
-					   placeholder="Feilfunksjon">
-			</div>
-
-		</div>
-
-		<div ng-hide="showMainCanopyForm">
+		<div class="col-xs-12"></div>
+		<div ng-hide="hideMainCanopyForm">
 
 
 			<div class="form-group col-md-3 col-xs-6">
 				<label for="mainCanopyType">Type hovedskjerm</label>
 				<input type="text" class="form-control" id="mainCanopyType"
-					   ng-model="getPersonById(person).gear.mainCanopyType"
+					   ng-model="person.gear.mainCanopyType"
 					   placeholder="Type hovedskjerm">
 			</div>
 			<div class="form-group col-md-3 col-xs-6">
-				<label for="harnessExperience">Erfaring hovedskjerm</label>
-				<input type="text" class="form-control" id="harnessExperience"
-					   ng-model="getPersonById(person).gear.mainCanopyExperience"
+				<label for="mainCanopyExperience">Erfaring hovedskjerm</label>
+				<input type="text" class="form-control" id="mainCanopyExperience"
+					   ng-model="person.gear.mainCanopyExperience"
 					   placeholder="Erfaring hovedskjerm">
 			</div>
 			<div class="form-group col-md-3 col-xs-6">
 				<label for="mainCanopySize">Skjermstørrelse</label>
 				<input type="text" class="form-control" id="mainCanopySize"
-					   ng-model="getPersonById(person).gear.mainCanopySize"
+					   ng-model="person.gear.mainCanopySize"
 					   placeholder="Skjermstørrelse">
 			</div>
 
 
 		</div>
-		<div ng-hide="showReserveCanopyForm">
+		<div class="col-xs-12"></div>
+		<div ng-if="observation.reserve">
 			<div>
 
 				<form role="form">
 					<div class="form-group col-md-3 col-xs-6">
 						<label for="reserveCanopyType">Type reserveskjerm</label>
 						<input type="text" class="form-control" id="reserveCanopyType"
-							   ng-model="getPersonById(person).gear.reserveCanopyType"
+							   ng-model="person.gear.reserveCanopyType"
 							   placeholder="Type reserveskjerm">
 					</div>
 					<div class="form-group col-md-3 col-xs-6">
 						<label for="reserveCanopySize">Skjermstørrelse</label>
 						<input type="text" class="form-control" id="reserveCanopySize"
-							   ng-model="getPersonById(person).gear.reserveCanopySize"
+							   ng-model="person.gear.reserveCanopySize"
 							   placeholder="Skjermstørrelse">
 					</div>
 				</form>
 			</div>
 		</div>
-		<div ng-hide="showAADForm">
+		<div class="col-xs-12"></div>
+		<div ng-if="observation.malfunction">
+
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="malfunction">Feilfunksjon</label>
+				<input type="text" class="form-control" id="malfunction"
+					   ng-model="person.gear.malfunction"
+					   placeholder="Feilfunksjon tagging og kategorisering">
+			</div>
+
+		</div>
+		<div class="col-xs-12"></div>
+		<div ng-if="observation.aad">
 			<div class="form-group col-md-3 col-xs-6">
 				<label for="aadType">Type nødåpner</label>
 				<input type="text" class="form-control" id="aadType"
-					   ng-model="getPersonById(person).gear.aadType" placeholder="Type nødåpner">
+					   ng-model="person.gear.aadType" placeholder="Type nødåpner">
 			</div>
 			<div class="form-group col-md-3 col-xs-6">
 				<label for="aadFireHeight">Fyringshøyde</label>
 				<input type="text" class="form-control" id="aadFireHeight"
-					   ng-model="getPersonById(person).gear.aadFireHeight" placeholder="Fyringshøyde">
+					   ng-model="person.gear.aadFireHeight" placeholder="Fyringshøyde">
 			</div>
 		</div>
-		<div ng-hide="showInjuryForm">
+		<div class="col-xs-12"></div>
+		<div ng-if="observation.injury">
 
 
 			<div class="form-group col-md-3 col-xs-6">
