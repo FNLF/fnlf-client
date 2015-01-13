@@ -8,7 +8,7 @@
 
 	<title>F/NLF - Observasjonsrapportering</title>
 
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 	<link href="angular/angular-loading-bar/loading-bar.min.css" rel="stylesheet">
 	<link href="angular/ui-select/select.min.css" rel="stylesheet">
 
@@ -16,12 +16,12 @@
 	<link href="css/app.css" rel="stylesheet">
 
 	<!--AngularJS-->
-	<script src="angular/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 	<script src="angular/angular-route.js"></script>
 	<script src="angular/http-auth-interceptor.js"></script>
 
-	<script src="angular/ui-bootstrap/ui-bootstrap.min.js"></script>
-	<script src="angular/ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
 	<script src="angular/angular-loading-bar/loading-bar.min.js"></script>
 	<script src="angular/angular-cookies-1.2.3.js"></script>
 	<script src="angular/ui-select/select.min.js"></script>
@@ -38,22 +38,18 @@
 	<script src="reportingApp/routes.js"></script>
 
 	<script src="reportingApp/shared/services/RestService.js"></script>
-	<script src="reportingApp/shared/services/DataService.js"></script>
+
 
 	<!-- login -->
 
 	<script src="reportingApp/components/login/mainController.js"></script>
 
-	<!-- club -->
-	<script src="reportingApp/components/club/clubController.js"></script>
-	<script src="reportingApp/components/club/clubService.js"></script>
-	<script src="reportingApp/components/club/locationsController.js"></script>
+	<!-- location -->
+	<script src="reportingApp/components/location/locationService.js"></script>
 
-	<!-- report -->
-	<script src="reportingApp/components/report/reportController.js"></script>
-	<script src="reportingApp/components/report/incidentController.js"></script>
 
 	<!-- Observation -->
+	<script src="reportingApp/components/observation/services/Definitions.js"></script>
 	<script src="reportingApp/components/observation/controllers/ObservationController.js"></script>
 	<script src="reportingApp/components/observation/services/ObservationService.js"></script>
 	<script src="reportingApp/components/observation/directives/observationtype.js"></script>
@@ -61,14 +57,13 @@
 	<script src="reportingApp/components/observation/directives/locationselector.js"></script>
 	<script src="reportingApp/components/observation/directives/observationdateselector.js"></script>
 	<script src="reportingApp/components/observation/directives/involvedpersonselector.js"></script>
+	<script src="reportingApp/components/observation/directives/involvedpersondetails.js"></script>
 	<script src="reportingApp/components/observation/directives/incidentform.js"></script>
 	<script src="reportingApp/components/observation/directives/summary.js"></script>
 
 
-	<!-- person -->
-	<script src="reportingApp/components/person/personDetailController.js"></script>
-	<script src="reportingApp/components/person/personQueryService.js"></script>
-	<script src="reportingApp/components/person/personsController.js"></script>
+
+
 
 
 </head>

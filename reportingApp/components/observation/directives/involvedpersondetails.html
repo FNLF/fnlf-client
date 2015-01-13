@@ -1,63 +1,152 @@
 <div>
-	<h1>Fyll ut informasjon om de involverte</h1>
+	<h3>Fyll ut informasjon om de involverte</h3>
 
-	<div class="row well" ng-repeat="person in anomaly.involvedPersons" ng-controller="PersonDetailController">
-		<form role="form">
-			<h3>{{person.fullname}}</h3>
+	<div class="row well" ng-repeat="person in observation.involved">
+		<h3 ng-init="getUserDetails(person)">{{person.fullname}}</h3>
 
-			<div class="form-group">
-				<div class="col-md-4 col-xs-12">
-					<label>Lisenser registrert i MelWin <a
-							ng-click="editLicenses = !editLicenses">(Endre)</a>:</label><br>
+		<div class="form-group col-xs-12">
+			<label>Lisenser registrert i MelWin <a
+					ng-click="editLicenses = !editLicenses">(Endre)</a>:</label><br>
 
-					<div ng-show="person.licenses.length == 0 && !editLicenses">Ingen lisenser registrert</div>
-					<div ng-show="!editLicenses">
-						<li ng-repeat="license in person.licenses track by license.id">
-							{{license.licenseName}}
-						</li>
-					</div>
-					<div class="form-group" ng-show="editLicenses">
-                        <span ng-repeat="license in licensesFromMelwin track by license.id">
+			<div ng-show="person.licenses.length == 0 && !editLicenses">Ingen lisenser registrert</div>
+			<div ng-show="!editLicenses">
+				<li ng-repeat="license in person.licenses track by license.id">
+					{{license.licenseName}}
+				</li>
+			</div>
+			<div class="form-group col-md-3 col-xs-6" ng-show="editLicenses">
+                        <span ng-repeat="license in licensesFromMelwin">
                             <label class="checkbox">
 								<input type="checkbox" ng-model="licensesSelected[license.id]"
 									   ng-checked="isChecked(license)" ng-value="license.id"/>
-								{{license.licenseName}}
+								{{license.name}}
 							</label>
                         </span>
-					</div>
-				</div>
-				<div class="col-md-8">
-					<row>
+			</div>
+		</div>
 
-						<label for="jumptype" class="col-xs-6">Hopptype</label>
+		<div class="form-group col-md-3 col-xs-6">
+			<label for="jumptype">Hopptype</label>
+			<select id="jumptype" class="form-control" data-placeholder="Velg hopptype"
+					ng-model="jumptypeSelected.id">
+				<option value=""></option>
+				<option ng-repeat="jumptype in jumptypes" ng-value="jumptype.id">
+					{{jumptype.name}}
+				</option>
+			</select>
+		</div>
 
-						<div class="col-xs-6">
-							<select id="jumptype" class="form-control" data-placeholder="Velg hopptype"
-									ng-model="jumptypeSelected.id">
-								<option value=""></option>
-								<option ng-repeat="jumptype in jumptypes" ng-value="jumptype.id">
-									{{jumptype.name}}
-								</option>
-							</select>
-						</div>
-
-						<label for="years" class="control-label ">Antall år i sporten</label>
-
-						<div class="col-xs-6">
-							<input id="years" class="form-control" type="text" ng-model="person.yearsOfExperience"/>
-						</div>
-						<label for="numberofjumps" class="control-label">Hopp totalt</label>
-
-						<div class="col-xs-6">
-							<input id="numberofjumps" class="form-control" type="text" ng-model="person.numberOfJumps"/>
-						</div>
-					</row>
+		<div class="form-group col-md-3 col-xs-6">
+			<label for="years" class="control-label ">Antall år i sporten</label>
+			<input id="years" class="form-control" type="text" ng-model="person.yearsOfExperience"/>
+		</div>
 
 
-				</div>
+		<div class="form-group col-md-3 col-xs-6">
+			<label for="numberofjumps" class="control-label">Hopp totalt</label>
+			<input id="numberofjumps" class="form-control" type="text" ng-model="person.numberOfJumps"/>
+		</div>
+
+
+		<div class="col-xs-12"></div>
+
+		<div ng-hide="hideHarnessForm">
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="harnessType">Type seletøy</label>
+				<input type="text" class="form-control" id="harnessType"
+					   ng-model="person.gear.harnessType" placeholder="Type seletøy">
+			</div>
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="harnessExperience">Erfaring seletøy</label>
+				<input type="text" class="form-control" id="harnessExperience"
+					   ng-model="person.gear.harnessExperience"
+					   placeholder="Erfaring seletøy">
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+		<div ng-hide="hideMainCanopyForm">
+
+
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="mainCanopyType">Type hovedskjerm</label>
+				<input type="text" class="form-control" id="mainCanopyType"
+					   ng-model="person.gear.mainCanopyType"
+					   placeholder="Type hovedskjerm">
+			</div>
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="mainCanopyExperience">Erfaring hovedskjerm</label>
+				<input type="text" class="form-control" id="mainCanopyExperience"
+					   ng-model="person.gear.mainCanopyExperience"
+					   placeholder="Erfaring hovedskjerm">
+			</div>
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="mainCanopySize">Skjermstørrelse</label>
+				<input type="text" class="form-control" id="mainCanopySize"
+					   ng-model="person.gear.mainCanopySize"
+					   placeholder="Skjermstørrelse">
 			</div>
 
-		</form>
+
+		</div>
+		<div class="col-xs-12"></div>
+		<div ng-if="observation.reserve">
+			<div>
+
+				<form role="form">
+					<div class="form-group col-md-3 col-xs-6">
+						<label for="reserveCanopyType">Type reserveskjerm</label>
+						<input type="text" class="form-control" id="reserveCanopyType"
+							   ng-model="person.gear.reserveCanopyType"
+							   placeholder="Type reserveskjerm">
+					</div>
+					<div class="form-group col-md-3 col-xs-6">
+						<label for="reserveCanopySize">Skjermstørrelse</label>
+						<input type="text" class="form-control" id="reserveCanopySize"
+							   ng-model="person.gear.reserveCanopySize"
+							   placeholder="Skjermstørrelse">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-xs-12"></div>
+		<div ng-if="observation.malfunction">
+
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="malfunction">Feilfunksjon</label>
+				<input type="text" class="form-control" id="malfunction"
+					   ng-model="person.gear.malfunction"
+					   placeholder="Feilfunksjon tagging og kategorisering">
+			</div>
+
+		</div>
+		<div class="col-xs-12"></div>
+		<div ng-if="observation.aad">
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="aadType">Type nødåpner</label>
+				<input type="text" class="form-control" id="aadType"
+					   ng-model="person.gear.aadType" placeholder="Type nødåpner">
+			</div>
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="aadFireHeight">Fyringshøyde</label>
+				<input type="text" class="form-control" id="aadFireHeight"
+					   ng-model="person.gear.aadFireHeight" placeholder="Fyringshøyde">
+			</div>
+		</div>
+		<div class="col-xs-12"></div>
+		<div ng-if="observation.injury">
+
+
+			<div class="form-group col-xs-12">
+				<label for="injuryDescription">Beskrivelse av skade</label>
+				<textarea rows="6" type="text" class="form-control" id="injuryDescription"
+						  ng-model="person.injury"
+						  placeholder="Beskriv skade"></textarea>
+			</div>
+
+
+		</div>
 	</div>
-	<button class="btn btn-success" ng-click="updateAnomaly()">Neste side</button>
+
 </div>
+
