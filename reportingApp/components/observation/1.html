@@ -1,26 +1,16 @@
 <div class="container" ng-controller="ObservationController">
-	<h1>Observasjonsrapport</h1>
+	<h1>Observasjonsrapport #{{observation.id}}</h1>
 
+	<h2>{{observation.title}}</h2>
 
 	<div class="form-group col-md-12">
 		<observationtype observation="observation"></observationtype>
-	</div>
-
-
-	<div class="form-group col-md-6 col-xs-12">
-		<clubselector observation="observation"></clubselector>
 	</div>
 
 	<div class="form-group col-md-6 col-xs-12">
 		<locationselector observation="observation"></locationselector>
 	</div>
 
-	<!--Select date-->
-	<div class="form-group col-md-6 col-xs-12">
-		<observationdateselector observation="observation"></observationdateselector>
-	</div>
-
-	<!--Select date-->
 	<div class="form-group col-md-6 col-xs-12">
 		<involvedpersonselector observation="observation"></involvedpersonselector>
 	</div>
@@ -34,7 +24,6 @@
 		<incidentform observation="observation"></incidentform>
 
 	</div>
-
 
 	<div class="form-group col-xs-12">
 		<summary observation="observation"></summary>

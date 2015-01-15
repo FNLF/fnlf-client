@@ -19,11 +19,15 @@
 			this.saveObservation = function (observation) {
 				return $http.post(urlBase + '/observations', observation);
 			};
-			this.getObservations = function () {
-				return $http.get(urlBase + '/observations');
+			this.getObservation = function (_id) {
+				return $http.get(urlBase + '/observations/'+_id);
 			};
+			this.getObservations = function () {
+				return $http.get(urlBase + '/observations/');
+			};
+
 			this.updateObservation = function (observation) {
-				return $http.put(urlBase + '/observations/' + observation.id, observation);
+				return $http.put(urlBase + '/observations/' + observation._id, observation);
 			};
 
 			this.getManufacturers = function () {

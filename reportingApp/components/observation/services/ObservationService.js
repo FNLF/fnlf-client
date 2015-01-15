@@ -48,8 +48,10 @@
 			};
 
 
-			this.saveObservation = function () {
-				observation = RestService.saveObservation(observation);
+			this.createObservation = function () {
+
+
+
 			};
 			this.updateObservation = function () {
 				RestService.updateObservation(observation);

@@ -1,35 +1,57 @@
-<div ng-hide="currentUserSignedIn">
-	<fnlf-login></fnlf-login>
-</div>
 
 
-<div class="col-md-4 col-sm-12 pull right" ng-show="currentUserSignedIn">
-
-	<div class="alert alert-info" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-		<i class="fa fa-info-circle"></i> <strong>Du er logget inn som <i>{{username}}</i></strong>
-		<hr class="message-inner-separator">
-
-		<p>Det er <u>kun</u> opprettelse av avvik som er praktisk testbart og skal testes</p>
-
-
-	</div>
-
-
-	<a ng-href="#!/observation/1" class="btn btn-primary btn-lg btn-block"><i class="fa fa-plus"></i> Opprett
-		observasjon</a>
-
-
-</div>
-
-
-<div class=" col-md-7 col-sm-12 pull-left" ng-hide="hasRole('user')">
+<div class=" col-md-7 col-sm-12 pull-left" ng-hide="currentUserSignedIn">
 	<h1>Fallskjermseksjonen / Norges Luftsportforbund</h1>
 
 	<h2>Observasjonsrapportering</h2>
 
 	<p>Dette er F/NLF's system for rapportering av observasjoner. Sidene er tilgjengelige for medlemmer i F/NLF.</p>
 </div>
+
+<div ng-hide="currentUserSignedIn">
+	<fnlf-login></fnlf-login>
+</div>
+
+<div class=" col-xs-12" ng-show="currentUserSignedIn" ng-controller="MainController">
+
+	<div class="col-xs-12">
+
+		<div class="col-md-7 col-xs-12">
+			<clubselector observation="observation"></clubselector>
+		</div>
+
+		<!--Select date-->
+		<div class=" col-md-7 col-xs-12">
+			<observationdateselector observation="observation"></observationdateselector>
+		</div>
+		<div class="col-xs-12"></div>
+		<div class="col-md-4 col-xs-12">
+
+			<button type="submit" class="btn btn-primary" ng-click="createObservation()">Opprett observasjon</button>
+
+		</div>
+
+	</div>
+
+	<div class="col-xs-12">
+
+		<h2>
+			Rediger eksisterende observasjoner
+
+		</h2>
+
+		<div ng-repeat="observation in observations">
+			<div class="col-xs-9"><a src="#" ng-click="editObservation(observation._id)"><h3> #{{observation.id}} {{observation.title}} </h3></a></div>
+
+		</div>
+
+	</div>
+
+
+</div>
+
+
+
 
 
 
