@@ -3,11 +3,6 @@
 	angular.module('reportingApp')
 		.service('ObservationService', function (RestService,Definitions) {
 
-
-
-
-
-
 			function Observation() {
 				this.id;
 				this.title;
@@ -15,7 +10,7 @@
 				this.wilfull = false;
 				this.owner = 0;
 				this.reporter = 0;
-				this.when = Date.now();
+				this.when = new Date();
 				this.involved = [];
 				this.organisation={};
 				this.rating = 0;
@@ -31,8 +26,6 @@
 				this.actions = {};
 				this.audit = {};
 				this.acl = {};
-
-
 
 			};
 

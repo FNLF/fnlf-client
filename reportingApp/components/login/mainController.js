@@ -9,12 +9,10 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope,ObservationService,RestService,$location) {
+		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location) {
 
 
-
-
-			$scope.observation = {};
+			$scope.observation = {when:new Date()};
 			$scope.observations = {};
 
 			$scope.editObservation = function(_id){
@@ -53,7 +51,7 @@
 					});
 
 			};
-			$scope.getObservations();
+
 
 			$scope.goToPage = function (url) {
 				$location.path(url);

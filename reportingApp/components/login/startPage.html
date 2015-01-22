@@ -1,6 +1,11 @@
+<style>
+	.newobservation >div {
+		padding: 10px;
+	}
 
+</style>
 
-<div class=" col-md-7 col-sm-12 pull-left" ng-hide="currentUserSignedIn">
+<div class=" col-md-7 col-sm-12 pull-left" ng-if="currentUserSignedOut">
 	<h1>Fallskjermseksjonen / Norges Luftsportforbund</h1>
 
 	<h2>Observasjonsrapportering</h2>
@@ -12,25 +17,25 @@
 	<fnlf-login></fnlf-login>
 </div>
 
-<div class=" col-xs-12" ng-show="currentUserSignedIn" ng-controller="MainController">
+<div class=" col-xs-12" ng-if="currentUserSignedIn" ng-controller="MainController">
 
-	<div class="col-xs-12">
+	<div class="panel panel-default col-md-12 newobservation" ng-init="getObservations()">
+		<div class="panel-body">
+			<div class="col-md-4 col-xs-12">
+				<clubselector observation="observation"></clubselector>
+			</div>
 
-		<div class="col-md-7 col-xs-12">
-			<clubselector observation="observation"></clubselector>
+			<!--Select date-->
+			<div class=" col-md-4 col-xs-12">
+				<observationdateselector observation="observation"></observationdateselector>
+			</div>
+
+			<div class="col-md-4 col-xs-12">
+
+				<button type="submit" class="btn btn-primary" ng-click="createObservation()">Opprett observasjon</button>
+
+			</div>
 		</div>
-
-		<!--Select date-->
-		<div class=" col-md-7 col-xs-12">
-			<observationdateselector observation="observation"></observationdateselector>
-		</div>
-		<div class="col-xs-12"></div>
-		<div class="col-md-4 col-xs-12">
-
-			<button type="submit" class="btn btn-primary" ng-click="createObservation()">Opprett observasjon</button>
-
-		</div>
-
 	</div>
 
 	<div class="col-xs-12">
@@ -39,12 +44,12 @@
 			Rediger eksisterende observasjoner
 
 		</h2>
+		<ul class="list-group">
+			<li class="list-item" ng-repeat="observation in observations">
+				<div><a src="#" ng-click="editObservation(observation._id)"><h3> #{{observation.id}} {{observation.title}} </h3></a></div>
 
-		<div ng-repeat="observation in observations">
-			<div class="col-xs-9"><a src="#" ng-click="editObservation(observation._id)"><h3> #{{observation.id}} {{observation.title}} </h3></a></div>
-
-		</div>
-
+			</li>
+		</ul>
 	</div>
 
 

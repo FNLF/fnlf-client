@@ -1,9 +1,9 @@
 <div>
-	<label class="control-label">Velg dato og tidspunkt observasjonen fant sted:</label> <br/>
+
 	<div class="input-group">
 
-		<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="observation.date"
-			   is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+		<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="observation.when"
+			   is-open="opened" min-date="minDate" datepicker-options="dateOptions"
 			   ng-required="true" close-text="Close"/>
         	      <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open($event)"><i
