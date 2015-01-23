@@ -26,12 +26,11 @@
 				return $http.get(urlBase + '/observations/');
 			};
 
-			this.updateObservation = function (observation) {
-				var etag = observation._etag;
+			this.updateObservation = function (observation,_id,etag) {
 				var config = {};
 				config.headers = {};
 				config.headers['If-Match'] = etag;
-				return $http.put(urlBase + '/observations/' + observation._id, observation,config);
+				return $http.put(urlBase + '/observations/' + _id, observation,config);
 			};
 
 			this.getManufacturers = function () {

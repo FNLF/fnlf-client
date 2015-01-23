@@ -48,6 +48,10 @@
 				RestService.getObservations()
 					.success(function(data){
 						$scope.observations = data._items;
+						angular.forEach($scope.observations,function(obs){
+							ObservationService.setTitle(obs);
+						});
+
 					});
 
 			};

@@ -11,7 +11,7 @@ angular.module('reportingApp').directive('summary', function (ObservationService
 
 	directive.link = function ($scope, element, attrs) {
 		$scope.saveObservation = function () {
-			RestService.updateObservation($scope.observation);
+			ObservationService.updateObservation();
 		};
 
 
