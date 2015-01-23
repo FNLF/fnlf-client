@@ -27,7 +27,11 @@
 			};
 
 			this.updateObservation = function (observation) {
-				return $http.put(urlBase + '/observations/' + observation._id, observation);
+				var etag = observation._etag;
+				var config = {};
+				config.headers = {};
+				config.headers['If-Match'] = etag;
+				return $http.put(urlBase + '/observations/' + observation._id, observation,config);
 			};
 
 			this.getManufacturers = function () {
