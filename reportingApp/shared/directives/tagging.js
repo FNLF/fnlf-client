@@ -9,15 +9,18 @@
 		directive.scope = {
 			model: '=',
 			category: '='
+
 		};
 
 		directive.link = function ($scope, element, attrs) {
 
 			$scope.tags = [];
 			$scope.tags.push("Tvinn og spinn");
-			$scope.tags.push("Jentelanding");
-			$scope.tags.push("Idiot");
+			$scope.tags.push("Overtråkk");
+			$scope.tags.push("Utelanding");
+			$scope.tags.push("Lavtrekk");
 
+			$scope.tags = $scope.tags.concat($scope.model.tags);
 			$scope.tagSelected = function ($item, $model){
 				$scope.tags.push($item);
 			};

@@ -27,7 +27,9 @@
 				new ItemType('components','Legg til observasjonsforløp')
 			];
 
-
+		$scope.saveObservation = function () {
+			ObservationService.updateObservation();
+		};
 
 
 		});
