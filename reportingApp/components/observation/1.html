@@ -1,15 +1,31 @@
 <div class="container" ng-controller="ObservationController">
 	
 	<!-- Placeholders for status stuff -->
-	<span class="pull-right"><span class="label label-success"><i class="fa fa-eye fa-fw"></i>Watching</span>
-	<span class="pull-right"><span class="label label-warning">Unsaved changes</span>
-	<span class="pull-right"><span class="label label-primary">Draft</button></span>
+	<!-- Watchers - am I watching, click to show who's watching -->
+	<span class="pull-right"><span class="label label-success"><i class="fa fa-eye fa-fw"></i>Watching</span>&nbsp;</span>
+	<!-- If changes, show warning include a "leaving page are you sure?"  -->
+	<span ng-if="observationChanges" class="pull-right"><span class="label">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>
+	<!-- Workflows, show current status. Click dropdown show actions -->
+	<span class="pull-right"><span class="label label-default">{{observation.workflow.state}}</span>&nbsp;</span>
+	<!-- Just show which version, click to show all versions? -->
+	<span class="pull-right"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span>
 	
 	<h1>Observasjonsrapport #{{observation.id}}</h1>
+	
+	<!-- Row with tags -->
+	<!-- A label showing type of observation -->
+	<span class="pull-left">
+	<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+	{{observation.type}}</span>
+	&nbsp;</span>
+	
+	<!-- And replicate the tags here! -->
+	<div ng-repeat="tag in observation.tags">
+		<span class="pull-left"><span class="label label-default">{{tag}}</span>&nbsp;</span>
+	</div>
+	<div class="clearfix"></div>
 
 	<h2>{{observation.title}}</h2>
-
-	<h4>Versjon {{observation._version}}</h4>
 
 	<div class="form-group col-md-12">
 		<observationtype observation="observation"></observationtype>
@@ -17,23 +33,23 @@
 
 	<div class="form-group col-xs-12" ng-repeat="item in items">
 
-		<div class="form-group col-xs-12 col-md-6">
+		<div class="form-group col-xs-12">
 
 			<button class="btn btn-default btn-lg" ng-click="item.used=!item.used">
-				<span class="glyphicon glyphicon-plus"></span> {{item.label}}
+			<span class="fa fa-plus fa-fw"></span> {{item.label}}
 			</button>
 
 		</div>
 
 		<div collapse="!item.used" ng-switch="item.type">
 			<div ng-switch-when="location">
-				<div class="form-group col-xs-12 col-md-6">
+				<div class="form-group col-xs-12">
 					<locationselector observation="observation"></locationselector>
 				</div>
 			</div>
 
 			<div ng-switch-when="involved">
-				<div class="form-group col-xs-12 col-md-6">
+				<div class="form-group col-xs-12">
 					<involvedpersonselector observation="observation"></involvedpersonselector>
 				</div>
 				<div class="form-group col-xs-12">
@@ -42,7 +58,7 @@
 			</div>
 
 			<div ng-switch-when="components">
-				<div class="form-group col-xs-12 col-md-6">
+				<div class="form-group col-xs-12">
 					<incidentform observation="observation"></incidentform>
 				</div>
 			</div>
@@ -51,16 +67,15 @@
 
 
 	</div>
-
-
-
-
-
+	
+	<!-- Ng if has edited stuff to be saved or not -->
+	<button class="btn btn-primary btn-block" ng-click="saveObservation()"><i class="fa fa-save fa-fw"></i> Lagre</button>
+	
+	
 	<div class="form-group col-xs-12">
 		<summary observation="observation"></summary>
 	</div>
-	<!-- Ng if has edited stuff to be saved or not -->
-	<button class="btn btn-primary btn-block" ng-click="updateObservation()">Lagre</button>
+
 
 </div>
 
