@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('RestService', ['$http', function ($http) {
+		.service('RestService', ['$http', function ($http,$rootScope) {
 			var urlBase = '/api/v1';
 
 			this.getClubs = function () {
@@ -22,15 +22,20 @@
 			this.getObservation = function (_id) {
 				return $http.get(urlBase + '/observations/'+_id);
 			};
-			this.getObservations = function () {
-				return $http.get(urlBase + '/observations/');
+			this.getObservations = function (userName) {
+				return $http.get(urlBase + '/observations');
+				//return $http.get(urlBase + '/observations/?where={"owner":'+userName+'}');
+			//	return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
 			};
 
 			this.updateObservation = function (observation,_id,etag) {
 				var config = {};
 				config.headers = {};
 				config.headers['If-Match'] = etag;
-				return $http.put(urlBase + '/observations/' + _id, observation,config);
+
+				var url = urlBase + '/observations/' + _id;
+				return $http({ method: 'PATCH', url: url, data: observation,headers: config.headers});
+				//return $http.patch(url, observation,config);
 			};
 
 			this.getManufacturers = function () {
