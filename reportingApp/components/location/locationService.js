@@ -9,8 +9,15 @@
                     }
                 };
 
-				this.getPlaceNames = function (name) {
-					return $http.get(urlBase+'q=' + name,config);
+				this.getPlaceNames = function (name, club) {
+					
+					return $http.get(urlBase+'q=' + name + '&club=' + club,config);
+	 			};
+	 			
+	 			this.getClubLocations = function (club) {
+	 				
+	 				// Default places:
+					var club_locations = $http.get('/api/v1/clubs/' +club ,config);
 	 			};
 
 		}]);
