@@ -29,6 +29,22 @@
 
 			$scope.createObservation = function(){
 				console.log("Create");
+				
+				var club = $scope.observation.club;
+				
+				$scope.observation.club = club.id;
+				//if(club.ci) $scope.observation.organization.ci = club.ci;
+				//if(club.ot) $scope.observation.organization.ot = club.ot;
+				
+				//To be filled in!
+				/**
+				$scope.observation.organization.plane = '';
+				$scope.observation.organization.hm = '';
+				$scope.observation.organization.hl = '';
+				$scope.observation.organization.hfl = [];
+				**/
+				
+				console.log($scope.observation);
 				RestService.createObservation($scope.observation).success(function(metadata){
 					console.log("Save");
 					RestService.getObservation(metadata._id).success(function(item){
