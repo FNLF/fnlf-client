@@ -16,9 +16,10 @@
 				return $http.get(urlBase + "/jumps/categories");
 			};
 
-			this.saveObservation = function (observation) {
+			this.createObservation = function (observation) {
 				return $http.post(urlBase + '/observations', observation);
 			};
+			
 			this.getObservation = function (_id) {
 				return $http.get(urlBase + '/observations/'+_id);
 			};

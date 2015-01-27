@@ -29,7 +29,7 @@
 
 			$scope.createObservation = function(){
 				console.log("Create");
-				RestService.saveObservation($scope.observation).success(function(metadata){
+				RestService.createObservation($scope.observation).success(function(metadata){
 					console.log("Save");
 					RestService.getObservation(metadata._id).success(function(item){
 						console.log(item);
