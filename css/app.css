@@ -43,6 +43,11 @@ body {
   }
 }
 
+/** ANGULAR NG_CLOAK **/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 /** ALERTS **/
 hr.message-inner-separator
 {

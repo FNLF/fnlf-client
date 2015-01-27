@@ -16,6 +16,9 @@
 				this.tags = [];
 				this.comments = [];
 				this.actions = {};
+				this.type = '';
+				
+				
 			};
 
 
@@ -118,7 +121,7 @@
 			};
 
 
-
+			
 
 		});
 

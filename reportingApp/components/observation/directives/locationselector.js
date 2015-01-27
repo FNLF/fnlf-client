@@ -26,6 +26,16 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 			}
 			});
 		};
+		
+		$scope.getClubLocations = function() {
+			
+			
+			return LocationService.getClubLocations($scope.observation.club).then(function(response) {
+				
+				
+				
+			});
+		};
 
 	};
 

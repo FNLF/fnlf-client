@@ -16,9 +16,10 @@
 				return $http.get(urlBase + "/jumps/categories");
 			};
 
-			this.saveObservation = function (observation) {
+			this.createObservation = function (observation) {
 				return $http.post(urlBase + '/observations', observation);
 			};
+			
 			this.getObservation = function (_id) {
 				return $http.get(urlBase + '/observations/'+_id);
 			};
@@ -28,7 +29,7 @@
 			//	return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
 			};
 
-			this.updateObservation = function (observation,_id,etag) {
+			this.updateObservation = function (observation, _id, etag) {
 				var config = {};
 				config.headers = {};
 				config.headers['If-Match'] = etag;

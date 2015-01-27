@@ -12,6 +12,7 @@ angular.module('reportingApp').directive('observationtype', function (Definition
 
 		$scope.observationTypes = Definitions.getObservationTypes();
 		$scope.observationTypeOptions = Definitions.getObservationTypeOptions();
+		
 	};
 
 	return directive;
