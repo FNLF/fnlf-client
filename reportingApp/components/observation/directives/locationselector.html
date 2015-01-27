@@ -1,6 +1,7 @@
 <div>
 	<label class="control-label">Velg sted for hendelsen:</label>
 	<input type="text" typeahead-on-select="locationSelected($item, $model, $label)"
+		   typeahead-wait-ms=500
 		   ng-model="observation.location" placeholder="Stedsnavn"
 		   typeahead="location as location.name+' '+location.descr for location in getLocations($viewValue)" class="form-control">
 

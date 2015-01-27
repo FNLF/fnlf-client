@@ -14,11 +14,12 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 
 		$scope.getLocations = function(name){
 			return LocationService.getPlaceNames(name).then(function(response){
-				if(response.data.stedsnavn){
+				if(response.data._items){
 
-					var array = [].concat(response.data.stedsnavn);
+					var array = [].concat(response.data._items);
 					return array.map(function(st){
-						return {name:st.stedsnavn,descr:st.navnetype+', '+st.kommunenavn,east:st.aust,north:st.nord};
+						//@todo: Fix thos to match data from server with geojson!!!
+						return {name:st.name, descr:st.geo_type+', '+st.municipality +', ' + st.county ,north:st.geo.coordinates[0],east:st.geo.coordinates[1]};
 					});
 			}else{
 				return {};
