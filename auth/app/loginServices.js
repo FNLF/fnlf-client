@@ -47,9 +47,12 @@
 			$rootScope.$on('event:auth-loginRequired', function () {
 				$rootScope.error = 'Login is required';
 				$rootScope.currentUserSignedIn = false;
+				$rootScope.currentUserSignedOut = true;
 			});
 			$rootScope.$on('event:auth-loginConfirmed', function () {
+				$rootScope.error = null;
 				$rootScope.currentUserSignedIn = true;
+				$rootScope.currentUserSignedOut = false;
 			});
 
 
