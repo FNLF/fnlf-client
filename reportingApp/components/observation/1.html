@@ -1,4 +1,10 @@
 <div class="container" ng-controller="ObservationController">
+	
+	<!-- Placeholders for status stuff -->
+	<span class="pull-right"><span class="label label-success"><i class="fa fa-eye fa-fw"></i>Watching</span>
+	<span class="pull-right"><span class="label label-warning">Unsaved changes</span>
+	<span class="pull-right"><span class="label label-primary">Draft</button></span>
+	
 	<h1>Observasjonsrapport #{{observation.id}}</h1>
 
 	<h2>{{observation.title}}</h2>
@@ -11,7 +17,7 @@
 
 	<div class="form-group col-xs-12" ng-repeat="item in items">
 
-		<div class="form-group col-xs-12">
+		<div class="form-group col-xs-12 col-md-6">
 
 			<button class="btn btn-default btn-lg" ng-click="item.used=!item.used">
 				<span class="glyphicon glyphicon-plus"></span> {{item.label}}
@@ -21,13 +27,13 @@
 
 		<div collapse="!item.used" ng-switch="item.type">
 			<div ng-switch-when="location">
-				<div class="form-group col-xs-12">
+				<div class="form-group col-xs-12 col-md-6">
 					<locationselector observation="observation"></locationselector>
 				</div>
 			</div>
 
 			<div ng-switch-when="involved">
-				<div class="form-group col-xs-12">
+				<div class="form-group col-xs-12 col-md-6">
 					<involvedpersonselector observation="observation"></involvedpersonselector>
 				</div>
 				<div class="form-group col-xs-12">
@@ -36,7 +42,7 @@
 			</div>
 
 			<div ng-switch-when="components">
-				<div class="form-group col-xs-12">
+				<div class="form-group col-xs-12 col-md-6">
 					<incidentform observation="observation"></incidentform>
 				</div>
 			</div>
@@ -54,7 +60,7 @@
 		<summary observation="observation"></summary>
 	</div>
 
-	<button class="btn btn-default" ng-click="saveObservation()">Lagre</button>
+	<button class="btn btn-primary btn-block" ng-click="saveObservation()">Lagre</button>
 
 </div>
 

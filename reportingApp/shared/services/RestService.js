@@ -5,7 +5,7 @@
 			var urlBase = '/api/v1';
 
 			this.getClubs = function () {
-				return $http.get(urlBase + "/clubs?where={\"active\":true}&max_results=50");
+				return $http.get(urlBase + "/clubs?where={\"active\":true}"); //projection={\"id\": 1, \"name\": 1}");
 			};
 
 			this.getLicenses = function () {
@@ -34,7 +34,7 @@
 				config.headers['If-Match'] = etag;
 
 				var url = urlBase + '/observations/' + _id;
-				return $http({ method: 'PATCH', url: url, data: observation,headers: config.headers});
+				return $http({ method: 'PATCH', url: url, data: observation, headers: config.headers});
 				//return $http.patch(url, observation,config);
 			};
 

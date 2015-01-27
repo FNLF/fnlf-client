@@ -41,7 +41,7 @@ angular.module('reportingApp').directive('observationdateselector', function () 
         startingDay: 1
       };
 
-      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      $scope.formats = ['yyyy-MM-ddTHH:mm:ss', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
       $scope.format = $scope.formats[0];
 
 

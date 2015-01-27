@@ -17,7 +17,9 @@
 
 			this.getObservationTypes = function () {
 				var observationTypes = [];
-				observationTypes.push(new ObservationType('unsafe_act', 'Erfaringsdeling'));
+				
+				observationTypes.push(new ObservationType('sharing', 'Erfaringsdeling'));
+				observationTypes.push(new ObservationType('unsafe_act', 'Uheldig hendelse'));
 				observationTypes.push(new ObservationType('near_miss', 'Næruhell'));
 				observationTypes.push(new ObservationType('incident', 'Uhell'));
 				observationTypes.push(new ObservationType('accident', 'Ulykke'));
