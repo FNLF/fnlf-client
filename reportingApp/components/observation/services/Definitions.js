@@ -17,9 +17,10 @@
 
 			this.getObservationTypes = function () {
 				var observationTypes = [];
-				observationTypes.push(new ObservationType('1', 'Næruhell'));
-				observationTypes.push(new ObservationType('2', 'Uhell'));
-				observationTypes.push(new ObservationType('3', 'Ulykke'));
+				observationTypes.push(new ObservationType('unsafe_act', 'Erfaringsdeling'));
+				observationTypes.push(new ObservationType('near_miss', 'Næruhell'));
+				observationTypes.push(new ObservationType('incident', 'Uhell'));
+				observationTypes.push(new ObservationType('accident', 'Ulykke'));
 
 				return observationTypes;
 			};

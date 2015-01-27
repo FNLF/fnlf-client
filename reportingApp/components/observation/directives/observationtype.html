@@ -3,7 +3,7 @@
 	<div class="form-group">
 		<label class="control-label">Type observasjon:</label><br/>
 		<label class="radio-inline" ng-repeat="observationType in observationTypes">
-			<input type="radio" name="observationType" ng-model="observation.type" ng-value="observationType">
+			<input type="radio" name="observationType" ng-model="observation.type" ng-value="observationType.id">
 			{{observationType.name}}
 		</label>
 	</div>
