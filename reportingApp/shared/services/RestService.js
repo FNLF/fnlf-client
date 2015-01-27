@@ -29,7 +29,7 @@
 			//	return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
 			};
 
-			this.updateObservation = function (observation,_id,etag) {
+			this.updateObservation = function (observation, _id, etag) {
 				var config = {};
 				config.headers = {};
 				config.headers['If-Match'] = etag;
