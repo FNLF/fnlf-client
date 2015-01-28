@@ -12,7 +12,7 @@
 
 		directive.link = function ($scope, element, attrs) {
 
-			$scope.personsFromDb = [];
+			$scope.personsFromDb = [].concat($scope.observation.involved);
 
 			$scope.personSelected = function ($item, $model) {
 
@@ -26,7 +26,7 @@
 				if(name.length>2){
 					RestService.getUserByName(name)
 					.success(function (response) {
-						$scope.personsFromDb = response._items;
+						$scope.personsFromDb = $scope.observation.involved.concat(response._items);
 					});
 				}
 			};
