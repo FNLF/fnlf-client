@@ -23,9 +23,7 @@
 				return $http.get(urlBase + '/observations/'+_id);
 			};
 			this.getObservations = function (userName) {
-				return $http.get(urlBase + '/observations');
-				//return $http.get(urlBase + '/observations/?where={"owner":'+userName+'}');
-			//	return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
+				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
 			};
 
 			this.updateObservation = function (observation,_id,etag) {
