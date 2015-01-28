@@ -10,8 +10,8 @@
 
 			<div ng-show="person.licenses.length == 0 && !editLicenses">Ingen lisenser registrert</div>
 			<div ng-show="!editLicenses">
-				<li ng-repeat="license in person.licenses track by license.id">
-					{{license.licenseName}}
+				<li ng-repeat="license in person.licenses.rights">
+					{{license}}
 				</li>
 			</div>
 			<div class="form-group col-md-3 col-xs-6" ng-show="editLicenses">
