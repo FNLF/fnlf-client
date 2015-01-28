@@ -45,7 +45,8 @@
 			};
 
 			$scope.getObservations = function(){
-				RestService.getObservations()
+				var userName = $rootScope.username;
+				RestService.getObservations(userName)
 					.success(function(data){
 						$scope.observations = data._items;
 						angular.forEach($scope.observations,function(obs){
