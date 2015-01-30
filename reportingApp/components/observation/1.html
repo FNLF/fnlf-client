@@ -36,12 +36,14 @@
 		<div class="form-group col-xs-12">
 
 			<button class="btn btn-default btn-lg" ng-click="item.used=!item.used">
-			<span class="fa fa-plus fa-fw"></span> {{item.label}}
+			<span ng-show="!item.used" class="fa fa-plus fa-fw"></span>
+			<span ng-show="item.used" class="fa fa-minus fa-fw"></span>
+				{{item.label}}
 			</button>
 
 		</div>
 
-		<div collapse="!item.used" ng-switch="item.type">
+		<div ng-show="item.used" ng-switch="item.type">
 			<div ng-switch-when="location">
 				<div class="form-group col-xs-12">
 					<locationselector observation="observation"></locationselector>
