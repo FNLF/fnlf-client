@@ -17,22 +17,22 @@
 	<fnlf-login></fnlf-login>
 </div>
 
-<div class=" col-xs-12" ng-if="currentUserSignedIn" ng-controller="MainController">
+<div class="" ng-if="currentUserSignedIn" ng-controller="MainController">
 
 	<div class="panel panel-default col-md-12 newobservation" ng-init="getObservations()">
 		<div class="panel-body">
-			<div class="col-md-4 col-xs-12">
+			<div class="col-md-4">
 				<clubselector observation="observation"></clubselector>
 			</div>
 
 			<!--Select date-->
-			<div class=" col-md-4 col-xs-12">
+			<div class=" col-md-4">
 				<observationdateselector observation="observation"></observationdateselector>
 			</div>
 
-			<div class="col-md-4 col-xs-12">
+			<div class="col-md-4">
 
-				<button type="submit" class="btn btn-primary" ng-click="createObservation()">Opprett observasjon</button>
+				<button type="submit" class="btn btn-primary" ng-click="createObservation()"><i class="fa fa-plus fa-fw"></i>Opprett observasjon</button>
 
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 		</h2>
 		<ul class="list-group">
 			<li class="list-item" ng-repeat="observation in observations">
-				<div><a src="#" ng-click="editObservation(observation._id)"><h3> #{{observation.id}} {{observation.title}} </h3></a></div>
+				<div><a src="#" ng-click="editObservation(observation._id)"><h3> #{{observation.id}} {{observation.tags.join(' ')}} </h3></a></div>
 
 			</li>
 		</ul>

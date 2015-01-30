@@ -19,7 +19,7 @@
 				this.type=type;
 				this.label=label;
 				this.used=false;
-			}
+			};
 
 			$scope.items=[
 				new ItemType('location','Legg til sted'),
@@ -31,6 +31,16 @@
 			ObservationService.updateObservation();
 		};
 
+		/**
+		 * How can we watch changes?
+		 * 
+		 * Triggers saved/unsaved label
+		 */
+		$scope.observationChanges = false;
+		$scope.$watch('observation', function() {
+			
+			$scope.observationChanges = true;
+		});
 
 		});
 
