@@ -2,16 +2,23 @@
 
 	angular.module('reportingApp')
 		.service('LocationService', ['$http', function ($http) {
-			var urlBase = '/locations/?';
+			var urlBase = '/api/v1/locations/search?';
 
 			   var config = {headers: {
                         'Accept': 'application/json'
                     }
                 };
 
-				this.getPlaceNames = function (name) {
-				return $http.get(urlBase+'navn=' + name + '&maxAnt=8&eksakteForst=true',config)
-			};
+				this.getPlaceNames = function (name, club) {
+					
+					return $http.get(urlBase+'q=' + name + '&club=' + club,config);
+	 			};
+	 			
+	 			this.getClubLocations = function (club) {
+	 				
+	 				// Default places:
+					var club_locations = $http.get('/api/v1/clubs/' +club ,config);
+	 			};
 
 		}]);
 

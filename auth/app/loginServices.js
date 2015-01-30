@@ -47,9 +47,12 @@
 			$rootScope.$on('event:auth-loginRequired', function () {
 				$rootScope.error = 'Login is required';
 				$rootScope.currentUserSignedIn = false;
+				$rootScope.currentUserSignedOut = true;
 			});
 			$rootScope.$on('event:auth-loginConfirmed', function () {
+				$rootScope.error = null;
 				$rootScope.currentUserSignedIn = true;
+				$rootScope.currentUserSignedOut = false;
 			});
 
 
@@ -212,5 +215,23 @@
 	};
 
 	angular.module('fnlf-login').directive('fnlfLogin', fnlfLogin);
+
+		var fnlfLogout = function (loginService) {
+    		var directive = {};
+    		directive.restrict = 'E';
+    		directive.replace=true;
+    		directive.scope = {};
+    		directive.template='<a href ng-click=\"logout()\" role=\"button\"><i class=\"fa fa-power-off\"></i> Logg ut</a>';
+    		directive.link = function ($scope, element, attrs) {
+    			$scope.logout = function () {
+    				console.log("Logout");
+    				loginService.logout();
+    			};
+    		};
+    		return directive;
+    	};
+
+    	angular.module('fnlf-login').directive('fnlfLogout', fnlfLogout);
+
 })();
 

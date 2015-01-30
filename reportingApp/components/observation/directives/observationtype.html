@@ -1,26 +1,15 @@
 <div>
+
 	<div class="form-group">
 		<label class="control-label">Type observasjon:</label><br/>
 		<label class="radio-inline" ng-repeat="observationType in observationTypes">
-			<input type="radio" name="observationType" ng-model="observation.type" ng-value="observationType">
+			<input type="radio" name="observationType" ng-model="observation.type" ng-value="observationType.id">
 			{{observationType.name}}
 		</label>
 	</div>
 
 	<div class="form-group">
-		<label class="checkbox-inline">
-			<input type="checkbox" name="injury" ng-model="observation.injury" ng-value="report">
-			Personskade
-		</label>
-
-		<label class="checkbox-inline">
-			<input type="checkbox" name="reserve" ng-model="observation.reserve" ng-value="report">
-			Reservetrekk
-		</label>
-
-		<label class="checkbox-inline">
-			<input type="checkbox" name="aad" ng-model="observation.aad" ng-value="report">
-			Nødåpner aktivert
-		</label>
+		<label class="control-label">Legg til tagger som beskriver hendelsen som helhet</label>
+		<tagging model="observation" category="observationTags"></tagging>
 	</div>
 </div>

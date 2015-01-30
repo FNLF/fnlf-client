@@ -1,11 +1,11 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('RestService', ['$http', function ($http) {
+		.service('RestService', ['$http', function ($http,$rootScope) {
 			var urlBase = '/api/v1';
 
 			this.getClubs = function () {
-				return $http.get(urlBase + "/clubs?where={\"active\":true}&max_results=50");
+				return $http.get(urlBase + "/clubs?where={\"active\":true}"); //projection={\"id\": 1, \"name\": 1}");
 			};
 
 			this.getLicenses = function () {
@@ -16,14 +16,25 @@
 				return $http.get(urlBase + "/jumps/categories");
 			};
 
-			this.saveObservation = function (observation) {
+			this.createObservation = function (observation) {
 				return $http.post(urlBase + '/observations', observation);
 			};
-			this.getObservations = function () {
-				return $http.get(urlBase + '/observations');
+			
+			this.getObservation = function (_id) {
+				return $http.get(urlBase + '/observations/'+_id);
 			};
-			this.updateObservation = function (observation) {
-				return $http.put(urlBase + '/observations/' + observation.id, observation);
+			this.getObservations = function (userName) {
+				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
+			};
+
+			this.updateObservation = function (observation, _id, etag) {
+				var config = {};
+				config.headers = {};
+				config.headers['If-Match'] = etag;
+
+				var url = urlBase + '/observations/' + _id;
+				return $http({ method: 'PATCH', url: url, data: observation, headers: config.headers});
+				//return $http.patch(url, observation,config);
 			};
 
 			this.getManufacturers = function () {
