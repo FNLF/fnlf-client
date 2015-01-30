@@ -22,9 +22,10 @@
 			};
 
 			$scope.items=[
-				new ItemType('location','Legg til sted'),
-				new ItemType('involved','Legg til involverte personer'),
-				new ItemType('components','Legg til observasjonsforløp')
+				new ItemType('location','Sted'),
+				new ItemType('organization','Hoppfeltorganisering'),
+				new ItemType('involved','Involverte personer'),
+				new ItemType('components','Observasjonsforløp')
 			];
 
 		$scope.saveObservation = function () {

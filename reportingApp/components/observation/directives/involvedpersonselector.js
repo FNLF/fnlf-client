@@ -31,6 +31,11 @@
 				}
 			};
 
+			$scope.tagTransform = function(itemText){
+
+				return {fullname:itemText,id:0};
+			}
+
 		};
 
 		return directive;

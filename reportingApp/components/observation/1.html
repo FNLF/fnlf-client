@@ -25,11 +25,12 @@
 	</div>
 	<div class="clearfix"></div>
 
-	<h2>{{observation.title}}</h2>
-
 	<div class="form-group col-md-12">
 		<observationtype observation="observation"></observationtype>
 	</div>
+
+
+
 
 	<div class="form-group col-xs-12" ng-repeat="item in items">
 
@@ -42,12 +43,15 @@
 			</button>
 
 		</div>
-
 		<div ng-show="item.used" ng-switch="item.type">
 			<div ng-switch-when="location">
 				<div class="form-group col-xs-12">
 					<locationselector observation="observation"></locationselector>
 				</div>
+			</div>
+
+			<div ng-switch-when="organization">
+				<organization observation="observation"></organization>
 			</div>
 
 			<div ng-switch-when="involved">

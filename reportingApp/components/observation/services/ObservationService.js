@@ -48,14 +48,7 @@
 					});
 				}
 
-				var dateText = '';
-				if(obs.when){
-					dateText = obs.when.format('yyyy-mm-dd');
-				}else{
-					dateText = obs._created;
-				}
-
-				obs.title = dateText + ' ' + tagText
+				obs.title = tagText
 
 			};
 
