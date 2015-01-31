@@ -7,7 +7,7 @@
 						templateUrl: 'reportingApp/components/login/startPage.html',
 						controller: 'MainController'
 					})
-					.when('/observation/1', {
+					.when('/observation/:id', {
 						templateUrl: 'reportingApp/components/observation/1.html',
 						controller: 'ObservationController'
 					})

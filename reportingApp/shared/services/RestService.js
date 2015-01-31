@@ -23,6 +23,11 @@
 			this.getObservation = function (_id) {
 				return $http.get(urlBase + '/observations/'+_id);
 			};
+
+			this.getObservationById = function (id) {
+				return $http.get(urlBase + '/observations/?where={"id":'+id+'}');
+			};
+
 			this.getObservations = function (userName) {
 				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
 			};

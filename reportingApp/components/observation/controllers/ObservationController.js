@@ -11,9 +11,12 @@
 	 */
 	angular.module('reportingApp')
 		.controller('ObservationController',
-		function ($scope, ObservationService) {
-
+		function ($scope, ObservationService,$routeParams) {
+			var observationId = $routeParams.id;
 			$scope.observation = ObservationService.getObservation();
+			ObservationService.getObservationById(observationId, function(obs){
+				$scope.observation = obs;
+			});
 
 			var ItemType = function ItemType(type,label){
 				this.type=type;

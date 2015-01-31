@@ -33,6 +33,15 @@
 			};
 
 
+			this.getObservationById = function (id,cb) {
+
+				RestService.getObservationById(id)
+					.success(function(obs){
+						cb(obs);
+					});
+			};
+
+
 			this.createObservation = function () {
 
 
@@ -57,6 +66,10 @@
 				for(var k in firstObject){
 					secondObject[k]=firstObject[k];
 				}
+				console.log('copy');
+				console.log(firstObject);
+				console.log(secondObject);
+
 			};
 			var copyFunction = this.copy;
 			var setTitleFunction = this.setTitle;
