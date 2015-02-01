@@ -37,7 +37,7 @@
 
 				RestService.getObservationById(id)
 					.success(function(obs){
-						cb(obs);
+						cb(obs._items[0]);
 					});
 			};
 

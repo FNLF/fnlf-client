@@ -15,7 +15,10 @@
 			var observationId = $routeParams.id;
 			$scope.observation = ObservationService.getObservation();
 			ObservationService.getObservationById(observationId, function(obs){
-				$scope.observation = obs;
+				for(var k in obs){
+            		//$scope.observation[k]=obs[k];
+            	}
+
 			});
 
 			var ItemType = function ItemType(type,label){
