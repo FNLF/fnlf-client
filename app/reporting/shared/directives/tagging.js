@@ -4,7 +4,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "reportingApp/shared/directives/tagging.html";
+		directive.templateUrl = "shared/directives/tagging.html";
 
 		directive.scope = {
 			model: '=',

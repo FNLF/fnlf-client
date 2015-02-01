@@ -47,7 +47,7 @@
 			};
 
 			this.getUserByName = function (name) {
-				return $http.get(urlBase + '/melwin/users/search?q=' + name)
+				return $http.get(urlBase + '/melwin/users/search?q=' + name);
 			};
 
 			this.getUserDetails = function (userId){

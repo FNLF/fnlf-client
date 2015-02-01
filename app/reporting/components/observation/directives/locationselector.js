@@ -2,7 +2,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "reportingApp/components/observation/directives/locationselector.html";
+	directive.templateUrl = "components/observation/directives/locationselector.html";
 
 	directive.scope = {
 		observation: '='

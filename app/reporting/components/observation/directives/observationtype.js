@@ -2,7 +2,7 @@ angular.module('reportingApp').directive('observationtype', function (Definition
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "reportingApp/components/observation/directives/observationtype.html";
+	directive.templateUrl = "components/observation/directives/observationtype.html";
 
 	directive.scope = {
 		observation: '='

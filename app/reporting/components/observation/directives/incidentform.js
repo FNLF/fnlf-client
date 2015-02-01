@@ -4,7 +4,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "reportingApp/components/observation/directives/incidentform.html";
+		directive.templateUrl = "components/observation/directives/incidentform.html";
 
 		directive.scope = {
 			observation: '='

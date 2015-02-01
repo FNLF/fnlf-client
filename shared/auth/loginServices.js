@@ -75,6 +75,7 @@
 							//$cookieStore.put('username', username);
 							$window.sessionStorage.token = response.token64;
 							$window.sessionStorage.username = username;
+							$rootScope.username = username;
 
 							$http.defaults.headers.common.Authorization = 'Basic ' + response.token64;
 							$rootScope.currentUserSignedIn = true;
@@ -192,7 +193,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/auth/views/login.html";
+		directive.templateUrl = "/shared/auth/views/login.html";
 
 		directive.scope = {};
 
