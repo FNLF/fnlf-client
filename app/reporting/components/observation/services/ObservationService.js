@@ -126,7 +126,47 @@
 				observation = new Observation();
 			};
 
-
+			/**
+			 * Change workflow state if access
+			 * 
+			 * 
+			 */
+			this.changeWorkflowState = function (objectId, action, comment){
+				
+				RestService.changeWorkflowState(objectId, action, comment)
+				.success(function(data){
+					RestService.getObservation(_id)
+						.success(function(updated){
+							console.log(observation);
+							copyFunction(updated,observation);
+							console.log(observation);
+							setTitleFunction(observation);
+						});
+				}).error(function(error){
+					console.log(error);
+					$rootScope.error=error;
+					RestService.getObservation(_id)
+						.success(function(updated){
+							console.log(observation);
+							copyFunction(updated,observation);
+							console.log(observation);
+							setTitleFunction(observation);
+						});
+				});
+			};
+			
+			/**
+			 * Watching start/stop
+			 */
+			
+			this.isWatching = function(objectId) {
+				
+				
+			};
+			
+			this.stopWatching = function(objectId) {
+				
+			};
 			
 
 		});

@@ -1,0 +1,17 @@
+
+<popover-button placement="bottom" button-classes="btn-primary" button-text="{{ observation.workflow.state }}" button-icon="fa fa-random fa-fw" on-close="onClose()" on-open="onOpen()">
+<title>{{title}}</title>
+<content>
+<div class="form-group">
+	<label for="comment">Kommentarer:</label>
+	<textarea ng-model="workflow.comment" name="comment" class="form-control" rows="3" id="comment"></textarea>
+</div>
+<p>
+<div ng-repeat="(key, value) in btns">
+
+	<button class="pull-{{value.side}} btn btn-{{value.btn_class}}" ng-controller="wfController" ng-click="workflowTransition('{{value.resource}}','{{workflow.comment}}')">{{value.action}}</button>
+
+</div>
+</p>
+<br />
+</content> </popover-button>

@@ -1,7 +1,7 @@
 (function() {
 
 	var profileApp = angular.module('profileApp', [ 'ngRoute', 'ui.bootstrap',
-	                                                'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login' ]);
+	                                                'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login','ngPopoverButton' ]);
 
 	profileApp.config([ 'cfpLoadingBarProvider',
 			function(cfpLoadingBarProvider) {
