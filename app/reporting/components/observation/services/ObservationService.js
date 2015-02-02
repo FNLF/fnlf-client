@@ -135,7 +135,7 @@
 				
 				RestService.changeWorkflowState(objectId, action, comment)
 				.success(function(data){
-					RestService.getObservation(_id)
+					RestService.getObservation(objectId)
 						.success(function(updated){
 							console.log(observation);
 							copyFunction(updated,observation);
@@ -145,7 +145,7 @@
 				}).error(function(error){
 					console.log(error);
 					$rootScope.error=error;
-					RestService.getObservation(_id)
+					RestService.getObservation(objectId)
 						.success(function(updated){
 							console.log(observation);
 							copyFunction(updated,observation);

@@ -52,7 +52,7 @@ angular.module('reportingApp')
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.transclude = true;
+//	directive.transclude = true;
 //	directive.replace = true;
 	
 //	directive.templateUrl = "/app/reporting/components/observation/directives/workflow.html";
@@ -60,6 +60,8 @@ angular.module('reportingApp')
 	directive.scope = {
 		observation: '=',
 	};
+	
+	directive.transcluded = true;
 	
 	directive.template = function(tElement, tAttrs) { 
 		
@@ -72,7 +74,7 @@ angular.module('reportingApp')
 							</div><p> \
 							<div ng-repeat="(key, value) in btns"> \
 								<button class="pull-{{value.side}} btn btn-{{value.btn_class}}"  \
-		 						ng-click="workflowTransition(\'{{value.resource}}\',\'{{workflow.comment}}\')">{{value.action}}</button> \
+		 						ng-click="workflowTransition(value.resource,workflow.comment)">{{value.title}}</button> \
 							</div> \
 							</p> \
 							<br /> \
@@ -105,6 +107,8 @@ angular.module('reportingApp')
 //	
 	directive.link = function($scope, element, attrs) {
 		
+		$scope.$watch($scope.observation.workflow,function(newValue,oldValue) {
+			
 		RestService.getWorkflowState($scope.observation._id)
 		.success(function (response) {
 			
@@ -134,7 +138,7 @@ angular.module('reportingApp')
 //						ng-click="changeWorkflowState("'+response.actions[k].resource+'","Kommentaren") \
 //						">'+response.actions[k].action+'</button>';
 				
-				btns.push({action: response.actions[k].action, resource: response.actions[k].resource, side: side, btn_class: btn_class });
+				btns.push({action: response.actions[k].action,title: response.actions[k].title, resource: response.actions[k].resource, side: side, btn_class: btn_class });
 				
 //				btns += '<button class="pull-'+side+' btn btn-'+bt_class+'" \
 //				ng-click="workflowTransition(\''+$scope.observation._id+'\',\''+response.actions[k].resource+'\',\'Kommentaren\');" \
@@ -150,6 +154,7 @@ angular.module('reportingApp')
 			$scope.btns = btns;
 			
 			$scope.title = 'Workflow for Obs #' + $scope.observation.id;
+		
 			
 			
 //			$scope.workflowPopover = $sce.trustAsHtml('<div class="form-group"> \
@@ -208,6 +213,8 @@ angular.module('reportingApp')
 
 		
 			
+		});
+		
 		});
 			
 		};
