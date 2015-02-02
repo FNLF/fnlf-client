@@ -65,9 +65,10 @@ angular.module('reportingApp')
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<popover-button placement="bottom" button-classes="btn-primary" button-text="{{ observation.workflow.state }}" button-icon="fa fa-random fa-fw" on-close="onClose()" on-open="onOpen()"> \
+		return '<popover-button placement="bottom" button-classes="btn-primary" button-text="{{ btn_title }}" button-icon="fa fa-random fa-fw" on-close="onClose()" on-open="onOpen()"> \
 							<title>{{title}}</title> \
 							<content> \
+							<div class="alert alert-info" role="alert" ng-show="error">{{workflow_error}}</div> \
 							<div class="form-group"> \
 							<label for="comment">Kommentarer:</label> \
 							<textarea ng-model="workflow.comment" name="comment" class="form-control" rows="3" id="comment"></textarea> \
@@ -150,7 +151,7 @@ angular.module('reportingApp')
 			
 			$scope.wf = {btns: '', title: '', comment: ''};
 	
-
+			$scope.btn_title = response.title;
 			$scope.btns = btns;
 			
 			$scope.title = 'Workflow for Obs #' + $scope.observation.id;
