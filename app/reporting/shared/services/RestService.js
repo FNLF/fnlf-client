@@ -53,6 +53,37 @@
 			this.getUserDetails = function (userId){
 				return $http.get(urlBase + '/melwin/users/' + userId);
 			};
+			
+			
+			/**
+			 * Workflows here!
+			 */
+			this.getWorkflowState = function (objectId){
+				console.log(objectId);
+				return $http.get(urlBase + '/observations/workflow/' + objectId + '/state');
+			};
+			
+			this.changeWorkflowState = function (objectId, action, comment){
+				return $http.post(urlBase + '/observations/workflow/' + objectId + '/' + action, {'comment': comment});
+			};
+			
+			/**
+			 * Watching/watchers
+			 * 
+			 */
+			this.isWatching = function (objectId){
+				return $http.get(urlBase + '/observations/watchers/' + objectId + '/watching');
+			};
+			this.getWatchers = function (objectId){
+				return $http.get(urlBase + '/observations/watchers/' + objectId + '/watchers');
+			};
+			this.startWatching = function (objectId){
+				return $http.post(urlBase + '/observations/watchers/' + objectId + '/start');
+			};
+			this.stopWatching = function (objectId){
+				return $http.post(urlBase + '/observations/watchers/' + objectId + '/stop');
+			};
+			
 
 		}]);
 
