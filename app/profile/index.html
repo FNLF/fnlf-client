@@ -27,9 +27,9 @@
 <script src="/static/js/ui-select/select.min.js"></script>
 <script src="/static/js/angular-sanitize.js"></script>
 
-<link href="/bower_components/ng-popover-button/dest/ngPopoverButton.css" rel="stylesheet">
-<script src="/bower_components/ng-popover-button/dest/ngPopoverButton.js"></script>
 
+<link href="/bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+<script src="/bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 
 
 
@@ -52,7 +52,7 @@
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="icon-bar">Meny</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
 
 
@@ -83,7 +83,7 @@
 	<div class="container">
 
 		<div class="row">
-
+			<div class="alert alert-info" role="alert" ng-show="error">{{error}}</div>
 
 			<div ng-hide="currentUserSignedIn">
 				<fnlf-login></fnlf-login>
@@ -91,71 +91,72 @@
 
 
 
-			<div class="" ng-if="currentUserSignedIn" ng-controller="userController">
+			<div ng-if="currentUserSignedIn" ng-controller="userController" class="ng-cloak" ng-cloak>
 
-				<div class="content-wrapper">
-					<h2>Profile Editing</h2>
-
-
-
-					<div class="everyone-wrapper">
-						<section ng-switch on="(editIndex == $index)" ng-repeat="person in userArray track by $index" class="clearfix">
-							<div class="img-wrapper clearfix">
-								<img width="100px" height="100px" ng-src="{{person.imgSrc}}">
-							</div>
-							<div class="info-wrapper clearfix">
-								<!-- Default Information -->
-								<h3 ng-switch-default>
-									{{person.firstname}} {{person.lastname}} <span>| {{person.gender}}</span>
-								</h3>
-
-								<p ng-switch-default class="p-desc">{{person.jobDesc}}</p>
-								<span ng-switch-default class="from">From: {{person.location.street}}, {{person.location.zip}} {{person.location.city}}</span> 
-								<span ng-switch-default class="phone">Phone: {{person.phone}}</span> 
-								<span ng-switch-default class="email">Email: {{person.email}}</span>
-								<!-- Edit Fields -->
-								<h3 ng-switch-when="true">
-									<input ng-model="editObject.firstname" placeholder="First Name" type="text" /> 
-									<input ng-model="editObject.lastname" placeholder="Last Name" type="text" /> 
-									<input ng-model="editObject.gender" placeholder="Gender" type="text" />
-								</h3>
-
-								<p ng-switch-when="true" class="p-desc">
-									<textarea ng-model="editObject.location.street" placeholder="Job Description"> </textarea>
-								</p>
-								<span ng-switch-when="true" class="from"> <input ng-model="editObject.location.city" id="city" type="text" placeholder="City" />
-								<input ng-model="editObject.location.zip" id="zip" type="text" placeholder="ST" />
-								</span> <span ng-switch-when="true" class="phone"> <input ng-model="editObject.phone" type="text" placeholder="Phone" />
-								</span> <span ng-switch-when="true" class="email"> <input ng-model="editObject.email" type="text" placeholder="Email" />
-								</span>
-
-							</div>
-							<div class="edit-wrapper clearfix">
-
-<popover-button placement="bottom" button-text="A Button" button-icon="fa-thumbs-up" on-close="onClose()" on-open="onOpen()">
-  <title> Title </title>
-  <content><a href="test">test</a> <input type="text"> 
-  
-  <button class="btn btn-warning" ng-click="editingPerson($index)">edit</button>
-  </content>
-</popover-button>
-								<!-- Default Buttons -->
-								<button class="yellow" ng-switch-default ng-click="editingPerson($index)">edit</button>
-								<!-- <button class="red" ng-switch-default>trash</button>-->
-								<!--More functionality going to be added later-->
-
-								<!--Buttons for editing -->
-								<button class="green" ng-switch-when="true" ng-click="saveEdit($index)">save</button>
-								<button class="red" ng-switch-when="true" ng-click="cancelEdit()">X</button>
-							</div>
-
-						</section>
-					</div>
-				</div>
+<!-- left column -->
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="text-center">
+        <img src="http://lorempixel.com/200/200/people/9/" class="avatar img-rounded img-thumbnail" alt="avatar">
+        <h6>Upload a different photo...</h6>
+        <input type="file" class="text-center center-block well well-sm">
+      </div>
+    </div>
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+      <div class="alert alert-info alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a> 
+        <i class="fa fa-coffee"></i>
+        This is an <strong>.alert</strong>. Use this to show important messages to the user.
+      </div>
+     
+      <form class="form-horizontal" role="form">
+       <h3>Personal info: Einar Huseby (45199)</h3>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="janesemail@gmail.com" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Telefon:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="9922992929" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Gateadresse:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="Halfdan ..." type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Postnummer:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="3116" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Poststed:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="Tønsberg" type="text">
+          </div>
+        </div>
+        
+        
+        <div class="form-group">
+        <label class="col-lg-3 control-label"></label>
+          <div class="col-lg-8">
+            <input class="btn btn-primary btn-block" value="Save Changes" type="button">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
 
 			</div>
 
+		</div>
 		</div>
 </body>
 </html>
