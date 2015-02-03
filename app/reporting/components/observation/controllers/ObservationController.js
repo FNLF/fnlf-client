@@ -13,11 +13,13 @@
 		.controller('ObservationController',
 		function ($scope, ObservationService,$routeParams) {
 			var observationId = $routeParams.id;
-			$scope.observation = ObservationService.getObservation();
+			$scope.observation = {};//ObservationService.getObservation();
+
+
 			ObservationService.getObservationById(observationId, function(obs){
 				
 				for(var k in obs){
-					//$scope.observation[k]=obs[k];
+					$scope.observation[k]=obs[k];
 					//$scope.observation = obs;
 				}
 				

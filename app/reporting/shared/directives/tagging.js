@@ -14,26 +14,21 @@
 
 		directive.link = function ($scope, element, attrs) {
 
-			$scope.tags = [];
-			$scope.tags.push("Tvinn og spinn");
-			$scope.tags.push("Overtråkk");
-			$scope.tags.push("Utelanding");
-			$scope.tags.push("Lavtrekk");
+			$scope.tagsFromDb = [];
+			$scope.tagsFromDb.push("Tvinn og spinn");
+			$scope.tagsFromDb.push("Overtråkk");
+			$scope.tagsFromDb.push("Utelanding");
+			$scope.tagsFromDb.push("Lavtrekk");
 
-			$scope.tags = $scope.tags.concat($scope.model.tags);
+			$scope.tags = [];
 			$scope.tagSelected = function ($item, $model){
 				$scope.tags.push($item);
 			};
 
 			$scope.getTags = function (name) {
-				if(name.length>2){
-				/*
-						RestService.getTags($scope.category,name)
-						.success(function (response) {
-							$scope.tags = response._items;
-						});
-						*/
-				}
+				$scope.tags = [].concat($scope.tagsFromDb,$scope.model.tags);
+
+
 			};
 
 		};
