@@ -1,7 +1,7 @@
 (function() {
 
 	var profileApp = angular.module('profileApp', [ 'ngRoute', 'ui.bootstrap',
-	                                                'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login','ngPopoverButton' ]);
+	                                                'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login','xeditable' ]);
 
 	profileApp.config([ 'cfpLoadingBarProvider',
 			function(cfpLoadingBarProvider) {
@@ -11,69 +11,32 @@
 
 })();
 
+angular.module("profileApp").run(function(editableOptions) {
+	  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+	});
+
 angular.module("profileApp")
 	   .controller("userController", function($scope, userService, loginService, $location, $route) {
-
-					/**
-					 * Wrap the logout here!
-					 */
-					$scope.logout = function() {
-						
-						loginService.logout();
-					};
-					
-					$scope.userArray = [];
-					
-					$scope.editIndex = -1;
-					$scope.editObject = {
-						firstname : "",
-						lastname : "",
-						imgSrc : "",
-						location : {
-							city : "",
-							zip : "",
-							street : ""
-						},
-						phone : "",
-						email : "",
-					};
-
-					//Promise!
-					userService.getUser().then(function(data) {
-						data.imgSrc = "http://3.bp.blogspot.com/-2hitMEJeVjo/UmrJuPIFa6I/AAAAAAAAZFQ/Hmu_ieZ3RWQ/s1600/olivia-munn.jpg";
-						$scope.userArray = [data];
-					});
-					
-					console.log("DADADA");
-					console.log($scope.userArray);
-
-					// edit button click
-					$scope.editingPerson = function(personIndex) {
-						
-						$scope.editObject = angular.copy($scope.userArray[personIndex]);
-						
-						/*
-						 * WHY COPY??? Because, I wont to seperate the edits
-						 * from the origanal array. Doing this allows the user
-						 * to cancel their edit and since the fields are not
-						 * data-binded to the origanl array, it won't make
-						 * anychanges.
-						 */
-						$scope.editIndex = personIndex;
-					};
-
-					// cancelEdit
-					$scope.cancelEdit = function() {
-						$scope.editIndex = -1;
-
-					};
-
-					// saveEdit
-					$scope.saveEdit = function(personIndex) {
-						userService.updateInfo(personIndex, $scope.editObject);
-						$scope.editIndex = -1;
-					};
-				});
+		   
+		   userService.getUser().then(function(data) {
+			   
+			   $scope.user = data;
+			   console.log( $scope.user.firstname);
+			   
+		   });
+			  
+		   
+		   
+		   
+//		   var _etag = u._etag;
+//		   var _id = u._id;
+//		   
+//		   delete(u._etag);
+//		   delete(u._id);
+		   //...
+		   
+		   
+	   });
 
 angular.module("profileApp")
 	   .service("userService",['$http','$q','$rootScope', function($http, $q, $rootScope) {
