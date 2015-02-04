@@ -209,7 +209,7 @@ angular.module('reportingApp')
 						//content: 'My Content', 
 						show: true,
 						contentTemplate: '/app/reporting/components/observation/directives/workflow.html',
-						template: '/app/reporting/components/observation/directives/aside.html',
+						template: '/shared/partials/aside.html',
 						placement: 'full-left',
 						container: 'body',
 						animation: 'am-slide-left',
