@@ -156,9 +156,12 @@ angular.module('reportingApp')
 //						">'+response.actions[k].action+'</button>';
 				
 				btns.push({permission: response.actions[k].permission, 
-					action: response.actions[k].action,title: response.actions[k].title, 
+					action: response.actions[k].action,
+					title: response.actions[k].title, 
 					resource: response.actions[k].resource, 
-					side: side, btn_class: btn_class, icon: icon });
+					side: side, 
+					btn_class: btn_class, 
+					icon: icon });
 				
 //				btns += '<button class="pull-'+side+' btn btn-'+bt_class+'" \
 //				ng-click="workflowTransition(\''+$scope.observation._id+'\',\''+response.actions[k].resource+'\',\'Kommentaren\');" \
@@ -167,7 +170,7 @@ angular.module('reportingApp')
 			};
 			
 			$scope.tt = 'default';
-			if(response.state == ('pending_review_hi' || 'pending_review_fs' || 'pending_review_su')) $scope.tt = 'warning';
+			if(['pending_review_hi','pending_review_fs','pending_review_su'].indexOf(response.state) > -1) $scope.tt = 'warning';
 			else if(response.state == 'ready') $scope.tt = 'primary';
 			else if(response.state == 'closed') $scope.tt = 'info';
 			else if(response.state == 'withdrawn') $scope.tt = 'danger';
