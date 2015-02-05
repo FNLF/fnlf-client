@@ -11,15 +11,18 @@
 	 */
 	angular.module('reportingApp')
 		.controller('ObservationController',
-		function ($scope, ObservationService,$routeParams) {
+		function ($scope, ObservationService,$routeParams,$timeout) {
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
-
+			$scope.observationChanges = false;
 
 			ObservationService.getObservationById(observationId, function(obs){
 				
 				$scope.observation = obs;
-				$scope.observationChanges = false;
+
+				$timeout(function(){
+					$scope.observationChanges = false;
+				},10);
 			});
 
 			var ItemType = function ItemType(type,label){
@@ -38,19 +41,29 @@
 		$scope.saveObservation = function () {
 			ObservationService.updateObservation($scope.observation,function(updated){
 				$scope.observation = updated;
-				$scope.observationChanges = false;
+
+				/**
+				 * Reset saved/unsaved label
+				 */
+				$timeout(function(){
+					$scope.observationChanges = false;
+				},100);
+
 			});
 		};
 
 		/**
-		 * How can we watch changes?
-		 * 
 		 * Triggers saved/unsaved label
 		 */
 		$scope.observationChanges = false;
-		$scope.$watch('observation', function() {
-			console.log("Changed");
-			$scope.observationChanges = true;
+		$scope.$watch('observation', function(changedObs,oldObs) {
+			if(oldObs._id) {
+				console.log("Changed");
+				console.log(oldObs);
+				console.log("->");
+				console.log(changedObs);
+				$scope.observationChanges = true;
+			}
 		},true);
 
 		});

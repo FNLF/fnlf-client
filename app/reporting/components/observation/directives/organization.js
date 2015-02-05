@@ -1,3 +1,22 @@
+angular.module('reportingApp').directive('organizationSummary', function () {
+
+	var directive = {};
+
+	directive.restrict = 'E';
+	directive.templateUrl = "components/observation/directives/organizationSummary.html";
+
+	directive.scope = {
+		observation: '='
+	};
+
+	directive.link = function ($scope, element, attrs) {
+
+	};
+
+	return directive;
+});
+
+
 (function () {
 
 	var organization = function (RestService) {
@@ -23,8 +42,10 @@
 			};
 
 			$scope.getPersonsByName = function (name) {
-				$scope.existing = [].concat($scope.observation.organization.hl,$scope.observation.organization.hm,$scope.observation.organization.hfl);
-				$scope.personsFromDb = [].concat($scope.existing);
+
+				$scope.existing = [].concat($scope.observation.organization.hl, $scope.observation.organization.hm, $scope.observation.organization.hfl);
+
+					$scope.personsFromDb = [].concat($scope.existing);
 					RestService.getUserByName(name)
 						.success(function (response) {
 

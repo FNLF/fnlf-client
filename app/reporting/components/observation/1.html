@@ -31,7 +31,7 @@
 
 		<div class="clearfix"></div>
 
-		<div class="form-group col-md-12">
+		<div class="form-group col-xs-12">
 			<observationtype observation="observation"></observationtype>
 		</div>
 
@@ -39,43 +39,26 @@
 
 
 		<div class="panel col-xs-12" ng-repeat="item in items">
-			<label> {{item.label}}</label>
-			<div ng-switch="item.type">
+			<div class="col-xs-2"><span> {{item.label}}</span></div>
+			<div ng-switch="item.type" class="col-md-7 col-xs-12">
 				<div ng-switch-when="location">
-					<div class="form-group col-xs-9" ng-if="observation.organization.hl">
-						<span class="label label-primary">{{observation.location.name}} </span>
-					</div>
+					<location-summary observation="observation"></location-summary>
 				</div>
 
 				<div ng-switch-when="organization">
-					<div class="form-group col-xs-3" ng-if="observation.organization.hl">
-						<span class="label label-primary" ng-repeat = "hl in observation.organization.hl">HL: {{hl.fullname}}</span>
-					</div>
-
-					<div class="form-group col-xs-3" ng-if="observation.organization.hm">
-						<span class="label label-primary" ng-repeat = "hm in observation.organization.hm">HM: {{hm.fullname}}</span>
-					</div>
-
-					<div class="form-group col-xs-3" ng-if="observation.organization.hfl">
-						<span class="label label-primary" ng-repeat = "hfl in observation.organization.hfl">HFL: {{hfl.fullname}}</span>
-					</div>
+					<organization-summary observation="observation"></organization-summary>
 				</div>
 
 				<div ng-switch-when="involved">
-					<div class="form-group col-xs-9" ng-if="observation.involved">
-						<span class="label label-default" ng-repeat = "p in observation.involved">{{p.fullname}}</span>
-					</div>
+					<involved-summary observation="observation"></involved-summary>
 				</div>
 
 				<div ng-switch-when="components">
-					<div class="form-group col-xs-9">
 
-					</div>
 				</div>
-
 			</div>
 
-			<div class="form-group col-xs-3">
+			<div class="form-group col-md-3 col-xs-12">
 
 				<button class="btn btn-default btn-sm pull-right" ng-click="item.used=!item.used">
 					<span ng-show="!item.used" class="fa fa-plus fa-fw"></span>
