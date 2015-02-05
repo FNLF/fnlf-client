@@ -20,8 +20,8 @@
 		<!-- Just show which version, click to show all versions? -->
 		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span>
 		<span class="pull-left"><span class="label label-default"><resolveclub clubid="observation.club"></resolveclub></span>&nbsp;</span>
-		<span class="pull-left"><span class="label label-default">Reporter: <resolveusername userid="observation.reporter"></resolveusername></span>&nbsp;</span>
-		<span class="pull-left"><span class="label label-default">Owner: <resolveusername userid="observation.owner"></resolveusername></span>&nbsp;</span>
+		<span class="pull-left"><span class="label label-default">Reporter: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span>
+		<span class="pull-left"><span class="label label-default">Owner: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
 
 		<!-- If changes, show warning include a "leaving page are you sure?"  -->
 		<span ng-if="observationChanges" class="pull-left"><span class="label label-default">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>

@@ -1,5 +1,5 @@
 
-angular.module('resolve').directive('resolveusername', function ($http, $q, ResolveService) {
+angular.module('resolve').directive('resolveuser', function ($http, $q, ResolveService) {
 		
 	var directive = {};
 	
