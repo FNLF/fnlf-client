@@ -23,12 +23,10 @@
 			};
 
 			$scope.getPersonsByName = function (name) {
-				if(name.length>2){
 					RestService.getUserByName(name)
 					.success(function (response) {
-						$scope.personsFromDb = $scope.observation.involved.concat(response._items);
+						$scope.personsFromDb = [].concat($scope.observation.involved,response._items);
 					});
-				}
 			};
 
 			$scope.tagTransform = function(itemText){

@@ -33,11 +33,11 @@
 			};
 
 
-			this.getObservationById = function (id,cb) {
+			this.getObservationById = function (id,callback) {
 
 				RestService.getObservationById(id)
 					.success(function(obs){
-						cb(obs._items[0]);
+						callback(obs._items[0]);
 					});
 			};
 
@@ -49,17 +49,7 @@
 			};
 
 
-			this.setTitle = function(obs){
-				var tagText = '';
-				if(obs.tags){
-					obs.tags.forEach(function(t){
-						tagText = tagText +' '+t;
-					});
-				}
 
-				obs.title = tagText
-
-			};
 
 			this.copy  = function(firstObject,secondObject){
 
@@ -72,9 +62,9 @@
 
 			};
 			var copyFunction = this.copy;
-			var setTitleFunction = this.setTitle;
 
-			this.updateObservation = function () {
+
+			this.updateObservation = function (observation,callback) {
 				var _id = observation._id;
 				var _etag = observation._etag;
 
@@ -104,20 +94,15 @@
 				.success(function(data){
 					RestService.getObservation(_id)
 						.success(function(updated){
-							console.log(observation);
-							copyFunction(updated,observation);
-							console.log(observation);
-							setTitleFunction(observation);
+							callback(updated);
 						});
 				}).error(function(error){
 					console.log(error);
 					$rootScope.error=error;
 					RestService.getObservation(_id)
 						.success(function(updated){
-							console.log(observation);
-							copyFunction(updated,observation);
-							console.log(observation);
-							setTitleFunction(observation);
+							callback(updated);
+
 						});
 				});
 			};
@@ -131,26 +116,22 @@
 			 * 
 			 * 
 			 */
-			this.changeWorkflowState = function (objectId, action, comment){
+			this.changeWorkflowState = function (objectId, action, comment,callback){
 				
 				RestService.changeWorkflowState(objectId, action, comment)
 				.success(function(data){
 					RestService.getObservation(objectId)
 						.success(function(updated){
-							console.log(observation);
-							copyFunction(updated,observation);
-							console.log(observation);
-							setTitleFunction(observation);
+							callback(updated);
+
 						});
 				}).error(function(error){
 					console.log(error);
 					$rootScope.error=error;
 					RestService.getObservation(objectId)
 						.success(function(updated){
-							console.log(observation);
-							copyFunction(updated,observation);
-							console.log(observation);
-							setTitleFunction(observation);
+							callback(updated);
+
 						});
 				});
 			};

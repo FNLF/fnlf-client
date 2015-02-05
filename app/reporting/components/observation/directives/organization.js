@@ -12,13 +12,7 @@
 
 		directive.link = function ($scope, element, attrs) {
 
-			$scope.existing = [];
-		/*
-				$scope.existing = $scope.existing.concat($scope.organization.hl);
-			$scope.existing = $scope.existing.concat($scope.organization.hm);
-			$scope.existing = $scope.existing.concat($scope.organization.hfl);
-		*/
-				$scope.personsFromDb = [].concat($scope.existing);
+
 
 			$scope.personSelected = function ($item, $model) {
 
@@ -29,12 +23,14 @@
 			};
 
 			$scope.getPersonsByName = function (name) {
-				if(name.length>2){
+				$scope.existing = [].concat($scope.observation.organization.hl,$scope.observation.organization.hm,$scope.observation.organization.hfl);
+				$scope.personsFromDb = [].concat($scope.existing);
 					RestService.getUserByName(name)
 						.success(function (response) {
+
 							$scope.personsFromDb = $scope.existing.concat(response._items);
 						});
-				}
+
 			};
 
 			$scope.tagTransform = function(itemText){

@@ -98,7 +98,9 @@ angular.module('reportingApp')
 		$scope.workflowTransition = function(action, comment) {
 			
 			//If unsaved changesz- save those first!
-			ObservationService.changeWorkflowState($scope.observation._id, action, comment);
+			ObservationService.changeWorkflowState($scope.observation._id, action, comment,function(updated){
+				$scope.observation=updated;
+			});
 			
 			//Rerender all directives
 			$scope.workflowAside.hide();
