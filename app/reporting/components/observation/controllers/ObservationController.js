@@ -46,9 +46,11 @@
 		 * How can we watch changes?
 		 * 
 		 * Triggers saved/unsaved label
+		 * 
+		 * Note it needs to load first...
 		 */
 		$scope.observationChanges = false;
-		$scope.$watch('observation', function() {
+		$scope.$watch('observation', function(newValue, oldValue) {
 			console.log("Changed");
 			$scope.observationChanges = true;
 		},true);
