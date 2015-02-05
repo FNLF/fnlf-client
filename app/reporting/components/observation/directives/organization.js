@@ -14,8 +14,6 @@
 
 
 
-			$scope.personsFromDb = [];
-
 			$scope.personSelected = function ($item, $model) {
 
 			};
@@ -25,9 +23,11 @@
 			};
 
 			$scope.getPersonsByName = function (name) {
+				$scope.existing = [].concat($scope.observation.organization.hl,$scope.observation.organization.hm,$scope.observation.organization.hfl);
+				$scope.personsFromDb = [].concat($scope.existing);
 					RestService.getUserByName(name)
 						.success(function (response) {
-							$scope.existing = [].concat($scope.observation.organization.hl,$scope.observation.organization.hm,$scope.observation.organization.hfl);
+
 							$scope.personsFromDb = $scope.existing.concat(response._items);
 						});
 

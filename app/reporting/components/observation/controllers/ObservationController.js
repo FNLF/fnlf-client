@@ -13,16 +13,13 @@
 		.controller('ObservationController',
 		function ($scope, ObservationService,$routeParams) {
 			var observationId = $routeParams.id;
-			$scope.observation = {};//ObservationService.getObservation();
+			$scope.observation = {id:observationId};
 
 
 			ObservationService.getObservationById(observationId, function(obs){
 				
-				for(var k in obs){
-					$scope.observation[k]=obs[k];
-					//$scope.observation = obs;
-				}
-				
+				$scope.observation = obs;
+				$scope.observationChanges = false;
 			});
 
 			var ItemType = function ItemType(type,label){
@@ -39,7 +36,10 @@
 			];
 
 		$scope.saveObservation = function () {
-			ObservationService.updateObservation();
+			ObservationService.updateObservation($scope.observation,function(updated){
+				$scope.observation = updated;
+				$scope.observationChanges = false;
+			});
 		};
 
 		/**
@@ -49,9 +49,9 @@
 		 */
 		$scope.observationChanges = false;
 		$scope.$watch('observation', function() {
-			
+			console.log("Changed");
 			$scope.observationChanges = true;
-		});
+		},true);
 
 		});
 
