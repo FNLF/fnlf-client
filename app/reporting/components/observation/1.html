@@ -1,33 +1,34 @@
 <div class="container" ng-controller="ObservationController">
-	
+	<div ng-if="observation._id">
+
 	<!-- Placeholders for status stuff -->
 	<!-- Watchers - am I watching, click to show who's watching -->
 	<span class="pull-right"><button class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Watching</button>&nbsp;</span>
 
 	<!-- Workflows, show current status. Click dropdown show actions -->
 	<span class="pull-right"><workflow observation="observation"></workflow>&nbsp;</span>
-	
+
 	<h1>OBS #{{observation.id}}</h1>
-	
+
 	<!-- Row with tags -->
 	<!-- A label showing type of observation -->
 	<span class="pull-left">
 	<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 	{{observation.type}}</span>
 	&nbsp;</span>
-	
+
 	<!-- Just show which version, click to show all versions? -->
 	<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span>
-	
+
 	<!-- If changes, show warning include a "leaving page are you sure?"  -->
 	<span ng-if="observationChanges" class="pull-left"><span class="label label-default">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>
-	
-	<!-- And replicate the tags here! 
+
+	<!-- And replicate the tags here!
 	<div ng-repeat="tag in observation.tags">
 		<span class="pull-left"><span class="label label-default">{{tag}}</span>&nbsp;</span>
 	</div>
 	-->
-	
+
 	<div class="clearfix"></div>
 
 	<div class="form-group col-md-12">
@@ -115,15 +116,15 @@
 
 
 	</div>
-	
+
 	<!-- Ng if has edited stuff to be saved or not -->
 	<button class="btn btn-primary btn-block" ng-click="saveObservation()"><i class="fa fa-save fa-fw"></i> Lagre</button>
-	
-	
+
+
 	<div class="form-group col-xs-12">
 		<summary observation="observation"></summary>
 	</div>
 
-
+</div>
 </div>
 
