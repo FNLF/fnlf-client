@@ -4,7 +4,7 @@
 			function ($routeProvider, $locationProvider, $httpProvider) {
 				$routeProvider
 					.when('/', {
-						templateUrl: 'components/login/startPage.html',
+						templateUrl: 'components/main/startPage.html',
 						controller: 'MainController'
 					})
 					.when('/observation/:id', {

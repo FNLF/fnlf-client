@@ -9,7 +9,12 @@
  */
 (function () {
 
-	var reportingApp = angular.module('reportingApp', ['ngRoute', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar', 'fnlf-login', 'ngPopoverButton'/*,'ngMockE2E'*/]);
+	var reportingApp = angular.module('reportingApp', 
+			['ngRoute', 'ui.select', 'ngSanitize', 'ngCookies',
+			 'ui.bootstrap',
+			 //'ui.bootstrap.alert','ui.bootstrap.collapse','ui.bootstrap.datepicker', 'ui.bootstrap.typeahead',
+			 'angular-loading-bar', 'fnlf-login', 
+			 'mgcrea.ngStrap.modal', 'mgcrea.ngStrap.aside'/*,'ngMockE2E'*/]);
 
 	reportingApp.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeBar = true;
@@ -26,6 +31,8 @@
 
 		$rootScope.initialized = true;
 	});
+	
+	
 
 
 })();
