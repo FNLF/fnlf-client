@@ -5,7 +5,7 @@
 			   on-remove="personRemoved($item, $model)">
 		<ui-select-match placeholder="Søk på navn eller medlemsnummer...">{{$item.fullname}}</ui-select-match>
 		<ui-select-choices repeat="person in personsFromDb | filter:$select.search track by person.id"
-						   refresh="getPersonsByName($select.search)" refresh-delay="500">
+						   refresh="getPersonsByName($select.search)" refresh-delay="100">
 			{{person.fullname}} ({{person.id}})
 		</ui-select-choices>
 	</ui-select>
