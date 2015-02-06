@@ -2,9 +2,12 @@
 
 	<div class="input-group">
 
-
-
-		<input type="datetime-local" class="form-control"  ng-model="observation.when">
-
+		<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="observation.when"
+			   is-open="opened" datepicker-options="dateOptions"
+			   ng-required="true" close-text="Close"/>
+        	      <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+						class="fa fa-calendar fa-fw"></i></button>
+              </span>
 	</div>
 </div>

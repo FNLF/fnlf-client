@@ -50,9 +50,8 @@
 					RestService.getObservation(metadata._id).success(function(item){
 						console.log(item);
 						$scope.observation = item;
-						ObservationService.setObservation($scope.observation);
 						console.log("Set");
-						$location.path("/observation/1");
+						$location.path("/observation/"+item.id);
 					});
 
 				});
