@@ -32,6 +32,10 @@
 				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
 			};
 
+			this.getObservationComponentTemplates = function () {
+				return $http.get(urlBase + '/observations/components');
+			};
+
 			this.updateObservation = function (observation, _id, etag) {
 				var config = {};
 				config.headers = {};
