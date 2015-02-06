@@ -1,0 +1,30 @@
+<div class="alert alert-info" role="alert" ng-show="error">{{workflow_error}}</div>
+{{btn_descr}}
+<div class="form-group">
+	<label for="comment" >Kommentarer:</label>
+	<textarea tooltip-placement="top" tooltip="Legg inn relevante kommentarer for å endre status på observasjonen" ng-model="workflow.comment" name="comment" class="form-control" rows="3" id="comment"></textarea>
+</div>
+<p>
+Siste kommentar: <strong>{{observation.workflow.comment}}</strong> @ {{observation.workflow.last_transition}} by {{observation.workflow.audit.0.u}}
+</p>
+
+<div ng-repeat="value in btns">
+	<div ng-if="value.permission.indexOf(username) > -1">
+		<button tooltip-placement="top" tooltip="{{value.title}}" class="pull-{{value.side}} btn btn-{{value.btn_class}}" ng-click="workflowTransition(value.resource,workflow.comment)">
+			<i class="fa fa-{{value.icon}} fa-fw"></i>{{value.action}}
+		</button>
+	</div>
+</div>
+</p>
+<div class="clearfix"></div>
+
+<!-- 
+<h3>Audit trail:</h3>
+<ul>
+<div ng-repeat="w in observation.workflow.audit">
+
+<li><strong>[{{w.a}}]</strong> {{w.s}} -> {{w.d}} : {{w.u}} @ {{w.t}} <span ng-if="w.c"> - <strong>&quot;{{w.c}}&quot;</strong></span></li> 
+
+</div>
+</ul>
+ -->

@@ -1,0 +1,32 @@
+<div>
+	<br>
+	<br>
+	<button class="btn btn-default btn-sm" ng-click="registeredData=!registeredData">
+		<span ng-show="!registeredData" class="fa fa-plus fa-fw"></span>
+		<span ng-show="registeredData" class="fa fa-minus fa-fw"></span>
+		Se datamodell
+	</button>
+
+	<div ng-if="registeredData">
+
+		<h2>Følgende er registrert:</h2>
+		<label>Type</label>
+		<pre>{{observation.type | json}}</pre>
+
+		<label>When</label>
+		<pre>{{observation.when | json}}</pre>
+
+		<label>Tags</label>
+		<pre>{{observation.tags | json}}</pre>
+
+		<label>Organization</label>
+		<pre>{{observation.organization | json}}</pre>
+
+		<label>Involved</label>
+		<pre>{{observation.involved | json}}</pre>
+
+		<label>Components</label>
+		<pre>{{observation.components | json}}</pre>
+	</div>
+
+</div>
