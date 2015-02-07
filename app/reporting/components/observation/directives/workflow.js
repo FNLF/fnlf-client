@@ -23,7 +23,7 @@ angular.module('reportingApp')
 	directive.template = function(tElement, tAttrs) { 
 		
 		
-		return '<button tooltip-placement="top" tooltip="{{btn_descr}}" type="button" class="btn btn-{{tt}}" ng-click="openWorkflowAside()"><i class="fa fa-random fa-fw"></i>{{btn_title}}</button>';
+		return '<button tooltip-placement="top" tooltip="{{btn_descr}}" type="button" class="btn btn-{{tt}} col-xs-6" ng-click="openWorkflowAside()"><i class="fa fa-random fa-fw"></i>{{btn_title}}</button>';
 	};
 	
 	
