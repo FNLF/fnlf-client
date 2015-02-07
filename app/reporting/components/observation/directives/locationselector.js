@@ -1,3 +1,23 @@
+
+angular.module('reportingApp').directive('locationSummary', function () {
+
+	var directive = {};
+
+	directive.restrict = 'E';
+	directive.template = '<span class="label label-primary">{{observation.location.name}} {{observation.location.descr}} </span>';
+
+	directive.scope = {
+		observation: '='
+	};
+
+	directive.link = function ($scope, element, attrs) {
+
+	};
+
+	return directive;
+});
+
+
 angular.module('reportingApp').directive('locationselector', function (LocationService) {
 	var directive = {};
 

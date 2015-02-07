@@ -1,3 +1,21 @@
+angular.module('reportingApp').directive('involvedSummary', function () {
+
+	var directive = {};
+
+	directive.restrict = 'E';
+	directive.template = '<span ng-repeat="p in observation.involved"><span class="label label-primary">{{p.fullname}} </span> &nbsp;</span>';
+
+	directive.scope = {
+		observation: '='
+	};
+
+	directive.link = function ($scope, element, attrs) {
+
+	};
+
+	return directive;
+});
+
 (function () {
 
 	var involvedpersonselector = function (RestService) {

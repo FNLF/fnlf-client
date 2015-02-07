@@ -1,59 +1,125 @@
 <div>
-	<div>
 
 
-
-			<div class="form-group">
-				<label for="hlComment">HL's kommentar</label>
-				<textarea id="hlComment" rows="10" class="form-control" ng-model="observation.text.hl"></textarea>
-			</div>
-
-
-
-
-		<!-- Modal-->
-		<div class="modal fade" id="myModal" modal-show modal-visible="showDialog" tabindex="-1" role="dialog"
-			 aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Legg til hendelsestype</h4>
-					</div>
-					<div class="modal-body">
-
-						<form role="form">
-							<div class="form-group">
-								<label for="name">Navn</label>
-								<input type="text" class="form-control" id="name" ng-model="incidentType.name"
-									   placeholder="Navn">
-							</div>
-							<div class="form-group">
-								<label>Gruppe</label><br>
-								<!--<input type="text" class="form-control" id="group" ng-model="incidentType.group" placeholder="Gruppe">-->
-								<select ui-select2 ng-model="incidentType.group" data-placeholder="Velg gruppe"
-										style="min-width: 300px;">
-									<option value=""></option>
-									<option ng-repeat="group in incidentGroups track by $index" ng-value="group">
-										{{group}}
-									</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="description">Beskrivelse</label>
-								<input type="text" class="form-control" id="description"
-									   ng-model="incidentType.description" placeholder="Beskrivelse">
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
-						<button type="button" ng-click="saveNewIncident()" data-dismiss="modal" class="btn btn-primary">
-							Lagre
-						</button>
-					</div>
-				</div>
-			</div>
+	<div class="well" ng-repeat="component in observation.components track by $index">
+		<div class="col-xs-12 col-md-6">
+			<label>Tittel</label>
+			<input type="text" ng-model="component.what" class="form-control">
 		</div>
+
+		<div class="col-xs-12">
+			<label>Atributter</label>
+		</div>
+
+		<div class="col-xs-12">
+			<div class="col-xs-6 col-md-4">
+				<input type="checkbox" ng-model="component.attributes.injury"/><span> Personskade &nbsp;</span>
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<input type="checkbox" ng-model="component.attributes.gear_failure"/><span> Utstyrsvikt &nbsp;</span>
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<input type="checkbox" ng-model="component.attributes.gear_malfunction"/><span> Feilfunksjon &nbsp;</span>
+			</div>
+
+
+		</div>
+
+		<div class="col-xs-12 col-md-6">
+			<label>Tagger</label>
+
+			<tagging model="component" category="component"></tagging>
+		</div>
+
+		<div class="col-xs-12">
+			<label>Flagg</label>
+		</div>
+
+		<div class="col-xs-12">
+			<div class="col-xs-6 col-md-2">
+				<input type="checkbox" ng-model="component.flags.violation"/><span> Regelbrudd &nbsp;</span>
+			</div>
+			<div class="col-xs-6 col-md-2">
+				<input type="checkbox" ng-model="component.flags.wilfull"/><span> Overlagt handling &nbsp;</span>
+			</div>
+			<div class="col-xs-6 col-md-2">
+				<input type="checkbox" ng-model="component.flags.barrier"/><span> Sperre &nbsp;</span>
+			</div>
+			<div class="col-xs-6 col-md-2">
+				<input type="checkbox" ng-model="component.flags.incident"/><span> Selve hendelsen &nbsp;</span>
+			</div>
+			<div class="col-xs-6 col-md-2">
+				<input type="checkbox" ng-model="component.flags.root_cause"/><span> Årsak &nbsp;</span>
+			</div>
+			<div class="col-xs-6 col-md-2">
+				<input type="checkbox" ng-model="component.flags.final_consequence"/><span> Utfall &nbsp;</span>
+			</div>
+
+		</div>
+
+		<div class="col-xs-12">
+			<label>Involvert</label>
+		</div>
+
+
+		<div class="col-xs-6 col-md-3" ng-repeat="p in observation.involved">
+			<input type="checkbox" ng-model="component.involved[p.id]"/>
+			<span>{{p.fullname}} {{p.id}}</span>
+		</div>
+
+
+
+			<div class="col-xs-6">
+				<label>Høyde</label>
+					<input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
+			</div>
+			<div class="col-xs-6">
+				<label>Sted eller situasjon</label>
+				<input type="text" ng-model="component.where.at" class="form-control" placeholder="I flyet, pakkematta, skjermåpning etc">
+			</div>
+
+
+
+
+
+		<div class="col-xs-12">
+			<label>Beskrivelse</label>
+
+			<textarea rows="4" cols="50" ng-model="component.how" class="form-control"></textarea>
+		</div>
+
+		<div class="col-xs-12">
+		<div class="pull-right control-group">
+			<button class="btn btn-sm btn-default">Flytt opp</button>
+			<button class="btn btn-sm btn-default">Flytt ned</button>
+			<button class="btn btn-sm btn-default">Ny komponent før denne</button>
+			<button class="btn btn-sm btn-default">Ny komponent etter denne</button>
+			<button class="btn btn-sm btn-default">Slett</button>
+		</div>
+
+
+		</div>
+
+		<div class="clearfix"></div>
+
 	</div>
+
+
+	<br>
+
+	<div class="form-group col-xs-12">
+		<div class="btn-group" dropdown is-open="status.isopen">
+			<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+				Ny komponent i hendelsesforløpet <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li ng-repeat="item in templates track by $index"><a ng-click="newComponent(item)">{{item.what}}</a>
+				</li>
+
+			</ul>
+		</div>
+
+	</div>
+
+
 </div>

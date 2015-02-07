@@ -20,14 +20,13 @@
 			$scope.tagsFromDb.push("Utelanding");
 			$scope.tagsFromDb.push("Lavtrekk");
 
-			$scope.tags = [];
+			$scope.tags = [].concat($scope.model.tags,$scope.tagsFromDb);
 			$scope.tagSelected = function ($item, $model){
 				$scope.tags.push($item);
 			};
 
 			$scope.getTags = function (name) {
 				$scope.tags = [].concat($scope.tagsFromDb,$scope.model.tags);
-
 
 			};
 

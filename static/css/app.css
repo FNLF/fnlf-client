@@ -11,7 +11,7 @@
 html,
 body {
   height: 100%;
-  padding-top: 50px;
+ /* padding-top: 50px;*/
   /* The html and body elements cannot have any padding or margin. */
 }
 
