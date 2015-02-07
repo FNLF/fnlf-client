@@ -37,6 +37,12 @@
 				new ItemType('involved','Involverte personer'),
 				new ItemType('components','Observasjonsforløp')
 			];
+			
+			$scope.observationTypesArray = {sharing: 'Erfaringsdeling',
+											unwanted_act: 'Uheldig hendelse',
+											near_miss: 'Næruhell',
+											incident: 'Uhell',
+											accident: 'Ulykke'};
 
 		$scope.saveObservation = function () {
 			ObservationService.updateObservation($scope.observation,function(updated){
