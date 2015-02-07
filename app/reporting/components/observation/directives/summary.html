@@ -10,8 +10,14 @@
 	<div ng-if="registeredData">
 
 		<h2>Følgende er registrert:</h2>
+		<label>Club</label>
+		<pre>{{observation.club | json}}</pre>
+
 		<label>Type</label>
 		<pre>{{observation.type | json}}</pre>
+
+		<label>Location</label>
+		<pre>{{observation.location | json}}</pre>
 
 		<label>When</label>
 		<pre>{{observation.when | json}}</pre>
@@ -27,6 +33,10 @@
 
 		<label>Components</label>
 		<pre>{{observation.components | json}}</pre>
+
+		<label>Weather</label>
+		<pre>{{observation.weather | json}}</pre>
+
 	</div>
 
 </div>

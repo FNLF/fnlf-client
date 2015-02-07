@@ -53,7 +53,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			$scope.personRemoved = function ($item, $model) {
 
 			};
-
+			$scope.personsFromDb=[];
 			$scope.getPersonsByName = function (name) {
 
 					$scope.existing = [].concat($scope.observation.organization.hl, $scope.observation.organization.hm, $scope.observation.organization.hfl);

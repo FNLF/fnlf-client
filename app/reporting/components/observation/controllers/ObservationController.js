@@ -16,14 +16,19 @@
 			$scope.observation = {id:observationId};
 			$scope.observationChanges = false;
 
-			ObservationService.getObservationById(observationId, function(obs){
-				
-				$scope.observation = obs;
+			$scope.loadObservation = function(){
+				ObservationService.getObservationById(observationId, function(obs){
 
-				$timeout(function(){
-					$scope.observationChanges = false;
-				},10);
-			});
+					$scope.observation = obs;
+					ObservationService.initObservation($scope.observation);
+
+					$timeout(function(){
+						$scope.observationChanges = false;
+					},10);
+				});
+
+			};
+			$scope.loadObservation();
 
 			var ItemType = function ItemType(type,label){
 				this.type=type;
@@ -47,7 +52,7 @@
 		$scope.saveObservation = function () {
 			ObservationService.updateObservation($scope.observation,function(updated){
 				$scope.observation = updated;
-
+				ObservationService.initObservation($scope.observation);
 				/**
 				 * Reset saved/unsaved label
 				 */

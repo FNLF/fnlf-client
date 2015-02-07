@@ -4,10 +4,12 @@
 		.service('ObservationService', function (RestService,Definitions,$rootScope) {
 
 			function Observation() {
-				this.id;
-				this.when = new Date();
 				this.involved = [];
+				this.location={};
 				this.organization={};
+				this.organization.hl=[];
+				this.organization.hm=[];
+				this.organization.hfl=[];
 				this.rating = {};
 				this.weather = {};
 				this.components = [];
@@ -16,12 +18,21 @@
 				this.tags = [];
 				this.comments = [];
 				this.actions = {};
-				this.type = '';
-				
-				
+				this.type = 'near_miss';
 			};
 
 
+			this.initObservation = function(obsevation){
+
+				var prototypeObs = new Observation();
+
+				for(var k in prototypeObs){
+					if(angular.isUndefined(obsevation[k])){
+						obsevation[k]=prototypeObs[k];
+					}
+				}
+
+			}
 
 			var observation = new Observation();
 
@@ -31,6 +42,8 @@
 			this.getObservation = function () {
 				return observation;
 			};
+
+
 
 
 			this.getObservationById = function (id,callback) {
