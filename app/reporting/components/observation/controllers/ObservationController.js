@@ -19,6 +19,7 @@
 			ObservationService.getObservationById(observationId, function(obs){
 				
 				$scope.observation = obs;
+				ObservationService.initObservation($scope.observation);
 
 				$timeout(function(){
 					$scope.observationChanges = false;
@@ -41,7 +42,7 @@
 		$scope.saveObservation = function () {
 			ObservationService.updateObservation($scope.observation,function(updated){
 				$scope.observation = updated;
-
+				ObservationService.initObservation($scope.observation);
 				/**
 				 * Reset saved/unsaved label
 				 */
