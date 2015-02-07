@@ -16,15 +16,19 @@
 			$scope.observation = {id:observationId};
 			$scope.observationChanges = false;
 
-			ObservationService.getObservationById(observationId, function(obs){
-				
-				$scope.observation = obs;
-				ObservationService.initObservation($scope.observation);
+			$scope.loadObservation = function(){
+				ObservationService.getObservationById(observationId, function(obs){
 
-				$timeout(function(){
-					$scope.observationChanges = false;
-				},10);
-			});
+					$scope.observation = obs;
+					ObservationService.initObservation($scope.observation);
+
+					$timeout(function(){
+						$scope.observationChanges = false;
+					},10);
+				});
+
+			};
+			$scope.loadObservation();
 
 			var ItemType = function ItemType(type,label){
 				this.type=type;
