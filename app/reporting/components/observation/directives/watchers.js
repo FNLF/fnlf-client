@@ -22,7 +22,7 @@ angular.module('reportingApp')
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<button tooltip-placement="top" tooltip-html-unsafe="{{watchers}}" type="button" class="btn btn-{{button_watching}} col-xs-6" ng-click="toggleWatching()"><i class="fa fa-{{icon_watching}} fa-fw"></i>{{button_title}}</button>';
+		return '<button tooltip-placement="top" tooltip-html-unsafe="{{watchers}}" type="button" class="btn btn-{{button_watching}}" ng-click="toggleWatching()"><i class="fa fa-{{icon_watching}} fa-fw"></i>{{button_title}}</button>';
 	};
 	
 	
@@ -44,7 +44,9 @@ angular.module('reportingApp')
 				});
 			}
 			
-			$route.reload();
+			$scope.loadObservation();
+			//$route.reload();
+			
 		
 		};
 		
@@ -105,7 +107,7 @@ angular.module('reportingApp')
 				
 				$scope.is_watching = false;
 				
-				$scope.watchers = '';
+				$scope.watchers = '<strong>Watchers:</strong><br />';
 				for(key in $scope.observation.watchers) {
 					
 					ResolveService.getUser($scope.observation.watchers[key]).then(function(user) {
