@@ -6,7 +6,7 @@
 
 		directive.restrict = 'E';
 		directive.templateUrl = "components/observation/directives/incidentformSummary.html";
-
+		
 		directive.scope = {
 			observation: '='
 		};
@@ -19,17 +19,39 @@
 	});
 
 
-	var incidentform = function (RestService) {
+	var incidentform = function (RestService, $aside) {
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "components/observation/directives/incidentform.html";
+//		directive.templateUrl = "components/observation/directives/incidentform.html";
+		
+		directive.template = function(tElement, tAttrs) { 
+			
+			return '<button type="button" class="btn btn-default pull-right" ng-click="openIncidentAside()"><i class="fa fa-plus fa-fw"></i>Endre observasjonsforløp</button>';
+		};
 
 		directive.scope = {
 			observation: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
+			
+			
+			$scope.openIncidentAside = function() {
+			    $scope.myAside = $aside({
+			        scope: $scope,
+			        title: 'Observasjonsforløp',
+			        //content: 'My Content', //Static custom content
+			        show: true,
+			        contentTemplate: '/app/reporting/components/observation/directives/incidentform.html',
+			        template: '/shared/partials/aside.html',
+			        placement: 'full-left',
+			        container: 'body',
+			        animation: 'am-slide-left',
+			        });   
+			};
+			
+			
 			if(angular.isUndefined($scope.observation.components)){
 				$scope.observation.components = [];
 			}

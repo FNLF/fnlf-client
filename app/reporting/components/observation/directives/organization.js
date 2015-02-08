@@ -19,11 +19,15 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 
 (function () {
 
-	var organization = function (RestService) {
+	var organization = function (RestService, $aside) {
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "components/observation/directives/organization.html";
+		//directive.templateUrl = "components/observation/directives/organization.html";
+		directive.template = function(tElement, tAttrs) { 
+			
+			return '<button type="button" class="btn btn-default pull-right" ng-click="openOrganizationAside()"><i class="fa fa-plus fa-fw"></i>Endre Organisasjon</button>';
+		};
 
 		directive.scope = {
 			observation: '='
@@ -31,6 +35,21 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 
 		directive.link = function ($scope, element, attrs) {
 
+			
+			$scope.openOrganizationAside = function() {
+			    $scope.myAside = $aside({
+			        scope: $scope,
+			        title: 'Hoppfeltorganiseringen',
+			        //content: 'My Content', //Static custom content
+			        show: true,
+			        contentTemplate: '/app/reporting/components/observation/directives/organization.html',
+			        template: '/shared/partials/aside.html',
+			        placement: 'full-left',
+			        container: 'body',
+			        animation: 'am-slide-left',
+			        });   
+			};
+			
 			var removeDupesById = function(arr){
 				var obj = {};
 
@@ -43,7 +62,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 					result.push(v);
 				});
 				return result;
-			}
+			};
 
 
 			$scope.personSelected = function ($item, $model) {
