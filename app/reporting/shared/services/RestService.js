@@ -25,7 +25,7 @@
 			};
 
 			this.getObservationById = function (id) {
-				return $http.get(urlBase + '/observations/?where={"id":'+id+'}');
+				return $http.get(urlBase + '/observations/'+id);
 			};
 
 			this.getObservations = function (userName) {
