@@ -50,7 +50,7 @@
 
 				RestService.getObservationById(id)
 					.success(function(obs){
-						callback(obs._items[0]);
+						callback(obs);
 					});
 			};
 

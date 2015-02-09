@@ -39,7 +39,7 @@ angular.module('reportingApp')
 			//Hide aside programatically
 			$scope.workflowAside.hide();
 			//Re-render all directives
-			$route.reload();
+			$scope.loadObservation(); //$route.reload();
 			};
 		
 	};

@@ -3,7 +3,7 @@
 
 		<!-- Placeholders for status stuff -->
 		<!-- Watchers - am I watching, click to show who's watching -->
-		<span class="pull-right"><button class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Watching</button>&nbsp;</span>
+		<span class="pull-right"><watchers observation="observation"></watchers></span>
 
 		<!-- Workflows, show current status. Click dropdown show actions -->
 		<span class="pull-right"><workflow observation="observation"></workflow>&nbsp;</span>
@@ -12,17 +12,21 @@
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->
-	<span class="pull-left">
-	<span class="label label-default">{{observation.when}}</span>
-		<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
-	{{observation.type}}</span>
-	&nbsp;</span>
+		<span class="pull-left"> <span class="label label-default">{{observation.when}}</span> <span class="label"
+			ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+				{{observationTypesArray[observation.type]}}</span> &nbsp;
+		</span>
 
 		<!-- Just show which version, click to show all versions? -->
-		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span>
+		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span> 
+		<span class="pull-left"><span class="label label-default"><resolveclub clubid="observation.club"></resolveclub></span>&nbsp;</span> 
+		<span class="pull-left"><span class="label label-default">Reporter: <resolveuser userid="observation.reporter">{{observation.reporter}}</resolveuser></span>&nbsp;</span> 
+		<span class="pull-left"><span class="label label-default">Owner: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
 
 		<!-- If changes, show warning include a "leaving page are you sure?"  -->
-		<span ng-if="observationChanges" class="pull-left"><span class="label label-default">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>
+		<span ng-if="observationChanges" class="pull-left"><span ng-click="saveObservation()" class="label label-danger">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>
+		
+
 
 		<!-- And replicate the tags here!
 		<div ng-repeat="tag in observation.tags">
@@ -31,84 +35,131 @@
 		-->
 
 		<div class="clearfix"></div>
-
-		<div class="form-group col-xs-12">
+		<br />
+		<div class="col-xs-12">
+			<!-- Ratings -->
+			<strong>Alvorlighetsgrad:</strong><br />
+			<rating-actual observation="observation"></rating-actual>
+			<rating-potential observation="observation"></rating-potential>
+		</div>
+		<!--  Observation type and tags -->
+		<div class="col-xs-12">
 			<observationtype observation="observation"></observationtype>
 		</div>
 
+<div>
+fly, filopplastning
+
+<button class="btn btn-block btn-primary"><i class="fa fa-plus fa-fw"></i> Legg til fil</button>
+<div class="clearfix"><br /></div>
+</div>
+
+		<div class="col-xs-12">
 
 
-
-		<div class="panel col-xs-12" ng-repeat="item in items">
-			<div class="col-xs-2"><span> {{item.label}}</span></div>
-			<div ng-switch="item.type" class="col-md-7 col-xs-12">
-				<div ng-switch-when="location">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Sted
 					<location-summary observation="observation"></location-summary>
 				</div>
-
-				<div ng-switch-when="organization">
-					<organization-summary observation="observation"></organization-summary>
-				</div>
-
-				<div ng-switch-when="involved">
-					<involved-summary observation="observation"></involved-summary>
-				</div>
-
-				<div ng-switch-when="components">
-					<incidentform-summary observation="observation"></incidentform-summary>
-				</div>
-			</div>
-
-			<div class="form-group col-md-3 col-xs-12">
-
-				<button class="btn btn-default btn-sm pull-right" ng-click="item.used=!item.used">
-					<span ng-show="!item.used" class="fa fa-plus fa-fw"></span>
-					<span ng-show="item.used" class="fa fa-minus fa-fw"></span>
-					Endre {{item.label}}
-				</button>
-
-			</div>
-			<div ng-if="item.used" ng-switch="item.type">
-				<div ng-switch-when="location">
-					<div class="form-group col-xs-12">
+				<div class="panel-body">
+					<div class="col-xs-12">
 						<locationselector observation="observation"></locationselector>
 					</div>
 				</div>
+			</div>
 
-				<div ng-switch-when="organization">
-					<div class="form-group col-xs-12">
-						<organization observation="observation"></organization>
-					</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Organisasjon
+					<organization-summary observation="observation"></organization-summary>
 				</div>
-
-				<div ng-switch-when="involved">
-					<div class="form-group col-xs-12">
-						<involvedpersonselector observation="observation"></involvedpersonselector>
-					</div>
-					<div class="form-group col-xs-12">
-						<involvedpersondetails observation="observation"></involvedpersondetails>
-					</div>
+				<div class="panel-body">
+					<organization observation="observation"></organization>
 				</div>
+			</div>
 
-				<div ng-switch-when="components">
-					<div class="form-group col-xs-12">
-						<incidentform observation="observation"></incidentform>
-					</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Involverte
+					<involved-summary observation="observation"></involved-summary>
 				</div>
+				<div class="panel-body">
+					<involvedpersonselector observation="observation"></involvedpersonselector>
+				</div>
+			</div>
 
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Observasjonsforløp
+					<incidentform-summary observation="observation"></incidentform-summary>
+				</div>
+				<div class="panel-body">
+					<incidentform observation="observation"></incidentform>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">Været</div>
+				<div class="panel-body">Været auto/manuellt</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">Tiltak</div>
+				<div class="panel-body">Lokale/sentrale tiltak</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">Relaterte</div>
+				<div class="panel-body">Select med lignende observasjoner</div>
 			</div>
 
 
+
+			<!-- ASIDES from here 
+
+			<div class="col-md-2  col-xs-12">
+				<span> Organisasjon</span>
+			</div>
+			<div class="col-md-7 col-xs-12">
+				<organization-summary observation="observation"></organization-summary>
+			</div>
+			<div class="col-xs-12">
+				<organization observation="observation"></organization>
+			</div>
+
+			<div class="col-md-2  col-xs-12">
+				<span> Involverte</span>
+			</div>
+			<div class="col-md-7 col-xs-12">
+				<involved-summary observation="observation"></involved-summary>
+			</div>
+			<div class="col-xs-12 ">
+				<involvedpersonselector observation="observation"></involvedpersonselector>
+			</div>
+
+			<div class="col-md-2 col-xs-12">
+				<span> Observasjonsforløp</span>
+			</div>
+			<div class="col-md-7 col-xs-12">
+				<incidentform-summary observation="observation"></incidentform-summary>
+			</div>
+			<div class="col-xs-12">
+				<incidentform observation="observation"></incidentform>
+			</div>
+
 		</div>
+		
+		-->
 
-		<!-- Ng if has edited stuff to be saved or not -->
-		<button class="btn btn-primary btn-block" ng-click="saveObservation()"><i class="fa fa-save fa-fw"></i> Lagre</button>
+
+			<!-- Ng if has edited stuff to be saved or not -->
+			<button class="btn btn-primary btn-block" ng-click="saveObservation()">
+				<i class="fa fa-save fa-fw"></i> Lagre
+			</button>
 
 
-		<div class="form-group col-xs-12">
-			<summary observation="observation"></summary>
+			<div class="form-group col-xs-12">
+				<summary observation="observation"></summary>
+			</div>
+
 		</div>
-
 	</div>
-</div>
-

@@ -18,17 +18,35 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 
 (function () {
 
-	var involvedpersonselector = function (RestService) {
+	var involvedpersonselector = function (RestService, $aside) {
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "components/observation/directives/involvedpersonselector.html";
+//		directive.templateUrl = "components/observation/directives/involvedpersonselector.html";
+		directive.template = function(tElement, tAttrs) { 
+			
+			return '<button type="button" class="btn btn-default pull-right" ng-click="openInvolvedAside()"><i class="fa fa-plus fa-fw"></i>Involverte personer</button>';
+		};
 
 		directive.scope = {
 			observation: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
+			
+			$scope.openInvolvedAside = function() {
+			    $scope.myAside = $aside({
+			        scope: $scope,
+			        title: 'Involverte personer',
+			        //content: 'My Content', //Static custom content
+			        show: true,
+			        contentTemplate: '/app/reporting/components/observation/directives/involvedpersonselector.html',
+			        template: '/shared/partials/aside.html',
+			        placement: 'full-left',
+			        container: 'body',
+			        animation: 'am-slide-left',
+			        });   
+			};
 
 			$scope.personsFromDb = [].concat($scope.observation.involved);
 

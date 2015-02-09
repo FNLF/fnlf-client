@@ -28,10 +28,16 @@
 <script src="/static/js/angular-sanitize.js"></script>
 
 
+
+<!-- X-editable -->
 <link href="/bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
 <script src="/bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 
 
+<!-- File upload -->
+<script src="/static/js/FileAPI.min.js"></script> 
+<script src="/static/js/angular-file-upload-shim.min.js"></script> 
+<script src="/static/js/angular-file-upload.min.js"></script> 
 
 
 <!-- APP -->
@@ -94,15 +100,28 @@
 			<div ng-if="currentUserSignedIn" ng-controller="userController" class="ng-cloak" ng-cloak>
 
 <!-- left column -->
-    <div class="col-md-4 col-sm-6 col-xs-12">
+    <div  ng-controller="avatarController" ng-init="getAvatar(picFile[0])" class="col-md-4 col-xs-12">
       <div class="text-center">
-        <img src="http://lorempixel.com/200/200/people/9/" class="avatar img-rounded img-thumbnail" alt="avatar">
-        <h6>Upload a different photo...</h6>
-        <input type="file" class="text-center center-block well well-sm">
+      <img ng-show="picFile[0].dataUrl != null" ng-src="picFile[0].dataUrl"  class="img-thumbnail img-responsive" alt="avatar">
+      
+      <div class="clearfix"></div>
+      <button class="btn btn-primary" ng-file-select ng-model="picFile" name="avatar" accept="image/*" ng-file-change="generateThumb(picFile[0], $files);upload($picFile);">
+      <i class="fa fa-image fa-fw"></i> Velg profilbilde</button>
+        
+        <div ng-if="picFile[0].progress > 0" class="ng-binding" style="width:{{picFile[0].progress}}%" ng-bind="picFile[0].progress + '%'"></div>
       </div>
+          Drop File:
+    <div ng-file-drop ng-model="files" class="drop-box" 
+        drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+        accept=".jpg,.png,.pdf">Drop Images or PDFs files here</div>
+    <div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
     </div>
+    
+
+    
+    
     <!-- edit form column -->
-    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+    <div class="col-md-8 col-xs-12 personal-info">
       <div class="alert alert-info alert-dismissable">
         <a class="panel-close close" data-dismiss="alert">×</a> 
         <i class="fa fa-coffee"></i>
@@ -156,7 +175,6 @@
 
 			</div>
 
-		</div>
 		</div>
 </body>
 </html>

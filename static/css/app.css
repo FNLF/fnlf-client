@@ -43,9 +43,16 @@ body {
   }
 }
 
-/** ANGULAR NG_CLOAK **/
+/** Angular ng-cloak**/
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+/** Angular mouse pointer on ng-click **/
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
 }
 
 /** ALERTS **/
