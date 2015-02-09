@@ -20,11 +20,13 @@
 		<!-- Just show which version, click to show all versions? -->
 		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span> 
 		<span class="pull-left"><span class="label label-default"><resolveclub clubid="observation.club"></resolveclub></span>&nbsp;</span> 
-		<span class="pull-left"><span class="label label-default">Reporter: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span> 
+		<span class="pull-left"><span class="label label-default">Reporter: <resolveuser userid="observation.reporter">{{observation.reporter}}</resolveuser></span>&nbsp;</span> 
 		<span class="pull-left"><span class="label label-default">Owner: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
 
 		<!-- If changes, show warning include a "leaving page are you sure?"  -->
-		<span ng-if="observationChanges" class="pull-left"><span class="label label-danger">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>
+		<span ng-if="observationChanges" class="pull-left"><span ng-click="saveObservation()" class="label label-danger">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>
+		
+
 
 		<!-- And replicate the tags here!
 		<div ng-repeat="tag in observation.tags">
@@ -33,17 +35,23 @@
 		-->
 
 		<div class="clearfix"></div>
-
+		<br />
+		<div class="col-xs-12">
+			<!-- Ratings -->
+			<strong>Alvorlighetsgrad:</strong><br />
+			<rating-actual observation="observation"></rating-actual>
+			<rating-potential observation="observation"></rating-potential>
+		</div>
+		<!--  Observation type and tags -->
 		<div class="col-xs-12">
 			<observationtype observation="observation"></observationtype>
 		</div>
 
 <div>
-Rating, fly, filopplastning
-<rating></rating>
-<h4>Default</h4>
+fly, filopplastning
 
-<button class="btn btn-block btn-primary"><i class="fa fa-plus fa-fw"></i> Last opp file</button>
+<button class="btn btn-block btn-primary"><i class="fa fa-plus fa-fw"></i> Legg til fil</button>
+<div class="clearfix"><br /></div>
 </div>
 
 		<div class="col-xs-12">
