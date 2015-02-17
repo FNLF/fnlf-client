@@ -2,7 +2,7 @@
 
 	var profileApp = angular.module('profileApp', [ 'ngRoute', 'ui.bootstrap',
 	                                                'angularFileUpload',
-	                                                'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login','xeditable' ]);
+	                                                'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login','xeditable','imageupload', ]);
 
 	profileApp.config([ 'cfpLoadingBarProvider',
 			function(cfpLoadingBarProvider) {
@@ -41,8 +41,8 @@ angular.module("profileApp")
  * Upload
  */
 angular.module("profileApp").controller("avatarController", 
-		['$scope', '$upload', 'userService', '$timeout','$rootScope', 
-		 function($scope, $upload, userService, $timeout, $rootScope) {
+		['$scope', '$http', 'userService', '$timeout','$rootScope', 
+		 function($scope, $http, userService, $timeout, $rootScope) {
 	
 	var urlBase = '/api/v1';
 	
@@ -51,11 +51,14 @@ angular.module("profileApp").controller("avatarController",
 	
 	//Always get the avatar!
 	
-	$scope.getAvatar = function(file) {
-		
+	$scope.getAvatar = function() {
+		$scope.avatar = {};
 		userService.getUserAvatar().then(function(data) {
-			file.dataurl = 'data:'+data.avatar.content_type+';base64,'+data.avatar.file;
-	});	   
+			$scope.avatar.dataURL = 'data:'+data.avatar.content_type+';base64,'+data.avatar.file;
+			$scope.userid = data._id;
+			$scope._etag = data._etag;
+	});
+	
 //		   var fileReader = new FileReader();
 //			fileReader.readAsDataURL(file);
 //			fileReader.onload = function(e) {
@@ -68,52 +71,216 @@ angular.module("profileApp").controller("avatarController",
 		   
 	   };
 	
-	$scope.$watch('files', function () {
-        $scope.upload($scope.files);
-    });
+	
+	   
+//	$scope.$watch('image', function () {
+//        $scope.upload($scope.image.resized);
+//    });
+	   
+	   function dataURItoBlob(dataURI) {
+		    // convert base64/URLEncoded data component to raw binary data held in a string
+		    var byteString;
+		    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+		        byteString = atob(dataURI.split(',')[1]);
+		    else
+		        byteString = unescape(dataURI.split(',')[1]);
+
+		    // separate out the mime component
+		    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+		    // write the bytes of the string to a typed array
+		    var ia = new Uint8Array(byteString.length);
+		    for (var i = 0; i < byteString.length; i++) {
+		        ia[i] = byteString.charCodeAt(i);
+		    }
+
+		    return new Blob([ia], {type:mimeString});
+		};
+	   
     
-	$scope.upload = function (files) {
+	$scope.upload = function (image) {
 		console.log("UPLOAAAAAAAAAD");
 		
-        if (files && files.length) {
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                $upload.upload({
-                    url: urlBase + '/users/' + $rootScope.userid,
-                    //fields: {'username': $scope.username},
-                    file: file
-                }).progress(function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-                }).success(function (data, status, headers, config) {
-                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-                });
-            }
+		var config = {};
+		config.headers = {};
+		config.headers['If-Match'] = $scope._etag;
+		config.headers['Content-Type'] = undefined;
+		
+		if(image) {
+			
+			var blob = dataURItoBlob(image);
+			var formData = new FormData();
+			formData.append('avatar', blob);
+			 
+			$http({ 
+				method: 'PATCH', 
+				url: urlBase + '/users/' + $scope.userid, 
+				data: formData, 
+				headers: config.headers,
+				transformRequest: angular.identity
+			
+//			$http.patch(urlBase + '/users/' + $scope.userid, formData, {
+//						headers: config.headers,
+//						transformRequest: angular.identity,
+			}).success(function(result) {
+				$scope.uploadedImgSrc = result.src;
+				$scope.sizeInBytes = result.size;
+				$scope.getAvatar();
+				
+			});
+			};
+			
+		};
+		
+//        if (files && files.length) {
+//            for (var i = 0; i < files.length; i++) {
+//                
+//            	var file = files[i];
+//            	
+//                $upload.upload({
+//                    url: urlBase + '/users/' + $scope.userid,
+//                    //fields: {'username': $scope.username}, //additional form fields
+//                    file: file,
+//                    method: 'PATCH',
+//                    fileFormDataName: 'avatar', //Assign file to field name
+//                    headers: config.headers //Add etag
+//                }).progress(function (evt) {
+//                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+//                    $scope.uploadProgress = progressPercentage;
+//                    console.log('progress: ' + progressPercentage + '% ');
+//                }).success(function (data, status, headers, config) {
+//                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+//                });
+//            }
+//        }
+//    };
+    
+ // Takes a data URI and returns the Data URI corresponding to the resized image at the wanted size.
+    function resizedataURL(datas, wantedWidth, wantedHeight)
+        {
+            // We create an image to receive the Data URI
+            var img = document.createElement('img');
+
+            // When the event "onload" is triggered we can resize the image.
+            img.onload = function()
+                {        
+                    // We create a canvas and get its context.
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+
+                    // We set the dimensions at the wanted size.
+                    canvas.width = wantedWidth;
+                    canvas.height = wantedHeight;
+
+                    // We resize the image with the canvas method drawImage();
+                    ctx.drawImage(this, 0, 0, wantedWidth, wantedHeight);
+
+                    var dataURI = canvas.toDataURL();
+
+                    /////////////////////////////////////////
+                    // Use and treat your Data URI here !! //
+                    /////////////////////////////////////////
+                };
+
+            // We put the Data URI in the image's src attribute
+            return datas;
         }
-    };
+    // Use it like that : resizedataURL('yourDataURIHere', 50, 50);
+    
     
 	$scope.generateThumb = function(file) {
 		
 		if (file != null) {
-			console.log("Filereader");
-			console.log($scope.fileReaderSupported);
+			
 			if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
-				console.log("THUMBING");
 					$timeout(function() {
-					var fileReader = new FileReader();
-					fileReader.readAsDataURL(file);
-					fileReader.onload = function(e) {
-						$timeout(function() {
-							file.dataUrl = e.target.result;
-						});
-					}
+						var fileReader = new FileReader();
+						fileReader.readAsDataURL(file);
+						
+						fileReader.onloadend = function(e) {
+							$timeout(function() {
+
+						        var img = new Image();
+						        var canvas = document.createElement('canvas');
+						        var ctx = canvas.getContext("2d");
+						        var canvasCopy = document.createElement("canvas");
+						        var copyContext = canvasCopy.getContext("2d");
+						        var maxWidth = 300;
+						        var maxHeight = 200;
+
+						        img.onload = function()
+						        {
+						            var ratio = 1;
+
+						            if(img.width > maxWidth)
+						                ratio = maxWidth / img.width;
+						            else if(img.height > maxHeight)
+						                ratio = maxHeight / img.height;
+
+						            canvasCopy.width = img.width;
+						            canvasCopy.height = img.height;
+						            copyContext.drawImage(img, 0, 0);
+
+						            canvas.width = img.width * ratio;
+						            canvas.height = img.height * ratio;
+						            ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height);
+						        };
+
+						        //img.src = fileReader.result;
+						        file.dataUrl = fileReader.result;
+								
+						        //file.dataUrl = e.target.result;
+//								render(e.target.result);
+						        //file.dataUrl = resizedataURL(e.target.result, 200,300);
+							});
+						};
 					});
 			}
 		}
-	}
+	};
+
+	
+	function resizeImage(file) {
+		var reader = new FileReader();
+		    reader.onloadend = function() {
+		 
+		    var tempImg = new Image();
+		    tempImg.src = reader.result;
+		    
+		    tempImg.onload = function() {
+		 
+		        var MAX_WIDTH = 400;
+		        var MAX_HEIGHT = 300;
+		        var tempW = tempImg.width;
+		        var tempH = tempImg.height;
+		        if (tempW > tempH) {
+		            if (tempW > MAX_WIDTH) {
+		               tempH *= MAX_WIDTH / tempW;
+		               tempW = MAX_WIDTH;
+		            }
+		        } else {
+		            if (tempH > MAX_HEIGHT) {
+		               tempW *= MAX_HEIGHT / tempH;
+		               tempH = MAX_HEIGHT;
+		            }
+		        }
+		 
+		        var canvas = document.createElement('canvas');
+		        canvas.width = tempW;
+		        canvas.height = tempH;
+		        var ctx = canvas.getContext("2d");
+		        ctx.drawImage(this, 0, 0, tempW, tempH);
+		        var dataURL = canvas.toDataURL("image/jpeg");
+		      };
+		 
+		   };
+		   reader.readAsDataURL(file);
+		};
 	
 	
 }]);
+
+
 
 angular.module("profileApp")
 	   .service("userService",['$http','$q','$rootScope', function($http, $q, $rootScope) {
@@ -149,6 +316,11 @@ angular.module("profileApp")
 			// updating person - no $scope, no injection allowable???
 			this.updateInfo = function(personIndex, obj) {
 				$scope.userArray.splice(personIndex, 1, obj);
+			};
+		
+			this.getUserId = function() {
+				
+				return $rootScope.userid;
 			};
 	
 			// I transform the error response, unwrapping the
