@@ -36,6 +36,7 @@
 
 		directive.link = function ($scope, element, attrs) {
 			
+			$scope.isCollapsed = false;
 			
 			$scope.openIncidentAside = function() {
 			    $scope.myAside = $aside({
@@ -76,3 +77,4 @@
 	angular.module('reportingApp').directive('incidentform', incidentform);
 
 })();
+
