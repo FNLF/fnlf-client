@@ -19,7 +19,7 @@
 	});
 
 
-	var incidentform = function (RestService, $aside) {
+	var incidentform = function (RestService, $aside,Definitions) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -47,14 +47,18 @@
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
-			        animation: 'am-slide-left',
+			        animation: 'am-slide-left'
 			        });   
 			};
-			
-			
+
+
 			if(angular.isUndefined($scope.observation.components)){
 				$scope.observation.components = [];
 			}
+
+			$scope.persons = $scope.observation.involved.map(function(p){
+				return {id:p.id, fullname:p.fullname};
+			})
 
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()
@@ -63,9 +67,42 @@
 				});
 
 			$scope.newComponent = function(selectedTemplate){
-					$scope.selectedTemplate = selectedTemplate;
-					$scope.observation.components.push(selectedTemplate);
+				console.log("New from template")
+				console.log(selectedTemplate);
+				console.log(selectedTemplate.attributes);
+				$scope.selectedTemplate = selectedTemplate;
+				$scope.selectedTemplate.involved = [].concat($scope.persons);
+				$scope.selectedTemplate.tags = Definitions.componentTagsFromAttributes(selectedTemplate.attributes);
+				$scope.observation.components.push(selectedTemplate);
+
+
 				return false;
+			};
+
+			$scope.deleteComponent = function(component){
+				var index = $scope.observation.components.indexOf(component);
+				$scope.observation.components.splice(index,1);
+			};
+
+			$scope.newCause = function(){
+				var template = {};
+				template.what="Årsak";
+				template.involved = [].concat($scope.persons);
+				template.flags={};
+				template.flags.root_cause=true;
+				template.where = {};
+				template.where.altitude = 0;
+				$scope.observation.components.unshift(template);
+			};
+
+			$scope.getStaticTags = function(){
+				return Definitions.getComponentTags();
+			};
+
+			$scope.staticTags = Definitions.getComponentTags();
+
+			$scope.initComponent = function(component){
+			//	component.attributes = Definitions.componentAttributesFromTags(component.tags);
 			};
 
 		};

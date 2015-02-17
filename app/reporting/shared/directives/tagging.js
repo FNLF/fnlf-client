@@ -8,25 +8,25 @@
 
 		directive.scope = {
 			model: '=',
-			category: '='
-
+			category: '=',
+			input: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
 
 			$scope.tagsFromDb = [];
-			$scope.tagsFromDb.push("Tvinn og spinn");
-			$scope.tagsFromDb.push("Overtråkk");
-			$scope.tagsFromDb.push("Utelanding");
-			$scope.tagsFromDb.push("Lavtrekk");
 
-			$scope.tags = [].concat($scope.model.tags,$scope.tagsFromDb);
+			if(angular.isDefined($scope.input)){
+				$scope.tagsFromDb = [].concat($scope.input);
+			}
+
+			$scope.tags = [].concat($scope.model,$scope.tagsFromDb);
 			$scope.tagSelected = function ($item, $model){
 				$scope.tags.push($item);
 			};
 
 			$scope.getTags = function (name) {
-				$scope.tags = [].concat($scope.tagsFromDb,$scope.model.tags);
+				$scope.tags = [].concat($scope.tagsFromDb,$scope.model);
 
 			};
 
