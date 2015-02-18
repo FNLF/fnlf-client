@@ -3,7 +3,7 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.template = '<span ng-repeat="p in observation.involved"><span class="label label-primary">{{p.fullname}} </span> &nbsp;</span>';
+	directive.template = '<table class="table"><tr><td><span ng-repeat="p in observation.involved"><span>{{p.fullname}} </span> &nbsp;&nbsp;</span> </td></tr></table>';
 
 	directive.scope = {
 		observation: '='
