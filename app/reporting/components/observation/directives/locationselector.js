@@ -4,7 +4,7 @@ angular.module('reportingApp').directive('locationSummary', function () {
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.template = '<span class="label label-primary">{{observation.location.name}} {{observation.location.descr}} </span>';
+	directive.template = '<a target="_blank" href="https://www.google.no/maps/@{{observation.location.north}},{{observation.location.east}},15z" <span>Kart</span>';
 
 	directive.scope = {
 		observation: '='
