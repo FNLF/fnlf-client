@@ -46,22 +46,8 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
-			        animation: 'am-slide-left',
+			        animation: 'am-slide-left'
 			        });   
-			};
-			
-			var removeDupesById = function(arr){
-				var obj = {};
-
-				angular.forEach(arr,function(v){
-					obj[v.id]=v;
-				});
-				var result = [];
-
-				angular.forEach(obj,function(v){
-					result.push(v);
-				});
-				return result;
 			};
 
 
@@ -74,15 +60,10 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			};
 			$scope.personsFromDb=[];
 			$scope.getPersonsByName = function (name) {
-
-					$scope.existing = [].concat($scope.observation.organization.hl, $scope.observation.organization.hm, $scope.observation.organization.hfl);
-
-					$scope.personsFromDb = removeDupesById([].concat($scope.existing));
 					RestService.getUserByName(name)
 						.success(function (response) {
-							$scope.personsFromDb = removeDupesById($scope.existing.concat(response._items));
+							$scope.personsFromDb = response._items;
 						});
-
 			};
 
 			$scope.tagTransform = function(itemText){

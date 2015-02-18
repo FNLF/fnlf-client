@@ -1,8 +1,7 @@
 <div>
 	<label>Velg involvert(e) person(er):</label><br>
 
-	<ui-select multiple tagging="tagTransform" ng-model="observation.involved" theme="bootstrap" on-select="personSelected($item, $model)"
-			   on-remove="personRemoved($item, $model)">
+	<ui-select multiple tagging="tagTransform" ng-model="observation.involved" theme="bootstrap">
 		<ui-select-match placeholder="Søk på navn eller medlemsnummer...">{{$item.fullname}}</ui-select-match>
 		<ui-select-choices repeat="person in personsFromDb | filter:$select.search track by person.id"
 						   refresh="getPersonsByName($select.search)" refresh-delay="100">

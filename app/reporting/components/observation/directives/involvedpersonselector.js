@@ -44,24 +44,16 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
-			        animation: 'am-slide-left',
+			        animation: 'am-slide-left'
 			        });   
 			};
 
-			$scope.personsFromDb = [].concat($scope.observation.involved);
-
-			$scope.personSelected = function ($item, $model) {
-
-			};
-
-			$scope.personRemoved = function ($item, $model) {
-
-			};
+			$scope.personsFromDb = [];
 
 			$scope.getPersonsByName = function (name) {
 					RestService.getUserByName(name)
 					.success(function (response) {
-						$scope.personsFromDb = [].concat($scope.observation.involved,response._items);
+						$scope.personsFromDb = response._items;
 					});
 			};
 
