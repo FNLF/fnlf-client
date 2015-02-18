@@ -60,9 +60,12 @@ fly, filopplastning
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Sted
-					<location-summary observation="observation"></location-summary>
 				</div>
 				<div class="panel-body">
+
+					<div class="col-xs-12">
+						<location-summary observation="observation"></location-summary>
+					</div>
 					<div class="col-xs-12">
 						<locationselector observation="observation"></locationselector>
 					</div>
@@ -72,9 +75,9 @@ fly, filopplastning
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Organisasjon
-					<organization-summary observation="observation"></organization-summary>
 				</div>
 				<div class="panel-body">
+					<organization-summary observation="observation"></organization-summary>
 					<organization observation="observation"></organization>
 				</div>
 			</div>
@@ -82,9 +85,9 @@ fly, filopplastning
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Involverte
-					<involved-summary observation="observation"></involved-summary>
 				</div>
 				<div class="panel-body">
+					<involved-summary observation="observation"></involved-summary>
 					<involvedpersonselector observation="observation"></involvedpersonselector>
 				</div>
 			</div>
@@ -92,9 +95,9 @@ fly, filopplastning
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Observasjonsforløp
-					<incidentform-summary observation="observation"></incidentform-summary>
 				</div>
 				<div class="panel-body">
+					<incidentform-summary observation="observation"></incidentform-summary>
 					<incidentform observation="observation"></incidentform>
 				</div>
 			</div>
@@ -114,43 +117,6 @@ fly, filopplastning
 
 
 
-			<!-- ASIDES from here 
-
-			<div class="col-md-2  col-xs-12">
-				<span> Organisasjon</span>
-			</div>
-			<div class="col-md-7 col-xs-12">
-				<organization-summary observation="observation"></organization-summary>
-			</div>
-			<div class="col-xs-12">
-				<organization observation="observation"></organization>
-			</div>
-
-			<div class="col-md-2  col-xs-12">
-				<span> Involverte</span>
-			</div>
-			<div class="col-md-7 col-xs-12">
-				<involved-summary observation="observation"></involved-summary>
-			</div>
-			<div class="col-xs-12 ">
-				<involvedpersonselector observation="observation"></involvedpersonselector>
-			</div>
-
-			<div class="col-md-2 col-xs-12">
-				<span> Observasjonsforløp</span>
-			</div>
-			<div class="col-md-7 col-xs-12">
-				<incidentform-summary observation="observation"></incidentform-summary>
-			</div>
-			<div class="col-xs-12">
-				<incidentform observation="observation"></incidentform>
-			</div>
-
-		</div>
-		
-		-->
-
-
 			<!-- Ng if has edited stuff to be saved or not -->
 			<button class="btn btn-primary btn-block" ng-click="saveObservation()">
 				<i class="fa fa-save fa-fw"></i> Lagre
@@ -163,3 +129,4 @@ fly, filopplastning
 
 		</div>
 	</div>
+</div>
