@@ -67,12 +67,10 @@
 				});
 
 			$scope.newComponent = function(selectedTemplate){
-				console.log("New from template")
-				console.log(selectedTemplate);
-				console.log(selectedTemplate.attributes);
+
 				$scope.selectedTemplate = selectedTemplate;
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
-				$scope.selectedTemplate.tags = Definitions.componentTagsFromAttributes(selectedTemplate.attributes);
+				$scope.selectedTemplate.tags = [];//Definitions.componentTagsFromAttributes(selectedTemplate.attributes);
 				$scope.observation.components.push(selectedTemplate);
 
 
