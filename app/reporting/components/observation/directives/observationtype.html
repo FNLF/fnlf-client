@@ -1,13 +1,10 @@
 <div>
-
-	<div class="form-group">
-		<label class="control-label">Type observasjon:</label><br/>
-		<label class="radio-inline" ng-repeat="observationType in observationTypes">
-			<input type="radio" name="observationType" ng-model="observation.type" ng-value="observationType.id">
-			{{observationType.name}}
-		</label>
+	<label class="control-label">Type observasjon:</label>
+	<div>
+		<div class="btn-group">
+			<label class="btn btn-success" ng-model="observation.type" btn-radio="observationType.id" ng-repeat="observationType in observationTypes">{{observationType.name}}</label>
+		</div>
 	</div>
-
 	<div class="form-group">
 		<label class="control-label">Legg til tagger som beskriver hendelsen som helhet</label>
 		<tagging model="observation.tags" category="observationTags" input="['Reservetrekk','Overtrokk','Overtramp']"></tagging>
