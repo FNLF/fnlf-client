@@ -70,7 +70,7 @@
 
 				$scope.selectedTemplate = selectedTemplate;
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
-				$scope.selectedTemplate.tags = [];//Definitions.componentTagsFromAttributes(selectedTemplate.attributes);
+				$scope.selectedTemplate.tags = Definitions.componentTagsFromAttributes(selectedTemplate.attributes);
 				$scope.observation.components.push(selectedTemplate);
 
 
@@ -91,6 +91,28 @@
 				template.where = {};
 				template.where.altitude = 0;
 				$scope.observation.components.unshift(template);
+			};
+
+			$scope.newBarrier = function(){
+				var template = {};
+				template.what="Sikkerhetsbarriære";
+				template.involved = [].concat($scope.persons);
+				template.flags={};
+				template.flags.barrier=true;
+				template.where = {};
+				template.where.altitude = 0;
+				$scope.observation.components.unshift(template);
+			};
+
+			$scope.newConsequence = function(){
+				var template = {};
+				template.what="Konsekvens";
+				template.involved = [].concat($scope.persons);
+				template.flags={};
+				template.flags.final_consequence=true;
+				template.where = {};
+				template.where.altitude = 0;
+				$scope.observation.components.push(template);
 			};
 
 			$scope.getStaticTags = function(){
