@@ -9,8 +9,9 @@
 						<span class="glyphicon" ng-class="{'glyphicon-chevron-down': component.open, 'glyphicon-chevron-up': !component.open}"></span><span> {{component.what}}</span>
 					</div>
 				</accordion-heading>
-
-				<observation-component component="component" observation="observation"></observation-component>
+				<div ng-if="component.open">
+					<observation-component component="component" observation="observation"></observation-component>
+				</div>
 			</accordion-group>
 		</accordion>
 
