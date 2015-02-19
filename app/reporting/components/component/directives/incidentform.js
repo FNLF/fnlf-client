@@ -43,7 +43,7 @@
 			        title: 'Observasjonsforløp',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/reporting/components/observation/directives/incidentform.html',
+			        contentTemplate: '/app/reporting/components/component/directives/incidentform.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
