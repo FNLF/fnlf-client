@@ -19,11 +19,11 @@
 	});
 
 
-	var incidentform = function (RestService, $aside,Definitions) {
+	var observationComponents = function (RestService, $aside,Definitions) {
 		var directive = {};
 
 		directive.restrict = 'E';
-//		directive.templateUrl = "components/observation/directives/incidentform.html";
+//		directive.templateUrl = "components/observation/directives/observationComponents.html";
 		
 		directive.template = function(tElement, tAttrs) { 
 			
@@ -43,7 +43,7 @@
 			        title: 'Observasjonsforløp',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/reporting/components/component/directives/incidentform.html',
+			        contentTemplate: '/app/reporting/components/component/directives/observationComponents.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
@@ -130,6 +130,6 @@
 		return directive;
 	};
 
-	angular.module('reportingApp').directive('incidentform', incidentform);
+	angular.module('reportingApp').directive('observationComponents', observationComponents);
 
 })();
