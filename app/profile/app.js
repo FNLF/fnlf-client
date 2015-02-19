@@ -57,19 +57,8 @@ angular.module("profileApp").controller("avatarController",
 			$scope.avatar.dataURL = 'data:'+data.avatar.content_type+';base64,'+data.avatar.file;
 			$scope.userid = data._id;
 			$scope._etag = data._etag;
-	});
-	
-//		   var fileReader = new FileReader();
-//			fileReader.readAsDataURL(file);
-//			fileReader.onload = function(e) {
-//				$timeout(function() {
-//					file.dataUrl = e.target.result;
-//				});
-//			}
-//		   
-//		   picFile[0].dataUrl
-		   
-	   };
+		});
+	};
 	
 	
 	   
@@ -99,7 +88,6 @@ angular.module("profileApp").controller("avatarController",
 	   
     
 	$scope.upload = function (image) {
-		console.log("UPLOAAAAAAAAAD");
 		
 		var config = {};
 		config.headers = {};
@@ -131,31 +119,10 @@ angular.module("profileApp").controller("avatarController",
 			};
 			
 		};
-		
-//        if (files && files.length) {
-//            for (var i = 0; i < files.length; i++) {
-//                
-//            	var file = files[i];
-//            	
-//                $upload.upload({
-//                    url: urlBase + '/users/' + $scope.userid,
-//                    //fields: {'username': $scope.username}, //additional form fields
-//                    file: file,
-//                    method: 'PATCH',
-//                    fileFormDataName: 'avatar', //Assign file to field name
-//                    headers: config.headers //Add etag
-//                }).progress(function (evt) {
-//                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-//                    $scope.uploadProgress = progressPercentage;
-//                    console.log('progress: ' + progressPercentage + '% ');
-//                }).success(function (data, status, headers, config) {
-//                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-//                });
-//            }
-//        }
-//    };
-    
- // Takes a data URI and returns the Data URI corresponding to the resized image at the wanted size.
+
+	/**
+	 * Takes a data URI and returns the Data URI corresponding to the resized image at the wanted size.
+	 */
     function resizedataURL(datas, wantedWidth, wantedHeight)
         {
             // We create an image to receive the Data URI
@@ -226,12 +193,8 @@ angular.module("profileApp").controller("avatarController",
 						            ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height);
 						        };
 
-						        //img.src = fileReader.result;
 						        file.dataUrl = fileReader.result;
 								
-						        //file.dataUrl = e.target.result;
-//								render(e.target.result);
-						        //file.dataUrl = resizedataURL(e.target.result, 200,300);
 							});
 						};
 					});
