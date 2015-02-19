@@ -10,8 +10,8 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController',
-		function ($scope, ObservationService,$routeParams,$timeout) {
+		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http) {
+			
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
 			$scope.observationChanges = false;
@@ -77,6 +77,69 @@
 			}
 		},true);
 
+		/******************************************************
+		 * File upload!
+		 *****************************************************/
+	
+//		$scope.$watch('files', function () {
+//	        $scope.upload($scope.files);
+//	    });
+		
+		
+		$scope.upload = function (files) {
+			
+			var urlBase = '/api/v1';
+			
+//			Only for patch/put
+			var config = {};
+//			config.headers = {};
+//			//config.headers['If-Match'] = $scope._etag;
+		
+			if (files && files.length) {
+				
+				 for (var i = 0; i < files.length; i++) {
+				
+					 var file = files[i];
+					
+					 $upload.upload({
+						 url: urlBase + '/files/',
+						 fields: {'ref': 'observation', 'ref_id': $scope.observation._id}, //additional form fields
+						 file: file,
+						 method: 'POST',
+						 fileFormDataName: 'file', //Assign file to field name
+						 headers: config.headers //Add etag
+						 }).progress(function (evt) {
+							 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+							 console.log('progress: ' + progressPercentage + '% ');
+						 }).success(function (data, status, headers, config) {
+							 if(data._status == 'OK') {
+								 console.log('Adding id to files ' + data._id + 'From' + data);
+								 $scope.observation.files.push(data._id);
+								 //Automatic save after upload!
+							 }
+							 console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+						 });
+					 }
+				 $scope.saveObservation();
+				 }
+		 };
+		 
+
+		
+		
+		function handleError(response) {
+			if (!angular.isObject(response.data) || !response.data.message) {
+				return ($q.reject("An unknown error occurred."));
+			}
+			return ($q.reject(response.data.message));
+		}
+		function handleSuccess(response) {
+			console.log(response.data);
+			return (response.data);
+		};
+		
+		
 		});
+	
 
 })();
