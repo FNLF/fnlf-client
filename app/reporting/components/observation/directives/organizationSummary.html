@@ -1,14 +1,33 @@
-<div>
-	<span ng-repeat = "hl in observation.organization.hl">
-		<span class="label label-primary" >HL: {{hl.fullname}} </span>
+<table class="table">
+	<tr>
+		<td>HL</td>
+		<td><span ng-repeat="hl in observation.organization.hl">
+		<span>{{hl.fullname}} </span>
 		&nbsp;
 	</span>
-	<span ng-repeat = "hfl in observation.organization.hfl">
-		<span class="label label-primary">HFL: {{hfl.fullname}} </span>
+		</td>
+	</tr>
+	<tr>
+		<td>HM</td>
+		<td>
+	<span ng-repeat="hfl in observation.organization.hfl">
+		<span>{{hfl.fullname}} </span>
 		&nbsp;
 	</span>
-	<span ng-repeat = "hm in observation.organization.hm">
-		<span class="label label-primary">HM: {{hm.fullname}} </span>
+		</td>
+	</tr>
+
+	<tr>
+		<td>HFL</td>
+		<td>	<span ng-repeat="hm in observation.organization.hm">
+		<span>{{hm.fullname}} </span>
 		&nbsp;
-	</span>
-</div>
+	</span></td>
+
+	</tr>
+</table>
+
+
+
+
+

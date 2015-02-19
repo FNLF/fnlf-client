@@ -1,9 +1,8 @@
 <div>
 
-	<ui-select multiple tagging ng-model="model.tags" theme="bootstrap" on-select="tagSelected($item, $model)">
+	<ui-select multiple tagging ng-model="$parent.model" theme="bootstrap">
 		<ui-select-match placeholder="Legg til tagger...">{{$item}}</ui-select-match>
-		<ui-select-choices repeat="tag in tags | filter:$select.search"
-						   refresh="getTags($select.search)"  refresh-delay="500">
+		<ui-select-choices repeat="tag in tags | filter:$select.search">
 			{{tag}}
 		</ui-select-choices>
 	</ui-select>

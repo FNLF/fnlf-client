@@ -1,6 +1,11 @@
-<div>
-	<span ng-repeat="component in observation.components">
-		<span class="label label-primary">{{component.what}} </span>
-		&nbsp;
-	</span>
-</div>
+<span ng-repeat="component in observation.components">
+	<span class="label label-primary">{{component.what}} </span>
+	&nbsp;
+
+	<span ng-repeat="tag in component.tags">
+	<span class="label label-info">{{tag}} </span>
+	&nbsp;
+					</span>
+	<br>
+
+</span>

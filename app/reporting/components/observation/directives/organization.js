@@ -19,11 +19,15 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 
 (function () {
 
-	var organization = function (RestService) {
+	var organization = function (RestService, $aside) {
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "components/observation/directives/organization.html";
+		//directive.templateUrl = "components/observation/directives/organization.html";
+		directive.template = function(tElement, tAttrs) { 
+			
+			return '<button type="button" class="btn btn-default pull-right" ng-click="openOrganizationAside()"><i class="fa fa-plus fa-fw"></i>Endre Organisasjon</button>';
+		};
 
 		directive.scope = {
 			observation: '='
@@ -31,19 +35,20 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 
 		directive.link = function ($scope, element, attrs) {
 
-			var removeDupesById = function(arr){
-				var obj = {};
-
-				angular.forEach(arr,function(v){
-					obj[v.id]=v;
-				});
-				var result = [];
-
-				angular.forEach(obj,function(v){
-					result.push(v);
-				});
-				return result;
-			}
+			
+			$scope.openOrganizationAside = function() {
+			    $scope.myAside = $aside({
+			        scope: $scope,
+			        title: 'Hoppfeltorganiseringen',
+			        //content: 'My Content', //Static custom content
+			        show: true,
+			        contentTemplate: '/app/reporting/components/observation/directives/organization.html',
+			        template: '/shared/partials/aside.html',
+			        placement: 'full-left',
+			        container: 'body',
+			        animation: 'am-slide-left'
+			        });   
+			};
 
 
 			$scope.personSelected = function ($item, $model) {
@@ -55,15 +60,10 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			};
 			$scope.personsFromDb=[];
 			$scope.getPersonsByName = function (name) {
-
-					$scope.existing = [].concat($scope.observation.organization.hl, $scope.observation.organization.hm, $scope.observation.organization.hfl);
-
-					$scope.personsFromDb = removeDupesById([].concat($scope.existing));
 					RestService.getUserByName(name)
 						.success(function (response) {
-							$scope.personsFromDb = removeDupesById($scope.existing.concat(response._items));
+							$scope.personsFromDb = response._items;
 						});
-
 			};
 
 			$scope.tagTransform = function(itemText){

@@ -33,6 +33,15 @@
 	<!-- Auth -->
 	<script src="/shared/auth/loginServices.js"></script>
 	
+	<!-- Resolvers -->
+	<script src="/shared/resolve/app.js"></script>
+	<script src="/shared/resolve/service.js"></script>
+	<script src="/shared/resolve/user.js"></script>
+	<script src="/shared/resolve/club.js"></script>
+	<script src="/shared/resolve/observationtype.js"></script>
+	
+	
+	
 	<!-- Mgcrea AngularStrap! -->
 	<link href="/static/css/bootstrap-additions.min.css" rel="stylesheet">
 	<script src="/static/js/angular-strap.min.js"></script>
@@ -49,6 +58,7 @@
 
 	<!-- location -->
 	<script src="components/location/locationService.js"></script>
+	
 
 
 	<!-- Observation -->
@@ -65,6 +75,11 @@
 	<script src="components/observation/directives/summary.js"></script>
 	<script src="components/observation/directives/organization.js"></script>
 	<script src="components/observation/directives/workflow.js"></script>
+	<script src="components/observation/directives/watchers.js"></script>
+	<script src="components/observation/directives/ratingactual.js"></script>
+	<script src="components/observation/directives/ratingpotential.js"></script>
+	
+	
 
 
 
@@ -123,7 +138,6 @@
 			<div ng-hide="currentUserSignedIn">
 				<fnlf-login></fnlf-login>
 			</div>
-
 			<div ng-if="currentUserSignedIn" ng-view class="ng-cloak" ng-cloak>
 
 			</div>
