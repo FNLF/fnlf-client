@@ -32,6 +32,10 @@
 				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
 			};
 
+			this.getAllObservations = function () {
+				return $http.get(urlBase + '/observations/');
+			};
+
 			this.getObservationComponentTemplates = function () {
 				return $http.get(urlBase + '/observations/components');
 			};
@@ -87,7 +91,36 @@
 			this.stopWatching = function (objectId){
 				return $http.post(urlBase + '/observations/watchers/' + objectId + '/stop');
 			};
-			
+
+			/**
+			 * Tags
+			 */
+
+			this.getTags = function(group){
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}	');
+			};
+
+			var getExistingTags = function(tag,group){
+				return $http.get(urlBase + '/tags/?where={"tag":"'+tag+'"}	');
+			};
+
+			this.addTag = function(tag,group){
+				if(!angular.isUndefined(tag) && !angular.isUndefined(group)) {
+					getExistingTags(tag, group).success(function (data) {
+						if (data._meta.total == 0) {
+							console.log("Adding new tag " + tag);
+							$http.post(urlBase + '/tags', {tag: tag, group: group});
+						} else {
+							console.log("Incrementing tag " + tag + " freq");
+							$http.post(urlBase + '/tags/' + data._id, {tag: tag, group: group});
+						}
+
+					});
+				}
+
+			};
+
+
 
 		}]);
 
