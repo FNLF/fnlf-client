@@ -10,7 +10,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http) {
+		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http, $window) {
 			
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
@@ -63,12 +63,18 @@
 			});
 		};
 
+		
 		/**
 		 * Triggers saved/unsaved label
 		 */
 		$scope.observationChanges = false;
 		$scope.$watch('observation', function(changedObs,oldObs) {
 			if(oldObs._id) {
+				
+				$window.onbeforeunload = function(){
+			        return 'You have unsaved data';
+			      };
+				
 				console.log("Changed");
 				console.log(oldObs);
 				console.log("->");

@@ -23,9 +23,9 @@ angular.module('reportingApp')
 	directive.template = function(tElement, tAttrs) { 
 		
 		return '<div ng-repeat="f in thumbnails"> \
-					<div class="col-xs-4 col-md-1"> \
+					<div class="col-xs-6 col-md-2"> \
 					<a ng-click="openFileAside(f.objectid)" class="thumbnail"> \
-						<img ng-src="{{f.src}}"> \
+						<img ng-src="{{f.src}}" class="img-responsive"> \
 					</a> \
 					</div> \
 				</div>'; 
