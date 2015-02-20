@@ -1,0 +1,53 @@
+<div>
+	<div>
+
+		<accordion close-others="true">
+			<accordion-group is-open="component.open" ng-repeat="component in observation.components track by $index">
+
+				<accordion-heading>
+					<div>
+						<span class="glyphicon" ng-class="{'glyphicon-chevron-down': component.open, 'glyphicon-chevron-up': !component.open}"></span>
+						<observation-component-summary component="component"></observation-component-summary>
+
+					</div>
+				</accordion-heading>
+				<div ng-if="component.open">
+					<observation-component component="component" observation="observation"></observation-component>
+				</div>
+			</accordion-group>
+		</accordion>
+
+	</div>
+
+
+
+	<div class="form-group col-xs-12">
+		<div class="btn-group" dropdown is-open="status.isopen">
+
+			<button type="button" class="btn btn-primary" ng-click="newCause()">
+				Ny årsak
+			</button>
+
+			<button type="button" class="btn btn-primary" ng-click="newBarrier()">
+				Ny sikkerhetsbarriære
+			</button>
+
+			<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+				Ny komponent i hendelsesforløpet <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li ng-repeat="item in templates track by $index"><a ng-click="newComponent(item)">{{item.what}}</a>
+				</li>
+
+			</ul>
+
+			<button type="button" class="btn btn-primary" ng-click="newConsequence()">
+				Ny konsekvens
+			</button>
+
+
+		</div>
+
+	</div>
+
+</div>

@@ -11,6 +11,10 @@
 						templateUrl: 'components/observation/1.html',
 						controller: 'ObservationController'
 					})
+					.when('/observation/:id/:ui', {
+						templateUrl: 'components/observation/2.html',
+						controller: 'ObservationController'
+					})
 					.when('/report/1', {
 						templateUrl: 'components/report/1.html',
 						controller: 'ReportController'

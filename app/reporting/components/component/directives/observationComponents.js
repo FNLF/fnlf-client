@@ -1,11 +1,32 @@
 (function () {
 
-	angular.module('reportingApp').directive('incidentformSummary', function () {
+	angular.module('reportingApp').directive('observationComponentSummary', function (Definitions) {
 
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "components/observation/directives/incidentformSummary.html";
+		directive.templateUrl = "components/component/directives/observationComponentSummary.html";
+
+		directive.scope = {
+			component: '='
+		};
+
+		directive.link = function ($scope, element, attrs) {
+			$scope.getAttributesAsTags = function(component){
+				return Definitions.componentTagsFromAttributes(component.attributes);
+			};
+
+		};
+
+		return directive;
+	});
+
+	angular.module('reportingApp').directive('observationComponentsSummary', function () {
+
+		var directive = {};
+
+		directive.restrict = 'E';
+		directive.templateUrl = "components/component/directives/observationComponentsSummary.html";
 		
 		directive.scope = {
 			observation: '='
@@ -19,11 +40,11 @@
 	});
 
 
-	var incidentform = function (RestService, $aside,Definitions) {
+	var observationComponents = function (RestService, $aside,Definitions) {
 		var directive = {};
 
 		directive.restrict = 'E';
-//		directive.templateUrl = "components/observation/directives/incidentform.html";
+//		directive.templateUrl = "components/observation/directives/observationComponents.html";
 		
 		directive.template = function(tElement, tAttrs) { 
 			
@@ -43,7 +64,7 @@
 			        title: 'Observasjonsforløp',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/reporting/components/observation/directives/incidentform.html',
+			        contentTemplate: '/app/reporting/components/component/directives/observationComponents.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
@@ -90,6 +111,8 @@
 				template.flags.root_cause=true;
 				template.where = {};
 				template.where.altitude = 0;
+				$scope.closeOthers(template);
+
 				$scope.observation.components.unshift(template);
 			};
 
@@ -101,7 +124,9 @@
 				template.flags.barrier=true;
 				template.where = {};
 				template.where.altitude = 0;
+				$scope.closeOthers(template);
 				$scope.observation.components.unshift(template);
+
 			};
 
 			$scope.newConsequence = function(){
@@ -112,6 +137,7 @@
 				template.flags.final_consequence=true;
 				template.where = {};
 				template.where.altitude = 0;
+				$scope.closeOthers(template);
 				$scope.observation.components.push(template);
 			};
 
@@ -125,11 +151,19 @@
 			//	component.attributes = Definitions.componentAttributesFromTags(component.tags);
 			};
 
+			$scope.closeOthers = function(component){
+
+				$scope.observation.components.forEach(function(c){
+					c.open=false;
+				});
+				component.open=true;
+			};
+
 		};
 
 		return directive;
 	};
 
-	angular.module('reportingApp').directive('incidentform', incidentform);
+	angular.module('reportingApp').directive('observationComponents', observationComponents);
 
 })();
