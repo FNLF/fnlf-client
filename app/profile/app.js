@@ -1,7 +1,6 @@
 (function() {
 
 	var profileApp = angular.module('profileApp', [ 'ngRoute', 'ui.bootstrap',
-	                                                'angularFileUpload',
 	                                                'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login','xeditable','imageupload', ]);
 
 	profileApp.config([ 'cfpLoadingBarProvider',
@@ -45,9 +44,6 @@ angular.module("profileApp").controller("avatarController",
 		 function($scope, $http, userService, $timeout, $rootScope) {
 	
 	var urlBase = '/api/v1';
-	
-	$scope.usingFlash = FileAPI && FileAPI.upload != null;
-	$scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
 	
 	//Always get the avatar!
 	
