@@ -23,7 +23,7 @@ angular.module('reportingApp')
 	directive.template = function(tElement, tAttrs) { 
 		
 		return '<div ng-repeat="f in thumbnails"> \
-					<div class="col-xs-2 col-md-1"> \
+					<div class="col-xs-4 col-md-1"> \
 					<a ng-click="openFileAside(f.objectid)" class="thumbnail"> \
 						<img ng-src="{{f.src}}"> \
 					</a> \
@@ -94,7 +94,7 @@ angular.module('reportingApp')
 			        title: 'Filvisning',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/reporting/components/observation/directives/file.html',
+			        contentTemplate: '/app/reporting/components/observation/directives/filepreviews.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
@@ -109,10 +109,7 @@ angular.module('reportingApp')
 		
 	directive.link = function($scope, element, attrs) {
 		
-		
-		
 		$scope.$watch('observation',function(newValue,oldValue) {
-		
 			
 			if(newValue) {
 				var urlBase = '/api/v1';

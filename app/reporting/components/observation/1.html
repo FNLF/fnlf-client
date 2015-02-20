@@ -64,173 +64,87 @@
 
 <div class="col-xs-12 col-md-12">
 
-<div class="row">
-	<filepreviews observation="observation"></filepreviews>
-</div>
+	<div class="row">
+		<filepreviews observation="observation"></filepreviews>
+	</div>
     <div class="hidden-xs hidden-sm">
-    <div ng-file-drop ng-model="files" ng-file-change="upload($files)" class="drop-box" drag-over-class="dragover" ng-multiple="true" allow-dir="true" accept=".jpg,.png,.pdf">Drop files here</div>
-    <div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    	<div ng-file-drop ng-model="files" ng-file-change="upload($files)" class="drop-box" drag-over-class="dragover" ng-multiple="true" allow-dir="true" accept=".jpg,.png,.pdf">Drop files here</div>
+    	<div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
 	</div>
 	
 	<button class="btn btn-block btn-primary" ng-file-select ng-multiple="true" ng-file-change="upload($files)"><i class="fa fa-plus fa-fw"></i> Legg til fil</button>
+
 </div>
 
 <div class="clearfix"><br /></div>
 </div>
 
 <div class="list-group col-xs-12 col-md-12">
-  <a href="" class="list-group-item">
+
+  <li class="list-group-item">
+    <p class="list-group-item-text">
+	
+
+	
+	</p>
+  </li>
+  
+  
+  <li class="list-group-item">
     <h4 class="list-group-item-heading">Sted</h4>
     <p class="list-group-item-text">
 	<!-- <location-summary observation="observation"></location-summary> -->
 	<locationselector observation="observation"></locationselector>
 	</p>
-  </a>
+  </li>
   
-  <a class="list-group-item">
+  <li class="list-group-item">
     <h4 class="list-group-item-heading">Organisasjon</h4>
     <p class="list-group-item-text">
 	<organization-summary observation="observation"></organization-summary>
 	<organization observation="observation"></organization>
 	</p>
 	<div class="clearfix"></div>
-  </a>
+  </li>
   
-  <a href="" class="list-group-item">
+  <li class="list-group-item">
     <h4 class="list-group-item-heading">Involverte</h4>
     <p class="list-group-item-text">
     <involved-summary observation="observation"></involved-summary>
 	<involvedpersonselector observation="observation"></involvedpersonselector>
 	<div class="clearfix"></div>
 	</p>
-  </a>
+  </li>
   
-  <a href="" class="list-group-item">
+  <li class="list-group-item">
     <h4 class="list-group-item-heading">Observasjonsforløp</h4>
     <p class="list-group-item-text">
     <incidentform-summary observation="observation"></incidentform-summary>
 	<incidentform observation="observation"></incidentform>
 	<div class="clearfix"></div>
 	</p>
-  </a>
+  </li>
   
-  <a href="" class="list-group-item">
+  <li class="list-group-item">
     <h4 class="list-group-item-heading">Været</h4>
     <p class="list-group-item-text">Været auto/manuellt</p>
     <div class="clearfix"></div>
-  </a>
+  </li>
   
-  <a href="" class="list-group-item">
+  <li class="list-group-item">
     <h4 class="list-group-item-heading">Tiltak</h4>
     <p class="list-group-item-text">Lokale/sentrale tiltak</p>
     <div class="clearfix"></div>
-  </a>
+  </li>
    
-   <a href="" class="list-group-item">
+   <li class="list-group-item">
     <h4 class="list-group-item-heading">Relaterte</h4>
     <p class="list-group-item-text">Select med lignende observasjoner</p>
     <div class="clearfix"></div>
-  </a>
+  </li>
 
 </div>
 
-		<div class="col-xs-12">
-
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Sted
-					
-				</div>
-				<div class="panel-body">
-					<div class="col-xs-12">
-						
-					</div>
-				</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Organisasjon
-				</div>
-				<div class="panel-body">
-					<organization-summary observation="observation"></organization-summary>
-					<organization observation="observation"></organization>
-				</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Involverte
-					
-				</div>
-				<div class="panel-body">
-					<involved-summary observation="observation"></involved-summary>
-					<involvedpersonselector observation="observation"></involvedpersonselector>
-				</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Observasjonsforløp
-				</div>
-				<div class="panel-body">
-					<incidentform-summary observation="observation"></incidentform-summary>
-					<incidentform observation="observation"></incidentform>
-					
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">Været</div>
-				<div class="panel-body">Været auto/manuellt</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">Tiltak</div>
-				<div class="panel-body">Lokale/sentrale tiltak</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">Relaterte</div>
-				<div class="panel-body">Select med lignende observasjoner</div>
-			</div>
-
-
-
-			<!-- ASIDES from here 
-
-			<div class="col-md-2  col-xs-12">
-				<span> Organisasjon</span>
-			</div>
-			<div class="col-md-7 col-xs-12">
-				<organization-summary observation="observation"></organization-summary>
-			</div>
-			<div class="col-xs-12">
-				<organization observation="observation"></organization>
-			</div>
-
-			<div class="col-md-2  col-xs-12">
-				<span> Involverte</span>
-			</div>
-			<div class="col-md-7 col-xs-12">
-				<involved-summary observation="observation"></involved-summary>
-			</div>
-			<div class="col-xs-12 ">
-				<involvedpersonselector observation="observation"></involvedpersonselector>
-			</div>
-
-			<div class="col-md-2 col-xs-12">
-				<span> Observasjonsforløp</span>
-			</div>
-			<div class="col-md-7 col-xs-12">
-				<incidentform-summary observation="observation"></incidentform-summary>
-			</div>
-			<div class="col-xs-12">
-				<incidentform observation="observation"></incidentform>
-			</div>
-
-		</div>
-		
-		-->
 
 
 			<!-- Ng if has edited stuff to be saved or not -->
@@ -243,5 +157,5 @@
 				<summary observation="observation"></summary>
 			</div>
 
-		</div>
 	</div>
+</div>
