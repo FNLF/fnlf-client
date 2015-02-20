@@ -1,11 +1,32 @@
 (function () {
 
-	angular.module('reportingApp').directive('incidentformSummary', function () {
+	angular.module('reportingApp').directive('observationComponentSummary', function (Definitions) {
 
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "components/observation/directives/incidentformSummary.html";
+		directive.templateUrl = "components/component/directives/observationComponentSummary.html";
+
+		directive.scope = {
+			component: '='
+		};
+
+		directive.link = function ($scope, element, attrs) {
+			$scope.getAttributesAsTags = function(component){
+				return Definitions.componentTagsFromAttributes(component.attributes);
+			};
+
+		};
+
+		return directive;
+	});
+
+	angular.module('reportingApp').directive('observationComponentsSummary', function () {
+
+		var directive = {};
+
+		directive.restrict = 'E';
+		directive.templateUrl = "components/component/directives/observationComponentsSummary.html";
 		
 		directive.scope = {
 			observation: '='

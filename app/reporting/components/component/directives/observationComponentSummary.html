@@ -1,0 +1,22 @@
+<span>
+
+	<label ng-if="component.flags.incident" class="label label-info">Selve hendelsen</label>
+	<label ng-if="component.flags.root_cause" class="label label-info">Årsak</label>
+	<label ng-if="component.flags.final_consequence" class="label label-info">Konsekvens</label>
+	&nbsp;
+
+	<span class="label label-primary">{{component.what}} </span>
+	&nbsp;
+
+	<span ng-repeat="tag in getAttributesAsTags(component)">
+	<span class="label label-warning">{{tag}} </span>
+	&nbsp;
+					</span>
+
+	<span ng-repeat="tag in component.tags">
+	<span class="label label-default">{{tag}} </span>
+	&nbsp;
+					</span>
+
+
+</span>

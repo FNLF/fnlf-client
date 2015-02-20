@@ -6,7 +6,9 @@
 
 				<accordion-heading>
 					<div>
-						<span class="glyphicon" ng-class="{'glyphicon-chevron-down': component.open, 'glyphicon-chevron-up': !component.open}"></span><span> {{component.what}}</span>
+						<span class="glyphicon" ng-class="{'glyphicon-chevron-down': component.open, 'glyphicon-chevron-up': !component.open}"></span>
+						<observation-component-summary component="component"></observation-component-summary>
+
 					</div>
 				</accordion-heading>
 				<div ng-if="component.open">
