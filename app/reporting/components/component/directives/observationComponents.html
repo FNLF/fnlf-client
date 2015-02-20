@@ -1,8 +1,8 @@
 <div>
-	<div ng-repeat="component in observation.components track by $index">
+	<div>
 
 		<accordion close-others="true">
-			<accordion-group is-open="component.open">
+			<accordion-group is-open="component.open" ng-repeat="component in observation.components track by $index">
 
 				<accordion-heading>
 					<div>
@@ -14,7 +14,6 @@
 				</div>
 			</accordion-group>
 		</accordion>
-
 
 	</div>
 

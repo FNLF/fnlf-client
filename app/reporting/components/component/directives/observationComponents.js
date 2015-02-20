@@ -90,7 +90,7 @@
 				template.flags.root_cause=true;
 				template.where = {};
 				template.where.altitude = 0;
-				template.open=true;
+				$scope.closeOthers(template);
 
 				$scope.observation.components.unshift(template);
 			};
@@ -103,8 +103,9 @@
 				template.flags.barrier=true;
 				template.where = {};
 				template.where.altitude = 0;
-				template.open=true;
+				$scope.closeOthers(template);
 				$scope.observation.components.unshift(template);
+
 			};
 
 			$scope.newConsequence = function(){
@@ -115,7 +116,7 @@
 				template.flags.final_consequence=true;
 				template.where = {};
 				template.where.altitude = 0;
-				template.open=true;
+				$scope.closeOthers(template);
 				$scope.observation.components.push(template);
 			};
 
@@ -129,6 +130,13 @@
 			//	component.attributes = Definitions.componentAttributesFromTags(component.tags);
 			};
 
+			$scope.closeOthers = function(component){
+
+				$scope.observation.components.forEach(function(c){
+					c.open=false;
+				});
+				component.open=true;
+			};
 
 		};
 
