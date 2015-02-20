@@ -80,6 +80,10 @@
 			this.componentTagsFromAttributes = function(attributes){
 				var tags = [];
 
+				if(angular.isUndefined(attributes)){
+					return tags;
+				}
+
 				if(attributes.gear_malfunction){
 					tags.push('Feilfunksjon');
 				}
