@@ -13,8 +13,7 @@ angular.module('resolve')
 			
 			directive.link = function($scope, element, attrs) {
 			
-				$scope.$watch('observation', function(newValue,
-						oldValue) {
+				$scope.$watch('observation', function(newValue, oldValue) {
 			
 					if (newValue && newValue._id) {
 			
