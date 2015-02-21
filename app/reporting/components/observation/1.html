@@ -12,14 +12,14 @@
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->
-		<span class="pull-left"> <span class="label label-default">{{observation.when}}</span> <span class="label"
+		<span class="pull-left"> <span class="label label-default">{{observation.when | date:'yyyy-MM-dd HH:mm'}}</span> <span class="label"
 			ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 				{{observationTypesArray[observation.type]}}</span> &nbsp;
 		</span>
 
 		<!-- Just show which version, click to show all versions? -->
-		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span> <span class="pull-left"><span class="label label-default">
-		<resolveclub clubid="observation.club"></resolveclub></span>&nbsp;</span>
+		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span> <span class="pull-left">
+		<span class="label label-default"><resolveclub clubid="observation.club"></resolveclub></span>&nbsp;</span>
 		<span class="pull-left"><span class="label label-default">Reporter: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span>
 		<span class="pull-left"><span class="label label-default">Owner: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
 

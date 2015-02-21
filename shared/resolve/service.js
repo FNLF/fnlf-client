@@ -3,7 +3,7 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 	
 	var urlBase = '/api/v1';
 	
-	console.log("Resolve SERVICE");
+	
 	this.getClub = function(clubid) {
 		
 		var request = $http({
@@ -16,7 +16,7 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 	
 	
 	this.getUser = function(userid) {
-		
+		console.log("Resolve SERVICE");
 		var request = $http({
 			method : "get",
 			url : urlBase + '/melwin/users/' + userid + '?projection={"firstname": 1, "lastname": 1}',
