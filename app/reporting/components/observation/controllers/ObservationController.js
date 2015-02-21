@@ -10,8 +10,8 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController',
-		function ($scope, ObservationService,$routeParams,$timeout) {
+		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http, $window) {
+			
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
 			$scope.observationChanges = false;
@@ -63,12 +63,18 @@
 			});
 		};
 
+		
 		/**
 		 * Triggers saved/unsaved label
 		 */
 		$scope.observationChanges = false;
 		$scope.$watch('observation', function(changedObs,oldObs) {
 			if(oldObs._id) {
+				
+				$window.onbeforeunload = function(){
+			        return 'You have unsaved data';
+			      };
+				
 				console.log("Changed");
 				console.log(oldObs);
 				console.log("->");
@@ -77,6 +83,54 @@
 			}
 		},true);
 
+		/******************************************************
+		 * File upload!
+		 *****************************************************/
+		//Watch changes on files
+//		$scope.$watch('files', function () {
+//	        $scope.upload($scope.files);
+//	    });
+		
+		
+		$scope.upload = function (files) {
+			
+			var urlBase = '/api/v1';
+			
+//			Only for patch/put
+			var config = {};
+		
+			if (files && files.length) {
+				
+				 for (var i = 0; i < files.length; i++) {
+				
+					 var file = files[i];
+					 var uploads = 0;
+					 $upload.upload({
+						 url: urlBase + '/files/',
+						 fields: {'ref': 'observation', 'ref_id': $scope.observation._id}, //additional form fields
+						 file: file,
+						 method: 'POST',
+						 fileFormDataName: 'file', //Assign file to field name
+						 headers: config.headers //Add etag
+						 }).progress(function (evt) {
+							 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+						 }).success(function (data, status, headers, config) {
+							 if(data._status == 'OK') {
+								 $scope.observation.files.push(data._id);
+							 }
+						 
+						 }).then(function(success, error, progress) {
+							//Only save when last upload returns
+							uploads++;
+						 	if(files.length == uploads) $scope.saveObservation();
+					 	});
+					 }
+				 
+				 };
+		 };
+		
+		
 		});
+	
 
 })();
