@@ -7,32 +7,20 @@ angular.module('resolve')
 			directive.template = '<a href="/app/profile/{{userid}}">{{firstname}} {{lastname}}</a>';
 			
 			directive.scope = {
-			
+				observation : '=observation',
 				userid : '='
 			};
 			
 			directive.link = function($scope, element, attrs) {
+				console.log("Resolve USER");
 			
-				$scope.$watch('observation', function(newValue,
-						oldValue) {
-			
-					if (newValue && newValue._id) {
-			
-						console.log("Resolve USER");
-			
-							ResolveService.getUser($scope.userid).then(
-									function(user) {
-			
-										console.log(user);
-										$scope.firstname = user.firstname;
-										$scope.lastname = user.lastname;
-									});
-						}
-						;
-			
+				ResolveService.getUser($scope.userid).then(
+					function(user) {
+
+						console.log(user);
+						$scope.firstname = user.firstname;
+						$scope.lastname = user.lastname;
 					});
-				};
-			
+				};					;
 				return directive;
-			
 		});
