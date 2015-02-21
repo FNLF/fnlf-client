@@ -13,12 +13,11 @@ angular.module('resolve').directive('resolveclub', function (ResolveService) {
 	
 	directive.link = function ($scope, element, attrs) {
 	
-				
-			ResolveService.getClub($scope.clubid).then(function(club) {
-				
-				$scope.name = club.name;
-			});
-		};
+		ResolveService.getClub($scope.clubid).then(function(club) {
+			
+			$scope.name = club.name;
+		});
+	};
 	
 	return directive;
 			
