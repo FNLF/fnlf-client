@@ -8,13 +8,14 @@ angular.module('resolve').directive('resolveclub', function (ResolveService) {
 	
 	directive.scope = {
 			
-			clubid: '=' 
+			clubid: '=',
 	};
 	
 	directive.link = function ($scope, element, attrs) {
 	
 				
 			ResolveService.getClub($scope.clubid).then(function(club) {
+				
 				$scope.name = club.name;
 			});
 		};
