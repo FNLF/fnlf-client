@@ -1,23 +1,15 @@
 <div class="">
-
-
 	<div class="col-xs-12 col-md-12">
-		<label ng-if="component.flags.incident" class="label label-info">Selve hendelsen</label>
-		<label ng-if="component.flags.root_cause" class="label label-info">Årsak</label>
-		<label ng-if="component.flags.final_consequence" class="label label-info">Konsekvens</label>
-
-		<h3>{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span></h3>
-
-
+		<label ng-if="component.flags.incident" class="label label-info">Selve hendelsen</label> <label ng-if="component.flags.root_cause" class="label label-info">Årsak</label> <label
+			ng-if="component.flags.final_consequence" class="label label-info">Konsekvens</label>
+		<h3>
+			{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
+		</h3>
 		<input type="text" class="form-control pull-right" ng-model="component.what" ng-show="component.editTitle">
-
-
-
 	</div>
 	<div class="col-xs-12">
-
 		<div class="btn-group-xs">
-			<label class="btn btn-default" ng-model="component.attributes.gear_malfunction" btn-checkbox>Feilfunksjon</label>
+			<label class="btn btn-default" ng-model="component.attributes.gear_malfunction" btn-checkbox>Feilfunksjon</label> 
 			<label class="btn btn-default" ng-model="component.attributes.violation" btn-checkbox>Regelbrudd</label>
 			<label class="btn btn-default" ng-model="component.attributes.wilfull" btn-checkbox>Med hensikt</label>
 			<label class="btn btn-default" ng-model="component.attributes.damage" btn-checkbox>Matriell skade</label>
@@ -26,59 +18,36 @@
 			<label class="btn btn-default" ng-model="component.attributes.death" btn-checkbox>Død</label>
 		</div>
 	</div>
-
-
+	
 	<div class="col-xs-12 col-md-6 col-lg-4">
 		<label>Faktorer</label>
 		<tagging model="component.tags" category="component" input="staticTags"></tagging>
 	</div>
-
+	
 	<div class="col-xs-12 col-md-6 col-lg-4">
 		<label>Involvert</label>
-		<ui-select multiple ng-model="component.involved" theme="bootstrap">
-			<ui-select-match placeholder="Velg blandt involverte personer...">{{$item.fullname}}</ui-select-match>
-			<ui-select-choices repeat="person in persons track by person.id">
-				{{person.fullname}}
-			</ui-select-choices>
-		</ui-select>
+		<ui-select multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blandt involverte personer...">{{$item.fullname}}</ui-select-match>
+		<ui-select-choices repeat="person in persons track by person.id"> {{person.fullname}} </ui-select-choices> </ui-select>
 	</div>
-
-
-
+	
 	<div class="col-xs-8 col-md-4 col-lg-3">
 		<label>Sted eller situasjon</label>
 		<tagging model="component.where.at" category="where-at" input="['På pakkematta','I manifest', 'I flyet','I frittfall','I skjermåpning','Under skjerm','I landingen','Etter landingen']"></tagging>
 	</div>
-
+	
 	<div class="col-xs-4 col-md-2 col-lg-1">
-		<label>Høyde</label>
-		<input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
+		<label>Høyde</label> <input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
 	</div>
-
-
+	
 	<div class="clearfix"></div>
-
-
 	<div class="col-xs-12">
-		<label>Fritekst</label>
-
-		<input type="text" ng-model="component.how" class="form-control"></textarea>
+		<label>Fritekst</label> <input type="text" ng-model="component.how" class="form-control">
+		</textarea>
 	</div>
-
-
-
+	
 	<div class="pull-right">
 		<br>
-		<button type="button" class="btn btn-primary" ng-click="deleteComponent(component)">
-			Slett komponent
-		</button>
-
+		<button type="button" class="btn btn-primary" ng-click="deleteComponent(component)">Slett komponent</button>
 	</div>
 	<div class="clearfix"></div>
-
-
 </div>
-
-
-
-
