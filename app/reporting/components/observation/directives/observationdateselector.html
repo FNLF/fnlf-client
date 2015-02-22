@@ -1,13 +1,15 @@
 <div>
-
 	<div class="input-group">
-
-		<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="observation.when"
-			   is-open="opened" datepicker-options="dateOptions"
-			   ng-required="true" close-text="Close"/>
-        	      <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i
-						class="fa fa-calendar fa-fw"></i></button>
-              </span>
+		<datetimepicker 
+		ng-model="observation.when" 
+		min-date="minDate" 
+		max-date="maxDate" 
+		starting-day="1"
+		hour-step="hstep" 
+		minute-step="mstep" 
+		show-meridian="false" 
+		date-format="yyyy-MM-dd" 
+		date-options="dateOptions" 
+		readonly-time="false"></datetimepicker>
 	</div>
 </div>
