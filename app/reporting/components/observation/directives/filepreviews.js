@@ -16,6 +16,7 @@ angular.module('reportingApp')
 	
 	directive.scope = {
 		observation: '=',
+		save: '&',
 	};
 	
 	directive.transcluded = true;
@@ -68,6 +69,18 @@ angular.module('reportingApp')
 
 		};
 		
+		$scope.removeFile = function(objectid) {
+			
+			var index = $scope.observation.files.indexOf(objectid);
+			
+			if (index > -1) {
+				$scope.observation.files.splice(index, 1);
+				$scope.fileAside.hide();
+				$scope.save(); //Calls $scope.saveObservation()
+			};
+			
+		};
+		
 		
 		
 		function handleError(response) {
@@ -88,8 +101,9 @@ angular.module('reportingApp')
 				//Full size images are BIG 
 				//$scope.filesrc = 'data:'+response.file.content_type+';charset=utf8;base64,'+response.file.file;
 				$scope.filesrc = 'data:'+response.mimetype+';charset=utf8;base64,'+response.src;
+			    $scope.fileid = objectid;
 			    
-				$scope.myAside = $aside({
+				$scope.fileAside = $aside({
 			        scope: $scope,
 			        title: 'Filvisning',
 			        //content: 'My Content', //Static custom content
@@ -108,7 +122,7 @@ angular.module('reportingApp')
 
 		
 	directive.link = function($scope, element, attrs) {
-		
+				
 		$scope.$watch('observation',function(newValue,oldValue) {
 			
 			if(newValue) {
