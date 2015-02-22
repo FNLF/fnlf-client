@@ -30,9 +30,6 @@
 			$scope.createObservation = function(){
 				console.log("Create");
 				
-				var club = $scope.observation.club;
-				console.log($scope.observation.when);
-				$scope.observation.club = club.id;
 				//if(club.ci) $scope.observation.organization.ci = club.ci;
 				//if(club.ot) $scope.observation.organization.ot = club.ot;
 				
