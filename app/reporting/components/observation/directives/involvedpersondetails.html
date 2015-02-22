@@ -7,7 +7,7 @@
 		
 
 	<div class="row well" ng-repeat="person in observation.involved">
-		<h3 ng-init="getUserDetails(person)">{{person.fullname}}<button class="btn btn-primary pull-right" ng-init="isCollapsed=true" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Mer' : 'Lukk'}}</button></h3>
+		<h3 ng-init="getUserDetails(person)"><resolveuser userid="person.id"></resolveuser><button class="btn btn-primary pull-right" ng-init="isCollapsed=true" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Mer' : 'Lukk'}}</button></h3>
 
 	<div collapse="isCollapsed">
 
@@ -36,13 +36,13 @@
 			<strong>Kjennelse:</strong><br />
 			<div class="checkbox">
 	  			<label>
-		    		<input type="checkbox" value="" ng-model="verdict.fu">
+		    		<input type="checkbox" value="" ng-model="person.verdict.fu">
 		   	 		Farlig Ukontrollert (FU)
 	  			</label>
 			</div>
 			<div class="checkbox">
 	  			<label>
-		    		<input type="checkbox" value="" ng-model="verdict.ph">
+		    		<input type="checkbox" value="" ng-model="person.verdict.ph">
 		   	 		Permanent Hoppforbud
 	  			</label>
 			</div>
