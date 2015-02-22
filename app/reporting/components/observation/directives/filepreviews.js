@@ -111,7 +111,7 @@ angular.module('reportingApp')
 			        contentTemplate: '/app/reporting/components/observation/directives/filepreviews.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
-			        container: 'body',
+			        container: false,
 			        animation: 'am-slide-left',
 			        });  
 			 });
