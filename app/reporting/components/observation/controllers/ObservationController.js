@@ -10,7 +10,9 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http, $window) {
+		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate) {
+			
+			DoNotReloadCurrentTemplate($scope);
 			
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};

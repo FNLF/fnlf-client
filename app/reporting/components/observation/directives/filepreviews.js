@@ -8,7 +8,7 @@
 
 
 angular.module('reportingApp')
-	   .directive('filepreviews', function (RestService, ObservationService, $aside) {
+	   .directive('filepreviews', function (RestService, ObservationService, $aside, $rootScope, $window) {
   
 	var directive = {};
 
@@ -33,7 +33,7 @@ angular.module('reportingApp')
 	};
 	
 	
-	directive.controller = function ($scope, $route, $http, $q) {
+	directive.controller = function ($scope, $route, $http, $q, $location) {
 
 		$scope.getFileList = function() {
 			 return $scope.files;
@@ -95,6 +95,9 @@ angular.module('reportingApp')
 			return (response.data);
 		};
 		
+		/**
+		 * Normal opening of aside
+		 */
 		$scope.openFileAside = function(objectid) {
 			
 			 $scope.fetchFullsizeFile(objectid).then(function(response) {
@@ -102,6 +105,8 @@ angular.module('reportingApp')
 				//$scope.filesrc = 'data:'+response.file.content_type+';charset=utf8;base64,'+response.file.file;
 				$scope.filesrc = 'data:'+response.mimetype+';charset=utf8;base64,'+response.src;
 			    $scope.fileid = objectid;
+			    
+			    $location.path('/observation/modal-route', false);
 			    
 				$scope.fileAside = $aside({
 			        scope: $scope,
@@ -111,11 +116,25 @@ angular.module('reportingApp')
 			        contentTemplate: '/app/reporting/components/observation/directives/filepreviews.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
-			        container: false,
+			        container: 'body',
+			        backdrop: false,
 			        animation: 'am-slide-left',
 			        });  
 			 });
 		};
+		
+		// Needs to manually close aside on back button
+		$rootScope.$on('$routeChangeStart', function(event, next, current) {
+		  if($scope.fileAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
+			  $scope.fileAside.hide(); 
+		  }
+		});
+		
+		$scope.$on('aside.hide', function() {
+		  if($location.path().indexOf('/modal-route') != -1) {
+			  $window.history.back();
+		};
+		});
 		
 		
 	};
