@@ -12,7 +12,8 @@
 			 'mgcrea.ngStrap.modal', 'mgcrea.ngStrap.aside',
 			 'fnlf-login', 'resolve',
 			 'angularFileUpload',
-			 'ui.bootstrap.datetimepicker'
+			 'ui.bootstrap.datetimepicker',
+			 'ngMap'
 			 /*,'ngMockE2E'*/
 			 ]);
 

@@ -99,7 +99,12 @@
 				<li class="list-group-item">
 					<h4 class="list-group-item-heading">Sted</h4>
 					<p class="list-group-item-text">
+						<a ng-init="isCollapsed=false" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Vis kart' : 'Lukk kart'}}</a>
+						
+						<div collapse="isCollapsed">
+						
 						<location-summary observation="observation"></location-summary>
+						</div>
 						<locationselector observation="observation"></locationselector>
 					</p>
 					<div class="clearfix"></div>
