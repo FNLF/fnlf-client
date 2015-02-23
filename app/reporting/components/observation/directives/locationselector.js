@@ -1,16 +1,32 @@
 
-angular.module('reportingApp').directive('locationSummary', function () {
+angular.module('reportingApp').directive('locationSummary', function ($window) {
 
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.template = '<a target="_blank" href="https://www.google.no/maps/@{{observation.location.north}},{{observation.location.east}},15z" <span>Kart</span>';
+	directive.template = function(tElement, tAttrs) {
+		//'<a target="_blank" href="https://www.google.no/maps/@{{observation.location.north}},{{observation.location.east}},15z" <span>Kart</span>';
+		return '<map center="[{{observation.location.north}}, {{observation.location.east}}]"> \
+				  <marker \
+				      position="[{{observation.location.north}}, {{observation.location.east}}]" \
+				      title="{{observation.location.name}}" \
+				      draggable="false" \
+				      visible="true" \
+				      ></marker> \
+				</map>';
+	};
 
 	directive.scope = {
 		observation: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
+		
+//		$scope.$on('mapInitialized', function (event, map) {
+//		    $window.setTimeout(function() {
+//		        map.setCenter(new google.maps.LatLng($scope.observation.north, $scope.observation.east));
+//		    }, 100);
+//		});
 
 	};
 
