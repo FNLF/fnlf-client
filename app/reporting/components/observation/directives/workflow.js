@@ -8,7 +8,7 @@
 
 
 angular.module('reportingApp')
-	   .directive('workflow', function (RestService, ObservationService, $modal, $sce, $compile, $rootScope, $route, $aside) {
+	   .directive('workflow', function (RestService, ObservationService, $aside, $rootScope, $window) {
   
 	var directive = {};
 
@@ -27,7 +27,7 @@ angular.module('reportingApp')
 	};
 	
 	
-	directive.controller = function ($scope, $route) {
+	directive.controller = function ($scope, $rootScope, $location, $aside) {
 
 		$scope.workflowTransition = function(action, comment) {
 			
@@ -41,6 +41,39 @@ angular.module('reportingApp')
 			//Re-render all directives
 			$scope.loadObservation(); //$route.reload();
 			};
+			
+			$scope.openWorkflowAside = function() {
+				$location.path('/observation/modal-route', false);
+				
+				  $scope.workflowAside = $aside({
+						scope: $scope,
+						title: $scope.title, 
+						//content: 'My Content', 
+						show: true,
+						contentTemplate: '/app/reporting/components/observation/directives/workflow.html',
+						template: '/shared/partials/aside.html',
+						placement: 'full-left',
+						container: 'body',
+						backdrop: 'static',
+						animation: 'am-slide-left',
+						});
+	
+			};
+			
+			// Needs to manually close aside on back button
+			$rootScope.$on('$routeChangeStart', function(event, next, current) {
+			  if($scope.workflowAside) {
+				  if($scope.workflowAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
+					  $scope.workflowAside.hide();
+				  }
+			  }
+			});
+			
+			$scope.$on('aside.hide', function() {
+			  if($location.path().indexOf('/modal-route') != -1) {
+				  $window.history.back();
+			  };
+			});
 		
 	};
 
@@ -120,22 +153,7 @@ angular.module('reportingApp')
 			
 	
 			
-			$scope.openWorkflowAside = function() {
-				
-				  $scope.workflowAside = $aside({
-						scope: $scope,
-						title: $scope.title, 
-						//content: 'My Content', 
-						show: true,
-						contentTemplate: '/app/reporting/components/observation/directives/workflow.html',
-						template: '/shared/partials/aside.html',
-						placement: 'full-left',
-						container: 'body',
-						animation: 'am-slide-left',
-						});
-	
-			};
-			
+
 	
 		
 			

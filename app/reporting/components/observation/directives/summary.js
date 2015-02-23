@@ -1,4 +1,4 @@
-angular.module('reportingApp').directive('summary', function (ObservationService, RestService, $aside) {
+angular.module('reportingApp').directive('summary', function (ObservationService, RestService, $aside, $rootScope, $window) {
 	var directive = {};
 
 	directive.restrict = 'E';
@@ -11,12 +11,11 @@ angular.module('reportingApp').directive('summary', function (ObservationService
 		observation: '='
 
 	};
-
-	directive.link = function ($scope, element, attrs) {
-
-
+	
+	directive.controller = function($scope, $rootScope, $location, $aside) {
 		$scope.openSummaryAside = function() {
-		    $scope.myAside = $aside({
+			$location.path('/observation/modal-route', false);
+		    $scope.summaryAside = $aside({
 		        scope: $scope,
 		        title: 'Datamodellen',
 		        //content: 'My Content', //Static custom content
@@ -25,9 +24,31 @@ angular.module('reportingApp').directive('summary', function (ObservationService
 		        template: '/shared/partials/aside.html',
 		        placement: 'full-left',
 		        container: 'body',
+		        backdrop: 'static',
 		        animation: 'am-slide-left'
 		        });   
 		};
+		// Needs to manually close aside on back button
+		$rootScope.$on('$routeChangeStart', function(event, next, current) {
+		  if($scope.summaryAside) {
+			if($scope.summaryAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
+			  $scope.summaryAside.hide();
+			}
+		  }
+		});
+		
+		$scope.$on('aside.hide', function() {
+		  if($location.path().indexOf('/modal-route') != -1) {
+			  $window.history.back();
+		  };
+		});
+		
+	};
+
+	directive.link = function ($scope, element, attrs) {
+
+		
+
 	};
 
 	return directive;
