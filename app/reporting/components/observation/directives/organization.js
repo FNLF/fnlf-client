@@ -19,7 +19,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 
 (function () {
 
-	var organization = function (RestService, $aside) {
+	var organization = function (RestService, $aside, $rootScope, $window) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -33,11 +33,11 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			observation: '='
 		};
 
-		directive.link = function ($scope, element, attrs) {
-
+		directive.controller = function ($scope, $rootScope, $location, $aside) {
 			
 			$scope.openOrganizationAside = function() {
-			    $scope.myAside = $aside({
+				$location.path('/observation/modal-route', false);
+			    $scope.organizationAside = $aside({
 			        scope: $scope,
 			        title: 'Hoppfeltorganiseringen',
 			        //content: 'My Content', //Static custom content
@@ -46,9 +46,32 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
+			        backdrop: 'static',
 			        animation: 'am-slide-left'
 			        });   
 			};
+			// Needs to manually close aside on back button
+			$rootScope.$on('$routeChangeStart', function(event, next, current) {
+			  if($scope.organizationAside) {
+				  if($scope.organizationAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
+					  $scope.organizationAside.hide(); 
+				  }
+			  }
+			});
+			
+			$scope.$on('aside.hide', function() {
+			  if($location.path().indexOf('/modal-route') != -1) {
+				  $window.history.back();
+			  };
+			});
+			
+			
+		};
+		
+		
+		directive.link = function ($scope, element, attrs) {
+
+			
 
 
 			$scope.personSelected = function ($item, $model) {
@@ -69,7 +92,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			$scope.tagTransform = function(itemText){
 
 				return {fullname:itemText,id:0};
-			}
+			};
 
 		};
 

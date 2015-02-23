@@ -33,7 +33,7 @@ angular.module('reportingApp')
 	};
 	
 	
-	directive.controller = function ($scope, $route, $http, $q, $location) {
+	directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q) {
 
 		$scope.getFileList = function() {
 			 return $scope.files;
@@ -117,7 +117,7 @@ angular.module('reportingApp')
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
-			        backdrop: false,
+			        backdrop: 'static',
 			        animation: 'am-slide-left',
 			        });  
 			 });
@@ -125,15 +125,17 @@ angular.module('reportingApp')
 		
 		// Needs to manually close aside on back button
 		$rootScope.$on('$routeChangeStart', function(event, next, current) {
-		  if($scope.fileAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
-			  $scope.fileAside.hide(); 
-		  }
+			if($scope.fileAside) {
+			  if($scope.fileAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
+				  $scope.fileAside.hide(); 
+			  }
+			}
 		});
 		
 		$scope.$on('aside.hide', function() {
 		  if($location.path().indexOf('/modal-route') != -1) {
 			  $window.history.back();
-		};
+		  };
 		});
 		
 		
