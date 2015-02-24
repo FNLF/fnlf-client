@@ -12,6 +12,7 @@
 	angular.module('reportingApp')
 		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate) {
 			
+			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
 			
 			var observationId = $routeParams.id;
@@ -46,7 +47,7 @@
 			];
 			
 			$scope.observationTypesArray = {sharing: 'Erfaringsdeling',
-											unwanted_act: 'Uheldig hendelse',
+											unsafe_act: 'Uønsket hendelse',
 											near_miss: 'Næruhell',
 											incident: 'Uhell',
 											accident: 'Ulykke'};
@@ -60,6 +61,7 @@
 				 */
 				$timeout(function(){
 					$scope.observationChanges = false;
+					$window.onbeforeunload = null;
 				},100);
 
 			});
@@ -74,7 +76,7 @@
 			if(oldObs._id) {
 				
 				$window.onbeforeunload = function(){
-			        return 'You have unsaved data';
+			        return 'You have unsaved observation data';
 			      };
 				
 				console.log("Changed");
