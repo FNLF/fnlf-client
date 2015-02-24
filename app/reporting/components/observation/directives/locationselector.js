@@ -48,7 +48,16 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 
 		$scope.locations = [];
 
+		$scope.formatter = function(obj){
+
+			if(Object.keys(obj).length==0){
+				return '';
+			}
+			return obj.name;
+		}
+
 		$scope.getLocations = function(name){
+
 			return LocationService.getPlaceNames(name).then(function(response){
 				if(response.data._items){
 
@@ -61,6 +70,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 				return {};
 			}
 			});
+
 		};
 		
 		$scope.getClubLocations = function() {
