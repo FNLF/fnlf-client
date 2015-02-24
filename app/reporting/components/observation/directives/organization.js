@@ -26,7 +26,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 		//directive.templateUrl = "components/observation/directives/organization.html";
 		directive.template = function(tElement, tAttrs) { 
 			
-			return '<button type="button" class="btn btn-default pull-right" ng-click="openOrganizationAside()"><i class="fa fa-plus fa-fw"></i>Endre Organisasjon</button>';
+			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openOrganizationAside()"><i class="fa fa-plus fa-fw"></i>Endre Organisasjon</button>';
 		};
 
 		directive.scope = {
