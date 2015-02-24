@@ -4,7 +4,7 @@ angular.module('reportingApp').directive('summary', function (ObservationService
 	directive.restrict = 'E';
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<button type="button" class="btn btn-default pull-right" ng-click="openSummaryAside()"><i class="fa fa-eye fa-fw"></i>Se datamodell</button>';
+		return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openSummaryAside()"><i class="fa fa-eye fa-fw"></i>Se datamodell</button>';
 	};
 
 	directive.scope = {

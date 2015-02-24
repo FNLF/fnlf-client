@@ -48,7 +48,7 @@
 		
 		directive.template = function(tElement, tAttrs) { 
 			
-			return '<button type="button" class="btn btn-default pull-right" ng-click="openIncidentAside()"><i class="fa fa-plus fa-fw"></i>Endre observasjonsforløp</button>';
+			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openIncidentAside()"><i class="fa fa-plus fa-fw"></i>Endre observasjonsforløp</button>';
 		};
 
 		directive.scope = {
