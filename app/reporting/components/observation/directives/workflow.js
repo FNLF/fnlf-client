@@ -21,7 +21,7 @@ angular.module('reportingApp')
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '{{observationChanges}}<button ng-disabled="observationChanges" tooltip-placement="top" tooltip="{{btn_descr}}" type="button" class="btn btn-{{tt}}" ng-click="openWorkflowAside()"><i class="fa fa-random fa-fw"></i>{{btn_title}}</button>';
+		return '<button ng-disabled="observationChanges" tooltip-placement="top" tooltip="{{btn_descr}}" type="button" class="btn btn-{{tt}}" ng-click="openWorkflowAside()"><i class="fa fa-random fa-fw"></i>{{btn_title}}</button>';
 	};
 	
 	
