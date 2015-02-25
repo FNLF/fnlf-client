@@ -97,11 +97,15 @@
 			 */
 
 			this.getTags = function(group){
-				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}	');
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}&sort=-freq');
+			};
+
+			this.getMostPopularTags = function(group){
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}&sort=-freq&max_results=6');
 			};
 
 			var getExistingTags = function(tag,group){
-				return $http.get(urlBase + '/tags/?where={"tag":"'+tag+'"}	');
+				return $http.get(urlBase + '/tags/?where={"tag":"'+tag+'","group":"'+group+'"}');
 			};
 
 			this.addTag = function(tag,group){
@@ -112,10 +116,12 @@
 							$http.post(urlBase + '/tags', {tag: tag, group: group});
 						} else {
 							console.log("Incrementing tag " + tag + " freq");
-							$http.post(urlBase + '/tags/' + data._id, {tag: tag, group: group});
+							$http.post(urlBase + '/tags/freq/' + data._items[0]._id, {tag: tag, group: group});
 						}
 
 					});
+				}else{
+					console.log("Tag or group was undefined");
 				}
 
 			};
