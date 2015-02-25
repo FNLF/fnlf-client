@@ -5,6 +5,10 @@
 	<label>Id</label>
 	<pre>{{observation.id}}</pre>
 	<pre>{{observation._id}}</pre>
+	
+	<label>Created</label>
+	<pre>{{observation._created | date:'yyyy-MM-dd HH:mm'}}</pre>
+	
 	<label>Club</label>
 	<pre>{{observation.club | json}}</pre>
 
@@ -37,5 +41,5 @@
 
 	<label>Weather</label>
 	<pre>{{observation.weather | json}}</pre>
-
+	
 </div>
