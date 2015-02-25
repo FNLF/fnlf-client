@@ -1,7 +1,7 @@
 <div>
 
 	<ui-select multiple tagging ng-model="$parent.model" theme="bootstrap" on-select="onSelect($item, $model)">
-		<ui-select-match placeholder="Legg til tagger...">{{$item}}</ui-select-match>
+		<ui-select-match placeholder="Legg til {{noun}}...">{{$item}}</ui-select-match>
 		<ui-select-choices repeat="tag in tags | filter:$select.search">
 			{{tag}}
 		</ui-select-choices>
