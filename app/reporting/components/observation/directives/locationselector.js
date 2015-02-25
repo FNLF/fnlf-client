@@ -6,9 +6,9 @@ angular.module('reportingApp').directive('locationSummary', function ($window) {
 	directive.restrict = 'E';
 	directive.template = function(tElement, tAttrs) {
 		//'<a target="_blank" href="https://www.google.no/maps/@{{observation.location.north}},{{observation.location.east}},15z" <span>Kart</span>';
-		return '<map center="[{{observation.location.north}}, {{observation.location.east}}]"> \
+		return '<map center="{{observation.location.geo.coordinates}}"> \
 				  <marker \
-				      position="[{{observation.location.north}}, {{observation.location.east}}]" \
+				      position="{{observation.location.geo.coordinates}}" \
 				      title="{{observation.location.name}}" \
 				      draggable="false" \
 				      visible="true" \
@@ -54,7 +54,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 				return '';
 			}
 			return obj.name;
-		}
+		};
 
 		$scope.getLocations = function(name){
 
@@ -62,16 +62,15 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 				if(response.data._items){
 
 					var array = [].concat(response.data._items);
-					return array.map(function(st){
-						//@todo: Fix thos to match data from server with geojson!!!
+					return array.map(function(place){
 						
 						var obj = {};
 						
-						obj.municipality = st.municipality;
-						obj.county = st.county;
-						obj.name = st.name;
-						obj.geo = {coordinates: [st.geo.coordinates[0],st.geo.coordinates[1]], type: 'Point'};
-						obj.geo_type = st.geo_type;
+						obj.municipality = place.municipality;
+						obj.county = place.county;
+						obj.name = place.name;
+						obj.geo = {coordinates: [place.geo.coordinates[0],place.geo.coordinates[1]], type: 'Point'};
+						obj.geo_type = place.geo_type;
 						
 						return obj;
 					});
