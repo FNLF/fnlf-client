@@ -1,6 +1,6 @@
 <div>
 	<input type="text" typeahead-on-select="locationSelected($item, $model, $label)"
-		   typeahead-wait-ms=50
+		   typeahead-wait-ms=500
 		   ng-model="observation.location" placeholder="Stedsnavn"
 		   typeahead="l as l.name+' '+l.descr for l in getLocations($viewValue)"
 		   typeahead-input-formatter="formatter($model)"
