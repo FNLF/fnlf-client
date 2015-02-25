@@ -7,6 +7,10 @@
 			this.getClubs = function () {
 				return $http.get(urlBase + "/clubs?where={\"active\":true}"); //projection={\"id\": 1, \"name\": 1}");
 			};
+			
+			this.getClub = function (id) {
+				return $http.get(urlBase + "/clubs/" + id); //projection={\"id\": 1, \"name\": 1}");
+			};
 
 			this.getLicenses = function () {
 				return $http.get(urlBase + '/melwin/licenses');
