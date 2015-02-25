@@ -37,7 +37,7 @@
 			};
 
 			this.getAllObservations = function () {
-				return $http.get(urlBase + '/observations/');
+				return $http.get(urlBase + '/observations/?sort=-id');
 			};
 
 			this.getObservationComponentTemplates = function () {
