@@ -31,7 +31,7 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 		};
 
 		directive.scope = {
-			observation: '='
+			observation: '=',
 		};
 
 		directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q) {
@@ -107,7 +107,6 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 				return (request.then(handleSuccess, handleError));
 			};
 			
-			
 			function handleError(response) {
 				if (!angular.isObject(response.data) || !response.data.message) {
 					return ($q.reject("An unknown error occurred."));
@@ -127,20 +126,25 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 		directive.link = function ($scope, element, attrs) {
 			if(!$scope.observation.weather.auto) $scope.observation.weather['auto'] = {};
 			
+			
 			/** Change if club changes! **/
 			$scope.$watch('observation.club',function(newValue,oldValue) {
 				
-				if(newValue) {
-					/** Get closest airport if any from clubs - nb needs to be updated on club change!!! **/
-					$scope.setMetar('ento');
-					$scope.setTaf('ento');
-				}
+				if(newValue &&  newValue != oldValue) {
+					
+					RestService.getClub($scope.observation.club)
+					.success(function (response) {
+						$scope.setMetar(response.icao);
+						$scope.setTaf(response.icao);
+					});
+					
+				};
 			});
 			/** Change if location changes! **/
 			$scope.$watch('observation.location',function(newValue,oldValue) {
 				
-				if(newValue) {
-					$scope.setYr('vestfold','tønsberg','jarlsberg flyplass');
+				if(newValue && newValue != oldValue) {
+					$scope.setYr($scope.observation.location.county,$scope.observation.location.municipality,$scope.observation.location.name);
 				}
 			});
 			
