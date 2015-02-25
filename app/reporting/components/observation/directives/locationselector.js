@@ -64,7 +64,16 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 					var array = [].concat(response.data._items);
 					return array.map(function(st){
 						//@todo: Fix thos to match data from server with geojson!!!
-						return {name:st.name, descr:st.geo_type+', '+st.municipality +', ' + st.county ,north:st.geo.coordinates[0],east:st.geo.coordinates[1]};
+						
+						var obj = {};
+						
+						obj.municipality = st.municipality;
+						obj.county = st.county;
+						obj.name = st.name;
+						obj.geo = {coordinates: [st.geo.coordinates[0],st.geo.coordinates[1]], type: 'Point'};
+						obj.geo_type = st.geo_type;
+						
+						return obj;
 					});
 			}else{
 				return {};

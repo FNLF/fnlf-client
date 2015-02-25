@@ -84,7 +84,12 @@
 				<textarea class="form-control" rows="3" ng-model="observation.weather.manual.description" placeholder="Beskrivelse"></textarea>
 			</div>
 		</div>
-		
 	</form>
+	<div class="clearfix"></div>
+	{{observation.weather.auto.taf}}
+	{{observation.weather.auto.metar}}
+	{{observation.weather.auto.yr | json}}
+	
+	
 </div>
 <div class="clearfix"></div>
