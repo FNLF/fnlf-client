@@ -5,7 +5,7 @@
 </div>
 <div class="clearfix"></div>
 <br />
-<button class="btn btn-danger col-xs-12 col-md-4" ng-click="removeFile(fileid)">
+<button class="btn btn-danger col-xs-12 col-md-4" ng-confirm-message="Er du sikker at du vil slette bildet?" ng-confirm-click="removeFile(fileid)">
 	<i class="fa fa-times fa-fw"></i>Delete file
 </button>
 <div class="clearfix"></div>

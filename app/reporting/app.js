@@ -10,10 +10,12 @@
 			 //'ui.bootstrap.alert','ui.bootstrap.collapse','ui.bootstrap.datepicker', 'ui.bootstrap.typeahead',
 			 'angular-loading-bar', 
 			 'mgcrea.ngStrap.modal', 'mgcrea.ngStrap.aside',
-			 'fnlf-login', 'resolve',
+			 'fnlf-login', 
+			 'resolve',
 			 'angularFileUpload',
 			 'ui.bootstrap.datetimepicker',
-			 'ngMap'
+			 'ngMap',
+			 'angular-confirm'
 			 /*,'ngMockE2E'*/
 			 ]);
 
@@ -30,7 +32,7 @@
 
 		$rootScope.initialized = true;
 	});
-	
+ 
 	
 	/**
 	 * Aside/modal route and back button hack
