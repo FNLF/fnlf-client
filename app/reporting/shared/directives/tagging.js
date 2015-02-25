@@ -8,13 +8,19 @@
 
 		directive.scope = {
 			model: '=',
-			category: '=',
+			group: '@',
 			input: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
 
 			$scope.tags = $scope.input;
+
+			$scope.onSelect = function(item, model){
+				console.log("Onselect "+item);
+				RestService.addTag(item,$scope.group);
+			};
+
 
 		};
 
