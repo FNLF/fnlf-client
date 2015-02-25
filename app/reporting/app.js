@@ -15,7 +15,9 @@
 			 'angularFileUpload',
 			 'ui.bootstrap.datetimepicker',
 			 'ngMap',
-			 'angular-confirm'
+			 'angular-confirm',
+			 'ngTable',
+			 'truncate'
 			 /*,'ngMockE2E'*/
 			 ]);
 

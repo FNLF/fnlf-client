@@ -12,8 +12,8 @@
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->
-		<span class="pull-left"> <span class="label label-default">{{observation.when | date:'yyyy-MM-dd HH:mm'}}</span> <span class="label"
-			ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+		<span class="pull-left"> <span class="label label-default">{{observation.when | date:'yyyy-MM-dd HH:mm'}}</span> 
+		<span class="label"	ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 				{{observationTypesArray[observation.type]}}</span> &nbsp;
 		</span>
 

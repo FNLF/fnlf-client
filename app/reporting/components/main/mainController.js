@@ -9,11 +9,10 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location) {
+		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions) {
 
-
-			$scope.observation = {when:new Date()};
 			$scope.observations = {};
+			$scope.allObservations = {};
 
 			$scope.editObservation = function(_id){
 				console.log("Edit");
@@ -64,11 +63,37 @@
 					});
 
 			};
-
-
+			
+			$scope.getAllObservations = function(){
+				var userName = $rootScope.username;
+				RestService.getAllObservations()
+				.success(function(data){
+					$scope.allObservations = data._items;
+					
+					console.log($scope.allObservations);
+					
+					$scope.tableParams = new ngTableParams({
+				        page: 1,            // show first page
+				        count: 5           // count per page
+				    }, {
+				        total: $scope.allObservations.length, // length of data
+				        getData: function($defer, params) {
+				            $defer.resolve($scope.allObservations.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+				        }
+				    }); 
+					
+				});
+				
+			};
+			
 			$scope.goToPage = function (url) {
 				$location.path(url);
 			};
+			
+			//ng-table
+
+		    
+			
 		});
 
 })();
