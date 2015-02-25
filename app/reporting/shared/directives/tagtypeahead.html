@@ -1,0 +1,7 @@
+<div>
+
+	<input type="text" class="form-control"
+		   ng-model="$parent.model" placeholder="{{noun}}"
+		   typeahead="tag for tag in tags | filter:$viewValue "
+		   typeahead-on-select="onSelect($item, $model, $label)"  typeahead-editable="true" >
+</div>

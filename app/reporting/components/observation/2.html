@@ -11,12 +11,20 @@
 					<div ng-switch="ui">
 						<div ng-switch-when="tags">
 
+
+
 							<label class="control-label">Legg til tagger som beskriver observasjonen som helhet</label>
+							<p ng-init='testtags.bar=""'></p>
+
+
+							<p></p>
+							<populartags group="harnessTypes" noun="seletøy"></populartags>
 							<p></p>
 
-							<tagging model="observation.tags" group="observation" noun="X"></tagging>
+							<tagtypeahead model="testtags.bar" group="harnessTypes"  noun="seletøy" ></tagtypeahead>
 							<p></p>
-							<populartags group="observation" noun="tagger"></populartags>
+							<pre> {{testtags | json}}</pre>
+
 						</div>
 						<div ng-switch-when="component">
 							<observation-components-summary observation="observation"></observation-components-summary>
