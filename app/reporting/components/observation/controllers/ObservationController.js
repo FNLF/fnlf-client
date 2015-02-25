@@ -19,6 +19,8 @@
 			$scope.observation = {id:observationId};
 			$scope.observationChanges = false;
 
+			$scope.ui=$routeParams.ui;
+
 			$scope.loadObservation = function(){
 				ObservationService.getObservationById(observationId, function(obs){
 
