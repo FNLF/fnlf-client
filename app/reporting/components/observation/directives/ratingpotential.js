@@ -29,7 +29,7 @@ angular.module('reportingApp').directive('ratingPotential', function () {
 
 			$scope.ratingType = 'Potensiell';
 			
-			$scope.observation.rating.potential = $scope.observation.rating.potential || 0;
+			$scope.observation.rating.potential = $scope.observation.rating.potential || 1;
 			
 			$scope.hoveringOver = function(value) {
 			  	$scope.overStar = value;

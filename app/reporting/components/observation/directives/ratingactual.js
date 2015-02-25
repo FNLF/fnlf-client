@@ -33,7 +33,7 @@ angular.module('reportingApp').directive('ratingActual', function () {
 
 			$scope.ratingType = 'Faktisk';
 			
-			$scope.observation.rating.actual = $scope.observation.rating.actual || 0;
+			$scope.observation.rating.actual = $scope.observation.rating.actual || 1;
 			
 			$scope.hoveringOver = function(value) {
 			  	$scope.overStar = value;
