@@ -12,8 +12,8 @@ angular.module('reportingApp').directive('ratingActual', function () {
 			
 			return '{{ratingType}}&nbsp;&nbsp;&nbsp;&nbsp;: <rating ng-model="observation.rating.actual" max="10" readonly="false" state-on="\'fa fa-bullseye\'" state-off="\'fa fa-circle-o\'" on-hover="hoveringOver(value)" on-leave="overStar = null"> \
 					</rating> \
-					<span class="label" ng-class="{\'label-success\': percent<30, \'label-info\': percent>=30 && percent<50,\'label-warning\': percent>=50 && percent<70, \'label-danger\': percent>=70}" \
-					ng-show="overStar && !isReadonly">{{percent}}%</span>';
+					<span class="label" ng-class="{\'label-success\': overStar<3, \'label-info\': overStar>=3 && overStar<5,\'label-warning\': overStar>=5 && overStar<7, \'label-danger\': overStar>=7}" \
+					ng-show="overStar && !isReadonly">{{overStar}}</span>';
 		};
 
 		directive.scope = {
@@ -37,7 +37,6 @@ angular.module('reportingApp').directive('ratingActual', function () {
 			
 			$scope.hoveringOver = function(value) {
 			  	$scope.overStar = value;
-			  	$scope.percent = 100 * (value / 10);
 			};
 			  
 
