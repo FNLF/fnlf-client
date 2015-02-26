@@ -14,17 +14,27 @@
 
 		directive.link = function ($scope, element, attrs) {
 
+			$scope.onSelect = function(item, model){
+				RestService.addTag(item,$scope.group);
+			};
 
 			$scope.tags = [];
 			RestService.getTags($scope.group)
 				.success(function(data){
-					$scope.tags=data._items.map(function(t){return t.tag});
+					var allTags=data._items.map(function(t){return t.tag});
+
+					var tmp ={};
+					allTags.forEach(function(t){
+						tmp[t]=t;
+					});
+					Object.keys(tmp).forEach(function(k){
+						$scope.tags.push(tmp[k]);
+					});
+
+
 				});
 
-			$scope.onSelect = function(item, model){
-				console.log("Onselect "+item);
-				RestService.addTag(item,$scope.group);
-			};
+
 
 
 		};

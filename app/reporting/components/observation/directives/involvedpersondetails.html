@@ -75,13 +75,14 @@
 
 		<div ng-hide="hideHarnessForm">
 			<div class="form-group col-md-3 col-xs-6">
-				<label for="harnessType">Type seletøy</label>
-				<input type="text" class="form-control" id="harnessType"
-					   ng-model="person.gear.harnessType" placeholder="Type seletøy">
+				<label >Type seletøy</label>
+
+				<tagtypeahead model="person.gear.harnessType" noun="Type seletøy" group="harnessTypes"></tagtypeahead>
+
 			</div>
 			<div class="form-group col-md-3 col-xs-6">
 				<label for="harnessExperience">Erfaring seletøy</label>
-				<input type="text" class="form-control" id="harnessExperience"
+				<input type="number" class="form-control" id="harnessExperience"
 					   ng-model="person.gear.harnessExperience"
 					   placeholder="Erfaring seletøy">
 			</div>
@@ -92,20 +93,20 @@
 
 
 			<div class="form-group col-md-3 col-xs-6">
-				<label for="mainCanopyType">Type hovedskjerm</label>
-				<input type="text" class="form-control" id="mainCanopyType"
-					   ng-model="person.gear.mainCanopyType"
-					   placeholder="Type hovedskjerm">
+				<label >Type hovedskjerm</label>
+
+				<tagtypeahead model="person.gear.mainCanopyType" noun="Type hovedskjerm" group="maincanopies"></tagtypeahead>
+
 			</div>
 			<div class="form-group col-md-3 col-xs-6">
 				<label for="mainCanopyExperience">Erfaring hovedskjerm</label>
-				<input type="text" class="form-control" id="mainCanopyExperience"
+				<input type="number" class="form-control" id="mainCanopyExperience"
 					   ng-model="person.gear.mainCanopyExperience"
 					   placeholder="Erfaring hovedskjerm">
 			</div>
 			<div class="form-group col-md-3 col-xs-6">
 				<label for="mainCanopySize">Skjermstørrelse</label>
-				<input type="text" class="form-control" id="mainCanopySize"
+				<input type="number" class="form-control" id="mainCanopySize"
 					   ng-model="person.gear.mainCanopySize"
 					   placeholder="Skjermstørrelse">
 			</div>
@@ -113,19 +114,18 @@
 
 		</div>
 		<div class="col-xs-12"></div>
-		<div ng-if="observation.reserve">
+		<div>
 			<div>
 
 				<form role="form">
 					<div class="form-group col-md-3 col-xs-6">
-						<label for="reserveCanopyType">Type reserveskjerm</label>
-						<input type="text" class="form-control" id="reserveCanopyType"
-							   ng-model="person.gear.reserveCanopyType"
-							   placeholder="Type reserveskjerm">
+						<label>Type reserveskjerm</label>
+						<tagtypeahead model="person.gear.reserveCanopyType" noun="Type reserveskjerm" group="reserveCanopies"></tagtypeahead>
+
 					</div>
 					<div class="form-group col-md-3 col-xs-6">
 						<label for="reserveCanopySize">Skjermstørrelse</label>
-						<input type="text" class="form-control" id="reserveCanopySize"
+						<input type="number" class="form-control" id="reserveCanopySize"
 							   ng-model="person.gear.reserveCanopySize"
 							   placeholder="Skjermstørrelse">
 					</div>
@@ -133,42 +133,20 @@
 			</div>
 		</div>
 		<div class="col-xs-12"></div>
-		<div ng-if="observation.malfunction">
 
-			<div class="form-group col-md-3 col-xs-6">
-				<label for="malfunction">Feilfunksjon</label>
-				<input type="text" class="form-control" id="malfunction"
-					   ng-model="person.gear.malfunction"
-					   placeholder="Feilfunksjon tagging og kategorisering">
-			</div>
-
-		</div>
 		<div class="col-xs-12"></div>
-		<div ng-if="observation.aad">
+		<div>
 			<div class="form-group col-md-3 col-xs-6">
-				<label for="aadType">Type nødåpner</label>
-				<input type="text" class="form-control" id="aadType"
-					   ng-model="person.gear.aadType" placeholder="Type nødåpner">
+				<label>Type nødåpner</label>
+				<tagtypeahead model="person.gear.aadType" noun="Type nødåpner" group="aadType"></tagtypeahead>
 			</div>
 			<div class="form-group col-md-3 col-xs-6">
 				<label for="aadFireHeight">Fyringshøyde</label>
-				<input type="text" class="form-control" id="aadFireHeight"
+				<input type="number" class="form-control" id="aadFireHeight"
 					   ng-model="person.gear.aadFireHeight" placeholder="Fyringshøyde">
 			</div>
 		</div>
 		<div class="col-xs-12"></div>
-		<div ng-if="observation.injury">
-
-
-			<div class="form-group col-xs-12">
-				<label for="injuryDescription">Beskrivelse av skade</label>
-				<textarea rows="6" type="text" class="form-control" id="injuryDescription"
-						  ng-model="person.injury"
-						  placeholder="Beskriv skade"></textarea>
-			</div>
-
-
-		</div>
 	</div>
 </div>
 </div>
