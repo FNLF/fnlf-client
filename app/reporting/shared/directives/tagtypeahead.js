@@ -17,7 +17,7 @@
 			$scope.onSelect = function(item, model,label){
 				console.log("onSelect "+item+" "+model+" "+label);
 				RestService.addTag(item,$scope.group);
-				$scope.model=model;
+				$scope.model=item;
 			};
 
 			$scope.tags = [];

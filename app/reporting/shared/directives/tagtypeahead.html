@@ -1,7 +1,9 @@
 <div>
 
-	<input type="text" class="form-control"
-		   ng-model="$parent.model" placeholder="{{noun}}"
-		   typeahead="tag for tag in tags | filter:$viewValue "
-		   typeahead-on-select="onSelect($item, $model, $label)"  typeahead-editable="true" >
+	<ui-select tagging ng-model="$parent.model" theme="bootstrap" on-select="onSelect($item, $model)" >
+		<ui-select-match placeholder="Legg til {{noun}}...">{{$select.selected}}</ui-select-match>
+		<ui-select-choices repeat="tag in tags | filter:$select.search">
+			{{tag}}
+		</ui-select-choices>
+	</ui-select>
 </div>
