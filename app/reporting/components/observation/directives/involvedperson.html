@@ -1,0 +1,149 @@
+<div>
+	<div>
+		<div>
+
+			<div class="form-group col-xs-12">
+				<label>Lisenser registrert i MelWin <a
+						ng-click="editLicenses = !editLicenses">(Endre)</a>:</label><br>
+
+				<div ng-show="person.licenses.length == 0 && !editLicenses">Ingen lisenser registrert</div>
+				<div ng-show="!editLicenses">
+				<span ng-repeat="license in person.licenses.rights">
+					<span>{{license}} &nbsp;</span>
+				</span>
+				</div>
+				<div class="form-group col-md-3 col-xs-6" ng-show="editLicenses">
+                        <span ng-repeat="license in licensesFromMelwin">
+                            <label class="checkbox">
+								<input type="checkbox" ng-model="licensesSelected[license.id]"
+									   ng-checked="isChecked(license)" ng-value="license.id"/>
+								{{license.name}}
+							</label>
+                        </span>
+				</div>
+			</div>
+
+			<div class="form-group col-md-3 col-xs-6">
+				<strong>Kjennelse:</strong><br/>
+
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="" ng-model="person.verdict.fu">
+						Farlig Ukontrollert (FU)
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="" ng-model="person.verdict.ph">
+						Permanent Hoppforbud
+					</label>
+				</div>
+			</div>
+			
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="jumptype">Hopptype</label>
+				<select id="jumptype" class="form-control" data-placeholder="Velg hopptype"
+						ng-model="person.jumptypeSelected">
+					<option ng-repeat="jumptype in jumptypes track by jumptype.id" ng-value="jumptype.id">
+						{{jumptype.name}}
+					</option>
+				</select>
+
+				<tagging model="person.jumptypeTags" noun="hoppaktivitet" group="jumptype"></tagging>
+			</div>
+
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="years" class="control-label ">Antall år i sporten</label>
+				<input id="years" class="form-control" type="text" ng-model="person.yearsOfExperience"/>
+			</div>
+
+
+			<div class="form-group col-md-3 col-xs-6">
+				<label for="numberofjumps" class="control-label">Hopp totalt</label>
+				<input id="numberofjumps" class="form-control" type="text" ng-model="person.numberOfJumps"/>
+			</div>
+
+
+			<div class="col-xs-12"></div>
+
+			<div ng-hide="hideHarnessForm">
+				<div class="form-group col-md-3 col-xs-6">
+					<label>Type seletøy</label>
+
+					<tagtypeahead model="person.gear.harnessType" noun="Type seletøy"
+								  group="harnessTypes"></tagtypeahead>
+
+				</div>
+				<div class="form-group col-md-3 col-xs-6">
+					<label for="harnessExperience">Erfaring seletøy</label>
+					<input type="number" class="form-control" id="harnessExperience"
+						   ng-model="person.gear.harnessExperience"
+						   placeholder="Erfaring seletøy">
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+			<div ng-hide="hideMainCanopyForm">
+
+
+				<div class="form-group col-md-3 col-xs-6">
+					<label>Type hovedskjerm</label>
+
+					<tagtypeahead model="person.gear.mainCanopyType" noun="Type hovedskjerm"
+								  group="maincanopies"></tagtypeahead>
+
+				</div>
+				<div class="form-group col-md-3 col-xs-6">
+					<label for="mainCanopyExperience">Erfaring hovedskjerm</label>
+					<input type="number" class="form-control" id="mainCanopyExperience"
+						   ng-model="person.gear.mainCanopyExperience"
+						   placeholder="Erfaring hovedskjerm">
+				</div>
+				<div class="form-group col-md-3 col-xs-6">
+					<label for="mainCanopySize">Skjermstørrelse</label>
+					<input type="number" class="form-control" id="mainCanopySize"
+						   ng-model="person.gear.mainCanopySize"
+						   placeholder="Skjermstørrelse">
+				</div>
+
+
+			</div>
+			<div class="col-xs-12"></div>
+			<div>
+				<div>
+
+					<form role="form">
+						<div class="form-group col-md-3 col-xs-6">
+							<label>Type reserveskjerm</label>
+							<tagtypeahead model="person.gear.reserveCanopyType" noun="Type reserveskjerm"
+										  group="reserveCanopies"></tagtypeahead>
+
+						</div>
+						<div class="form-group col-md-3 col-xs-6">
+							<label for="reserveCanopySize">Skjermstørrelse</label>
+							<input type="number" class="form-control" id="reserveCanopySize"
+								   ng-model="person.gear.reserveCanopySize"
+								   placeholder="Skjermstørrelse">
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-xs-12"></div>
+
+			<div class="col-xs-12"></div>
+			<div>
+				<div class="form-group col-md-3 col-xs-6">
+					<label>Type nødåpner</label>
+					<tagtypeahead model="person.gear.aadType" noun="Type nødåpner" group="aadType"></tagtypeahead>
+				</div>
+				<div class="form-group col-md-3 col-xs-6">
+					<label for="aadFireHeight">Fyringshøyde</label>
+					<input type="number" class="form-control" id="aadFireHeight"
+						   ng-model="person.gear.aadFireHeight" placeholder="Fyringshøyde">
+				</div>
+			</div>
+			<div class="col-xs-12"></div>
+		</div>
+	</div>
+</div>
+

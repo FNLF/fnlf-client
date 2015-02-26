@@ -45,3 +45,49 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 
 	return directive;
 });
+
+
+angular.module('reportingApp').directive('involvedperson', function (RestService) {
+	var directive = {};
+
+	directive.restrict = 'E';
+	directive.templateUrl = "components/observation/directives/involvedperson.html";
+
+	directive.scope = {
+		person: '=',
+		jumptypes: '=',
+		licensesFromMelwin: '='
+
+	};
+
+	directive.link = function ($scope, element, attrs) {
+
+		RestService.getUserDetails($scope.person.id)
+			.success(function(data){
+				$scope.person.membership = data.membership;
+				$scope.person.licenses = data.licenses;
+			});
+
+
+	};
+
+	return directive;
+});
+
+angular.module('reportingApp').directive('involvedpersonsummary', function (RestService) {
+	var directive = {};
+
+	directive.restrict = 'E';
+	directive.templateUrl = "components/observation/directives/involvedpersonsummary.html";
+
+	directive.scope = {
+		person: '='
+	};
+
+	directive.link = function ($scope, element, attrs) {
+
+
+	};
+
+	return directive;
+});

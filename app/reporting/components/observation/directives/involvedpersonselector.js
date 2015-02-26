@@ -3,7 +3,7 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.template = '<table class="table"><tr><td><span ng-repeat="p in observation.involved"><span>{{p.fullname}} </span> &nbsp;&nbsp;</span> </td></tr></table>';
+	directive.template = '<table class="table"><tr><td><span ng-repeat="person in observation.involved"><involvedpersonsummary person="person"></involvedpersonsummary> &nbsp;</span> </td></tr></table>';
 
 	directive.scope = {
 		observation: '='
@@ -64,7 +64,12 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 				  $window.history.back();
 			  };
 			});
-			
+
+			$scope.onSelect = function(item,model){
+				console.log("OnSelect "+item)
+				item.open=true;
+			}
+
 		}
 
 		directive.link = function ($scope, element, attrs) {
