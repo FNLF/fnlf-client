@@ -1,10 +1,15 @@
 <span>
-	<resolveuser userid="person.id"></resolveuser>&nbsp;
+	<span class="col-xs-2">
+		<resolveuser userid="person.id"></resolveuser>&nbsp;
+	</span>
 	<!--<span>{{person.jumptypeSelected}}</span>&nbsp;-->
-	<span ng-repeat="tag in person.jumptypeTags"><span class="label label-info">{{tag}}&nbsp;</span>&nbsp;</span>
-	<span class="label label-default">{{person.gear.harnessType}}</span>&nbsp;
-	<span class="label label-default">{{person.gear.mainCanopyType}}</span>&nbsp;
-	<span class="label label-info">Antall hopp: {{person.numberOfJumps}}</span>&nbsp;
-	<span class="label label-info">År i sporten: {{person.yearsOfExperience}}</span>&nbsp;
+
+	<span class="label label-default col-xs-1">{{person.gear.harnessType}}</span>&nbsp;
+	<span class="label label-default col-xs-1">{{person.gear.mainCanopyType}}</span>&nbsp;
+	<span class="label label-success col-xs-1" ng-show="person.numberOfJumps">{{person.numberOfJumps}} hopp</span>&nbsp;
+	<span class="label label-success col-xs-1" ng-show="person.yearsOfExperience">{{person.yearsOfExperience}} år i sporten</span>&nbsp;
+
+	<span ng-repeat="tag in person.jumptypeTags"><span class="label label-info col-xs-1">{{tag}}&nbsp;</span>&nbsp;</span>
+
 </span>
 
