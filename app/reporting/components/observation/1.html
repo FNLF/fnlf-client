@@ -104,8 +104,9 @@
 				<p class="list-group-item-text">
 					<a ng-init="isCollapsed=false" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Vis kart' : 'Lukk kart'}}</a>
 				<div collapse="isCollapsed">
-
+				<div style="margin-left:1rem;margin-right:1rem">
 					<location-summary observation="observation"></location-summary>
+				</div>
 				</div> <locationselector observation="observation"></locationselector>
 				</p>
 				<div class="clearfix"></div>
