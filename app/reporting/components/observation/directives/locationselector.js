@@ -53,7 +53,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 			if(Object.keys(obj).length==0){
 				return '';
 			}
-			return obj.name;
+			return obj.name+' '+obj.geo_type+' '+obj.municipality;
 		};
 
 		$scope.getLocations = function(name){
