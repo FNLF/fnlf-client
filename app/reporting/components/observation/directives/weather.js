@@ -132,18 +132,20 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 				
 				if(newValue &&  newValue != oldValue) {
 					
-					RestService.getClub($scope.observation.club)
-					.success(function (response) {
-						$scope.setMetar(response.icao);
-						$scope.setTaf(response.icao);
-					});
+					
 					
 				};
 			});
 			/** Change if location changes! **/
 			$scope.$watch('observation.location',function(newValue,oldValue) {
 				
-				if(newValue && newValue != oldValue) {
+				if(newValue && newValue.nickname != oldValue.nickname) {
+					//Reset
+					$scope.observation.weather.auto = {};
+					
+					$scope.setMetar($scope.observation.location.icao);
+					$scope.setTaf($scope.observation.location.icao);
+					
 					$scope.setYr($scope.observation.location.county,$scope.observation.location.municipality,$scope.observation.location.name);
 				}
 			});
