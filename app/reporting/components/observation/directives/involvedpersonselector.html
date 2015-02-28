@@ -1,4 +1,4 @@
-<div>
+<div class="col-xs-12 col-md-12">
 	<label>Velg involvert(e) person(er):</label><br>
 
 	<ui-select multiple tagging="tagTransform" ng-model="observation.involved" theme="bootstrap" on-select="onSelect($item, $model)">
@@ -9,5 +9,9 @@
 		</ui-select-choices>
 	</ui-select>
 </div>
-<p></p>
-<involvedpersondetails observation="observation"></involvedpersondetails>
+<div class="clearfix"></div>
+<br />
+<div class="col-xs-12 col-md-12">
+	<involvedpersondetails observation="observation"></involvedpersondetails>
+</div>
+<div class="clearfix"></div>
