@@ -48,7 +48,7 @@
 		
 		directive.template = function(tElement, tAttrs) { 
 			
-			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openIncidentAside()"><i class="fa fa-plus fa-fw"></i>Endre hendelsesforløp</button>';
+			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openIncidentAside()"><i class="fa fa-plus fa-fw"></i>Endre hendinger på tidslinja</button>';
 		};
 
 		directive.scope = {
@@ -61,7 +61,7 @@
 				$location.path('/observation/modal-route', false);
 			    $scope.incidentAside = $aside({
 			        scope: $scope,
-			        title: 'Hendelsesforløp',
+			        title: 'Hendinger på tidslinja',
 			        //content: 'My Content', //Static custom content
 			        show: true,
 			        contentTemplate: '/app/reporting/components/component/directives/observationComponents.html',
