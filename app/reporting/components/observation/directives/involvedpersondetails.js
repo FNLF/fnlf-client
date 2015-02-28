@@ -62,13 +62,13 @@ angular.module('reportingApp').directive('involvedperson', function (RestService
 
 	directive.link = function ($scope, element, attrs) {
 
-		RestService.getUserDetails($scope.person.id)
-			.success(function(data){
-				$scope.person.membership = data.membership;
-				$scope.person.licenses = data.licenses;
-			});
-
-
+		if($scope.person.id){
+			RestService.getUserDetails($scope.person.id)
+				.success(function(data){
+					$scope.person.membership = data.membership;
+					$scope.person.licenses = data.licenses;
+				});
+		}
 	};
 
 	return directive;
