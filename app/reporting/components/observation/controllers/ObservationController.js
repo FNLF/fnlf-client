@@ -10,7 +10,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate) {
+		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -22,6 +22,7 @@
 			$scope.ui=$routeParams.ui;
 
 			$scope.loadObservation = function(){
+
 				ObservationService.getObservationById(observationId, function(obs){
 
 					$scope.observation = obs;
@@ -31,10 +32,18 @@
 						$scope.observationChanges = false;
 					},10);
 				});
-
 			};
 			$scope.loadObservation();
+			
+			$rootScope.loadObservation = function() {
+				$scope.loadObservation();
+			};
+			
+			$rootScope.saveObservation = function() {
+				$scope.saveObservation();
+			};
 
+			
 			var ItemType = function ItemType(type,label){
 				this.type=type;
 				this.label=label;
@@ -55,6 +64,7 @@
 											accident: 'Ulykke'};
 
 		$scope.saveObservation = function () {
+
 			ObservationService.updateObservation($scope.observation,function(updated){
 				$scope.observation = updated;
 				ObservationService.initObservation($scope.observation);
