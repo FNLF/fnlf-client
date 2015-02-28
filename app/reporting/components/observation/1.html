@@ -102,12 +102,12 @@
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Sted</h4>
 				<p class="list-group-item-text">
-					<a ng-init="isCollapsed=false" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Vis kart' : 'Lukk kart'}}</a>
-				<div collapse="isCollapsed">
-				<div style="margin-left:1rem;margin-right:1rem">
-					<location-summary observation="observation"></location-summary>
-				</div>
-				</div> <locationselector observation="observation"></locationselector>
+<!-- 					<a ng-init="isCollapsed=false" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Vis kart' : 'Lukk kart'}}</a> -->
+<!-- 				<div collapse="isCollapsed"> -->
+
+<!-- 					<location-summary observation="observation"></location-summary> -->
+<!-- 				</div> <locationselector observation="observation"></locationselector> -->
+				<location observation="observation"></location>
 				</p>
 				<div class="clearfix"></div>
 			</li>
