@@ -1,13 +1,22 @@
 <div class="">
 	<div class="col-xs-12 col-md-12">
-		<label ng-if="component.flags.incident" class="label label-info">Selve hendelsen</label> <label ng-if="component.flags.root_cause" class="label label-info">Årsak</label> <label
-			ng-if="component.flags.final_consequence" class="label label-info">Konsekvens</label>
 		<h3>
 			{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
 		</h3>
 		<input type="text" class="form-control pull-right" ng-model="component.what" ng-show="component.editTitle">
 	</div>
-	<div class="col-xs-12">
+
+	<div class="col-xs-12 col-md-6">
+		<div class="btn-group-xs">
+			<label class="btn btn-default" ng-model="component.flags.root_cause" btn-checkbox>Rotårsak</label>
+			<label class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
+			<label class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hending</label>
+			<label class="btn btn-default" ng-model="component.flags.final_consequence" btn-checkbox>Konsekvens</label>
+		</div>
+	</div>
+
+
+	<div class="col-xs-12 col-md-6">
 		<div class="btn-group-xs">
 			<label class="btn btn-default" ng-model="component.attributes.gear_malfunction" btn-checkbox>Feilfunksjon</label> 
 			<label class="btn btn-default" ng-model="component.attributes.violation" btn-checkbox>Regelbrudd</label>
