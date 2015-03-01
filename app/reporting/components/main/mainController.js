@@ -68,10 +68,14 @@
 				var userName = $rootScope.username;
 				RestService.getAllObservations()
 				.success(function(data){
-					$scope.allObservations = data._items;
-					
-					console.log($scope.allObservations);
-					
+
+					$scope.allObservations = data._items.filter(function(it){
+						if(it.id){
+							return true;
+						}
+						return false;
+					});
+
 					$scope.tableParams = new ngTableParams({
 				        page: 1,            // show first page
 				        count: 5           // count per page
