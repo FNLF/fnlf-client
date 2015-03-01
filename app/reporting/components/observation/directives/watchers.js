@@ -26,7 +26,7 @@ angular.module('reportingApp')
 	};
 	
 	
-	directive.controller = function ($scope, $route, $http, $q) {
+	directive.controller = function ($scope, $route, $http, $q, $rootScope) {
 
 		var urlBase = '/api/v1';
 		
@@ -44,7 +44,7 @@ angular.module('reportingApp')
 				});
 			}
 			
-			$scope.loadObservation();
+			$rootScope.loadObservation();
 			//$route.reload();
 			
 		
