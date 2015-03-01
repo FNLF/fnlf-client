@@ -43,10 +43,6 @@ angular.module('reportingApp')
 					$scope.setWatching();
 				});
 			}
-			
-			$rootScope.loadObservation();
-			//$route.reload();
-			
 		
 		};
 		
