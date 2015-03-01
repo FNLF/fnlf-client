@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ObservationController">
+<div ng-controller="ObservationController">
 	<div ng-if="observation._id">
 
 		<!-- Placeholders for status stuff -->
@@ -6,26 +6,26 @@
 		<span class="pull-right"><watchers observation="observation"></watchers></span>
 
 		<!-- Workflows, show current status. Click dropdown show actions -->
-		<span class="pull-right"><workflow observation="observation"></workflow>&nbsp;</span>
+		<span class="pull-right"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
 
 		<h1>OBS #{{observation.id}}</h1>
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->
-		<span class="pull-left"> <span class="label label-default">{{observation.when}}</span> <span class="label"
-			ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+		<span class="pull-left"> <span class="label label-default">{{observation.when | date:'yyyy-MM-dd HH:mm'}}</span> 
+		<span class="label"	ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 				{{observationTypesArray[observation.type]}}</span> &nbsp;
 		</span>
 
 		<!-- Just show which version, click to show all versions? -->
-		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span> 
-		<span class="pull-left"><span class="label label-default"><resolveclub clubid="observation.club"></resolveclub></span>&nbsp;</span> 
-		<span class="pull-left"><span class="label label-default">Reporter: <resolveuser userid="observation.reporter">{{observation.reporter}}</resolveuser></span>&nbsp;</span> 
-		<span class="pull-left"><span class="label label-default">Owner: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
+		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span> <span class="pull-left"> <span class="label label-default"><resolveclub
+					clubid="observation.club"></resolveclub></span>&nbsp;
+		</span> <span class="pull-left"><span class="label label-default">Reporter: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span> <span class="pull-left"><span
+			class="label label-default">Owner: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
 
 		<!-- If changes, show warning include a "leaving page are you sure?"  -->
 		<span ng-if="observationChanges" class="pull-left"><span ng-click="saveObservation()" class="label label-danger">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>
-		
+
 
 
 		<!-- And replicate the tags here!
@@ -36,100 +36,144 @@
 
 		<div class="clearfix"></div>
 		<br />
-		<div class="col-xs-12">
-			<!-- Ratings -->
-			<strong>Alvorlighetsgrad:</strong><br />
-			<rating-actual observation="observation"></rating-actual>
-			<rating-potential observation="observation"></rating-potential>
-		</div>
-		<!--  Observation type and tags -->
-		<div class="col-xs-12">
-			<observationtype observation="observation"></observationtype>
-		</div>
-
-<div class="col-xs-12">
-	<div class="clearfix"><br /></div>
-<div class="panel panel-default">
-	<div class="panel-body">
-		<button class="btn btn-block btn-primary"><i class="fa fa-plus fa-fw"></i> Legg til fil</button>
-	</div>
-</div>
-
-</div>
-
-		<div class="col-xs-12">
 
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Sted
+
+		<!-- EDITABLE -->
+
+		<!-- LISTBOX -->
+		<div class="list-group" style="padding: 50px -15px; margin-left: -15px; margin-right: -15px;">
+
+			<li class="list-group-item">
+				<p class="list-group-item-text">
+				<div class="col-xs-12  col-md-12">
+				<label class="control-label">Tittel</label>
+				<tagging model="observation.tags" group="observation" noun="ord"></tagging>
+					<populartags group="observation" noun="ord"></populartags>
 				</div>
-				<div class="panel-body">
+				</p>
+				<div class="clearfix"></div>
+			</li>
 
-					<div class="col-xs-12">
-						<location-summary observation="observation"></location-summary>
+
+			<li class="list-group-item">
+				<p class="list-group-item-text">
+				<div class="col-xs-12 col-md-4">
+					<observationdateselector observation="observation"></observationdateselector>
+					<clubselector observation="observation"></clubselector>
+				</div>
+
+				<div class="col-xs-12 col-md-3 col-md-offset-1">
+					<observationtype observation="observation"></observationtype>
+				</div> <!-- Ratings -->
+				<div class="col-xs-12 col-md-4">
+
+					<div class="form-group">
+						<label class="control-label">Alvorlighetsgrad</label><br />
+						<rating-actual observation="observation"></rating-actual>
+						<br />
+						<rating-potential observation="observation"></rating-potential>
 					</div>
-					<div class="col-xs-12">
-						<locationselector observation="observation"></locationselector>
-					</div>
 				</div>
-			</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Organisasjon
+
+			<li class="list-group-item">
+				<p class="list-group-item-text">
+				<div class="row">
+					<filepreviews save="saveObservation()" observation="observation"></filepreviews>
 				</div>
-				<div class="panel-body">
+				<div class="hidden-xs hidden-sm">
+					<div ng-file-drop ng-model="files" ng-file-change="upload($files)" class="drop-box" drag-over-class="dragover" ng-multiple="true" allow-dir="true" accept=".jpg,.png,.pdf">Drop files here</div>
+					<div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
+				</div>
+
+				<button class="btn btn-block btn-primary" ng-file-select ng-multiple="true" ng-file-change="upload($files)">
+					<i class="fa fa-plus fa-fw"></i> Legg til fil
+				</button>
+
+
+				</p>
+				<div class="clearfix"></div>
+			</li>
+
+			<li class="list-group-item">
+				<h4 class="list-group-item-heading">Sted</h4>
+				<p class="list-group-item-text">
+<!-- 					<a ng-init="isCollapsed=false" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Vis kart' : 'Lukk kart'}}</a> -->
+<!-- 				<div collapse="isCollapsed"> -->
+
+<!-- 					<location-summary observation="observation"></location-summary> -->
+<!-- 				</div> <locationselector observation="observation"></locationselector> -->
+				<location observation="observation"></location>
+				</p>
+				<div class="clearfix"></div>
+			</li>
+
+			<li class="list-group-item">
+				<h4 class="list-group-item-heading">Organisasjon</h4>
+				<p class="list-group-item-text">
 					<organization-summary observation="observation"></organization-summary>
 					<organization observation="observation"></organization>
-				</div>
-			</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Involverte
-				</div>
-				<div class="panel-body">
+			<li class="list-group-item">
+				<h4 class="list-group-item-heading">Involverte</h4>
+				<p class="list-group-item-text">
 					<involved-summary observation="observation"></involved-summary>
 					<involvedpersonselector observation="observation"></involvedpersonselector>
-				</div>
-			</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Observasjonsforløp
-				</div>
-				<div class="panel-body">
+			<li class="list-group-item">
+				<h4 class="list-group-item-heading">Hendelsesforløp</h4>
+				<p class="list-group-item-text">
 					<observation-components-summary observation="observation"></observation-components-summary>
 					<observation-components observation="observation"></observation-components>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">Været</div>
-				<div class="panel-body">Været auto/manuellt</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">Tiltak</div>
-				<div class="panel-body">Lokale/sentrale tiltak</div>
-			</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">Relaterte</div>
-				<div class="panel-body">Select med lignende observasjoner</div>
-			</div>
+			<li class="list-group-item">
+				<h4 class="list-group-item-heading">Været</h4>
+				<p class="list-group-item-text">
+					<weather observation="observation"></weather>
+				</p>
+				<div class="clearfix"></div>
+			</li>
 
+			<li class="list-group-item">
+				<h4 class="list-group-item-heading">Tiltak</h4>
+				<p class="list-group-item-text"></p>
+				<div class="clearfix"></div>
+			</li>
 
-
-			<!-- Ng if has edited stuff to be saved or not -->
-			<button class="btn btn-primary btn-block" ng-click="saveObservation()">
-				<i class="fa fa-save fa-fw"></i> Lagre
-			</button>
-
-
-			<div class="form-group col-xs-12">
-				<summary observation="observation"></summary>
-			</div>
+			<li class="list-group-item">
+				<h4 class="list-group-item-heading">Relaterte</h4>
+				<p class="list-group-item-text"></p>
+				<div class="clearfix"></div>
+			</li>
+			<li class="list-group-item">
+				<h4 class="list-group-item-heading">Datamodell</h4>
+				<p class="list-group-item-text">
+					<summary observation="observation"></summary>
+				</p>
+				<div class="clearfix"></div>
+			</li>
 
 		</div>
+		<!-- END LISTBOX -->
+
+		<!-- Ng if has edited stuff to be saved or not -->
+		<button ng-disabled="!observationChanges" class="btn btn-primary btn-block" ng-click="saveObservation()">
+			<i class="fa fa-save fa-fw"></i> Lagre
+		</button>
+
 	</div>
+</div>
 </div>

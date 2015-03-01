@@ -7,6 +7,10 @@
 			this.getClubs = function () {
 				return $http.get(urlBase + "/clubs?where={\"active\":true}"); //projection={\"id\": 1, \"name\": 1}");
 			};
+			
+			this.getClub = function (id) {
+				return $http.get(urlBase + "/clubs/" + id); //projection={\"id\": 1, \"name\": 1}");
+			};
 
 			this.getLicenses = function () {
 				return $http.get(urlBase + '/melwin/licenses');
@@ -30,6 +34,10 @@
 
 			this.getObservations = function (userName) {
 				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
+			};
+
+			this.getAllObservations = function () {
+				return $http.get(urlBase + '/observations/?sort=-id');
 			};
 
 			this.getObservationComponentTemplates = function () {
@@ -87,7 +95,42 @@
 			this.stopWatching = function (objectId){
 				return $http.post(urlBase + '/observations/watchers/' + objectId + '/stop');
 			};
-			
+
+			/**
+			 * Tags
+			 */
+
+			this.getTags = function(group){
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}&sort=-freq');
+			};
+
+			this.getMostPopularTags = function(group){
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}&sort=-freq&max_results=6');
+			};
+
+			var getExistingTags = function(tag,group){
+				return $http.get(urlBase + '/tags/?where={"tag":"'+tag+'","group":"'+group+'"}');
+			};
+
+			this.addTag = function(tag,group){
+				if(!angular.isUndefined(tag) && !angular.isUndefined(group)) {
+					getExistingTags(tag, group).success(function (data) {
+						if (data._meta.total == 0) {
+							console.log("Adding new tag " + tag);
+							$http.post(urlBase + '/tags', {tag: tag, group: group});
+						} else {
+							console.log("Incrementing tag " + tag + " freq");
+							$http.post(urlBase + '/tags/freq/' + data._items[0]._id, {tag: tag, group: group});
+						}
+
+					});
+				}else{
+					console.log("Tag or group was undefined");
+				}
+
+			};
+
+
 
 		}]);
 

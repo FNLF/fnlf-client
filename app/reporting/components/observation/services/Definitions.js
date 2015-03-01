@@ -4,9 +4,10 @@
 		.service('Definitions', function () {
 
 
-			function ObservationType(id, name) {
+			function ObservationType(id, name, descr) {
 				this.id = id;
 				this.name = name;
+				this.descr = descr;
 			};
 
 			function ObservationTypeOption(id, name) {
@@ -18,11 +19,11 @@
 			this.getObservationTypes = function () {
 				var observationTypes = [];
 				
-				observationTypes.push(new ObservationType('sharing', 'Erfaringsdeling'));
-				observationTypes.push(new ObservationType('unsafe_act', 'Uheldig hendelse'));
-				observationTypes.push(new ObservationType('near_miss', 'Næruhell'));
-				observationTypes.push(new ObservationType('incident', 'Uhell'));
-				observationTypes.push(new ObservationType('accident', 'Ulykke'));
+				observationTypes.push(new ObservationType('sharing', 'Erfaring', 'Del en observasjon av noe bra eller dårlig'));
+				observationTypes.push(new ObservationType('unsafe_act', 'Uønsket hendelse', 'Alle de tingene som oppstår som er uønsket eller uheldige'));
+				observationTypes.push(new ObservationType('near_miss', 'Næruhell', 'Næruhell som definert i HB'));
+				observationTypes.push(new ObservationType('incident', 'Uhell', 'Personskade - oppsøker legehjelp'));
+				observationTypes.push(new ObservationType('accident', 'Ulykke', 'Død eller varige men'));
 
 				return observationTypes;
 			};
@@ -79,6 +80,10 @@
 
 			this.componentTagsFromAttributes = function(attributes){
 				var tags = [];
+
+				if(angular.isUndefined(attributes)){
+					return tags;
+				}
 
 				if(attributes.gear_malfunction){
 					tags.push('Feilfunksjon');

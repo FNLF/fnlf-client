@@ -15,6 +15,8 @@
 						templateUrl: 'components/observation/2.html',
 						controller: 'ObservationController'
 					})
+					.when('/observation/modal-route', {
+					})
 					.when('/report/1', {
 						templateUrl: 'components/report/1.html',
 						controller: 'ReportController'
@@ -38,33 +40,6 @@
 
 				$locationProvider.hashPrefix('!');
 				
-//				We already have an interceptor!!!!
-//				$httpProvider.interceptors.push(function ($q, $rootScope, $location) {
-//						return {
-//							'responseError': function (rejection) {
-//								var status = rejection.status;
-//								var config = rejection.config;
-//								var method = config.method;
-//								var url = config.url;
-//
-//								if (status == 401) {
-//									$location.path("/");
-//								}
-//								if (status == 403) {
-//									$rootScope.error = "Dont even try. You dont have the necessary roles to acces these datas!!";
-//									console.log($rootScope.error);
-//								}
-//								else {
-//									$rootScope.error = method + " on " + url + " failed with status " + status;
-//
-//								}
-//
-//								return $q.reject(rejection);
-//							}
-//						};
-//					}
-//				);
-
 
 			}]
 	);

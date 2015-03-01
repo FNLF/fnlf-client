@@ -21,7 +21,7 @@
 				this.type = 'near_miss';
 			};
 
-
+			
 			this.initObservation = function(obsevation){
 
 				var prototypeObs = new Observation();

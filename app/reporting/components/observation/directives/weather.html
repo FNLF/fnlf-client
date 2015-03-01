@@ -1,0 +1,95 @@
+<div class="clearfix"></div>
+<div class="col-xs-12 col-md-12">
+	<form class="form-horizontal">
+
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label><h4>Vindhastighet (knop):</h4></label>
+			</div>
+			<div class="form-group">
+				<label>Gjennomsnitt <input type="number" ng-model="observation.weather.manual.wind.avg" value="0" class="form-control" placeholder="">
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>Max <input type="number" ng-model="observation.weather.manual.wind.max" value="0" class="form-control" placeholder="">
+				</label>
+			</div>
+			<div class="form-group">
+				<label>Min <input type="number" ng-model="observation.weather.manual.wind.min" value="0" class="form-control" placeholder="">
+				</label>
+			</div>
+
+			<div class="form-group">
+				<div class="checkbox">
+					<label> <input type="checkbox" value="" ng-model="observation.weather.manual.turbulence"> Turbulens
+					</label>
+				</div>
+				<div class="checkbox">
+					<label> <input type="checkbox" value="" ng-model="observation.weather.manual.gusting"> Gusting
+					</label>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label><h4>Skybase (fot):</h4></label>
+			</div>
+			<div class="form-group">
+				<label>Høyde <input type="number" ng-model="observation.weather.manual.clouds.base" value="0" class="form-control" placeholder="">
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="checkbox">
+					<label> <input type="checkbox" value="" ng-model="observation.weather.manual.clouds.raining"> Regn
+					</label>
+				</div>
+				<div class="checkbox">
+					<label> <input type="checkbox" value="" ng-model="observation.weather.manual.clouds.fog"> Tåke
+					</label>
+				</div>
+				<div class="checkbox">
+					<label> <input type="checkbox" value="" ng-model="observation.weather.manual.clouds.hail"> Hagl
+					</label>
+				</div>
+				<div class="checkbox">
+					<label> <input type="checkbox" value="" ng-model="observation.weather.manual.clouds.snow"> Snø
+					</label>
+				</div>
+
+				<div class="checkbox">
+					<label> <input type="checkbox" value="" ng-model="observation.weather.manual.clouds.thunder"> Torden
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label><h4>Temperatur (&deg;C):</h4></label>
+			</div>
+			<div class="form-group">
+				<label>Bakke <input type="number" ng-model="observation.weather.manual.temp.ground" value="0" class="form-control" placeholder="">
+			</div>
+			<div class="form-group">
+				</label> <label>Høyde <input type="number" ng-model="observation.weather.manual.temp.altitude" value="0" class="form-control" placeholder="">
+				</label>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12">
+			<div class="form-group">
+				<label>Beskrivelse:</label>
+				<textarea class="form-control" rows="3" ng-model="observation.weather.manual.description" placeholder="Beskrivelse"></textarea>
+			</div>
+		</div>
+	</form>
+	<div class="clearfix"></div>
+	{{observation.weather.auto.taf}}
+	{{observation.weather.auto.metar}}
+	{{observation.weather.auto.yr | json}}
+	
+	
+</div>
+<div class="clearfix"></div>

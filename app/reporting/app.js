@@ -1,10 +1,5 @@
 /**
  *
- * @author: Tore Buer, s180346
- * @author: Eivind Jacobsen, s173466
- * @author: Morten Kristoffersen, s169440
- *
- * @since may.26.2014
  *
  */
 (function () {
@@ -15,7 +10,14 @@
 			 //'ui.bootstrap.alert','ui.bootstrap.collapse','ui.bootstrap.datepicker', 'ui.bootstrap.typeahead',
 			 'angular-loading-bar', 
 			 'mgcrea.ngStrap.modal', 'mgcrea.ngStrap.aside',
-			 'fnlf-login', 'resolve',
+			 'fnlf-login', 
+			 'resolve',
+			 'angularFileUpload',
+			 'ui.bootstrap.datetimepicker',
+			 'ngMap',
+			 'angular-confirm',
+			 'ngTable',
+			 'truncate'
 			 /*,'ngMockE2E'*/
 			 ]);
 
@@ -32,8 +34,39 @@
 
 		$rootScope.initialized = true;
 	});
+ 
 	
+	/**
+	 * Aside/modal route and back button hack
+	 * 
+	 */
 	
+	reportingApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+        var original = $location.path;
+        $location.path = function (path, reload) {
+            if (reload === false) {
+                var lastRoute = $route.current;
+                var un = $rootScope.$on('$locationChangeSuccess', function () {
+                    $route.current = lastRoute;
+                    un();
+                });
+            }
 
-
+            return original.apply($location, [path]);
+        };
+    }]);
+	
+	reportingApp.factory('DoNotReloadCurrentTemplate', ['$route', function($route) {
+		  return function(scope) {
+		    var lastRoute = $route.current;
+		    scope.$on('$locationChangeSuccess', function() {
+		      if (lastRoute.$$route.templateUrl === $route.current.$$route.templateUrl) {
+		        console.log('DoNotReloadCurrentTemplate not reloading template: ' + $route.current.$$route.templateUrl);
+		        $route.current = lastRoute;
+		      }
+		    });
+		  };
+		}]);
+	/** End aside/modal hack **/
+	
 })();

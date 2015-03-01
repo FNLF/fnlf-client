@@ -1,7 +1,43 @@
-<div>
-	<input type="text" typeahead-on-select="locationSelected($item, $model, $label)"
-		   typeahead-wait-ms=500
-		   ng-model="observation.location" placeholder="Stedsnavn"
-		   typeahead="location as location.name+' '+location.descr for location in getLocations($viewValue)" class="form-control">
+<div class="col-xs-12 col-md-12">
 
+<a ng-init="isCollapsed=false" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Vis kart' : 'Lukk kart'}}</a>
+<div collapse="isCollapsed">
+<map center="{{location.location.geo.coordinates}}">
+				  <marker
+				      position="{{location.location.geo.coordinates}}"
+				      title="{{location.location.name}}"
+				      draggable="false"
+				      visible="true"
+				      ></marker>
+				</map>
 </div>
+<div class="clearfix"></div>
+	<h3>Klubb <resolveclub clubid="observation.club"></resolveclub></h3>
+	<form >
+	<div class="form-group">
+	<input type="text" typeahead-on-select="locationSelected($item, $model, $label)" typeahead-wait-ms=500 ng-model="location.location" placeholder="Stedsnavn"
+		typeahead="l as formatter(l) for l in getLocations($viewValue)" typeahead-input-formatter="formatter($model)" class="form-control">
+		</div>
+		<div class="form-group"> 
+		<input ng-model="location.nickname" type="text" placeholder="Nickname" class="form-control">
+		</div>
+		<div class="form-group">
+	<div class="checkbox">
+		<label> <input type="checkbox" value="" ng-model="location.isdefault"> Default sted
+		</label>
+		</div>
+		<div class="form-group">
+		<label>Nærmeste flyplass</label>
+		<select ng-model="location.icao"	ng-options="opt as opt.name for opt in icao"></select>
+        </div>
+        <div class="form-group">		
+        <button class="btn btn-primary" ng-click="saveLocation()"><i class="fa fa-plus fa-fw"></i> Legg til</button>
+		</div>
+	</div>
+	{{location | json}}
+	</form>
+	<!-- ng-repeat places -->
+	
+</div>
+
+<div class="clearfix"></div>

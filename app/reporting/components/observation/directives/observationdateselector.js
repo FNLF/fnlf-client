@@ -1,4 +1,9 @@
-angular.module('reportingApp').directive('observationdateselector', function () {
+/**
+ * 
+ * Using https://github.com/zhaber/datetimepicker
+ */
+
+angular.module('reportingApp').directive('observationdateselector', function ($timeout) {
 	var directive = {};
 
 	directive.restrict = 'E';
@@ -10,24 +15,7 @@ angular.module('reportingApp').directive('observationdateselector', function () 
 
 	directive.link = function ($scope, element, attrs) {
 
-	  $scope.today = function() {
-        $scope.dt = new Date();
-      };
-      $scope.today();
-
-      $scope.clear = function () {
-        $scope.dt = null;
-      };
-
-      // Disable weekend selection
-      $scope.disabled = function(date, mode) {
-        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-      };
-
-      $scope.toggleMin = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-      };
-      $scope.toggleMin();
+		$scope.date = new Date();
 
       $scope.open = function($event) {
         $event.preventDefault();
@@ -37,13 +25,17 @@ angular.module('reportingApp').directive('observationdateselector', function () 
       };
 
       $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
+    		    startingDay: 1,
+    		    showWeeks: true
       };
-
-      $scope.formats = ['yyyy-MM-ddTHH:mm:ss', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      $scope.formats = ['yyyy-MM-dd', 'yyyy-MM-ddTHH:mm:ss', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
       $scope.format = $scope.formats[0];
 
+      $scope.maxDate = new Date();
+      $scope.minDate = new Date(2011,10,30);
+      /** TIME **/
+      $scope.hstep = 1;
+      $scope.mstep = 1;
 
 	};
 
