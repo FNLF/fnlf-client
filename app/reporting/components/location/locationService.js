@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('LocationService', ['$http', function ($http) {
+		.service('LocationService', ['$http', '$q', function ($http, $q) {
 			var urlBase = '/api/v1/';
 
 			   var config = {headers: {
