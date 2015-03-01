@@ -19,7 +19,7 @@
 			this.getObservationTypes = function () {
 				var observationTypes = [];
 				
-				observationTypes.push(new ObservationType('sharing', 'Erfaringsdeling', 'Del en observasjon av noe bra eller dårlig'));
+				observationTypes.push(new ObservationType('sharing', 'Erfaring', 'Del en observasjon av noe bra eller dårlig'));
 				observationTypes.push(new ObservationType('unsafe_act', 'Uønsket hendelse', 'Alle de tingene som oppstår som er uønsket eller uheldige'));
 				observationTypes.push(new ObservationType('near_miss', 'Næruhell', 'Næruhell som definert i HB'));
 				observationTypes.push(new ObservationType('incident', 'Uhell', 'Personskade - oppsøker legehjelp'));

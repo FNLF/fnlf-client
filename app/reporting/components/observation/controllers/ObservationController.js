@@ -10,7 +10,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope) {
+		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -43,25 +43,15 @@
 				$scope.saveObservation();
 			};
 
-			
-			var ItemType = function ItemType(type,label){
-				this.type=type;
-				this.label=label;
-				this.used=false;
-			};
 
-			$scope.items=[
-				new ItemType('location','Sted'),
-				new ItemType('organization','Hoppfeltorganisering'),
-				new ItemType('involved','Involverte personer'),
-				new ItemType('components','Observasjonsforløp')
-			];
-			
-			$scope.observationTypesArray = {sharing: 'Erfaringsdeling',
-											unsafe_act: 'Uønsket hendelse',
-											near_miss: 'Næruhell',
-											incident: 'Uhell',
-											accident: 'Ulykke'};
+			var observationTypes = Definitions.getObservationTypes();
+
+			$scope.observationTypesArray = {};
+
+			observationTypes.forEach(function(t){
+				$scope.observationTypesArray[t.id] = t.name;
+			});
+
 
 		$scope.saveObservation = function () {
 
