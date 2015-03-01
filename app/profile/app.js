@@ -1,7 +1,8 @@
 (function() {
 
-	var profileApp = angular.module('profileApp', [ 'ngRoute', 'ui.bootstrap',
-	                                                'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login','xeditable','imageupload', ]);
+	var profileApp = angular.module('profileApp', [ 'ngRoute', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngCookies', 
+	                                                'angular-loading-bar',
+	                                                'fnlf-login','imageupload', 'resolve']);
 
 	profileApp.config([ 'cfpLoadingBarProvider',
 			function(cfpLoadingBarProvider) {
@@ -11,27 +12,60 @@
 
 })();
 
-angular.module("profileApp").run(function(editableOptions) {
-	  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-	});
 
 angular.module("profileApp")
 	   .controller("userController", function($scope, userService, loginService, $location, $route) {
 		   
-		   userService.getUser().then(function(data) {
-			   
-			   $scope.user = data;
-			   console.log( $scope.user.firstname);
-			   
-		   });
-			  
-//		   var _etag = u._etag;
-//		   var _id = u._id;
-//		   
-//		   delete(u._etag);
-//		   delete(u._id);
-		   //...
+		   var needsReloading = false;
 		   
+		   function loadUser() {
+		   
+			   userService.getUser().then(function(data) {
+				   
+				   $scope.user = data;
+				   $scope.profile = {};
+				   $scope.profile.settings = data.settings;
+				   $scope.profile.custom = data.info;
+				   $scope.profile.info = data.info;
+				   
+					$scope.clubs = {};
+					userService.getMelwinUser().then(function(data) {
+						
+						if(!$scope.profile.settings.default_club && data.membership.clubs.length == 1) {
+							$scope.profile.settings.default_club = data.membership.clubs[0];
+							needsReloading = true;
+							$scope.saveUser($scope.profile, $scope.user._id, $scope.user._etag);
+							
+						}
+						
+						userService.getClubs(data.membership.clubs).then(function(response) {
+							$scope.clubs = response._items;
+							
+						});
+					});
+				   
+			   });
+		   
+		   };
+		   loadUser();
+		   
+		   $scope.error = undefined;
+		   
+		   $scope.saveUser = function(){
+			   
+			   userService.saveUser($scope.profile, $scope.user._id, $scope.user._etag).then(function(response) {
+				   
+				   if(needsReloading) {
+					   loadUser();
+					   needsReloading = false;
+				   }
+				   
+			   });
+			   
+			   
+		   };
+		   
+			  
 	   });
 
 /**
@@ -40,8 +74,8 @@ angular.module("profileApp")
  * Upload
  */
 angular.module("profileApp").controller("avatarController", 
-		['$scope', '$http', 'userService', '$timeout','$rootScope', 
-		 function($scope, $http, userService, $timeout, $rootScope) {
+							['$scope', '$http', 'userService', '$timeout','$rootScope', 
+							function($scope, $http, userService, $timeout, $rootScope) {
 	
 	var urlBase = '/api/v1';
 	
@@ -50,11 +84,17 @@ angular.module("profileApp").controller("avatarController",
 	$scope.getAvatar = function() {
 		$scope.avatar = {};
 		userService.getUserAvatar().then(function(data) {
-			$scope.avatar.dataURL = 'data:'+data.avatar.content_type+';base64,'+data.avatar.file;
+			if(data.avatar) {
+				$scope.avatar.dataURL = 'data:'+data.avatar.content_type+';base64,'+data.avatar.file;
+			}
+			else {
+				$scope.avatar.dataURL = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+			}
 			$scope.userid = data._id;
 			$scope._etag = data._etag;
 		});
 	};
+
 	
 	
 	   
@@ -115,127 +155,6 @@ angular.module("profileApp").controller("avatarController",
 			};
 			
 		};
-
-	/**
-	 * Takes a data URI and returns the Data URI corresponding to the resized image at the wanted size.
-	 */
-    function resizedataURL(datas, wantedWidth, wantedHeight)
-        {
-            // We create an image to receive the Data URI
-            var img = document.createElement('img');
-
-            // When the event "onload" is triggered we can resize the image.
-            img.onload = function()
-                {        
-                    // We create a canvas and get its context.
-                    var canvas = document.createElement('canvas');
-                    var ctx = canvas.getContext('2d');
-
-                    // We set the dimensions at the wanted size.
-                    canvas.width = wantedWidth;
-                    canvas.height = wantedHeight;
-
-                    // We resize the image with the canvas method drawImage();
-                    ctx.drawImage(this, 0, 0, wantedWidth, wantedHeight);
-
-                    var dataURI = canvas.toDataURL();
-
-                    /////////////////////////////////////////
-                    // Use and treat your Data URI here !! //
-                    /////////////////////////////////////////
-                };
-
-            // We put the Data URI in the image's src attribute
-            return datas;
-        }
-    // Use it like that : resizedataURL('yourDataURIHere', 50, 50);
-    
-    
-	$scope.generateThumb = function(file) {
-		
-		if (file != null) {
-			
-			if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
-					$timeout(function() {
-						var fileReader = new FileReader();
-						fileReader.readAsDataURL(file);
-						
-						fileReader.onloadend = function(e) {
-							$timeout(function() {
-
-						        var img = new Image();
-						        var canvas = document.createElement('canvas');
-						        var ctx = canvas.getContext("2d");
-						        var canvasCopy = document.createElement("canvas");
-						        var copyContext = canvasCopy.getContext("2d");
-						        var maxWidth = 300;
-						        var maxHeight = 200;
-
-						        img.onload = function()
-						        {
-						            var ratio = 1;
-
-						            if(img.width > maxWidth)
-						                ratio = maxWidth / img.width;
-						            else if(img.height > maxHeight)
-						                ratio = maxHeight / img.height;
-
-						            canvasCopy.width = img.width;
-						            canvasCopy.height = img.height;
-						            copyContext.drawImage(img, 0, 0);
-
-						            canvas.width = img.width * ratio;
-						            canvas.height = img.height * ratio;
-						            ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height);
-						        };
-
-						        file.dataUrl = fileReader.result;
-								
-							});
-						};
-					});
-			}
-		}
-	};
-
-	
-	function resizeImage(file) {
-		var reader = new FileReader();
-		    reader.onloadend = function() {
-		 
-		    var tempImg = new Image();
-		    tempImg.src = reader.result;
-		    
-		    tempImg.onload = function() {
-		 
-		        var MAX_WIDTH = 400;
-		        var MAX_HEIGHT = 300;
-		        var tempW = tempImg.width;
-		        var tempH = tempImg.height;
-		        if (tempW > tempH) {
-		            if (tempW > MAX_WIDTH) {
-		               tempH *= MAX_WIDTH / tempW;
-		               tempW = MAX_WIDTH;
-		            }
-		        } else {
-		            if (tempH > MAX_HEIGHT) {
-		               tempW *= MAX_HEIGHT / tempH;
-		               tempH = MAX_HEIGHT;
-		            }
-		        }
-		 
-		        var canvas = document.createElement('canvas');
-		        canvas.width = tempW;
-		        canvas.height = tempH;
-		        var ctx = canvas.getContext("2d");
-		        ctx.drawImage(this, 0, 0, tempW, tempH);
-		        var dataURL = canvas.toDataURL("image/jpeg");
-		      };
-		 
-		   };
-		   reader.readAsDataURL(file);
-		};
-	
 	
 }]);
 
@@ -256,10 +175,47 @@ angular.module("profileApp")
 	
 				var request = $http({
 					method : "get",
-					url : urlBase + '/melwin/users/' + $rootScope.username,
+					url : urlBase + '/users/' + $rootScope.username,
 				});
 				return (request.then(handleSuccess, handleError));
 	
+			};
+			
+			this.saveUser = function(data, _id, _etag) {
+				
+				var config = {};
+				config.headers = {};
+				config.headers['If-Match'] = _etag;
+				config.headers['Content-Type'] = 'application/json';
+				
+				var request = $http({
+					method : "patch",
+					headers: config.headers,
+					data: data,
+					url : urlBase + '/users/' + _id,
+				});
+				return (request.then(handleSuccess, handleError));
+				
+			};
+			
+			this.getMelwinUser = function() {
+				
+				var request = $http({
+					method : "get",
+					url : urlBase + '/melwin/users/' + $rootScope.username,
+				});
+				return (request.then(handleSuccess, handleError));
+				
+			};
+			
+			this.getClubs = function(clubs) {
+				
+				var request = $http({
+					method : "get",
+					url : urlBase + '/clubs/?where={"id": {"\$in": ' + JSON.stringify(clubs) + '}}&projection={"id": 1, "name": 1}'
+				});
+				return (request.then(handleSuccess, handleError));
+				
 			};
 			
 			this.getUserAvatar = function() {
@@ -288,7 +244,7 @@ angular.module("profileApp")
 			function handleError(response) {
 				// The API response from the server should be
 				// returned in a
-				// nomralized format. However, if the request
+				// normalized format. However, if the request
 				// was not handled by the
 				// server (or what not handles properly - ex.
 				// server error), then we
