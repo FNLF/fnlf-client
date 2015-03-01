@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="profileApp">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F/NLF - Elektroniske Tjenester | Profil</title>
 
 
@@ -123,32 +125,30 @@
 				</div>
 
 				<!-- edit form column -->
-				<div class="col-md-8 col-xs-12 personal-info" ng-controller="userController">
 
 
-					<div class="well well-large">
-						<h3>
-							<resolveuser ng-if="user.id" userid="user.id">{{user.id}}</resolveuser>
-						</h3>
-						<hr>
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-								<label class="col-lg-3 control-label">Default klubb:</label>
-								<div class="col-lg-8">
-									<select ng-model="profile.settings.default_club" ng-options="club.id as club.name  for club in clubs"></select>
-								</div>
+				<div class="well col-md-8 col-xs-12 personal-info" ng-controller="userController">
+					<h3>
+						<resolveuser ng-if="user.id" userid="user.id">{{user.id}}</resolveuser>
+					</h3>
+					<hr>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label class="col-lg-3 control-label">Default klubb:</label>
+							<div class="col-lg-8">
+								<select ng-model="profile.settings.default_club" ng-options="club.id as club.name  for club in clubs"></select>
 							</div>
-							<div class="form-group">
-								<label class="col-lg-3 control-label">Totalt antall hopp:</label>
-								<div class="col-lg-8">
-									<input type="number" ng-model="profile.settings.total_jumps" />
-								</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 control-label">Totalt antall hopp:</label>
+							<div class="col-lg-8">
+								<input type="number" ng-model="profile.settings.total_jumps" />
 							</div>
-							<button ng-click="saveUser()" class="btn btn-primary btn-block">
-								<i class="fa fa-save fa-fw"></i> Save
-							</button>
-						</form>
-					</div>
+						</div>
+						<button ng-click="saveUser()" class="btn btn-primary btn-block">
+							<i class="fa fa-save fa-fw"></i> Save
+						</button>
+					</form>
 				</div>
 			</div>
 
