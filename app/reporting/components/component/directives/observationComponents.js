@@ -169,7 +169,7 @@
 
 				$scope.observation.components.push($scope.selectedTemplate);
 
-
+				$scope.closeOthers($scope.selectedTemplate);
 				return false;
 			};
 
