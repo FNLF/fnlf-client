@@ -30,12 +30,11 @@ angular.module("profileApp")
 				   
 					$scope.clubs = {};
 					userService.getMelwinUser().then(function(data) {
-						
-						if(!$scope.profile.settings.default_club && data.membership.clubs.length == 1) {
+						if(typeof $scope.profile.settings == 'undefined') $scope.profile.settings = {};
+						if(typeof $scope.profile.settings.default_club == 'undefined' && data.membership.clubs.length == 1) {
 							$scope.profile.settings.default_club = data.membership.clubs[0];
 							needsReloading = true;
 							$scope.saveUser($scope.profile, $scope.user._id, $scope.user._etag);
-							
 						}
 						
 						userService.getClubs(data.membership.clubs).then(function(response) {
