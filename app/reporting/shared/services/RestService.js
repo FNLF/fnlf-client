@@ -66,6 +66,10 @@
 				return $http.get(urlBase + '/melwin/users/' + userId);
 			};
 			
+			this.getUser = function(userId) {
+				return $http.get(urlBase + '/users/' + userId);
+			};
+			
 			
 			/**
 			 * Workflows here!

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="profileApp">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F/NLF - Elektroniske Tjenester | Profil</title>
 
 
@@ -27,20 +29,25 @@
 <script src="/static/js/ui-select/select.min.js"></script>
 <script src="/static/js/angular-sanitize.js"></script>
 
-
-
-<!-- X-editable -->
-<link href="/bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
-<script src="/bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-
-
 <!-- Imageupload! -->
-<script src="/static/js/imageupload.js"></script> 
+<script src="/static/js/imageupload.js"></script>
+<script src="/shared/directives/inlinehelp.js"></script>
 
 <!--  CROP  
 <script src="/bower_components/ngImgCrop/compile/minified/ng-img-crop.js"></script>
 <link rel="stylesheet" type="text/css" href="/bower_components/ngImgCrop/compile/minified/ng-img-crop.css">
 -->
+
+<!-- Resolvers -->
+<script src="/shared/resolve/app.js"></script>
+<script src="/shared/resolve/service.js"></script>
+<script src="/shared/resolve/user.js"></script>
+<script src="/shared/resolve/club.js"></script>
+
+<!-- Mgcrea AngularStrap! -->
+<link href="/static/css/bootstrap-additions.min.css" rel="stylesheet">
+<script src="/static/js/angular-strap.min.js"></script>
+<script src="/static/js/angular-strap.tpl.min.js"></script>
 
 <!-- APP -->
 <script src="app.js" type="text/javascript"></script>
@@ -91,7 +98,10 @@
 	<div class="container">
 
 		<div class="row">
-			<div class="alert alert-info" role="alert" ng-show="error">{{error}}</div>
+
+			<div ng-if="error" class="alert alert-info alert-dismissable">
+				<a class="panel-close close" data-dismiss="alert">×</a> <i class="fa fa-coffee"></i> {{error}}
+			</div>
 
 			<div ng-hide="currentUserSignedIn">
 				<fnlf-login></fnlf-login>
@@ -99,79 +109,52 @@
 
 			<div ng-if="currentUserSignedIn" ng-controller="userController" class="ng-cloak" ng-cloak>
 
-<!-- left column -->
 
-    <div  ng-controller="avatarController" ng-init="getAvatar()" class="col-md-4 col-xs-12">
-		<!-- Imageupload directive boxxxy-->
-		
-		<img class="img-circle img-responsive" ng-show="image" ng-src="{{image.resized.dataURL}}" />
-		<img class="img-circle img-responsive" ng-show="avatar && !image" ng-src="{{avatar.dataURL}}" />
-		
-		<button input-image append-data-uri resize resize-max-height="300" resize-max-width="250" resize-quality="0.7" ng-model="image" class="btn btn-primary"><i class="fa fa-image fa-fw"></i> Velg profilbilde</button>
-		<button ng-show="image" type="submit" ng-click="upload(image.resized.dataURL)" ng-disabled="!image" class="btn btn-primary"><i class="fa fa-save fa-fw"></i> Lagre</button>
-	
-	
-    
-    </div>
-    
+				<div class="clearfix"></div>
+				<!-- left column -->
 
-    
-    
-    <!-- edit form column -->
-    <div class="col-md-8 col-xs-12 personal-info">
-      <div class="alert alert-info alert-dismissable">
-        <a class="panel-close close" data-dismiss="alert">×</a> 
-        <i class="fa fa-coffee"></i>
-        This is an <strong>.alert</strong>. Use this to show important messages to the user.
-      </div>
-     
-      <form class="form-horizontal" role="form">
-       <h3>Personal info: Einar Huseby (45199)</h3>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Email:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="janesemail@gmail.com" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Telefon:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="9922992929" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Gateadresse:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="Halfdan ..." type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Postnummer:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="3116" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Poststed:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="Tønsberg" type="text">
-          </div>
-        </div>
-        
-        
-        <div class="form-group">
-        <label class="col-lg-3 control-label"></label>
-          <div class="col-lg-8">
-            <input class="btn btn-primary btn-block" value="Save Changes" type="button">
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+				<div ng-controller="avatarController" ng-init="getAvatar()" class="col-md-4 col-xs-12 well text-center">
+					<!-- Imageupload directive boxxxy-->
+
+					<img class="img-thumbnail img-responsive" ng-show="image" ng-src="{{image.resized.dataURL}}" /> <img class="img-thumbnail img-responsive" ng-show="avatar && !image" ng-src="{{avatar.dataURL}}" />
+					<div class="clearfix"></div>
+					<button input-image append-data-uri resize resize-max-height="300" resize-max-width="250" resize-quality="0.7" ng-model="image" class="btn btn-primary btn-block"
+						ng-change="upload(image.resized.dataURL)">
+						<i class="fa fa-image fa-fw"></i> Velg profilbilde
+					</button>
+				</div>
+
+				<!-- edit form column -->
 
 
+				<div class="well col-md-8 col-xs-12 personal-info" ng-controller="userController">
+					<h3>
+						<resolveuser ng-if="user.id" userid="user.id">{{user.id}}</resolveuser>
+					</h3>
+					<hr>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label class="col-lg-3 control-label">Default klubb:</label>
+							<div class="col-lg-8">
+								<select ng-model="profile.settings.default_club" ng-options="club.id as club.name  for club in clubs"></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 control-label">Totalt antall hopp:</label>
+							<div class="col-lg-8">
+								<input type="number" ng-model="profile.settings.total_jumps" />
+							</div>
+						</div>
+						<button ng-click="saveUser()" class="btn btn-primary btn-block">
+							<i class="fa fa-save fa-fw"></i> Save
+						</button>
+					</form>
+				</div>
 			</div>
 
+
 		</div>
+
+	</div>
 </body>
 </html>

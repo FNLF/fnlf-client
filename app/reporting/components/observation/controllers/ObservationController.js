@@ -22,12 +22,12 @@
 			$scope.ui=$routeParams.ui;
 
 			$scope.loadObservation = function(){
-
+				$scope.observation = {};
 				ObservationService.getObservationById(observationId, function(obs){
 
 					$scope.observation = obs;
 					ObservationService.initObservation($scope.observation);
-
+					$scope.observationChanges = false;
 					$timeout(function(){
 						$scope.observationChanges = false;
 					},10);
