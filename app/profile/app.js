@@ -61,6 +61,8 @@ angular.module("profileApp").controller("userController",
 			   
 			   $scope.user._etag = response._etag;
 			   
+			   $scope.success = "Din info ble lagret";
+			   
 			   if(needsReloading) {
 				   $scope.loadUser();
 				   needsReloading = false;
@@ -142,6 +144,7 @@ angular.module("profileApp").controller("userController",
 				$scope.sizeInBytes = result.size;
 				$scope.getAvatar();
 				$scope.user._etag = result._etag;
+				$scope.success = "Avatar oppdatert";
 			});
 			};
 			

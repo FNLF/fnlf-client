@@ -103,13 +103,16 @@
 				<a class="panel-close close" data-dismiss="alert">×</a> <i class="fa fa-coffee"></i> {{error}}
 			</div>
 
+
 			<div ng-hide="currentUserSignedIn">
 				<fnlf-login></fnlf-login>
 			</div>
 
 			<div ng-if="currentUserSignedIn" ng-controller="userController" class="ng-cloak" ng-cloak>
 
-
+			<div ng-if="success" class="alert alert-success alert-dismissable">
+				<a class="panel-close close" data-dismiss="alert">×</a> {{success}}
+			</div>
 				<div class="clearfix"></div>
 				<!-- left column -->
 
@@ -118,7 +121,7 @@
 
 					<img class="img-thumbnail img-responsive" ng-show="image" ng-src="{{image.resized.dataURL}}" /> <img class="img-thumbnail img-responsive" ng-show="avatar && !image" ng-src="{{avatar.dataURL}}" />
 					<div class="clearfix"></div>
-					<button input-image append-data-uri resize resize-max-height="300" resize-max-width="250" resize-quality="0.7" ng-model="image" class="btn btn-primary btn-block"
+					<button input-image append-data-uri resize resize-max-height="300" resize-max-width="250" resize-quality="0.9" ng-model="image" class="btn btn-primary btn-block"
 						ng-change="upload(image.resized.dataURL)">
 						<i class="fa fa-image fa-fw"></i> Velg profilbilde
 					</button>
@@ -127,11 +130,12 @@
 				<!-- edit form column -->
 
 
-				<div class="well col-md-8 col-xs-12 personal-info">
+				<div class="well col-md-8 col-xs-12">
 					<h3>
 						<resolveuser ng-if="user.id" userid="user.id">{{user.id}}</resolveuser>
 					</h3>
 					<hr>
+					
 					<form class="form-horizontal" role="form">
 						<div class="form-group">
 							<label class="col-lg-3 control-label">Default klubb:</label>
