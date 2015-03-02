@@ -91,7 +91,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 
 			$scope.tagTransform = function(itemText){
 
-				return {fullname:itemText,id:0};
+				return {fullname:itemText,id:0,tmpname:itemText};
 			};
 
 		};
