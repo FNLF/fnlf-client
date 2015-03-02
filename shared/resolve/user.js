@@ -4,23 +4,24 @@ angular.module('resolve')
 			var directive = {};
 			
 			directive.restrict = 'E';
-			directive.template = '<a href="/app/profile/{{userid}}">{{firstname}} {{lastname}}</a>';
+			directive.template = '<span ng-if="userid==0">{{tmpname}}</span> <span ng-if="userid>0"><a href="/app/profile/{{userid}}">{{firstname}} {{lastname}}</a></span>';
 			
 			directive.scope = {
-				observation : '=observation',
-				userid : '='
+				userid : '=',
+				tmpname: '='
 			};
 			
 			directive.link = function($scope, element, attrs) {
-				console.log("Resolve USER");
-			
-				ResolveService.getUser($scope.userid).then(
-					function(user) {
 
-						console.log(user);
-						$scope.firstname = user.firstname;
-						$scope.lastname = user.lastname;
-					});
-				};					;
+					if($scope.userid>0){
+						ResolveService.getUser($scope.userid).then(
+							function(user) {
+								console.log(user);
+								$scope.firstname = user.firstname;
+								$scope.lastname = user.lastname;
+							});
+					}
+
+				};
 				return directive;
 		});
