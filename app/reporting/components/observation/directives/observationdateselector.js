@@ -15,8 +15,7 @@ angular.module('reportingApp').directive('observationdateselector', function ($t
 
 	directive.link = function ($scope, element, attrs) {
 
-		$scope.date = new Date();
-
+	  $scope.observation.when = new Date();
       $scope.open = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -28,7 +27,7 @@ angular.module('reportingApp').directive('observationdateselector', function ($t
     		    startingDay: 1,
     		    showWeeks: true
       };
-      $scope.formats = ['yyyy-MM-dd', 'yyyy-MM-ddTHH:mm:ss', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      $scope.formats = ['yyyy-MM-dd HH:mm', 'yyyy-MM-ddTHH:mm:ss', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
       $scope.format = $scope.formats[0];
 
       $scope.maxDate = new Date();

@@ -23,7 +23,7 @@
 			
 			//Default club for user!
 			RestService.getUser($rootScope.username).then(function(data) {
-				if(!$scope.observation) $scope.observation = {};
+				
 				if(!$scope.observation.club && data.data.settings.default_club) {
 					$scope.observation.club = data.data.settings.default_club;
 				}
