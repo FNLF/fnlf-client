@@ -1,5 +1,46 @@
 (function () {
 
+
+
+	var decrementOrderFunc = function(components,component){
+
+		var objWithPrevIndex = null;
+		components.forEach(function(c){
+			if(c.order == (component.order-1)){
+				objWithPrevIndex = c;
+			}
+
+		});
+
+		if(objWithPrevIndex){
+			var tmpOrder = component.order;
+			component.order = objWithPrevIndex.order;
+			objWithPrevIndex.order = tmpOrder
+		}
+
+
+	};
+
+	var incrementOrderFunc = function(components,component){
+
+		var objWithNextIndex = null;
+		components.forEach(function(c){
+			if(c.order == (component.order+1)){
+				objWithNextIndex = c;
+			}
+
+		});
+
+		if(objWithNextIndex){
+			var tmpOrder = component.order;
+			component.order = objWithNextIndex.order;
+			objWithNextIndex.order = tmpOrder
+		}
+
+
+	};
+
+
 	angular.module('reportingApp').directive('observationComponentSummary', function (Definitions) {
 
 		var directive = {};
@@ -33,6 +74,21 @@
 		};
 
 		directive.link = function ($scope, element, attrs) {
+			var i=0;
+			$scope.observation.components.forEach(function(c){
+				if(!c.order){
+					c.order = i;
+				}
+				i++;
+			});
+
+			$scope.decrementOrder = function(component){
+				decrementOrderFunc($scope.observation.components,component);
+			};
+
+			$scope.incrementOrder = function(component){
+				incrementOrderFunc($scope.observation.components,component);
+			};
 
 		};
 
@@ -106,11 +162,12 @@
 				});
 
 			$scope.newComponent = function(selectedTemplate){
-
+				console.log(selectedTemplate);
 				$scope.selectedTemplate = selectedTemplate;
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
-				$scope.selectedTemplate.tags = Definitions.componentTagsFromAttributes(selectedTemplate.attributes);
-				$scope.observation.components.push(selectedTemplate);
+				$scope.selectedTemplate.order = $scope.observation.components.length+1;
+
+				$scope.observation.components.push($scope.selectedTemplate);
 
 
 				return false;
@@ -121,43 +178,7 @@
 				$scope.observation.components.splice(index,1);
 			};
 
-			$scope.newCause = function(){
-				var template = {};
-				template.what="Årsak";
-				template.involved = [].concat($scope.persons);
-				template.flags={};
-				template.flags.root_cause=true;
-				template.where = {};
-				template.where.altitude = 0;
-				$scope.closeOthers(template);
 
-				$scope.observation.components.unshift(template);
-			};
-
-			$scope.newBarrier = function(){
-				var template = {};
-				template.what="Sikkerhetsbarriære";
-				template.involved = [].concat($scope.persons);
-				template.flags={};
-				template.flags.barrier=true;
-				template.where = {};
-				template.where.altitude = 0;
-				$scope.closeOthers(template);
-				$scope.observation.components.unshift(template);
-
-			};
-
-			$scope.newConsequence = function(){
-				var template = {};
-				template.what="Konsekvens";
-				template.involved = [].concat($scope.persons);
-				template.flags={};
-				template.flags.final_consequence=true;
-				template.where = {};
-				template.where.altitude = 0;
-				$scope.closeOthers(template);
-				$scope.observation.components.push(template);
-			};
 
 			$scope.getStaticTags = function(){
 				return Definitions.getComponentTags();
@@ -175,6 +196,14 @@
 					c.open=false;
 				});
 				component.open=true;
+			};
+
+			$scope.decrementOrder = function(component){
+				decrementOrderFunc($scope.observation.components,component);
+			};
+
+			$scope.incrementOrder = function(component){
+				incrementOrderFunc($scope.observation.components,component);
 			};
 
 		};

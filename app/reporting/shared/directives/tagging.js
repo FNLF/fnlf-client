@@ -65,7 +65,17 @@
 			$scope.tags = [];
 			RestService.getMostPopularTags($scope.group)
 				.success(function(data){
-					$scope.tags=data._items.map(function(t){return t.tag});
+
+					var allTags=data._items.map(function(t){return t.tag});
+
+					var tmp ={};
+					allTags.forEach(function(t){
+						tmp[t]=t;
+					});
+					Object.keys(tmp).forEach(function(k){
+						$scope.tags.push(tmp[k]);
+					});
+
 				});
 
 
