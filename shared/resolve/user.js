@@ -17,6 +17,6 @@ angular.module('resolve')
 						$scope.firstname = user.firstname;
 						$scope.lastname = user.lastname;
 					});
-				};					;
+				};
 				return directive;
 		});
