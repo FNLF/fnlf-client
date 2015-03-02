@@ -44,7 +44,25 @@
 				return $http.get(urlBase + '/observations/components');
 			};
 
+			var clearFullname = function(person){
+				if(person) {
+					delete person.open;
+					delete person.fullname;
+				}
+			};
+
 			this.updateObservation = function (observation, _id, etag) {
+
+				angular.forEach(observation.involved,clearFullname);
+				angular.forEach(observation.organization.hl,clearFullname);
+				angular.forEach(observation.organization.hm,clearFullname);
+				angular.forEach(observation.organization.hfl,clearFullname);
+				angular.forEach(observation.organization.pilot,clearFullname);
+				angular.forEach(observation.components,function(comp){
+					angular.forEach(comp.involved,clearFullname);
+				});
+
+
 				var config = {};
 				config.headers = {};
 				config.headers['If-Match'] = etag;
