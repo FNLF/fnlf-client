@@ -113,7 +113,7 @@
 				<div class="clearfix"></div>
 				<!-- left column -->
 
-				<div ng-controller="avatarController" ng-init="getAvatar()" class="col-md-4 col-xs-12 well text-center">
+				<div ng-init="getAvatar()" class="col-md-4 col-xs-12 well text-center">
 					<!-- Imageupload directive boxxxy-->
 
 					<img class="img-thumbnail img-responsive" ng-show="image" ng-src="{{image.resized.dataURL}}" /> <img class="img-thumbnail img-responsive" ng-show="avatar && !image" ng-src="{{avatar.dataURL}}" />
@@ -127,7 +127,7 @@
 				<!-- edit form column -->
 
 
-				<div class="well col-md-8 col-xs-12 personal-info" ng-controller="userController">
+				<div class="well col-md-8 col-xs-12 personal-info">
 					<h3>
 						<resolveuser ng-if="user.id" userid="user.id">{{user.id}}</resolveuser>
 					</h3>

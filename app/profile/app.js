@@ -12,73 +12,67 @@
 
 })();
 
-
-angular.module("profileApp")
-	   .controller("userController", function($scope, userService, loginService, $location, $route) {
-		   
-		   var needsReloading = false;
-		   
-		   function loadUser() {
-		   
-			   userService.getUser().then(function(data) {
-				   
-				   $scope.user = data;
-				   $scope.profile = {};
-				   $scope.profile.settings = data.settings;
-				   $scope.profile.custom = data.info;
-				   $scope.profile.info = data.info;
-				   
-					$scope.clubs = {};
-					userService.getMelwinUser().then(function(data) {
-						if(typeof $scope.profile.settings == 'undefined') $scope.profile.settings = {};
-						if(typeof $scope.profile.settings.default_club == 'undefined' && data.membership.clubs.length == 1) {
-							$scope.profile.settings.default_club = data.membership.clubs[0];
-							needsReloading = true;
-							$scope.saveUser($scope.profile, $scope.user._id, $scope.user._etag);
-						}
-						
-						userService.getClubs(data.membership.clubs).then(function(response) {
-							$scope.clubs = response._items;
-							
-						});
-					});
-				   
-			   });
-		   
-		   };
-		   loadUser();
-		   
-		   $scope.error = undefined;
-		   
-		   $scope.saveUser = function(){
-			   
-			   userService.saveUser($scope.profile, $scope.user._id, $scope.user._etag).then(function(response) {
-				   
-				   if(needsReloading) {
-					   loadUser();
-					   needsReloading = false;
-				   }
-				   
-			   });
-			   
-			   
-		   };
-		   
-			  
-	   });
-
-/**
- * Avatar
- * 
- * Upload
- */
-angular.module("profileApp").controller("avatarController", 
-							['$scope', '$http', 'userService', '$timeout','$rootScope', 
-							function($scope, $http, userService, $timeout, $rootScope) {
+angular.module("profileApp").controller("userController", 
+							['$scope', '$http', 'userService', '$timeout','$rootScope', '$window',
+							function($scope, $http, userService, $timeout, $rootScope, $window) {
 	
 	var urlBase = '/api/v1';
 	
 	//Always get the avatar!
+	
+	   var needsReloading = false;
+	   
+	   $scope.loadUser = function() {
+	   
+		   userService.getUser().then(function(data) {
+			   
+			   $scope.user = data;
+			   $scope.profile = {};
+			   $scope.profile.settings = data.settings;
+			   $scope.profile.custom = data.info;
+			   $scope.profile.info = data.info;
+			   
+				$scope.clubs = {};
+				userService.getMelwinUser().then(function(data) {
+					//Default club auto
+					if(typeof $scope.profile.settings == 'undefined') $scope.profile.settings = {};
+					if(typeof $scope.profile.settings.default_club == 'undefined' && data.membership.clubs.length == 1) {
+						$scope.profile.settings.default_club = data.membership.clubs[0];
+						needsReloading = true;
+						$scope.saveUser($scope.profile, $scope.user._id, $scope.user._etag);
+					}
+					
+					userService.getClubs(data.membership.clubs).then(function(response) {
+						$scope.clubs = response._items;
+						
+					});
+				});
+			   
+		   });
+	   
+	   };
+	   $scope.loadUser();
+	   
+	   $scope.error = undefined;
+	   
+	   $scope.saveUser = function(){
+		   
+		   userService.saveUser($scope.profile, $scope.user._id, $scope.user._etag).then(function(response) {
+			   
+			   $scope.user._etag = response._etag;
+			   
+			   if(needsReloading) {
+				   $scope.loadUser();
+				   needsReloading = false;
+				   $window.location.reload();
+			   }
+			   
+		   });
+		   
+		   
+	   };
+	
+	
 	
 	$scope.getAvatar = function() {
 		$scope.avatar = {};
@@ -89,8 +83,6 @@ angular.module("profileApp").controller("avatarController",
 			else {
 				$scope.avatar.dataURL = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 			}
-			$scope.userid = data._id;
-			$scope._etag = data._etag;
 		});
 	};
 
@@ -126,7 +118,7 @@ angular.module("profileApp").controller("avatarController",
 		
 		var config = {};
 		config.headers = {};
-		config.headers['If-Match'] = $scope._etag;
+		config.headers['If-Match'] = $scope.user._etag;
 		config.headers['Content-Type'] = undefined;
 		
 		if(image) {
@@ -137,7 +129,7 @@ angular.module("profileApp").controller("avatarController",
 			 
 			$http({ 
 				method: 'PATCH', 
-				url: urlBase + '/users/' + $scope.userid, 
+				url: urlBase + '/users/' + $scope.user._id, 
 				data: formData, 
 				headers: config.headers,
 				transformRequest: angular.identity
@@ -149,7 +141,7 @@ angular.module("profileApp").controller("avatarController",
 				$scope.uploadedImgSrc = result.src;
 				$scope.sizeInBytes = result.size;
 				$scope.getAvatar();
-				
+				$scope.user._etag = result._etag;
 			});
 			};
 			
@@ -241,6 +233,7 @@ angular.module("profileApp")
 			// application dta from
 			// the API response payload.
 			function handleError(response) {
+				console.log("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
 				// The API response from the server should be
 				// returned in a
 				// normalized format. However, if the request
