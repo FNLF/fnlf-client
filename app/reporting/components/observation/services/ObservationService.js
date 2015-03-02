@@ -5,6 +5,7 @@
 
 			function Observation() {
 				this.involved = [];
+				this.when = new Date();
 				this.location={};
 				this.organization={};
 				this.organization.hl=[];
@@ -22,13 +23,13 @@
 			};
 
 			
-			this.initObservation = function(obsevation){
+			this.initObservation = function(observation){
 
 				var prototypeObs = new Observation();
 
 				for(var k in prototypeObs){
-					if(angular.isUndefined(obsevation[k])){
-						obsevation[k]=prototypeObs[k];
+					if(angular.isUndefined(observation[k])){
+						observation[k]=prototypeObs[k];
 					}
 				}
 
