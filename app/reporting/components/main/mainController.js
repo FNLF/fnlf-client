@@ -69,24 +69,28 @@
 			$scope.getAllObservations = function(){
 				var userName = $rootScope.username;
 				RestService.getAllObservations()
-				.success(function(data){
+				.success(function(r){
 
-					$scope.allObservations = data._items.filter(function(it){
-						if(it.id){
-							return true;
-						}
-						return false;
-					});
-
+ 
+					
+					var data = r._items;
+//					.filter(function(it){
+//						if(it.id){
+//							
+//							return true;
+//						}
+//						return false;
+//					});
 					$scope.tableParams = new ngTableParams({
 				        page: 1,            // show first page
 				        count: 5           // count per page
 				    }, {
-				        total: $scope.allObservations.length, // length of data
+				        total: data.length, // length of data
 				        getData: function($defer, params) {
-				            $defer.resolve($scope.allObservations.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+				            $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 				        }
-				    }); 
+				    });
+
 					
 				});
 				
