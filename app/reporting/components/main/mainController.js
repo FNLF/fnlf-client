@@ -10,7 +10,9 @@
 	 */
 	angular.module('reportingApp')
 		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions) {
-
+			
+			$scope.observation = {};
+			
 			$scope.observations = {};
 			$scope.allObservations = {};
 
@@ -93,8 +95,7 @@
 			$scope.goToPage = function (url) {
 				$location.path(url);
 			};
-			
-			//ng-table
+
 
 		    
 			
