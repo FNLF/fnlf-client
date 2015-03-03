@@ -9,7 +9,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions) {
+		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions, $filter) {
 			
 			$scope.observation = {};
 			
@@ -62,6 +62,23 @@
 				RestService.getObservations(userName)
 					.success(function(data){
 						$scope.observations = data._items;
+						
+						$scope.tableMyObservations = new ngTableParams({
+					        page: 1,            // show first page
+					        count: 10,           // count per page
+					        sorting: {
+					            name: 'asc'     // initial sorting
+					        }
+					    }, {
+					        total: $scope.observations.length, // length of data
+					        getData: function($defer, params) {
+					        	var filteredData = params.filter() ? $filter('filter')($scope.observations, params.filter()) : $scope.observations;
+					            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+					            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+					        }
+					    });
+						
+						
 					});
 
 			};
@@ -71,23 +88,28 @@
 				RestService.getAllObservations()
 				.success(function(r){
 
- 
+					var data = r._items
+					.filter(function(it){
+						if(it.id){
+							
+							return true;
+						}
+						return false;
+					});
 					
-					var data = r._items;
-//					.filter(function(it){
-//						if(it.id){
-//							
-//							return true;
-//						}
-//						return false;
-//					});
+					
 					$scope.tableParams = new ngTableParams({
 				        page: 1,            // show first page
-				        count: 5           // count per page
+				        count: 5,           // count per page
+				        sorting: {
+				            name: 'asc'     // initial sorting
+				        }
 				    }, {
 				        total: data.length, // length of data
 				        getData: function($defer, params) {
-				            $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+				        	var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+				            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+				            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 				        }
 				    });
 

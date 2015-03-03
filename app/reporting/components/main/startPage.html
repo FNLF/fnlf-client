@@ -23,13 +23,26 @@
 			<h2>Mine observasjoner</h2>
 		</div>
 		<div>
-			<div class="list-group">
-				<div class="list-group-item" ng-repeat="observation in observations">
-					<div>
-						<a src="#" ng-click="editObservation(observation._id)"><span> #{{observation.id}} {{observation.tags.join(' ')}} </span></a>
-					</div>
-				</div>
-			</div>
+			<!-- 			<div class="list-group"> -->
+			<!-- 				<div class="list-group-item" ng-repeat="observation in observations"> -->
+			<!-- 					<div> -->
+			<!-- 						<a src="#" ng-click="editObservation(observation._id)"><span> #{{observation.id}} {{observation.tags.join(' ')}} </span></a> -->
+			<!-- 					</div> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
+
+			<table ng-table="tableMyObservations" show-filter="false" class="table table-condensed table-striped table-responsive">
+				<tr ng-repeat="observation in $data">
+
+					<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
+					<td data-title="'Date'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Title'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+					<td data-title="'Type'"><span class="label"
+						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+							{{observationTypesArray[observation.type]}}</span> &nbsp; </span></td>
+				</tr>
+			</table>
+
 		</div>
 
 	</div>
@@ -37,7 +50,7 @@
 
 	<div class="col-xs-12 col-md-12" ng-init="getAllObservations()">
 		<!-- ng-table all observations -->
-		<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive">
+		<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
 			<tr ng-repeat="observation in $data">
 
 
@@ -54,10 +67,4 @@
 		</table>
 		{{pages | json}}
 
-</div>
-
-
-
-
-
-
+	</div>
