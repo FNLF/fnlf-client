@@ -78,7 +78,31 @@
 			var copyFunction = this.copy;
 
 
+			var clearFullname = function(person){
+				if(person) {
+					delete person.open;
+					delete person.fullname;
+				}
+			};
+
+			this.clearFullnameFromObservation = function(observation){
+				angular.forEach(observation.involved,clearFullname);
+				angular.forEach(observation.organization.hl,clearFullname);
+				angular.forEach(observation.organization.hm,clearFullname);
+				angular.forEach(observation.organization.hfl,clearFullname);
+				angular.forEach(observation.organization.pilot,clearFullname);
+				angular.forEach(observation.components,function(comp){
+					angular.forEach(comp.involved,clearFullname);
+				});
+
+
+			};
+
+
 			this.updateObservation = function (observation,callback) {
+
+				clearFullnameFromObservation(observation);
+
 				var _id = observation._id;
 				var _etag = observation._etag;
 
@@ -108,6 +132,7 @@
 				.success(function(data){
 					RestService.getObservation(_id)
 						.success(function(updated){
+							clearFullnameFromObservation(updated);
 							callback(updated);
 						});
 				}).error(function(error){
@@ -115,6 +140,7 @@
 					$rootScope.error=error;
 					RestService.getObservation(_id)
 						.success(function(updated){
+							clearFullnameFromObservation(updated);
 							callback(updated);
 
 						});
