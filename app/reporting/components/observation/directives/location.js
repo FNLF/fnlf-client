@@ -70,7 +70,7 @@ angular.module('reportingApp').directive('location', function (LocationService) 
 					//By definition, first item is default!
 					//Ecmas 5 only!
 					//if(Object.keys($scope.observation.location).length === 0) {
-					if(!$scope.observation.location.nickname) {
+					if(typeof $scope.observation.location.nickname == 'undefined' && response.locations.length > 0) {
 						$scope.observation.location = response.locations[0];
 					};
 					
