@@ -15,7 +15,9 @@ angular.module('reportingApp').directive('observationdateselector', function ($t
 
 	directive.link = function ($scope, element, attrs) {
 
-	  $scope.observation.when = new Date();
+		if(typeof $scope.observation.when == 'undefined') {
+			$scope.observation.when = new Date();
+		}
       $scope.open = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
