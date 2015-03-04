@@ -85,7 +85,7 @@
 				}
 			};
 
-			this.clearFullnameFromObservation = function(observation){
+			function clearFullnameFromObservation(observation){
 				angular.forEach(observation.involved,clearFullname);
 				angular.forEach(observation.organization.hl,clearFullname);
 				angular.forEach(observation.organization.hm,clearFullname);
