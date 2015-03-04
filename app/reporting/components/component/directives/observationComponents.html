@@ -2,7 +2,7 @@
 	<div>
 
 		<accordion close-others="true">
-			<accordion-group is-open="component.open" ng-repeat="component in observation.components track by $index ">
+			<accordion-group is-open="component.open" ng-repeat="component in observation.components | orderBy:'order' track by $index">
 
 				<accordion-heading>
 					<div>
