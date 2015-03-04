@@ -33,7 +33,7 @@
 			};
 
 			this.getObservations = function (userName) {
-				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
+				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}&sort=-id');
 			};
 
 			this.getAllObservations = function () {
