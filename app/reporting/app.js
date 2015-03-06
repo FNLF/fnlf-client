@@ -17,7 +17,8 @@
 			 'ngMap',
 			 'angular-confirm',
 			 'ngTable',
-			 'truncate'
+			 'truncate',
+			 'angularMoment'
 			 /*,'ngMockE2E'*/
 			 ]);
 
@@ -26,8 +27,10 @@
 		cfpLoadingBarProvider.includeSpinner = true;
 	}]);
 	
-	reportingApp.run(function ($rootScope, $location, $cookieStore) {
+	reportingApp.run(function ($rootScope, $location, $cookieStore, amMoment) {
 
+		amMoment.changeLocale('nb');
+		
 		$rootScope.$on('$viewContentLoaded', function () {
 			delete $rootScope.error;
 		});
