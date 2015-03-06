@@ -102,7 +102,7 @@
 	});
 
 
-	var observationComponents = function (RestService,Functions, $aside, Definitions, $rootScope, $window) {
+	var observationComponents = function (RestService,Functions,ResolveService, $aside, Definitions, $rootScope, $window) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -159,6 +159,18 @@
 			$scope.persons = $scope.observation.involved.map(function(p){
 				return {id:p.id, fullname:p.fullname, tmpname:p.tmpname};
 			});
+
+			$scope.persons.forEach(function(p){
+				if(p.tmpname){
+					p.fullname=p.tmpname;
+				}
+				else{
+					ResolveService.getUser(p.id).then(function(u){
+						p.fullname=u.firstname+' '+u.lastname;
+					})
+				}
+			});
+
 
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()
