@@ -96,7 +96,7 @@
 	});
 
 
-	var observationComponents = function (RestService, $aside,Definitions, $rootScope, $window) {
+	var observationComponents = function (RestService, $aside, Definitions, $rootScope, $window) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -118,7 +118,6 @@
 			    $scope.incidentAside = $aside({
 			        scope: $scope,
 			        title: 'Hendinger i forløpet',
-			        //content: 'My Content', //Static custom content
 			        show: true,
 			        contentTemplate: '/app/reporting/components/component/directives/observationComponents.html',
 			        template: '/shared/partials/aside.html',
@@ -153,7 +152,7 @@
 
 			$scope.persons = $scope.observation.involved.map(function(p){
 				return {id:p.id, fullname:p.fullname, tmpname:p.tmpname};
-			})
+			});
 
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()

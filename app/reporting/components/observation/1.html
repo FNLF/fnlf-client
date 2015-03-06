@@ -7,6 +7,8 @@
 
 		<!-- Workflows, show current status. Click dropdown show actions -->
 		<span class="pull-right"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
+<!-- 		<span class="pull-right"><share observation="observation"></share>&nbsp;</span> -->
+<!-- 		<span class="pull-right"><comments observation="observation"></comments>&nbsp;</span> -->
 
 		<h1>OBS #{{observation.id}}</h1>
 
@@ -35,6 +37,7 @@
 		-->
 
 		<div class="clearfix"></div>
+		
 		<br />
 
 
@@ -107,6 +110,16 @@
 
 <!-- 					<location-summary observation="observation"></location-summary> -->
 <!-- 				</div> <locationselector observation="observation"></locationselector> -->
+				<div ng-if="observation.location.geo.coordinates">
+				<map center="{{observation.location.geo.coordinates}}">
+				  <marker
+				      position="{{observation.location.geo.coordinates}}"
+				      title="{{observation.location.name}}"
+				      draggable="false"
+				      visible="true"
+				      ></marker>
+				</map>
+				</div>
 				<location observation="observation"></location>
 				</p>
 				<div class="clearfix"></div>
