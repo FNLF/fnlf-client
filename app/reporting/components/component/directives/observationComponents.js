@@ -16,8 +16,11 @@
 			var tmpOrder = component.order;
 			component.order = objWithPrevIndex.order;
 			objWithPrevIndex.order = tmpOrder
-		}
-
+		}else{
+         	if(component.order>1){
+         		component.order--;
+         	}
+         }
 
 	};
 
@@ -35,8 +38,11 @@
 			var tmpOrder = component.order;
 			component.order = objWithNextIndex.order;
 			objWithNextIndex.order = tmpOrder
+		}else{
+			if(component.order<components.length){
+				component.order++;
+			}
 		}
-
 
 	};
 
@@ -96,7 +102,7 @@
 	});
 
 
-	var observationComponents = function (RestService, $aside, Definitions, $rootScope, $window) {
+	var observationComponents = function (RestService,Functions, $aside, Definitions, $rootScope, $window) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -162,7 +168,8 @@
 
 			$scope.newComponent = function(selectedTemplate){
 				console.log(selectedTemplate);
-				$scope.selectedTemplate = selectedTemplate;
+				$scope.selectedTemplate ={};
+				Functions.copy(selectedTemplate,$scope.selectedTemplate);
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
 				$scope.selectedTemplate.order = $scope.observation.components.length+1;
 
