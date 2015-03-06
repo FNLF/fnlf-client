@@ -1,0 +1,47 @@
+<div ng-controller="aclController">
+
+	<alert ng-if="error" type="danger" close="closeAlert()">{{error}}</alert>
+	<div class="clearfix"></div>
+
+	<div ng-init="getGroup()">
+		<h2>
+			Gruppe: {{group.name}}
+			</h1>
+
+			<ui-select multiple ng-model="grouppersons" theme="bootstrap" on-select="onSelectGroup($item, $model)" on-remove="onRemovedGroup($item, $model)"> <ui-select-match
+				placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id"></resolveuser></ui-select-match> <ui-select-choices
+				repeat="person in personsFromDb | filter:$select.search track by person.id" refresh="getPersonsByName($select.search)" refresh-delay="300"> {{person.fullname}} ({{person.id}})
+			</ui-select-choices> </ui-select>
+			<div class="clearfix"></div>
+			<br />
+			<!-- Roller -->
+			<h2>Roller:</h2>
+			<form class="form-inline">
+				<input class="form-control" type="text" ng-model="role.name" placeholder="Rollenavn" /> &nbsp; <input class="form-control" type="text" ng-model="role.description" placeholder="Beskrivelse">
+				&nbsp; <input class="form-control" type="text" ng-model="role.ref" placeholder="Referanse">&nbsp;
+				<button ng-disabled="!role.name" class="btn btn-primary" ng-click="createRole();">
+					<i class="fa fa-plus fa-fw"></i> Opprett ny rolle
+				</button>
+			</form>
+
+			<div class="clearfix"></div>
+			<br />
+
+			<!-- Person in roles role.name, role.group, role.description -->
+			<div ng-if="group">
+				<div ng-repeat="role in roles">
+
+					<h4>
+						<a ng-href="#!/group/{{group._id}}/role/{{role._id}}">{{role.name}} - {{role.description}}</a>
+					</h4>
+
+<!-- 					<div ng-init="getPersonsInRole(role._id)"></div> -->
+
+
+				</div>
+
+			</div>
+	</div>
+	<div class="clearfix"></div>
+	<br /> <a class="btn btn-primary" ng-href="#!">Tilbake til oversikt</a>
+</div>
