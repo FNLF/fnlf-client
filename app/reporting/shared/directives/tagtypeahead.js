@@ -14,6 +14,10 @@
 
 		directive.link = function ($scope, element, attrs) {
 
+			if($scope.model instanceof Array){
+				$scope.model = "";
+			}
+
 			$scope.onSelect = function(item, model,label){
 
 				RestService.addTag(item,$scope.group);
