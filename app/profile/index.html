@@ -98,9 +98,8 @@
 	<div class="container">
 
 		<div class="row">
-
-			<div ng-if="error" class="alert alert-info alert-dismissable">
-				<a class="panel-close close" data-dismiss="alert">×</a> <i class="fa fa-coffee"></i> {{error}}
+			<div ng-show="error" close="error = false" class="alert alert-info alert-dismissable">
+				<a class="close" data-dismiss="alert">&times;</a> <i class="fa fa-coffee"></i> {{error}}
 			</div>
 
 
@@ -115,8 +114,9 @@
 			</div>
 				<div class="clearfix"></div>
 				<!-- left column -->
-
-				<div ng-init="getAvatar()" class="col-md-4 col-xs-12 well text-center">
+				
+				<div class="col-md-4 col-xs-12">
+				<div ng-init="getAvatar()" class="well text-center">
 					<!-- Imageupload directive boxxxy-->
 
 					<img class="img-thumbnail img-responsive" ng-show="image" ng-src="{{image.resized.dataURL}}" /> <img class="img-thumbnail img-responsive" ng-show="avatar && !image" ng-src="{{avatar.dataURL}}" />
@@ -126,13 +126,13 @@
 						<i class="fa fa-image fa-fw"></i> Velg profilbilde
 					</button>
 				</div>
-
+				</div>
 				<!-- edit form column -->
 
-
-				<div class="well col-md-8 col-xs-12">
+				<div class="col-md-8 col-xs-12">
+				<div class="well">
 					<h3>
-						<resolveuser ng-if="user.id" userid="user.id">{{user.id}}</resolveuser>
+						<i class="fa fa-wrench fa-fw"></i> <resolveuser ng-if="user.id" userid="user.id">{{user.id}}</resolveuser>
 					</h3>
 					<hr>
 					
@@ -154,6 +154,8 @@
 						</button>
 					</form>
 				</div>
+				</div>
+				
 			</div>
 
 

@@ -34,6 +34,7 @@ angular.module("profileApp").controller("userController",
 			   
 				$scope.clubs = {};
 				userService.getMelwinUser().then(function(data) {
+					
 					//Default club auto
 					if(typeof $scope.profile.settings == 'undefined') $scope.profile.settings = {};
 					if(typeof $scope.profile.settings.default_club == 'undefined' && data.membership.clubs.length == 1) {
@@ -236,7 +237,6 @@ angular.module("profileApp")
 			// application dta from
 			// the API response payload.
 			function handleError(response) {
-				console.log("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
 				// The API response from the server should be
 				// returned in a
 				// normalized format. However, if the request
