@@ -176,6 +176,12 @@
 			RestService.getObservationComponentTemplates()
 				.success(function(data){
 					$scope.templates = data._items;
+					$scope.templates.forEach(function(t){
+						if(t.what=='Annet'){
+							$scope.template = t;
+						}
+					});
+
 				});
 
 			$scope.newComponent = function(selectedTemplate){
