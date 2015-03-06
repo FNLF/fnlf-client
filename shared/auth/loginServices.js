@@ -75,6 +75,7 @@
 							//$cookieStore.put('username', username);
 							$window.sessionStorage.token = response.token64;
 							$window.sessionStorage.username = username;
+							
 							$rootScope.username = username;
 
 							$http.defaults.headers.common.Authorization = 'Basic ' + response.token64;
@@ -115,6 +116,7 @@
 					$rootScope.username = username;
 					$rootScope.authToken = authToken;
 					$rootScope.currentUserSignedIn = true;
+					
 
 					console.log('Trying to verify token ' + authToken + ' for username ' + username);
 					console.log(username);
@@ -129,6 +131,10 @@
 						//Show content, hide login form
 						$rootScope.currentUserSignedIn = true;
 						console.log('Login from session - success');
+						
+						if(typeof response.settings.default_club !== 'undefined') {
+							$rootScope.default_club = response.settings.default_club;
+						}
 						//Broadcast the success update buffers!
 						authService.loginConfirmed('success', function (config) {
 							config.headers["Authorization"] = 'Basic ' + authToken;
