@@ -1,0 +1,24 @@
+<div ng-controller="aclController">
+
+	<alert ng-if="error" type="danger" close="closeAlert()">{{error}}</alert>
+	<div class="clearfix"></div>
+
+	<div ng-init="getRole()">
+		<h2>
+			Role: {{role.name}} ({{group.name}})
+			</h2>
+			
+			<div ng-init="getPersonsInRole()"></div>
+
+			<ui-select multiple ng-model="rolepersons" theme="bootstrap" on-select="onSelectRole($item, $model, role._id)" on-remove="onRemovedRole($item, $model, role._id)"> <ui-select-match
+				placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id"></resolveuser></ui-select-match> <ui-select-choices
+				repeat="person in personsFromDb | filter:$select.search track by person.id" refresh="getPersonsByName($select.search)" refresh-delay="300"> {{person.fullname}} ({{person.id}})
+			</ui-select-choices> </ui-select>
+			<div class="clearfix"></div>
+			<br />
+	</div>
+	
+	<div class="clearfix"></div>
+	<br />
+	<a class="btn btn-primary" ng-href="#!/group/{{group._id}}">Tilbake til gruppe</a>
+</div>

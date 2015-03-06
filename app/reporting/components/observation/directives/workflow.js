@@ -43,8 +43,7 @@ angular.module('reportingApp')
 			
 		$scope.openWorkflowAside = function() {
 			
-			console.log("OBS CHANGED??)");
-			console.log($scope.observationChanges);
+			if(!$scope.workflowpermission) return; 
 			
 			$location.path('/observation/modal-route', false);
 			
@@ -133,6 +132,7 @@ angular.module('reportingApp')
 					btn_class: btn_class, 
 					icon: icon });
 				
+				$scope.workflowpermission = response.actions[k].permission;
 			};
 			
 			
