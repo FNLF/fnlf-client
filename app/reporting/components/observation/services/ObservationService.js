@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('ObservationService', function (RestService,Definitions,$rootScope) {
+		.service('ObservationService', function (RestService,Definitions,Functions,$rootScope) {
 
 			function Observation() {
 				this.involved = [];
@@ -65,17 +65,7 @@
 
 
 
-			this.copy  = function(firstObject,secondObject){
 
-				for(var k in firstObject){
-					secondObject[k]=firstObject[k];
-				}
-				console.log('copy');
-				console.log(firstObject);
-				console.log(secondObject);
-
-			};
-			var copyFunction = this.copy;
 
 
 			var clearFullname = function(person){
@@ -107,7 +97,7 @@
 				var _etag = observation._etag;
 
 				var observationDto = {};
-				copyFunction(observation,observationDto);
+				Functions.copy(observation,observationDto);
 
 				delete observationDto.id;
 				delete observationDto.reporter;
