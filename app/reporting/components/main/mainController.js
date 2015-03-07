@@ -75,6 +75,7 @@
 					        	var filteredData = params.filter() ? $filter('filter')($scope.observations, params.filter()) : $scope.observations;
 					            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 					            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+					            params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
 					        }
 					    });
 						
@@ -84,7 +85,6 @@
 			};
 			
 			$scope.getAllObservations = function(){
-				var userName = $rootScope.username;
 				RestService.getAllObservations()
 				.success(function(r){
 
@@ -96,7 +96,6 @@
 						}
 						return false;
 					});
-					
 					
 					$scope.tableParams = new ngTableParams({
 				        page: 1,            // show first page
@@ -110,9 +109,45 @@
 				        	var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
 				            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 				            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+				            params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
 				        }
 				    });
 
+					
+				});
+				
+			};
+			
+			$scope.getObservationsTodo = function(){
+				RestService.getWorkflowTodo()
+				.success(function(r){
+					
+					var data = r._items
+					.filter(function(it){
+						if(it.id){
+							
+							return true;
+						}
+						return false;
+					});
+					
+					$scope.todoTable = new ngTableParams({
+						page: 1,            // show first page
+						count: 5, // count per page
+						counts: [], 
+						sorting: {
+							name: 'asc'     // initial sorting
+						}
+					}, {
+						total: data.length, // length of data
+						getData: function($defer, params) {
+							var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+							var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+							$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+							params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
+						}
+					});
+					
 					
 				});
 				

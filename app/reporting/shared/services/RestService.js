@@ -78,8 +78,11 @@
 			 * Workflows here!
 			 */
 			this.getWorkflowState = function (objectId){
-				console.log(objectId);
 				return $http.get(urlBase + '/observations/workflow/' + objectId + '/state');
+			};
+			
+			this.getWorkflowTodo = function (){
+				return $http.get(urlBase + '/observations/workflow/todo');
 			};
 			
 			this.changeWorkflowState = function (objectId, action, comment){
