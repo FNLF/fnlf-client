@@ -28,16 +28,82 @@ angular.module("editorApp").controller("editorController",[
 				'RestService',
 				function($scope, $http, editorService, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams, RestService) {
 
-					$scope.observation={};
-					$scope.observation.components=[];
 
+					$scope.templates=[];
 					RestService.getObservationComponentTemplates()
 						.success(function(data){
 							$scope.templates = data._items;
-							$scope.observation.components = $scope.templates;
+
+
+							var i = 0;
+
+							$scope.templates.forEach(function(t){
+								if(!t.sort){
+									t.sort = i;
+
+								}
+								i++;
+							});
+
+						});
+					$scope.allTags = [];
+					RestService.getAllTags()
+						.success(function(data){
+							$scope.allTags = data._items;
 						});
 
+
+					$scope.newTemplate = function(){
+						var component = {};
+						component.what='ny';
+
+						RestService.createObservationComponentTemplate(component)
+							.success(function(data){
+								console.log('Created new template');
+								console.log(data);
+								$scope.templates.push(data);
+								data.sort = $scope.templates.length;
+							});
+					};
+
+					var saveFn = function(component){
+						RestService.updateObservationComponentTemplate(component)
+								.success(function(data){
+									console.log(data);
+									//angular.copy(data,component);
+								});
+					};
+
+
+					$scope.incrementSort = function(component){
+						component.sort++;
+						saveFn(component);
+					};
+
+					$scope.decrementSort = function(component){
+						component.sort--;
+						saveFn(component);
+
+					};
+
+					$scope.hideTemplate = function(component){
+						component.active=false;
+						saveFn(component);
+					};
+
+					$scope.showTemplate = function(component){
+						component.active=true;
+						saveFn(component);
+					};
+
+					$scope.saveTemplate = function(component){
+						saveFn(component);
+					};
+
 				} ]);
+
+
+
 
 				angular.module("editorApp").service("editorService",['$http',	'$q', '$rootScope', function($http, $q, $rootScope) {
 

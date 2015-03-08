@@ -44,6 +44,15 @@
 				return $http.get(urlBase + '/observations/components');
 			};
 
+			this.updateObservationComponentTemplate = function (template) {
+				return $http.put(urlBase + '/observations/components/'+template._id,template);
+			};
+
+			this.createObservationComponentTemplate = function (template) {
+				return $http.post(urlBase + '/observations/components/',template);
+			};
+
+
 			this.updateObservation = function (observation, _id, etag) {
 
 
@@ -109,6 +118,10 @@
 			/**
 			 * Tags
 			 */
+
+			this.getAllTags = function(){
+				return $http.get(urlBase + '/tags?sort=group,-freq&max_results=200');
+			};
 
 			this.getTags = function(group){
 				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}&sort=-freq');

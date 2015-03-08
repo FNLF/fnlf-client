@@ -52,7 +52,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "components/component/directives/observationComponentSummary.html";
+		directive.templateUrl = "/app/reporting/components/component/directives/observationComponentSummary.html";
 
 		directive.scope = {
 			component: '='
@@ -73,7 +73,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "components/component/directives/observationComponentsSummary.html";
+		directive.templateUrl = "/app/reporting/components/component/directives/observationComponentsSummary.html";
 		
 		directive.scope = {
 			observation: '='

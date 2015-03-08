@@ -2,4 +2,15 @@
 
 	<h1>Tags</h1>
 
+	<table class="table">
+		<tr>
+			<td>Group</td> <td>Tag</td> <td>Freq</td>
+		</tr>
+		<tr ng-repeat="tag in allTags">
+			<td>{{tag.group}}</td> <td>{{tag.tag}}</td> <td>{{tag.freq}}</td>
+
+		</tr>
+
+	</table>
+
 </div>

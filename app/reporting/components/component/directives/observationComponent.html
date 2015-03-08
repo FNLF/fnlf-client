@@ -33,7 +33,7 @@
 		<tagging model="component.tags" group="component" noun="faktorer"></tagging>
 	</div>
 	
-	<div class="col-xs-12 col-md-6 col-lg-4">
+	<div class="col-xs-12 col-md-6 col-lg-4 hideInTemplateEditor">
 		<label>Involvert</label>
 		<ui-select multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blandt involverte personer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 		<ui-select-choices repeat="person in persons track by person.id"> {{person.fullname}} </ui-select-choices> </ui-select>
@@ -49,12 +49,12 @@
 	</div>
 	
 	<div class="clearfix"></div>
-	<div class="col-xs-12">
+	<div class="col-xs-12 hideInTemplateEditor">
 		<label>Fritekst</label> <input type="text" ng-model="component.how" class="form-control">
 		</textarea>
 	</div>
 	
-	<div class="pull-right">
+	<div class="pull-right hideInTemplateEditor">
 		<br>
 
 
