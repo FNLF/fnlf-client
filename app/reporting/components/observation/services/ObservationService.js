@@ -94,6 +94,7 @@
 				clearFullnameFromObservation(observation);
 
 				var _id = observation._id;
+				var id = observation.id;
 				var _etag = observation._etag;
 
 				var observationDto = {};
@@ -120,15 +121,16 @@
 
 				RestService.updateObservation(observationDto, _id, _etag)
 				.success(function(data){
-					RestService.getObservation(_id)
+					RestService.getObservation(id)
 						.success(function(updated){
+							$rootScope.error = null;
 							clearFullnameFromObservation(updated);
 							callback(updated);
 						});
 				}).error(function(error){
 					console.log(error);
 					$rootScope.error=error;
-					RestService.getObservation(_id)
+					RestService.getObservation(id)
 						.success(function(updated){
 							clearFullnameFromObservation(updated);
 							callback(updated);
