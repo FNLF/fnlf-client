@@ -27,6 +27,18 @@
 
 				return observationTypes;
 			};
+			
+			this.resolveObservationTypes = function(id) {
+				
+				var ot = this.getObservationTypes();
+				
+				for (i = 0; i < ot.length; i++) {
+				    if(ot[i]['id'] == id) return ot[i]['name'];
+				}
+				
+				return '';
+				
+			}; 
 
 
 			this.getObservationTypeOptions = function () {

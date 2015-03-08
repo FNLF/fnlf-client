@@ -39,7 +39,7 @@
 					<td data-title="'Title'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
 					<td data-title="'Type'"><span class="label"
 						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
-							{{observationTypesArray[observation.type]}}</span> &nbsp; </span></td>
+							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
 				</tr>
 			</table>
 
@@ -60,7 +60,7 @@
 					<td data-title="'Title'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id.$oid)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
 					<td data-title="'Type'"><span class="label"
 						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
-							{{observationTypesArray[observation.type]}}</span> &nbsp; </span></td>
+							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
 				</tr>
 			</table>
 
@@ -81,9 +81,11 @@
 				<td data-title="'Title'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
 				<td data-title="'Club'" filter="{ 'club': 'text' }"><resolveclub clubid="observation.club"</resolveclub></td>
 				<td data-title="'Rating'">{{observation.rating.actual}}/{{observation.rating.potential}}</td>
-				<td data-title="'Type'"><span class="label"
-					ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
-						{{observationTypesArray[observation.type]}}</span> &nbsp; </span></td>
+				<td data-title="'Type'">
+					<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+						{{resolveObservationType(observation.type)}}</span> &nbsp; 
+					</span>
+				</td>
 
 			</tr>
 		</table>

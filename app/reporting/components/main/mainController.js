@@ -15,7 +15,15 @@
 			
 			$scope.observations = {};
 			$scope.allObservations = {};
+			
+			$scope.observationTypes = Definitions.getObservationTypes();
 
+			$scope.resolveObservationType = function(id) {
+				
+				return Definitions.resolveObservationTypes(id);
+			};
+			
+			
 			$scope.editObservation = function(_id){
 				console.log("Edit");
 				RestService.getObservation(_id).success(function(item){
