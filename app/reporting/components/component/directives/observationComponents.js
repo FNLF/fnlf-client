@@ -187,7 +187,7 @@
 			$scope.newComponent = function(selectedTemplate){
 				console.log(selectedTemplate);
 				$scope.selectedTemplate ={};
-				Functions.copy(selectedTemplate,$scope.selectedTemplate);
+				angular.copy(selectedTemplate,$scope.selectedTemplate);
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
 				$scope.selectedTemplate.order = $scope.observation.components.length+1;
 
