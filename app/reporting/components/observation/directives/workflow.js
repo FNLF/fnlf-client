@@ -8,7 +8,7 @@
 
 
 angular.module('reportingApp')
-	   .directive('workflow', function (RestService, ObservationService, $aside, $rootScope, $window) {
+	   .directive('workflow', function (RestService, ObservationService, $aside, $rootScope, $window, Definitions) {
   
 	var directive = {};
 
@@ -27,6 +27,10 @@ angular.module('reportingApp')
 	
 	directive.controller = function ($scope, $rootScope, $location, $aside) {
 
+		$scope.workflowActions = {init: 'Opprettet', set_ready: 'Satt klar', send_to_hi: 'Sendt til HI', approve_hi: 'Godkjent av HI', reject_hi: 'Avslått av HI', approve_fs: 'Godkjent av fagsjef',
+				reject_fs: 'Avslått av Fagsjef', approve_su: 'Godkjent av SU', reject_su: 'Avslått av SU', withdraw: 'Trekt tilbake', reopen: 'Gjenåpnet', reopen_su: 'Gjenåpnet av SU'};
+		
+		
 		
 		$scope.workflowTransition = function(action, comment) {
 			
@@ -81,8 +85,10 @@ angular.module('reportingApp')
 
 		
 	directive.link = function($scope, element, attrs) {
+
+		$scope.observationTypes = Definitions.getObservationTypes();
 	
-	$scope.$watch('observation',function(newValue,oldValue) {
+		$scope.$watch('observation',function(newValue,oldValue) {
 		
 	if(newValue && newValue._id) {
 		console.log(newValue);
