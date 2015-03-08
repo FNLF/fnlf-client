@@ -177,7 +177,7 @@
 				.success(function(data){
 					$scope.templates = data._items;
 					$scope.templates.forEach(function(t){
-						if(t.what=='Annet'){
+						if(t.default){
 							$scope.template = t;
 						}
 					});
