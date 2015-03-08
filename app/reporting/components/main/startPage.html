@@ -1,9 +1,9 @@
 
 <div class="" ng-controller="MainController">
-
+<div class="row">
 	<div class="col-md-6 col-xs-12">
 		<div class="">
-			<h2>Registrer ny observasjon</h2>
+			<h3>Registrer ny observasjon</h3>
 		</div>
 		<div>
 			<div class="form-group">
@@ -17,71 +17,66 @@
 			</div>
 		</div>
 	</div>
+	</div>
 
+<div class="row">
 	<div class="col-xs-12 col-md-6" ng-init="getObservations()">
-		<div>
-			<h2>Mine observasjoner</h2>
-		</div>
-		<div>
-			<!-- 			<div class="list-group"> -->
-			<!-- 				<div class="list-group-item" ng-repeat="observation in observations"> -->
-			<!-- 					<div> -->
-			<!-- 						<a src="#" ng-click="editObservation(observation._id)"><span> #{{observation.id}} {{observation.tags.join(' ')}} </span></a> -->
-			<!-- 					</div> -->
-			<!-- 				</div> -->
-			<!-- 			</div> -->
-
 			<table ng-table="tableMyObservations" show-filter="false" class="table table-condensed table-striped table-responsive">
+				<caption>
+					<h3>Mine observasjoner</h3>
+				</caption>
 				<tr ng-repeat="observation in $data">
 
 					<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
-					<td data-title="'Date'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
-					<td data-title="'Title'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+					<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
 					<td data-title="'Type'"><span class="label"
 						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
 				</tr>
 			</table>
 
-		</div>
 
 	</div>
-	
+
 	<div class="col-xs-12 col-md-6" ng-init="getObservationsTodo()">
-		<div>
-			<h2>Til behandling</h2>
-		</div>
-		<div>
-			<table ng-table="todoTable" show-filter="false" class="table table-condensed table-striped table-responsive">
-				<tr ng-repeat="observation in $data">
 
-					<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id.$oid)">#{{observation.id}}</a></td>
-					<td data-title="'Date'" sortable="'date'">{{observation.when.$date | date:'yyyy-MM-dd'}}</td>
-					<td data-title="'Title'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id.$oid)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
-					<td data-title="'Type'"><span class="label"
-						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
-							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
-				</tr>
-			</table>
+		<table ng-table="todoTable" show-filter="false" class="table table-condensed table-striped table-responsive">
+			<caption>
+				<h3>Til behandling</h3>
+			</caption>
+			<tr ng-repeat="observation in $data">
 
-		</div>
+				<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id.$oid)">#{{observation.id}}</a></td>
+				<td data-title="'Tid'" sortable="'date'">{{observation.when.$date | date:'yyyy-MM-dd'}}</td>
+				<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id.$oid)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+				<td data-title="'Type'"><span class="label"
+					ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+						{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
+			</tr>
+		</table>
+
 
 	</div>
-	
-	<div class="clearfix"></div>
+</div>
+
+<div class="row">
 
 	<div class="col-xs-12 col-md-12" ng-init="getAllObservations()">
 		<!-- ng-table all observations -->
 		<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
+			
+			<caption>
+				<h3>Observasjoner</h3>
+			</caption>
 			<tr ng-repeat="observation in $data">
 
-
 				<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
-				<td data-title="'Date'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
-				<td data-title="'Title'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
-				<td data-title="'Club'" filter="{ 'club': 'text' }"><resolveclub clubid="observation.club"</resolveclub></td>
-				<td data-title="'Rating'">{{observation.rating.actual}}/{{observation.rating.potential}}</td>
-				<td data-title="'Type'">
+				<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
+				<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+				<td data-title="'Klubb'" filter="{ 'club': 'text' }"><resolveclub clubid="observation.club"</resolveclub></td>
+				<td data-title="'Gradering'">{{observation.rating.actual}}/{{observation.rating.potential}}</td>
+				<td data-title="'Type'" filter="{ 'type': 'text' }">
 					<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 						{{resolveObservationType(observation.type)}}</span> &nbsp; 
 					</span>
@@ -89,6 +84,7 @@
 
 			</tr>
 		</table>
-		{{pages | json}}
 
+	</div>
+	</div>
 	</div>

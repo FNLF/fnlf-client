@@ -51,18 +51,22 @@
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				<button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed">
+				<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 				</button>
 				<ng-include ng-if="currentUserSignedIn" src="'/shared/partials/applicationSwitcher.html'"></ng-include>
 				<a class="navbar-brand" ng-href="#!/"> F/NLF Elektroniske tjenester</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			
+			<div class="collapse navbar-collapse" collapse="!navbarCollapsed">
 
 				<ul class="nav navbar-nav navbar-right">
-
 					<li ng-show="currentUserSignedIn"><fnlf-logout></fnlf-logout></li>
 
 				</ul>
@@ -79,6 +83,7 @@
 	<!-- Wrap page content to have bar at bottom! -->
 <div id="wrap"> 
 	<div class="container">
+		
 		<div class="alert alert-info" role="alert" ng-show="error">{{error}}</div>
 
 		<div ng-hide="currentUserSignedIn">
@@ -88,18 +93,33 @@
 
 
 		<div ng-if="currentUserSignedIn" class="ng-cloak" ng-cloak>
-
+			
+			<div class="col-md-3 col-xs-12">
 			<p>
-				<a href="app/reporting/" class="btn btn-primary col-md-3 col-xs-12"><i class="fa fa-eye fa-fw"></i> Observasjons rapportering</a>
+				<a href="app/reporting/" class="btn btn-primary btn-block"><i class="fa fa-eye fa-fw"></i> Observasjonsregistrering</a>
 			</p>
 			<div class="clearfix"></div>
 			<p>
-				<a href="app/profile/" class="btn btn-primary col-md-3 col-xs-12"><i class="fa fa-user fa-fw"></i> Profil</a>
+				<a href="app/profile/" class="btn btn-primary btn-block"><i class="fa fa-user fa-fw"></i> Profil</a>
 			</p>
 			<div class="clearfix"></div>
-			<p>
-				<a href="app/club/" class="btn btn-warning col-md-3 col-xs-12"><i class="fa fa-group fa-fw"></i> Klubb</a>
-			</p>
+<!-- 			<p> -->
+<!-- 				<a href="app/club/" class="btn btn-warning btn-block"><i class="fa fa-group fa-fw"></i> Klubb</a> -->
+<!-- 			</p> -->
+			</div>
+			
+			<div class="col-md-9 col-xs-12">
+			<div class="jumbotron">
+  <h1>Nytt system</h1>
+  <p>Dette systemet skal erstatte dagens "hendelsesrapportering" og vil i tillegg kunne gi flere tjenester på sikt.</p>
+  <p>Systemet skal fra 22. mars etter fagseminaret være i bruk av samtlige klubber og vil erstatte dagens papirskjema og "Elektronisk hendelsesrapportering".</p>
+  <p>Er dette første gangen du logger inn, vennligst gå til <a ng-href="/app/profile">din profil</a> og oppdater din informasjon.</p>
+  <p><a class="btn btn-primary btn-lg" ng-href="/app/reporting" role="button"><i class="fa fa-eye fa-fw"></i> Observasjonsregistrering</a></p>
+</div>
+			
+			</div>
+			
+			
 		</div>
 	</div>
 	
