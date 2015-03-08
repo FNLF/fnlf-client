@@ -6,7 +6,7 @@
 		<textarea tooltip-placement="top" tooltip="Legg inn relevante kommentarer for å endre status på observasjonen" ng-model="workflow.comment" name="comment" class="form-control" rows="3" id="comment"></textarea>
 	</div>
 	<p>
-		Siste kommentar: <strong>{{observation.workflow.comment}}</strong> @ {{observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}} by
+		Siste kommentar: <strong>{{observation.workflow.comment}}</strong> @ {{observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}} av
 		<resolveuser userid="observation.workflow.audit.0.u"></resolveuser>
 	</p>
 
@@ -26,12 +26,10 @@
 
 <table ng-table="workflowAuditTrail" class="table table-condensed table-striped">
 	<tr ng-repeat="w in observation.workflow.audit">
-		<td data-title="'Date'">{{w.t | date:'yyyy-MM-dd HH:mm'}}</td>
-		<td data-title="'Action'">{{w.a}}</td>
-		<td data-title="'From'">{{w.s}}</td>
-		<td data-title="'To'">{{w.d}}</td>
-		<td data-title="'User'"><resolveuser userid="w.u"></resolveuser></td>
-		<td data-title="'Comment'">{{w.c}}</td>
+		<td data-title="'Dato'">{{w.t | date:'yyyy-MM-dd HH:mm'}}</td>
+		<td data-title="'Hending'">{{workflowActions[w.a]}}</td>
+		<td data-title="'Av'"><resolveuser userid="w.u"></resolveuser></td>
+		<td data-title="'Kommentar'">{{w.c}}</td>
 	</tr>
 </table>
 
