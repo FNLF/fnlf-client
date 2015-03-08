@@ -24,8 +24,8 @@
 				return $http.post(urlBase + '/observations', observation);
 			};
 			
-			this.getObservation = function (_id) {
-				return $http.get(urlBase + '/observations/'+_id);
+			this.getObservation = function (id) {
+				return $http.get(urlBase + '/observations/'+id);
 			};
 
 			this.getObservationById = function (id) {

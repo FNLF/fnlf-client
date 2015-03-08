@@ -1,6 +1,6 @@
 (function () {
 
-	var tagtypeahead = function (RestService) {
+	var tagtypeahead = function (RestService,Functions) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -14,6 +14,10 @@
 
 		directive.link = function ($scope, element, attrs) {
 
+			if($scope.model instanceof Array){
+				$scope.model = "";
+			}
+
 			$scope.onSelect = function(item, model,label){
 
 				RestService.addTag(item,$scope.group);
@@ -23,15 +27,7 @@
 			$scope.tags = [];
 			RestService.getTags($scope.group)
 				.success(function(data){
-					var allTags=data._items.map(function(t){return t.tag});
-
-					var tmp ={};
-					allTags.forEach(function(t){
-						tmp[t]=t;
-					});
-					Object.keys(tmp).forEach(function(k){
-						$scope.tags.push(tmp[k]);
-					});
+					$scope.tags = Functions.deduplicate(data._items.map(function(t){return t.tag}));
 				});
 		};
 

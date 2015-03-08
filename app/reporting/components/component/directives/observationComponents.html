@@ -6,7 +6,7 @@
 
 				<accordion-heading>
 					<div>
-						<span class="glyphicon" ng-class="{'glyphicon-chevron-down': component.open, 'glyphicon-chevron-up': !component.open}"></span>
+						<span class="glyphicon" ng-class="{'glyphicon-chevron-up': component.open, 'glyphicon-chevron-down': !component.open}"></span>
 						<observation-component-summary component="component"></observation-component-summary>
 
 					</div>
@@ -21,17 +21,20 @@
 
 
 
-	<div class="form-group col-xs-12">
-		<div class="btn-group" dropdown is-open="status.isopen">
+	<div>
+		<div class="btn-group col-xs-6">
 
-			<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-				Ny hending <span class="caret"></span>
+
+			<select tooltip="Ny hending"  class="form-control " data-placeholder="Hending"
+					ng-model="template"
+					ng-options="item.what for item in templates">
+				<option value="" disabled>Velg type hending</option>
+			</select>
+
+			<button type="button" class="btn btn-primary" dropdown-toggle ng-disabled="!template" ng-click="newComponent(template)">
+				<span class="fa fa-plus"></span> Ny hending
 			</button>
-			<ul class="dropdown-menu" role="menu">
-				<li ng-repeat="item in templates track by $index"><a ng-click="newComponent(item)">{{item.what}}</a>
-				</li>
 
-			</ul>
 
 		</div>
 

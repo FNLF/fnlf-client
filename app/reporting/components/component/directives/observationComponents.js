@@ -16,8 +16,11 @@
 			var tmpOrder = component.order;
 			component.order = objWithPrevIndex.order;
 			objWithPrevIndex.order = tmpOrder
-		}
-
+		}else{
+         	if(component.order>1){
+         		component.order--;
+         	}
+         }
 
 	};
 
@@ -35,8 +38,11 @@
 			var tmpOrder = component.order;
 			component.order = objWithNextIndex.order;
 			objWithNextIndex.order = tmpOrder
+		}else{
+			if(component.order<components.length){
+				component.order++;
+			}
 		}
-
 
 	};
 
@@ -96,7 +102,7 @@
 	});
 
 
-	var observationComponents = function (RestService, $aside, Definitions, $rootScope, $window) {
+	var observationComponents = function (RestService,Functions,ResolveService, $aside, Definitions, $rootScope, $window) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -154,15 +160,34 @@
 				return {id:p.id, fullname:p.fullname, tmpname:p.tmpname};
 			});
 
+			$scope.persons.forEach(function(p){
+				if(p.tmpname){
+					p.fullname=p.tmpname;
+				}
+				else{
+					ResolveService.getUser(p.id).then(function(u){
+						p.fullname=u.firstname+' '+u.lastname;
+					})
+				}
+			});
+
+
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()
 				.success(function(data){
 					$scope.templates = data._items;
+					$scope.templates.forEach(function(t){
+						if(t.default){
+							$scope.template = t;
+						}
+					});
+
 				});
 
 			$scope.newComponent = function(selectedTemplate){
 				console.log(selectedTemplate);
-				$scope.selectedTemplate = selectedTemplate;
+				$scope.selectedTemplate ={};
+				angular.copy(selectedTemplate,$scope.selectedTemplate);
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
 				$scope.selectedTemplate.order = $scope.observation.components.length+1;
 

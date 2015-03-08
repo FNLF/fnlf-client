@@ -1,8 +1,5 @@
 <div ng-repeat="component in observation.components | orderBy:'order'">
 	<p>
 		<observation-component-summary component="component"></observation-component-summary>
-
-		<span class="fa fa-angle-down" ng-click="incrementOrder(component)"></span>
-		<span class="fa fa-angle-up" ng-click="decrementOrder(component)"></span>
 	</p>
 </div>
