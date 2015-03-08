@@ -67,10 +67,33 @@ angular.module("editorApp").controller("editorController",[
 					};
 
 					var saveFn = function(component){
-						RestService.updateObservationComponentTemplate(component)
+
+						var dto = {};
+						angular.copy(component,dto);
+
+
+						var _id = component._id;
+						var _etag = component._etag;
+
+						delete dto.sort;
+						delete dto.editTitle;
+						delete dto.open;
+
+						delete dto._updated;
+						delete dto._latest_version;
+						delete dto._version;
+						delete dto.workflow;
+						delete dto._links;
+						delete dto._created;
+						delete dto._status;
+						delete dto._etag;
+						delete dto._id;
+
+
+						RestService.updateObservationComponentTemplate(dto,_id,_etag)
 								.success(function(data){
 									console.log(data);
-									//angular.copy(data,component);
+									angular.copy(data,component);
 								});
 					};
 

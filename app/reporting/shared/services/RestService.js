@@ -44,8 +44,13 @@
 				return $http.get(urlBase + '/observations/components');
 			};
 
-			this.updateObservationComponentTemplate = function (template) {
-				return $http.put(urlBase + '/observations/components/'+template._id,template);
+			this.updateObservationComponentTemplate = function (template,_id,_etag) {
+				var config = {};
+				config.headers = {};
+				config.headers['If-Match'] = _etag;
+
+            	var url = urlBase + '/observations/components/' + _id;
+            	return $http({ method: 'PUT', url: url, data: template, headers: config.headers});
 			};
 
 			this.createObservationComponentTemplate = function (template) {
