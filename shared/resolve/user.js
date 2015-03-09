@@ -4,7 +4,7 @@ angular.module('resolve')
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.template = '<span ng-if="userid<=0">{{tmpname}}</span><span ng-if="userid>0"><a href="/app/profile/{{userid}}">{{firstname}} {{lastname}}</a></span>';
+		directive.template = '<span ng-if="userid==0">{{tmpname}}</span><span ng-if="userid!=0"><a href="/app/profile/{{userid}}">{{firstname}} {{lastname}}</a></span>';
 
 		directive.scope = {
 			userid: '=',
@@ -18,6 +18,10 @@ angular.module('resolve')
 						$scope.firstname = user.firstname;
 						$scope.lastname = user.lastname;
 					});
+			}
+			else if($scope.userid == -1) {
+				$scope.firstname = 'Anonyme';
+				$scope.lastname = 'Anonymesen';
 			}
 
 		};
