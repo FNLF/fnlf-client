@@ -22,6 +22,10 @@
 				
 				return Definitions.resolveObservationTypes(id);
 			};
+			$scope.resolveWorkflowState = function(state) {
+				
+				return Definitions.resolveObservationWorkflowState(state);
+			};
 			
 			
 			$scope.editObservation = function(_id){

@@ -30,7 +30,8 @@
 					<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
 					<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
 					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
-					<td data-title="'Type'"><span class="label"
+					<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+					<td data-title="'Type'"><span class="label pull-right"
 						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
 				</tr>
@@ -50,7 +51,8 @@
 				<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id.$oid)">#{{observation.id}}</a></td>
 				<td data-title="'Tid'" sortable="'date'">{{observation.when.$date | date:'yyyy-MM-dd'}}</td>
 				<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id.$oid)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
-				<td data-title="'Type'"><span class="label"
+				<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+				<td data-title="'Type'"><span class="label pull-right"
 					ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 						{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
 			</tr>
@@ -76,7 +78,8 @@
 				<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
 				<td data-title="'Klubb'" filter="{ 'club': 'text' }"><resolveclub clubid="observation.club"</resolveclub></td>
 				<td data-title="'Gradering'">{{observation.rating.actual}}/{{observation.rating.potential}}</td>
-				<td data-title="'Type'" filter="{ 'type': 'text' }">
+				<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+				<td data-title="'Type'"><span class="label pull-right"
 					<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 						{{resolveObservationType(observation.type)}}</span> &nbsp; 
 					</span>
