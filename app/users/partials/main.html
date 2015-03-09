@@ -1,0 +1,13 @@
+<div ng-init="getAllUsers()">
+
+<table ng-table="usersTable" show-filter="false" class="table table-condensed table-striped table-responsive">
+	<caption>Brukere</caption>
+	<tr ng-repeat="user in $data">
+
+		<td data-title="'Name'" sortable="'name'"><resolveuser userid="user.id"></resolveuser></td>
+		<td data-title="'Description'" sortable="'description'">{{user.id}}</td>
+		<td data-title="'Active'" sortable="'active'">{{user.id}}</td>
+	</tr>
+</table>
+
+</div>
