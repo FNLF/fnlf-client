@@ -4,9 +4,9 @@
 	<caption>Brukere</caption>
 	<tr ng-repeat="user in $data">
 
-		<td data-title="'Name'" sortable="'name'"><resolveuser userid="user.id"></resolveuser></td>
-		<td data-title="'Description'" sortable="'description'">{{user.id}}</td>
-		<td data-title="'Active'" sortable="'active'">{{user.id}}</td>
+		<td data-title="'Navn'" sortable="'name'"><resolveuser userid="user.id"></resolveuser></td>
+		<td data-title="'Medlemsnr'" sortable="'description'">{{user.id}}</td>
+		<td data-title="'Opprettet'" sortable="'active'">{{user._created | date:'yyyy-MM-dd HH:mm'}}</td>
 	</tr>
 </table>
 
