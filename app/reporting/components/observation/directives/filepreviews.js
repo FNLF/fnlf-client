@@ -6,7 +6,6 @@
  * 
  */
 
-
 angular.module('reportingApp')
 	   .directive('filepreviews', function (RestService, ObservationService, $aside, $rootScope, $window) {
   
@@ -21,27 +20,51 @@ angular.module('reportingApp')
 	
 	directive.transcluded = true;
 	
-	directive.template = function(tElement, tAttrs) { 
+	directive.templateUrl = "components/observation/directives/files.html";
+//	directive.template = function(tElement, tAttrs) { 
 		
-		return '<div ng-repeat="f in thumbnails"> \
-					<div class="col-xs-6 col-md-2"> \
-					<a ng-click="openFileAside(f.objectid)" class="thumbnail"> \
-						<img ng-src="{{f.src}}" class="img-responsive"> \
-					</a> \
-					</div> \
-				</div>'; 
-	};
+//		return '<div ng-repeat="f in thumbnails"> \
+//					<div class="col-xs-6 col-md-2"> \
+//					<a ng-click="openFileAside(f.objectid)" class="thumbnail"> \
+//						<img ng-src="{{f.src}}" class="img-responsive"> \
+//					</a> \
+//					</div> \
+//				</div> \
+//				</div> \
+//				<div ng-repeat="l in filelist"> \
+//				<div><a href="{{l.url}}">{{l.name}}</a>{{l.size}} Bytes {{l.type}}</div><br /> \
+//				</div>{{filelist | json}}'; 
+//	};
 	
 	
-	directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q) {
-
+	directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q, $window) {
+		var urlBase = '/api/v1';
+		
 		$scope.getFileList = function() {
 			 return $scope.files;
 		 };
 		 
-		 $scope.getFile = function(objectid) {
+		 
+		 $scope.buildFileList = function() {
+			 
+			 for(k in $scope.observation.files) {
+				 
+				 $scope.fetchFileInfo($scope.observation.files[k]).then(function(response) {
+					 $scope.filelist.push({'name': response.name, 
+						 'type': response.content_type,'size': bytesToSize(response.size), 
+						 'url': urlBase + '/download/' + response._id + '?token=' + $window.sessionStorage.token, 
+						 '_id': response._id});
+					 
+					 if(response.content_type.match(/image/g) != null) {
+						 $scope.getImageFile(response._id);
+					 }
+				 });
+			 };
+		 };
+		 
+		 $scope.getImageFile = function(objectid) {
 			 console.log('Getting file for preview!!!');
-			 $scope.fetchFile(objectid).then(function(response) {
+			 $scope.fetchImageFile(objectid).then(function(response) {
 					
 				 $scope.thumbnails.push({src: 'data:'+response.mimetype+';charset=utf8;base64,'+response.src, objectid: objectid}); 
 			 });
@@ -49,21 +72,28 @@ angular.module('reportingApp')
 		 };
 		 
 		
-		$scope.fetchFile = function(objectid) {
-			var urlBase = '/api/v1';
+		$scope.fetchFileInfo = function(objectid) {
+			
 			var request = $http({
 				method : "get",
-				url : urlBase + '/download/' + objectid + '/small'
+				url : urlBase + '/files/' + objectid + '?projection={"file": 0}&bambus'
 			});
 			return (request.then(handleSuccess, handleError));
 
 		};
-		
-		$scope.fetchFullsizeFile = function(objectid) {
-			var urlBase = '/api/v1';
+		$scope.fetchImageFile = function(objectid) {
 			var request = $http({
 				method : "get",
-				url : urlBase + '/download/' + objectid + '/large'
+				url : urlBase + '/download/image/' + objectid + '/small'
+			});
+			return (request.then(handleSuccess, handleError));
+			
+		};
+		
+		$scope.fetchFullsizeFile = function(objectid) {
+			var request = $http({
+				method : "get",
+				url : urlBase + '/download/image/' + objectid + '/large'
 			});
 			return (request.then(handleSuccess, handleError));
 
@@ -138,6 +168,14 @@ angular.module('reportingApp')
 		  };
 		});
 		
+		function bytesToSize(bytes) {
+			   if(bytes == 0) return '0 Byte';
+			   var k = 1000;
+			   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+			   var i = Math.floor(Math.log(bytes) / Math.log(k));
+			   return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+			}
+		
 		
 	};
 
@@ -147,14 +185,12 @@ angular.module('reportingApp')
 		$scope.$watch('observation',function(newValue,oldValue) {
 			
 			if(newValue) {
-				var urlBase = '/api/v1';
 				
 				$scope.thumbnails = [];
+				$scope.filelist = [];
 				
-				for(key in $scope.observation.files) {
-					
-					$scope.getFile($scope.observation.files[key]);
-				};
+				$scope.buildFileList();
+				
 				
 		};
 	});

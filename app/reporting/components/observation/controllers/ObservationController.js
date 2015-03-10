@@ -111,9 +111,10 @@
 				
 					 var file = files[i];
 					 var uploads = 0;
+					 
 					 $upload.upload({
 						 url: urlBase + '/files/',
-						 fields: {'ref': 'observation', 'ref_id': $scope.observation._id}, //additional form fields
+						 fields: {'ref': 'observations', 'ref_id': $scope.observation._id, 'content_type': file.type, 'name': file.name, 'size': file.size, 'owner': $rootScope.username }, //additional form fields
 						 file: file,
 						 method: 'POST',
 						 fileFormDataName: 'file', //Assign file to field name
