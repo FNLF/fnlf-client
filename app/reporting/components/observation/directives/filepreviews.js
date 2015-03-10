@@ -76,7 +76,7 @@ angular.module('reportingApp')
 			
 			var request = $http({
 				method : "get",
-				url : urlBase + '/files/' + objectid + '?projection={"file": 0}&bambus'
+				url : urlBase + '/files/' + objectid + '?projection={"file": 0}'
 			});
 			return (request.then(handleSuccess, handleError));
 
