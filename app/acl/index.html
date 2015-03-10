@@ -66,8 +66,10 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<ng-include ng-if="currentUserSignedIn" src="'/shared/partials/applicationSwitcher.html'"></ng-include>
-				<a class="navbar-brand" ng-href="#!/"> F/NLF Acl</a>
+				<div>
+					<ng-include ng-if="currentUserSignedIn" src="'/shared/partials/applicationSwitcher.html'"></ng-include>
+					<a class="navbar-brand" ng-href="#!/"> F/NLF Acl</a>
+				</div>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
