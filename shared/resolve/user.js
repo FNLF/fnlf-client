@@ -4,7 +4,8 @@ angular.module('resolve')
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.template = '<span ng-if="userid==0">{{tmpname}}</span><span ng-if="userid!=0"><a href="/app/profile/{{userid}}">{{firstname}} {{lastname}}</a></span>';
+//		directive.template = '<span ng-if="userid==0">{{tmpname}}</span><span ng-if="userid!=0"><a href="/app/profile/{{userid}}">{{firstname}} {{lastname}}</a></span>';
+		directive.template = '<span ng-if="userid==0">{{tmpname}}</span><span ng-if="userid!=0">{{firstname}} {{lastname}}</span>';
 
 		directive.scope = {
 			userid: '=',
