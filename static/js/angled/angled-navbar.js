@@ -27,7 +27,8 @@
  				search : '=',
  				inverse : '=',
  				searchfn : '&',
- 				navfn : '&'
+ 				navfn : '&',
+ 				loggedin : '='
  			},
  			templateUrl : 'tmpls/nav/navbar.html',
  			controller : function($scope,$element,$attrs){
@@ -155,7 +156,7 @@
 						<a class="navbar-brand" ng-click="noop()" ng-bind-html="haveBranding()"></a> \
 					</div> \
 					<div class="collapse navbar-collapse" collapse="!navbarCollapsed" id="navbar-menu" ng-if="hasMenus()"> \
-						<ul class="nav navbar-nav pull-right"> \
+						<ul class="nav navbar-nav"> \
 							\
 							<li ng-repeat="menu in menus" ng-class="{true: \'dropdown\'}[hasDropdownMenu(menu)]" dropdown><a ng-if="!hasDropdownMenu(menu)" ng-click="navAction(menu.action)">{{menu.title}}</a> \
 								<a ng-if="hasDropdownMenu(menu)" class="dropdown-toggle" dropdown-toggle>{{menu.title}} <b class="caret"></b></a> \
@@ -163,7 +164,9 @@
 										<li ng-repeat="item in menu.menu" ng-class="{true: \'divider\'}[isDivider(item)]"><a ng-if="!isDivider(item)" ng-click="navAction(item.action)">{{item.title}}</a></li> \
 									</ul> \
 							</li> \
+				<li ng-show="loggedin"><fnlf-logout></fnlf-logout></li> \
 						</ul> \
+				<ul class="nav navbar-nav navbar-right"> \
 						<form ng-if="search.show" class="navbar-form navbar-right" role="search"> \
 							<div class="form-group"> \
 								<input type="text" class="form-control" placeholder="Search" ng-model="search.terms"> \
