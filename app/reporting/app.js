@@ -18,7 +18,8 @@
 			 'angular-confirm',
 			 'ngTable',
 			 'truncate',
-			 'angularMoment'
+			 'angularMoment',
+			 'angled-navbar.directives'
 			 /*,'ngMockE2E'*/
 			 ]);
 
@@ -36,6 +37,7 @@
 		});
 
 		$rootScope.initialized = true;
+		
 	});
  
 	
@@ -71,5 +73,7 @@
 		  };
 		}]);
 	/** End aside/modal hack **/
+	
+
 	
 })();
