@@ -118,12 +118,11 @@
 				delete observationDto._etag;
 				delete observationDto._id;
 
-
+				$rootScope.error = null;
 				RestService.updateObservation(observationDto, _id, _etag)
-				.success(function(data){
+					.success(function(data){
 					RestService.getObservation(id)
 						.success(function(updated){
-							$rootScope.error = null;
 							clearFullnameFromObservation(updated);
 							callback(updated);
 						});
