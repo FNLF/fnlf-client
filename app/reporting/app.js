@@ -36,6 +36,8 @@
 		});
 
 		$rootScope.initialized = true;
+		$rootScope.toolbar={};
+
 	});
  
 	

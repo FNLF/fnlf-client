@@ -165,10 +165,8 @@ angular.module('reportingApp')
 			};
 
 			var workflowbutton = {disabled:disabledFn,tooltip:response.description,text:response.title,btn_class:$scope.tt,icon:'random',onclick:$scope.openWorkflowAside};
-            if(!$rootScope.toolbar){
-				$rootScope.toolbar={};
-			}
 			$rootScope.toolbar.workflowbutton=workflowbutton;
+
 
 
 		});

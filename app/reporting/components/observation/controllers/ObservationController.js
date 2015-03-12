@@ -140,13 +140,8 @@
 
 
 		var saveButton = {disabled:disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
-		if(!$rootScope.toolbar){
-			$rootScope.toolbar={};
-		}
-        $rootScope.toolbar.saveButton = saveButton;
+		$rootScope.toolbar.savebutton=saveButton;
 
-
-		
 		});
 	
 
