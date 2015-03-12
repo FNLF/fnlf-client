@@ -158,7 +158,7 @@
 
 
 
-			var resolvePersonsFn = function(){
+			$scope.resolvePersonsFn = function(){
 
 				$scope.persons = $scope.observation.involved.map(function(p){
 					return {id:p.id, fullname:p.fullname, tmpname:p.tmpname};
@@ -179,7 +179,7 @@
 				});
 
 			};
-			resolvePersonsFn();
+			$scope.resolvePersonsFn();
 
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()
