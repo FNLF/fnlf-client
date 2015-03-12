@@ -28,13 +28,12 @@
 		</div>
 		<div class="form-group">
 		<label>Nærmeste flyplass</label>
-		<select ng-model="location.icao"	ng-options="opt as opt.name for opt in icao"></select>
+		<select ng-model="location.icao" ng-options="opt as opt.name for opt in icao"></select>
         </div>
         <div class="form-group">		
         <button class="btn btn-primary" ng-click="saveLocation()"><i class="fa fa-plus fa-fw"></i> Legg til</button>
 		</div>
 	</div>
-	{{location | json}}
 	</form>
 	<!-- ng-repeat places -->
 	

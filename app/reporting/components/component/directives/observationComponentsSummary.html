@@ -1,4 +1,4 @@
-<div ng-repeat="component in observation.components">
+<div ng-repeat="component in observation.components | orderBy:'order'">
 	<p>
 		<observation-component-summary component="component"></observation-component-summary>
 	</p>

@@ -1,10 +1,10 @@
 (function () {
 
-	var tagging = function (RestService) {
+	var tagging = function (RestService,Functions) {
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "shared/directives/tagging.html";
+		directive.templateUrl = "/app/reporting/shared/directives/tagging.html";
 
 		directive.scope = {
 			model: '=',
@@ -21,22 +21,8 @@
 			$scope.tags = [];
 			RestService.getTags($scope.group)
 				.success(function(data){
-					var allTags=data._items.map(function(t){return t.tag});
-
-					var tmp ={};
-					allTags.forEach(function(t){
-						tmp[t]=t;
-					});
-					Object.keys(tmp).forEach(function(k){
-						$scope.tags.push(tmp[k]);
-					});
-
-
+					$scope.tags = Functions.deduplicate(data._items.map(function(t){return t.tag}));
 				});
-
-
-
-
 		};
 
 		return directive;
@@ -49,11 +35,11 @@
 
 (function () {
 
-	var populartags = function (RestService) {
+	var populartags = function (RestService,Functions) {
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "shared/directives/populartags.html";
+		directive.templateUrl = "/app/reporting/shared/directives/populartags.html";
 
 		directive.scope = {
 			group: '@',
@@ -65,7 +51,7 @@
 			$scope.tags = [];
 			RestService.getMostPopularTags($scope.group)
 				.success(function(data){
-					$scope.tags=data._items.map(function(t){return t.tag});
+					$scope.tags = Functions.deduplicate(data._items.map(function(t){return t.tag}));
 				});
 
 

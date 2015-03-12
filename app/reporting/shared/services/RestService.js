@@ -24,8 +24,8 @@
 				return $http.post(urlBase + '/observations', observation);
 			};
 			
-			this.getObservation = function (_id) {
-				return $http.get(urlBase + '/observations/'+_id);
+			this.getObservation = function (id) {
+				return $http.get(urlBase + '/observations/'+id);
 			};
 
 			this.getObservationById = function (id) {
@@ -33,7 +33,7 @@
 			};
 
 			this.getObservations = function (userName) {
-				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}');
+				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}&sort=-id');
 			};
 
 			this.getAllObservations = function () {
@@ -44,7 +44,24 @@
 				return $http.get(urlBase + '/observations/components');
 			};
 
+			this.updateObservationComponentTemplate = function (template,_id,_etag) {
+				var config = {};
+				config.headers = {};
+				config.headers['If-Match'] = _etag;
+
+            	var url = urlBase + '/observations/components/' + _id;
+            	return $http({ method: 'PUT', url: url, data: template, headers: config.headers});
+			};
+
+			this.createObservationComponentTemplate = function (template) {
+				return $http.post(urlBase + '/observations/components/',template);
+			};
+
+
 			this.updateObservation = function (observation, _id, etag) {
+
+
+
 				var config = {};
 				config.headers = {};
 				config.headers['If-Match'] = etag;
@@ -66,13 +83,20 @@
 				return $http.get(urlBase + '/melwin/users/' + userId);
 			};
 			
+			this.getUser = function(userId) {
+				return $http.get(urlBase + '/users/' + userId);
+			};
+			
 			
 			/**
 			 * Workflows here!
 			 */
 			this.getWorkflowState = function (objectId){
-				console.log(objectId);
 				return $http.get(urlBase + '/observations/workflow/' + objectId + '/state');
+			};
+			
+			this.getWorkflowTodo = function (){
+				return $http.get(urlBase + '/observations/workflow/todo');
 			};
 			
 			this.changeWorkflowState = function (objectId, action, comment){
@@ -99,6 +123,10 @@
 			/**
 			 * Tags
 			 */
+
+			this.getAllTags = function(){
+				return $http.get(urlBase + '/tags?sort=group,-freq&max_results=200');
+			};
 
 			this.getTags = function(group){
 				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}&sort=-freq');

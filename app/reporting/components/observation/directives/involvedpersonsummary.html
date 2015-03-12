@@ -1,5 +1,5 @@
 <p>
-	<resolveuser userid="person.id"></resolveuser>&nbsp;
+	<resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser>&nbsp;
 	<!--<span>{{person.jumptypeSelected}}</span>&nbsp;-->
 	<span ng-repeat="tag in person.jumptypeTags"><span class="label label-info">{{tag}}&nbsp;</span>&nbsp;</span>
 	<span class="label label-default" ng-if="person.gear.harnessType">{{person.gear.harnessType}}</span>&nbsp;
@@ -7,6 +7,7 @@
 	<span class="label label-info" ng-if="person.numberOfJumps">Antall hopp: {{person.numberOfJumps}}</span>&nbsp;
 	<span class="label label-info" ng-if="person.yearsOfExperience">År i sporten: {{person.yearsOfExperience}}</span>&nbsp;
 	<span ng-if="person.verdict.fu" class="label label-warning">FU</span>
+	<span ng-if="person.verdict.mh" class="label label-warning">Midlertidig hoppforbud</span>
 	<span ng-if="person.verdict.ph" class="label label-danger">Permanent Hoppforbud</span>
 </p>
 

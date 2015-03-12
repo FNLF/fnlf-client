@@ -75,6 +75,7 @@
 							//$cookieStore.put('username', username);
 							$window.sessionStorage.token = response.token64;
 							$window.sessionStorage.username = username;
+							
 							$rootScope.username = username;
 
 							$http.defaults.headers.common.Authorization = 'Basic ' + response.token64;
@@ -115,6 +116,7 @@
 					$rootScope.username = username;
 					$rootScope.authToken = authToken;
 					$rootScope.currentUserSignedIn = true;
+					
 
 					console.log('Trying to verify token ' + authToken + ' for username ' + username);
 					console.log(username);
@@ -129,6 +131,10 @@
 						//Show content, hide login form
 						$rootScope.currentUserSignedIn = true;
 						console.log('Login from session - success');
+						
+						if(typeof response.settings.default_club !== 'undefined') {
+							$rootScope.default_club = response.settings.default_club;
+						}
 						//Broadcast the success update buffers!
 						authService.loginConfirmed('success', function (config) {
 							config.headers["Authorization"] = 'Basic ' + authToken;
@@ -165,6 +171,10 @@
 				$rootScope.currentUserSignedIn = false;
 				//Abort all buffers
 				authService.loginCancelled();
+				
+				//Clean up menu!
+				$rootScope.nav.menus = [];
+				$rootScope.nav.tollbar = [];
 
 				//Now just make sure to force login
 				authService.loginRequired('Login is mandatory');
@@ -222,7 +232,7 @@
     		directive.restrict = 'E';
     		directive.replace=true;
     		directive.scope = {};
-    		directive.template='<a href ng-click=\"logout()\" role=\"button\"><i class=\"fa fa-power-off\"></i> Logg ut</a>';
+    		directive.template='<a href ng-click=\"logout()\"><i class=\"fa fa-power-off\"></i> Logg ut</a>';
     		directive.link = function ($scope, element, attrs) {
     			$scope.logout = function () {
     				console.log("Logout");

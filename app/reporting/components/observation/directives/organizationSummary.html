@@ -1,34 +1,34 @@
 <table class="table">
-	<tr>
+	<tr ng-if="observation.organization.hl">
 		<td>HL</td>
-		<td><span ng-repeat="hl in observation.organization.hl">
-		<span>{{hl.fullname}} </span>
+		<td><span ng-repeat="person in observation.organization.hl">
+		<span><resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser></span>
 		&nbsp;
 	</span>
 		</td>
 	</tr>
-	<tr>
+	<tr ng-if="observation.organization.hm">
 		<td>HM</td>
 		<td>
-	<span ng-repeat="hfl in observation.organization.hfl">
-		<span>{{hfl.fullname}} </span>
+	<span ng-repeat="person in observation.organization.hm">
+		<span><resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser></span>
 		&nbsp;
 	</span>
 		</td>
 	</tr>
 
-	<tr>
+	<tr ng-if="observation.organization.hfl">
 		<td>HFL</td>
-		<td>	<span ng-repeat="hm in observation.organization.hm">
-		<span>{{hm.fullname}} </span>
+		<td>	<span ng-repeat="person in observation.organization.hfl">
+		<span><resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser></span>
 		&nbsp;
 	</span></td>
 
 	</tr>
-	<tr>
+	<tr ng-if="observation.organization.pilot">
 		<td>Pilot</td>
-		<td>	<span ng-repeat="pilot in observation.organization.pilot">
-		<span>{{pilot.fullname}} </span>
+		<td>	<span ng-repeat="person in observation.organization.pilot">
+		<span><resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser> </span>
 		&nbsp;
 	</span></td>
 

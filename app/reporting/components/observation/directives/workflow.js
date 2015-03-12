@@ -8,7 +8,7 @@
 
 
 angular.module('reportingApp')
-	   .directive('workflow', function (RestService, ObservationService, $aside, $rootScope, $window) {
+	   .directive('workflow', function (RestService, ObservationService, $aside, $rootScope, $window, Definitions) {
   
 	var directive = {};
 
@@ -27,6 +27,10 @@ angular.module('reportingApp')
 	
 	directive.controller = function ($scope, $rootScope, $location, $aside) {
 
+		$scope.workflowActions = {init: 'Opprettet', set_ready: 'Satt klar', send_to_hi: 'Sendt til HI', approve_hi: 'Godkjent av HI', reject_hi: 'Avslått av HI', approve_fs: 'Godkjent av fagsjef',
+				reject_fs: 'Avslått av Fagsjef', approve_su: 'Godkjent av SU', reject_su: 'Avslått av SU', withdraw: 'Trekt tilbake', reopen: 'Gjenåpnet', reopen_su: 'Gjenåpnet av SU'};
+		
+		
 		
 		$scope.workflowTransition = function(action, comment) {
 			
@@ -38,13 +42,12 @@ angular.module('reportingApp')
 			//Hide aside programatically
 			$scope.workflowAside.hide();
 			//Re-render all directives
-			$scope.loadObservation(); //$route.reload();
+			$rootScope.loadObservation();
 		};
 			
 		$scope.openWorkflowAside = function() {
 			
-			console.log("OBS CHANGED??)");
-			console.log($scope.observationChanges);
+			if(!$scope.workflowpermission) return; 
 			
 			$location.path('/observation/modal-route', false);
 			
@@ -82,8 +85,10 @@ angular.module('reportingApp')
 
 		
 	directive.link = function($scope, element, attrs) {
+
+		$scope.observationTypes = Definitions.getObservationTypes();
 	
-	$scope.$watch('observation',function(newValue,oldValue) {
+		$scope.$watch('observation',function(newValue,oldValue) {
 		
 	if(newValue && newValue._id) {
 		console.log(newValue);
@@ -133,6 +138,7 @@ angular.module('reportingApp')
 					btn_class: btn_class, 
 					icon: icon });
 				
+				$scope.workflowpermission = response.actions[k].permission;
 			};
 			
 			
@@ -154,6 +160,14 @@ angular.module('reportingApp')
 			$scope.username = +$rootScope.username;
 			$scope.title = 'Workflow for Obs #' + $scope.observation.id;
 			
+			var disabledFn = function(){
+				if(!$scope.workflowpermission || $scope.observationChanges) return true;
+				
+				return false;
+			 };
+			var toolbarbutton = {disabled:disabledFn,tooltip:response.description,text:response.title,btn_class:$scope.tt,icon:'random',onclick:$scope.openWorkflowAside};
+			
+			$rootScope.nav.toolbar[1] = toolbarbutton;
 		});
 	};
 	});

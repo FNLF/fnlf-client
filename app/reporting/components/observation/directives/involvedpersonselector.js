@@ -84,10 +84,11 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 					});
 			};
 
+
 			$scope.tagTransform = function(itemText){
 
-				return {fullname:itemText,id:0};
-			}
+				return {fullname:itemText,tmpname:itemText,id:0}
+			};
 
 		};
 

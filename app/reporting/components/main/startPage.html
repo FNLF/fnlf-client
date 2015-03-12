@@ -1,15 +1,16 @@
 
-<div class="" ng-controller="MainController">
+<div ng-controller="MainController">
 
-	<div class="col-md-6 col-xs-12" ng-init="getObservations()">
+<div class="row">
+	<div class="col-md-6 col-xs-12">
 		<div class="">
-			<h2>Registrer ny observasjon</h2>
+			<h3>Registrer ny observasjon</h3>
 		</div>
 		<div>
 			<div class="form-group">
-				<clubselector observation="observation"></clubselector>
+				<clubselector ng-if="observation" observation="observation"></clubselector>
 
-				<observationdateselector observation="observation"></observationdateselector>
+				<observationdateselector ng-if="observation" observation="observation"></observationdateselector>
 
 				<button type="submit" class="btn btn-primary form-control" ng-disabled="!observation.club || !observation.when" ng-click="createObservation()">
 					<i class="fa fa-plus fa-fw"></i>Registrer ny observasjon
@@ -17,69 +18,77 @@
 			</div>
 		</div>
 	</div>
+	</div>
 
-	<div class="col-xs-12 col-md-6">
-		<div>
-			<h2>Mine observasjoner</h2>
-		</div>
-		<div>
-			<div class="list-group">
-				<div class="list-group-item" ng-repeat="observation in observations">
-					<div>
-						<a src="#" ng-click="editObservation(observation._id)"><span> #{{observation.id}} {{observation.tags.join(' ')}} </span></a>
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="row">
+	<div class="col-xs-12 col-md-6" ng-init="getObservations()">
+			<table ng-table="tableMyObservations" show-filter="false" class="table table-condensed table-striped table-responsive">
+				<caption>
+					<h3>Mine observasjoner</h3>
+				</caption>
+				<tr ng-repeat="observation in $data">
+
+					<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
+					<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+					<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+					<td data-title="'Type'"><span class="label pull-right"
+						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
+				</tr>
+			</table>
+
 
 	</div>
-	<div class="clearfix"></div>
 
-	<div class="col-xs-12 col-md-12" ng-init="getAllObservations()">
-		<!-- ng-table all observations -->
-		<table ng-table="tableParams" show-filter="true" template-pagination="custom/pager" class="table table-condensed table-striped table-responsive">
-			<tr ng-repeat="observation in allObservations">
-				
-				
-				<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
-			<td data-title="'Date'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
-				<td data-title="'Tags'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
-				<td data-title="'Club'" filter="{ 'club': 'text' }"><resolveclub clubid="observation.club"</resolveclub></td>
-				<td data-title="'Rating'">{{observation.rating.actual}}/{{observation.rating.potential}}</td>
-				<td data-title="'Type'">		<span class="label"	ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
-				{{observationTypesArray[observation.type]}}</span> &nbsp;
-		</span></td>
-				
-				
+	<div class="col-xs-12 col-md-6" ng-init="getObservationsTodo()">
+
+		<table ng-table="todoTable" show-filter="false" class="table table-condensed table-striped table-responsive">
+			<caption>
+				<h3>Til behandling</h3>
+			</caption>
+			<tr ng-repeat="observation in $data">
+
+				<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id.$oid)">#{{observation.id}}</a></td>
+				<td data-title="'Tid'" sortable="'date'">{{observation.when.$date | date:'yyyy-MM-dd'}}</td>
+				<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id.$oid)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+				<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+				<td data-title="'Type'"><span class="label pull-right"
+					ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+						{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
 			</tr>
 		</table>
 
-		<script type="text/ng-template" id="custom/pager">
-        <ul class="pager ng-cloak">
-          <li ng-repeat="page in pages"
-                ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
-                ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
-            <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Previous</a>
-            <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next &raquo;</a>
-          </li>
-            <li> 
-            <div class="btn-group">
-                <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
-                <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
-                <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
-                <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
-            </div>
-            </li>
-        </ul>
-    </script>
-    
+
 	</div>
-
-
 </div>
 
+<div class="row">
 
+	<div class="col-xs-12 col-md-12" ng-init="getAllObservations()">
+		<!-- ng-table all observations -->
+		<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
+			
+			<caption>
+				<h3>Observasjoner</h3>
+			</caption>
+			<tr ng-repeat="observation in $data">
 
+				<td data-title="'Id'" sortable="'id'"><a src="#" ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
+				<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
+				<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a src="#" ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+				<td data-title="'Klubb'" filter="{ 'club': 'text' }"><resolveclub clubid="observation.club"</resolveclub></td>
+				<td data-title="'Gradering'">{{observation.rating.actual}}/{{observation.rating.potential}}</td>
+				<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+				<td data-title="'Type'"><span class="label pull-right"
+					<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+						{{resolveObservationType(observation.type)}}</span> &nbsp; 
+					</span>
+				</td>
 
+			</tr>
+		</table>
 
-
+	</div>
+	</div>
+	</div>

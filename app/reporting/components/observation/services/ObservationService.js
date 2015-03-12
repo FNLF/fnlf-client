@@ -1,10 +1,11 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('ObservationService', function (RestService,Definitions,$rootScope) {
+		.service('ObservationService', function (RestService,Definitions,Functions,$rootScope) {
 
 			function Observation() {
 				this.involved = [];
+				this.when = new Date();
 				this.location={};
 				this.organization={};
 				this.organization.hl=[];
@@ -22,13 +23,13 @@
 			};
 
 			
-			this.initObservation = function(obsevation){
+			this.initObservation = function(observation){
 
 				var prototypeObs = new Observation();
 
 				for(var k in prototypeObs){
-					if(angular.isUndefined(obsevation[k])){
-						obsevation[k]=prototypeObs[k];
+					if(angular.isUndefined(observation[k])){
+						observation[k]=prototypeObs[k];
 					}
 				}
 
@@ -64,25 +65,40 @@
 
 
 
-			this.copy  = function(firstObject,secondObject){
 
-				for(var k in firstObject){
-					secondObject[k]=firstObject[k];
+
+
+			var clearFullname = function(person){
+				if(person) {
+					delete person.open;
+					delete person.fullname;
 				}
-				console.log('copy');
-				console.log(firstObject);
-				console.log(secondObject);
+			};
+
+			function clearFullnameFromObservation(observation){
+				angular.forEach(observation.involved,clearFullname);
+				angular.forEach(observation.organization.hl,clearFullname);
+				angular.forEach(observation.organization.hm,clearFullname);
+				angular.forEach(observation.organization.hfl,clearFullname);
+				angular.forEach(observation.organization.pilot,clearFullname);
+				angular.forEach(observation.components,function(comp){
+					angular.forEach(comp.involved,clearFullname);
+				});
+
 
 			};
-			var copyFunction = this.copy;
 
 
 			this.updateObservation = function (observation,callback) {
+
+				clearFullnameFromObservation(observation);
+
 				var _id = observation._id;
+				var id = observation.id;
 				var _etag = observation._etag;
 
 				var observationDto = {};
-				copyFunction(observation,observationDto);
+				Functions.copy(observation,observationDto);
 
 				delete observationDto.id;
 				delete observationDto.reporter;
@@ -105,15 +121,18 @@
 
 				RestService.updateObservation(observationDto, _id, _etag)
 				.success(function(data){
-					RestService.getObservation(_id)
+					RestService.getObservation(id)
 						.success(function(updated){
+							$rootScope.error = null;
+							clearFullnameFromObservation(updated);
 							callback(updated);
 						});
 				}).error(function(error){
 					console.log(error);
 					$rootScope.error=error;
-					RestService.getObservation(_id)
+					RestService.getObservation(id)
 						.success(function(updated){
+							clearFullnameFromObservation(updated);
 							callback(updated);
 
 						});

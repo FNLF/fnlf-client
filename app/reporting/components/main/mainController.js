@@ -9,11 +9,25 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions) {
-
+		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions, $filter) {
+			
+			$scope.observation = {};
+			
 			$scope.observations = {};
 			$scope.allObservations = {};
+			
+			$scope.observationTypes = Definitions.getObservationTypes();
 
+			$scope.resolveObservationType = function(id) {
+				
+				return Definitions.resolveObservationTypes(id);
+			};
+			$scope.resolveWorkflowState = function(state) {
+				
+				return Definitions.resolveObservationWorkflowState(state);
+			};
+			
+			
 			$scope.editObservation = function(_id){
 				console.log("Edit");
 				RestService.getObservation(_id).success(function(item){
@@ -60,27 +74,92 @@
 				RestService.getObservations(userName)
 					.success(function(data){
 						$scope.observations = data._items;
+						
+						$scope.tableMyObservations = new ngTableParams({
+					        page: 1,            // show first page
+					        count: 10,           // count per page
+					        sorting: {
+					            name: 'asc'     // initial sorting
+					        }
+					    }, {
+					        total: $scope.observations.length, // length of data
+					        getData: function($defer, params) {
+					        	var filteredData = params.filter() ? $filter('filter')($scope.observations, params.filter()) : $scope.observations;
+					            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+					            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+					            params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
+					        }
+					    });
+						
+						
 					});
 
 			};
 			
 			$scope.getAllObservations = function(){
-				var userName = $rootScope.username;
 				RestService.getAllObservations()
-				.success(function(data){
-					$scope.allObservations = data._items;
-					
-					console.log($scope.allObservations);
+				.success(function(r){
+
+					var data = r._items
+					.filter(function(it){
+						if(it.id){
+							
+							return true;
+						}
+						return false;
+					});
 					
 					$scope.tableParams = new ngTableParams({
 				        page: 1,            // show first page
-				        count: 5           // count per page
-				    }, {
-				        total: $scope.allObservations.length, // length of data
-				        getData: function($defer, params) {
-				            $defer.resolve($scope.allObservations.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+				        count: 5,           // count per page
+				        sorting: {
+				            name: 'asc'     // initial sorting
 				        }
-				    }); 
+				    }, {
+				        total: data.length, // length of data
+				        getData: function($defer, params) {
+				        	var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+				            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+				            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+				            params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
+				        }
+				    });
+
+					
+				});
+				
+			};
+			
+			$scope.getObservationsTodo = function(){
+				RestService.getWorkflowTodo()
+				.success(function(r){
+					
+					var data = r._items
+					.filter(function(it){
+						if(it.id){
+							
+							return true;
+						}
+						return false;
+					});
+					
+					$scope.todoTable = new ngTableParams({
+						page: 1,            // show first page
+						count: 5, // count per page
+						counts: [], 
+						sorting: {
+							name: 'asc'     // initial sorting
+						}
+					}, {
+						total: data.length, // length of data
+						getData: function($defer, params) {
+							var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+							var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+							$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+							params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
+						}
+					});
+					
 					
 				});
 				
@@ -89,8 +168,7 @@
 			$scope.goToPage = function (url) {
 				$location.path(url);
 			};
-			
-			//ng-table
+
 
 		    
 			

@@ -38,13 +38,16 @@
 	<script src="/shared/resolve/service.js"></script>
 	<script src="/shared/resolve/user.js"></script>
 	<script src="/shared/resolve/club.js"></script>
+	<script src="/shared/resolve/observationtype.js"></script>
+	<script src="/shared/resolve/license.js"></script>
 	<!-- <script src="/shared/resolve/observationtype.js"></script> -->
 	
 	<!-- Shared directives -->
 	<script src="/shared/directives/ngconfirmation.js"></script>
-	
+	<!-- <script src="/shared/directives/inlinehelp.js"></script> -->
 	<!-- shared filters -->
 	<script src="/shared/filters/truncate.js"></script>
+	
 	
 	
 	
@@ -69,13 +72,25 @@
 	
 	<!-- ngTable -->
 	<script src="/static/js/ng-table/ng-table.min.js"></script>
-	<!-- <link href="/static/js/ng-table/ng-table.min.css" rel="stylesheet">-->
-
+	<link href="/static/js/ng-table/ng-table.min.css" rel="stylesheet">
+	
+	<!-- Moment -->
+	<script src="/static/js/angular-moment/moment.min.js"></script>
+	<script src="/static/js/angular-moment/angular-moment.min.js"></script>
+	<script src="/static/js/angular-moment/nb.js"></script>
+	
+	<!-- Angled navbar -->
+	<link href="/static/js/angled/angled-navbar.css" rel="stylesheet">
+	<script src="/static/js/angled/angled-navbar.js"></script>
+	
+	<!-- Drag drop sort list -->
+	<script src="/static/js/angular-drag-and-drop-lists.min.js"></script>
 	
 	<!-- App -->
 	<script src="app.js"></script>
 	<script src="routes.js"></script>
 
+	<script src="shared/services/Functions.js"></script>
 	<script src="shared/services/RestService.js"></script>
 	<script src="shared/directives/tagging.js"></script>
 	<script src="shared/directives/tagtypeahead.js"></script>
@@ -106,54 +121,19 @@
 	<script src="components/observation/directives/ratingpotential.js"></script>
 	<script src="components/observation/directives/filepreviews.js"></script>
 	<script src="components/observation/directives/weather.js"></script>
+	<script src="components/observation/directives/share.js"></script>
+	<script src="components/observation/directives/comments.js"></script>
 	
 	<!-- Observationcomponent -->
 	<script src="components/component/directives/observationComponent.js"></script>
 	<script src="components/component/directives/observationComponents.js"></script>
-
-
-
-
-
 
 </head>
 <body>
 
 
 	<!-- Navigationbar -->
-
-
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-
-				<ng-include src="'/shared/partials/applicationSwitcher.html'"></ng-include>
-				<a class="navbar-brand" ng-href="#!/"> F/NLF Observasjonsrapportering</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-				<ul class="nav navbar-nav navbar-right">
-
-					<li ng-show="currentUserSignedIn"><fnlf-logout></fnlf-logout></li>
-
-				</ul>
-
-			</div>
-			<!-- /.navbar-collapse -->
-
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
-
+<angled-navbar menus="nav.menus" search="false" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
 
 	<!-- END OF Navigationbar -->
 
@@ -161,12 +141,15 @@
 	<div class="container">
 
 		<div class="row">
+		
+			
 
 			<div class="alert alert-info" role="alert" ng-show="error">{{error}}</div>
 
 			<div ng-hide="currentUserSignedIn">
 				<fnlf-login></fnlf-login>
 			</div>
+			
 			<div ng-if="currentUserSignedIn" ng-view class="ng-cloak" ng-cloak>
 
 			</div>

@@ -144,6 +144,8 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 				
 				var locations = response.locations;
 				
+				if(!locations) location = [];
+				
 				if($scope.location.isdefault) {
 					locations.unshift(obj);
 				}

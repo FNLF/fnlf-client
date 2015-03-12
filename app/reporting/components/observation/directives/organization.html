@@ -5,7 +5,7 @@
 		<label>HL:</label>
 
 		<ui-select multiple tagging="tagTransform" ng-model="observation.organization.hl" theme="bootstrap">
-			<ui-select-match placeholder="Søk på navn eller medlemsnummer...">{{$item.fullname}}</ui-select-match>
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
 				{{person.fullname}} ({{person.id}})
@@ -18,7 +18,7 @@
 		<label>HFL:</label>
 
 		<ui-select multiple tagging="tagTransform" ng-model="observation.organization.hfl" theme="bootstrap">
-			<ui-select-match placeholder="Søk på navn eller medlemsnummer...">{{$item.fullname}}</ui-select-match>
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
 				{{person.fullname}} ({{person.id}})
@@ -31,7 +31,7 @@
 		<label>HM:</label>
 
 		<ui-select multiple tagging="tagTransform" ng-model="observation.organization.hm" theme="bootstrap">
-			<ui-select-match placeholder="Søk på navn eller medlemsnummer...">{{$item.fullname}}</ui-select-match>
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
 				{{person.fullname}} ({{person.id}})
@@ -44,7 +44,7 @@
 		<label>Pilot:</label>
 
 		<ui-select multiple tagging="tagTransform" ng-model="observation.organization.pilot" theme="bootstrap">
-			<ui-select-match placeholder="Søk på navn eller medlemsnummer...">{{$item.fullname}}</ui-select-match>
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
 				{{person.fullname}} ({{person.id}})

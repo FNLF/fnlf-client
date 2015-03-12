@@ -4,6 +4,13 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 	var urlBase = '/api/v1';
 	
 	
+	this.resolveObservationType = function(type) {
+		
+		var types = {'sharing': 'Erfaringsdeling', 'unwanted_act': 'Uønsket hending', 'near_miss': 'Næruhell', 'incident': 'Uhell', 'accident': 'Ulykke'};
+		return types[type];
+	};
+	
+	
 	this.getClub = function(clubid) {
 		
 		var request = $http({
@@ -14,6 +21,14 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 	
 	};
 	
+	this.getLicense = function (id) {
+		var request = $http({
+			method : "get",
+			url : urlBase + '/melwin/licenses/' + id,
+		});
+		return (request.then(handleSuccess, handleError));
+		
+	};
 	
 	this.getUser = function(userid) {
 		console.log("Resolve SERVICE");

@@ -1,6 +1,6 @@
 (function () {
 
-	var clubselector = function (RestService, ObservationService) {
+	var clubselector = function (RestService, ObservationService, $rootScope) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -19,6 +19,15 @@
 					});
 			};
 			$scope.getClubs();
+			
+			
+			//Default club for user!
+			RestService.getUser($rootScope.username).then(function(data) {
+				
+				if(typeof $scope.observation.club == 'undefined' && data.data.settings.default_club) {
+					$scope.observation.club = data.data.settings.default_club;
+				}
+			});
 
 		};
 		return directive;
