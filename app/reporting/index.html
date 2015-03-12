@@ -38,6 +38,8 @@
 	<script src="/shared/resolve/service.js"></script>
 	<script src="/shared/resolve/user.js"></script>
 	<script src="/shared/resolve/club.js"></script>
+	<script src="/shared/resolve/observationtype.js"></script>
+	<script src="/shared/resolve/license.js"></script>
 	<!-- <script src="/shared/resolve/observationtype.js"></script> -->
 	
 	<!-- Shared directives -->
@@ -76,7 +78,11 @@
 	<script src="/static/js/angular-moment/moment.min.js"></script>
 	<script src="/static/js/angular-moment/angular-moment.min.js"></script>
 	<script src="/static/js/angular-moment/nb.js"></script>
-
+	
+	<!-- Angled navbar -->
+	<link href="/static/js/angled/angled-navbar.css" rel="stylesheet">
+	<script src="/static/js/angled/angled-navbar.js"></script>
+	
 	<!-- Drag drop sort list -->
 	<script src="/static/js/angular-drag-and-drop-lists.min.js"></script>
 	
@@ -122,51 +128,12 @@
 	<script src="components/component/directives/observationComponent.js"></script>
 	<script src="components/component/directives/observationComponents.js"></script>
 
-
-
-
-
-
 </head>
 <body>
 
 
 	<!-- Navigationbar -->
-
-
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-								<button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed">
-				<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-					<div>
-						<ng-include ng-if="currentUserSignedIn" src="'/shared/partials/applicationSwitcher.html'"></ng-include>
-						<a class="navbar-brand" ng-href="#!/"> F/NLF Observasjoner</a>
-					</div>
-				</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			
-			<div class="collapse navbar-collapse" collapse="!navbarCollapsed">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a ng-href="/"><i class="fa fa-home fa-fw"></i>Hjem</a></li>
-					<li ng-show="currentUserSignedIn"><fnlf-logout></fnlf-logout></li>
-
-				</ul>
-
-			</div>
-			<!-- /.navbar-collapse -->
-
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
-
+<angled-navbar menus="nav.menus" search="false" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
 
 	<!-- END OF Navigationbar -->
 
@@ -174,12 +141,15 @@
 	<div class="container">
 
 		<div class="row">
+		
+			
 
 			<div class="alert alert-info" role="alert" ng-show="error">{{error}}</div>
 
 			<div ng-hide="currentUserSignedIn">
 				<fnlf-login></fnlf-login>
 			</div>
+			
 			<div ng-if="currentUserSignedIn" ng-view class="ng-cloak" ng-cloak>
 
 			</div>
