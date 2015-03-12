@@ -156,21 +156,30 @@
 				$scope.observation.components = [];
 			}
 
-			$scope.persons = $scope.observation.involved.map(function(p){
-				return {id:p.id, fullname:p.fullname, tmpname:p.tmpname};
-			});
 
-			$scope.persons.forEach(function(p){
-				if(p.tmpname){
-					p.fullname=p.tmpname;
-				}
-				else{
-					ResolveService.getUser(p.id).then(function(u){
-						p.fullname=u.firstname+' '+u.lastname;
-					})
-				}
-			});
 
+			var resolvePersonsFn = function(){
+
+				$scope.persons = $scope.observation.involved.map(function(p){
+					return {id:p.id, fullname:p.fullname, tmpname:p.tmpname};
+				});
+
+				$scope.persons.forEach(function(p){
+					if(p.fullname){
+
+					}
+					else if(p.tmpname){
+						p.fullname=p.tmpname;
+					}
+					else{
+						ResolveService.getUser(p.id).then(function(u){
+							p.fullname=u.firstname+' '+u.lastname;
+						})
+					}
+				});
+
+			};
+			resolvePersonsFn();
 
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()
@@ -188,6 +197,7 @@
 				console.log(selectedTemplate);
 				$scope.selectedTemplate ={};
 				angular.copy(selectedTemplate,$scope.selectedTemplate);
+				resolvePersonsFn();
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
 				$scope.selectedTemplate.order = $scope.observation.components.length+1;
 
