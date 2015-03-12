@@ -1,0 +1,447 @@
+
+
+<div ng-controller="ObservationController">
+	<div ng-if="observation._id">
+		<!-- START -->
+
+		<div class="list-group" style="padding: 50px -15px; margin-left: -15px; margin-right: -15px;">
+
+			<li class="list-group-item">
+				<p class="list-group-item-text">
+				<div class="col-xs-12  col-md-12">
+					
+					
+						<div  class="col-xs-9">
+							<h2>
+								<span class="label label-warning">#{{observation.id}}</span>
+						
+						 {{observation.tags.join(' ')}} <!-- <resolveclub clubid="observation.club"></resolveclub>-->
+						 </h2>
+						 </div>
+						
+					 <div class="col-xs-3"><span class="label pull-right" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]"
+						class="label"> <resolveobservationtype type="observation.type"></resolveobservationtype>
+					</span>
+					</div>
+
+				</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
+
+			<li class="list-group-item">
+				<p class="list-group-item-text">
+				<div class="col-xs-12  col-md-6">
+
+					<table class="table table-condensed">
+						<caption>Sammendrag</caption>
+						<tr>
+							<td>Alvorlighetsgrad</td>
+							<td>{{observation.rating.actual}} / {{observation.rating.potential}}</td>
+						</tr>
+						<tr>
+							<td>Klubb</td>
+							<td><resolveclub clubid="observation.club"></resolveclub></td>
+						</tr>
+
+						<tr>
+							<td>Tidspunkt</td>
+							<td>{{observation.when | date:'yyyy-MM-dd HH:mm'}}</td>
+						</tr>
+						<tr>
+							<td>Opprettet</td>
+							<td>{{observation._created | date:'yyyy-MM-dd HH:mm'}}</td>
+						</tr>
+						<tr>
+							<td>Lukket</td>
+							<td>{{observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}}</td>
+						</tr>
+						<tr>
+							<td>Behandlingstid</td>
+							<td>3 dager 11 timer</td>
+						</tr>
+						<tr>
+							<td>Involverte</td>
+							<td>{{observation.involved.length}}</td>
+						</tr>
+						<tr>
+							<td>Kjennelser</td>
+							<td>
+								<div ng-repeat="v in observation.involved">
+									<div ng-if="v.verdict.fu">FU</div>
+									<div ng-if="v.verdict.mh">MH</div>
+									<div ng-if="v.verdict.ph">PH</div>
+								</div>
+							</td>
+						</tr>
+
+					</table>
+
+				</div>
+
+				<!-- MAP -->
+				<div class="col-xs-12  col-md-6">
+					<label class="control-label">{{observation.location.municipality}}, {{observation.location.name}}</label>
+					<div ng-if="observation.location.geo.coordinates">
+						<map center="{{observation.location.geo.coordinates}}" zoom="8">
+							<marker position="{{observation.location.geo.coordinates}}" title="{{observation.location.name}}" draggable="false" visible="true"></marker>
+						</map>
+					</div>
+				</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
+			
+			<!-- INVOLVERTE -->
+			<li class="list-group-item">
+				<div class="col-xs-12  col-md-12">
+					<label class="control-label"> Involverte </label>
+						<table class="table table-condensed">
+						<tr>
+						<th>Hopper</th>
+						<th>Lisenser</th>
+						<th>Hopp</th>
+						<th>År</th>
+						<th>Hopptype</th>
+						<th>Kjennelse</th>
+						<th>Utstyr</th>
+						</tr>
+							<tr ng-repeat="p in observation.involved">
+								<td>Hopper {{$index+1}}</td>
+								<td>
+									<div ng-repeat="l in p.licenses.rights">
+										<resolvelicense licenseid="l"></resolvelicense>
+									</div>
+								</td>
+								<td>{{p.numberOfJumps}}</td>
+								<td>{{p.yearsOfExperience}}</td>
+								
+								<td>{{p.jumptypeSelected}}</td>
+								<td>
+								<div ng-repeat="v in p.verdict">
+									<div ng-if="v.fu">Farlig Ukontrollert</div>
+									<div ng-if="v.ph">Permanent Hoppforbud</div>
+									<div ng-if="v.mh">Midlertidig Hoppforbud</div>
+								</div>
+								</td>
+								<td>
+								<label ng-if="p.gear.harnessType || p.gear.harnessExperience">Seletøy: </label>
+								<span ng-if="p.gear.harnessType">{{p.gear.harnessType}}</span>
+								<span ng-if="p.gear.harnessExperience">{{p.gear.harnessExperience}} hopp</span>
+								<br>
+								<label ng-if="p.gear.mainCanopyType||p.gear.mainCanopyExperience||p.gear.mainCanopySize">Hovedskjerm: </label>
+								<span ng-if="p.gear.mainCanopyType">{{p.gear.mainCanopyType}}</span>
+								<span ng-if="p.gear.mainCanopySize">{{p.gear.mainCanopySize}} sqft</span>
+								<span ng-if="p.gear.mainCanopyExperience">{{p.gear.mainCanopyExperience}} hopp</span>
+								
+								<br>
+								<label ng-if="p.gear.reserveCanopyType || p.gear.reserveCanopySize">Reserveskjerm: </label>
+								<span ng-if="p.gear.reserveCanopyType">{{p.gear.reserveCanopyType}}</span>
+								<span ng-if="p.gear.reserveCanopySize">{{p.gear.reserveCanopySize}}</span>
+								<span ng-if="">{{}}</span>
+								</td>
+							</tr>
+						</table>
+				</div>
+				<div class="clearfix"></div>
+			</li>
+
+			<!-- Forløp tidslinje! -->
+			<li class="list-group-item">
+				<p class="list-group-item-text">
+				<div class="col-xs-12  col-md-12">
+					<label class="control-label">Forløp</label>
+					<span ng-if="observation.components.length == 0">Intent forløp</span>
+					<div class="clearfix"></div>
+					
+					<ul class="timeline" ng-if="observation.components.length > 0">
+						
+						
+						<li ng-repeat="c in observation.components">
+						
+						
+							<!-- root cause, incident, consequence -->
+							<div class="timeline-badge danger">
+								{{$index+1}}
+							</div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h4 class="timeline-title">{{c.what}}
+									<span ng-if="c.flags.barrier" class="label label-default">Barriære</span>
+									<span ng-if="c.flags.incident" class="label label-info">Hending</span>
+									<span ng-if="c.flags.root_cause" class="label label-warning">Rot Årsak</span>
+									<span ng-if="c.flags.final_consequence" class="label label-danger">Konsekvens</span>
+									<span ng-if="c.attributes.damage" class="label label-default">Materiell Skade</span>
+									<span ng-if="c.attributes.gear_failure" class="label label-default">Utstyrssvikt</span>
+									<span ng-if="c.attributes.gear_malfunction" class="label label-info">Feilfunksjon</span>
+									<span ng-if="c.flags.attributes.injury" class="label label-warning">Personskade</span>
+									<span ng-if="c.flags.attributes.death" class="label label-default">Død</span>
+									
+									</h4>
+								</div>
+								<div class="timeline-body">
+								<strong>{{c.tags.join(' ')}}</strong>
+								
+								<dl class="dl-horizontal">
+									<dt>Hvem:</dt><dd><div ng-repeat="p in c.involved"><resolveuser userid="p.id"></div></dd>
+									<dt>Hva:</dt><dd>{{c.what}}</dd>
+									<dt>Hvor</dt><dd>{{c.where.at}} ({{c.where.altitude}}fot)</dd>
+									<dt>Hvordan:</dt><dd>{{c.how}}</dd>
+									<dt>Flagg:</dt>
+									<dd>
+									<span ng-if="c.flags.wilfull" class="label label-danger">Med vilje</span>
+									<span ng-if="c.flags.violation" class="label label-warning">Regelbrudd</span>
+									</dd>
+								</dl>
+								
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
+			
+			<li class="list-group-item">
+				<p class="list-group-item-text">
+				<div class="col-xs-12  col-md-6">
+					<label class="control-label">Hoppfeltorganisering</label>
+					<div class="clearfix"></div>
+					<dl class="dl-horizontal">
+						<dt>HL:</dt><dd><span ng-repeat="k in observation.organization.hl"><resolveuser userid="k.id"></resolveuser></span></dd>
+						<dt>HFL:</dt><dd><span ng-repeat="k in observation.organization.hfl"><resolveuser userid="k.id"></resolveuser></span></dd>
+						<dt>HM:</dt><dd><span ng-repeat="k in observation.organization.hm"><resolveuser userid="k.id"></resolveuser></span></dd>
+						<dt>Pilot:</dt><dd><span ng-repeat="k in observation.organization.pilot"><resolveuser userid="k.id"></resolveuser></span></dd>
+					</dl>
+				</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
+			<li class="list-group-item">
+				<p class="list-group-item-text">
+				<div class="col-xs-12  col-md-12">
+					<label class="control-label">Været</label>
+					<div class="clearfix"></div>
+					<div class="col-xs-12  col-md-4">
+					<dl class="dl-horizontal">
+						<dt>Vind</dt><dd></dd>
+						<dt ng-show="observation.weather.manual.wind.max">Maks:</dt><dd>{{observation.weather.manual.wind.max}} knop</dd>
+						<dt>Gjennomsnitt:</dt><dd>{{observation.weather.manual.wind.avg}} knop</dd>
+						<dt>Minimum:</dt><dd>{{observation.weather.manual.wind.min}} knop</dd>
+						<dt>Turbulens:</dt><dd>{{observation.weather.manual.wind.tubulence ? 'JA' : 'NEI'}}</dd>
+						<dt>Gusting:</dt><dd>{{observation.weather.manual.wind.gusting ? 'JA' : 'NEI'}}</dd>
+						</dl>
+						</div>
+						<div class="col-xs-12  col-md-4">
+						<dl class="dl-horizontal">
+						<dt>Skyer</dt><dd></dd>
+						<dt>Skybase:</dt><dd>{{observation.weather.manual.clouds.base}} fot</dd>
+						<dt>Regn:</dt><dd>{{observation.weather.manual.clouds.rain ? 'JA' : 'NEI'}}</dd>
+						<dt>Tåke:</dt><dd>{{observation.weather.manual.clouds.fog ? 'JA' : 'NEI'}}</dd>
+						<dt>Hagl:</dt><dd>{{observation.weather.manual.clouds.hail ? 'JA' : 'NEI'}}</dd>
+						<dt>Snø:</dt><dd>{{observation.weather.manual.clouds.snow ? 'JA' : 'NEI'}}</dd>
+						<dt>Torden:</dt><dd>{{observation.weather.manual.clouds.thunder ? 'JA' : 'NEI'}}</dd>
+						</dl></div>
+						
+						<div class="col-xs-12  col-md-4">
+						<dl class="dl-horizontal">
+						<dt>Temperatur</dt><dd></dd>
+						<dt>Bakken:</dt><dd>{{observation.weather.manual.temp.ground}}&deg;C</dd>
+						<dt>Høyden:</dt><dd>{{observation.weather.manual.temp.altitude}}&deg;C</dd>
+						<div class="col-xs-12  col-md-4">
+						</dl>
+						</div>
+						<div class="col-xs-12  col-md-12">
+					<strong>{{observation.weather.manual.description}}</strong>
+					<p>Yr: {{observation.weather.auto.yr['@from']}}-{{observation.weather.auto.yr['@to']}} {{observation.weather.auto.yr.windDirection['@deg']}}&deg; {{observation.weather.auto.yr.windSpeed['@mps']*1.81}} knop </p>
+					<p>{{observation.weather.auto.metar}}</p>
+					<p>{{observation.weather.auto.taf}}</p>
+					</div>
+					
+				</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
+			
+			
+			<li class="list-group-item">
+				<p class="list-group-item-text">
+				<div class="col-xs-12  col-md-6">
+					<label class="control-label">Tiltak</label>
+					<div class="clearfix"></div>
+					{{observation.actions.join(' ')}}
+				</div>
+				
+				<div class="col-xs-12  col-md-6">
+					<label class="control-label">Relaterte</label>
+					<div class="clearfix"></div>
+					{{observation.related.join(' ')}}
+				</div>
+				</p>
+				<div class="clearfix"></div>
+			</li>
+			
+<!-- 			<li class="list-group-item"> -->
+<!-- 				<p class="list-group-item-text"> -->
+<!-- 				<div class="col-xs-12  col-md-12"> -->
+<!-- 					<label class="control-label">DUMP</label> -->
+<!-- 					<div class="clearfix"></div> -->
+<!-- 					{{observation | json }} -->
+<!-- 				</div> -->
+<!-- 				</p> -->
+<!-- 				<div class="clearfix"></div> -->
+<!-- 			</li> -->
+
+		</div>
+
+		<!-- END -->
+	</div>
+</div>
+
+<style>
+.timeline {
+	list-style: none;
+	padding: 20px 0 20px;
+	position: relative;
+}
+
+.timeline:before {
+	top: 0;
+	bottom: 0;
+	position: absolute;
+	content: " ";
+	width: 3px;
+	background-color: #eeeeee;
+	left: 25px;
+	margin-right: -1.5px;
+}
+
+.timeline>li {
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.timeline>li:before,.timeline>li:after {
+	content: " ";
+	display: table;
+}
+
+.timeline>li:after {
+	clear: both;
+}
+
+.timeline>li:before,.timeline>li:after {
+	content: " ";
+	display: table;
+}
+
+.timeline>li:after {
+	clear: both;
+}
+
+.timeline>li>.timeline-panel {
+	width: calc(100% - 75px);
+	float: right;
+	border: 1px solid #d4d4d4;
+	border-radius: 2px;
+	padding: 20px;
+	position: relative;
+	-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
+
+.timeline>li>.timeline-panel:before {
+	position: absolute;
+	top: 26px;
+	left: -15px;
+	display: inline-block;
+	border-top: 15px solid transparent;
+	border-right: 15px solid #ccc;
+	border-left: 0 solid #ccc;
+	border-bottom: 15px solid transparent;
+	content: " ";
+}
+
+.timeline>li>.timeline-panel:after {
+	position: absolute;
+	top: 27px;
+	left: -14px;
+	display: inline-block;
+	border-top: 14px solid transparent;
+	border-right: 14px solid #fff;
+	border-left: 0 solid #fff;
+	border-bottom: 14px solid transparent;
+	content: " ";
+}
+
+.timeline>li>.timeline-badge {
+	color: #fff;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.4em;
+	text-align: center;
+	position: absolute;
+	top: 16px;
+	left: 0px;
+	margin-right: -25px;
+	background-color: #999999;
+	z-index: 100;
+	border-top-right-radius: 50%;
+	border-top-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+	border-bottom-left-radius: 50%;
+}
+
+.timeline>li.timeline-inverted>.timeline-panel {
+	float: left;
+}
+
+.timeline>li.timeline-inverted>.timeline-panel:before {
+	border-right-width: 0;
+	border-left-width: 15px;
+	right: -15px;
+	left: auto;
+}
+
+.timeline>li.timeline-inverted>.timeline-panel:after {
+	border-right-width: 0;
+	border-left-width: 14px;
+	right: -14px;
+	left: auto;
+}
+
+.timeline-badge.primary {
+	background-color: #2e6da4 !important;
+}
+
+.timeline-badge.success {
+	background-color: #3f903f !important;
+}
+
+.timeline-badge.warning {
+	background-color: #f0ad4e !important;
+}
+
+.timeline-badge.danger {
+	background-color: #d9534f !important;
+}
+
+.timeline-badge.info {
+	background-color: #5bc0de !important;
+}
+
+.timeline-title {
+	margin-top: 0;
+	color: inherit;
+}
+
+.timeline-body>p,.timeline-body>ul {
+	margin-bottom: 0;
+}
+
+.timeline-body>p+p {
+	margin-top: 5px;
+}
+</style>
