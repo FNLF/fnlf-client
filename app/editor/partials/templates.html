@@ -17,6 +17,7 @@
 				<accordion-heading>
 					<div>
 						{{component.sort}}
+						<span ng-show="!component.active">(Inaktiv)</span>
 						<span class="glyphicon" ng-class="{'glyphicon-chevron-up': component.open, 'glyphicon-chevron-down': !component.open}"></span>
 						<observation-component-summary component="component"></observation-component-summary>
 

@@ -184,7 +184,7 @@
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()
 				.success(function(data){
-					$scope.templates = data._items;
+					$scope.templates = data._items.filter(function(t){return t.active}).sort(function(a,b){return a.sort-b.sort});
 					$scope.templates.forEach(function(t){
 						if(t.default){
 							$scope.template = t;

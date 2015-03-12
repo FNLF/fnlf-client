@@ -46,6 +46,9 @@ angular.module("editorApp").controller("editorController",[
 
 								if(!t.flags){
 									t.flags={};
+								}else{
+									delete t.flags.violation;
+									delete t.flags.wilfull;
 								}
 								if(!t.tags){
 									t.tags=[];
@@ -81,7 +84,14 @@ angular.module("editorApp").controller("editorController",[
 							.success(function(data){
 								console.log('Created new template');
 								console.log(data);
+								data.flags={};
+								data.attributes={};
+								data.where={};
+								data.tags=[];
+								data.active=true;
 								$scope.templates.push(data);
+
+
 								data.sort = $scope.templates.length;
 							});
 					};
