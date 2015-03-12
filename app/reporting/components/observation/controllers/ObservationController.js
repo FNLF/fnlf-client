@@ -134,7 +134,15 @@
 				 
 				 };
 		 };
-		
+		var disabledFn = function(){
+			return !$scope.observationChanges;
+		};
+
+		$rootScope.toolbar=[];
+		var toolbarbutton = {disabled:disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
+        $rootScope.toolbar.push(toolbarbutton);
+
+
 		
 		});
 	

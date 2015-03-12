@@ -159,7 +159,15 @@ angular.module('reportingApp')
 			$scope.btns = btns;
 			$scope.username = +$rootScope.username;
 			$scope.title = 'Workflow for Obs #' + $scope.observation.id;
-			
+
+			var disabledFn = function(){
+				return $scope.observationChanges;
+			};
+
+			var toolbarbutton = {disabled:disabledFn,tooltip:response.description,text:response.title,btn_class:$scope.tt,icon:'random',onclick:$scope.openWorkflowAside};
+            $rootScope.toolbar[1]=toolbarbutton;
+
+
 		});
 	};
 	});
