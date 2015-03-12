@@ -47,7 +47,7 @@
 				
 			$rootScope.nav.brand = 'FNLF - Observasjonsrapportering';
 			
-			if($route.current == '/observation/report/:id')
+//			if($route.current == '/observation/report/:id')
 			$rootScope.nav.menus = [
 				                    {
 				                        title: 'Observasjoner',
