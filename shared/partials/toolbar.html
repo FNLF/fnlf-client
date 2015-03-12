@@ -1,4 +1,4 @@
-<span ng-repeat="btn in toolbar">
+<span ng-repeat="(key,btn) in toolbar">
 		<button tooltip="{{btn.tooltip}}" class="navbar-btn btn-sm btn btn-{{btn.btn_class}}"
 				ng-disabled="btn.disabled()" ng-click="btn.onclick()" tooltip-placement="bottom">
 			<i class="fa fa-{{btn.icon}} fa-fw"></i>{{btn.text}}

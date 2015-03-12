@@ -138,9 +138,12 @@
 			return !$scope.observationChanges;
 		};
 
-		$rootScope.toolbar=[];
-		var toolbarbutton = {disabled:disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
-        $rootScope.toolbar.push(toolbarbutton);
+
+		var saveButton = {disabled:disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
+		if(!$rootScope.toolbar){
+			$rootScope.toolbar={};
+		}
+        $rootScope.toolbar.saveButton = saveButton;
 
 
 		
