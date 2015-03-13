@@ -2,7 +2,7 @@
 
 	var aclApp = angular.module('aclApp', [ 'ngRoute', 'ui.bootstrap',
 			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
-			'fnlf-login', 'resolve', 'ngTable' ]);
+			'fnlf-login', 'resolve', 'ngTable', 'angled-navbar.directives' ]);
 
 	aclApp.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeBar = true;
@@ -31,6 +31,10 @@ angular.module("aclApp").controller("aclController",[
 					
 					$scope.grouppersons = [];
 					$scope.personsFromDb = [];
+					
+					// Menus
+					$rootScope.nav = {toolbar: [], menus: []}; //reset
+					$rootScope.nav.brand = 'FNLF Acl';
 					
 					function ArrNoDupe(a) {
 					    var temp = {};

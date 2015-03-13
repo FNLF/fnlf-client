@@ -1,9 +1,5 @@
 (function() {
 
-	var reportingApp = angular.module('reportingApp', [ 'ngRoute', 'ui.bootstrap',
-			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
-			'fnlf-login', 'resolve', 'ngTable' ]);
-
 	var editorApp = angular.module('editorApp', [ 'ngRoute', 'ui.bootstrap',
 			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
 			'fnlf-login', 'resolve', 'ngTable','reportingApp' ]);
@@ -28,7 +24,11 @@ angular.module("editorApp").controller("editorController",[
 				'RestService',
 				function($scope, $http, editorService, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams, RestService) {
 
-
+					// Menus
+					$rootScope.nav = {toolbar: [], menus: []}; //reset
+					$rootScope.nav.brand = 'FNLF Editor';
+					
+					
 					$scope.templates=[];
 					RestService.getObservationComponentTemplates()
 						.success(function(data){

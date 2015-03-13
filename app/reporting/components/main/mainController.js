@@ -10,8 +10,10 @@
 	 */
 	angular.module('reportingApp')
 		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions, $filter) {
-			$rootScope.toolbar={};
-
+			
+			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
+			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
+			
 			$scope.observation = {};
 			
 			$scope.observations = {};

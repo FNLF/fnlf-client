@@ -10,10 +10,13 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope) {
+		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope, $sce) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
+			
+			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
+			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
 			
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
@@ -31,6 +34,15 @@
 					$timeout(function(){
 						$scope.observationChanges = false;
 					},10);
+					
+					// Menus
+					$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
+					if($scope.observation.workflow.state == 'closed') {
+						$rootScope.nav.menus = [{title: 'Åpne i rapport', link: '#!/observation/report/'+ $scope.observation.id}];
+					};
+					
+					$rootScope.nav.search = true;
+					
 				});
 			};
 			$scope.loadObservation();
@@ -42,8 +54,13 @@
 			$rootScope.saveObservation = function() {
 				$scope.saveObservation();
 			};
-
-
+			
+			//Toolbar!
+			var disabledFn = function(){
+				return !$scope.observationChanges;
+			 };
+			$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+			
 			var observationTypes = Definitions.getObservationTypes();
 
 			$scope.observationTypesArray = {};
@@ -53,7 +70,7 @@
 			});
 
 
-		$scope.saveObservation = function () {
+		$rootScope.saveObservation = function () {
 
 			ObservationService.updateObservation($scope.observation,function(updated){
 				$scope.observation = updated;

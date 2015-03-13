@@ -32,8 +32,8 @@
 						observation[k]=prototypeObs[k];
 					}
 				}
-
-			}
+				
+			};
 
 			var observation = new Observation();
 
@@ -82,7 +82,7 @@
 				angular.forEach(observation.organization.hfl,clearFullname);
 				angular.forEach(observation.organization.pilot,clearFullname);
 				angular.forEach(observation.components,function(comp){
-					angular.forEach(comp.involved,clearFullname);
+				angular.forEach(comp.involved,clearFullname);
 				});
 
 

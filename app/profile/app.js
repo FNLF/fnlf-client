@@ -2,7 +2,8 @@
 
 	var profileApp = angular.module('profileApp', [ 'ngRoute', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngCookies', 
 	                                                'angular-loading-bar',
-	                                                'fnlf-login','imageupload', 'resolve']);
+	                                                'fnlf-login','imageupload', 'resolve',
+	                                   			 'angled-navbar.directives']);
 
 	profileApp.config([ 'cfpLoadingBarProvider',
 			function(cfpLoadingBarProvider) {
@@ -21,6 +22,10 @@ angular.module("profileApp").controller("userController",
 	//Always get the avatar!
 	
 	   var needsReloading = false;
+	   // Menus
+	   $rootScope.nav = {toolbar: [], menus: []}; //reset
+	   $rootScope.nav.brand = 'FNLF Profil';
+
 	   
 	   $scope.loadUser = function() {
 	   

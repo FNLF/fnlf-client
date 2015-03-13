@@ -11,31 +11,17 @@
 						templateUrl: 'components/observation/1.html',
 						controller: 'ObservationController'
 					})
+					.when('/observation/report/:id', {
+						templateUrl: 'components/observation/report.html',
+						controller: 'ReportController'
+
+					})
 					.when('/observation/:id/:ui', {
 						templateUrl: 'components/observation/2.html',
 						controller: 'ObservationController'
 					})
 					.when('/observation/modal-route', {
 					})
-					.when('/report/1', {
-						templateUrl: 'components/report/1.html',
-						controller: 'ReportController'
-
-					})
-					.when('/report/2', {
-						templateUrl: 'components/report/2.html',
-						controller: 'ReportController'
-					})
-					.when('/report/3', {
-						templateUrl: 'components/report/3.html',
-						controller: 'ReportController'
-
-					})
-					.when('/report/', {
-						templateUrl: 'components/report/1.html',
-						controller: 'ReportController'
-					})
-
 					.otherwise({redirectTo: '/'});
 
 				$locationProvider.hashPrefix('!');

@@ -7,11 +7,11 @@
 
 /* Sticky footer styles
       -------------------------------------------------- */
-
+html { height: 100%; }
 
 body {
 	height: 100%;
- padding-top: 70px;
+ 	padding-top: 70px;
   /* The html and body elements cannot have any padding or margin. */
 }
 
