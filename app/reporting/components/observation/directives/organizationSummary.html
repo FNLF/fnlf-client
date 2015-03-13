@@ -1,4 +1,12 @@
 <table class="table">
+	<tr ng-if="observation.organization.hi">
+		<td>HI</td>
+		<td><span ng-repeat="person in observation.organization.hi">
+		<span><resolveuser userid="person"></resolveuser></span>
+		&nbsp;
+	</span>
+		</td>
+	</tr>
 	<tr ng-if="observation.organization.hl">
 		<td>HL</td>
 		<td><span ng-repeat="person in observation.organization.hl">

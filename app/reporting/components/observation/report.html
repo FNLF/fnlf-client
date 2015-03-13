@@ -1,6 +1,6 @@
 
 
-<div ng-controller="ObservationController">
+<div ng-controller="ReportController">
 	<div ng-if="observation._id">
 		<!-- START -->
 
@@ -36,13 +36,22 @@
 					<table class="table table-condensed">
 						<caption>Sammendrag</caption>
 						<tr>
-							<td>Alvorlighetsgrad</td>
-							<td>{{observation.rating.actual}} / {{observation.rating.potential}}</td>
+							<td>Hovedinstruktør</td>
+							<td><span ng-repeat="person in observation.organization.hi">
+								<span><resolveuser userid="person"></resolveuser></span>
+								&nbsp;
+								</span>
+							</td>
 						</tr>
 						<tr>
 							<td>Klubb</td>
 							<td><resolveclub clubid="observation.club"></resolveclub></td>
 						</tr>
+						<tr>
+							<td>Alvorlighetsgrad</td>
+							<td>{{observation.rating.actual}} / {{observation.rating.potential}}</td>
+						</tr>
+						
 
 						<tr>
 							<td>Tidspunkt</td>
