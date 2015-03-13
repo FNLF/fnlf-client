@@ -2,7 +2,7 @@
 
 	var clubApp = angular.module('clubApp', [ 'ngRoute', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngCookies', 
 	                                                'angular-loading-bar',
-	                                                'fnlf-login','imageupload', 'resolve']);
+	                                                'fnlf-login','imageupload', 'resolve', 'angled-navbar.directives']);
 
 	clubApp.config([ 'cfpLoadingBarProvider',
 			function(cfpLoadingBarProvider) {
@@ -16,7 +16,9 @@ angular.module("clubApp").controller("clubController",
 							['$scope', '$http', 'clubService', '$timeout','$rootScope', '$window',
 							function($scope, $http, clubService, $timeout, $rootScope, $window) {
 	
-	var urlBase = '/api/v1';
+	// Menus
+	$rootScope.nav = {toolbar: [], menus: []}; //reset
+	$rootScope.nav.brand = 'FNLF Klubb';
 	
 	
 }]);

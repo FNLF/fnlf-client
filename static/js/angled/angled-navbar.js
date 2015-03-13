@@ -1,18 +1,5 @@
 /**
  * Angled Navbar
- *
- * Angular directive to automate creation of Bootstrap navbar.
- *
- * @author : Michael E Conroy (michael.e.conroy@gmail.com)
- * 		- http://codepen.io/m-e-conroy/pen/bcEsA
- * @date : 9 Jun 2014
- * 
- * @require
- *		* jQuery 2.1.1
- *		* AngularJS 1.2.x
- * 		* AngularJS ngSanitize 1.2.x
- *		* Bootstrap 3.1.x CSS & JS
- *			* Angled Library: Modules/css/angled-navbar.css
  */
 
  angular.module('angled-navbar.directives',['ngSanitize', 'ui.bootstrap'])
@@ -64,27 +51,6 @@
  						$scope.$emit('angled-navbar.search.execute');
  					}; // end searchfn
  				}
-
- 				//-- Observers & Listeners --//
-
-// 				$scope.$watch('affixed',function(val,old){
-// 					var b = angular.element('body');
-// 					// affixed top
-// 					if(angular.equals(val,'top') && !b.hasClass('navbar-affixed-top')){
-// 						if(b.hasClass('navbar-affixed-bottom'))
-// 							b.removeClass('navbar-affixed-bottom');
-// 						b.addClass('navbar-affixed-top');
-// 					}else if(angular.equals(val,'bottom') && !b.hasClass('navbar-affixed-bottom')){
-// 						if(b.hasClass('navbar-affixed-top'))
-// 							b.removeClass('navbar-affixed-top');
-// 						b.addClass('navbar-affixed-bottom');
-// 					}else{
-// 						if(b.hasClass('navbar-affixed-top'))
-// 							b.removeClass('navbar-affixed-top');
-// 						if(b.hasClass('navbar-affixed-bottom'))
-// 							b.removeClass('navbar-affixed-bottom');
-// 					}
-// 				}); // end watch(affixed)
 
  				//-- Methods --//
 
@@ -142,51 +108,5 @@
 
  			} // end controller
  		}; // end return
- 	}]) // end angledNavbar
+ 	}]); // end angledNavbar
 
- 	/**
-	.run(['$templateCache',function($templateCache){
-//		$templateCache.put('tmpls/nav/navbar.html','<nav class="navbar navbar-fixed-top" ng-class="{\'navbar-inverse\': inverse,\'navbar-default\': !inverse,\'navbar-fixed-top\': affixed == \'top\',\'navbar-fixed-bottom\': affixed == \'bottom\'}" role="navigation"><div class="container-fluid"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><span class="sr-only">Toggle Navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" ng-click="noop()" ng-bind-html="haveBranding()"></a></div><div class="collapse navbar-collapse" id="navbar-menu" ng-if="hasMenus()"><ul class="nav navbar-nav"><li ng-repeat="menu in menus" ng-class="{true: \'dropdown\'}[hasDropdownMenu(menu)]"><a ng-if="!hasDropdownMenu(menu)" ng-click="navAction(menu.action)">{{menu.title}}</a><a ng-if="hasDropdownMenu(menu)" class="dropdown-toggle" data-toggle="dropdown">{{menu.title}} <b class="caret"></b></a><ul ng-if="hasDropdownMenu(menu)" class="dropdown-menu"><li ng-repeat="item in menu.menu" ng-class="{true: \'divider\'}[isDivider(item)]"><a ng-if="!isDivider(item)" ng-click="navAction(item.action)">{{item.title}}</a></li></ul></li></ul><form ng-if="search.show" class="navbar-form navbar-right" role="search"><div class="form-group"><input type="text" class="form-control" placeholder="Search" ng-model="search.terms"><button class="btn btn-default" type="button" ng-click="searchfn()"><span class="glyphicon glyphicon-search"></span></button></div></form></div></div></nav>');
-		$templateCache.put('tmpls/nav/navbar.html','<nav class="navbar navbar-fixed-top" \
-			ng-class="{\'navbar-inverse\': inverse,\'navbar-default\': !inverse,\'navbar-static-top\': affixed == \'top\',\'navbar-static-bottom\': affixed == \'bottom\'}" \
-				role="navigation"> \
-				<div class="container"> \
-					<div class="navbar-header"> \
-						<button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed"> \
-							<span class="sr-only">Toggle Navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> \
-						</button> \
-						<div> \
-							<ng-include ng-if="loggedin" src="\'/shared/partials/applicationSwitcher.html\'"></ng-include> \
-							<a class="navbar-brand" ng-click="noop()" ng-bind-html="haveBranding()"></a> \
-						</div> \
-					</div> \
-					<div class="collapse navbar-collapse navbar-right" collapse="!navbarCollapsed" id="navbar-menu" ng-if="hasMenus() || toolbar"> \
-						<ul class="nav navbar-nav"> \
-							<li ng-repeat="btn in toolbar"><button tooltip="{{btn.tooltip}}" class="navbar-btn btn-sm btn btn-{{btn.btn_class}}" \
-								ng-disabled="btn.disabled()" ng-click="btn.onclick()" tooltip-placement="bottom"> \
-								<i class="fa fa-{{btn.icon}} fa-fw"></i>{{btn.text}} \
-								</button>&nbsp; \
-							</li> \
-							<li ng-repeat="menu in menus" ng-class="{true: \'dropdown\'}[hasDropdownMenu(menu)]" dropdown><a ng-if="!hasDropdownMenu(menu)" ng-click="navAction(menu.action)">{{menu.title}}</a> \
-								<a ng-if="hasDropdownMenu(menu)" class="dropdown-toggle" dropdown-toggle>{{menu.title}} <b class="caret"></b></a> \
-									<ul ng-if="hasDropdownMenu(menu)" class="dropdown-menu"> \
-										<li ng-repeat="item in menu.menu" ng-class="{true: \'divider\'}[isDivider(item)]"><a ng-if="!isDivider(item)" ng-href="{{item.action}}" ng-bind-html="item.title">{{item.title}}</a></li> \
-									</ul> \
-							</li> \
-							<li ng-show="loggedin"><fnlf-logout></fnlf-logout></li> \
-						</ul> \
-					<ul class="nav navbar-nav navbar-right"> \
-						<form ng-if="search.show" class="navbar-form navbar-right" role="search"> \
-							<div class="form-group"> \
-								<input type="text" class="form-control" placeholder="Search" ng-model="search.terms"> \
-								<button class="btn btn-default" type="button" ng-click="searchfn()"> \
-									<span class="glyphicon glyphicon-search"></span> \
-								</button> \
-							</div> \
-						</form> \
-						</ul> \
-				</div> \
-			</nav>');
-	}]); // end angled-navbar.directives
- 	
- 	**/

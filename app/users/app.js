@@ -2,7 +2,8 @@
 
 	var usersApp = angular.module('usersApp', [ 'ngRoute', 'ui.bootstrap',
 			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
-			'fnlf-login', 'resolve', 'ngTable' ]);
+			'fnlf-login', 'resolve', 'ngTable',
+			 'angled-navbar.directives' ]);
 
 	usersApp.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeBar = true;
@@ -23,6 +24,12 @@ angular.module("usersApp").controller("usersLocalController",[
 				'$routeParams',
 				function($scope, $http, usersService, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams) {
 					
+					
+					// Menus
+					$rootScope.nav = {toolbar: [], menus: []}; //reset
+					$rootScope.nav.brand = 'FNLF Brukere';
+
+					
 					if($routeParams.userid) $scope.userId = $routeParams.userid;
 					
 					$scope.users = [];
@@ -40,7 +47,6 @@ angular.module("usersApp").controller("usersLocalController",[
 
 					
 					$scope.getAllUsers = function() {
-						console.log("HUHEU");
 						usersService.getAllUsers().then(function(r) {
 							
 							$scope.users = r._items;

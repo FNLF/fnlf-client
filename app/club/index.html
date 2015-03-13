@@ -33,11 +33,9 @@
 <script src="/static/js/imageupload.js"></script>
 <script src="/shared/directives/inlinehelp.js"></script>
 
-<!--  CROP  
-<script src="/bower_components/ngImgCrop/compile/minified/ng-img-crop.js"></script>
-<link rel="stylesheet" type="text/css" href="/bower_components/ngImgCrop/compile/minified/ng-img-crop.css">
--->
-
+<!-- Angled navbar -->
+<link href="/static/js/angled/angled-navbar.css" rel="stylesheet">
+<script src="/static/js/angled/angled-navbar.js"></script>
 <!-- Resolvers -->
 <script src="/shared/resolve/app.js"></script>
 <script src="/shared/resolve/service.js"></script>
@@ -62,40 +60,8 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed">
-				<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div>
-					<ng-include ng-if="currentUserSignedIn" src="'/shared/partials/applicationSwitcher.html'"></ng-include>
-					<a class="navbar-brand" ng-href="#!/"> F/NLF Klubb</a>
-				</div>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			
-			<div class="collapse navbar-collapse" collapse="!navbarCollapsed">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a ng-href="/"><i class="fa fa-home fa-fw"></i>Hjem</a></li>
-					<li ng-show="currentUserSignedIn"><fnlf-logout></fnlf-logout></li>
-
-				</ul>
-
-			</div>
-			<!-- /.navbar-collapse -->
-
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
-
-
+	<!-- Navigationbar -->
+	<angled-navbar menus="nav.menus" search="false" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
 	<!-- END OF Navigationbar -->
 
 	<!--Contains data from /pages appears in ng-view-->

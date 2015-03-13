@@ -15,6 +15,9 @@
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
 			
+			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
+			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
+			
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
 			$scope.observationChanges = false;
@@ -31,6 +34,15 @@
 					$timeout(function(){
 						$scope.observationChanges = false;
 					},10);
+					
+					// Menus
+					$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
+					if($scope.observation.workflow.state == 'closed') {
+						$rootScope.nav.menus = [{title: 'Åpne i rapport', link: '#!/observation/report/'+ $scope.observation.id}];
+					};
+					
+					$rootScope.nav.search = true;
+					
 				});
 			};
 			$scope.loadObservation();
@@ -42,28 +54,12 @@
 			$rootScope.saveObservation = function() {
 				$scope.saveObservation();
 			};
-
-			$rootScope.nav = {toolbar: [], menus: []};
-				
-			$rootScope.nav.brand = 'FNLF - Observasjonsrapportering';
 			
-//			if($route.current == '/observation/report/:id')
-			$rootScope.nav.menus = [
-				                    {
-				                        title: 'Observasjoner',
-				                        menu: [
-				                          {title: $sce.trustAsHtml('<i class="fa fa-cog fa-fw"></i> Innstillinger'),action: '#!/'},
-				                          {divider: true},
-				                          {title: 'Siste observasjon',action: '#!/observation/report/5'}
-				                        ]
-				                      },
-				                    ];
-			
+			//Toolbar!
 			var disabledFn = function(){
 				return !$scope.observationChanges;
 			 };
-			var toolbarbutton = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
-			$rootScope.nav.toolbar[0] = toolbarbutton;
+			$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
 			
 			var observationTypes = Definitions.getObservationTypes();
 
