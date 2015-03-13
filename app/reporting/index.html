@@ -131,6 +131,11 @@
 	<script src="components/component/directives/observationComponent.js"></script>
 	<script src="components/component/directives/observationComponents.js"></script>
 
+
+
+
+
+
 </head>
 <body>
 
@@ -143,15 +148,12 @@
 	<div class="container">
 
 		<div class="row">
-		
-			
 
 			<div class="alert alert-info" role="alert" ng-show="error">{{error}}</div>
 
 			<div ng-hide="currentUserSignedIn">
 				<fnlf-login></fnlf-login>
 			</div>
-			
 			<div ng-if="currentUserSignedIn" ng-view class="ng-cloak" ng-cloak>
 
 			</div>

@@ -37,7 +37,6 @@
 		});
 
 		$rootScope.initialized = true;
-		
 	});
  
 	
@@ -73,7 +72,5 @@
 		  };
 		}]);
 	/** End aside/modal hack **/
-	
-
 	
 })();

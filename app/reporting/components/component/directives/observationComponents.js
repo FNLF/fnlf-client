@@ -156,26 +156,35 @@
 				$scope.observation.components = [];
 			}
 
-			$scope.persons = $scope.observation.involved.map(function(p){
-				return {id:p.id, fullname:p.fullname, tmpname:p.tmpname};
-			});
 
-			$scope.persons.forEach(function(p){
-				if(p.tmpname){
-					p.fullname=p.tmpname;
-				}
-				else{
-					ResolveService.getUser(p.id).then(function(u){
-						p.fullname=u.firstname+' '+u.lastname;
-					})
-				}
-			});
 
+			$scope.resolvePersonsFn = function(){
+
+				$scope.persons = $scope.observation.involved.map(function(p){
+					return {id:p.id, fullname:p.fullname, tmpname:p.tmpname};
+				});
+
+				$scope.persons.forEach(function(p){
+					if(p.fullname){
+
+					}
+					else if(p.tmpname){
+						p.fullname=p.tmpname;
+					}
+					else{
+						ResolveService.getUser(p.id).then(function(u){
+							p.fullname=u.firstname+' '+u.lastname;
+						})
+					}
+				});
+
+			};
+			$scope.resolvePersonsFn();
 
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()
 				.success(function(data){
-					$scope.templates = data._items;
+					$scope.templates = data._items.filter(function(t){return t.active}).sort(function(a,b){return a.sort-b.sort});
 					$scope.templates.forEach(function(t){
 						if(t.default){
 							$scope.template = t;
@@ -188,6 +197,7 @@
 				console.log(selectedTemplate);
 				$scope.selectedTemplate ={};
 				angular.copy(selectedTemplate,$scope.selectedTemplate);
+				resolvePersonsFn();
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
 				$scope.selectedTemplate.order = $scope.observation.components.length+1;
 

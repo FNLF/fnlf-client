@@ -471,3 +471,7 @@ img {
     display: block;
     margin-top: 10px;
 }
+
+.label .ng-isolate-scope a {
+    color:white;
+}

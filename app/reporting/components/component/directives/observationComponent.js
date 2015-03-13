@@ -13,7 +13,7 @@
 */
 		directive.link = function ($scope, element, attrs) {
 
-
+			$scope.resolvePersonsFn();
 
 		};
 		return directive;

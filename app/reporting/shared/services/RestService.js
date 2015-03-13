@@ -50,7 +50,7 @@
 				config.headers['If-Match'] = _etag;
 
             	var url = urlBase + '/observations/components/' + _id;
-            	return $http({ method: 'PUT', url: url, data: template, headers: config.headers});
+            	return $http({ method: 'PATCH', url: url, data: template, headers: config.headers});
 			};
 
 			this.createObservationComponentTemplate = function (template) {

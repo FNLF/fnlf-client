@@ -35,13 +35,36 @@ angular.module("editorApp").controller("editorController",[
 							$scope.templates = data._items;
 
 
+
 							var i = 0;
 
 							$scope.templates.forEach(function(t){
+
+								if(!t.attributes){
+									t.attributes={};
+								}
+
+								if(!t.flags){
+									t.flags={};
+								}else{
+									delete t.flags.violation;
+									delete t.flags.wilfull;
+								}
+								if(!t.tags){
+									t.tags=[];
+								}
+								if(!t.involved){
+							//		t.involved=[];
+								}
+
 								if(!t.sort){
 									t.sort = i;
-
 								}
+
+								if(angular.isUndefined(t.active)){
+									t.active=true;
+								}
+
 								i++;
 							});
 
@@ -61,7 +84,14 @@ angular.module("editorApp").controller("editorController",[
 							.success(function(data){
 								console.log('Created new template');
 								console.log(data);
+								data.flags={};
+								data.attributes={};
+								data.where={};
+								data.tags=[];
+								data.active=true;
 								$scope.templates.push(data);
+
+
 								data.sort = $scope.templates.length;
 							});
 					};
@@ -75,7 +105,7 @@ angular.module("editorApp").controller("editorController",[
 						var _id = component._id;
 						var _etag = component._etag;
 
-						delete dto.sort;
+
 						delete dto.editTitle;
 						delete dto.open;
 
@@ -100,12 +130,12 @@ angular.module("editorApp").controller("editorController",[
 
 					$scope.incrementSort = function(component){
 						component.sort++;
-						saveFn(component);
+						//saveFn(component);
 					};
 
 					$scope.decrementSort = function(component){
 						component.sort--;
-						saveFn(component);
+						//saveFn(component);
 
 					};
 
