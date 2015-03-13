@@ -95,6 +95,7 @@
 	<script src="shared/directives/tagging.js"></script>
 	<script src="shared/directives/tagtypeahead.js"></script>
 
+	<!-- Controllers -->
 	<script src="components/main/mainController.js"></script>
 
 	<!-- location -->
@@ -105,7 +106,9 @@
 	<!-- Observation -->
 	<script src="components/observation/services/Definitions.js"></script>
 	<script src="components/observation/controllers/ObservationController.js"></script>
+	<script src="components/observation/controllers/ReportController.js"></script>
 	<script src="components/observation/services/ObservationService.js"></script>
+	<!-- Directives -->
 	<script src="components/observation/directives/observationtype.js"></script>
 	<script src="components/observation/directives/clubselector.js"></script>
 	<script src="components/observation/directives/locationselector.js"></script>
@@ -133,8 +136,7 @@
 
 
 	<!-- Navigationbar -->
-<angled-navbar menus="nav.menus" search="false" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
-
+	<angled-navbar menus="nav.menus" search="false" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
 	<!-- END OF Navigationbar -->
 
 	<!--Contains data from /pages appears in ng-view-->

@@ -13,7 +13,7 @@
 					})
 					.when('/observation/report/:id', {
 						templateUrl: 'components/observation/report.html',
-						controller: 'ObservationController'
+						controller: 'ReportController'
 
 					})
 					.when('/observation/:id/:ui', {
