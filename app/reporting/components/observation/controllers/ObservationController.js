@@ -38,10 +38,13 @@
 					// Menus
 					$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
 					if($scope.observation.workflow.state == 'closed') {
-						$rootScope.nav.menus = [{title: 'Åpne i rapport', link: '#!/observation/report/'+ $scope.observation.id}];
+						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-text', link: '#!/observation/report/'+ $scope.observation.id}];
 					};
 					
-					$rootScope.nav.search = true;
+					 
+					if($scope.observation.workflow.state != 'draft' && $scope.observation.workflow.state !='withdrawn') {
+						$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+					}
 					
 				});
 			};
@@ -59,7 +62,7 @@
 			var disabledFn = function(){
 				return !$scope.observationChanges;
 			 };
-			$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+			
 			
 			var observationTypes = Definitions.getObservationTypes();
 
@@ -98,10 +101,6 @@
 			        return 'You have unsaved observation data';
 			      };
 				
-				console.log("Changed");
-				console.log(oldObs);
-				console.log("->");
-				console.log(changedObs);
 				$scope.observationChanges = true;
 			}
 		},true);
