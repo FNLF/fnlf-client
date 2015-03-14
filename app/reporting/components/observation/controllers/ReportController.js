@@ -15,6 +15,14 @@
 				$scope.observation = {};
 				ObservationService.getObservationById(observationId, function(obs){
 
+					components = obs.components;
+					
+					components.sort(function(a,b) {
+						return a.order - b.order;
+					});
+					console.log(components);
+					obs.components = components;
+					
 					$scope.observation = obs;
 					ObservationService.initObservation($scope.observation);
 					
