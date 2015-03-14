@@ -34,11 +34,16 @@
 			$scope.editObservation = function(_id){
 				console.log("Edit");
 				RestService.getObservation(_id).success(function(item){
-					console.log(item);
+
 					$scope.observation = item;
 					ObservationService.setObservation($scope.observation);
-					console.log("Set");
-					$location.path("/observation/"+item.id);
+
+					if($scope.observation.workflow.state == 'closed') {
+						$location.path("/observation/report/"+item.id);
+					}
+					else {
+						$location.path("/observation/"+item.id);
+					}
 				});
 
 			};
