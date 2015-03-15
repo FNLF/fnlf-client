@@ -143,7 +143,7 @@ angular.module('reportingApp')
 			        title: 'Filvisning',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/reporting/components/observation/directives/filepreviews.html',
+			        contentTemplate: '/app/obs/components/observation/directives/filepreviews.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',

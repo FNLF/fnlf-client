@@ -45,7 +45,7 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 			        title: 'Værforholdene',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/reporting/components/observation/directives/weather.html',
+			        contentTemplate: '/app/obs/components/observation/directives/weather.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',

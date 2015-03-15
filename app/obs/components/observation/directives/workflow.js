@@ -56,7 +56,7 @@ angular.module('reportingApp')
 					title: $scope.title, 
 					//content: 'My Content', 
 					show: true,
-					contentTemplate: '/app/reporting/components/observation/directives/workflow.html',
+					contentTemplate: '/app/obs/components/observation/directives/workflow.html',
 					template: '/shared/partials/aside.html',
 					placement: 'full-left',
 					container: 'body',

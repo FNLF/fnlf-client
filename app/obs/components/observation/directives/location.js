@@ -32,7 +32,7 @@ angular.module('reportingApp').directive('location', function (LocationService) 
 						title: 'Legg til lokalisasjon ', 
 						//content: 'My Content', 
 						show: true,
-						contentTemplate: '/app/reporting/components/observation/directives/location.html',
+						contentTemplate: '/app/obs/components/observation/directives/location.html',
 						template: '/shared/partials/aside.html',
 						placement: 'full-left',
 						container: 'body',

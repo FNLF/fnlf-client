@@ -4,7 +4,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/reporting/shared/directives/tagging.html";
+		directive.templateUrl = "/app/obs/shared/directives/tagging.html";
 
 		directive.scope = {
 			model: '=',
@@ -39,7 +39,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/reporting/shared/directives/populartags.html";
+		directive.templateUrl = "/app/obs/shared/directives/populartags.html";
 
 		directive.scope = {
 			group: '@',
