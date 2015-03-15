@@ -8,18 +8,15 @@
 			<div>
 				<ng-include ng-if="loggedin" src="'/shared/partials/applicationSwitcher.html'"></ng-include>
 				<a class="navbar-brand" ng-click="noop()" ng-bind-html="haveBranding()"></a>
-				<ul class="nav navbar-nav">
-				<li ng-repeat="btn in toolbar" class="hidden-xs">
-					<button tooltip="{{btn.tooltip}}" class="btn navbar-btn btn-sm btn-{{btn.btn_class}}" ng-disabled="btn.disabled()" ng-click="btn.onclick()" tooltip-placement="bottom">
-						<i class="fa fa-{{btn.icon}} fa-fw"></i>{{btn.text}}
-					</button>&nbsp;
-				</li>
-				</ul>
 			</div>
 		</div>
 		<div class="collapse navbar-collapse navbar-right" collapse="!navbarCollapsed" id="navbar-menu" ng-if="hasMenus() || toolbar">
 			<ul class="nav navbar-nav">
-				
+				<li ng-repeat="btn in toolbar" class="navbar-left pull-left">
+					<button tooltip="{{btn.tooltip}}" class="btn navbar-btn btn-sm btn-{{btn.btn_class}}" ng-disabled="btn.disabled()" ng-click="btn.onclick()" tooltip-placement="bottom">
+						<i class="fa fa-{{btn.icon}} fa-fw"></i>{{btn.text}}
+					</button>&nbsp;
+				</li>
 				<li ng-repeat="menu in menus" ng-class="{true: 'dropdown'}[hasDropdownMenu(menu)]" dropdown>
 				<a ng-if="!hasDropdownMenu(menu)" ng-href="{{menu.link}}" ng-click="navAction(menu.action)"><i class="fa fa-fw fa-text-o" ng-class="menu.icon"></i> {{menu.title}}</a> 
 					<a ng-if="hasDropdownMenu(menu)" class="dropdown-toggle" dropdown-toggle>{{menu.title}} <b class="caret"></b></a>
