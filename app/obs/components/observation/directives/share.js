@@ -8,7 +8,7 @@
 
 
 angular.module('reportingApp')
-	   .directive('share', function (RestService, ObservationService, $aside, $rootScope, $window) {
+	   .directive('share', function (RestService, ObservationService, $aside, $rootScope, $window, $http, $q) {
   
 	var directive = {};
 
@@ -21,12 +21,12 @@ angular.module('reportingApp')
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<button class="btn btn-default" ng-disabled="observationChanges" ng-click="openShareAside()"><i class="fa fa-envelope-o fa-fw"></i>Share</button>';
+		return '<button class="btn btn-sm btn-primary" ng-disabled="observationChanges" ng-click="openShareAside()"><i class="fa fa-envelope-o fa-fw"></i> Del</button>';
 	};
 	
 	
 	directive.controller = function ($scope, $rootScope, $location, $aside) {
-
+		var urlBase = '/api/v1';
 		$scope.openShareAside = function() {
 			
 			$location.path('/observation/modal-route', false);
@@ -35,7 +35,7 @@ angular.module('reportingApp')
 					scope: $scope,
 					title: 'Del observasjon #' + $scope.observation.id, 
 					show: true,
-					contentTemplate: '/app/reporting/components/observation/directives/share.html',
+					contentTemplate: '/app/obs/components/observation/directives/share.html',
 					template: '/shared/partials/aside.html',
 					placement: 'full-left',
 					container: 'body',
@@ -60,13 +60,37 @@ angular.module('reportingApp')
 		  };
 		});
 		
+		$scope._share = function(recepients, comment, title) {
+
+			var request = $http({
+				method : "post",
+				data: {comment: comment, recepients: recepients, title: title},
+				url : urlBase + '/observations/share/'+$scope.observation.id
+			});
+			return (request.then(handleSuccess, handleError));
+
+		};
+		
+		function handleError(response) {
+			if (!angular.isObject(response.data) || !response.data.message) {
+				return ($q.reject("An unknown error occurred."));
+			}
+			return ($q.reject(response.data.message));
+		}
+		function handleSuccess(response) {
+			console.log(response.data);
+			return (response.data);
+		};
+		
 	};
 
 		
 	directive.link = function($scope, element, attrs) {
 	
 		$scope.personsFromDb = [];
-
+		
+		$scope.share = {recepients: [], comment: '', persons: [], success: '', error: ''};
+		
 		$scope.getPersonsByName = function (name) {
 				RestService.getUserByName(name)
 				.success(function (response) {
@@ -77,8 +101,31 @@ angular.module('reportingApp')
 		$scope.tagTransform = function(itemText){
 
 			return {fullname:itemText,id:0};
-		}
+		};
 		
+		$scope.onSelect = function(item, model) {
+			
+			$scope.share.recepients.push(item.id);
+			
+		};
+		
+		$scope.onRemove = function(item, model) {
+			
+			$scope.share.recepients.splice($scope.share.recepients.indexOf(item.id), 1);
+		};
+		
+		
+		$scope.shareObservation = function() {
+			if($scope.share.recepients.length > 0) {
+				$scope._share($scope.share.recepients, $scope.share.comment, $scope.observation.tags.join(' ')).then(function(r) {
+					$scope.share.comment='';
+					$scope.share.persons = [];
+					$scope.share.recepients = [];
+					$scope.share.success = 'Observasjonen ble delt';
+					
+				});
+			}
+		};
 	};
 		
 	
