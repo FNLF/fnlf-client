@@ -28,7 +28,7 @@
 		<td data-title="'Dato'">{{w.t | date:'yyyy-MM-dd HH:mm'}}</td>
 		<td data-title="'Hending'">{{workflowActions[w.a]}}</td>
 		<td data-title="'Av'"><resolveuser userid="w.u"></resolveuser></td>
-		<td data-title="'Kommentar'">{{w.c}}</td>
+		<td data-title="'Kommentar'" ng-bind-html="w.c | nl2br"></td>
 	</tr>
 </table>
 
