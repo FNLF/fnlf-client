@@ -11,17 +11,25 @@
 				<div class="col-xs-12  col-md-12">
 					
 					
-						<div  class="col-xs-9">
+						<div  class="col-xs-8">
 							<h2>
 								<span class="label label-warning">#{{observation.id}}</span>
-						
-						 {{observation.tags.join(' ')}} <!-- <resolveclub clubid="observation.club"></resolveclub>-->
-						 </h2>
+						 		{{observation.tags.join(' ')}} <!-- <resolveclub clubid="observation.club"></resolveclub>-->
+						 	</h2>
 						 </div>
 						
-					 <div class="col-xs-3"><span class="label pull-right" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]"
-						class="label"> <resolveobservationtype type="observation.type"></resolveobservationtype>
-					</span>
+					 <div class="col-xs-4" ng-if="observation.id">
+						 <div class="pull-right">
+						 	<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]">
+						 		<resolveobservationtype type="observation.type"></resolveobservationtype>
+							</span>
+							<span ng-if="observation.workflow.state=='closed'">
+							&nbsp;
+							<comments observation="observation"></comments>
+							&nbsp;
+						 	<share observation="observation"></share>
+						 	</span>
+						</div>
 					</div>
 
 				</div>
@@ -67,7 +75,7 @@
 						</tr>
 						<tr>
 							<td>Behandlingstid</td>
-							<td>3 dager 11 timer</td>
+							<td>{{t = moment.utc(moment(observation.workflow.last_transition.diff(moment(observation._created))))}}</td>
 						</tr>
 						<tr>
 							<td>Involverte</td>
