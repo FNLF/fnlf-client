@@ -42,7 +42,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			        title: 'Hoppfeltorganiseringen',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/reporting/components/observation/directives/organization.html',
+			        contentTemplate: '/app/obs/components/observation/directives/organization.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
