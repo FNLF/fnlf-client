@@ -42,7 +42,7 @@
 					};
 					
 					 
-					if($scope.observation.workflow.state != 'draft' && $scope.observation.workflow.state !='withdrawn') {
+					if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
 						$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
 					}
 					
