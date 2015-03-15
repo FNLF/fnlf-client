@@ -17,7 +17,7 @@
 			 'ngMap',
 			 'angular-confirm',
 			 'ngTable',
-			 'truncate',
+			 'truncate','nl2br',
 			 'angularMoment',
 			 'angled-navbar.directives'
 			 /*,'ngMockE2E'*/
