@@ -1,7 +1,14 @@
+/**
+ * 
+ * Workflow directive
+ * 
+ * Skal bruke workflow servicen for å hente og utføre operasjoner mot observasjonens workflow
+ * 
+ */
 
 
 angular.module('reportingApp')
-	   .directive('comments', function (RestService, ObservationService, ResolveService, $rootScope) {
+	   .directive('workingcomments', function (RestService, ObservationService, ResolveService, $rootScope) {
   
 	var directive = {};
 
@@ -11,16 +18,18 @@ angular.module('reportingApp')
 		observation: '=',
 	};
 	
+	directive.transcluded = true;
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<button class="btn btn-sm btn-success" ng-click="openCommentAside()"><i class="fa fa-comments fa-fw"></i> Kommentarer</button>';
+		return '<button class="btn btn-default" ng-click="openCommentAside()"><i class="fa fa-comments fa-fw"></i>Arbeidskommentarer</button>';
 	};
 	
 	
 	directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q, $window) {
 
 		var urlBase = '/api/v1';
+		$scope.observationcomment = '';
 		
 		$scope.openCommentAside = function() {
 			
@@ -56,21 +65,15 @@ angular.module('reportingApp')
 		  };
 		});
 		
-		$scope._saveComment = function(comment) {
-			var request = $http({
-				method : "post",
-				data: {comment: comment, observation: $scope.observation._id, user: $rootScope.user_id},
-				url : urlBase + '/observation/comments/'
-			});
-			return (request.then(handleSuccess, handleError));
-
-		};
-		$scope._getComments = function() {
-			var request = $http({
-				method : "get",
-				url : urlBase + '/observation/comments/?where={"observation":"'+$scope.observation._id+'"}&sort=[("_created",-1)]'
-			});
-			return (request.then(handleSuccess, handleError));
+		$scope.saveComment = function(c) {
+			
+			if($scope.observation.comments.length == 0) {
+				$scope.observation.comments = [];
+			};
+			$scope.observation.comments.unshift({user: $rootScope.username, comment: c, date: new Date()});
+			
+			$rootScope.saveObservation();
+			$scope.observationcomment = '';
 			
 		};
 		
@@ -86,34 +89,12 @@ angular.module('reportingApp')
 			return (response.data);
 		};
 		
-		
 	};
 
 		
 	directive.link = function($scope, element, attrs) {
 		
-		
-		$scope.comments=[];
-		$scope.comment='';
-		
-		$scope.saveComment = function() {
-			
-			$scope._saveComment($scope.comment).then(function(r){
-				$scope.comment='';
-				$scope.getComments();
-			});
-		};
-		
-
-		
-		$scope.getComments = function() {
-			
-			$scope._getComments().then(function(r){
-				$scope.comments = r._items;
-			});
-		};
-		
-
+		$scope.observationcomment='';
 
 	};
 		
