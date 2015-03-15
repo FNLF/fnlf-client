@@ -31,13 +31,21 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 	};
 	
 	this.getUser = function(userid) {
-		console.log("Resolve SERVICE");
 		var request = $http({
 			method : "get",
 			url : urlBase + '/melwin/users/' + userid + '?projection={"firstname": 1, "lastname": 1}',
 		});
 		return (request.then(handleSuccess, handleError));
 
+	};
+	this.getUserAvatar = function(userid) {
+		
+		var request = $http({
+			method : "get",
+			url : urlBase + '/users/' + userid +'?projection={\"avatar\": 1}',
+		});
+		return (request.then(handleSuccess, handleError));
+		
 	};
 	
 	
