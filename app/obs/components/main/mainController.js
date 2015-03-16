@@ -12,7 +12,7 @@
 		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions, $filter) {
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
-			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
+			$rootScope.nav.brand = "FNLF Observasjoner";
 			
 			$scope.observation = {};
 			
