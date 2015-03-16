@@ -26,6 +26,10 @@
 					$scope.observation = obs;
 					ObservationService.initObservation($scope.observation);
 					
+					var start = moment($scope.observation._created);
+					var stop = moment($scope.observation.workflow.last_transition);
+					$scope.timeTaken = moment.duration(stop - start).humanize();
+					
 					// Menus
 					$rootScope.nav = {toolbar: [], menus: []}; //reset
 					$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
