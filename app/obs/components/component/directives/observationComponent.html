@@ -1,0 +1,69 @@
+<div class="">
+	<div class="col-xs-12 col-md-12">
+		<h3>
+			{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
+		</h3>
+		<input type="text" class="form-control pull-right" ng-model="component.what" ng-show="component.editTitle">
+	</div>
+
+	<div class="col-xs-12 col-md-6">
+		<div class="btn-group-xs">
+			<label class="btn btn-default" ng-model="component.flags.root_cause" btn-checkbox>Rotårsak</label>
+			<label class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
+			<label class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hending</label>
+			<label class="btn btn-default" ng-model="component.flags.final_consequence" btn-checkbox>Konsekvens</label>
+		</div>
+	</div>
+
+
+	<div class="col-xs-12 col-md-6">
+		<div class="btn-group-xs">
+			<label class="btn btn-default" ng-model="component.attributes.gear_malfunction" btn-checkbox>Feilfunksjon</label> 
+			<label class="btn btn-default" ng-model="component.attributes.violation" btn-checkbox>Regelbrudd</label>
+			<label class="btn btn-default" ng-model="component.attributes.wilfull" btn-checkbox>Med hensikt</label>
+			<label class="btn btn-default" ng-model="component.attributes.damage" btn-checkbox>Matriell skade</label>
+			<label class="btn btn-default" ng-model="component.attributes.gear_failure" btn-checkbox>Utstyrsvikt</label>
+			<label class="btn btn-default" ng-model="component.attributes.injury" btn-checkbox>Personskade</label>
+			<label class="btn btn-default" ng-model="component.attributes.death" btn-checkbox>Død</label>
+		</div>
+	</div>
+	
+	<div class="col-xs-12 col-md-6 col-lg-4">
+		<label>Faktorer</label>
+		<tagging model="component.tags" group="component" noun="faktorer"></tagging>
+	</div>
+	
+	<div class="col-xs-12 col-md-6 col-lg-4 hideInTemplateEditor">
+		<label>Involvert</label>
+		<ui-select multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blandt involverte personer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+		<ui-select-choices repeat="person in persons track by person.id"> {{person.fullname}} </ui-select-choices> </ui-select>
+	</div>
+	
+	<div class="col-xs-8 col-md-4 col-lg-3">
+		<label>Sted eller situasjon</label>
+		<tagtypeahead model="component.where.at" group="where-at" noun="på/i"></tagtypeahead>
+	</div>
+	
+	<div class="col-xs-4 col-md-2">
+		<label>Høyde i fot</label> <input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
+	</div>
+	
+	<div class="clearfix"></div>
+	<div class="col-xs-12 hideInTemplateEditor">
+		<label>Fritekst</label> <input type="text" ng-model="component.how" class="form-control">
+		</textarea>
+	</div>
+	
+	<div class="pull-right hideInTemplateEditor">
+		<br>
+
+
+		<button type="button" class="btn btn-primary" ng-click="incrementOrder(component)"><span>Flytt ned</span></button>
+		<button type="button" class="btn btn-primary" ng-click="decrementOrder(component)"><span>Flytt opp</span></button>
+		<span>&nbsp;</span>
+		<button type="button" class="btn btn-primary" ng-click="deleteComponent(component)">Slett hending</button>
+
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

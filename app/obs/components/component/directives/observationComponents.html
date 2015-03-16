@@ -1,0 +1,44 @@
+<div>
+	<div>
+
+		<accordion close-others="true">
+			<accordion-group is-open="component.open" ng-repeat="component in observation.components | orderBy:'order' track by $index">
+
+				<accordion-heading>
+					<div>
+						<span class="glyphicon" ng-class="{'glyphicon-chevron-up': component.open, 'glyphicon-chevron-down': !component.open}"></span>
+						<observation-component-summary component="component"></observation-component-summary>
+
+					</div>
+				</accordion-heading>
+				<div ng-if="component.open">
+					<observation-component component="component" observation="observation"></observation-component>
+				</div>
+			</accordion-group>
+		</accordion>
+
+	</div>
+
+
+
+	<div>
+		<div class="btn-group col-xs-6">
+
+
+			<select tooltip="Ny hending"  class="form-control " data-placeholder="Hending"
+					ng-model="template"
+					ng-options="item.what for item in templates">
+				<option value="" disabled>Velg type hending</option>
+			</select>
+
+			<button type="button" class="btn btn-primary" dropdown-toggle ng-disabled="!template" ng-click="newComponent(template)">
+				<span class="fa fa-plus"></span> Ny hending
+			</button>
+
+
+		</div>
+
+	</div>
+
+</div>
+<div class="clearfix"></div>

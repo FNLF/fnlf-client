@@ -1,0 +1,45 @@
+<div>
+	<style>
+		.hideInTemplateEditor{
+			display: none;
+		}
+
+	</style>
+
+	<h1>Templates</h1>
+
+	<div>
+		<button type="button" class="btn btn-primary" ng-click="newTemplate(component)">Ny mal</button>
+		<p></p>
+		<accordion close-others="true">
+			<accordion-group is-open="component.open" ng-repeat="component in templates | orderBy:'sort' track by $index">
+
+				<accordion-heading>
+					<div>
+						{{component.sort}}
+						<span ng-show="!component.active">(Inaktiv)</span>
+						<span class="glyphicon" ng-class="{'glyphicon-chevron-up': component.open, 'glyphicon-chevron-down': !component.open}"></span>
+						<observation-component-summary component="component"></observation-component-summary>
+
+					</div>
+				</accordion-heading>
+				<div ng-if="component.open">
+					<observation-component component="component" observation="observation"></observation-component>
+				</div>
+
+				<button type="button" class="btn btn-primary" ng-click="incrementSort(component)"><span>Flytt ned</span></button>
+				<button type="button" class="btn btn-primary" ng-click="decrementSort(component)"><span>Flytt opp</span></button>
+				<span>&nbsp;</span>
+				<button type="button" class="btn btn-primary" ng-click="showTemplate(component)" ng-disabled="component.active">Aktiver mal</button>
+				<button type="button" class="btn btn-primary" ng-click="hideTemplate(component)" ng-disabled="!component.active">Deaktiver mal</button>
+				<span>&nbsp;</span>
+				<button type="button" class="btn btn-primary" ng-click="saveTemplate(component)">Lagre mal</button>
+
+
+
+			</accordion-group>
+		</accordion>
+
+	</div>
+
+</div>
