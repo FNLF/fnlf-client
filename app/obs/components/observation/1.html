@@ -61,8 +61,11 @@
 			<li class="list-group-item">
 				<p class="list-group-item-text">
 				<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+						<label class="control-label">Observasjons tidspunkt:</label><br />
 					<observationdateselector observation="observation"></observationdateselector>
 					<clubselector observation="observation"></clubselector>
+					</div>
 				</div>
 
 				<div class="col-xs-12 col-md-3 col-md-offset-1">
@@ -73,9 +76,12 @@
 
 					<div class="form-group">
 						<label class="control-label">Alvorlighetsgrad</label><br />
+						<p>
 						<rating-actual observation="observation"></rating-actual>
-						<br />
+						</p>
+						<p>
 						<rating-potential observation="observation"></rating-potential>
+						</p>
 					</div>
 				</div>
 				</p>

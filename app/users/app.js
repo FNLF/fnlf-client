@@ -95,7 +95,7 @@ angular.module("usersApp").service("usersService",['$http',	'$q', '$rootScope', 
 						
 						var request = $http({
 							method : "get",
-							url : urlBase + '/users/?max_results=5000',
+							url : urlBase + '/users/?max_results=5000&sort=[("_created", -1)]',
 							
 						});
 						return (request.then(handleSuccess, handleError));
