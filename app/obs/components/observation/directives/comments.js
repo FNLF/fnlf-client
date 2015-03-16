@@ -98,8 +98,14 @@ angular.module('reportingApp')
 		
 		$scope.saveComment = function() {
 			
+			if($scope.comment.length < 2) {
+				$scope.error = "Påkrevd med minimum 2 bokstaver for å poste kommentar";
+				return;
+			}
+			
 			$scope._saveComment($scope.comment).then(function(r){
 				$scope.comment='';
+				$scope.error='';
 				$scope.getComments();
 			});
 		};
