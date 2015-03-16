@@ -23,7 +23,7 @@
 				<div class="panel-heading">
 					<strong><resolveuser userid="c.user"></resolveuser></strong> <span class="text-muted"><span am-time-ago="c._created"></span></span>
 				</div>
-				<div class="panel-body" ng-bind-html="c.comment | nl2br"></div>
+				<div class="panel-body"><span ng-if="c.comment.length > 0" ng-bind-html="c.comment | nl2br"></span></div>
 				<!-- /panel-body -->
 			</div>
 			<!-- /panel panel-default -->
