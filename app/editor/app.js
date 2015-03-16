@@ -1,5 +1,9 @@
 (function() {
 
+	var reportingApp = angular.module('reportingApp', [ 'ngRoute', 'ui.bootstrap',
+			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
+			'fnlf-login', 'resolve', 'ngTable' ]);
+
 	var editorApp = angular.module('editorApp', [ 'ngRoute', 'ui.bootstrap',
 			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
 			'fnlf-login', 'resolve', 'ngTable','reportingApp' ]);

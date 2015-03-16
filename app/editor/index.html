@@ -52,13 +52,13 @@
 <script src="app.js" type="text/javascript"></script>
 <script src="routes.js" type="text/javascript"></script>
 
-<script src="/app/reporting/shared/directives/tagging.js"></script>
-<script src="/app/reporting/shared/directives/tagtypeahead.js"></script>
-<script src="/app/reporting/components/observation/services/Definitions.js"></script>
-<script src="/app/reporting/components/component/directives/observationComponent.js"></script>
-<script src="/app/reporting/components/component/directives/observationComponents.js"></script>
-<script src="/app/reporting/shared/services/Functions.js"></script>
-<script src="/app/reporting/shared/services/RestService.js"></script>
+<script src="/app/obs/shared/directives/tagging.js"></script>
+<script src="/app/obs/shared/directives/tagtypeahead.js"></script>
+<script src="/app/obs/components/observation/services/Definitions.js"></script>
+<script src="/app/obs/components/component/directives/observationComponent.js"></script>
+<script src="/app/obs/components/component/directives/observationComponents.js"></script>
+<script src="/app/obs/shared/services/Functions.js"></script>
+<script src="/app/obs/shared/services/RestService.js"></script>
 
 
 	<!-- Auth module -->
@@ -79,11 +79,6 @@
 	<div class="container">
 
 		<div class="row">
-
-			<div ng-if="error" class="alert alert-info alert-dismissable">
-				<a class="panel-close close" data-dismiss="alert">×</a> <i class="fa fa-coffee"></i> {{error}}
-			</div>
-
 
 			<div ng-hide="currentUserSignedIn">
 				<fnlf-login></fnlf-login>
