@@ -6,7 +6,7 @@
 
 	var editorApp = angular.module('editorApp', [ 'ngRoute', 'ui.bootstrap',
 			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
-			'fnlf-login', 'resolve', 'ngTable','reportingApp' ]);
+			'fnlf-login', 'resolve', 'ngTable','reportingApp','angled-navbar.directives' ]);
 
 	editorApp.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeBar = true;
