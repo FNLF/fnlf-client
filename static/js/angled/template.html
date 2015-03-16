@@ -13,7 +13,7 @@
 		<div class="collapse navbar-collapse navbar-right" collapse="!navbarCollapsed" id="navbar-menu" ng-if="hasMenus() || toolbar">
 			<span><ul class="nav navbar-nav">
 				<li ng-repeat="btn in toolbar" class="navbar-left pull-left">
-					<button tooltip="{{btn.tooltip}}" class="btn navbar-btn btn-sm btn-{{btn.btn_class}}" ng-disabled="btn.disabled()" ng-click="btn.onclick()" tooltip-placement="bottom">
+					<button ng-if="btn.text||btn.icon" tooltip="{{btn.tooltip}}" class="btn navbar-btn btn-sm btn-{{btn.btn_class}}" ng-disabled="btn.disabled()" ng-click="btn.onclick()" tooltip-placement="bottom">
 						<i class="fa fa-{{btn.icon}} fa-fw"></i>{{btn.text}}
 					</button>&nbsp;
 				</li>
