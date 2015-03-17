@@ -48,7 +48,13 @@
 	<div id="wrap">
 		<div class="container">
 
-			<div class="alert alert-info" role="alert" ng-show="error">{{error}}</div>
+			<div class="alert alert-info" role="alert" ng-show="error&&currentUserSignedIn">{{error}}</div>
+
+			<div ng-if="!currentUserSignedIn">
+				<style>
+					#loading-bar, #loading-bar-spinner {display:none;}
+				</style>
+			</div>
 
 			<div ng-hide="currentUserSignedIn">
 				<fnlf-login></fnlf-login>
