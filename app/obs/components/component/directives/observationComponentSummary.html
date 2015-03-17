@@ -1,19 +1,15 @@
-<span ng-init="order=0">
-	<span class="small">{{component.order}} </span>
-	&nbsp;
-
-	<span class="label label-primary">{{component.what}} </span>
-	&nbsp;
-
-	<span ng-repeat="tag in getAttributesAsTags(component)">
-	<span class="label label-warning">{{tag}} </span>
-	&nbsp;
-					</span>
-
-	<span ng-repeat="tag in component.tags">
-	<span class="label label-default">{{tag}} </span>
-	&nbsp;
-					</span>
-
+<span ng-init="order=0"> <span class="small">{{component.order}} </span> &nbsp;
+	<span class="label label-primary">{{component.what}} </span> &nbsp; 
+	<span ng-repeat="tag in getAttributesAsTags(component)"> 
+		<span class="label label-warning">{{tag}} </span> &nbsp;
+	</span> 
+	<span ng-repeat="tag in component.tags"> 
+		<span class="label label-default">{{tag}} </span> &nbsp;
+	</span>
+	<div class="clearfix"></div>
+			<dl class="dl-horizontal">
+				<dt>{{component.what}}</dt>
+				<dd>{{component.how}}</dd>
+			</dl>
 
 </span>
