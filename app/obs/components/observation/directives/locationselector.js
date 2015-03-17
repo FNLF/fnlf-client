@@ -10,7 +10,7 @@ angular.module('reportingApp').directive('locationSummary', function ($window) {
 				  <marker \
 				      position="{{observation.location.geo.coordinates}}" \
 				      title="{{observation.location.name}}" \
-				      draggable="false" \
+				      draggable="true" \
 				      visible="true" \
 				      ></marker> \
 				</map>';
@@ -63,9 +63,9 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 		$scope.icao.push({icao: "ENBN", name: "Brønnøysund/Brønnøy",coords:[65.461878,12.21601]});
 		$scope.icao.push({icao: "ENBO", name: "Bodø",coords:[67.268311,14.362235]});
 		$scope.icao.push({icao: "ENBR", name: "Bergen/Flesland",coords:[60.29183,5.222017]});
-		$scope.icao.push({icao: "ENBS", name: "Båtsfjord",coords[70.600278,29.6925]});
-		$scope.icao.push({icao: "ENBV", name: "Berlevåg",coords[70.870036,29.029759]});
-		$scope.icao.push({icao: "ENCN", name: "Kristiansand/Kjevik",coords[58.20383,8.083769]});
+		$scope.icao.push({icao: "ENBS", name: "Båtsfjord",coords:[70.600278,29.6925]});
+		$scope.icao.push({icao: "ENBV", name: "Berlevåg",coords:[70.870036,29.029759]});
+		$scope.icao.push({icao: "ENCN", name: "Kristiansand/Kjevik",coords:[58.20383,8.083769]});
 		$scope.icao.push({icao: "ENDU", name: "Bardufoss",coords:[69.055833,18.540278]});
 		$scope.icao.push({icao: "ENEV", name: "Harstad/Narvik/Evenes",coords:[68.491109,16.680574]});
 		$scope.icao.push({icao: "ENFG", name: "Fagernes/Leirin",coords:[61.009102,9.294345]});
@@ -177,9 +177,20 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 
 	directive.link = function ($scope, element, attrs) {
 
+		$scope.mapDistance = function(lat1,lon1,lat2,lon2){
+
+			var phi1 = lat1.toRadians(), phi2 = lat2.toRadians(), deltaLambda = (lon2-lon1).toRadians(), R = 6371000; // gives d in metres
+        	var d = Math.acos( Math.sin(ph11)*Math.sin(ph12) + Math.cos(ph11)*Math.cos(ph12) * Math.cos(deltaLambda) ) * R;
+
+		};
+
 		$scope.locations = [];
 
 		$scope.formatter = function(obj){
+
+			if(angular.isUndefined(obj)){
+				return '';
+			}
 
 			if(Object.keys(obj).length==0){
 				return '';
