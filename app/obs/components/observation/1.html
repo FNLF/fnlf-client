@@ -21,11 +21,11 @@
 		<!-- Just show which version, click to show all versions? -->
 		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span> <span class="pull-left"> <span class="label label-default"><resolveclub
 					clubid="observation.club"></resolveclub></span>&nbsp;
-		</span> <span class="pull-left"><span class="label label-default">Reporter: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span> <span class="pull-left"><span
-			class="label label-default">Owner: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
+		</span> <span class="pull-left"><span class="label label-default">Opprettet: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span> <span class="pull-left"><span
+			class="label label-default">Eier: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
 
 		<!-- If changes, show warning include a "leaving page are you sure?"  -->
-		<span ng-if="observationChanges" class="pull-left"><span ng-click="saveObservation()" class="label label-danger">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>
+		<span ng-if="observationChanges" class="pull-left"><span ng-click="saveObservation()" class="label label-danger">{{observationChanges ? 'Endringer' : 'Lagret'}}</span>&nbsp;</span>
 
 
 
@@ -157,27 +157,54 @@
 				<div class="clearfix"></div>
 			</li>
 
+			<!-- Weather; should be more intelligent and using weather icons? -->
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Været</h4>
 				<p class="list-group-item-text">
+				<span ng-show="observation.weather.manual.wind.max"><span class="label label-default">Max {{observation.weather.manual.wind.max}} knop </span>&nbsp;</span>
+				<span ng-show="observation.weather.manual.wind.avg"><span class="label label-default">Avg {{observation.weather.manual.wind.avg}} knop </span>&nbsp;</span>
+				<span ng-show="observation.weather.manual.wind.gusting"><span class="label label-warning">Gusting</span>&nbsp;</span>
+				<span ng-show="observation.weather.manual.wind.turbulence"><span class="label label-warning">Turbulent</span>&nbsp;</span>
+				<span ng-show="observation.weather.manual.wind.dir"><span class="label label-default">{{observation.weather.manual.wind.dir}}</span>&nbsp;</span>
+				
+				<div class="clearfix"></div>
+					<br />
 					<weather observation="observation"></weather>
 				</p>
 				<div class="clearfix"></div>
 			</li>
 
+			<!-- Actions! -->
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Tiltak</h4>
 				<p class="list-group-item-text">
-				<actions observation="observation"></actions>
+					<div class="col-xs-12 col-md-6" ng-show="observation.actions.local">
+						<strong>Lokale:</strong>
+						<ol>
+							<li ng-repeat="a in observation.actions.local">{{a}}</li>
+						</ol>
+					</div>
+					<div class="col-xs-12 col-md-6" ng-show="observation.actions.central">
+						<strong>Sentrale:</strong>
+						<ol>
+							<li ng-repeat="a in observation.actions.central">
+								{{a}}
+							</li>
+						</ol>
+					</div>
+					<div class="clearfix"></div>
+					<actions observation="observation"></actions>
 				</p>
 				<div class="clearfix"></div>
 			</li>
-
+			<!-- 
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Relaterte</h4>
 				<p class="list-group-item-text"></p>
 				<div class="clearfix"></div>
 			</li>
+			 -->
+			 
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Datamodell</h4>
 				<p class="list-group-item-text">

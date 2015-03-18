@@ -4,7 +4,7 @@
 
 		<div class="col-xs-12 col-md-4">
 			<div class="form-group">
-				<label><h4>Vind (knop/&deg;):</h4></label>
+				<label><h4>Vind (knop):</h4></label>
 			</div>
 			<div class="form-group">
 				<label>Gjennomsnitt <input type="number" ng-model="observation.weather.manual.wind.avg" value="0" class="form-control" placeholder="">
@@ -20,7 +20,24 @@
 				</label>
 			</div>
 			<div class="form-group">
-				<label>Retning i &deg; <input type="number" ng-model="observation.weather.manual.wind.dir" value="0" class="form-control" placeholder="">
+				<label>Retning<select type="select" ng-model="observation.weather.manual.wind.dir" class="form-control" placeholder="">
+				<option value="N">N</option>
+				<option value="NNE">NNE</option>
+				<option value="NE">NE</option>
+				<option value="ENE">ENE</option>
+				<option value="E">E</option>
+				<option value="ESE">ESE</option>
+				<option value="SE">SE</option>
+				<option value="SSE">SSE</option>
+				<option value="S">S</option>
+				<option value="SSW">SSW</option>
+				<option value="SW">SW</option>
+				<option value="WSW">WSW</option>
+				<option value="W">W</option>
+				<option value="WNW">WNW</option>
+				<option value="NW">NW</option>
+				<option value="NNW">NNW</option>
+				</select>
 				</label>
 			</div>
 

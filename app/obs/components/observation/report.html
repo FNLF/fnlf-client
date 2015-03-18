@@ -284,17 +284,32 @@
 			
 			<li class="list-group-item">
 				<p class="list-group-item-text">
-				<div class="col-xs-12  col-md-6">
+				<div class="col-xs-12  col-md-12">
 					<label class="control-label">Tiltak</label>
 					<div class="clearfix"></div>
-					{{observation.actions.join(' ')}}
+					<div class="col-xs-12 col-md-6" ng-show="observation.actions.local">
+						<strong>Lokale:</strong>
+						<ol>
+							<li ng-repeat="a in observation.actions.local">{{a}}</li>
+						</ol>
+					</div>
+					<div class="col-xs-12 col-md-6" ng-show="observation.actions.central">
+						<strong>Sentrale:</strong>
+						<ol>
+							<li ng-repeat="a in observation.actions.central">
+								{{a}}
+							</li>
+						</ol>
+					</div>
+					<div class="clearfix"></div>
 				</div>
-				
+				<!-- 
 				<div class="col-xs-12  col-md-6">
 					<label class="control-label">Relaterte</label>
 					<div class="clearfix"></div>
 					{{observation.related.join(' ')}}
 				</div>
+				 -->
 				</p>
 				<div class="clearfix"></div>
 			</li>
