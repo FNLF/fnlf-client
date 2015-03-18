@@ -1,0 +1,19 @@
+<div>
+
+
+<map center="{{location.geo.coordinates}}">
+				  <marker
+				      position="{{location.geo.coordinates}}"
+				      title="{{location.name}}"
+				      draggable="true"
+				      visible="true"
+					  on-dragend="dragMarker()"
+				      ></marker>
+				</map>
+	<p class="label label-default" ng-show="markerDragged">
+		<small>
+				{{location.geo.coordinates[0]}} {{location.geo.coordinates[1]}}
+		</small>
+
+	</p>
+</div>
