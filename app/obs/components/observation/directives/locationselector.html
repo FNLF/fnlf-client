@@ -2,15 +2,22 @@
 
 <a ng-init="isCollapsed=false" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Vis kart' : 'Lukk kart'}}</a>
 <div collapse="isCollapsed">
-<map center="{{location.location.geo.coordinates}}">
+<map center="{{location.location.geo.coordinates}}" on-click="placeMarker()" >
 				  <marker
 				      position="{{location.location.geo.coordinates}}"
 				      title="{{location.location.name}}"
-				      draggable="false"
+				      draggable="true"
 				      visible="true"
+					  on-dragend="dragMarker()"
 				      ></marker>
 				</map>
 </div>
+
+	<pre>
+		{{location.location.geo.coordinatesjson}}
+
+	</pre>
+
 <div class="clearfix"></div>
 	<h3>Klubb <resolveclub clubid="observation.club"></resolveclub></h3>
 	<form >
