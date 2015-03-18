@@ -13,8 +13,9 @@
 <br />
 <table class="table table-striped table-condensed table-hover">
 	<tr ng-repeat="a in observation.actions.local">
+		<td>{{$index+1}}</td>
 		<td>{{a}}</td>
-		<td><span class="pull-right"></span><i class="fa fa-times fa-fw" ng-click="removeActionLocal($index)"></i></span></td>
+		<td class="text-right"><i class="fa fa-times fa-fw" ng-click="removeActionLocal($index)"></i></td>
 		</tr>
 </table>
 </div>
@@ -34,8 +35,9 @@
 <br />
 <table class="table table-striped table-condensed table-hover">
 	<tr ng-repeat="a in observation.actions.central">
+		<td>{{$index+1}}</td>
 		<td>{{a}}</td>
-		<td><span class="pull-right"></span><i class="fa fa-times fa-fw" ng-click="removeActionCentral($index)"></i></span></td>
+		<td class="text-right"><i class="fa fa-times fa-fw" ng-click="removeActionCentral($index)"></i></td>
 		</tr>
 </table>
 </div>

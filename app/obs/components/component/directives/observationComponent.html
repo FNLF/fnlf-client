@@ -18,6 +18,8 @@
 
 	<div class="col-xs-12 col-md-6">
 		<div class="btn-group-xs">
+			<label class="btn btn-default" ng-model="component.attributes.reserve_ride" btn-checkbox>Reserve benyttet</label> 
+			<label class="btn btn-default" ng-model="component.attributes.aad_fire" btn-checkbox>Nødåpner fyrt</label> 
 			<label class="btn btn-default" ng-model="component.attributes.gear_malfunction" btn-checkbox>Feilfunksjon</label> 
 			<label class="btn btn-default" ng-model="component.attributes.violation" btn-checkbox>Regelbrudd</label>
 			<label class="btn btn-default" ng-model="component.attributes.wilfull" btn-checkbox>Med hensikt</label>
@@ -50,7 +52,7 @@
 	
 	<div class="clearfix"></div>
 	<div class="col-xs-12 hideInTemplateEditor">
-		<label>Fritekst</label> <input type="text" ng-model="component.how" class="form-control">
+		<label>Fritekst (hvordan)</label> <input type="text" ng-model="component.how" class="form-control">
 		</textarea>
 	</div>
 	

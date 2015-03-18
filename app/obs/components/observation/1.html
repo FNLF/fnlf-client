@@ -159,8 +159,10 @@
 				<span ng-show="observation.weather.manual.wind.turbulence"><span class="label label-warning">Turbulent</span>&nbsp;</span>
 				<span ng-show="observation.weather.manual.wind.dir"><span class="label label-default">{{observation.weather.manual.wind.dir}}</span>&nbsp;</span>
 				
+				<div class="clearfix"></div><br />
+				<p>{{observation.weather.manual.description}}</p>
 				<div class="clearfix"></div>
-					<br />
+					
 					<weather observation="observation"></weather>
 				</p>
 				<div class="clearfix"></div>
@@ -170,13 +172,13 @@
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Tiltak</h4>
 				<p class="list-group-item-text">
-					<div class="col-xs-12 col-md-6" ng-show="observation.actions.local">
+					<div class="col-xs-12 col-md-6">
 						<strong>Lokale:</strong>
 						<ol>
 							<li ng-repeat="a in observation.actions.local">{{a}}</li>
 						</ol>
 					</div>
-					<div class="col-xs-12 col-md-6" ng-show="observation.actions.central">
+					<div class="col-xs-12 col-md-6">
 						<strong>Sentrale:</strong>
 						<ol>
 							<li ng-repeat="a in observation.actions.central">
