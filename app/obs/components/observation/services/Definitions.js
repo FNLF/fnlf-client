@@ -136,6 +136,12 @@
 				if(attributes.injury){
 					tags.push('Personskade');
 				}
+				if(attributes.reserve_ride){
+					tags.push('Reserve benyttet');
+				}
+				if(attributes.add_fire){
+					tags.push('Nødåpner fyrt');
+				}
 
 				return tags;
 			};
