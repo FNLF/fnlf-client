@@ -1,29 +1,28 @@
 
-angular.module('reportingApp').directive('locationSummary', function ($window) {
+angular.module('reportingApp').directive('locationsummary', function ($window) {
 
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.template = function(tElement, tAttrs) {
-		//'<a target="_blank" href="https://www.google.no/maps/@{{observation.location.north}},{{observation.location.east}},15z" <span>Kart</span>';
-		return '<map center="{{observation.location.geo.coordinates}}"> \
-				  <marker \
-				      position="{{observation.location.geo.coordinates}}" \
-				      title="{{observation.location.name}}" \
-				      draggable="true" \
-				      visible="true" \
-				      ></marker> \
-				</map>';
-	};
+	directive.templateUrl = "components/observation/directives/locationsummary.html";
 
-	directive.require = 'location';
+
 	directive.scope = {
-		location: '=',
-		
+		location: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
-		
+
+				$scope.dragMarker = function(event){
+					$scope.location.geo.coordinates[0]=event.latLng.k;
+					$scope.location.geo.coordinates[1]=event.latLng.D;
+					$scope.markerDragged=true;
+				};
+
+		$scope.$watch('location',function() {
+			$scope.markerDragged=false;
+		});
+
 //		$scope.$on('mapInitialized', function (event, map) {
 //		    $window.setTimeout(function() {
 //		        map.setCenter(new google.maps.LatLng($scope.observation.north, $scope.observation.east));
@@ -177,14 +176,19 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 
 	directive.link = function ($scope, element, attrs) {
 
-		$scope.mapDistance = function(lat1,lon1,lat2,lon2){
 
-			var phi1 = lat1.toRadians(), phi2 = lat2.toRadians(), deltaLambda = (lon2-lon1).toRadians(), R = 6371000; // gives d in metres
-        	var d = Math.acos( Math.sin(ph11)*Math.sin(ph12) + Math.cos(ph11)*Math.cos(ph12) * Math.cos(deltaLambda) ) * R;
-
-		};
 
 		$scope.locations = [];
+
+		$scope.dragMarker = function(a){
+			console.log('dragMarker');
+			console.log(a);
+		};
+
+		$scope.placeMarker = function(a){
+			console.log('click');
+			console.log(a);
+		};
 
 		$scope.formatter = function(obj){
 

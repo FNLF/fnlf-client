@@ -90,18 +90,21 @@
 
 			<li class="list-group-item">
 				<p class="list-group-item-text">
+
 				<div class="row">
 					<filepreviews save="saveObservation()" observation="observation"></filepreviews>
 				</div>
+
+
 				<div class="hidden-xs hidden-sm">
 					<div ng-file-drop ng-model="files" ng-file-change="upload($files)" class="drop-box" drag-over-class="dragover" ng-multiple="true" allow-dir="true" accept="*">Dra og slipp filer her</div>
 					<div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
 				</div>
-
+<!--
 				<button class="btn btn-block btn-primary" ng-file-select ng-multiple="true" ng-file-change="upload($files)">
 					<i class="fa fa-plus fa-fw"></i> Legg til fil
 				</button>
-
+-->
 
 				</p>
 				<div class="clearfix"></div>
@@ -110,20 +113,9 @@
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Sted</h4>
 				<p class="list-group-item-text">
-<!-- 					<a ng-init="isCollapsed=false" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Vis kart' : 'Lukk kart'}}</a> -->
-<!-- 				<div collapse="isCollapsed"> -->
 
-<!-- 					<location-summary observation="observation"></location-summary> -->
-<!-- 				</div> <locationselector observation="observation"></locationselector> -->
 				<div ng-if="observation.location.geo.coordinates">
-				<map center="{{observation.location.geo.coordinates}}">
-				  <marker
-				      position="{{observation.location.geo.coordinates}}"
-				      title="{{observation.location.name}}"
-				      draggable="false"
-				      visible="true"
-				      ></marker>
-				</map>
+					<locationsummary location="observation.location"></locationsummary>
 				</div>
 				<location observation="observation"></location>
 				</p>

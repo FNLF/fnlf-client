@@ -6,7 +6,7 @@ angular.module('reportingApp').directive('location', function (LocationService) 
 		
 		return '<div class="form-group"> \
 				<select class="form-control" ng-model="observation.location" \
-        		ng-options="opt as opt.nickname for opt in clublocations track by opt.nickname"> \
+        		ng-options="opt as opt.nickname for opt in clublocations track by opt.nickname" ng-change="locationSelected()"> \
         		</select> \
 				</div> \
 				<div class="clearfix"></div> \
@@ -87,7 +87,10 @@ angular.module('reportingApp').directive('location', function (LocationService) 
 
 	directive.link = function ($scope, element, attrs) {
 		
-		
+		$scope.locationSelected = function(){
+			$scope.observation.location = angular.copy($scope.observation.location);
+		};
+
 		$scope.getClubLocations();
 		
 	};
