@@ -2,7 +2,7 @@
 
 <span class="small">{{component.order}} </span> &nbsp;
 	<strong>{{component.what}} </strong>
-					{{component.how}} &nbsp; 
+					{{component.how| limitTo : 40}} &nbsp;
 	<span ng-repeat="tag in getAttributesAsTags(component)"> 
 		<span class="label label-warning">{{tag}} </span> &nbsp;
 	</span> 
