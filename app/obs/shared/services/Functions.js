@@ -3,9 +3,12 @@
 		.service('Functions',  function () {
 
 			this.mapDistance = function(lat1,lon1,lat2,lon2){
-
-				var phi1 = lat1.toRadians(), phi2 = lat2.toRadians(), deltaLambda = (lon2-lon1).toRadians(), R = 6371000; // gives d in metres
-				var d = Math.acos( Math.sin(ph11)*Math.sin(ph12) + Math.cos(ph11)*Math.cos(ph12) * Math.cos(deltaLambda) ) * R;
+				var toRad = (Math.PI /180);
+				var phi1 = lat1 * toRad
+				var phi2 = lat2 * toRad
+				var deltaLambda = (lon2-lon1) * toRad;
+				var R = 6371000; // gives d in metres
+				var d = Math.acos( Math.sin(phi1)*Math.sin(phi2) + Math.cos(phi1)*Math.cos(phi2) * Math.cos(deltaLambda) ) * R;
 				return d;
 			};
 

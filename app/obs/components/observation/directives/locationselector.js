@@ -35,7 +35,7 @@ angular.module('reportingApp').directive('locationsummary', function ($window) {
 });
 
 
-angular.module('reportingApp').directive('locationselector', function (LocationService, ObservationService, $rootScope, $timeout) {
+angular.module('reportingApp').directive('locationselector', function (LocationService, ObservationService,Functions, $rootScope, $timeout) {
 	var directive = {};
 
 	directive.restrict = 'E';
@@ -47,12 +47,159 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 		locationAside: '='
 
 	};
-	
 
-	
+
+	directive.link = function ($scope, element, attrs) {
+
+		$scope.showMarker=false;
+		$scope.model = {};
+		$scope.model.location={};
+		$scope.model.location.geo={};
+		$scope.model.location.geo.coordinates=[62,9.5];
+		$scope.model.nickname='';
+		$scope.zoom=7;
+
+		$scope.existingClubLocationUsed = false;
+
+
+		if($scope.clublocations && $scope.clublocations[0] && $scope.clublocations[0].geo && $scope.clublocations[0].geo.coordinates){
+
+			var x = $scope.clublocations[0].geo.coordinates[0];
+			var y = $scope.clublocations[0].geo.coordinates[1];
+			$scope.model.location.geo.coordinates=[x,y];
+			$scope.zoom=7;
+		}
+
+		$scope.locations = [];
+
+
+		var selectIcaoFn = function(lat,lon){
+			var selected = null;
+			var minDist = 30000;
+			$scope.icao.forEach(function(icao){
+
+				var dist = Functions.mapDistance(lat,lon,icao.coords[0],icao.coords[1]);
+				if(dist < minDist){
+					selected = icao;
+					minDist=dist;
+				}
+
+			});
+			if(selected) {
+				console.log("Closest icao within 30000: " + selected.name + " dist: " + minDist);
+			}
+			return selected;
+
+		};
+
+		var checkIfLocationEdited = function(){
+			var changed = true;
+			if($scope.clublocations && $scope.clublocations.length>0){
+				$scope.clublocations.forEach(function(loc){
+
+					if(loc.geo.coordinates[0]==$scope.model.location.geo.coordinates[0]){
+						if(loc.geo.coordinates[1]==$scope.model.location.geo.coordinates[1]){
+							changed = false;
+						}
+					}
+
+				});
+
+			}
+			$scope.existingClubLocationUsed=!changed;
+		};
+
+		$scope.locationSelectedFn = function() {
+			$scope.showMarker=true;
+			$scope.zoom=12;
+			var coords = $scope.model.location.geo.coordinates;
+			console.log("selected with coords "+coords);
+			$scope.model.icao = selectIcaoFn(coords[0],coords[1]);
+			checkIfLocationEdited();
+		};
+
+		$scope.dragMarker = function(event){
+			$scope.showMarker=true;
+			$scope.model.location.geo.coordinates[0]=event.latLng.k;
+			$scope.model.location.geo.coordinates[1]=event.latLng.D;
+			console.log($scope.model.location.geo);
+			$scope.existingClubLocationUsed=false;
+			var coords = $scope.model.location.geo.coordinates;
+			$scope.model.icao = selectIcaoFn(coords[0],coords[1]);
+			$scope.model.name='';
+			$scope.model.geo_type='';
+			$scope.model.nickname='';
+		};
+
+		$scope.clickMarker = function(event,location){
+			console.log('clickMarker');
+			console.log(event);
+			console.log(location);
+			$scope.model.location = angular.copy(location);
+			$scope.model.nickname = location.nickname;
+			$scope.existingClubLocationUsed=true;
+			$scope.showMarker=true;
+		};
+
+
+		$scope.formatter = function(obj){
+
+			if(angular.isUndefined(obj)){
+				return '';
+			}
+
+			if(angular.isUndefined(obj.name)){
+				return '';
+			}
+
+			if(Object.keys(obj).length==0){
+				return '';
+			}
+			console.log(obj);
+
+			return obj.name+' '+obj.geo_type+' '+obj.municipality;
+		};
+
+		$scope.getLocations = function(name){
+
+			return LocationService.getPlaceNames(name).then(function(response){
+				if(response.data._items){
+
+					var array = [].concat(response.data._items);
+					return array.map(function(place){
+						
+						var obj = {};
+						
+						obj.municipality = place.municipality;
+						obj.county = place.county;
+						obj.name = place.name;
+						obj.geo = {coordinates: [place.geo.coordinates[0],place.geo.coordinates[1]], type: 'Point'};
+						obj.geo_type = place.geo_type;
+						
+						return obj;
+					});
+			}else{
+				return {};
+			}
+			});
+
+		};
+		
+		$scope.getClubLocations = function() {
+			
+			
+			return LocationService.getClubLocations($scope.observation.club).then(function(response) {
+				
+				
+				
+			});
+		};
+
+	};
+
 	directive.controller = function($scope) {
-		
-		
+
+
 		/** Could also use a close by using coordinates for airports! **/
 		$scope.icao = [];
 		$scope.icao.push({icao: "ENAL", name: "Ålesund/Vigra",coords:[62.560598,6.113761]});
@@ -109,134 +256,73 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 		$scope.icao.push({icao: "ENZV", name: "Stavanger/Sola",coords:[58.880441,5.631402]});
 		$scope.icao.push({icao: "ENOR", name: "Norway FIR",coords:[57.484,2.797]});
 		/*
-		$scope.icao.push({icao: "ENOB", name: "Bodø OFIR"});
-		$scope.icao.push({icao: "ENSA", name: "Svea/Svalbard"});
-		$scope.icao.push({icao: "ENVR", name: "Værøy Heliport"});
-		$scope.icao.push({icao: "ENAS", name: "Ny Ålesund"});
-		*/
-		$scope.locationSelected = function($item, $model, $label) {
-			
-			console.log($item);
-			console.log($model);
-			console.log($label);
-		};
+		 $scope.icao.push({icao: "ENOB", name: "Bodø OFIR"});
+		 $scope.icao.push({icao: "ENSA", name: "Svea/Svalbard"});
+		 $scope.icao.push({icao: "ENVR", name: "Værøy Heliport"});
+		 $scope.icao.push({icao: "ENAS", name: "Ny Ålesund"});
+		 */
+
 //		ng-model="location.location"
-		
+
 		function getClubLocations() {
-			
+
 			LocationService.getClubLocations($scope.observation.club).then(function(response) {
-				
+
 				return response;
-				
+
 			});
 		};
-		
-		$scope.saveLocation = function() {
-			
+
+		$scope.useLocation = function() {
+
 			var obj = {};
-			obj = $scope.location.location;
-			obj.nickname = $scope.location.nickname;
-			obj.icao = $scope.location.icao.icao;
-			
+			obj = $scope.model.location;
+			obj.nickname = $scope.model.nickname;
+			obj.icao = $scope.model.icao;
+			$scope.observation.location = obj;
+			$rootScope.hideLocationAside();
+		};
+
+		$scope.saveLocation = function() {
+
+			var obj = {};
+			obj = $scope.model.location;
+			obj.nickname = $scope.model.nickname;
+			obj.icao = $scope.model.icao;
+
 			//Get locations from club
-			
+
 			LocationService.getClubLocations($scope.observation.club).then(function(response) {
-				
+
 				var locations = response.locations;
-				
+
 				if(!locations) location = [];
-				
-				if($scope.location.isdefault) {
+
+				if($scope.model.isdefault) {
 					locations.unshift(obj);
 				}
 				else locations.push(obj);
-				
+
 				LocationService.saveClubLocations($scope.observation.club, locations, response._etag, response._id).success(function(response) {
 					console.log(response);
-					
+
 					$scope.clublocations = response.locations;
 					$scope.observation.location = obj;
-					
+
 					$rootScope.saveObservation();
-					
+
 					$timeout(function(){
 						$rootScope.loadObservation();
 					},1000);
-					
+
 					$rootScope.hideLocationAside();
-					
-					
-					
-					});
-			});
-			
-		};
-	};
-
-
-	directive.link = function ($scope, element, attrs) {
 
 
 
-		$scope.locations = [];
-
-		$scope.dragMarker = function(a){
-			console.log('dragMarker');
-			console.log(a);
-		};
-
-		$scope.placeMarker = function(a){
-			console.log('click');
-			console.log(a);
-		};
-
-		$scope.formatter = function(obj){
-
-			if(angular.isUndefined(obj)){
-				return '';
-			}
-
-			if(Object.keys(obj).length==0){
-				return '';
-			}
-			return obj.name+' '+obj.geo_type+' '+obj.municipality;
-		};
-
-		$scope.getLocations = function(name){
-
-			return LocationService.getPlaceNames(name).then(function(response){
-				if(response.data._items){
-
-					var array = [].concat(response.data._items);
-					return array.map(function(place){
-						
-						var obj = {};
-						
-						obj.municipality = place.municipality;
-						obj.county = place.county;
-						obj.name = place.name;
-						obj.geo = {coordinates: [place.geo.coordinates[0],place.geo.coordinates[1]], type: 'Point'};
-						obj.geo_type = place.geo_type;
-						
-						return obj;
-					});
-			}else{
-				return {};
-			}
+				});
 			});
 
 		};
-		
-		$scope.getClubLocations = function() {
-			
-			
-			return LocationService.getClubLocations($scope.observation.club).then(function(response) {
-				
-				
-				
-			});
-		};
-
 	};
 
 	return directive;
