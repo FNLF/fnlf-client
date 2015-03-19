@@ -21,7 +21,7 @@ angular.module('reportingApp')
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<button ng-disabled="observationChanges" tooltip-placement="top" tooltip="{{btn_descr}}" type="button" class="btn btn-{{tt}}" ng-click="openWorkflowAside()"><i class="fa fa-random fa-fw"></i>{{btn_title}}</button>';
+		return '<button ng-disabled="observationChanges" tooltip-placement="top" tooltip="{{btn_descr}}" type="button" class="btn btn-{{tt}}" ng-click="openWorkflowAside()"><i class="fa fa-random fa-fw"></i> {{btn_title}}</button>';
 	};
 	
 	
@@ -54,7 +54,6 @@ angular.module('reportingApp')
 			  $scope.workflowAside = $aside({
 					scope: $scope,
 					title: $scope.title, 
-					//content: 'My Content', 
 					show: true,
 					contentTemplate: '/app/obs/components/observation/directives/workflow.html',
 					template: '/shared/partials/aside.html',
@@ -158,7 +157,7 @@ angular.module('reportingApp')
 			$scope.btn_descr = response.description;
 			$scope.btns = btns;
 			$scope.username = +$rootScope.username;
-			$scope.title = 'Workflow for Obs #' + $scope.observation.id;
+			$scope.title = 'Workflow for #' + $scope.observation.id;
 			
 			var disabledFn = function(){
 				if(!$scope.workflowpermission || $scope.observationChanges) return true;
