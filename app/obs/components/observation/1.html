@@ -2,14 +2,12 @@
 	<div ng-if="observation._id">
 
 		<!-- Placeholders for status stuff -->
-		<!-- Watchers - am I watching, click to show who's watching -->
-		<span class="pull-right"><watchers observation="observation"></watchers></span>
 
 		<!-- Workflows, show current status. Click dropdown show actions -->
 		<span class="pull-right"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
 <!-- 		<span class="pull-right"><workingcomments observation="observation"></workingcomments>&nbsp;</span> -->
 
-		<h1>OBS #{{observation.id}}</h1>
+		<h1>#{{observation.id}}  {{observation.tags.join(' ')}}</h1>
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->

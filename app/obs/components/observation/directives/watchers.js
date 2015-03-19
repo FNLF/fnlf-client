@@ -22,7 +22,7 @@ angular.module('reportingApp')
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<button tooltip-placement="top" tooltip-html-unsafe="{{watchers}}" type="button" class="btn btn-{{button_watching}}" ng-click="toggleWatching()"><i class="fa fa-{{icon_watching}} fa-fw"></i>{{button_title}}</button>';
+		return '<button tooltip-placement="top" tooltip-html-unsafe="{{watchers}}" type="button" class="btn btn-sm btn-{{button_watching}}" ng-click="toggleWatching()"><i class="fa fa-{{icon_watching}} fa-fw"></i>{{button_title}}</button>';
 	};
 	
 	
