@@ -15,6 +15,11 @@
 
 			$scope.resolvePersonsFn();
 
+			$scope.whatEdited = function(component){
+				component.editTitle=false;
+
+				RestService.addTag(component.what,"what");
+			};
 		};
 		return directive;
 	};

@@ -1,6 +1,15 @@
 (function () {
 
+	var reorderFunc = function(components){
 
+		var orderedComponents = components.filter(function(t){return t.active}).sort(function(a,b){return a.order-b.order});
+		var i = 0;
+		orderedComponents.forEach(function(c){
+			c.order = i;
+			i++;
+		});
+
+	};
 
 	var decrementOrderFunc = function(components,component){
 
@@ -21,7 +30,7 @@
          		component.order--;
          	}
          }
-
+		reorderFunc(components);
 	};
 
 	var incrementOrderFunc = function(components,component){
@@ -43,7 +52,7 @@
 				component.order++;
 			}
 		}
-
+		reorderFunc(components);
 	};
 
 
@@ -82,7 +91,7 @@
 		directive.link = function ($scope, element, attrs) {
 			var i=0;
 			$scope.observation.components.forEach(function(c){
-				if(!c.order){
+				if(angular.isUndefined(c.order)){
 					c.order = i;
 				}
 				i++;
@@ -184,7 +193,7 @@
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()
 				.success(function(data){
-					$scope.templates = data._items.filter(function(t){return t.active}).sort(function(a,b){return a.order-b.order});
+					$scope.templates = data._items.filter(function(t){return t.active}).sort(function(a,b){return a.sort-b.sort});
 					$scope.templates.forEach(function(t){
 						if(t['default']){
 							$scope.template = t;
@@ -193,23 +202,37 @@
 
 				});
 
+			$scope.onChange = function(selectedTemplate) {
+				console.log("onChange!");
+				console.log(selectedTemplate);
+			};
+
 			$scope.newComponent = function(selectedTemplate){
 				console.log(selectedTemplate);
 				$scope.selectedTemplate ={};
 				angular.copy(selectedTemplate,$scope.selectedTemplate);
 				$scope.resolvePersonsFn();
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
-				$scope.selectedTemplate.order = $scope.observation.components.length+1;
+				$scope.selectedTemplate.order = -1;
 
 				$scope.observation.components.push($scope.selectedTemplate);
 
+				reorderFunc($scope.observation.components);
+
 				$scope.closeOthers($scope.selectedTemplate);
+
+				if($scope.selectedTemplate.what=="Egendefinert"){
+					$scope.selectedTemplate.editTitle=true;
+					$scope.selectedTemplate.what='';
+				}
+				$scope.template = '';
 				return false;
 			};
 
 			$scope.deleteComponent = function(component){
 				var index = $scope.observation.components.indexOf(component);
 				$scope.observation.components.splice(index,1);
+				reorderFunc($scope.observation.components);
 			};
 
 

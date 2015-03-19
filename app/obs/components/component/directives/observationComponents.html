@@ -22,19 +22,25 @@
 
 
 	<div>
-		<div class="btn-group col-xs-6">
+		<div class="col-xs-12 col-lg-6">
+			<label>Legg til hendinger og årsaker</label>
+			<div class="well">
+				<p>
+					Begynn med å legge til sjølve hendinga, og så årsaken til hendinga og så årsaken til årsaken (osv) helt tilbake til rotårsaken
 
+				</p>
+			</div>
 
-			<select tooltip="Ny hending"  class="form-control " data-placeholder="Hending"
+			<select tooltip="Ny hending"  class="form-control " data-placeholder="Hending" ng-change="newComponent(template)"
 					ng-model="template"
 					ng-options="item.what for item in templates">
-				<option value="" disabled>Velg type hending</option>
+				<option value="" disabled>Legg til hendinger og årsaker</option>
 			</select>
-
+		<!--
 			<button type="button" class="btn btn-primary" dropdown-toggle ng-disabled="!template" ng-click="newComponent(template)">
 				<span class="fa fa-plus"></span> Ny hending
 			</button>
-
+		-->
 
 		</div>
 
