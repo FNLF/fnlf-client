@@ -3,7 +3,7 @@
 	var reorderFunc = function(components){
 
 		var orderedComponents = components.filter(function(t){return t.active}).sort(function(a,b){return a.order-b.order});
-		var i = 0;
+		var i = 1;
 		orderedComponents.forEach(function(c){
 			c.order = i;
 			i++;
