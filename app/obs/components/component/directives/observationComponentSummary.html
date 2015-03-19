@@ -3,6 +3,12 @@
 <span class="small">{{component.order}} </span> &nbsp;
 	<strong>{{component.what}} </strong>
 					{{component.how| limitTo : 40}} &nbsp;
+					
+	<span ng-if="component.flags.barrier" class="label label-default">Barriære</span>
+	<span ng-if="component.flags.incident" class="label label-info">Hending</span>
+	<span ng-if="component.flags.root_cause" class="label label-warning">Rot Årsak</span>
+	<span ng-if="component.flags.final_consequence" class="label label-danger">Konsekvens</span>
+					
 	<span ng-repeat="tag in getAttributesAsTags(component)"> 
 		<span class="label label-warning">{{tag}} </span> &nbsp;
 	</span> 
