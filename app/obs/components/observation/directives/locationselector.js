@@ -68,6 +68,15 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 			var y = $scope.clublocations[0].geo.coordinates[1];
 			$scope.model.location.geo.coordinates=[x,y];
 			$scope.zoom=7;
+
+			$scope.clublocations.forEach(function(loc){
+
+				if(typeof loc.icao != 'string'){ //icao was accidentially object instead of string;
+					delete loc.icao;
+				}
+
+			});
+
 		}
 
 		$scope.locations = [];
@@ -111,7 +120,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 
 		$scope.locationSelectedFn = function() {
 			$scope.showMarker=true;
-			$scope.zoom=12;
+			$scope.zoom=13;
 			var coords = $scope.model.location.geo.coordinates;
 			console.log("selected with coords "+coords);
 			$scope.model.icao = selectIcaoFn(coords[0],coords[1]);
@@ -132,9 +141,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 		};
 
 		$scope.clickMarker = function(event,location){
-			console.log('clickMarker');
-			console.log(event);
-			console.log(location);
+			$scope.zoom=13;
 			$scope.model.location = angular.copy(location);
 			$scope.model.nickname = location.nickname;
 			$scope.existingClubLocationUsed=true;
@@ -278,7 +285,9 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 			var obj = {};
 			obj = $scope.model.location;
 			obj.nickname = $scope.model.nickname;
-			obj.icao = $scope.model.icao;
+			if($scope.model.icao) {
+				obj.icao = $scope.model.icao.icao;
+			}
 			$scope.observation.location = obj;
 			$rootScope.hideLocationAside();
 		};
@@ -288,7 +297,16 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 			var obj = {};
 			obj = $scope.model.location;
 			obj.nickname = $scope.model.nickname;
-			obj.icao = $scope.model.icao;
+			if($scope.model.icao) {
+				obj.icao = $scope.model.icao.icao;
+			}
+			if($scope.model.isdefault) {
+				$scope.clublocations.unshift(obj);
+			}else{
+				$scope.clublocations.push(obj);
+			}
+
+			$scope.observation.location = obj;
 
 			//Get locations from club
 
@@ -296,31 +314,23 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 
 				var locations = response.locations;
 
-				if(!locations) location = [];
+				if(!locations) locations = [];
 
 				if($scope.model.isdefault) {
 					locations.unshift(obj);
 				}
-				else locations.push(obj);
+				else{
+					locations.push(obj);
+				}
 
 				LocationService.saveClubLocations($scope.observation.club, locations, response._etag, response._id).success(function(response) {
 					console.log(response);
-
 					$scope.clublocations = response.locations;
 					$scope.observation.location = obj;
-
-					$rootScope.saveObservation();
-
-					$timeout(function(){
-						$rootScope.loadObservation();
-					},1000);
-
-					$rootScope.hideLocationAside();
-
-
-
 				});
 			});
+
+			$rootScope.hideLocationAside();
 
 		};
 	};
