@@ -12,13 +12,13 @@
 	};
 
 	var decrementOrderFunc = function(components,component){
-		component.order = component.order-0.5;
+		component.order = component.order-1.1;
 		reorderFunc(components);
 	};
 
 	var incrementOrderFunc = function(components,component){
 
-		component.order = component.order+0.5;
+		component.order = component.order+1.1;
 		reorderFunc(components);
 	};
 
