@@ -149,10 +149,10 @@
 				if(!angular.isUndefined(tag) && !angular.isUndefined(group)) {
 					getExistingTags(tag, group).success(function (data) {
 						if (data._meta.total == 0) {
-							console.log("Adding new tag " + tag);
+							console.log("Adding new tag " + tag+ ' ('+group+')');
 							$http.post(urlBase + '/tags', {tag: tag, group: group});
 						} else {
-							console.log("Incrementing tag " + tag + " freq");
+							console.log("Incrementing tag " + tag + " freq ("+group+")");
 							$http.post(urlBase + '/tags/freq/' + data._items[0]._id, {tag: tag, group: group});
 						}
 

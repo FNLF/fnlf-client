@@ -4,10 +4,10 @@
 			{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
 		</h3>
 		<div class="input-group" ng-show="component.editTitle">
-			<tagtypeahead model="component.what" group="component.what"  noun="Hva skjedde?" ></tagtypeahead>
+			<tagtypeahead model="component.what" group="component.what"  noun="Beskriv {{getFlagAsLabel(component)}}" ></tagtypeahead>
 		<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
-		              <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-click="whatEdited(component)">
+			<span class="input-group-btn">
+            	<button class="btn btn-success" type="button" ng-click="whatEdited(component)">
 					  Ok
 				  </button>
                </span>
@@ -75,6 +75,7 @@
 			<span class="label label-danger" ng-show="howTextClicked && component.how.length > 120">Legg gjerne til flere hendinger i stedet for å skrive alt som skjedde her</span>
 
 		</div>
+		<div class="clearfix"></div>
 		<div class="col-xs-12"></div>
 
 		<button type="button" class="btn btn-primary" ng-click="newCause()">

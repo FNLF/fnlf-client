@@ -255,10 +255,36 @@
 				incrementOrderFunc($scope.observation.components,component);
 			};
 
+			$scope.observationTypeName = 'Hendelse';
+			$scope.componentWhatTag = 'near_miss';
+			var getObservationTypeName = function(){
+				$scope.observationTypeId=$scope.observation.type;
+				var observationType = Definitions.resolveObservationTypes($scope.observation.type);
+				if(observationType) {
+					$scope.observationTypeName = observationType.toLowerCase();
+				}
+			};
+			getObservationTypeName();
+
+
 			if($scope.observation.components.length==0){
 				$scope.newIncident();
 			}
 
+
+
+			$scope.getFlagAsLabel = function(component){
+				if(component.flags.root_cause){
+					return 'årsak';
+				}
+				if(component.flags.final_consequence){
+					return 'konsekvens';
+				}
+				if(component.flags.barrier){
+					return 'brutt barriære';
+				}
+				return 'hendelse';
+			};
 		};
 
 		return directive;
