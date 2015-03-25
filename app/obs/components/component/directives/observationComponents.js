@@ -169,7 +169,7 @@
 				angular.copy(selectedTemplate,$scope.selectedTemplate);
 				$scope.resolvePersonsFn();
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
-				if($scope.selectedTemplate.flags.root_cause){
+				if($scope.selectedTemplate.flags.cause){
 					$scope.selectedTemplate.order = -1;
 				}else{
 					$scope.selectedTemplate.order = $scope.observation.components.length+1;
@@ -191,7 +191,7 @@
 
 			$scope.newConsequence = function(){
 				var template = {};
-				template.flags={final_consequence:true};
+				template.flags={consequence:true};
 				template.attributes={};
 				$scope.newComponent(template);
 			};
@@ -205,7 +205,7 @@
 
 			$scope.newCause = function(){
 				var template = {};
-				template.flags={root_cause:true};
+				template.flags={cause:true};
 				template.attributes={};
 				$scope.newComponent(template);
 			};

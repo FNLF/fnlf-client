@@ -12,10 +12,25 @@
 		};
 */
 		directive.link = function ($scope, element, attrs) {
+
+			$scope.incidentOrElse = function(flags){
+				var isIncident = true;
+				Object.keys(flags).forEach(function(k){
+					var v = flags[k];
+					if(v){
+						if(k=='incident'){
+							isIncident = true;
+						}
+						else{
+							isIncident = false;
+						}
+					}
+				});
+				return isIncident;
+			};
+
 			$scope.componentWhatSelected = function(){
-				console.log($scope.component.what);
 				$scope.component.editTitle=false;
-				RestService.addTag($scope.component.what,"what");
 				$scope.copyFromTemplate();
 			};
 
@@ -48,8 +63,6 @@
 
 			$scope.whatEdited = function(component){
 				component.editTitle=false;
-
-				RestService.addTag(component.what,"what");
 				$scope.copyFromTemplate();
 			};
 		};
