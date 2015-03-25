@@ -84,10 +84,16 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 					});
 			};
 
+			var wordSum = function(word){
+				var sum = 0;
+				for(var i = 0; i < word.length; i++) {
+					sum += (word[i].charCodeAt() - 96);
+				}
+				return sum;
+			};
 
 			$scope.tagTransform = function(itemText){
-
-				return {fullname:itemText,tmpname:itemText,id:0}
+				return {fullname:itemText,tmpname:itemText,id:wordSum(itemText)*-1}
 			};
 
 		};
