@@ -157,6 +157,15 @@ angular.module("editorApp").controller("editorController",[
 						saveFn(component);
 					};
 
+
+					$scope.tagUp = function(tag){
+						RestService.addTag(tag.tag,tag.group);
+					};
+
+					$scope.tagDown = function(tag){
+						RestService.removeTag(tag.tag,tag.group);
+					};
+
 				} ]);
 
 

@@ -145,6 +145,27 @@
 				return $http.get(urlBase + '/tags/?where={"tag":"'+tag+'","group":"'+group+'"}');
 			};
 
+			this.removeTag = function(tag,group){
+
+				if(!angular.isUndefined(tag) && !angular.isUndefined(group)) {
+					getExistingTags(tag, group).success(function (data) {
+						if (data._meta.total == 0) {
+
+						} else {
+							console.log("Decrementing tag " + tag + " freq ("+group+")");
+							for(var i =0; i < 10; i++) {
+								$http.delete(urlBase + '/tags/freq/' + data._items[0]._id, {tag: tag, group: group});
+							}
+						}
+
+					});
+				}else{
+					console.log("Tag or group was undefined");
+				}
+
+			};
+
+
 			this.addTag = function(tag,group){
 				if(!angular.isUndefined(tag) && !angular.isUndefined(group)) {
 					getExistingTags(tag, group).success(function (data) {

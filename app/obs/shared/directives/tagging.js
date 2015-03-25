@@ -21,7 +21,7 @@
 			$scope.tags = [];
 			RestService.getTags($scope.group)
 				.success(function(data){
-					$scope.tags = Functions.deduplicate(data._items.map(function(t){return t.tag}));
+					$scope.tags = Functions.deduplicate(data._items.filter(function(t){return t.freq>=0}).map(function(t){return t.tag}));
 				});
 		};
 
