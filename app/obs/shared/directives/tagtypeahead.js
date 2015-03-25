@@ -9,7 +9,8 @@
 		directive.scope = {
 			model:'=',
 			group: '@',
-			noun: '@'
+			noun: '@',
+			selectfn: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
@@ -21,6 +22,10 @@
 			$scope.onSelect = function(item, model,label){
 				RestService.addTag(Functions.capitalizeFirstLetter(item),$scope.group);
 				$scope.model=item;
+				if($scope.selectfn){
+					$scope.selectfn();
+				}
+
 			};
 
 			$scope.tags = [];

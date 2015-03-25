@@ -12,6 +12,12 @@
 		};
 */
 		directive.link = function ($scope, element, attrs) {
+			$scope.componentWhatSelected = function(){
+				console.log($scope.component.what);
+				$scope.component.editTitle=false;
+				RestService.addTag($scope.component.what,"what");
+			};
+
 
 			$scope.resolvePersonsFn();
 

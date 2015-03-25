@@ -4,12 +4,14 @@
 			{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
 		</h3>
 		<div class="input-group" ng-show="component.editTitle">
-			<tagtypeahead model="component.what" group="component.what"  noun="Beskriv {{getFlagAsLabel(component)}}" ></tagtypeahead>
+			<tagtypeahead selectfn="componentWhatSelected" model="component.what" group="component.what"  noun="Beskriv {{getFlagAsLabel(component)}}" ></tagtypeahead>
 		<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
 			<span class="input-group-btn">
-            	<button class="btn btn-success" type="button" ng-click="whatEdited(component)">
+
+            	<button class="btn btn-default" ng-disabled="!component.what" type="button" ng-click="whatEdited(component)">
 					  Ok
 				  </button>
+
                </span>
 		</div>
 	</div>
@@ -19,7 +21,7 @@
 		<div class="col-xs-12 col-md-4">
 			<label>Type</label>
 			<div class="btn-group-xs">
-				<label class="btn btn-default" ng-model="component.flags.root_cause" btn-checkbox>Rotårsak</label>
+				<label class="btn btn-default" ng-model="component.flags.root_cause" btn-checkbox>Årsak</label>
 				<label class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
 				<label class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hending</label>
 				<label class="btn btn-default" ng-model="component.flags.final_consequence" btn-checkbox>Konsekvens</label>

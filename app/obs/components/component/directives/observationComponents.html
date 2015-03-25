@@ -18,6 +18,13 @@
 
 		</div>
 
+		<div class="col-xs-12">
+			<button ng-show="observation.components.length>0" type="button" class="btn btn-primary" ng-click="newCause()">
+				<span class="fa fa-plus"></span> Ny årsak
+			</button>
+			<p></p>
+		</div>
+
 	</div>
 	<div class="col-xs-12">
 
@@ -42,6 +49,8 @@
 		<button ng-show="observation.components.length==0" type="button" class="btn btn-primary" ng-click="newIncident()">
 			<span class="fa fa-plus"></span> Ny {{observationTypeName}}
 		</button>
+
+
 
 		<button ng-show="observation.components.length>2" type="button" class="btn btn-primary" ng-click="newConsequence()">
 			<span class="fa fa-plus"></span> Ny konsekvens/sluttresultat
