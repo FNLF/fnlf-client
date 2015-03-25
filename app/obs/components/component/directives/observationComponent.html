@@ -4,8 +4,13 @@
 			{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
 		</h3>
 		<div class="input-group" ng-show="component.editTitle">
-			<tagtypeahead selectfn="componentWhatSelected" model="component.what" group="component.what"  noun="Beskriv {{getFlagAsLabel(component)}}" ></tagtypeahead>
-		<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
+			<tagtypeahead ng-if="component.flags.root_cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
+			<tagtypeahead ng-if="component.flags.final_consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
+			<tagtypeahead ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv brutt barriære" ></tagtypeahead>
+			<tagtypeahead ng-if="(!component.flags.root_cause && !component.flags.final_consequence && !component.flags.barrier)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv hendelse" ></tagtypeahead>
+
+
+			<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
 			<span class="input-group-btn">
             	<button class="btn btn-default" ng-disabled="!component.what" type="button" ng-click="whatEdited(component)">
 					  Ok

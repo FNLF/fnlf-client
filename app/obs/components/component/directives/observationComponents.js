@@ -163,11 +163,6 @@
 					$scope.templates = data._items.filter(function(t){return t.active}).sort(function(a,b){return a.sort-b.sort});
 				});
 
-			$scope.onChange = function(selectedTemplate) {
-				console.log("onChange!");
-				console.log(selectedTemplate);
-			};
-
 			$scope.newComponent = function(selectedTemplate){
 				console.log(selectedTemplate);
 				$scope.selectedTemplate ={};
@@ -222,17 +217,6 @@
 			};
 
 
-
-			$scope.getStaticTags = function(){
-				return Definitions.getComponentTags();
-			};
-
-			$scope.staticTags = Definitions.getComponentTags();
-
-			$scope.initComponent = function(component){
-			//	component.attributes = Definitions.componentAttributesFromTags(component.tags);
-			};
-
 			$scope.closeOthers = function(component){
 
 				$scope.observation.components.forEach(function(c){
@@ -267,18 +251,7 @@
 
 
 
-			$scope.getFlagAsLabel = function(component){
-				if(component.flags.root_cause){
-					return 'årsak';
-				}
-				if(component.flags.final_consequence){
-					return 'konsekvens';
-				}
-				if(component.flags.barrier){
-					return 'brutt barriære';
-				}
-				return 'hendelse';
-			};
+
 		};
 
 		return directive;
