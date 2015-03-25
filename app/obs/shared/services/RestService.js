@@ -124,8 +124,8 @@
 			 * Tags
 			 */
 
-			this.getAllTags = function(){
-				return $http.get(urlBase + '/tags?sort=group,-freq&max_results=200');
+			this.getAllTags = function(page,sort){
+				return $http.get(urlBase + '/tags?sort='+sort+'&max_results=200&page='+page);
 			};
 
 

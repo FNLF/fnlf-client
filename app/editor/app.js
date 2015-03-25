@@ -74,7 +74,7 @@ angular.module("editorApp").controller("editorController",[
 
 						});
 					$scope.allTags = [];
-					RestService.getAllTags()
+					RestService.getAllTags(1)
 						.success(function(data){
 							$scope.allTags = data._items;
 						});
@@ -159,11 +159,41 @@ angular.module("editorApp").controller("editorController",[
 
 
 					$scope.tagUp = function(tag){
-						RestService.addTag(tag.tag,tag.group);
+						for(var i=0; i < 10; i++) {
+							RestService.addTag(tag.tag, tag.group);
+						}
+						tag.freq+=10;
 					};
 
 					$scope.tagDown = function(tag){
 						RestService.removeTag(tag.tag,tag.group);
+						tag.freq-=10;
+					};
+					$scope.page=1;
+					$scope.sort = "group,-freq";
+
+					$scope.sortByTag = function(){
+						$scope.sort = "tag,-freq";
+						$scope.getTags($scope.page,$scope.sort);
+					};
+
+					$scope.sortByFreq = function(){
+						$scope.sort = "-freq,group";
+						$scope.getTags($scope.page,$scope.sort);
+					};
+
+					$scope.sortByGroup = function(){
+						$scope.sort = "group,-freq";
+						$scope.getTags($scope.page,$scope.sort);
+					};
+
+
+					$scope.getTags = function(page){
+						$scope.page=page;
+						RestService.getAllTags(page,$scope.sort)
+							.success(function(data){
+								$scope.allTags = data._items;
+							});
 					};
 
 				} ]);

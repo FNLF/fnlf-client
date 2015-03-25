@@ -2,9 +2,13 @@
 
 	<h1>Tags</h1>
 
+	<button class="btn btn-default" ng-show="page>1" ng-click="getTags(page-1)">Side {{page-1}}</button>
+<span>Side {{page}}</span>
+	<button class="btn btn-default" ng-click="getTags(page+1)">Side {{page+1}}</button>
+
 	<table class="table">
 		<tr>
-			<td>Group</td> <td>Tag</td> <td>Freq</td>
+			<td><button class="btn btn-default" ng-click='sortByGroup()'>Group</button> </td> <td><button class="btn btn-default" ng-click='sortByTag()'>Tag</button></td> <td><button class="btn btn-default" ng-click='sortByFreq()'>Freq</button></td>
 		</tr>
 		<tr ng-repeat="tag in allTags">
 			<td>{{tag.group}}</td> <td>{{tag.tag}}</td> <td>{{tag.freq}} <span ng-click="tagUp(tag)" class="fa fa-plus"></span> <span ng-click="tagDown(tag)" class="fa fa-minus"></span></td>
