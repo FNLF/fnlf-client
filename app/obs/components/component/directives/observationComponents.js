@@ -2,7 +2,7 @@
 
 	var reorderFunc = function(components){
 
-		var orderedComponents = components.filter(function(t){return t.active}).sort(function(a,b){return a.order-b.order});
+		var orderedComponents = components.sort(function(a,b){return a.order-b.order});
 		var i = 1;
 		orderedComponents.forEach(function(c){
 			c.order = i;
@@ -12,46 +12,13 @@
 	};
 
 	var decrementOrderFunc = function(components,component){
-
-		var objWithPrevIndex = null;
-		components.forEach(function(c){
-			if(c.order == (component.order-1)){
-				objWithPrevIndex = c;
-			}
-
-		});
-
-		if(objWithPrevIndex){
-			var tmpOrder = component.order;
-			component.order = objWithPrevIndex.order;
-			objWithPrevIndex.order = tmpOrder
-		}else{
-         	if(component.order>1){
-         		component.order--;
-         	}
-         }
+		component.order = component.order-0.5;
 		reorderFunc(components);
 	};
 
 	var incrementOrderFunc = function(components,component){
 
-		var objWithNextIndex = null;
-		components.forEach(function(c){
-			if(c.order == (component.order+1)){
-				objWithNextIndex = c;
-			}
-
-		});
-
-		if(objWithNextIndex){
-			var tmpOrder = component.order;
-			component.order = objWithNextIndex.order;
-			objWithNextIndex.order = tmpOrder
-		}else{
-			if(component.order<components.length){
-				component.order++;
-			}
-		}
+		component.order = component.order+0.5;
 		reorderFunc(components);
 	};
 
@@ -213,7 +180,11 @@
 				angular.copy(selectedTemplate,$scope.selectedTemplate);
 				$scope.resolvePersonsFn();
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
-				$scope.selectedTemplate.order = -1;
+				if($scope.selectedTemplate.flags.root_cause){
+					$scope.selectedTemplate.order = -1;
+				}else{
+					$scope.selectedTemplate.order = $scope.observation.components.length+1;
+				}
 
 				$scope.observation.components.push($scope.selectedTemplate);
 
@@ -221,12 +192,33 @@
 
 				$scope.closeOthers($scope.selectedTemplate);
 
-				if($scope.selectedTemplate.what=="Egendefinert"){
-					$scope.selectedTemplate.editTitle=true;
-					$scope.selectedTemplate.what='';
-				}
+
+				$scope.selectedTemplate.editTitle=true;
+				$scope.selectedTemplate.what='';
+
 				$scope.template = '';
 				return false;
+			};
+
+			$scope.newConsequence = function(){
+				var template = {};
+				template.flags={final_consequence:true};
+				template.attributes={};
+				$scope.newComponent(template);
+			};
+
+			$scope.newIncident = function(){
+				var template = {};
+				template.flags={incident:true};
+				template.attributes={};
+				$scope.newComponent(template);
+			};
+
+			$scope.newCause = function(){
+				var template = {};
+				template.flags={root_cause:true};
+				template.attributes={};
+				$scope.newComponent(template);
 			};
 
 			$scope.deleteComponent = function(component){
@@ -262,6 +254,10 @@
 			$scope.incrementOrder = function(component){
 				incrementOrderFunc($scope.observation.components,component);
 			};
+
+			if($scope.observation.components.length==0){
+				$scope.newIncident();
+			}
 
 		};
 

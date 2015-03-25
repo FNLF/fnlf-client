@@ -4,7 +4,7 @@
 			{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
 		</h3>
 		<div class="input-group" ng-show="component.editTitle">
-		<input type="text" class="form-control pull-right" ng-model="component.what" placeholder="Hva som skjedde. 1-3 ord som beskriver denne delen av forløpet" maxlength="40">
+			<tagtypeahead model="component.what" group="component.what"  noun="Hva skjedde?" ></tagtypeahead>
 		<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
 		              <span class="input-group-btn">
                   <button class="btn btn-default" type="button" ng-click="whatEdited(component)">
@@ -76,6 +76,11 @@
 
 		</div>
 		<div class="col-xs-12"></div>
+
+		<button type="button" class="btn btn-primary" ng-click="newCause()">
+			<span class="fa fa-plus"></span> Hvorfor skjedde dette? Hva var årsaken?
+		</button>
+
 		<div class="pull-right hideInTemplateEditor">
 			<br>
 

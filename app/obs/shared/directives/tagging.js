@@ -15,7 +15,7 @@
 		directive.link = function ($scope, element, attrs) {
 
 			$scope.onSelect = function(item, model){
-				RestService.addTag(item,$scope.group);
+				RestService.addTag(Functions.capitalizeFirstLetter(item),$scope.group);
 			};
 
 			$scope.tags = [];

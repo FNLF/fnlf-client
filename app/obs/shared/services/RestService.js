@@ -128,6 +128,11 @@
 				return $http.get(urlBase + '/tags?sort=group,-freq&max_results=200');
 			};
 
+
+			this.getTagsByRegex = function(text,group){
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'", "tag":{"$regex":".*'+text+'.*"}}&sort=-freq');
+			};
+
 			this.getTags = function(group){
 				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}&sort=-freq');
 			};

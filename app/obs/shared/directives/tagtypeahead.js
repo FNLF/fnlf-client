@@ -19,8 +19,7 @@
 			}
 
 			$scope.onSelect = function(item, model,label){
-
-				RestService.addTag(item,$scope.group);
+				RestService.addTag(Functions.capitalizeFirstLetter(item),$scope.group);
 				$scope.model=item;
 			};
 
