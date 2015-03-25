@@ -7,12 +7,10 @@
 			<tagtypeahead selectfn="componentWhatSelected" model="component.what" group="component.what"  noun="Beskriv {{getFlagAsLabel(component)}}" ></tagtypeahead>
 		<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
 			<span class="input-group-btn">
-
             	<button class="btn btn-default" ng-disabled="!component.what" type="button" ng-click="whatEdited(component)">
 					  Ok
-				  </button>
-
-               </span>
+				</button>
+            </span>
 		</div>
 	</div>
 	<div class="col-xs-12"></div>
@@ -27,8 +25,6 @@
 				<label class="btn btn-default" ng-model="component.flags.final_consequence" btn-checkbox>Konsekvens</label>
 			</div>
 		</div>
-
-
 		<div class="col-xs-12 col-md-6">
 			<label>Flagg</label>
 			<div class="btn-group-xs">
