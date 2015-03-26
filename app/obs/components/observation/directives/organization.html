@@ -8,7 +8,7 @@
 			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
-				{{person.fullname}} ({{person.id}})
+				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
 			</ui-select-choices>
 		</ui-select>
 
@@ -21,7 +21,7 @@
 			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
-				{{person.fullname}} ({{person.id}})
+				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
 			</ui-select-choices>
 		</ui-select>
 
@@ -34,7 +34,7 @@
 			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
-				{{person.fullname}} ({{person.id}})
+				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
 			</ui-select-choices>
 		</ui-select>
 
@@ -47,7 +47,7 @@
 			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
-				{{person.fullname}} ({{person.id}})
+				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
 			</ui-select-choices>
 		</ui-select>
 

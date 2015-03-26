@@ -89,16 +89,12 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 						});
 			};
 
-			var wordSum = function(word){
-				var sum = 0;
-				for(var i = 0; i < word.length; i++) {
-					sum += (word[i].charCodeAt() - 96);
-				}
-				return sum;
+			var nonMemberId = function(){
+				return Math.floor(Math.random()*10000)*-1;
 			};
 
 			$scope.tagTransform = function(itemText){
-				return {fullname:itemText,tmpname:itemText,id:wordSum(itemText)*-1}
+				return {fullname:itemText,tmpname:itemText,id:nonMemberId()}
 			};
 
 		};

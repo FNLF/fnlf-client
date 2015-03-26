@@ -5,7 +5,7 @@
 		<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
 		<ui-select-choices repeat="person in personsFromDb | filter:$select.search track by person.id"
 						   refresh="getPersonsByName($select.search)" refresh-delay="100">
-			{{person.fullname}} ({{person.id}})
+			<span>{{person.fullname}}</span> <span ng-show="person.id>0">({{person.id}})</span>
 		</ui-select-choices>
 	</ui-select>
 </div>
