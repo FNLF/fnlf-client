@@ -2,14 +2,13 @@
 	<div class="input-group">
 		<datetimepicker 
 		ng-model="observation.when" 
-		min-date="minDate" 
-		max-date="maxDate" 
-		starting-day="1"
+		min-date="minDate"
+		max-date="maxDate"
 		hour-step="hstep" 
 		minute-step="mstep" 
 		show-meridian="false" 
 		date-format="yyyy-MM-dd" 
-		date-options="dateOptions" 
+		date-options="{startingDay:1}"
 		readonly-time="false"></datetimepicker>
 	</div>
 </div>
