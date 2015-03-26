@@ -244,11 +244,11 @@
 			};
 			getObservationTypeName();
 
-
-			if($scope.observation.components.length==0){
-				$scope.newIncident();
-			}
-
+			$scope.addComponentIfEmpty = function() {
+				if ($scope.observation.components.length == 0) {
+					$scope.newIncident();
+				}
+			};
 
 
 
