@@ -21,11 +21,15 @@ angular.module("clubApp").controller("locationsController",
 	$rootScope.nav.brand = 'FNLF Klubb';
 
 	$scope.zoom=7;
+	$scope.coords=[];
 
 	$scope.getClubLocations = function(){
 
 		clubService.getClubLocations().then(function(response){
-    		$scope.loc = response.locations[0];
+    		if(response.locations) {
+				$scope.loc = response.locations[0];
+			}
+			$scope.coords=[$scope.loc.geo.coordinates[0],$scope.loc.geo.coordinates[1]];
     		$scope.clubLocations = response.locations;
     	});
 
@@ -34,32 +38,49 @@ angular.module("clubApp").controller("locationsController",
 	$scope.saveClubLocations = function(){
 
 		clubService.getClubLocations().then(function(response){
-
-    		var etag = response.etag;
-
-				clubService.saveClubLocations($scope.clubLocations, etag,response._id).success(function(response) {
-					console.log(response);
-					$scope.clubLocations = response.locations;
-				});
-
+			clubService.saveClubLocations($scope.clubLocations, response._etag,response._id).then(function(response) {
+				console.log(response);
+				$scope.loc = null;
+			});
     	});
+	};
 
+	$scope.removeLocation = function(location){
+		var index = $scope.clubLocations.indexOf(location);
+		if(index >-1){
+			$scope.clubLocations.splice(index,1);
+		}
+		$scope.loc = null;
+	};
+
+	$scope.rowClicked = function(location){
+		console.log(location);
+		$scope.loc=location;
+		$scope.coords=[$scope.loc.geo.coordinates[0],$scope.loc.geo.coordinates[1]];
+		$scope.zoom=13;
 	};
 
 
-		$scope.dragMarker = function(event,location){
-			location.geo.coordinates[0]=event.latLng.k;
-			location.geo.coordinates[1]=event.latLng.D;
-			console.log(location.geo);
+	$scope.dragMarker = function(event,location){
+		console.log(location);
+		$scope.loc.geo.coordinates[0]=event.latLng.k;
+		$scope.loc.geo.coordinates[1]=event.latLng.D;
+		$scope.coords=[$scope.loc.geo.coordinates[0],$scope.loc.geo.coordinates[1]];
 
-		};
 
-		$scope.clickMarker = function(event,location){
-			$scope.loc=location;
-			$scope.zoom=13;
-			$scope.location = location;
-			$scope.nickname = location.nickname;
-		};
+	};
+	$scope.clickRedMarker = function(event,location){
+		$scope.zoom=13;
+		$scope.coords=[$scope.loc.geo.coordinates[0],$scope.loc.geo.coordinates[1]];
+
+	};
+
+	$scope.clickMarker = function(event,location){
+		console.log(location);
+		$scope.loc=location;
+		$scope.zoom=13;
+		$scope.coords=[$scope.loc.geo.coordinates[0],$scope.loc.geo.coordinates[1]];
+	};
 
 
 

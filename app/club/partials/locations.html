@@ -14,7 +14,7 @@
 
 
 		<div class="col-xs-12">
-			<map center="{{loc.geo.coordinates}}" zoom="{{zoom}}"  >
+			<map center="{{coords}}" zoom="{{zoom}}"  >
 
 				<marker ng-if="loc"
 						position="{{loc.geo.coordinates}}"
@@ -22,16 +22,16 @@
 						draggable="true"
 						visible="true"
 						on-dragend="dragMarker(loc)"
-						on-click="clickMarker(loc)"
+						on-click="clickRedMarker(loc)"
 						></marker>
 
-				<marker ng-repeat="loc in clubLocations track by $index"
-						position="{{loc.geo.coordinates}}"
-						title="{{loc.name}}"
+				<marker ng-repeat="location in clubLocations track by $index"
+						position="{{location.geo.coordinates}}"
+						title="{{location.name}}"
 						draggable="false"
 						icon="http://maps.google.com/mapfiles/marker_white.png"
 						visible="true"
-						on-click="clickMarker(loc)"
+						on-click="clickMarker(location)"
 						></marker>
 
 
@@ -57,7 +57,7 @@
 					{{loc.name}}
 				</td>
 				<td>
-					<button class="btn btn-default">Slett {{loc.nickname}}</button>
+					<button class="btn btn-default" ng-click="removeLocation(loc)">Slett {{loc.nickname}}</button>
 				</td>
 
 			</tr>
@@ -74,18 +74,15 @@
 		<table  class="table table-striped table-hover">
 			<tr>
 				<th>Navn</th>
-				<th>Koordinater</th>
 				<th>Stednavn</th>
 			</tr>
-				<tr ng-repeat="location in clubLocations">
+				<tr ng-click="rowClicked(location)" ng-repeat="location in clubLocations">
 				<td>
 						{{location.nickname}}
 				</td>
+
 				<td>
-					{{location.geo.coordinates}}
-				</td>
-				<td>
-					{{location.name}}
+					{{location.name}} {{location.geo_type}} <small>{{location.geo.coordinates}}</small>
 				</td>
 
 			</tr>
