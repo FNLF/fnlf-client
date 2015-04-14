@@ -14,7 +14,7 @@
 
 		// Menus
 		$rootScope.nav = {toolbar: [], menus: []}; //reset
-		$rootScope.nav.brand = 'FNLF Elektroniske Tjenester';
+		$rootScope.nav.brand = 'FNLF Tjenester';
 
 
 			}]);

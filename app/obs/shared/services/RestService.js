@@ -124,8 +124,13 @@
 			 * Tags
 			 */
 
-			this.getAllTags = function(){
-				return $http.get(urlBase + '/tags?sort=group,-freq&max_results=200');
+			this.getAllTags = function(page,sort){
+				return $http.get(urlBase + '/tags?sort='+sort+'&max_results=200&page='+page);
+			};
+
+
+			this.getTagsByRegex = function(text,group){
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'", "tag":{"$regex":".*'+text+'.*"}}&sort=-freq');
 			};
 
 			this.getTags = function(group){
@@ -140,14 +145,35 @@
 				return $http.get(urlBase + '/tags/?where={"tag":"'+tag+'","group":"'+group+'"}');
 			};
 
+			this.removeTag = function(tag,group){
+
+				if(!angular.isUndefined(tag) && !angular.isUndefined(group)) {
+					getExistingTags(tag, group).success(function (data) {
+						if (data._meta.total == 0) {
+
+						} else {
+							console.log("Decrementing tag " + tag + " freq ("+group+")");
+							for(var i =0; i < 10; i++) {
+								$http.delete(urlBase + '/tags/freq/' + data._items[0]._id, {tag: tag, group: group});
+							}
+						}
+
+					});
+				}else{
+					console.log("Tag or group was undefined");
+				}
+
+			};
+
+
 			this.addTag = function(tag,group){
 				if(!angular.isUndefined(tag) && !angular.isUndefined(group)) {
 					getExistingTags(tag, group).success(function (data) {
 						if (data._meta.total == 0) {
-							console.log("Adding new tag " + tag);
+							console.log("Adding new tag " + tag+ ' ('+group+')');
 							$http.post(urlBase + '/tags', {tag: tag, group: group});
 						} else {
-							console.log("Incrementing tag " + tag + " freq");
+							console.log("Incrementing tag " + tag + " freq ("+group+")");
 							$http.post(urlBase + '/tags/freq/' + data._items[0]._id, {tag: tag, group: group});
 						}
 

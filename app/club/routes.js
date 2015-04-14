@@ -1,21 +1,17 @@
 (function () {
-	var profileApp = angular.module('profileApp');
+	var profileApp = angular.module('clubApp');
 	
 	profileApp.config(['$routeProvider', '$locationProvider', '$httpProvider',
 			function ($routeProvider, $locationProvider, $httpProvider) {
 				$routeProvider
 					.when('/', {
-						templateUrl: 'startpage.html',
-						controller: 'userController'
-					})
-					.when('/:id', {
-						templateUrl: 'profile.html',
-						controller: 'userController'
-					})
-					.when('/melwin', {
-						templateUrl: 'melwin.html',
-						controller: 'melwinController'
+						templateUrl: 'partials/main.html',
+						controller: 'clubController'
+					}).when('/locations', {
+						templateUrl: 'partials/locations.html',
+						controller: 'locationsController'
 					});
+
 
 				$locationProvider.hashPrefix('!');
 

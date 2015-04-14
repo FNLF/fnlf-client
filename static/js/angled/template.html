@@ -1,3 +1,16 @@
+<!-- Fnlf Beta style -->
+<style>
+/* Fnlf Beta only */
+.navbar-brand:after
+{	color: #FF3333;
+	font-weight: bold;
+    content: " Beta!";
+}
+.navbar {
+	border-bottom: 1px solid #FF3333;
+}
+</style>
+<!-- End beta style -->
 <nav class="navbar navbar-fixed-top" ng-class="{'navbar-inverse': inverse,'navbar-default': !inverse,'navbar-static-top': affixed == 'top','navbar-static-bottom': affixed == 'bottom'}"
 	role="navigation">
 	<div class="container">
@@ -7,7 +20,7 @@
 			</button>
 			<div>
 				<ng-include ng-if="loggedin" src="'/shared/partials/applicationSwitcher.html'"></ng-include>
-				<a class="navbar-brand" ng-click="noop()" ng-bind-html="haveBranding()"></a>
+				<a class="navbar-brand" ng-href="#!/" ng-bind-html="haveBranding()">FNLF</a>
 			</div>
 		</div>
 		<div class="collapse navbar-collapse navbar-right" collapse="!navbarCollapsed" id="navbar-menu" ng-if="hasMenus() || toolbar">
@@ -25,6 +38,11 @@
 							<a ng-if="!isDivider(item)" ng-href="{{item.action}}" ng-bind-html="item.title">{{item.title}}</a>
 						</li>
 					</ul>
+				</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+				<li class="visible-xs" ng-show="loggedin">
+					<a ng-href="/"><i class="fa fa-home fa-fw"></i> Hjem</a>
 				</li>
 				<li ng-show="loggedin">
 					<fnlf-logout></fnlf-logout>

@@ -1,6 +1,10 @@
 <div class="col-xs-12 col-md-12">
 	<div class="alert alert-info" role="alert" ng-show="error">{{workflow_error}}</div>
-	{{btn_descr}}
+	
+	<p><strong>Tittel:</strong> {{observation.tags.join(' ')}} <span class="label label-{{tt}}">{{btn_descr}}</span></p>
+	<p><strong>Klubb:</strong> <resolveclub clubid="observation.club"></resolveclub></p>
+	
+	
 	<div class="form-group">
 		<label for="comment">Kommentarer:</label>
 		<textarea tooltip-placement="top" tooltip="Legg inn relevante kommentarer for å endre status på observasjonen" ng-model="workflow.comment" name="comment" class="form-control" rows="3" id="comment"></textarea>

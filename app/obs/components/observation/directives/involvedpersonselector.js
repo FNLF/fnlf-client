@@ -84,10 +84,12 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 					});
 			};
 
+			var nonMemberId = function(){
+				return Math.floor(Math.random()*10000)*-1;
+			};
 
 			$scope.tagTransform = function(itemText){
-
-				return {fullname:itemText,tmpname:itemText,id:0}
+				return {fullname:itemText,tmpname:itemText,id:nonMemberId()}
 			};
 
 		};

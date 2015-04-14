@@ -6,7 +6,7 @@
 
 	var editorApp = angular.module('editorApp', [ 'ngRoute', 'ui.bootstrap',
 			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
-			'fnlf-login', 'resolve', 'ngTable','reportingApp' ]);
+			'fnlf-login', 'resolve', 'ngTable','reportingApp','angled-navbar.directives' ]);
 
 	editorApp.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeBar = true;
@@ -74,7 +74,7 @@ angular.module("editorApp").controller("editorController",[
 
 						});
 					$scope.allTags = [];
-					RestService.getAllTags()
+					RestService.getAllTags(1)
 						.success(function(data){
 							$scope.allTags = data._items;
 						});
@@ -155,6 +155,45 @@ angular.module("editorApp").controller("editorController",[
 
 					$scope.saveTemplate = function(component){
 						saveFn(component);
+					};
+
+
+					$scope.tagUp = function(tag){
+						for(var i=0; i < 10; i++) {
+							RestService.addTag(tag.tag, tag.group);
+						}
+						tag.freq+=10;
+					};
+
+					$scope.tagDown = function(tag){
+						RestService.removeTag(tag.tag,tag.group);
+						tag.freq-=10;
+					};
+					$scope.page=1;
+					$scope.sort = "group,-freq";
+
+					$scope.sortByTag = function(){
+						$scope.sort = "tag,-freq";
+						$scope.getTags($scope.page,$scope.sort);
+					};
+
+					$scope.sortByFreq = function(){
+						$scope.sort = "-freq,group";
+						$scope.getTags($scope.page,$scope.sort);
+					};
+
+					$scope.sortByGroup = function(){
+						$scope.sort = "group,-freq";
+						$scope.getTags($scope.page,$scope.sort);
+					};
+
+
+					$scope.getTags = function(page){
+						$scope.page=page;
+						RestService.getAllTags(page,$scope.sort)
+							.success(function(data){
+								$scope.allTags = data._items;
+							});
 					};
 
 				} ]);

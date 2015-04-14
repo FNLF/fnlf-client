@@ -2,14 +2,12 @@
 	<div ng-if="observation._id">
 
 		<!-- Placeholders for status stuff -->
-		<!-- Watchers - am I watching, click to show who's watching -->
-		<span class="pull-right"><watchers observation="observation"></watchers></span>
 
 		<!-- Workflows, show current status. Click dropdown show actions -->
 		<span class="pull-right"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
 <!-- 		<span class="pull-right"><workingcomments observation="observation"></workingcomments>&nbsp;</span> -->
 
-		<h1>OBS #{{observation.id}}</h1>
+		<h1>#{{observation.id}}  {{observation.tags.join(' ')}}</h1>
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->
@@ -21,11 +19,11 @@
 		<!-- Just show which version, click to show all versions? -->
 		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span> <span class="pull-left"> <span class="label label-default"><resolveclub
 					clubid="observation.club"></resolveclub></span>&nbsp;
-		</span> <span class="pull-left"><span class="label label-default">Reporter: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span> <span class="pull-left"><span
-			class="label label-default">Owner: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
+		</span> <span class="pull-left"><span class="label label-default">Opprettet: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span> <span class="pull-left"><span
+			class="label label-default">Eier: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
 
 		<!-- If changes, show warning include a "leaving page are you sure?"  -->
-		<span ng-if="observationChanges" class="pull-left"><span ng-click="saveObservation()" class="label label-danger">{{observationChanges ? 'Unsaved' : 'Saved'}}</span>&nbsp;</span>
+		<span ng-if="observationChanges" class="pull-left"><span ng-click="saveObservation()" class="label label-danger">{{observationChanges ? 'Endringer' : 'Lagret'}}</span>&nbsp;</span>
 
 
 
@@ -51,7 +49,7 @@
 				<div class="col-xs-12  col-md-12">
 				<label class="control-label">Tittel</label>
 				<tagging model="observation.tags" group="observation" noun="ord"></tagging>
-					<populartags group="observation" noun="ord"></populartags>
+
 				</div>
 				</p>
 				<div class="clearfix"></div>
@@ -61,8 +59,10 @@
 			<li class="list-group-item">
 				<p class="list-group-item-text">
 				<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+						<label class="control-label">Observasjons tidspunkt:</label><br />
 					<observationdateselector observation="observation"></observationdateselector>
-					<clubselector observation="observation"></clubselector>
+					</div>
 				</div>
 
 				<div class="col-xs-12 col-md-3 col-md-offset-1">
@@ -73,9 +73,12 @@
 
 					<div class="form-group">
 						<label class="control-label">Alvorlighetsgrad</label><br />
+						<p>
 						<rating-actual observation="observation"></rating-actual>
-						<br />
+						</p>
+						<p>
 						<rating-potential observation="observation"></rating-potential>
+						</p>
 					</div>
 				</div>
 				</p>
@@ -85,9 +88,12 @@
 
 			<li class="list-group-item">
 				<p class="list-group-item-text">
+
 				<div class="row">
 					<filepreviews save="saveObservation()" observation="observation"></filepreviews>
 				</div>
+
+
 				<div class="hidden-xs hidden-sm">
 					<div ng-file-drop ng-model="files" ng-file-change="upload($files)" class="drop-box" drag-over-class="dragover" ng-multiple="true" allow-dir="true" accept="*">Dra og slipp filer her</div>
 					<div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
@@ -105,20 +111,9 @@
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Sted</h4>
 				<p class="list-group-item-text">
-<!-- 					<a ng-init="isCollapsed=false" ng-click="isCollapsed = !isCollapsed">{{isCollapsed ? 'Vis kart' : 'Lukk kart'}}</a> -->
-<!-- 				<div collapse="isCollapsed"> -->
 
-<!-- 					<location-summary observation="observation"></location-summary> -->
-<!-- 				</div> <locationselector observation="observation"></locationselector> -->
 				<div ng-if="observation.location.geo.coordinates">
-				<map center="{{observation.location.geo.coordinates}}">
-				  <marker
-				      position="{{observation.location.geo.coordinates}}"
-				      title="{{observation.location.name}}"
-				      draggable="false"
-				      visible="true"
-				      ></marker>
-				</map>
+					<locationsummary location="observation.location"></locationsummary>
 				</div>
 				<location observation="observation"></location>
 				</p>
@@ -152,25 +147,56 @@
 				<div class="clearfix"></div>
 			</li>
 
+			<!-- Weather; should be more intelligent and using weather icons? -->
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Været</h4>
 				<p class="list-group-item-text">
+				<span ng-show="observation.weather.manual.wind.max"><span class="label label-default">Max {{observation.weather.manual.wind.max}} knop </span>&nbsp;</span>
+				<span ng-show="observation.weather.manual.wind.avg"><span class="label label-default">Avg {{observation.weather.manual.wind.avg}} knop </span>&nbsp;</span>
+				<span ng-show="observation.weather.manual.wind.gusting"><span class="label label-warning">Gusting</span>&nbsp;</span>
+				<span ng-show="observation.weather.manual.wind.turbulence"><span class="label label-warning">Turbulent</span>&nbsp;</span>
+				<span ng-show="observation.weather.manual.wind.dir"><span class="label label-default">{{observation.weather.manual.wind.dir}}</span>&nbsp;</span>
+				
+				<div class="clearfix"></div><br />
+				<p>{{observation.weather.manual.description}}</p>
+				<div class="clearfix"></div>
+					
 					<weather observation="observation"></weather>
 				</p>
 				<div class="clearfix"></div>
 			</li>
 
+			<!-- Actions! -->
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Tiltak</h4>
-				<p class="list-group-item-text"></p>
+				<p class="list-group-item-text">
+					<div class="col-xs-12 col-md-6">
+						<strong>Lokale:</strong>
+						<ol>
+							<li ng-repeat="a in observation.actions.local">{{a}}</li>
+						</ol>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<strong>Sentrale:</strong>
+						<ol>
+							<li ng-repeat="a in observation.actions.central">
+								{{a}}
+							</li>
+						</ol>
+					</div>
+					<div class="clearfix"></div>
+					<actions observation="observation"></actions>
+				</p>
 				<div class="clearfix"></div>
 			</li>
-
+			<!-- 
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Relaterte</h4>
 				<p class="list-group-item-text"></p>
 				<div class="clearfix"></div>
 			</li>
+			 -->
+			 
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Datamodell</h4>
 				<p class="list-group-item-text">

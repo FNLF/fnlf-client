@@ -89,9 +89,12 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 						});
 			};
 
-			$scope.tagTransform = function(itemText){
+			var nonMemberId = function(){
+				return Math.floor(Math.random()*10000)*-1;
+			};
 
-				return {fullname:itemText,id:0,tmpname:itemText};
+			$scope.tagTransform = function(itemText){
+				return {fullname:itemText,tmpname:itemText,id:nonMemberId()}
 			};
 
 		};

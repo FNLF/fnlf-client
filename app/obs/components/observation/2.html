@@ -18,16 +18,18 @@
 
 
 							<p></p>
-							<populartags group="harnessTypes" noun="seletøy"></populartags>
+							<populartags group="testTags" noun="seletøy"></populartags>
 							<p></p>
-
-							<tagtypeahead model="testtags.bar" group="harnessTypes"  noun="seletøy" ></tagtypeahead>
+<!--
+							<tagging model="testtags.tags" group="testTags"  noun="Testtagger" ></tagging>
+	-->
+							<tagtypeahead selectfn="myonselect" model="testtags.select" group="testTags"  noun="Testtagger" ></tagtypeahead>
 							<p></p>
 							<pre> {{testtags | json}}</pre>
 
 						</div>
 						<div ng-switch-when="component">
-							<observation-components-summary observation="observation"></observation-components-summary>
+							<observation-components observation="observation"></observation-components>
 
 						</div>
 
