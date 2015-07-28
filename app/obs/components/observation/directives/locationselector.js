@@ -14,8 +14,10 @@ angular.module('reportingApp').directive('locationsummary', function ($window) {
 	directive.link = function ($scope, element, attrs) {
 
 				$scope.dragMarker = function(event){
-					$scope.location.geo.coordinates[0]=event.latLng.k;
-					$scope.location.geo.coordinates[1]=event.latLng.D;
+					console.log("DragMarker");
+					console.log(event);
+					$scope.location.geo.coordinates[0]=event.latLng.lat();
+					$scope.location.geo.coordinates[1]=event.latLng.lng();
 					$scope.markerDragged=true;
 				};
 
@@ -128,9 +130,10 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 		};
 
 		$scope.dragMarker = function(event){
+			console.log(event);
 			$scope.showMarker=true;
-			$scope.model.location.geo.coordinates[0]=event.latLng.k;
-			$scope.model.location.geo.coordinates[1]=event.latLng.D;
+			$scope.model.location.geo.coordinates[0]=event.latLng.lat();
+			$scope.model.location.geo.coordinates[1]=event.latLng.lng();
 			console.log($scope.model.location.geo);
 			$scope.existingClubLocationUsed=false;
 			var coords = $scope.model.location.geo.coordinates;
