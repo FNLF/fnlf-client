@@ -85,7 +85,7 @@
 						
 						$scope.tableMyObservations = new ngTableParams({
 					        page: 1,            // show first page
-					        count: 10,           // count per page
+					        count: 5,           // count per page
 					        sorting: {
 					            name: 'asc'     // initial sorting
 					        }
@@ -119,7 +119,7 @@
 					
 					$scope.tableParams = new ngTableParams({
 				        page: 1,            // show first page
-				        count: 5,           // count per page
+				        count: 20,           // count per page
 				        sorting: {
 				            name: 'asc'     // initial sorting
 				        }
@@ -129,7 +129,7 @@
 				        	var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
 				            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 				            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-				            params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
+				            params.settings({ counts: orderedData.length > 10 ? [20, 50, 200] : []});
 				        }
 				    });
 
