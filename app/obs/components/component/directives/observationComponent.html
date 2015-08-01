@@ -72,7 +72,7 @@
 			<tagging model="component.tags" group="component" noun="Tagger"></tagging>
 		</div>
 		<div class="col-xs-12 col-md-6 hideInTemplateEditor">
-			<input type="text" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true">
+			<textarea type="text" rows="2" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true"></textarea>
 			<span class="label label-info" ng-show="howTextClicked && component.how.length > 10">{{(160 - component.how.length)}} tegn igjen</span>&nbsp;
 			<span class="label label-warning" ng-show="howTextClicked && component.how.length > 80">Legg gjerne til de viktigste nøkkel-ordene i teksten som tagger</span>&nbsp;
 			<span class="label label-danger" ng-show="howTextClicked && component.how.length > 120">Legg gjerne til flere hendinger i stedet for å skrive alt som skjedde her</span>
