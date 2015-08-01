@@ -58,20 +58,9 @@
 		 * Note it needs to load first...
 		 */
 		$scope.observationChanges = false;
-<<<<<<< Temporary merge branch 1
-		$scope.$watch('observation', function(changedObs,oldObs) {
-			if(oldObs._id) {
-				console.log("Changed");
-				console.log(oldObs);
-				console.log("->");
-				console.log(changedObs);
-				$scope.observationChanges = true;
-			}
-=======
 		$scope.$watch('observation', function(newValue, oldValue) {
 			console.log("Changed");
 			$scope.observationChanges = true;
->>>>>>> Temporary merge branch 2
 		},true);
 
 		});
