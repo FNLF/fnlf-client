@@ -1,0 +1,62 @@
+<div ng-init="addComponentIfEmpty()">
+
+	<div class="col-xs-12">
+		<div class="col-xs-12 col-lg-6">
+			<label>Hva slags {{observationTypeName}} ønsker du å beskrive?</label>
+			<div class="well">
+				<p>
+					Begynn med å fylle inn et par ord om hva slags {{observationTypeName}} som gjorde at du nå er inne i dette systemet. Bruk gjerne forslagene som kommer opp.
+					Etterpå kan du legge inn årsaken til det som skjedde, og så årsaken til årsaken (osv) helt tilbake til rotårsaken.
+
+				</p>
+				<p>
+					Målet er å bygge opp kjeden av årsaker som ledet frem til den konkrete hendelsen som du ønsker registrere her.
+					På den måten ønsker vi som organisasjon å kunne forstå årsakssammenhenger og kunne lære av denne og lignende tilfeller.
+				</p>
+			</div>
+
+
+		</div>
+
+		<div class="col-xs-12">
+			<button ng-show="observation.components.length>0" type="button" class="btn btn-primary" ng-click="newCause()">
+				<span class="fa fa-plus"></span> Ny årsak
+			</button>
+			<p></p>
+		</div>
+
+	</div>
+	<div class="col-xs-12">
+
+		<accordion close-others="true">
+			<accordion-group is-open="component.open" ng-repeat="component in observation.components | orderBy:'order' track by $index">
+
+				<accordion-heading>
+					<div>
+						<span class="glyphicon" ng-class="{'glyphicon-chevron-up': component.open, 'glyphicon-chevron-down': !component.open}"></span>
+						<observation-component-summary component="component"></observation-component-summary>
+
+					</div>
+				</accordion-heading>
+				<div ng-if="component.open">
+					<observation-component component="component" observation="observation"></observation-component>
+				</div>
+			</accordion-group>
+		</accordion>
+
+	</div>
+	<div class="col-xs-12">
+		<button ng-show="observation.components.length==0" type="button" class="btn btn-primary" ng-click="newIncident()">
+			<span class="fa fa-plus"></span> Ny {{observationTypeName}}
+		</button>
+
+
+
+		<button ng-show="observation.components.length>2" type="button" class="btn btn-primary" ng-click="newConsequence()">
+			<span class="fa fa-plus"></span> Ny konsekvens/sluttresultat
+		</button>
+	</div>
+
+
+</div>
+<div class="clearfix"></div>

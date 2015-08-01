@@ -1,0 +1,77 @@
+<div>
+	<!-- left column -->
+	<div class="col-md-4 col-xs-12">
+		<div ng-init="getClubLogo()" class="well text-center">
+			<!-- Imageupload directive boxxxy-->
+
+			<img class="img-thumbnail img-responsive" ng-show="image" ng-src="{{image.resized.dataURL}}" /> <img class="img-thumbnail img-responsive" ng-show="avatar && !image" ng-src="{{avatar.dataURL}}" />
+			<div class="clearfix"></div>
+			<button input-image append-data-uri resize resize-max-height="300" resize-max-width="250" resize-quality="0.9" ng-model="image" class="btn btn-primary btn-block"
+					ng-change="upload(image.resized.dataURL)">
+				<i class="fa fa-image fa-fw"></i> Velg klubblogo
+			</button>
+		</div>
+	</div>
+
+	<!-- edit form column -->
+
+	<div class=" col-md-8 col-xs-12">
+		<div class="well">
+			<h3>
+				<resolveclub ng-if="default_club" clubid="default_club">{{default_club}}</resolveclub>
+			</h3>
+			<hr>
+
+			<h2> <a ng-href="#!/locations">Steder</a> </h2>
+
+			<form ng-if="false" class="form-horizontal" role="form">
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Hovedinstruktør</label>
+					<div class="col-lg-8">
+						<select ng-model="club.ci" ng-options="club.id as club.name  for club in clubs"></select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Styreleder:</label>
+					<div class="col-lg-8">
+						<input type="text" ng-model="club.roles.board.director" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Styremedlemmer:</label>
+					<div class="col-lg-8">
+						<input type="text" ng-model="club.roles.board.members" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">OT:</label>
+					<div class="col-lg-8">
+						<input type="number" ng-model="club.ot" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">URL:</label>
+					<div class="col-lg-8">
+						<input type="test" ng-model="club.url" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Locations:</label>
+					<div class="col-lg-8">
+						<input type="number" ng-model="club.locations" />
+
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Fly:</label>
+					<div class="col-lg-8">
+						<input type="number" ng-model="club.planes" />
+					</div>
+				</div>
+				<button ng-click="saveUser()" class="btn btn-primary btn-block">
+					<i class="fa fa-save fa-fw"></i> Save
+				</button>
+			</form>
+		</div>
+	</div>
+</div>

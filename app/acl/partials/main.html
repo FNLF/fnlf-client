@@ -1,0 +1,26 @@
+<form class="form-inline">
+<input class="form-control" type="text" ng-model="group.name" placeholder="Gruppenavn"/>
+&nbsp;
+<!-- <input class="form-control" type="checkbox" ng-model="group.active"><label>Aktiv</label> -->
+<input class="form-control" type="text" ng-model="group.description" placeholder="Beskrivelse">
+&nbsp;
+<input class="form-control" type="text" ng-model="group.ref" placeholder="Referanse">
+&nbsp;
+<button ng-disabled="!group.name" class="btn btn-primary" ng-click="createGroup();"><i class="fa fa-plus fa-fw"></i> Opprett gruppe</button>
+<button ng-click="groupsTable.reload()" class="btn btn-default">Reload</button>
+</form>
+<div class="clearfix"></div>
+<br />
+
+<!-- List all groups, ng-click to group page! -->
+<div ng-init="getAllGroups()" ng-if="group">
+<table ng-table="groupsTable" show-filter="false" class="table table-condensed table-striped table-responsive">
+	<caption>Grupper</caption>
+	<tr ng-repeat="group in $data">
+
+		<td data-title="'Name'" sortable="'name'"><a ng-href="#!/group/{{group._id}}">{{group.name}}</a></td>
+		<td data-title="'Description'" sortable="'description'">{{group.description}}</td>
+		<td data-title="'Active'" sortable="'active'">{{group.active | json}}</td>
+	</tr>
+</table>
+</div>

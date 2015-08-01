@@ -1,0 +1,100 @@
+
+<div class="" ng-controller="MainController">
+	<div class="row">
+		<div class="col-md-6 col-xs-12">
+			<div class="">
+				<h3>Registrer ny observasjon</h3>
+			</div>
+			<div>
+				<div class="form-group">
+					<clubselector ng-if="observation" observation="observation"></clubselector>
+
+					<observationdateselector ng-if="observation" observation="observation"></observationdateselector>
+
+					<button type="submit" class="btn btn-primary form-control" ng-disabled="!observation.club || !observation.when" ng-click="createObservation()">
+						<i class="fa fa-plus fa-fw"></i>Registrer ny observasjon
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 hidden-xs">
+			<div class="well">
+			<h2 class="text-info">Skarpt!</h2>
+				<p class="lead">
+				Dette er det skarpe observasjonssystemet! Her skal faktiske observasjoner registreres.
+				</p>
+			</div>
+		
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-md-6" ng-init="getObservations()">
+			<table ng-table="tableMyObservations" show-filter="false" class="table table-condensed table-striped table-responsive">
+				<caption>
+					<h3>Mine observasjoner</h3>
+				</caption>
+				<tr ng-repeat="observation in $data">
+
+					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
+					<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a  ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+					<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+					<td data-title="'Type'"><span class="label pull-right"
+						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
+				</tr>
+			</table>
+
+
+		</div>
+
+		<div class="col-xs-12 col-md-6" ng-init="getObservationsTodo()">
+
+			<table ng-table="todoTable" show-filter="false" class="table table-condensed table-striped table-responsive">
+				<caption>
+					<h3>Til min behandling</h3>
+				</caption>
+				<tr ng-repeat="observation in $data">
+
+					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id.$oid)">#{{observation.id}}</a></td>
+					<td data-title="'Tid'" sortable="'date'">{{observation.when.$date | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a  ng-click="editObservation(observation._id.$oid)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+					<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+					<td data-title="'Type'"><span class="label pull-right"
+						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
+				</tr>
+			</table>
+
+
+		</div>
+	</div>
+
+	<div class="row">
+
+		<div class="col-xs-12 col-md-12" ng-init="getAllObservations()">
+			<!-- ng-table all observations -->
+			<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
+
+				<caption>
+					<h3>Observasjoner</h3>
+				</caption>
+				<tr ng-repeat="observation in $data">
+
+					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
+					<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a  ng-click="editObservation(observation._id)">{{observation.tags.join(' ') | cut:true:40:' ...'}}</a></td>
+					<td data-title="'Klubb'" filter="{ 'club': 'text' }"><resolveclub clubid="observation.club"</resolveclub></td>
+					<td data-title="'Gradering'">{{observation.rating.actual}}/{{observation.rating.potential}}</td>
+					<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+					<td data-title="'Type'"><span class="label pull-right"
+						ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
+
+				</tr>
+			</table>
+
+		</div>
+	</div>
+</div>

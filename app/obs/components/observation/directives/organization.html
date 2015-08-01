@@ -1,0 +1,57 @@
+<div class="clearfix"></div>
+<div class="col-xs-12 col-md-12">
+<form class="form-horizontal">
+	<div class="form-group">
+		<label>HL:</label>
+
+		<ui-select multiple tagging="tagTransform" ng-model="observation.organization.hl" theme="bootstrap">
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
+							   refresh="getPersonsByName($select.search)" refresh-delay="100">
+				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
+			</ui-select-choices>
+		</ui-select>
+
+	</div>
+
+	<div class="form-group">
+		<label>HFL:</label>
+
+		<ui-select multiple tagging="tagTransform" ng-model="observation.organization.hfl" theme="bootstrap">
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
+							   refresh="getPersonsByName($select.search)" refresh-delay="100">
+				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
+			</ui-select-choices>
+		</ui-select>
+
+	</div>
+
+	<div class="form-group">
+		<label>HM:</label>
+
+		<ui-select multiple tagging="tagTransform" ng-model="observation.organization.hm" theme="bootstrap">
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
+							   refresh="getPersonsByName($select.search)" refresh-delay="100">
+				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
+			</ui-select-choices>
+		</ui-select>
+
+	</div>
+
+	<div class="form-group">
+		<label>Pilot:</label>
+
+		<ui-select multiple tagging="tagTransform" ng-model="observation.organization.pilot" theme="bootstrap">
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
+							   refresh="getPersonsByName($select.search)" refresh-delay="100">
+				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
+			</ui-select-choices>
+		</ui-select>
+
+	</div>
+</form>
+</div>
+<div class="clearfix"></div>

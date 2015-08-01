@@ -1,0 +1,60 @@
+<div class="col-xs-12 col-md-12">
+
+
+<div>
+<map center="{{model.location.geo.coordinates}}" zoom="{{zoom}}" on-dblclick="dragMarker()" >
+				  <marker ng-if="showMarker"
+				      position="{{model.location.geo.coordinates}}"
+				      title="{{model.location.name}}"
+				      draggable="true"
+				      visible="true"
+					  on-dragend="dragMarker()"
+				      ></marker>
+
+				<marker ng-repeat="loc in clublocations track by $index"
+						position="{{loc.geo.coordinates}}"
+						title="{{loc.name}}"
+						draggable="false"
+						icon="http://maps.google.com/mapfiles/marker_white.png"
+						visible="true"
+						on-click="clickMarker(loc)"
+						></marker>
+
+
+				</map>
+</div>
+
+	<small ng-show="model.location.geo.coordinates" class="label label-default">
+		{{model.nickname}} {{model.location.geo.coordinates}}
+	</small>
+
+<div class="clearfix"></div>
+	<h3>Klubb <resolveclub clubid="observation.club"></resolveclub></h3>
+	<form >
+	<div class="form-group">
+	<input type="text" typeahead-on-select="locationSelectedFn($item, $model, $label)" typeahead-editable="false" typeahead-wait-ms=50 ng-model="model.location" placeholder="Stedsnavn"
+		typeahead="l as formatter(l) for l in getLocations($viewValue)" typeahead-input-formatter="formatter($model)" class="form-control">
+		</div>
+		<div class="form-group"> 
+		<input ng-model="model.nickname" type="text" placeholder="Fyll inn nickname" class="form-control">
+		</div>
+		<div class="form-group">
+	<div>
+		<label> <input type="checkbox" value="" ng-model="model.isdefault"> Default sted
+		</label>
+		</div>
+		<div class="form-group">
+		<label ng-show="model.icao">Nærmeste flyplass</label>
+			<span>{{model.icao.name}}</span>
+        </div>
+        <div class="form-group">		
+        <button ng-if="!existingClubLocationUsed" ng-disabled="!model.nickname" class="btn btn-primary" ng-click="saveLocation()"><i class="fa fa-plus fa-fw"></i> Legg til nytt sted</button>
+		<button ng-if="existingClubLocationUsed" ng-disabled="!model.nickname" class="btn btn-primary" ng-click="useLocation()"><i class="fa fa-plus fa-fw"></i> Bruk eksisterende sted</button>
+		</div>
+	</div>
+	</form>
+	<!-- ng-repeat places -->
+	
+</div>
+
+<div class="clearfix"></div>

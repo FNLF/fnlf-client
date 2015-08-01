@@ -1,0 +1,102 @@
+<div class="">
+	<div class="col-xs-12 col-md-6">
+		<h3 ng-show="!component.editTitle">
+			{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
+		</h3>
+		<div class="input-group" ng-show="component.editTitle">
+			<tagtypeahead ng-if="component.flags.root_cause || component.flags.cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
+			<tagtypeahead ng-if="component.flags.final_consequence||component.flags.consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
+			<tagtypeahead ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv brutt barriære" ></tagtypeahead>
+			<tagtypeahead ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv hendelse" ></tagtypeahead>
+
+
+			<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
+			<span class="input-group-btn">
+            	<button class="btn btn-default" ng-disabled="!component.what" type="button" ng-click="whatEdited(component)">
+					  Ok
+				</button>
+            </span>
+		</div>
+	</div>
+	<div class="col-xs-12"></div>
+
+	<div ng-hide="component.editTitle">
+		<div class="col-xs-12 col-md-4">
+			<label>Type</label>
+			<div class="btn-group-xs">
+				<label class="btn btn-default" ng-model="component.flags.cause" btn-checkbox>Årsak</label>
+				<label class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
+				<label class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hending</label>
+				<label class="btn btn-default" ng-model="component.flags.consequence" btn-checkbox>Konsekvens</label>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<label>Flagg</label>
+			<div class="btn-group-xs">
+				<label class="btn btn-default" ng-model="component.attributes.reserve_ride" btn-checkbox>Reserve benyttet</label>
+				<label class="btn btn-default" ng-model="component.attributes.aad_fire" btn-checkbox>Nødåpner fyrt</label>
+				<label class="btn btn-default" ng-model="component.attributes.gear_malfunction" btn-checkbox>Feilfunksjon</label>
+				<label class="btn btn-default" ng-model="component.attributes.violation" btn-checkbox>Regelbrudd</label>
+				<label class="btn btn-default" ng-model="component.attributes.wilfull" btn-checkbox>Med hensikt</label>
+				<label class="btn btn-default" ng-model="component.attributes.damage" btn-checkbox>Matriell skade</label>
+				<label class="btn btn-default" ng-model="component.attributes.gear_failure" btn-checkbox>Utstyrsvikt</label>
+				<label class="btn btn-default" ng-model="component.attributes.injury" btn-checkbox>Personskade</label>
+				<label class="btn btn-default" ng-model="component.attributes.death" btn-checkbox>Død</label>
+			</div>
+		</div>
+
+
+
+		<div class="col-xs-12 col-md-6 col-lg-4 hideInTemplateEditor">
+			<label>Involvert</label>
+			<ui-select multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blandt involverte personer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+				<ui-select-choices repeat="person in persons track by person.id"> {{person.fullname}} </ui-select-choices> </ui-select>
+		</div>
+
+		<div class="col-xs-8 col-md-4 col-lg-3">
+			<label>Sted eller situasjon</label>
+			<tagtypeahead model="component.where.at" group="where-at" noun="på/i"></tagtypeahead>
+		</div>
+
+		<div class="col-xs-4 col-md-2">
+			<label>Høyde i fot</label> <input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
+		</div>
+
+		<div class="clearfix"></div>
+
+
+		<div class="col-xs-12">
+			<label>Hvordan</label>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-4">
+			<tagging model="component.tags" group="component" noun="Tagger"></tagging>
+		</div>
+		<div class="col-xs-12 col-md-6 hideInTemplateEditor">
+			<input type="text" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true">
+			<span class="label label-info" ng-show="howTextClicked && component.how.length > 10">{{(160 - component.how.length)}} tegn igjen</span>&nbsp;
+			<span class="label label-warning" ng-show="howTextClicked && component.how.length > 80">Legg gjerne til de viktigste nøkkel-ordene i teksten som tagger</span>&nbsp;
+			<span class="label label-danger" ng-show="howTextClicked && component.how.length > 120">Legg gjerne til flere hendinger i stedet for å skrive alt som skjedde her</span>
+
+		</div>
+		<div class="clearfix"></div>
+		<div class="col-xs-12"></div>
+
+		<button type="button" class="btn btn-primary" ng-click="newCause()">
+			<span class="fa fa-plus"></span> Hvorfor skjedde dette? Hva var årsaken?
+		</button>
+
+		<div class="pull-right hideInTemplateEditor">
+			<br>
+
+
+			<button type="button" class="btn btn-primary" ng-click="incrementOrder(component)"><span>Flytt ned</span></button>
+			<button type="button" class="btn btn-primary" ng-click="decrementOrder(component)"><span>Flytt opp</span></button>
+			<span>&nbsp;</span>
+			<button type="button" class="btn btn-primary" ng-click="deleteComponent(component)">Slett hending</button>
+
+		</div>
+		<div class="clearfix"></div>
+
+	</div>
+</div>
+<div class="clearfix"></div>

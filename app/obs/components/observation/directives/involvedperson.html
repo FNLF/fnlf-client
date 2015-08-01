@@ -1,0 +1,117 @@
+<div>
+	<div>
+		<div class="form-group col-xs-12">
+			<label>Lisenser registrert i MelWin:</label><br>
+
+			<div ng-show="person.licenses.length == 0">Ingen lisenser registrert</div>
+				<span ng-repeat="license in person.licenses.rights">
+					<span>{{license}} &nbsp;</span>
+				</span>
+		</div>
+	</div>
+
+	<div class="form-group col-md-3 col-xs-6">
+		<strong>Kjennelse:</strong><br/>
+
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="" ng-model="person.verdict.fu">
+				Farlig Ukontrollert (FU)
+			</label>
+		</div>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="" ng-model="person.verdict.ph">
+				Permanent Hoppforbud
+			</label>
+		</div>
+	</div>
+	<div class="col-xs-12"><label>Hopptype og erfaring</label></div>
+	<div class="form-group col-md-3 col-xs-12">
+		<select tooltip="Offisiell hopptype" id="jumptype" class="form-control" data-placeholder="Hopptype"
+				ng-model="person.jumptypeSelected"
+				ng-options="jumptype.id as jumptype.name for jumptype in jumptypes">
+		</select>
+	</div>
+
+	<div class="form-group col-md-3 col-xs-12">
+		<tagging tooltip="Hoppaktivitet" model="person.jumptypeTags" noun="hoppaktivitet"
+				 group="jumptype"></tagging>
+	</div>
+
+	<div class="form-group col-md-2 col-xs-6">
+		<input tooltip="År i sporten" placeholder="År i sporten" id="years" class="form-control" type="number"
+			   ng-model="person.yearsOfExperience"/>
+	</div>
+
+
+	<div class="form-group col-md-2 col-xs-6">
+		<input tooltip="Hopp totalt" placeholder="Hopp totalt" id="numberofjumps" class="form-control" type="number"
+			   ng-model="person.numberOfJumps"/>
+	</div>
+
+
+	<div class="col-xs-12"><label>Hovedskjerm</label></div>
+
+	<div class="form-group col-md-3 col-xs-12">
+		<tagtypeahead tooltip="Type hovedskjerm" model="person.gear.mainCanopyType" noun="Type hovedskjerm"
+					  group="maincanopies"></tagtypeahead>
+
+	</div>
+
+	<div class="form-group col-md-2 col-xs-6">
+		<input tooltip="Hovedskjermstørrelse" type="number" class="form-control" id="mainCanopySize"
+			   ng-model="person.gear.mainCanopySize"
+			   placeholder="Hovedskjermstørrelse">
+	</div>
+
+	<div class="form-group col-md-2 col-xs-6">
+		<input tooltip="Erfaring hovedskjerm" type="number" class="form-control" id="mainCanopyExperience"
+			   ng-model="person.gear.mainCanopyExperience"
+			   placeholder="Erfaring hovedskjerm">
+	</div>
+
+	<div class="col-xs-12"><label>Reserveskjerm</label></div>
+
+
+	<div class="form-group col-md-3 col-xs-12">
+		<tagtypeahead tooltip="Type reserveskjerm" model="person.gear.reserveCanopyType" noun="Type reserveskjerm"
+					  group="reserveCanopies"></tagtypeahead>
+	</div>
+	<div class="form-group col-md-2 col-xs-6">
+
+		<input tooltip="Reserveskjermstørrelse" type="number" class="form-control" id="reserveCanopySize"
+			   ng-model="person.gear.reserveCanopySize"
+			   placeholder="Reserveskjermstørrelse">
+	</div>
+	<div class="col-xs-12"><label>Seletøy</label></div>
+
+	<div class="form-group col-md-3 col-xs-12">
+		<tagtypeahead tooltip="Type seletøy" model="person.gear.harnessType" noun="Type seletøy"
+					  group="harnessTypes"></tagtypeahead>
+	</div>
+
+	<div class="form-group col-md-2 col-xs-6">
+		<input tooltip="Erfaring seletøy" type="number" class="form-control" id="harnessExperience"
+			   ng-model="person.gear.harnessExperience"
+			   placeholder="Erfaring seletøy">
+	</div>
+	<div class="form-group col-md-2 col-xs-12">
+		<tagtypeahead model="person.gear.aadType" noun="Type nødåpner" group="aadType" placeholder="Type nødåpner"
+					  tooltip="Type nødåpner"></tagtypeahead>
+	</div>
+
+
+
+	<div class="col-xs-12"><label>Annet utstyr</label></div>
+
+	<div class="form-group col-md-12 col-xs-12">
+		<tagging model="person.gear.other" noun="Annet utstyr" group="otherEquipment" placeholder="Annet utstyr"
+					  tooltip="Annet utstyr"></tagging>
+	</div>
+
+	<div class="col-xs-12"></div>
+</div>
+
+
+

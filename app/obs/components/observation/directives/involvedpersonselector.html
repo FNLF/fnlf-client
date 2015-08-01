@@ -1,0 +1,17 @@
+<div class="col-xs-12 col-md-12">
+	<label>Velg involvert(e) person(er):</label><br>
+
+	<ui-select multiple tagging="tagTransform" ng-model="observation.involved" theme="bootstrap" on-select="onSelect($item, $model)">
+		<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+		<ui-select-choices repeat="person in personsFromDb | filter:$select.search track by person.id"
+						   refresh="getPersonsByName($select.search)" refresh-delay="100">
+			<span>{{person.fullname}}</span> <span ng-show="person.id>0">({{person.id}})</span>
+		</ui-select-choices>
+	</ui-select>
+</div>
+<div class="clearfix"></div>
+<br />
+<div class="col-xs-12 col-md-12">
+	<involvedpersondetails observation="observation"></involvedpersondetails>
+</div>
+<div class="clearfix"></div>

@@ -1,0 +1,20 @@
+<span ng-init="order=0"> 
+
+<span class="small">{{component.order}} </span> &nbsp;
+	<strong>{{component.what}} </strong>
+					
+	<span ng-if="component.flags.barrier" class="label label-default">Barriære</span>
+	<span ng-if="component.flags.incident" class="label label-info">Hending</span>
+	<span ng-if="component.flags.cause || component.flags.root_cause" class="label label-warning">Årsak</span>
+	<span ng-if="component.flags.consequence || component.flags.final_consequence" class="label label-danger">Konsekvens</span>
+					
+	<span ng-repeat="tag in getAttributesAsTags(component)"> 
+		<span class="label label-warning">{{tag}} </span> &nbsp;
+	</span> 
+	<span ng-repeat="tag in component.tags"> 
+		<span class="label label-default">{{tag}} </span> &nbsp;
+	</span>
+	<small>{{component.how| limitTo : 40}} {{component.how.length > 40 ? '...' : ''}} &nbsp;</small>
+	<div class="clearfix"></div>
+
+</span>
