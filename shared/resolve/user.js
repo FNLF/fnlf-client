@@ -21,8 +21,8 @@ angular.module('resolve')
 					});
 			}
 			else{
-				$scope.firstname = 'Anonyme';
-				$scope.lastname = 'Anonymesen';
+				$scope.firstname = 'Anonymisert';
+				$scope.lastname = '';
 				if($scope.tmpname){
 					$scope.firstname = $scope.tmpname;
                 	$scope.lastname = '';

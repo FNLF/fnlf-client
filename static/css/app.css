@@ -15,7 +15,7 @@ body {
   /* The html and body elements cannot have any padding or margin. */
 }
 
-/* Responsive toolset for viewport */
+/* Responsive toolset for viewport
 body::before {
   content: "xs";
   position: fixed;
@@ -28,7 +28,7 @@ body::before {
 @media (min-width : 768px) { body::before { content: "sm"; }}
 @media (min-width : 992px) { body::before { content: "md"; }}
 @media (min-width : 1200px) { body::before { content: "lg"; }}
-
+*/
 
 /* Wrapper for page content to push down footer */
 #wrap {
