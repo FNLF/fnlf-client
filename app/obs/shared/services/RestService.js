@@ -37,7 +37,8 @@
 			};
 
 			this.getAllObservations = function () {
-				return $http.get(urlBase + '/observations/?sort=-id');
+			    var sort = '-id';
+				return $http.get(urlBase + '/observations/?sort='+sort+'&max_results=200');
 			};
 
 			this.getObservationComponentTemplates = function () {
