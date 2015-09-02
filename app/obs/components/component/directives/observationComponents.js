@@ -35,9 +35,7 @@
 		};
 
 		directive.link = function ($scope, element, attrs) {
-			$scope.getAttributesAsTags = function(component){
-				return Definitions.componentTagsFromAttributes(component.attributes);
-			};
+
 
 		};
 
