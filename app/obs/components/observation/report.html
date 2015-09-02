@@ -186,16 +186,27 @@
 							</div>
 							<div class="timeline-panel">
 								<div class="timeline-heading">
-									<h4 class="timeline-title">{{c.what}}
-									<span ng-if="c.flags.barrier" class="label label-default">Barriære</span>
-									<span ng-if="c.flags.incident" class="label label-info">Hending</span>
-									<span ng-if="c.flags.root_cause" class="label label-warning">Rot Årsak</span>
-									<span ng-if="c.flags.final_consequence" class="label label-danger">Konsekvens</span>
-									<span ng-if="c.attributes.damage" class="label label-default">Materiell Skade</span>
-									<span ng-if="c.attributes.gear_failure" class="label label-default">Utstyrssvikt</span>
-									<span ng-if="c.attributes.gear_malfunction" class="label label-info">Feilfunksjon</span>
-									<span ng-if="c.flags.attributes.injury" class="label label-warning">Personskade</span>
-									<span ng-if="c.flags.attributes.death" class="label label-default">Død</span>
+									<h4 class="timeline-title">
+										<small>
+											<span ng-if="c.flags.barrier" class="label label-default">Barriære</span>
+											<span ng-if="c.flags.incident" class="label label-info">Hendelse</span>
+											<span ng-if="c.flags.cause" class="label label-warning">Årsak</span>
+											<span ng-if="c.flags.root_cause" class="label label-warning">Rot Årsak</span>
+											<span ng-if="c.flags.consequence" class="label label-danger">Konsekvens</span>
+											<span ng-if="c.flags.final_consequence" class="label label-danger">Sluttkonsekvens</span>
+										</small>
+									</h4>
+									<h4 class="timeline-title">
+									{{c.what}}
+
+									<span class="label label-default" ng-if="c.attributes.packing_error">Pakkefeil</span>
+									<span class="label label-info" ng-if="c.attributes.reserve_ride">Reserve benyttet</span>
+									<span class="label label-warning" ng-if="c.attributes.aad_fire">Nødåpner fyrt</span>
+									<span class="label label-default" ng-if="c.attributes.gear_malfunction">Feilfunksjon</span>
+									<span class="label label-default" ng-if="c.attributes.damage">Matriell skade</span>
+									<span class="label label-default" ng-if="c.attributes.gear_failure">Utstyrsvikt</span>
+									<span class="label label-warning" ng-if="c.attributes.injury">Personskade</span>
+									<span class="label label-warning" ng-if="c.attributes.death">Død</span>
 									
 									</h4>
 								</div>

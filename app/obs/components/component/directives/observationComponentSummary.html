@@ -2,14 +2,13 @@
 
 <span class="small">{{component.order}} </span> &nbsp;
 	<strong>{{component.what}} </strong>
-					
+
 	<span ng-if="component.flags.barrier" class="label label-default">Barriære</span>
 	<span ng-if="component.flags.incident" class="label label-info">Hendelse</span>
 	<span ng-if="component.flags.cause || component.flags.root_cause" class="label label-warning">Årsak</span>
 	<span ng-if="component.flags.consequence || component.flags.final_consequence" class="label label-danger">Konsekvens</span>
-	
-	<span ng-if="component.flags.incident" class="label label-info">Hending</span>
-	
+
+	<span class="label label-warning" ng-if="component.attributes.packing_error">Pakkefeil</span>
 	<span class="label label-warning" ng-if="component.attributes.reserve_ride">Reserve benyttet</span>
 	<span class="label label-warning" ng-if="component.attributes.aad_fire">Nødåpner fyrt</span>
 	<span class="label label-warning" ng-if="component.attributes.gear_malfunction">Feilfunksjon</span>

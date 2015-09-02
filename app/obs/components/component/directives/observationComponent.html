@@ -1,42 +1,51 @@
 <div class="">
     <div class="col-xs-12 col-md-6">
+
+
+
         <h3 ng-show="!component.editTitle">
             {{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
         </h3>
-        <div class="input-group" ng-show="component.editTitle">
-            <tagtypeahead ng-if="component.flags.root_cause || component.flags.cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
-            <tagtypeahead ng-if="component.flags.final_consequence||component.flags.consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
-            <tagtypeahead ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv brutt barriære" ></tagtypeahead>
-            <tagtypeahead ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv hendelse" ></tagtypeahead>
 
 
-            <small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
-			<span class="input-group-btn">
-            	<button class="btn btn-default" ng-disabled="!component.what" type="button" ng-click="whatEdited(component)">
-                    Ok
-                </button>
-            </span>
+        <div ng-show="component.editTitle">
+
+            <div>
+                <div class="btn-group-xs">
+                    <label class="btn btn-default" ng-model="component.flags.cause" btn-checkbox>Årsak</label>
+                    <label class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
+                    <label class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hendelse</label>
+                    <label class="btn btn-default" ng-model="component.flags.consequence" btn-checkbox>Konsekvens</label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <tagtypeahead ng-if="component.flags.root_cause || component.flags.cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
+                <tagtypeahead ng-if="component.flags.final_consequence||component.flags.consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
+                <tagtypeahead ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv brutt barriære" ></tagtypeahead>
+                <tagtypeahead ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv selve hendelse" ></tagtypeahead>
+
+
+                <small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-disabled="!component.what" type="button" ng-click="whatEdited(component)">
+                            Ok
+                        </button>
+                    </span>
+            </div>
         </div>
     </div>
     <div class="col-xs-12"></div>
 
     <div ng-hide="component.editTitle">
-        <!-- Too complicated. Used by noone
-        <div class="col-xs-12 col-md-4">
-            <label>Type</label>
-            <div class="btn-group-xs">
-                <label class="btn btn-default" ng-model="component.flags.cause" btn-checkbox>Årsak</label>
-                <label class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
-                <label class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hending</label>
-                <label class="btn btn-default" ng-model="component.flags.consequence" btn-checkbox>Konsekvens</label>
-            </div>
-        </div>
-        -->
+
         <div class="col-xs-12 col-md-12">
             <label>Flagg</label>
             <div class="btn-group-md">
+				<label class="btn btn-default" ng-model="component.attributes.packing_error" btn-checkbox>Pakkefeil</label>
                 <label class="btn btn-default" ng-model="component.attributes.reserve_ride" btn-checkbox>Reserve benyttet</label>
-                <label class="btn btn-default" ng-model="component.attributes.aad_fire" btn-checkbox>Nødåpner fyrt</label>
+
+				<label class="btn btn-default" ng-model="component.attributes.aad_fire" btn-checkbox>Nødåpner fyrt</label>
                 <label class="btn btn-default" ng-model="component.attributes.gear_malfunction" btn-checkbox>Feilfunksjon</label>
                 <label class="btn btn-default" ng-model="component.attributes.violation" btn-checkbox>Regelbrudd</label>
                 <label class="btn btn-default" ng-model="component.attributes.wilfull" btn-checkbox>Med hensikt</label>
