@@ -20,7 +20,7 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 		return (request.then(handleSuccess, handleError));
 	
 	};
-	
+
 	this.getLicense = function (id) {
 		var request = $http({
 			method : "get",
@@ -56,7 +56,6 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 		return ($q.reject(response.data.message));
 	}
 	function handleSuccess(response) {
-		console.log(response.data);
 		return (response.data);
 	};
 	
