@@ -9,7 +9,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions, $filter) {
+		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions, $filter,$q) {
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.brand = "FNLF Observasjoner";
@@ -79,7 +79,11 @@
 
 			$scope.getObservations = function(){
 				var userName = $rootScope.username;
-				RestService.getObservations(userName)
+				var page=0;
+				var maxResults=200;
+				var sort='-id';
+
+				RestService.getObservations(page,maxResults,sort, userName)
 					.success(function(data){
 						$scope.observations = data._items;
 						
@@ -103,43 +107,25 @@
 					});
 
 			};
-			
+
+
+
+
 			$scope.getAllObservations = function(){
 				RestService.getAllObservations()
 				.success(function(r){
-
 					var data = r._items
-					.filter(function(it){
-						if(it.id){
-							
-							return true;
-						}
-						return false;
-					});
-					
-					$scope.tableParams = new ngTableParams({
-				        page: 1,            // show first page
-				        count: 20,           // count per page
-				        sorting: {
-				            name: 'asc'     // initial sorting
-				        }
-				    }, {
-				        total: data.length, // length of data
-				        getData: function($defer, params) {
-				        	var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
-				            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-				            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-				            params.settings({ counts: orderedData.length > 10 ? [20, 50, 200] : []});
-				        }
-				    });
-
-					
 				});
 				
 			};
 			
 			$scope.getObservationsTodo = function(){
-				RestService.getWorkflowTodo()
+
+				var page=0;
+				var maxResults=200;
+				var sort='-id';
+
+				RestService.getWorkflowTodo(page,maxResults,sort)
 				.success(function(r){
 					
 					var data = r._items
@@ -176,6 +162,8 @@
 			$scope.goToPage = function (url) {
 				$location.path(url);
 			};
+
+
 
 
 		    

@@ -32,14 +32,15 @@
 				return $http.get(urlBase + '/observations/'+id);
 			};
 
-			this.getObservations = function (userName) {
-				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}&sort=-id');
+			this.getObservations = function (page,maxResults,sort,userName) {
+				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}&sort='+sort+'&max_results='+maxResults+'&page='+page);
 			};
 
-			this.getAllObservations = function () {
-			    var sort = '-id';
-				return $http.get(urlBase + '/observations/?sort='+sort+'&max_results=200');
+			this.getAllObservations = function (page,maxResults,sort) {
+				return $http.get(urlBase + '/observations/?sort='+sort+'&max_results='+maxResults+'&page='+page);
 			};
+
+
 
 			this.getObservationComponentTemplates = function () {
 				return $http.get(urlBase + '/observations/components');
@@ -96,8 +97,8 @@
 				return $http.get(urlBase + '/observations/workflow/' + objectId + '/state');
 			};
 			
-			this.getWorkflowTodo = function (){
-				return $http.get(urlBase + '/observations/workflow/todo');
+			this.getWorkflowTodo = function (page,maxResults,sort){
+				return $http.get(urlBase + '/observations/workflow/todo?sort='+sort+'&max_results='+maxResults+'&page='+page);
 			};
 			
 			this.changeWorkflowState = function (objectId, action, comment){

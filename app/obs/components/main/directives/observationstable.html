@@ -1,0 +1,23 @@
+<div>
+
+	<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
+
+		<caption>
+			<h3>Observasjoner</h3>
+		</caption>
+		<tr ng-repeat="observation in $data">
+
+			<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
+			<td data-title="'Tid'" sortable="'when'">{{observation.when | date:'yyyy-MM-dd'}}</td>
+			<td data-title="'Tittel'" filter="{ 'tags': 'select' }" filter-data="getTags()"><a  ng-click="editObservation(observation._id)">{{observation.tags.join('#') | cut:true:80:' ...'}}</a></td>
+			<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="observation.club"></resolveclub></td>
+			<td data-title="'Gradering'">{{observation.rating.actual}}/{{observation.rating.potential}}</td>
+			<td data-title="'Status'" filter="{ 'state': 'text' }">{{resolveWorkflowState(observation.workflow.state)}}</a></td>
+			<td data-title="'Type'"><span class="label pull-right"
+										  ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
+							{{resolveObservationType(observation.type)}}</span> &nbsp; </span></td>
+
+		</tr>
+	</table>
+
+</div>
