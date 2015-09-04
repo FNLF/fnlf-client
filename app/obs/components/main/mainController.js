@@ -9,7 +9,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions, $filter,$q) {
+		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions,ObservationsTableService) {
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.brand = "FNLF Observasjoner";
@@ -21,47 +21,9 @@
 			
 			$scope.observationTypes = Definitions.getObservationTypes();
 
-			$scope.resolveObservationType = function(id) {
-				
-				return Definitions.resolveObservationTypes(id);
-			};
-			$scope.resolveWorkflowState = function(state) {
-				
-				return Definitions.resolveObservationWorkflowState(state);
-			};
-			
-			
-			$scope.editObservation = function(_id){
-				console.log("Edit");
-				RestService.getObservation(_id).success(function(item){
-
-					$scope.observation = item;
-					ObservationService.setObservation($scope.observation);
-
-					if($scope.observation.workflow.state == 'closed') {
-						$location.path("/observation/report/"+item.id);
-					}
-					else {
-						$location.path("/observation/"+item.id);
-					}
-				});
-
-			};
-
 			$scope.createObservation = function(){
 				console.log("Create");
-				
-				//if(club.ci) $scope.observation.organization.ci = club.ci;
-				//if(club.ot) $scope.observation.organization.ot = club.ot;
-				
-				//To be filled in!
-				/**
-				$scope.observation.organization.plane = '';
-				$scope.observation.organization.hm = '';
-				$scope.observation.organization.hl = '';
-				$scope.observation.organization.hfl = [];
-				**/
-				
+
 				console.log($scope.observation);
 				RestService.createObservation($scope.observation).success(function(metadata){
 					console.log("Save");
@@ -73,101 +35,68 @@
 					});
 
 				});
-
-
 			};
 
-			$scope.getObservations = function(){
-				var userName = $rootScope.username;
-				var page=0;
-				var maxResults=200;
-				var sort='-id';
+			$scope.editObservation = function (_id) {
+				ObservationService.editObservation(_id);
+			};
 
-				RestService.getObservations(page,maxResults,sort, userName)
-					.success(function(data){
-						$scope.observations = data._items;
-						
-						$scope.tableMyObservations = new ngTableParams({
-					        page: 1,            // show first page
-					        count: 5,           // count per page
-					        sorting: {
-					            name: 'asc'     // initial sorting
-					        }
-					    }, {
-					        total: $scope.observations.length, // length of data
-					        getData: function($defer, params) {
-					        	var filteredData = params.filter() ? $filter('filter')($scope.observations, params.filter()) : $scope.observations;
-					            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-					            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-					            params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
-					        }
-					    });
-						
-						
+
+			$scope.tableMyObservations = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
+				var sortString = ObservationsTableService.sortStringFromParams(params);
+				RestService.getObservations(params.page(), params.count(), sortString,$rootScope.username)
+					.then(function(r){
+						var meta = r.data._meta;
+						params.total(meta.total);
+						$defer.resolve(r.data._items);
 					});
 
-			};
+			}});
 
-
-
-
-			$scope.getAllObservations = function(){
-				RestService.getAllObservations()
-				.success(function(r){
-					var data = r._items
-				});
-				
-			};
-			
-			$scope.getObservationsTodo = function(){
-
-				var page=0;
-				var maxResults=200;
-				var sort='-id';
-
-				RestService.getWorkflowTodo(page,maxResults,sort)
-				.success(function(r){
-					
-					var data = r._items
-					.filter(function(it){
-						if(it.id){
-							
-							return true;
-						}
-						return false;
+			$scope.todoTable = new ngTableParams({page: 1, count: 100, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
+				var sortString = ObservationsTableService.sortStringFromParams(params);
+				RestService.getWorkflowTodo(params.page(), params.count(), sortString)
+					.then(function(r){
+						params.total(r.data._items.length);
+						$defer.resolve(r.data._items);
 					});
-					
-					$scope.todoTable = new ngTableParams({
-						page: 1,            // show first page
-						count: 5, // count per page
-						counts: [], 
-						sorting: {
-							name: 'asc'     // initial sorting
-						}
-					}, {
-						total: data.length, // length of data
-						getData: function($defer, params) {
-							var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
-							var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-							$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-							params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
-						}
+
+			}});
+
+			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
+				var sortString = ObservationsTableService.sortStringFromParams(params);
+				RestService.getAllObservations(params.page(), params.count(), sortString)
+					.then(function(r){
+						var meta = r.data._meta;
+						params.total(meta.total);
+						$defer.resolve(r.data._items);
 					});
-					
-					
-				});
-				
-			};
-			
-			$scope.goToPage = function (url) {
-				$location.path(url);
+
+			}});
+
+
+			$scope.getTitles = function(){
+				return ObservationsTableService.getTags();
 			};
 
+			$scope.getClubs = function(){
+				return ObservationsTableService.getClubs();
+			};
 
 
+			$scope.getTypes = function(){
+				return ObservationsTableService.getTypes();
+			};
 
-		    
-			
+			$scope.getStates = function(){
+				return ObservationsTableService.getWorkflowStates();
+			};
+
+			$scope.getRatings = function(){
+				return ObservationsTableService.getRatings();
+			};
+
+
 		});
 
 })();

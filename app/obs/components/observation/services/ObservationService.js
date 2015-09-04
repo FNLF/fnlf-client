@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('ObservationService', function (RestService,Definitions,Functions,$rootScope) {
+		.service('ObservationService', function (RestService,Definitions,Functions,$rootScope,$location) {
 
 			function Observation() {
 				this.involved = [];
@@ -62,7 +62,17 @@
 
 			};
 
+			this.editObservation = function (_id) {
+				RestService.getObservation(_id).success(function (item) {
+					if (item.workflow.state == 'closed') {
+						$location.path("/observation/report/" + item.id);
+					}
+					else {
+						$location.path("/observation/" + item.id);
+					}
+				});
 
+			};
 
 
 

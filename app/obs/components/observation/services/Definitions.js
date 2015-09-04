@@ -18,7 +18,6 @@
 			this.getObservationWorkflowStates = function() {
 				
 				var ows = {'draft': 'Draft', 'ready': 'Klar', 'withdrawn': 'Trekt tilbake', 'closed': 'Lukket', 'pending_review_hi': 'Avventer HI', 'pending_review_fs': 'Avventer Fagsjef', 'pending_review_su': 'Avventer SU'};
-				
 				return ows;
 			};
 			
@@ -27,6 +26,11 @@
 				return this.getObservationWorkflowStates()[state];
 			};
 
+
+			this.getObservationTypeMap = function() {
+				var types = {'sharing': 'Erfaringsdeling', 'unwanted_act': 'Uønsket hending', 'near_miss': 'Næruhell', 'incident': 'Uhell', 'accident': 'Ulykke'};
+				return types;
+			};
 
 			this.getObservationTypes = function () {
 				var observationTypes = [];
