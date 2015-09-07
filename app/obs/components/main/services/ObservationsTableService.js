@@ -6,28 +6,39 @@
 			this.getTags = function () {
 				console.log("GET TAGS");
 				var def = $q.defer();
-				var tags = [{title: 'Reservetrekk', id: 'Reservetrekk'}];
-				def.resolve(tags);
-				return def;
+				RestService.getTags('observation').then(function(r){
+						var data = r.data;
+						var items = data._items;
+						var tags = items.map(function (tag) {
+							return {id: tag.tag, title: tag.tag+' ('+tag.freq+')'};
+						});
+						tags.unshift(null);
+						def.resolve(tags)
+					});
 
+				return def;
+			};
+
+			this.getYears = function(){
+				var arr = [];
+				arr.push({id:2016,title:'2016'});
+				arr.push({id:2015,title:'2015'});
+				arr.push({id:2014,title:'2014'});
+				arr.unshift(null);
+				return arr;
 			};
 
 			this.getClubs = function () {
-				console.log("GET CLUBS");
 				var def = $q.defer();
-
 				RestService.getClubs().then(function (r) {
 					var data = r.data;
 					var items = data._items;
 					var clubs = items.map(function (club) {
 						return {id: club.id, title: club.name};
 					});
+					clubs.unshift(null);
 					def.resolve(clubs);
 				});
-
-				//var clubs = [{title:'VFSK',id:'F-001'}];
-				//return clubs;
-
 				return def;
 			};
 
@@ -39,6 +50,7 @@
 					var value = objs[key];
 					arr.push({id:key,title:value});
 				});
+				arr.unshift(null);
 				return arr;
 			};
 
@@ -49,21 +61,18 @@
 					var value = objs[key];
 					arr.push({id:key,title:value});
 				});
+				arr.unshift(null);
 				return arr;
 			};
 
 			this.getRatings = function(){
 				var arr = [];
 				arr.push({id:1,title:'>1'});
-				arr.push({id:1,title:'>2'});
-				arr.push({id:1,title:'>3'});
-				arr.push({id:1,title:'>4'});
-				arr.push({id:1,title:'>5'});
-				arr.push({id:1,title:'>6'});
-				arr.push({id:1,title:'>7'});
-				arr.push({id:1,title:'>8'});
-				arr.push({id:1,title:'>9'});
-
+				arr.push({id:3,title:'>3'});
+				arr.push({id:5,title:'>5'});
+				arr.push({id:7,title:'>7'});
+				arr.push({id:9,title:'>9'});
+				arr.unshift(null);
 				return arr;
 			};
 
@@ -80,6 +89,39 @@
 
 					});
 					return sortString;
+			};
+
+			this.whereStringFromParams = function(params){
+				var whereString = 'where={';
+				var filter = params.filter();
+				console.log(filter);
+
+				if(filter['club']){
+					whereString += '"club":"'+filter['club']+'",';
+				}
+
+				if(filter['state']){
+					whereString += '"workflow.state":"'+filter['state']+'",';
+				}
+
+				if(filter['type']){
+					whereString += '"type":"'+filter['type']+'",';
+				}
+
+				if(filter['rating']){
+					var rating = filter['rating'];
+					whereString += '"$or":[ {"rating.actual":{"$gt":'+rating+'}}, {"rating.potential":{"$gt":'+rating+'}}],';
+				}
+
+				if(filter['tags']){
+					var tag = filter['tags'];
+					whereString += '"tags":"'+tag+'",';
+				}
+
+				whereString = whereString.replace(/,\s*$/, "");
+				whereString = whereString +'}';
+				console.log(whereString);
+				return whereString;
 			};
 
 

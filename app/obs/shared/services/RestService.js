@@ -36,8 +36,8 @@
 				return $http.get(urlBase + '/observations/?where={"watchers": {"$in": ['+userName+']}}&sort='+sort+'&max_results='+maxResults+'&page='+page);
 			};
 
-			this.getAllObservations = function (page,maxResults,sort) {
-				return $http.get(urlBase + '/observations/?sort='+sort+'&max_results='+maxResults+'&page='+page);
+			this.getAllObservations = function (page,maxResults,sort,where) {
+				return $http.get(urlBase + '/observations/?sort='+sort+'&max_results='+maxResults+'&page='+page+'&'+where);
 			};
 
 

@@ -43,6 +43,7 @@
 
 
 			$scope.tableMyObservations = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
+
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				RestService.getObservations(params.page(), params.count(), sortString,$rootScope.username)
 					.then(function(r){
@@ -64,13 +65,21 @@
 			}});
 
 			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
+
+				var filter = params.filter();
+				console.log(filter);
+
 				var sortString = ObservationsTableService.sortStringFromParams(params);
-				RestService.getAllObservations(params.page(), params.count(), sortString)
+				var whereString = ObservationsTableService.whereStringFromParams(params);
+				RestService.getAllObservations(params.page(), params.count(), sortString,whereString)
 					.then(function(r){
 						var meta = r.data._meta;
 						params.total(meta.total);
 						$defer.resolve(r.data._items);
-					});
+					},
+				function(error){
+					console.log(error);
+				});
 
 			}});
 
@@ -95,6 +104,11 @@
 			$scope.getRatings = function(){
 				return ObservationsTableService.getRatings();
 			};
+
+			$scope.getYears = function(){
+				return ObservationsTableService.getYears();
+			};
+
 
 
 		});
