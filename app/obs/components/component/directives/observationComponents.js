@@ -97,7 +97,7 @@
 				$location.path('/observation/modal-route', false);
 			    $scope.incidentAside = $aside({
 			        scope: $scope,
-			        title: 'Hendinger i forløpet',
+			        title: 'Komponenter i forløpet',
 			        show: true,
 			        contentTemplate: '/app/obs/components/component/directives/observationComponents.html',
 			        template: '/shared/partials/aside.html',

@@ -10,8 +10,9 @@
 		<tr>
 			<td><button class="btn btn-default" ng-click='sortByGroup()'>Group</button> </td> <td><button class="btn btn-default" ng-click='sortByTag()'>Tag</button></td> <td><button class="btn btn-default" ng-click='sortByFreq()'>Freq</button></td>
 		</tr>
+
 		<tr ng-repeat="tag in allTags">
-			<td>{{tag.group}}</td> <td>{{tag.tag}}</td> <td>{{tag.freq}} <span ng-click="tagUp(tag)" class="fa fa-plus"></span> <span ng-click="tagDown(tag)" class="fa fa-minus"></span></td>
+			<td><small> {{tag.group}}</small></td> <td><small>{{tag.tag}}</small></td> <td><small>{{tag.freq}} <span ng-click="tagUp(tag)" class="fa fa-plus"></span> <span ng-click="tagDown(tag)" class="fa fa-minus"></span></small></td>
 
 		</tr>
 

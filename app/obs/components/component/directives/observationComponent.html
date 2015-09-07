@@ -26,7 +26,7 @@
                 <tagtypeahead ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv selve hendelse" ></tagtypeahead>
 
 
-                <small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere hendinger i stedet for å skrive lang tekst her</small>
+                <small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere komponenter i stedet for å skrive lang tekst her</small>
                     <span class="input-group-btn">
                         <button class="btn btn-default" ng-disabled="!component.what" type="button" ng-click="whatEdited(component)">
                             Ok
@@ -89,7 +89,7 @@
             <textarea type="text" rows="2" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true"></textarea>
             <span class="label label-info" ng-show="howTextClicked && component.how.length > 10">{{(160 - component.how.length)}} tegn igjen</span>&nbsp;
             <span class="label label-warning" ng-show="howTextClicked && component.how.length > 80">Legg gjerne til de viktigste nøkkel-ordene i teksten som tagger</span>&nbsp;
-            <span class="label label-danger" ng-show="howTextClicked && component.how.length > 120">Legg gjerne til flere hendinger i stedet for å skrive alt som skjedde her</span>
+            <span class="label label-danger" ng-show="howTextClicked && component.how.length > 120">Legg gjerne til flere komponenter i stedet for å skrive alt som skjedde her</span>
 
         </div>
         <div class="clearfix"></div>
@@ -106,7 +106,7 @@
             <button type="button" class="btn btn-primary" ng-click="incrementOrder(component)"><span>Flytt ned</span></button>
             <button type="button" class="btn btn-primary" ng-click="decrementOrder(component)"><span>Flytt opp</span></button>
             <span>&nbsp;</span>
-            <button type="button" class="btn btn-primary" ng-click="deleteComponent(component)">Slett hending</button>
+            <button type="button" class="btn btn-primary" ng-click="deleteComponent(component)">Slett komponent</button>
 
         </div>
         <div class="clearfix"></div>
