@@ -20,9 +20,25 @@
 
 			$scope.tags = [];
 			RestService.getTags($scope.group)
-				.success(function(data){
-					$scope.tags = Functions.deduplicate(data._items.filter(function(t){return t.freq>=0}).map(function(t){return t.tag}));
+				.then(function(r){
+					$scope.tags = Functions.deduplicate(r.data._items.filter(function(t){return t.freq>=0}).map(function(t){return t.tag}));
 				});
+
+
+			$scope.refresh = function(search){
+/*
+				if(search){
+					search = Functions.capitalizeFirstLetter(search);
+					RestService.getTagsByRegex(search,$scope.group)
+						.then(function(r){
+
+
+
+						});
+				}
+*/
+			};
+
 		};
 
 		return directive;

@@ -136,7 +136,7 @@
 			};
 
 			this.getTags = function(group){
-				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}&sort=-freq');
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'", "freq":{"$gt":0}}&sort=-freq&max_results=50');
 			};
 
 			this.getMostPopularTags = function(group){
