@@ -7,7 +7,7 @@
 		<span class="pull-right"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
 <!-- 		<span class="pull-right"><workingcomments observation="observation"></workingcomments>&nbsp;</span> -->
 
-		<h1>#{{observation.id}}  {{observation.tags.join(' ')}}</h1>
+		<h1>#{{observation.id}}  {{observation.tags.join('#')}}</h1>
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->
@@ -212,7 +212,8 @@
 		<button ng-disabled="!observationChanges" class="btn btn-primary btn-block" ng-click="saveObservation()">
 			<i class="fa fa-save fa-fw"></i> Lagre
 		</button>
-
+		<br>
+		<span class="block"><workflow observation-changes="observationChanges" observation="observation" btnclass="btn-block">Send videre</workflow>&nbsp;</span>
 	</div>
 </div>
 </div>
