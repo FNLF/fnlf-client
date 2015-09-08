@@ -1,4 +1,4 @@
-var inlinehelp = angular.module('inlinehelp', ['mgcrea.ngStrap.tooltip','mgcrea.ngStrap.popover']);
+var inlinehelp = angular.module('inlinehelp', []);
 //'mgcrea.ngStrap.popover' 'ui.bootstrap'
 
 inlinehelp.directive('inlinehelp',  function() {
@@ -6,9 +6,10 @@ inlinehelp.directive('inlinehelp',  function() {
 	var directive = {};
 
 	directive.restrict = 'E';
+	directive.transclude = true;
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<a data-trigger="click" data-type="success" data-title="{{tooltip.title}}" bs-tooltip ><i class="fa fa-question-circle fa-fw text-info"></i></a>';
+		return '<span ng-click="flip()"><span class="h2">{{title}}<i class="fa fa-question-circle fa-fw text-primary"></i></span><div collapse="isCollapsed"><div class="well well-lg" ng-transclude></div></div> </span>';
 		//return '<i data-placement="top-right" title="{{title}}" data-content="{{content}}" data-trigger="click" bs-popover class="fa fa-question-circle fa-fw text-info"></i>';
 		//return '<i tooltip-trigger="mousenter" tooltip-placement="right" tooltip="{{content}}" data-trigger="click" bs-popover class="fa fa-question-circle fa-fw text-info"></i>';
 	};
@@ -23,6 +24,14 @@ inlinehelp.directive('inlinehelp',  function() {
 //	};
 
 	directive.link = function ($scope, element, attrs) {
+
+		$scope.isCollapsed=true;
+
+		$scope.flip = function(){
+			$scope.isCollapsed=!$scope.isCollapsed;
+
+		};
+
 
 	};
 

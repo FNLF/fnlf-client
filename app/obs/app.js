@@ -12,6 +12,7 @@
 			 'mgcrea.ngStrap.modal', 'mgcrea.ngStrap.aside',
 			 'fnlf-login', 
 			 'resolve',
+			 'inlinehelp',
 			 'angularFileUpload',
 			 'ui.bootstrap.datetimepicker',
 			 'ngMap',
