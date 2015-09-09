@@ -14,7 +14,7 @@
 			$scope.clubs = [];
 			$scope.getClubs = function () {
 				RestService.getClubs()
-					.success(function (response) {
+					.then(function (response) {
 						$scope.clubs = response._items;
 					});
 			};

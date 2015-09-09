@@ -15,7 +15,7 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 	directive.link = function ($scope, element, attrs) {
 		$scope.getUserDetails = function (user){
 			RestService.getUserDetails(user.id)
-				.success(function(data){
+				.then(function(data){
 					user.membership = data.membership;
 					user.licenses = data.licenses;
 				});
@@ -25,7 +25,7 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 
 		var getJumpTypes = function(){
 			RestService.getJumpTypes()
-				.success(function(data){
+				.then(function(data){
 					$scope.jumptypes = data._items;
 				});
 		};
@@ -35,7 +35,7 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 
 		var getLicensesFromMelwin = function(){
 			RestService.getLicenses()
-				.success(function(data){
+				.then(function(data){
 					$scope.licensesFromMelwin = data._items;
 				});
 		};
@@ -64,7 +64,7 @@ angular.module('reportingApp').directive('involvedperson', function (RestService
 
 		if($scope.person.id){
 			RestService.getUserDetails($scope.person.id)
-				.success(function(data){
+				.then(function(data){
 					$scope.person.membership = data.membership;
 					$scope.person.licenses = data.licenses;
 				});

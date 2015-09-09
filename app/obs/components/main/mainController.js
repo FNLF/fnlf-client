@@ -25,14 +25,16 @@
 				console.log("Create");
 
 				console.log($scope.observation);
-				RestService.createObservation($scope.observation).success(function(metadata){
-					console.log("Save");
-					RestService.getObservation(metadata._id).success(function(item){
-						console.log(item);
-						$scope.observation = item;
-						console.log("Set");
-						$location.path("/observation/"+item.id);
-					});
+				RestService.createObservation($scope.observation)
+					.then(function(metadata){
+						console.log("Save");
+						RestService.getObservation(metadata._id)
+							.then(function(item){
+							console.log(item);
+							$scope.observation = item;
+							console.log("Set");
+							$location.path("/observation/"+item.id);
+						});
 
 				});
 			};

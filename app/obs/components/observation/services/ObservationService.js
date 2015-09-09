@@ -50,7 +50,7 @@
 			this.getObservationById = function (id,callback) {
 
 				RestService.getObservationById(id)
-					.success(function(obs){
+					.then(function(obs){
 						callback(obs);
 					});
 			};
@@ -63,7 +63,7 @@
 			};
 
 			this.editObservation = function (_id) {
-				RestService.getObservation(_id).success(function (item) {
+				RestService.getObservation(_id).then(function (item) {
 					if (item.workflow.state == 'closed') {
 						$location.path("/observation/report/" + item.id);
 					}
@@ -130,22 +130,22 @@
 
 				$rootScope.error = null;
 				RestService.updateObservation(observationDto, _id, _etag)
-					.success(function(data){
+					.then(function(data){
 					RestService.getObservation(id)
-						.success(function(updated){
+						.then(function(updated){
 							clearFullnameFromObservation(updated);
 							callback(updated);
 						});
-				}).error(function(error){
-					console.log(error);
-					$rootScope.error=error;
-					RestService.getObservation(id)
-						.success(function(updated){
-							clearFullnameFromObservation(updated);
-							callback(updated);
+				},function(error){
+						console.log(error);
+						$rootScope.error=error;
+						RestService.getObservation(id)
+							.then(function(updated){
+								clearFullnameFromObservation(updated);
+								callback(updated);
 
-						});
-				});
+							});
+					});
 			};
 
 			this.clearObservation = function () {
@@ -160,21 +160,21 @@
 			this.changeWorkflowState = function (objectId, action, comment,callback){
 				
 				RestService.changeWorkflowState(objectId, action, comment)
-				.success(function(data){
+				.then(function(data){
 					RestService.getObservation(objectId)
-						.success(function(updated){
+						.then(function(updated){
 							callback(updated);
 
 						});
-				}).error(function(error){
-					console.log(error);
-					$rootScope.error=error;
-					RestService.getObservation(objectId)
-						.success(function(updated){
-							callback(updated);
+				},function(error){
+						console.log(error);
+						$rootScope.error=error;
+						RestService.getObservation(objectId)
+							.then(function(updated){
+								callback(updated);
 
-						});
-				});
+							});
+					});
 			};
 			
 			/**

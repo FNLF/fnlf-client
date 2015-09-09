@@ -95,7 +95,7 @@ angular.module('reportingApp')
 		console.log(newValue);
 		
 		RestService.getWorkflowState($scope.observation._id)
-				   .success(function (response) {
+				   .then(function (response) {
 			
 			var icon = '';
 			var btns = [];

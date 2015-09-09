@@ -35,7 +35,7 @@ angular.module("editorApp").controller("editorController",[
 					
 					$scope.templates=[];
 					RestService.getObservationComponentTemplates()
-						.success(function(data){
+						.then(function(data){
 							$scope.templates = data._items;
 
 
@@ -75,87 +75,12 @@ angular.module("editorApp").controller("editorController",[
 						});
 					$scope.allTags = [];
 					RestService.getAllTags(1)
-						.success(function(data){
+						.then(function(data){
 							$scope.allTags = data._items;
 						});
 
 
-					$scope.newTemplate = function(){
-						var component = {};
-						component.what='ny';
 
-						RestService.createObservationComponentTemplate(component)
-							.success(function(data){
-								console.log('Created new template');
-								console.log(data);
-								data.flags={};
-								data.attributes={};
-								data.where={};
-								data.tags=[];
-								data.active=true;
-								$scope.templates.push(data);
-
-
-								data.sort = $scope.templates.length;
-							});
-					};
-
-					var saveFn = function(component){
-
-						var dto = {};
-						angular.copy(component,dto);
-
-
-						var _id = component._id;
-						var _etag = component._etag;
-
-
-						delete dto.editTitle;
-						delete dto.open;
-
-						delete dto._updated;
-						delete dto._latest_version;
-						delete dto._version;
-						delete dto.workflow;
-						delete dto._links;
-						delete dto._created;
-						delete dto._status;
-						delete dto._etag;
-						delete dto._id;
-
-
-						RestService.updateObservationComponentTemplate(dto,_id,_etag)
-								.success(function(data){
-									console.log(data);
-									angular.copy(data,component);
-								});
-					};
-
-
-					$scope.incrementSort = function(component){
-						component.sort++;
-						//saveFn(component);
-					};
-
-					$scope.decrementSort = function(component){
-						component.sort--;
-						//saveFn(component);
-
-					};
-
-					$scope.hideTemplate = function(component){
-						component.active=false;
-						saveFn(component);
-					};
-
-					$scope.showTemplate = function(component){
-						component.active=true;
-						saveFn(component);
-					};
-
-					$scope.saveTemplate = function(component){
-						saveFn(component);
-					};
 
 
 					$scope.tagUp = function(tag){
@@ -191,7 +116,7 @@ angular.module("editorApp").controller("editorController",[
 					$scope.getTags = function(page){
 						$scope.page=page;
 						RestService.getAllTags(page,$scope.sort)
-							.success(function(data){
+							.then(function(data){
 								$scope.allTags = data._items;
 							});
 					};

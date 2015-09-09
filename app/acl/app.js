@@ -48,7 +48,7 @@ angular.module("aclApp").controller("aclController",[
 					
 					$scope.getPersonsByName = function (name) {
 						aclService.getUserByName(name)
-						.success(function (response) {
+						.then(function (response) {
 							$scope.personsFromDb = response._items;
 							console.log($scope.personsFromDb);
 						});

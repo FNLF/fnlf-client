@@ -93,7 +93,7 @@ angular.module('reportingApp')
 		
 		$scope.getPersonsByName = function (name) {
 				RestService.getUserByName(name)
-				.success(function (response) {
+				.then(function (response) {
 					$scope.personsFromDb = response._items;
 				});
 		};

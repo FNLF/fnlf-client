@@ -326,10 +326,11 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 					locations.push(obj);
 				}
 
-				LocationService.saveClubLocations($scope.observation.club, locations, response._etag, response._id).success(function(response) {
-					console.log(response);
-					$scope.clublocations = response.locations;
-					$scope.observation.location = obj;
+				LocationService.saveClubLocations($scope.observation.club, locations, response._etag, response._id)
+					.then(function(response) {
+						console.log(response);
+						$scope.clublocations = response.locations;
+						$scope.observation.location = obj;
 				});
 			});
 
