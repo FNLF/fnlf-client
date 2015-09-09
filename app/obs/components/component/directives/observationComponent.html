@@ -13,9 +13,13 @@
             <div>
                 <div class="btn-group-xs">
                     <label class="btn btn-default" ng-model="component.flags.cause" btn-checkbox>Årsak</label>
+                    <inlinehelp>Direkte eller indirekte årsak til hendelsen</inlinehelp>
                     <label class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
+                    <inlinehelp>Sikkerhetsbarriære som har blitt brutt eller som har fungert som den skulle</inlinehelp>
                     <label class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hendelse</label>
+                    <inlinehelp>Det som gjorde at du nå skriver i ORS</inlinehelp>
                     <label class="btn btn-default" ng-model="component.flags.consequence" btn-checkbox>Konsekvens</label>
+                    <inlinehelp>Direkte og indirekte konsekvenser av hendelsen</inlinehelp>
                 </div>
             </div>
 
@@ -40,7 +44,7 @@
     <div ng-hide="component.editTitle">
 
         <div class="col-xs-12 col-md-12">
-            <label>Flagg</label>
+            <label>Flagg<inlinehelp>Bruk flagg slik at det blir lett å lage god statistikk</inlinehelp></label>
             <div class="btn-group-md">
 				<label class="btn btn-default" ng-model="component.attributes.packing_error" btn-checkbox>Pakkefeil</label>
                 <label class="btn btn-default" ng-model="component.attributes.reserve_ride" btn-checkbox>Reserve benyttet</label>
@@ -59,28 +63,36 @@
         <p></p>
 
         <div class="col-xs-12 col-md-6 col-lg-4 hideInTemplateEditor">
-            <label>Involvert</label>
+            <label>Involvert
+            <inlinehelp>Personer som var involvert i akkurat denne komponenten i forløpet</inlinehelp>
+            </label>
             <ui-select multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blandt involverte personer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
                 <ui-select-choices repeat="person in persons track by person.id"> {{person.fullname}} </ui-select-choices> </ui-select>
         </div>
 
         <div class="col-xs-8 col-md-4 col-lg-3">
-            <label>Sted eller situasjon</label>
+            <label>Sted eller situasjon
+                <inlinehelp>Fyll ut denne slik at det blir mulig å se fellestrekk over tid hvor ting typisk skjer</inlinehelp>
+            </label>
             <tagtypeahead model="component.where.at" group="where-at" noun="på/i"></tagtypeahead>
         </div>
 
         <div class="col-xs-4 col-md-2">
-            <label>Høyde i fot</label> <input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
+            <label>Høyde i fot<inlinehelp>Høyde over bakken der dette er relevant</inlinehelp></label> <input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
         </div>
 
         <div class="clearfix"></div>
 
 
         <div class="col-xs-6">
-            <label>Hvordan (Søketagger)</label>
+            <label>Hvordan (Tagger)
+                <inlinehelp>Tagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
+                    Det er viktig at det viktigste i friteksten og er utrykt i form av tagger.
+                </inlinehelp>
+            </label>
         </div>
         <div class="col-xs-6">
-            <label>Hvordan (Fritekst)</label>
+            <label>Hvordan (Fritekst)<inlinehelp> Kort tekst som forklarer komponenten. Bruk heller flagg, tagger eller flere komponenter enn å skrive mye her. Viss du kun skriver her vil aldri kunne lage fornuftig statistikk av observasjonen din.</inlinehelp> </label>
         </div>
         <div class="col-xs-12 col-md-6 col-lg-4">
             <tagging model="component.tags" group="component" noun="Tagger"></tagging>
