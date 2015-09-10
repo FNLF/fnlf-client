@@ -10,7 +10,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope, $sce) {
+		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -26,27 +26,29 @@
 
 			$scope.loadObservation = function(){
 				$scope.observation = {};
-				ObservationService.getObservationById(observationId, function(obs){
+				ObservationService.getObservationById(observationId)
+					.then(function(obs){
+						$scope.observation = obs;
 
-					$scope.observation = obs;
-					ObservationService.initObservation($scope.observation);
-					$scope.observationChanges = false;
-					$timeout(function(){
 						$scope.observationChanges = false;
-					},10);
-					
-					// Menus
-					$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
-					if($scope.observation.workflow.state == 'closed') {
-						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-text', link: '#!/observation/report/'+ $scope.observation.id}];
-					};
-					
-					 
-					if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
-						$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
-					}
-					
-				});
+						$timeout(function(){
+							$scope.observationChanges = false;
+						},10);
+
+						// Menus
+						$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
+						if($scope.observation.workflow.state == 'closed') {
+							$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-text', link: '#!/observation/report/'+ $scope.observation.id}];
+						};
+
+
+						if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
+							$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+						}
+				}).catch(function(error){
+						console.log("Catched in ObservationController: "+error);
+						$rootScope.error = "Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke";
+					});
 			};
 			$scope.loadObservation();
 			
@@ -75,18 +77,28 @@
 
 		$rootScope.saveObservation = function () {
 
-			ObservationService.updateObservation($scope.observation,function(updated){
-				$scope.observation = updated;
-				ObservationService.initObservation($scope.observation);
-				/**
-				 * Reset saved/unsaved label
-				 */
-				$timeout(function(){
-					$scope.observationChanges = false;
-					$window.onbeforeunload = null;
-				},100);
+			console.log("When before save: "+$scope.observation.when);
+			console.log("Version, Etag: "+$scope.observation._version+', '+$scope.observation._etag);
 
-			});
+			ObservationService.updateObservation($scope.observation)
+				.then(function(updated){
+					$rootScope.error = '';
+					$scope.observation = updated;
+
+
+				})
+				.then(function(){
+						$timeout(function(){
+							$scope.observationChanges = false;
+							$window.onbeforeunload = null;
+						console.log("When: "+$scope.observation.when);
+						},100);
+					})
+				.catch(function(error){
+					console.log("Catch error in ObservationController. Reloading observation"+error);
+					$rootScope.error = error;
+					$scope.loadObservation();
+				});
 		};
 
 		

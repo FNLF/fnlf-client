@@ -224,17 +224,18 @@
 				// server error), then we
 				// may have to normalize it on our end, as best
 				// we can.
-				if (!angular.isObject(response.data) || !response.data.message) {
-					return ($q.reject("An unknown error occurred."));
+				if (!angular.isObject(response.data) || !response.data._error.message) {
+					console.log(response);
+					return ($q.reject("An unknown error occurred. "+response.statusText));
 				}
 				// Otherwise, use expected error message.
-				return ($q.reject(response.data.message));
+				console.log(response.data._error.message);
+				return ($q.reject(response.data._error.message));
 			}
 			// I transform the successful response, unwrapping
 			// the application data
 			// from the API response payload.
 			function handleSuccess(response) {
-				console.log(response.data);
 				return (response.data);
 			}
 

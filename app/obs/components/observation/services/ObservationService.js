@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('ObservationService', function (RestService,Definitions,Functions,$rootScope,$location) {
+		.service('ObservationService', function (RestService,Definitions,Functions,$rootScope,$location,$q) {
 
 			function Observation() {
 				this.involved = [];
@@ -35,6 +35,8 @@
 				
 			};
 
+			var initObservationFn = this.initObservation;
+
 			var observation = new Observation();
 
 			this.setObservation = function (selectedObservation) {
@@ -47,11 +49,11 @@
 
 
 
-			this.getObservationById = function (id,callback) {
-
-				RestService.getObservationById(id)
+			this.getObservationById = function (id) {
+				return RestService.getObservationById(id)
 					.then(function(obs){
-						callback(obs);
+						initObservationFn(obs);
+						return obs;
 					});
 			};
 
@@ -99,7 +101,7 @@
 			};
 
 
-			this.updateObservation = function (observation,callback) {
+			this.updateObservation = function (observation) {
 
 				clearFullnameFromObservation(observation);
 
@@ -129,21 +131,13 @@
 				delete observationDto._id;
 
 				$rootScope.error = null;
-				RestService.updateObservation(observationDto, _id, _etag)
-					.then(function(data){
-					RestService.getObservation(id)
-						.then(function(updated){
-							clearFullnameFromObservation(updated);
-							callback(updated);
-						});
-				},function(error){
-						console.log(error);
-						$rootScope.error=error;
-						RestService.getObservation(id)
+
+				return RestService.updateObservation(observationDto, _id, _etag)
+					.then(function(obs){
+						return RestService.getObservation(id)
 							.then(function(updated){
 								clearFullnameFromObservation(updated);
-								callback(updated);
-
+								return updated;
 							});
 					});
 			};

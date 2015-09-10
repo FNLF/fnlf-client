@@ -6,8 +6,7 @@
 			this.getTags = function () {
 				console.log("GET TAGS");
 				var def = $q.defer();
-				RestService.getTags('observation').then(function(r){
-						var data = r.data;
+				RestService.getTags('observation').then(function(data){
 						var items = data._items;
 						var tags = items.map(function (tag) {
 							return {id: tag.tag, title: tag.tag+' ('+tag.freq+')'};
@@ -30,8 +29,8 @@
 
 			this.getClubs = function () {
 				var def = $q.defer();
-				RestService.getClubs().then(function (r) {
-					var data = r.data;
+				RestService.getClubs().then(function (data) {
+					;
 					var items = data._items;
 					var clubs = items.map(function (club) {
 						return {id: club.id, title: club.name};

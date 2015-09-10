@@ -48,10 +48,10 @@
 
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				RestService.getObservations(params.page(), params.count(), sortString,$rootScope.username)
-					.then(function(r){
-						var meta = r.data._meta;
+					.then(function(data){
+						var meta = data._meta;
 						params.total(meta.total);
-						$defer.resolve(r.data._items);
+						$defer.resolve(data._items);
 					});
 
 			}});
@@ -59,9 +59,9 @@
 			$scope.todoTable = new ngTableParams({page: 1, count: 100, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				RestService.getWorkflowTodo(params.page(), params.count(), sortString)
-					.then(function(r){
-						params.total(r.data._items.length);
-						$defer.resolve(r.data._items);
+					.then(function(data){
+						params.total(data._items.length);
+						$defer.resolve(data._items);
 					});
 
 			}});
@@ -74,10 +74,10 @@
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				var whereString = ObservationsTableService.whereStringFromParams(params);
 				RestService.getAllObservations(params.page(), params.count(), sortString,whereString)
-					.then(function(r){
-						var meta = r.data._meta;
+					.then(function(data){
+						var meta = data._meta;
 						params.total(meta.total);
-						$defer.resolve(r.data._items);
+						$defer.resolve(data._items);
 					},
 				function(error){
 					console.log(error);
