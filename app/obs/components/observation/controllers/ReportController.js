@@ -13,28 +13,35 @@
 
 			$scope.loadObservation = function(){
 				$scope.observation = {};
-				ObservationService.getObservationById(observationId, function(obs){
+				ObservationService.getObservationById(observationId)
+					.then(function(obs){
 
-					components = obs.components;
-					
-					components.sort(function(a,b) {
-						return a.order - b.order;
+						var components = obs.components;
+
+						components.sort(function(a,b) {
+							return a.order - b.order;
+						});
+						console.log(components);
+						obs.components = components;
+
+						$scope.observation = obs;
+						ObservationService.initObservation($scope.observation);
+
+						var start = moment($scope.observation._created);
+						var stop = moment($scope.observation.workflow.last_transition);
+						$scope.timeTaken = moment.duration(stop - start).humanize();
+
+						// Menus
+						$rootScope.nav = {toolbar: [], menus: []}; //reset
+						$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
+						$rootScope.nav.menus = [{title: 'Åpne i editor', link: '#!/observation/'+ $scope.observation.id}];
+					})
+					.catch(function(error){
+						console.log(error);
+						$rootScope.error=error;
 					});
-					console.log(components);
-					obs.components = components;
-					
-					$scope.observation = obs;
-					ObservationService.initObservation($scope.observation);
-					
-					var start = moment($scope.observation._created);
-					var stop = moment($scope.observation.workflow.last_transition);
-					$scope.timeTaken = moment.duration(stop - start).humanize();
-					
-					// Menus
-					$rootScope.nav = {toolbar: [], menus: []}; //reset
-					$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
-					$rootScope.nav.menus = [{title: 'Åpne i editor', link: '#!/observation/'+ $scope.observation.id}];
-				});
+
+
 			};
 			$scope.loadObservation();
 			
