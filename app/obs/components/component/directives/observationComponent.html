@@ -44,7 +44,7 @@
     <div ng-hide="component.editTitle">
 
         <div class="col-xs-12 col-md-12">
-            <label>Flagg<inlinehelp>Bruk flagg slik at det blir lett å lage god statistikk</inlinehelp></label>
+            <inlinehelp title="Flagg">Bruk flagg slik at det blir lett å lage god statistikk</inlinehelp>
             <div class="btn-group-md">
 				<label class="btn btn-default" ng-model="component.attributes.packing_error" btn-checkbox>Pakkefeil</label>
                 <label class="btn btn-default" ng-model="component.attributes.reserve_ride" btn-checkbox>Reserve benyttet</label>
@@ -63,42 +63,33 @@
         <p></p>
 
         <div class="col-xs-12 col-md-6 col-lg-4 hideInTemplateEditor">
-            <label>Involvert
-            <inlinehelp>Personer som var involvert i akkurat denne komponenten i forløpet</inlinehelp>
-            </label>
+            <inlinehelp title="Involvert">Personer som var involvert i akkurat denne komponenten i forløpet</inlinehelp>
             <ui-select multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blandt involverte personer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
                 <ui-select-choices repeat="person in persons track by person.id"> {{person.fullname}} </ui-select-choices> </ui-select>
         </div>
 
         <div class="col-xs-8 col-md-4 col-lg-3">
-            <label>Sted eller situasjon
-                <inlinehelp>Fyll ut denne slik at det blir mulig å se fellestrekk over tid hvor ting typisk skjer</inlinehelp>
-            </label>
+            <inlinehelp title="Sted eller situasjon">Fyll ut denne slik at det blir mulig å se fellestrekk over tid hvor ting typisk skjer</inlinehelp>
             <tagtypeahead model="component.where.at" group="where-at" noun="på/i"></tagtypeahead>
         </div>
 
         <div class="col-xs-4 col-md-2">
-            <label>Høyde i fot<inlinehelp>Høyde over bakken der dette er relevant</inlinehelp></label> <input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
+            <inlinehelp title="Høyde i fot">Høyde over bakken der dette er relevant</inlinehelp>
+            <input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
         </div>
 
         <div class="clearfix"></div>
 
 
-        <div class="col-xs-6">
-            <label>Hvordan (Tagger)
-                <inlinehelp>Tagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
+        <div class="col-xs-12">
+                <inlinehelp title="Hvordan (Tagger)">Tagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
                     Det er viktig at det viktigste i friteksten og er utrykt i form av tagger.
                 </inlinehelp>
-            </label>
-        </div>
-        <div class="col-xs-6">
-            <label>Hvordan (Fritekst)<inlinehelp> Kort tekst som forklarer komponenten. Bruk heller flagg, tagger eller flere komponenter enn å skrive mye her. Viss du kun skriver her vil aldri kunne lage fornuftig statistikk av observasjonen din.</inlinehelp> </label>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-4">
             <tagging model="component.tags" group="component" noun="Tagger"></tagging>
         </div>
-        <div class="col-xs-12 col-md-6 hideInTemplateEditor">
-            <textarea type="text" rows="2" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true"></textarea>
+        <div class="col-xs-12">
+            <inlinehelp title="Hvordan (Fritekst)"> Kort tekst som forklarer komponenten. Bruk heller flagg, tagger eller flere komponenter enn å skrive mye her. Viss du kun skriver her vil aldri kunne lage fornuftig statistikk av observasjonen din.</inlinehelp> </label>
+            <textarea type="text" rows="4" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true"></textarea>
             <span class="label label-info" ng-show="howTextClicked && component.how.length > 10">{{(160 - component.how.length)}} tegn igjen</span>&nbsp;
             <span class="label label-warning" ng-show="howTextClicked && component.how.length > 80">Legg gjerne til de viktigste nøkkel-ordene i teksten som tagger</span>&nbsp;
             <span class="label label-danger" ng-show="howTextClicked && component.how.length > 120">Legg gjerne til flere komponenter i stedet for å skrive alt som skjedde her</span>
@@ -111,7 +102,7 @@
             <span class="fa fa-plus"></span> Hvorfor skjedde dette? Hva var årsaken?
         </button>
 
-        <div class="pull-right hideInTemplateEditor">
+        <div class="pull-right">
             <br>
 
 

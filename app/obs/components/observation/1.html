@@ -47,7 +47,7 @@
 			<li class="list-group-item">
 				<p class="list-group-item-text">
 				<div class="col-xs-12  col-md-12">
-				<label class="control-label">Tittel</label>
+				<label class="control-label">Tittel<inlinehelp>Bruk en eller flere tagger som tittel på observasjonen</inlinehelp></label>
 				<tagging model="observation.tags" group="observation" noun="ord"></tagging>
 
 				</div>
@@ -60,7 +60,7 @@
 				<p class="list-group-item-text">
 				<div class="col-xs-12 col-md-4">
 				<div class="form-group">
-						<label class="control-label">Observasjons tidspunkt:</label><br />
+						<label class="control-label">Observasjonstidspunkt:<inlinehelp>Dato og gjerne klokkeslett</inlinehelp></label><br />
 					<observationdateselector observation="observation"></observationdateselector>
 					</div>
 				</div>
@@ -132,7 +132,7 @@
 			</li>
 
 			<li class="list-group-item">
-				<h4 class="list-group-item-heading">Involverte</h4>
+				<h4 class="list-group-item-heading">Involverte personer og utstyr</h4>
 				<p class="list-group-item-text">
 					<involved-summary observation="observation"></involved-summary>
 					<involvedpersonselector observation="observation"></involvedpersonselector>
