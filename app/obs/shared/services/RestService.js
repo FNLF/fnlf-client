@@ -51,31 +51,7 @@
 
 
 
-			this.getObservationComponentTemplates = function () {
-				return $http.get(urlBase + '/observations/components')
-					.then(handleSuccess, handleError);
-			};
-
-			this.updateObservationComponentTemplate = function (template,_id,_etag) {
-				var config = {};
-				config.headers = {};
-				config.headers['If-Match'] = _etag;
-
-            	var url = urlBase + '/observations/components/' + _id;
-            	return $http({ method: 'PATCH', url: url, data: template, headers: config.headers})
-					.then(handleSuccess, handleError);
-			};
-
-			this.createObservationComponentTemplate = function (template) {
-				return $http.post(urlBase + '/observations/components/',template)
-					.then(handleSuccess, handleError);
-			};
-
-
 			this.updateObservation = function (observation, _id, etag) {
-
-
-
 				var config = {};
 				config.headers = {};
 				config.headers['If-Match'] = etag;
