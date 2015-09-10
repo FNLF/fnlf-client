@@ -22,6 +22,7 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 		var request = $http({
 			method : "get",
 			url : urlBase + '/melwin/clubs/' + clubid + '?projection={"name": 1}',
+			cache: true
 		});
 		return (request.then(handleSuccess, handleError));
 	
@@ -31,6 +32,7 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 		var request = $http({
 			method : "get",
 			url : urlBase + '/melwin/licenses/' + id,
+			cache: true
 		});
 		return (request.then(handleSuccess, handleError));
 		
@@ -40,6 +42,7 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 		var request = $http({
 			method : "get",
 			url : urlBase + '/melwin/users/' + userid + '?projection={"firstname": 1, "lastname": 1}',
+			cache: true
 		});
 		return (request.then(handleSuccess, handleError));
 
@@ -49,6 +52,7 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 		var request = $http({
 			method : "get",
 			url : urlBase + '/users/' + userid +'?projection={\"avatar\": 1}',
+			cache: false
 		});
 		return (request.then(handleSuccess, handleError));
 		
