@@ -87,7 +87,7 @@
                 </inlinehelp>
             <tagging model="component.tags" group="component" noun="Tagger"></tagging>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12 hideInTemplateEditor">
             <inlinehelp title="Hvordan (Fritekst)"> Kort tekst som forklarer komponenten. Bruk heller flagg, tagger eller flere komponenter enn å skrive mye her. Viss du kun skriver her vil aldri kunne lage fornuftig statistikk av observasjonen din.</inlinehelp> </label>
             <textarea type="text" rows="4" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true"></textarea>
             <span class="label label-info" ng-show="howTextClicked && component.how.length > 10">{{(160 - component.how.length)}} tegn igjen</span>&nbsp;

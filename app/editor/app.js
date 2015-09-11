@@ -32,6 +32,51 @@ angular.module("editorApp").controller("editorController",[
 					$rootScope.nav = {toolbar: [], menus: []}; //reset
 					$rootScope.nav.brand = 'FNLF Editor';
 
+					$scope.resolvePersonsFn = function(){
+
+					};
+					$scope.templates=[];
+					RestService.getObservationComponentTemplates()
+						.then(function(data){
+							$scope.templates = data._items;
+
+
+
+							var i = 0;
+
+							$scope.templates.forEach(function(t){
+
+								if(!t.attributes){
+									t.attributes={};
+								}
+
+								if(!t.flags){
+									t.flags={};
+								}else{
+									delete t.flags.violation;
+									delete t.flags.wilfull;
+								}
+								if(!t.tags){
+									t.tags=[];
+								}
+								if(!t.involved){
+									//		t.involved=[];
+								}
+
+								if(!t.sort){
+									t.sort = i;
+								}
+
+								if(angular.isUndefined(t.active)){
+									t.active=true;
+								}
+
+								i++;
+							});
+
+						});
+
+
 					$scope.allTags = [];
 					RestService.getAllTags(1)
 						.then(function(data){

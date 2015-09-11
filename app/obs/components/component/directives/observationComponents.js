@@ -155,6 +155,11 @@
 			};
 			$scope.resolvePersonsFn();
 
+			$scope.templates=[];
+			RestService.getObservationComponentTemplates()
+				.then(function(data){
+					$scope.templates = data._items.filter(function(t){return t.active}).sort(function(a,b){return a.sort-b.sort});
+				});
 
 			$scope.newComponent = function(selectedTemplate){
 				console.log(selectedTemplate);

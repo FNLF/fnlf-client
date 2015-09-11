@@ -1,16 +1,16 @@
 <div>
 	<accordion close-others="true">
-		<accordion-group is-open="person.open" ng-repeat="person in observation.involved">
+		<accordion-group is-open="open[person.id]" ng-repeat="person in observation.involved">
 
-			<accordion-heading>
+			<accordion-heading ng-init="open[person.id]=true">
 				<div>
 					<span class="col-xs-1 glyphicon"
-						  ng-class="{'glyphicon-chevron-up': person.open, 'glyphicon-chevron-down': !person.open}"></span>
+						  ng-class="{'glyphicon-chevron-up': open[person.id], 'glyphicon-chevron-down': !open[person.id]}"></span>
 					<involvedpersonsummary person="person"></involvedpersonsummary>
 
 				</div>
 			</accordion-heading>
-			<div ng-if="person.open">
+			<div ng-if="open[person.id]">
 				<involvedperson person="person" jumptypes="jumptypes"
 								licensesFromMelwin="licensesFromMelwin"></involvedperson>
 			</div>

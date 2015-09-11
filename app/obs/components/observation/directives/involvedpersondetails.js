@@ -13,6 +13,9 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 	};
 
 	directive.link = function ($scope, element, attrs) {
+
+		$scope.open={};
+
 		$scope.getUserDetails = function (user){
 			RestService.getUserDetails(user.id)
 				.then(function(data){
