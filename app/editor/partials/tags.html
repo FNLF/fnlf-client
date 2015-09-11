@@ -2,6 +2,23 @@
 
 	<h1>Tags</h1>
 
+	<h3>Filter</h3>
+	<div>
+
+
+		<div>
+			<span ng-repeat="group in groups">
+				<a ng-click="setFilter(group)">{{group}}</a> &nbsp;
+			</span>
+		</div>
+
+	</div>
+
+	<br>
+	<br>
+
+
+
 	<button class="btn btn-default" ng-show="page>1" ng-click="getTags(page-1)">Side {{page-1}}</button>
 <span>Side {{page}}</span>
 	<button class="btn btn-default" ng-click="getTags(page+1)">Side {{page+1}}</button>

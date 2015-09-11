@@ -143,8 +143,13 @@
 			 * Tags
 			 */
 
-			this.getAllTags = function(page,sort){
-				return $http.get(urlBase + '/tags?sort='+sort+'&max_results=200&page='+page)
+			this.getAllTags = function(page,sort,filter){
+
+				if(angular.isUndefined(filter)){
+					filter = '{}';
+				}
+
+				return $http.get(urlBase + '/tags?sort='+sort+'&max_results=200&page='+page+'&where='+filter)
 					.then(handleSuccess, handleError);
 			};
 
@@ -155,9 +160,11 @@
 			};
 
 			this.getTags = function(group){
-				return $http.get(urlBase + '/tags/?where={"group":"'+group+'", "freq":{"$gt":0}}&sort=-freq&max_results=50')
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'", "freq":{"$gt":0}}&sort=-freq&max_results=50&')
 					.then(handleSuccess, handleError);
 			};
+
+
 
 			this.getMostPopularTags = function(group){
 				return $http.get(urlBase + '/tags/?where={"group":"'+group+'"}&sort=-freq&max_results=6')
@@ -168,6 +175,8 @@
 				return $http.get(urlBase + '/tags/?where={"tag":"'+tag+'","group":"'+group+'"}')
 					.then(handleSuccess, handleError);
 			};
+
+
 
 			this.removeTag = function(tag,group){
 
@@ -208,6 +217,15 @@
 					console.log("Tag or group was undefined");
 				}
 
+			};
+
+			this.getTagGroups = function(page){
+
+				if(angular.isUndefined(page)){
+					page = 1;
+				}
+				return $http.get(urlBase + '/tags/?sort=group&projection={"group":"1"}&max_results=50&page='+page)
+					.then(handleSuccess, handleError);
 			};
 
 			// I transform the error response, unwrapping the

@@ -76,13 +76,9 @@ angular.module("editorApp").controller("editorController",[
 
 						});
 
-
+					$scope.page=1;
+					$scope.sort = "group,-freq";
 					$scope.allTags = [];
-					RestService.getAllTags(1)
-						.then(function(data){
-							$scope.allTags = data._items;
-						});
-
 
 
 
@@ -98,8 +94,7 @@ angular.module("editorApp").controller("editorController",[
 						RestService.removeTag(tag.tag,tag.group);
 						tag.freq-=10;
 					};
-					$scope.page=1;
-					$scope.sort = "group,-freq";
+
 
 					$scope.sortByTag = function(){
 						$scope.sort = "tag,-freq";
@@ -119,12 +114,57 @@ angular.module("editorApp").controller("editorController",[
 
 					$scope.getTags = function(page){
 						$scope.page=page;
-						RestService.getAllTags(page,$scope.sort)
+
+						var filterString = '{}';
+
+						if(!angular.isUndefined($scope.filter)){
+							filterString = '{"group":"'+$scope.filter+'"}';
+						}
+
+						RestService.getAllTags(page,$scope.sort,filterString)
 							.then(function(data){
 								$scope.allTags = data._items;
 							});
+
 					};
 
+					$scope.getTags($scope.page);
+
+
+
+					$scope.groups = [];
+					var distinctGroups = {};
+					$scope.setFilter = function(filter){
+						$scope.filter = filter;
+						$scope.page = 1;
+						$scope.getTags($scope.page);
+
+					}
+
+					$scope.getTagGroups = function(){
+
+						for(var i = 0; i < 15; i++) {
+							RestService.getTagGroups(i)
+								.then(function (data) {
+									$scope.groups = [];
+
+									var meta = data._meta;
+
+
+									data._items.forEach(function (t) {
+										distinctGroups[t.group] = t;
+									});
+
+									Object.keys(distinctGroups).forEach(function (k) {
+										$scope.groups.push(distinctGroups[k].group);
+									});
+
+								});
+						}
+
+					};
+
+					$scope.getTagGroups();
 				} ]);
 
 
