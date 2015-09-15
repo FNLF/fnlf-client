@@ -478,14 +478,4 @@ img {
 
 
 
-.inlinehelpbody{
-    margin:-2px;
-    padding:20px;
-    background-color: whitesmoke;
-    border: 1px dashed lightgray;
-    border-radius: 16px;
-    z-index:-100000;
-}
-
-
 

@@ -34,7 +34,7 @@
 						// Menus
 						$rootScope.nav = {toolbar: [], menus: []}; //reset
 						$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
-						$rootScope.nav.menus = [{title: 'Åpne i editor', link: '#!/observation/'+ $scope.observation.id}];
+						$rootScope.nav.menus = [{title: 'Åpne i editor', icon: 'fa-edit', link: '#!/observation/'+ $scope.observation.id}];
 					})
 					.catch(function(error){
 						console.log(error);

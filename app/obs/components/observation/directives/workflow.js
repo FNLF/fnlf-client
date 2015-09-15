@@ -147,9 +147,9 @@ angular.module('reportingApp')
 			$scope.tt = 'default';
 			if(['pending_review_hi','pending_review_fs','pending_review_su'].indexOf(response.state) > -1) $scope.tt = 'warning';
 			else if(response.state == 'ready') $scope.tt = 'primary';
-			else if(response.state == 'closed') $scope.tt = 'info';
+			else if(response.state == 'closed') $scope.tt = 'success';
 			else if(response.state == 'withdrawn') $scope.tt = 'danger';
-			else if(response.state == 'draft') $scope.tt = 'default';
+			else if(response.state == 'draft') $scope.tt = 'info';
 	        
 			$scope.tooltip = response.description;
 			
