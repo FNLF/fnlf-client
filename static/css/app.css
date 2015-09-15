@@ -479,11 +479,11 @@ img {
 
 
 .inlinehelpbody{
-    margin:-20px;
-    margin-top:-1px;
+    margin:-2px;
+    padding:20px;
     background-color: whitesmoke;
     border: 1px dashed lightgray;
-    border-radius: 8px;
+    border-radius: 16px;
     z-index:-100000;
 }
 
