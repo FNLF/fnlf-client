@@ -475,3 +475,17 @@ img {
 .label .ng-isolate-scope a {
     color:white;
 }
+
+
+
+.inlinehelpbody{
+    margin:-20px;
+    margin-top:-1px;
+    background-color: whitesmoke;
+    border: 1px dashed lightgray;
+    border-radius: 8px;
+    z-index:-100000;
+}
+
+
+
