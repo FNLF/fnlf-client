@@ -40,8 +40,6 @@
 
 						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-text', link: '#!/observation/report/'+ $scope.observation.id}];
 
-
-
 						if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
 							$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
 						}
@@ -95,8 +93,26 @@
 						},100);
 					})
 				.catch(function(error){
-					console.log("Catch error in ObservationController. Reloading observation"+error);
-					$rootScope.error = error;
+
+					if(error){
+						if(error.indexOf("PRECONDITION FAILED")>-1){
+							var yourVersion = $scope.observation._latest_version;
+							var yourUpdated = $scope.observation._updated;
+							ObservationService.getObservationById(observationId)
+								.then(function(r){
+									var theirVersion = r._latest_version;
+									var theirUpdated = r._updated;
+									$rootScope.error = 'Kunne ikke lagre fordi versjonen på serveren, versjon '+theirVersion+' (oppdatert '+theirUpdated+') , er nyere enn din versjon '+yourVersion+'';
+
+								});
+
+						}
+					}else{
+						console.log("Catch error in ObservationController. Reloading observation"+error);
+						$rootScope.error = error;
+					}
+
+
 					$scope.loadObservation();
 				});
 		};
