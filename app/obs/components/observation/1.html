@@ -215,7 +215,7 @@
 			<i class="fa fa-save fa-fw"></i> Lagre
 		</button>
 		<br>
-		<span class="block"><workflow observation-changes="observationChanges" observation="observation" btnclass="btn-block">Send videre</workflow>&nbsp;</span>
+		<span class="block" ng-if="observation.workflow.state=='draft'"><workflow observation-changes="observationChanges" observation="observation" btnclass="btn-block">Send til HI</workflow>&nbsp;</span>
 	</div>
 </div>
 </div>
