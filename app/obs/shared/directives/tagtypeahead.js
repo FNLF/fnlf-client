@@ -20,19 +20,26 @@
 			}
 
 			$scope.onSelect = function(item, model,label){
-				RestService.addTag(Functions.capitalizeFirstLetter(item),$scope.group);
-				$scope.model=item;
+				$scope.model = Functions.capitalizeFirstLetter($scope.model);
+				RestService.addTag($scope.model,$scope.group);
+
 				if($scope.selectfn){
 					$scope.selectfn();
 				}
-
+				$scope.refresh();
 			};
 
 			$scope.tags = [];
-			RestService.getTags($scope.group)
-				.then(function(data){
-					$scope.tags = Functions.deduplicate(data._items.filter(function(t){return t.freq>=0}).map(function(t){return t.tag}));
-				});
+
+			$scope.refresh = function(){
+				RestService.getTags($scope.group)
+					.then(function(data){
+						$scope.tags = Functions.deduplicate(data._items.filter(function(t){return t.freq>=0}).map(function(t){return t.tag}));
+					});
+			};
+
+			$scope.refresh();
+
 		};
 
 		return directive;

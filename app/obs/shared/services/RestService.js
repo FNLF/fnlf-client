@@ -5,22 +5,22 @@
 			var urlBase = '/api/v1';
 
 			this.getClubs = function () {
-				return $http.get(urlBase + "/clubs?where={\"active\":true}")
+				return $http.get(urlBase + "/clubs?where={\"active\":true}",{ cache: true})
 					.then(handleSuccess, handleError);
 			};
 			
 			this.getClub = function (id) {
-				return $http.get(urlBase + "/clubs/" + id)
+				return $http.get(urlBase + "/clubs/" + id,{ cache: true})
 					.then(handleSuccess, handleError);
 			};
 
 			this.getLicenses = function () {
-				return $http.get(urlBase + '/melwin/licenses')
+				return $http.get(urlBase + '/melwin/licenses',{ cache: true})
 					.then(handleSuccess, handleError);
 			};
 
 			this.getJumpTypes = function () {
-				return $http.get(urlBase + "/jumps/categories")
+				return $http.get(urlBase + "/jumps/categories",{ cache: true})
 					.then(handleSuccess, handleError);
 			};
 
@@ -90,7 +90,7 @@
 			};
 
 			this.getUserDetails = function (userId){
-				return $http.get(urlBase + '/melwin/users/' + userId)
+				return $http.get(urlBase + '/melwin/users/' + userId,{ cache: true})
 					.then(handleSuccess, handleError);
 			};
 			
@@ -149,7 +149,7 @@
 					filter = '{}';
 				}
 
-				return $http.get(urlBase + '/tags?sort='+sort+'&max_results=200&page='+page+'&where='+filter)
+				return $http.get(urlBase + '/tags?sort='+sort+'&max_results=555&page='+page+'&where='+filter)
 					.then(handleSuccess, handleError);
 			};
 
@@ -160,7 +160,7 @@
 			};
 
 			this.getTags = function(group){
-				return $http.get(urlBase + '/tags/?where={"group":"'+group+'", "freq":{"$gt":0}}&sort=-freq&max_results=50&')
+				return $http.get(urlBase + '/tags/?where={"group":"'+group+'", "freq":{"$gte":0}}&sort=-freq,tag&max_results=555&')
 					.then(handleSuccess, handleError);
 			};
 
@@ -224,7 +224,7 @@
 				if(angular.isUndefined(page)){
 					page = 1;
 				}
-				return $http.get(urlBase + '/tags/?sort=group&projection={"group":"1"}&max_results=50&page='+page)
+				return $http.get(urlBase + '/tags/?sort=group&projection={"group":"1"}&max_results=555&page='+page,{ cache: true})
 					.then(handleSuccess, handleError);
 			};
 

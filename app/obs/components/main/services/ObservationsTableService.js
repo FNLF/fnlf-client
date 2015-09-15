@@ -1,17 +1,16 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('ObservationsTableService', function (ngTableParams,RestService,$q,Definitions, ObservationService, $location) {
+		.service('ObservationsTableService', function (ngTableParams,RestService,$q,Definitions) {
 
 			this.getTags = function () {
-				console.log("GET TAGS");
 				var def = $q.defer();
 				RestService.getTags('observation').then(function(data){
 						var items = data._items;
 						var tags = items.map(function (tag) {
 							return {id: tag.tag, title: tag.tag+' ('+tag.freq+')'};
 						});
-						tags.unshift(null);
+						tags.unshift({title: ''});
 						def.resolve(tags)
 					});
 
@@ -23,19 +22,19 @@
 				arr.push({id:2016,title:'2016'});
 				arr.push({id:2015,title:'2015'});
 				arr.push({id:2014,title:'2014'});
-				arr.unshift(null);
+				arr.unshift({title: ''});
 				return arr;
 			};
 
 			this.getClubs = function () {
 				var def = $q.defer();
 				RestService.getClubs().then(function (data) {
-					;
+
 					var items = data._items;
 					var clubs = items.map(function (club) {
 						return {id: club.id, title: club.name};
 					});
-					clubs.unshift(null);
+
 					def.resolve(clubs);
 				});
 				return def;
@@ -49,7 +48,7 @@
 					var value = objs[key];
 					arr.push({id:key,title:value});
 				});
-				arr.unshift(null);
+				arr.unshift({title: ''});
 				return arr;
 			};
 
@@ -60,7 +59,7 @@
 					var value = objs[key];
 					arr.push({id:key,title:value});
 				});
-				arr.unshift(null);
+				arr.unshift({title: ''});
 				return arr;
 			};
 
@@ -71,7 +70,7 @@
 				arr.push({id:5,title:'>5'});
 				arr.push({id:7,title:'>7'});
 				arr.push({id:9,title:'>9'});
-				arr.unshift(null);
+				arr.unshift({title: ''});
 				return arr;
 			};
 
@@ -93,7 +92,7 @@
 			this.whereStringFromParams = function(params){
 				var whereString = 'where={';
 				var filter = params.filter();
-				console.log(filter);
+
 
 				if(filter['club']){
 					whereString += '"club":"'+filter['club']+'",';
@@ -119,7 +118,7 @@
 
 				whereString = whereString.replace(/,\s*$/, "");
 				whereString = whereString +'}';
-				console.log(whereString);
+
 				return whereString;
 			};
 
