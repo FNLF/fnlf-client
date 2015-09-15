@@ -17,7 +17,7 @@
 			
 			this.getObservationWorkflowStates = function() {
 				
-				var ows = {'draft': 'Draft', 'ready': 'Klar', 'withdrawn': 'Trekt tilbake', 'closed': 'Lukket', 'pending_review_hi': 'Avventer HI', 'pending_review_fs': 'Avventer Fagsjef', 'pending_review_su': 'Avventer SU'};
+				var ows = {'withdrawn': 'Trekt tilbake', 'draft': 'Utkast','pending_review_hi': 'Avventer HI' ,'pending_review_fs': 'Avventer Fagsjef', 'pending_review_su': 'Avventer SU','closed': 'Lukket' };
 				return ows;
 			};
 			
@@ -28,7 +28,7 @@
 
 
 			this.getObservationTypeMap = function() {
-				var types = {'sharing': 'Erfaringsdeling', 'unwanted_act': 'Uønsket hending', 'near_miss': 'Næruhell', 'incident': 'Uhell', 'accident': 'Ulykke'};
+				var types = {'sharing': 'Erfaringsdeling', 'unwanted_act': 'Uønsket', 'near_miss': 'Næruhell', 'incident': 'Uhell', 'accident': 'Ulykke'};
 				return types;
 			};
 

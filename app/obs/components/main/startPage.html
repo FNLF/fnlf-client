@@ -28,7 +28,7 @@
 					<inlinehelp title="">
 						Gratulerer. Du har funne hjelpeteksten i ORS.
 						<br>
-						Viss hjelpeteksten rundt omkring i ORS er utilstrekkelig, se <a href="https://doc.nlf.no/confluence/display/FETDOC">Brukermanualen</a> eller ring 24 timers ORS-helpdesk 40222889
+						Viss hjelpeteksten rundt omkring i ORS er utilstrekkelig, se <a href="https://doc.nlf.no/confluence/display/FETDOC">Brukermanualen</a>
 					</inlinehelp>
 				</p>
 			</div>
@@ -46,7 +46,7 @@
 
 					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
 					<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
-					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a  ng-click="editObservation(observation._id)">{{observation.tags.join('#') | cut:true:40:' ...'}}</a></td>
+					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a  ng-click="editObservation(observation._id)">{{observation.tags.join('/') | cut:true:40:' ...'}}</a></td>
 					<td data-title="'Status'" filter="{ 'state': 'text' }"><resolveworkflowstate state="observation.workflow.state"></resolveworkflowstate></td>
 					<td data-title="'Type'"><resolveobservationtypelabel type="observation.type"></resolveobservationtypelabel> </td>
 				</tr>
@@ -65,7 +65,7 @@
 
 					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id.$oid)">#{{observation.id}}</a></td>
 					<td data-title="'Tid'" sortable="'date'">{{observation.when.$date | date:'yyyy-MM-dd'}}</td>
-					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a  ng-click="editObservation(observation._id.$oid)">{{observation.tags.join('#') | cut:true:40:' ...'}}</a></td>
+					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a  ng-click="editObservation(observation._id.$oid)">{{observation.tags.join('/') | cut:true:40:' ...'}}</a></td>
 					<td data-title="'Status'" filter="{ 'state': 'text' }"><resolveworkflowstate state="observation.workflow.state"></resolveworkflowstate></td>
 					<td data-title="'Type'"><resolveobservationtypelabel type="observation.type"></resolveobservationtypelabel> </td>
 				</tr>
@@ -89,7 +89,7 @@
 
 					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
 					<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
-					<td data-title="'Tittel'" filter="{ 'tags': 'select' }" filter-data="getTitles()"><a  ng-click="editObservation(observation._id)">{{observation.tags.join('#') | cut:true:60:' ...'}}</a></td>
+					<td data-title="'Tittel'" filter="{ 'tags': 'select' }" filter-data="getTitles()"><a  ng-click="editObservation(observation._id)">{{observation.tags.join('/') | cut:true:60:' ...'}}</a></td>
 					<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="observation.club"></resolveclub></td>
 					<td data-title="'Gradering'" sortable="'rating'" filter="{ 'rating': 'select' }" filter-data="getRatings()">{{observation.rating.actual}}/{{observation.rating.potential}}</td>
 					<td data-title="'Status'" sortable="'state'" filter="{ 'state': 'select' }" filter-data="getStates()"><resolveworkflowstate state="observation.workflow.state"></resolveworkflowstate></td>

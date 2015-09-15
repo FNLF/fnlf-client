@@ -8,9 +8,8 @@
 				RestService.getTags('observation').then(function(data){
 						var items = data._items;
 						var tags = items.map(function (tag) {
-							return {id: tag.tag, title: tag.tag+' ('+tag.freq+')'};
+							return {id: tag.tag, title: tag.tag};
 						});
-						tags.unshift({title: ''});
 						def.resolve(tags)
 					});
 

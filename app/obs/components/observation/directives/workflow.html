@@ -1,7 +1,7 @@
 <div class="col-xs-12 col-md-12">
 	<div class="alert alert-info" role="alert" ng-show="error">{{workflow_error}}</div>
 	
-	<p><strong>Tittel:</strong> {{observation.tags.join('#')}} <span class="label label-{{tt}}">{{btn_descr}}</span></p>
+	<p><strong>Tittel:</strong> {{observation.tags.join('/')}} <span class="label label-{{tt}}">{{btn_descr}}</span></p>
 	<p><strong>Klubb:</strong> <resolveclub clubid="observation.club"></resolveclub></p>
 	
 	

@@ -117,7 +117,7 @@ angular.module('reportingApp')
 		
 		$scope.shareObservation = function() {
 			if($scope.share.recepients.length > 0) {
-				$scope._share($scope.share.recepients, $scope.share.comment, $scope.observation.tags.join(' ')).then(function(r) {
+				$scope._share($scope.share.recepients, $scope.share.comment, $scope.observation.tags.join('/')).then(function(r) {
 					$scope.share.comment='';
 					$scope.share.persons = [];
 					$scope.share.recepients = [];
