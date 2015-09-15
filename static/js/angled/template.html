@@ -31,7 +31,7 @@
 					</button>&nbsp;
 				</li>
 				<li ng-repeat="menu in menus" ng-class="{true: 'dropdown'}[hasDropdownMenu(menu)]" dropdown>
-				<a ng-if="!hasDropdownMenu(menu)" ng-href="{{menu.link}}" ng-click="navAction(menu.action)"><i class="fa fa-fw fa-text-o" ng-class="menu.icon"></i> {{menu.title}}</a> 
+				<a ng-if="!hasDropdownMenu(menu)" ng-href="{{menu.link}}" ng-click="navAction(menu.action)"><i class="fa fa-fw {{menu.icon}}"></i> {{menu.title}}</a> 
 					<a ng-if="hasDropdownMenu(menu)" class="dropdown-toggle" dropdown-toggle>{{menu.title}} <b class="caret"></b></a>
 					<ul ng-if="hasDropdownMenu(menu)" class="dropdown-menu">
 						<li ng-repeat="item in menu.menu" ng-class="{true: 'divider'}[isDivider(item)]">

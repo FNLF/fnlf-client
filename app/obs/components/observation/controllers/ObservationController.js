@@ -38,7 +38,7 @@
 						// Menus
 						$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
 
-						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-text', link: '#!/observation/report/'+ $scope.observation.id}];
+						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
 
 						if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
 							$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
