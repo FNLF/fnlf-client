@@ -37,9 +37,9 @@
 
 						// Menus
 						$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
-						if($scope.observation.workflow.state == 'closed') {
-							$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-text', link: '#!/observation/report/'+ $scope.observation.id}];
-						};
+
+						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-text', link: '#!/observation/report/'+ $scope.observation.id}];
+
 
 
 						if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
