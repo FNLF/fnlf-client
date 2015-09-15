@@ -94,8 +94,7 @@
 					})
 				.catch(function(error){
 
-					if(error){
-						if(error.indexOf("PRECONDITION FAILED")>-1){
+					if(error.indexOf("PRECONDITION FAILED")>-1){
 							var yourVersion = $scope.observation._latest_version;
 							var yourUpdated = $scope.observation._updated;
 							ObservationService.getObservationById(observationId)
@@ -106,8 +105,10 @@
 
 								});
 
-						}
-					}else{
+
+					}else if(error.indexOf("The requested URL was not found on the server.")>-1){
+						$rootScope.error = "Du mangler skrivetilgang til #"+$scope.observation.id+". Kunne ikke lagre.";
+					} else{
 						console.log("Catch error in ObservationController. Reloading observation"+error);
 						$rootScope.error = error;
 					}
