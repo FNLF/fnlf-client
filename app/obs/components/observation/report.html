@@ -127,7 +127,7 @@
 						<th>Utstyr</th>
 						</tr>
 							<tr ng-repeat="p in observation.involved">
-								<td>Hopper {{$index+1}}</td>
+								<td><resolveuser userid="p.id" tmpname="p.tmpname"></resolveuser><!-- Hopper {{$index+1}}--></td>
 								<td>
 									<div ng-repeat="l in p.licenses.rights">
 										<resolvelicense licenseid="l"></resolvelicense>
