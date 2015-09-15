@@ -11,7 +11,7 @@
 	</div>
 	<p>
 		Siste kommentar: <strong>{{observation.workflow.comment}}</strong> @ {{observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}} av
-		<resolveuser userid="observation.workflow.audit.0.u"></resolveuser>
+		<resolveuser userid="observation.workflow.audit[0].u"></resolveuser>
 	</p>
 
 	<div ng-repeat="value in btns">

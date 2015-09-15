@@ -143,7 +143,7 @@ angular.module("editorApp").controller("editorController",[
 
 					$scope.getTagGroups = function(){
 
-						for(var i = 0; i < 15; i++) {
+						for(var i = 1; i < 3; i++) {
 							RestService.getTagGroups(i)
 								.then(function (data) {
 									$scope.groups = [];

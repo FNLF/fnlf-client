@@ -22,17 +22,17 @@
 			$scope.observationTypes = Definitions.getObservationTypes();
 
 			$scope.createObservation = function(){
-				console.log("Create");
+
 
 				console.log($scope.observation);
 				RestService.createObservation($scope.observation)
 					.then(function(metadata){
-						console.log("Save");
+
 						RestService.getObservation(metadata._id)
 							.then(function(item){
-							console.log(item);
+
 							$scope.observation = item;
-							console.log("Set");
+
 							$location.path("/observation/"+item.id);
 						});
 
@@ -69,7 +69,7 @@
 			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
 
 				var filter = params.filter();
-				console.log(filter);
+
 
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				var whereString = ObservationsTableService.whereStringFromParams(params);
