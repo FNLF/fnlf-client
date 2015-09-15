@@ -38,8 +38,8 @@
 						<i title="Slett komponent" ng-click="deleteComponent(component)" class="fa fa-fw fa-trash-o pull-right"></i>
 						<i title="Flytt ned" ng-click="incrementOrder(component)" class="fa fa-fw fa-angle-down pull-right"></i>
 			            <i title="Flytt opp" ng-click="decrementOrder(component)" class="fa fa-fw fa-angle-up pull-right"></i>
-						
-						<i class="fa fa-fw" ng-class="{'fa-chevron-up': component.open, 'fa-chevron-down': !component.open}"></i>
+			            
+						<i class="fa fa-fw" ng-class="{'fa-minus-square-o': component.open, 'fa-plus-square-o': !component.open}"></i>
 						<observation-component-summary component="component"></observation-component-summary>
 						
 					</div>
