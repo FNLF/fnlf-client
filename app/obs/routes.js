@@ -20,6 +20,14 @@
 						templateUrl: 'components/observation/2.html',
 						controller: 'ObservationController'
 					})
+					.when('/search/tag/:tag', {
+						templateUrl: 'components/observation/search.html',
+						controller: 'SearchController'
+					})
+					.when('/search/flag/:flag', {
+						templateUrl: 'components/observation/search.html',
+						controller: 'SearchController'
+					})
 					.when('/observation/modal-route', {
 					})
 					.otherwise({redirectTo: '/'});

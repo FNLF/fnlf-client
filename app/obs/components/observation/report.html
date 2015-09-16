@@ -14,7 +14,7 @@
 						<div  class="col-xs-6">
 							<h2>
 								<span class="label label-warning">#{{observation.id}}</span>
-						 		{{observation.tags.join('/')}} <!-- <resolveclub clubid="observation.club"></resolveclub>-->
+								<tags tags="observation.tags"></tags>
 						 	</h2>
 						 </div>
 						
@@ -197,16 +197,9 @@
 										</small>
 									</h4>
 									<h4 class="timeline-title">
-									{{c.what}}
+									<tags tag="c.what"></tags>
 
-									<span class="label label-default" ng-if="c.attributes.packing_error">Pakkefeil</span>
-									<span class="label label-info" ng-if="c.attributes.reserve_ride">Reserve benyttet</span>
-									<span class="label label-warning" ng-if="c.attributes.aad_fire">Nødåpner fyrt</span>
-									<span class="label label-default" ng-if="c.attributes.gear_malfunction">Feilfunksjon</span>
-									<span class="label label-default" ng-if="c.attributes.damage">Matriell skade</span>
-									<span class="label label-default" ng-if="c.attributes.gear_failure">Utstyrsvikt</span>
-									<span class="label label-warning" ng-if="c.attributes.injury">Personskade</span>
-									<span class="label label-warning" ng-if="c.attributes.death">Død</span>
+									<flags attributes ="c.attributes"></flags>
 									
 									</h4>
 								</div>
@@ -215,9 +208,9 @@
 								
 								<dl class="dl-horizontal">
 									<dt>Hvem:</dt><dd><div ng-repeat="p in c.involved"><resolveuser userid="p.id"></resolveuser></div></dd>
-									<dt>Hva:</dt><dd>{{c.what}}</dd>
-									<dt>Hvor</dt><dd>{{c.where.at}} ({{c.where.altitude}}fot)</dd>
-									<dt>Hvordan:</dt><dd>{{c.tags.join(', ')}} <br><small><i>{{c.how}}</i></small></dd>
+									<dt>Hva:</dt><dd><tags tag="c.what"></tags></dd>
+									<dt>Hvor</dt><dd><tags tag="c.where.at"></tags> ({{c.where.altitude}}fot)</dd>
+									<dt>Hvordan:</dt><dd><tags tags="c.tags"></tags><br><small><i>{{c.how}}</i></small></dd>
 									<dt>Flagg:</dt>
 									<dd>
 									<span ng-if="c.flags.wilfull" class="label label-danger">Med vilje</span>

@@ -188,6 +188,8 @@
 		$rootScope.nav.toolbar[1] = {disabled:disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
 
 		});
-	
+
+
+
 
 })();

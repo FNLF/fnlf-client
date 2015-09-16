@@ -183,7 +183,19 @@
 			this.stopWatching = function(objectId) {
 				
 			};
-			
+
+
+			this.searchByTag = function(page,maxResults,sort,tag){
+				var quotedTag = '"'+tag+'"';
+
+				var where = 'where={"$or":[{"tags":'+quotedTag+'},{"components.tags":'+quotedTag+'},{"components.what":'+quotedTag+'},{"components.where.at":'+quotedTag+'}]}';
+				return RestService.getAllObservations(page,maxResults,sort,where);
+			};
+
+			this.searchByFlag = function(page,maxResults,sort,flag){
+				var where = 'where={"$or":[{"components.attributes.'+flag+'":true}]}';
+				return RestService.getAllObservations(page,maxResults,sort,where);
+			};
 
 		});
 
