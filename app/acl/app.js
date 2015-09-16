@@ -186,7 +186,8 @@ angular.module("aclApp").service("aclService",['$http',	'$q', '$rootScope', func
 					var urlBase = '/api/v1';
 					
 					this.getUserByName = function (name) {
-						return $http.get(urlBase + '/melwin/users/search?q=' + name);
+						return $http.get(urlBase + '/melwin/users/search?q=' + name,{cache:true})
+							.then(handleSuccess, handleError);
 					};
 					
 					this.getUserById = function(username) {
