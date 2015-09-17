@@ -7,7 +7,9 @@
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
 
-			$scope.tag = decodeURIComponent($routeParams.tag);
+			if($routeParams.tag) {
+				$scope.tag = decodeURIComponent($routeParams.tag);
+			}
 			$scope.flag = $routeParams.flag;
 			$scope.observations = [];
 			$scope.total = 0;
