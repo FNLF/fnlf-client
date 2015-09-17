@@ -1,7 +1,7 @@
 
 
 <div ng-controller="ReportController">
-	<div ng-if="observation._id">
+	<div ng-if="::observation._id">
 		<!-- START -->
 
 		<div class="list-group" style="padding: 50px -15px; margin-left: -15px; margin-right: -15px;">
@@ -13,17 +13,17 @@
 					
 						<div  class="col-xs-6">
 							<h2>
-								<span class="label label-warning">#{{observation.id}}</span>
-								<tags tags="observation.tags"></tags>
+								<span class="label label-warning">#{{::observation.id}}</span>
+								<tags tags="::observation.tags"></tags>
 						 	</h2>
 						 </div>
 						
-					 <div class="col-xs-6" ng-if="observation.id">
+					 <div class="col-xs-6" ng-if="::observation.id">
 						 <div class="pull-right">
-						 	<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]">
-						 		<resolveobservationtype type="observation.type"></resolveobservationtype>
+						 	<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[::observation.type]">
+						 		<resolveobservationtype type="::observation.type"></resolveobservationtype>
 							</span>
-							<span ng-if="observation.workflow.state=='closed'">
+							<span ng-if="::observation.workflow.state=='closed'">
 							&nbsp;
 							<comments observation="observation"></comments>
 							&nbsp;
@@ -48,49 +48,49 @@
 						<caption>Sammendrag</caption>
 						<tr>
 							<td>Hovedinstruktør</td>
-							<td><span ng-repeat="person in observation.organization.hi">
-								<span><resolveuser userid="person"></resolveuser></span>
+							<td><span ng-repeat="person in ::observation.organization.hi">
+								<span><resolveuser userid="::person"></resolveuser></span>
 								&nbsp;
 								</span>
 							</td>
 						</tr>
 						<tr>
 							<td>Klubb</td>
-							<td><resolveclub clubid="observation.club"></resolveclub></td>
+							<td><resolveclub clubid="::observation.club"></resolveclub></td>
 						</tr>
 						<tr>
 							<td>Alvorlighetsgrad</td>
-							<td>{{observation.rating.actual}} / {{observation.rating.potential}}</td>
+							<td>{{::observation.rating.actual}} / {{::observation.rating.potential}}</td>
 						</tr>
 						
 
 						<tr>
 							<td>Tidspunkt</td>
-							<td>{{observation.when | date:'yyyy-MM-dd HH:mm'}}</td>
+							<td>{{::observation.when | date:'yyyy-MM-dd HH:mm'}}</td>
 						</tr>
 						<tr>
 							<td>Opprettet</td>
-							<td>{{observation._created | date:'yyyy-MM-dd HH:mm'}}</td>
+							<td>{{::observation._created | date:'yyyy-MM-dd HH:mm'}}</td>
 						</tr>
 						<tr>
 							<td>Lukket</td>
-							<td>{{observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}}</td>
+							<td>{{::observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}}</td>
 						</tr>
 						<tr>
 							<td>Behandlingstid</td>
-							<td>{{timeTaken}}</td>
+							<td>{{::timeTaken}}</td>
 						</tr>
 						<tr>
 							<td>Involverte</td>
-							<td>{{observation.involved.length}}</td>
+							<td>{{::observation.involved.length}}</td>
 						</tr>
 						<tr>
 							<td>Kjennelser</td>
 							<td>
-								<div ng-repeat="v in observation.involved">
-									<div ng-if="v.verdict.fu">FU</div>
-									<div ng-if="v.verdict.mh">MH</div>
-									<div ng-if="v.verdict.ph">PH</div>
+								<div ng-repeat="v in ::observation.involved">
+									<div ng-if="::v.verdict.fu">FU</div>
+									<div ng-if="::v.verdict.mh">MH</div>
+									<div ng-if="::v.verdict.ph">PH</div>
 								</div>
 							</td>
 						</tr>
@@ -101,10 +101,10 @@
 
 				<!-- MAP -->
 				<div class="col-xs-12  col-md-6">
-					<label class="control-label">{{observation.location.municipality}}, {{observation.location.name}}</label>
-					<div ng-if="observation.location.geo.coordinates">
-						<map center="{{observation.location.geo.coordinates}}" zoom="8">
-							<marker position="{{observation.location.geo.coordinates}}" title="{{observation.location.name}}" draggable="false" visible="true"></marker>
+					<label class="control-label">{{::observation.location.municipality}}, {{::observation.location.name}}</label>
+					<div ng-if="::observation.location.geo.coordinates">
+						<map center="{{::observation.location.geo.coordinates}}" zoom="8">
+							<marker position="{{::observation.location.geo.coordinates}}" title="{{::observation.location.name}}" draggable="false" visible="true"></marker>
 						</map>
 					</div>
 				</div>
@@ -126,38 +126,38 @@
 						<th>Kjennelse</th>
 						<th>Utstyr</th>
 						</tr>
-							<tr ng-repeat="p in observation.involved">
-								<td><resolveuser userid="p.id" tmpname="p.tmpname"></resolveuser><!-- Hopper {{$index+1}}--></td>
+							<tr ng-repeat="p in ::observation.involved">
+								<td><resolveuser userid="::p.id" tmpname="::p.tmpname"></resolveuser><!-- Hopper {{$index+1}}--></td>
 								<td>
-									<div ng-repeat="l in p.licenses.rights">
-										<resolvelicense licenseid="l"></resolvelicense>
+									<div ng-repeat="l in ::p.licenses.rights">
+										<resolvelicense licenseid="::l"></resolvelicense>
 									</div>
 								</td>
-								<td>{{p.numberOfJumps}}</td>
-								<td>{{p.yearsOfExperience}}</td>
+								<td>{{::p.numberOfJumps}}</td>
+								<td>{{::p.yearsOfExperience}}</td>
 								
-								<td>{{p.jumptypeSelected}}</td>
+								<td>{{::p.jumptypeSelected}}</td>
 								<td>
-								<div ng-repeat="v in p.verdict">
-									<div ng-if="v.fu">Farlig Ukontrollert</div>
-									<div ng-if="v.ph">Permanent Hoppforbud</div>
-									<div ng-if="v.mh">Midlertidig Hoppforbud</div>
+								<div ng-repeat="v in ::p.verdict">
+									<div ng-if="::v.fu">Farlig Ukontrollert</div>
+									<div ng-if="::v.ph">Permanent Hoppforbud</div>
+									<div ng-if="::v.mh">Midlertidig Hoppforbud</div>
 								</div>
 								</td>
 								<td>
-								<label ng-if="p.gear.harnessType || p.gear.harnessExperience">Seletøy: </label>
-								<span ng-if="p.gear.harnessType">{{p.gear.harnessType}}</span>
-								<span ng-if="p.gear.harnessExperience">{{p.gear.harnessExperience}} hopp</span>
+								<label ng-if="::p.gear.harnessType || ::p.gear.harnessExperience">Seletøy: </label>
+								<span ng-if="::p.gear.harnessType">{{::p.gear.harnessType}}</span>
+								<span ng-if="::p.gear.harnessExperience">{{::p.gear.harnessExperience}} hopp</span>
 								<br>
-								<label ng-if="p.gear.mainCanopyType||p.gear.mainCanopyExperience||p.gear.mainCanopySize">Hovedskjerm: </label>
-								<span ng-if="p.gear.mainCanopyType">{{p.gear.mainCanopyType}}</span>
-								<span ng-if="p.gear.mainCanopySize">{{p.gear.mainCanopySize}} sqft</span>
-								<span ng-if="p.gear.mainCanopyExperience">{{p.gear.mainCanopyExperience}} hopp</span>
+								<label ng-if="::p.gear.mainCanopyType||::p.gear.mainCanopyExperience||::p.gear.mainCanopySize">Hovedskjerm: </label>
+								<span ng-if="::p.gear.mainCanopyType">{{::p.gear.mainCanopyType}}</span>
+								<span ng-if="::p.gear.mainCanopySize">{{::p.gear.mainCanopySize}} sqft</span>
+								<span ng-if="::p.gear.mainCanopyExperience">{{::p.gear.mainCanopyExperience}} hopp</span>
 								
 								<br>
-								<label ng-if="p.gear.reserveCanopyType || p.gear.reserveCanopySize">Reserveskjerm: </label>
-								<span ng-if="p.gear.reserveCanopyType">{{p.gear.reserveCanopyType}}</span>
-								<span ng-if="p.gear.reserveCanopySize">{{p.gear.reserveCanopySize}}</span>
+								<label ng-if="::p.gear.reserveCanopyType || ::p.gear.reserveCanopySize">Reserveskjerm: </label>
+								<span ng-if="::p.gear.reserveCanopyType">{{::p.gear.reserveCanopyType}}</span>
+								<span ng-if="::p.gear.reserveCanopySize">{{::p.gear.reserveCanopySize}}</span>
 								<span ng-if="">{{}}</span>
 								</td>
 							</tr>
@@ -171,35 +171,35 @@
 				<p class="list-group-item-text">
 				<div class="col-xs-12  col-md-12">
 					<label class="control-label">Forløp</label>
-					<span ng-if="observation.components.length == 0">Intent forløp</span>
+					<span ng-if="::observation.components.length == 0">Intent forløp</span>
 					<div class="clearfix"></div>
 					
-					<ul class="timeline" ng-if="observation.components.length > 0">
+					<ul class="timeline" ng-if="::observation.components.length > 0">
 						
 						
-						<li ng-repeat="c in observation.components">
+						<li ng-repeat="c in ::observation.components">
 						
 						
 							<!-- root cause, incident, consequence -->
 							<div class="timeline-badge danger">
-								{{$index+1}}
+								{{::$index+1}}
 							</div>
 							<div class="timeline-panel">
 								<div class="timeline-heading">
 									<h4 class="timeline-title">
 										<small>
-											<span ng-if="c.flags.barrier" class="label label-default">Barriære</span>
-											<span ng-if="c.flags.incident" class="label label-info">Hendelse</span>
-											<span ng-if="c.flags.cause" class="label label-warning">Årsak</span>
-											<span ng-if="c.flags.root_cause" class="label label-warning">Rot Årsak</span>
-											<span ng-if="c.flags.consequence" class="label label-danger">Konsekvens</span>
-											<span ng-if="c.flags.final_consequence" class="label label-danger">Sluttkonsekvens</span>
+											<span ng-if="::c.flags.barrier" class="label label-default">Barriære</span>
+											<span ng-if="::c.flags.incident" class="label label-info">Hendelse</span>
+											<span ng-if="::c.flags.cause" class="label label-warning">Årsak</span>
+											<span ng-if="::c.flags.root_cause" class="label label-warning">Rot Årsak</span>
+											<span ng-if="::c.flags.consequence" class="label label-danger">Konsekvens</span>
+											<span ng-if="::c.flags.final_consequence" class="label label-danger">Sluttkonsekvens</span>
 										</small>
 									</h4>
 									<h4 class="timeline-title">
-									<tags tag="c.what"></tags>
+									<tags tag="::c.what"></tags>
 
-									<flags attributes ="c.attributes"></flags>
+									<flags attributes ="::c.attributes"></flags>
 									
 									</h4>
 								</div>
@@ -207,14 +207,14 @@
 
 								
 								<dl class="dl-horizontal">
-									<dt>Hvem:</dt><dd><div ng-repeat="p in c.involved"><resolveuser userid="p.id"></resolveuser></div></dd>
-									<dt>Hva:</dt><dd><tags tag="c.what"></tags></dd>
-									<dt>Hvor</dt><dd><tags tag="c.where.at"></tags> ({{c.where.altitude}}fot)</dd>
-									<dt>Hvordan:</dt><dd><tags tags="c.tags"></tags><br><small><i>{{c.how}}</i></small></dd>
+									<dt>Hvem:</dt><dd><div ng-repeat="p in ::c.involved"><resolveuser userid="::p.id"></resolveuser></div></dd>
+									<dt>Hva:</dt><dd><tags tag="::c.what"></tags></dd>
+									<dt>Hvor</dt><dd><tags tag="::c.where.at"></tags> ({{::c.where.altitude}}fot)</dd>
+									<dt>Hvordan:</dt><dd><tags tags="::c.tags"></tags><br><small><i>{{::c.how}}</i></small></dd>
 									<dt>Flagg:</dt>
 									<dd>
-									<span ng-if="c.flags.wilfull" class="label label-danger">Med vilje</span>
-									<span ng-if="c.flags.violation" class="label label-warning">Regelbrudd</span>
+									<span ng-if="::c.flags.wilfull" class="label label-danger">Med vilje</span>
+									<span ng-if="::c.flags.violation" class="label label-warning">Regelbrudd</span>
 									</dd>
 								</dl>
 								
@@ -233,10 +233,10 @@
 					<label class="control-label">Hoppfeltorganisering</label>
 					<div class="clearfix"></div>
 					<dl class="dl-horizontal">
-						<dt>HL:</dt><dd><span ng-repeat="k in observation.organization.hl"><resolveuser userid="k.id"></resolveuser></span></dd>
-						<dt>HFL:</dt><dd><span ng-repeat="k in observation.organization.hfl"><resolveuser userid="k.id"></resolveuser></span></dd>
-						<dt>HM:</dt><dd><span ng-repeat="k in observation.organization.hm"><resolveuser userid="k.id"></resolveuser></span></dd>
-						<dt>Pilot:</dt><dd><span ng-repeat="k in observation.organization.pilot"><resolveuser userid="k.id"></resolveuser></span></dd>
+						<dt>HL:</dt><dd><span ng-repeat="k in ::observation.organization.hl"><resolveuser userid="::k.id"></resolveuser></span></dd>
+						<dt>HFL:</dt><dd><span ng-repeat="k in ::observation.organization.hfl"><resolveuser userid="::k.id"></resolveuser></span></dd>
+						<dt>HM:</dt><dd><span ng-repeat="k in ::observation.organization.hm"><resolveuser userid="::k.id"></resolveuser></span></dd>
+						<dt>Pilot:</dt><dd><span ng-repeat="k in ::observation.organization.pilot"><resolveuser userid="::k.id"></resolveuser></span></dd>
 					</dl>
 				</div>
 				</p>
@@ -250,37 +250,37 @@
 					<div class="col-xs-12  col-md-4">
 					<dl class="dl-horizontal">
 						<dt>Vind</dt><dd></dd>
-						<dt ng-show="observation.weather.manual.wind.max">Maks:</dt><dd>{{observation.weather.manual.wind.max}} knop</dd>
-						<dt>Gjennomsnitt:</dt><dd>{{observation.weather.manual.wind.avg}} knop</dd>
-						<dt>Minimum:</dt><dd>{{observation.weather.manual.wind.min}} knop</dd>
-						<dt>Turbulens:</dt><dd>{{observation.weather.manual.wind.tubulence ? 'JA' : 'NEI'}}</dd>
-						<dt>Gusting:</dt><dd>{{observation.weather.manual.wind.gusting ? 'JA' : 'NEI'}}</dd>
+						<dt ng-show="observation.weather.manual.wind.max">Maks:</dt><dd>{{::observation.weather.manual.wind.max}} knop</dd>
+						<dt>Gjennomsnitt:</dt><dd>{{::observation.weather.manual.wind.avg}} knop</dd>
+						<dt>Minimum:</dt><dd>{{::observation.weather.manual.wind.min}} knop</dd>
+						<dt>Turbulens:</dt><dd>{{::observation.weather.manual.wind.tubulence ? 'JA' : 'NEI'}}</dd>
+						<dt>Gusting:</dt><dd>{{::observation.weather.manual.wind.gusting ? 'JA' : 'NEI'}}</dd>
 						</dl>
 						</div>
 						<div class="col-xs-12  col-md-4">
 						<dl class="dl-horizontal">
 						<dt>Skyer</dt><dd></dd>
-						<dt>Skybase:</dt><dd>{{observation.weather.manual.clouds.base}} fot</dd>
-						<dt>Regn:</dt><dd>{{observation.weather.manual.clouds.rain ? 'JA' : 'NEI'}}</dd>
-						<dt>Tåke:</dt><dd>{{observation.weather.manual.clouds.fog ? 'JA' : 'NEI'}}</dd>
-						<dt>Hagl:</dt><dd>{{observation.weather.manual.clouds.hail ? 'JA' : 'NEI'}}</dd>
-						<dt>Snø:</dt><dd>{{observation.weather.manual.clouds.snow ? 'JA' : 'NEI'}}</dd>
-						<dt>Torden:</dt><dd>{{observation.weather.manual.clouds.thunder ? 'JA' : 'NEI'}}</dd>
+						<dt>Skybase:</dt><dd>{{::observation.weather.manual.clouds.base}} fot</dd>
+						<dt>Regn:</dt><dd>{{::observation.weather.manual.clouds.rain ? 'JA' : 'NEI'}}</dd>
+						<dt>Tåke:</dt><dd>{{::observation.weather.manual.clouds.fog ? 'JA' : 'NEI'}}</dd>
+						<dt>Hagl:</dt><dd>{{::observation.weather.manual.clouds.hail ? 'JA' : 'NEI'}}</dd>
+						<dt>Snø:</dt><dd>{{::observation.weather.manual.clouds.snow ? 'JA' : 'NEI'}}</dd>
+						<dt>Torden:</dt><dd>{{::observation.weather.manual.clouds.thunder ? 'JA' : 'NEI'}}</dd>
 						</dl></div>
 						
 						<div class="col-xs-12  col-md-4">
 						<dl class="dl-horizontal">
 						<dt>Temperatur</dt><dd></dd>
-						<dt>Bakken:</dt><dd>{{observation.weather.manual.temp.ground}}&deg;C</dd>
-						<dt>Høyden:</dt><dd>{{observation.weather.manual.temp.altitude}}&deg;C</dd>
+						<dt>Bakken:</dt><dd>{{::observation.weather.manual.temp.ground}}&deg;C</dd>
+						<dt>Høyden:</dt><dd>{{::observation.weather.manual.temp.altitude}}&deg;C</dd>
 						<div class="col-xs-12  col-md-4"></div>
 						</dl>
 						</div>
 						<div class="col-xs-12  col-md-12">
-					<strong>{{observation.weather.manual.description}}</strong>
-					<p>Yr: {{observation.weather.auto.yr['@from']}}-{{observation.weather.auto.yr['@to']}} {{observation.weather.auto.yr.windDirection['@deg']}}&deg; {{observation.weather.auto.yr.windSpeed['@mps']*1.81}} knop </p>
-					<p>{{observation.weather.auto.metar}}</p>
-					<p>{{observation.weather.auto.taf}}</p>
+					<strong>{{::observation.weather.manual.description}}</strong>
+					<p>Yr: {{::observation.weather.auto.yr['@from']}}-{{::observation.weather.auto.yr['@to']}} {{::observation.weather.auto.yr.windDirection['@deg']}}&deg; {{::observation.weather.auto.yr.windSpeed['@mps']*1.81}} knop </p>
+					<p>{{::observation.weather.auto.metar}}</p>
+					<p>{{::observation.weather.auto.taf}}</p>
 					</div>
 					
 				</div>
@@ -297,14 +297,14 @@
 					<div class="col-xs-12 col-md-6" ng-show="observation.actions.local">
 						<strong>Lokale:</strong>
 						<ol>
-							<li ng-repeat="a in observation.actions.local">{{a}}</li>
+							<li ng-repeat="a in ::observation.actions.local">{{a}}</li>
 						</ol>
 					</div>
-					<div class="col-xs-12 col-md-6" ng-show="observation.actions.central">
+					<div class="col-xs-12 col-md-6" ng-show="::observation.actions.central">
 						<strong>Sentrale:</strong>
 						<ol>
-							<li ng-repeat="a in observation.actions.central">
-								{{a}}
+							<li ng-repeat="a in ::observation.actions.central">
+								{{::a}}
 							</li>
 						</ol>
 					</div>

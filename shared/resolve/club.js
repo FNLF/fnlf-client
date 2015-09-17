@@ -5,7 +5,7 @@ angular.module('resolve').directive('resolveclub', function (ResolveService) {
 	
 	directive.restrict = 'E';
 //	directive.template = '<a href="/app/club/{{clubid}}">{{name}}</a>';
-	directive.template = '{{name}}';
+	directive.template = '{{::name}}';
 	
 	directive.scope = {
 			

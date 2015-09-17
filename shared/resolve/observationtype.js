@@ -5,7 +5,7 @@ angular.module('resolve').directive('resolveobservationtype', function (ResolveS
 	
 	directive.restrict = 'E';
 	//directive.template = '<span class="label pull-right" ng-class="{sharing:\'label-success\', unsafe_act:\'label-default\', near_miss:\'label-info\', incident:\'label-warning\', accident:\'label-danger\'}[type]" class="label">{{observationname}}</span>';
-	directive.template = '{{observationname}}';
+	directive.template = '{{::observationname}}';
 	directive.scope = {
 			
 			type: '=',

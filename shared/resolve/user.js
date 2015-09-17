@@ -4,7 +4,7 @@ angular.module('resolve')
                 var directive = {};
 
                 directive.restrict = 'E';
-                directive.template = '<span>{{firstname}} {{lastname}}</span>';
+                directive.template = '<span>{{::firstname}} {{::lastname}}</span>';
 
                 directive.scope = {
                         userid: '=',

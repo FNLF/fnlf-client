@@ -5,7 +5,7 @@ angular.module('resolve').directive('resolvelicense', function (ResolveService) 
 	
 	directive.restrict = 'E';
 //	directive.template = '<a href="/app/license/{{licenseid}}">{{name}}</a>';
-	directive.template = '{{name}}';
+	directive.template = '{{::name}}';
 	
 	directive.scope = {
 			

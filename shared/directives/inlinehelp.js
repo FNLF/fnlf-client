@@ -14,7 +14,7 @@ inlinehelp.directive('inlinehelp',  function() {
 
 	directive.template = function(tElement, tAttrs) {
 		return '<span ng-click="flip()"> \
-					<span><label ng-bind="title"></label> \
+					<span><label ng-bind="::title"></label> \
 					<i ng-mouseenter="hover = true;" ng-mouseleave="hover = false;" ng-class="{\'text-info\': hover, \'text-muted\': !hover}" class="fa fa-info-circle fa-fw"></i>\
 					</span>\
 					<div collapse="isCollapsed">\
