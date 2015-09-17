@@ -20,7 +20,7 @@
 						
 					 <div class="col-xs-6" ng-if="::observation.id">
 						 <div class="pull-right">
-						 	<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[::observation.type]">
+						 	<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]">
 						 		<resolveobservationtype type="::observation.type"></resolveobservationtype>
 							</span>
 							<span ng-if="::observation.workflow.state=='closed'">
@@ -145,17 +145,17 @@
 								</div>
 								</td>
 								<td>
-								<label ng-if="::p.gear.harnessType || ::p.gear.harnessExperience">Seletøy: </label>
+								<label ng-if="::p.gear.harnessType ||p.gear.harnessExperience">Seletøy: </label>
 								<span ng-if="::p.gear.harnessType">{{::p.gear.harnessType}}</span>
 								<span ng-if="::p.gear.harnessExperience">{{::p.gear.harnessExperience}} hopp</span>
 								<br>
-								<label ng-if="::p.gear.mainCanopyType||::p.gear.mainCanopyExperience||::p.gear.mainCanopySize">Hovedskjerm: </label>
+								<label ng-if="::p.gear.mainCanopyType||p.gear.mainCanopyExperience||p.gear.mainCanopySize">Hovedskjerm: </label>
 								<span ng-if="::p.gear.mainCanopyType">{{::p.gear.mainCanopyType}}</span>
 								<span ng-if="::p.gear.mainCanopySize">{{::p.gear.mainCanopySize}} sqft</span>
 								<span ng-if="::p.gear.mainCanopyExperience">{{::p.gear.mainCanopyExperience}} hopp</span>
 								
 								<br>
-								<label ng-if="::p.gear.reserveCanopyType || ::p.gear.reserveCanopySize">Reserveskjerm: </label>
+								<label ng-if="::p.gear.reserveCanopyType ||p.gear.reserveCanopySize">Reserveskjerm: </label>
 								<span ng-if="::p.gear.reserveCanopyType">{{::p.gear.reserveCanopyType}}</span>
 								<span ng-if="::p.gear.reserveCanopySize">{{::p.gear.reserveCanopySize}}</span>
 								<span ng-if="">{{}}</span>
