@@ -1,6 +1,12 @@
 <div ng-controller="SearchController">
 
 	<div class="row">
+		<div class="col-xs-12 col-md-12">
+		<p>
+				<searchform></searchform>
+			<br>
+		</p>
+		</div>
 
 		<div class="col-xs-12">
 			<caption>
@@ -26,14 +32,13 @@
 
 				<tr ng-repeat="observation in $data">
 
-					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{observation.id}}</a></td>
-					<td data-title="'Tid'" sortable="'date'">{{observation.when | date:'yyyy-MM-dd'}}</td>
-					<td data-title="'Tittel'" filter="{ 'tags': 'select' }" filter-data="getTitles()"><a  ng-click="editObservation(observation._id)">{{observation.tags.join('/') | cut:true:60:' ...'}}</a></td>
-					<td data-title="'Forløp'"><tags tags="observation.flattenedWhats"></tags></td>
-					<td data-title="'Flagg'"><flags attributes="observation.flattenedFlags"></flags></td>
-					<td data-title="'Tagger'"><tags tags="observation.flattenedTags"></tags></td>
-					<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="observation.club"></resolveclub></td>
-					<td data-title="'Type'" sortable="'type'" filter="{ 'type': 'select'}" filter-data="getTypes()"><resolveobservationtypelabel type="observation.type"></resolveobservationtypelabel> </td>
+					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{::observation.id}}</a></td>
+					<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="::observation.club"></resolveclub></td>
+					<td data-title="'Forløp'"><tags tags="::observation.flattenedWhats"></tags></td>
+					<td data-title="'Flagg'"><flags attributes="::observation.flattenedFlags"></flags></td>
+					<td data-title="'Tagger'"><tags tags="::observation.flattenedTags"></tags></td>
+					<td data-title="'Type'" sortable="'type'" filter="{ 'type': 'select'}" filter-data="getTypes()"><resolveobservationtypelabel type="::observation.type"></resolveobservationtypelabel> </td>
 
 				</tr>
 			</table>

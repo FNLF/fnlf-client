@@ -1,6 +1,6 @@
-(function () {
 
-	var flagsDirective = function () {
+(function () {
+	angular.module('reportingApp').directive('flags', function () {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -15,15 +15,13 @@
 		};
 
 		return directive;
-	};
-
-	angular.module('reportingApp').directive('flags', flagsDirective);
+	});
 
 })();
 
-(function () {
 
-	var flagDirective = function () {
+(function () {
+	angular.module('reportingApp').directive('flag', function () {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -38,8 +36,6 @@
 		};
 
 		return directive;
-	};
-
-	angular.module('reportingApp').directive('flag', flagDirective);
+	});
 
 })();

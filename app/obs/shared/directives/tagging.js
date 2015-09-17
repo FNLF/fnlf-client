@@ -16,6 +16,10 @@
 
 			$scope.onSelect = function(item, model){
 				RestService.addTag(Functions.capitalizeFirstLetter(item),$scope.group);
+
+				if($scope.model){
+					$scope.model = $scope.model.map(function(t){return Functions.capitalizeFirstLetter(t)});
+				}
 			};
 
 			$scope.tags = [];
@@ -67,7 +71,10 @@
 			$scope.tags = [];
 			RestService.getMostPopularTags($scope.group)
 				.then(function(data){
-					$scope.tags = Functions.deduplicate(data._items.map(function(t){return t.tag}));
+					$scope.tags = Functions.deduplicate(data._items
+						.map(function(t){
+							return Functions.capitalizeFirstLetter(t.tag);
+						}));
 				});
 
 

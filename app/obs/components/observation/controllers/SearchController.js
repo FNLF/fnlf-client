@@ -22,7 +22,9 @@
 
 
 			var flattenComponentWhat = function(observation){
-				return observation.components.map(function(c){return c.what});
+				return observation.components.map(function(c){
+					return Functions.capitalizeFirstLetter(c.what);
+				});
 			};
 
 			var flattenComponentTags = function(observation){
@@ -30,7 +32,7 @@
 
 				angular.forEach(observation.components, function(c){
 					angular.forEach(c.tags,function(t){
-						tags.push(t);
+						tags.push(Functions.capitalizeFirstLetter(t));
 					});
 				});
 
