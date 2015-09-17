@@ -10,7 +10,7 @@ angular.module('reportingApp').directive('location', function (LocationService) 
         		</select> \
 				</div> \
 				<div class="clearfix"></div> \
-				<button type="button" class="btn btn-default btn-block" ng-click="openLocationAside()"><i class="fa fa-plus fa-fw"></i> Legg til annet sted</button>';
+				<button type="button" class="btn btn-default btn-block" ng-click="openLocationAside()"><i class="fa fa-plus fa-fw"></i> Lagre nytt sted</button>';
 	};
 
 	directive.scope = {
