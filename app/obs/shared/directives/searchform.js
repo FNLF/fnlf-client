@@ -48,7 +48,9 @@
 				'component.what.consequence',
 				'component.what.incident',
 				'observation',
-				'where-at'];
+				'where-at',
+				'component'
+			];
 
 			$scope.tags = [];
 			RestService.getMostPopularTags(groups)
