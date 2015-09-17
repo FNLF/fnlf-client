@@ -14,6 +14,8 @@
 
 		directive.link = function ($scope, element, attrs) {
 
+
+
 			$scope.all = {reserve_ride:true,
 				aad_fire:true,
 				gear_malfunction:true,
@@ -27,8 +29,8 @@
 			};
 
 
-
-			$scope.searchTag = '';
+			$scope.model = {};
+			$scope.model.search = '';
 
 			var allGroups = ['aadType',
 				'aircraftTypes',
@@ -61,14 +63,37 @@
 						}));
 				});
 
+			$scope.refresh = function(search){
+				if(search) {
+					$scope.model.text = Functions.capitalizeFirstLetter(search);
+					$scope.model.search = $scope.model.text;
+				}
+			};
 
-			$scope.onSelect = function(){
+			$scope.onSelect = function(tag){
+				console.log(tag);
+
+				if($scope.model.search) {
+					var path = '/search/tag/' + $scope.model.search;
+					console.log(path);
+					$location.path(path);
+				}else{
+					if($scope.model.text) {
+						var path = '/search/tag/' + $scope.model.text;
+						console.log(path);
+						$location.path(path);
+					}
+
+				}
+			};
+
+			$scope.go = function(){
 
 
-
-				var path = '/search/tag/'+$scope.searchTag;
+				var path = '/search/tag/' + $scope.model.text;
 				console.log(path);
 				$location.path(path);
+
 			};
 
 		};

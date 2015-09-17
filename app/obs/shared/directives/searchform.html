@@ -1,14 +1,14 @@
 <div>
 	<flags attributes = "all"></flags>
 	<div class="input-group">
-		<ui-select tagging-label="false" ng-model="$parent.searchTag" theme="bootstrap" on-select="onSelect(tag, $model)">
+		<ui-select tagging-label="()" tagging ng-model="model.search" search-enabled="true" reset-search-input="true" theme="bootstrap" on-select="onSelect(tag, $model)">
 			<ui-select-match placeholder="Søk etter alt...">{{$select.selected}}</ui-select-match>
-			<ui-select-choices repeat="tag in tags | filter:$select.search">
+			<ui-select-choices refresh="refresh($select.search)" refresh-delay="10" repeat="tag in tags | filter:$select.search">
 				{{tag}}
 			</ui-select-choices>
 		</ui-select>
 		<span class="input-group-btn">
-			<span class="btn btn-primary" ng-disabled="!searchTag" type="button" ng-click="onSelect()" href="/foo">
+			<span class="btn btn-primary" ng-disabled="!model.text" type="button" ng-click="go()" >
 				Søk
 			</span>
 		</span>
