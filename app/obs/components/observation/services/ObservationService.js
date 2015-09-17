@@ -186,9 +186,28 @@
 
 
 			this.searchByTag = function(page,maxResults,sort,tag){
-				var quotedTag = '"'+tag+'"';
 
-				var where = 'where={"$or":[{"tags":'+quotedTag+'},{"components.tags":'+quotedTag+'},{"components.what":'+quotedTag+'},{"components.where.at":'+quotedTag+'}]}';
+				var params = ['tags',
+					'components.tags',
+					'components.what',
+					'components.where.at',
+					'involved.jumptypeTags',
+					'involved.aircraft',
+					'involved.gear.mainCanopyType',
+					'involved.gear.reserveCanopyType',
+					'involved.gear.harnessType',
+					'involved.gear.aadType',
+					'involved.gear.other'];
+
+				var whereStart ='where={"$or":[';
+				var whereMid = '';
+				for(var i = 0; i < params.length;i++){
+					whereMid+='{"'+params[i]+'":"'+tag+'"},'
+				}
+				whereMid = whereMid.replace(/,\s*$/, "");
+				var whereEnd = ']}';
+
+				var where = whereStart+whereMid+whereEnd;
 				return RestService.getAllObservations(page,maxResults,sort,where);
 			};
 
@@ -196,6 +215,7 @@
 				var where = 'where={"$or":[{"components.attributes.'+flag+'":true}]}';
 				return RestService.getAllObservations(page,maxResults,sort,where);
 			};
+
 
 		});
 

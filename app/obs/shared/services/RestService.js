@@ -173,7 +173,7 @@
 					groupsString = groupsString+'"'+g+'",';
 				});
 				groupsString = groupsString.replace(/,\s*$/, "");
-				return $http.get(urlBase + '/tags/?where={"group":{"$in":['+groupsString+']}}&sort=-freq,tag')
+				return $http.get(urlBase + '/tags/?where={"group":{"$in":['+groupsString+']}}&sort=-freq,tag&max_results=555')
 					.then(handleSuccess, handleError);
 			};
 

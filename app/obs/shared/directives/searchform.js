@@ -51,7 +51,16 @@
 				'component.what.incident',
 				'observation',
 				'where-at',
-				'component'
+				'component',
+				'jumptypes',
+				'aircraftTypes',
+				'maincanopies',
+				'reserveCanopies',
+				'harnessTypes',
+				'aadType',
+				'otherEquipment'
+
+
 			];
 
 			$scope.tags = [];
@@ -74,12 +83,12 @@
 				console.log(tag);
 
 				if($scope.model.search) {
-					var path = '/search/tag/' + $scope.model.search;
+					var path = '/search/tag/' + encodeURIComponent($scope.model.search);
 					console.log(path);
 					$location.path(path);
 				}else{
 					if($scope.model.text) {
-						var path = '/search/tag/' + $scope.model.text;
+						var path = '/search/tag/' + encodeURIComponent($scope.model.text);
 						console.log(path);
 						$location.path(path);
 					}
@@ -90,7 +99,7 @@
 			$scope.go = function(){
 
 
-				var path = '/search/tag/' + $scope.model.text;
+				var path = '/search/tag/' + encodeURIComponent($scope.model.text);
 				console.log(path);
 				$location.path(path);
 
