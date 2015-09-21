@@ -167,13 +167,8 @@
 
 
 			this.getMostPopularTags = function(groups){
-
-				var groupsString = "";
-				angular.forEach(groups,function(g){
-					groupsString = groupsString+'"'+g+'",';
-				});
-				groupsString = groupsString.replace(/,\s*$/, "");
-				return $http.get(urlBase + '/tags/?where={"group":{"$in":['+groupsString+']}}&sort=-freq,tag&max_results=555')
+				var where = JSON.stringify({group:{$in:groups}});
+				return $http.get(urlBase + '/tags/?sort=-freq,tag&max_results=555&where='+where)
 					.then(handleSuccess, handleError);
 			};
 

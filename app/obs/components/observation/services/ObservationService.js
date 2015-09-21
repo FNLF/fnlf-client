@@ -184,35 +184,78 @@
 				
 			};
 
+			var mapping = {};
+			mapping['tags'] = ['observation'];
+			mapping['components.tags'] = ['component'];
+			mapping['components.what'] = ['component.what.cause','component.what.consequence','component.what.incident'];
+			mapping['components.where.at'] = ['where-at'];
+			mapping['involved.jumptypeTags'] = ['jumptypes'];
+			mapping['involved.aircraft'] = ['aircraftTypes'];
+			mapping['involved.gear.mainCanopyType'] = ['maincanopies'];
+			mapping['involved.gear.reserveCanopyType'] = ['reserveCanopies'];
+			mapping['involved.gear.harnessType'] = ['harnessTypes'];
+			mapping['involved.gear.aadType'] = ['aadType'];
+			mapping['involved.gear.other'] = ['otherEquipment'];
 
-			this.searchByTag = function(page,maxResults,sort,tag){
 
-				var params = ['tags',
-					'components.tags',
-					'components.what',
-					'components.where.at',
-					'involved.jumptypeTags',
-					'involved.aircraft',
-					'involved.gear.mainCanopyType',
-					'involved.gear.reserveCanopyType',
-					'involved.gear.harnessType',
-					'involved.gear.aadType',
-					'involved.gear.other'];
 
-				var whereStart ='where={"$or":[';
-				var whereMid = '';
-				for(var i = 0; i < params.length;i++){
-					whereMid+='{"'+params[i]+'":"'+tag+'"},'
-				}
-				whereMid = whereMid.replace(/,\s*$/, "");
-				var whereEnd = ']}';
+			this.getObservationParams = function(){
+				return Object.keys(mapping);
+			};
 
-				var where = whereStart+whereMid+whereEnd;
-				return RestService.getAllObservations(page,maxResults,sort,where);
+			var getObservationParamsFn = this.getObservationParams;
+
+			this.getObservationTagGroups = function(){
+				var arr = [];
+				Object.keys(mapping).forEach(function(k){
+					var v = mapping[k];
+					arr = arr.concat(v);
+				});
+				return arr;
+			};
+
+			this.getIncidentTagGroups = function(){
+				return [].concat(mapping['components.tags'],mapping['components.what']);
+			};
+
+			this.getGearTagGroups = function(){
+				return [].concat(mapping['involved.gear.mainCanopyType'],mapping['involved.gear.reserveCanopyType'],mapping['involved.gear.harnessType'],mapping['involved.gear.aadType'],mapping['involved.gear.other']);
+			};
+
+			this.getSituationTagGroups = function(){
+				return [].concat(mapping['components.where.at'],mapping['involved.jumptypeTags'],mapping['involved.aircraft']);
+			};
+
+
+			this.searchByTag = function(page,maxResults,sort,tags){
+
+				var params = getObservationParamsFn();
+				var whereObj = {};
+
+				var andArr = [];
+
+				angular.forEach(tags,function(tag){
+					var orArr = [];
+					angular.forEach(params,function(p){
+						var obj = {};
+						obj[p] = tag;
+						orArr.push(obj);
+
+					});
+					andArr.push({$or:orArr});
+
+				});
+				whereObj.$and = andArr;
+
+				var whereString = JSON.stringify(whereObj);
+
+				return RestService.getAllObservations(page,maxResults,sort,'where='+whereString);
 			};
 
 			this.searchByFlag = function(page,maxResults,sort,flag){
-				var where = 'where={"$or":[{"components.attributes.'+flag+'":true}]}';
+				var attrs = {};
+				attrs['components.attributes.'+flag]=true;
+				var where = 'where='+JSON.stringify(attrs);
 				return RestService.getAllObservations(page,maxResults,sort,where);
 			};
 

@@ -9,6 +9,10 @@
 
 			if($routeParams.tag) {
 				$scope.tag = decodeURIComponent($routeParams.tag);
+				$scope.tags = $scope.tag.split(',')
+					.map(function(t){
+						return Functions.capitalizeFirstLetter(t)
+					});
 			}
 			$scope.flag = $routeParams.flag;
 			$scope.observations = [];
@@ -21,6 +25,11 @@
 
 			}
 
+			$scope.collapsed=true;
+
+			$scope.toggleAdvanced = function(){
+				$scope.collapsed = !$scope.collapsed;
+			};
 
 
 			var flattenComponentWhat = function(observation){
@@ -60,7 +69,7 @@
 			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 
-				var searchParam = $scope.tag;
+				var searchParam = $scope.tags;
 				var searchFn = ObservationService.searchByTag;
 				if($scope.flag){
 					searchParam = $scope.flag;
