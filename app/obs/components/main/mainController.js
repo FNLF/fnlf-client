@@ -56,7 +56,7 @@
 
 			}});
 
-			$scope.todoTable = new ngTableParams({page: 1, count: 100, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
+			$scope.todoTable = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				RestService.getWorkflowTodo(params.page(), params.count(), sortString)
 					.then(function(data){
@@ -66,10 +66,7 @@
 
 			}});
 
-			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
-
-				var filter = params.filter();
-
+			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}, filter:{state:'closed'} } , {total: 1, getData: function($defer, params){
 
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				var whereString = ObservationsTableService.whereStringFromParams(params);
