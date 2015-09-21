@@ -47,7 +47,7 @@
 				<tr ng-repeat="observation in $data">
 
 					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{::observation.id}}</a></td>
-					<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Tid'" sortable="'when'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
 					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a  ng-click="editObservation(observation._id)">{{::observation.tags.join('/') | cut:true:40:' ...'}}</a></td>
 					<td data-title="'Status'" filter="{ 'state': 'text' }"><resolveworkflowstate state="::observation.workflow.state"></resolveworkflowstate></td>
 					<td data-title="'Type'"><resolveobservationtypelabel type="::observation.type"></resolveobservationtypelabel> </td>
@@ -66,7 +66,7 @@
 				<tr ng-repeat="observation in $data">
 
 					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id.$oid)">#{{::observation.id}}</a></td>
-					<td data-title="'Tid'" sortable="'date'">{{::observation.when.$date | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Tid'" sortable="'when'">{{::observation.when.$date | date:'yyyy-MM-dd'}}</td>
 					<td data-title="'Tittel'" filter="{ 'tags': 'text' }"><a  ng-click="editObservation(observation._id.$oid)">{{::observation.tags.join('/') | cut:true:40:' ...'}}</a></td>
 					<td data-title="'Status'" filter="{ 'state': 'text' }"><resolveworkflowstate state="::observation.workflow.state"></resolveworkflowstate></td>
 					<td data-title="'Type'"><resolveobservationtypelabel type="::observation.type"></resolveobservationtypelabel> </td>
@@ -90,7 +90,7 @@
 				<tr ng-repeat="observation in $data">
 
 					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{::observation.id}}</a></td>
-					<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
+					<td data-title="'Tid'" sortable="'when'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
 					<td data-title="'Tittel'" filter="{ 'tags': 'select' }" filter-data="getTitles()"><a  ng-click="editObservation(observation._id)">{{::observation.tags.join('/') | cut:true:50:' ...'}}</a></td>
 					<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="::observation.club"></resolveclub></td>
 					<td data-title="'Gradering'" sortable="'rating'" filter="{ 'rating': 'select' }" filter-data="getRatings()">{{::observation.rating.actual}}/{{::observation.rating.potential}}</td>
