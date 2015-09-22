@@ -89,6 +89,11 @@
 
 			function clearFullnameFromObservation(observation){
 				angular.forEach(observation.involved,clearFullname);
+
+				angular.forEach(observation.involved,function(p){
+					clearFullname(p.gear.rigger);
+				});
+
 				angular.forEach(observation.organization.hl,clearFullname);
 				angular.forEach(observation.organization.hm,clearFullname);
 				angular.forEach(observation.organization.hfl,clearFullname);
