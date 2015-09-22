@@ -16,6 +16,7 @@ angular.module('reportingApp')
 	directive.scope = {
 		observation: '=',
 		save: '&',
+		editmode: '@'
 	};
 	
 	directive.transcluded = true;
@@ -50,23 +51,27 @@ angular.module('reportingApp')
 			 for(k in $scope.observation.files) {
 				 
 				 $scope.fetchFileInfo($scope.observation.files[k]).then(function(response) {
-					 $scope.filelist.push({'name': response.name, 
-						 'type': response.content_type,'size': bytesToSize(response.size), 
-						 'url': urlBase + '/download/' + response._id + '?token=' + $window.sessionStorage.token, 
-						 '_id': response._id});
+
+					 var fileObj = {'name': response.name,
+						 'type': response.content_type,'size': bytesToSize(response.size),
+						 'url': urlBase + '/download/' + response._id + '?token=' + $window.sessionStorage.token,
+						 '_id': response._id};
+
+					   $scope.filelist.push(fileObj);
 					 
 					 if(response.content_type.match(/image/g) != null) {
-						 $scope.getImageFile(response._id);
+						 $scope.getImageFile(response._id,fileObj.name, fileObj.size);
+					 }else{
+						 $scope.nonimages.push(fileObj);
 					 }
 				 });
 			 };
 		 };
 		 
-		 $scope.getImageFile = function(objectid) {
-			 console.log('Getting file for preview!!!');
+		 $scope.getImageFile = function(objectid, filename, filesize) {
 			 $scope.fetchImageFile(objectid).then(function(response) {
 					
-				 $scope.thumbnails.push({src: 'data:'+response.mimetype+';charset=utf8;base64,'+response.src, objectid: objectid}); 
+				 $scope.thumbnails.push({src: 'data:'+response.mimetype+';charset=utf8;base64,'+response.src, objectid: objectid, filename:filename, filesize:filesize});
 			 });
 			 
 		 };
@@ -76,7 +81,8 @@ angular.module('reportingApp')
 			
 			var request = $http({
 				method : "get",
-				url : urlBase + '/files/' + objectid + '?projection={"file": 0}'
+				url : urlBase + '/files/' + objectid + '?projection={"file": 0}',
+				cache: true
 			});
 			return (request.then(handleSuccess, handleError));
 
@@ -84,7 +90,8 @@ angular.module('reportingApp')
 		$scope.fetchImageFile = function(objectid) {
 			var request = $http({
 				method : "get",
-				url : urlBase + '/download/image/' + objectid + '/small'
+				url : urlBase + '/download/image/' + objectid + '/small',
+				cache: true
 			});
 			return (request.then(handleSuccess, handleError));
 			
@@ -105,7 +112,9 @@ angular.module('reportingApp')
 			
 			if (index > -1) {
 				$scope.observation.files.splice(index, 1);
-				$scope.fileAside.hide();
+				if($scope.fileAside) {
+					$scope.fileAside.hide();
+				}
 				$scope.save(); //Calls $scope.saveObservation()
 			};
 			
@@ -114,28 +123,29 @@ angular.module('reportingApp')
 		
 		
 		function handleError(response) {
-			if (!angular.isObject(response.data) || !response.data.message) {
+				console.log(response);
+				if (!angular.isObject(response.data) || !response.data.message) {
 				return ($q.reject("An unknown error occurred."));
 			}
 			return ($q.reject(response.data.message));
 		}
 		
 		function handleSuccess(response) {
-			console.log(response.data);
 			return (response.data);
 		};
 		
 		/**
 		 * Normal opening of aside
 		 */
-		$scope.openFileAside = function(objectid) {
+		$scope.openFileAside = function(objectid,filename,filesize) {
 			
 			 $scope.fetchFullsizeFile(objectid).then(function(response) {
 				//Full size images are BIG 
 				//$scope.filesrc = 'data:'+response.file.content_type+';charset=utf8;base64,'+response.file.file;
 				$scope.filesrc = 'data:'+response.mimetype+';charset=utf8;base64,'+response.src;
 			    $scope.fileid = objectid;
-			    
+			    $scope.filename = filename;
+				$scope.filesize = filesize;
 			    $location.path('/observation/modal-route', false);
 			    
 				$scope.fileAside = $aside({
@@ -175,23 +185,21 @@ angular.module('reportingApp')
 			   var i = Math.floor(Math.log(bytes) / Math.log(k));
 			   return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
 			}
-		
-		
+
+
+
 	};
 
 		
 	directive.link = function($scope, element, attrs) {
-				
+
 		$scope.$watch('observation',function(newValue,oldValue) {
 			
 			if(newValue) {
-				
 				$scope.thumbnails = [];
 				$scope.filelist = [];
-				
+				$scope.nonimages = [];
 				$scope.buildFileList();
-				
-				
 		};
 	});
 		
