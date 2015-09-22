@@ -1,6 +1,6 @@
 <div ng-repeat="f in thumbnails">
 	<div class="col-xs-6 col-md-2 thumb">
-		<a ng-click="openFileAside(f.objectid)" class="thumbnail"> <img ng-src="{{f.src}}" class="img-responsive">
+		<a ng-click="openFileAside(f.objectid,f.filename,f.filesize)" class="thumbnail"> <img ng-src="{{f.src}}" class="img-responsive">
 		</a>
 	</div>
 </div>
@@ -9,10 +9,17 @@
 <div>
 <table class="table table-condensed">
 <tbody>
-		<tr ng-repeat="file in filelist">
+		<tr ng-repeat="file in nonimages">
 		<td>&nbsp;&nbsp;&nbsp;<a ng-href="{{file.url}}">{{file.name}}</a></td>
 		<td>{{file.size}}</td>
-		<td>{{file.type}}</td>
+		<td>{{file.type}}&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td ng-if="editmode">
+			<a ng-if="editmode" class="" ng-confirm-message="Er du sikker at du vil slette bildet?" ng-confirm-click="removeFile(file._id)">
+				<i class="fa fa-times fa-fw"></i>Slett fil
+			</a>
+		</td>
 		</tr>
 </tbody>
 </table>

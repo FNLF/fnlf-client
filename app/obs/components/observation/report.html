@@ -99,6 +99,8 @@
 
 				</div>
 
+
+
 				<!-- MAP -->
 				<div class="col-xs-12  col-md-6">
 					<label class="control-label">{{::observation.location.municipality}}, {{::observation.location.name}}</label>
@@ -107,6 +109,9 @@
 							<marker position="{{::observation.location.geo.coordinates}}" title="{{::observation.location.name}}" draggable="false" visible="true"></marker>
 						</map>
 					</div>
+				</div>
+				<div class="col-xs-12">
+					<filepreviews observation="observation"></filepreviews>
 				</div>
 				</p>
 				<div class="clearfix"></div>
