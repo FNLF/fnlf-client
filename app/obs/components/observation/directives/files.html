@@ -1,7 +1,10 @@
 <div ng-repeat="f in thumbnails">
 	<div class="col-xs-6 col-md-2 thumb">
-		<a ng-click="openFileAside(f.objectid)" class="thumbnail"> <img ng-src="{{f.src}}" class="img-responsive">
+		<a ng-click="openFileAside(f.objectid)" class="thumbnail"> 
+		<img ng-src="{{f.src}}" class="img-responsive">
+		Restricted!
 		</a>
+		
 	</div>
 </div>
 <div class="clearfix"></div>
@@ -10,7 +13,7 @@
 <table class="table table-condensed">
 <tbody>
 		<tr ng-repeat="file in filelist">
-		<td>&nbsp;&nbsp;&nbsp;<a ng-href="{{file.url}}">{{file.name}}</a></td>
+		<td><i ng-click='togglePublicRestricted' class="fa fa-fw fa-lock text-success"></i>&nbsp;&nbsp;&nbsp;<a ng-href="{{file.url}}">{{file.name}}</a></td>
 		<td>{{file.size}}</td>
 		<td>{{file.type}}</td>
 		</tr>
