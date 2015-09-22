@@ -168,7 +168,7 @@
 							 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 						 }).success(function (data, status, headers, config) {
 							 if(data._status == 'OK') {
-								 $scope.observation.files.push(data._id);
+								 $scope.observation.files.push({'f': data._id, 'r': true});
 							 }
 						 
 						 }).then(function(success, error, progress) {
