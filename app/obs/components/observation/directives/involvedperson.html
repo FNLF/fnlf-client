@@ -5,7 +5,7 @@
 
 			<div ng-show="person.licenses.length == 0">Ingen lisenser registrert</div>
 				<span ng-repeat="license in person.licenses.rights">
-					<span>{{license}} &nbsp;</span>
+					<span><resolvelicense licenseid="license"></resolvelicense> &nbsp;</span>
 				</span>
 		</div>
 	</div>
@@ -116,6 +116,34 @@
 			   placeholder="Reserveskjermstørrelse">
 
 	</div>
+
+	<div class="form-group col-md-3 col-xs-12">
+		<inlinehelp title="MK">MK som sist tok hovedkontroll eller brukskontroll</inlinehelp>
+		<ui-select tagging="tagTransform" ng-model="person.gear.rigger" theme="bootstrap" on-select="onSelect($item, $model)">
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$select.selected.id" tmpname="$select.selected.tmpname"></resolveuser></ui-select-match>
+			<ui-select-choices repeat="person in personsFromDb | filter:$select.search track by person.id"
+							   refresh="getPersonsByName($select.search)" refresh-delay="100">
+				<span>{{person.fullname}}</span> <span ng-show="person.id>0">({{person.id}})</span>
+			</ui-select-choices>
+		</ui-select>
+	</div>
+
+	<div class="form-group col-md-3 col-xs-12">
+		<inlinehelp title="Pakkedato">Dato for siste hovedkontroll eller brukskontroll</inlinehelp>
+		<div class="input-group">
+			<datetimepicker
+					ng-model="person.gear.riggerdate"
+					date-format="yyyy-MM-dd"
+					date-options="{startingDay:1,showWeeks: true}"
+					readonly-time="true"
+					show-meridian="showMeridian"
+					pick-time="false"
+					></datetimepicker>
+		</div>
+
+	</div>
+
+
 	<div class="col-xs-12"><label></label></div>
 
 	<div class="form-group col-md-3 col-xs-12">
@@ -138,6 +166,20 @@
 
 	</div>
 
+	<div class="form-group col-md-3 col-xs-12">
+		<inlinehelp title="Fabrikkontrolldato">Dato for siste fabrikk-kontroll</inlinehelp>
+		<div class="input-group">
+			<datetimepicker
+					ng-model="person.gear.aadControlDate"
+					date-format="yyyy-MM"
+					date-options="{startingDay:1,showWeeks: true}"
+					readonly-time="true"
+					show-meridian="showMeridian"
+					pick-time="false"
+					></datetimepicker>
+		</div>
+
+	</div>
 
 
 	<div class="col-xs-12">
@@ -150,6 +192,15 @@
 	</div>
 
 	<div class="col-xs-12"></div>
+
+	<style>
+
+		.datetimepicker-wrapper.ng-valid-time{
+			display:none !important;
+		}
+
+	</style>
+
 </div>
 
 

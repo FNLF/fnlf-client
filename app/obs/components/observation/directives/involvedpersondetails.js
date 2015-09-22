@@ -72,6 +72,25 @@ angular.module('reportingApp').directive('involvedperson', function (RestService
 					$scope.person.licenses = data.licenses;
 				});
 		}
+
+
+		$scope.personsFromDb = [];
+
+		$scope.getPersonsByName = function (name) {
+			RestService.getUserByName(name)
+				.then(function (response) {
+					$scope.personsFromDb = response._items;
+				});
+		};
+
+		var nonMemberId = function(){
+			return Math.floor(Math.random()*10000)*-1;
+		};
+
+		$scope.tagTransform = function(itemText){
+			return {fullname:itemText,tmpname:itemText,id:nonMemberId()}
+		};
+
 	};
 
 	return directive;
