@@ -76,12 +76,12 @@
 
 			this.sortStringFromParams = function(params){
 					var sortString = "-id";
-					angular.forEach(params.sorting(), function (k, v) {
-						if (k == 'desc') {
-							sortString = '-' + v;
+					angular.forEach(params.sorting(), function (v, k) {
+						if (v == 'desc') {
+							sortString = '-' + k;
 						}
-						if (k == 'asc') {
-							sortString = v;
+						if (v == 'asc') {
+							sortString = k;
 						}
 
 					});
@@ -89,36 +89,37 @@
 			};
 
 			this.whereStringFromParams = function(params){
-				var whereString = 'where={';
+
 				var filter = params.filter();
 
-
+				var whereObj = {};
 				if(filter['club']){
-					whereString += '"club":"'+filter['club']+'",';
+					whereObj['club'] = filter['club'];
 				}
 
 				if(filter['state']){
-					whereString += '"workflow.state":"'+filter['state']+'",';
+					whereObj['workflow.state'] = filter['state'];
 				}
 
 				if(filter['type']){
-					whereString += '"type":"'+filter['type']+'",';
+					whereObj['type']=filter['type'];
+
 				}
 
 				if(filter['rating']){
 					var rating = filter['rating'];
-					whereString += '"$or":[ {"rating.actual":{"$gt":'+rating+'}}, {"rating.potential":{"$gt":'+rating+'}}],';
+					var actualObj = {};
+					actualObj['rating.actual'] = {$gt:rating};
+					var potentialObj = {};
+					potentialObj['rating.potential'] = {$gt:rating};
+					whereObj['$or'] = [actualObj,potentialObj];
 				}
 
 				if(filter['tags']){
-					var tag = filter['tags'];
-					whereString += '"tags":"'+tag+'",';
+					whereObj['tags']=filter['tags'];
 				}
 
-				whereString = whereString.replace(/,\s*$/, "");
-				whereString = whereString +'}';
-
-				return whereString;
+				return "where="+JSON.stringify(whereObj);
 			};
 
 

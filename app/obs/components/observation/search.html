@@ -1,11 +1,21 @@
 <div ng-controller="SearchController">
 
 	<div class="row">
-		<div class="col-xs-12 col-md-12">
-		<p>
-				<searchform></searchform>
-			<br>
-		</p>
+		<div class="col-xs-12">
+			<flagsearch></flagsearch>
+		</div>
+		<div class="col-xs-12">
+			<a class="pull-right" ng-if="collapsed" ng-click="toggleAdvanced()">Avansert søk</a>
+			<a class="pull-right" ng-if="!collapsed" ng-click="toggleAdvanced()">Enkelt søk</a>
+		</div>
+
+		<div class="col-xs-12" ng-if="collapsed">
+			<searchform></searchform>
+		</div>
+
+
+		<div ng-if="!collapsed">
+			<searchformadvanced></searchformadvanced>
 		</div>
 
 		<div class="col-xs-12">

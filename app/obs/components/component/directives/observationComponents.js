@@ -168,7 +168,9 @@
 				$scope.resolvePersonsFn();
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
 				if($scope.selectedTemplate.flags.cause){
-					$scope.selectedTemplate.order = -1;
+					if(!$scope.selectedTemplate.order) {
+						$scope.selectedTemplate.order = -1;
+					}
 				}else{
 					$scope.selectedTemplate.order = $scope.observation.components.length+1;
 				}
@@ -201,10 +203,12 @@
 				$scope.newComponent(template);
 			};
 
-			$scope.newCause = function(){
+			$scope.newCause = function(parentOrder){
+				console.log("New cause bwfore component with order "+parentOrder);
 				var template = {};
 				template.flags={cause:true};
 				template.attributes={};
+				template.order = parentOrder - 0.5;
 				$scope.newComponent(template);
 			};
 
