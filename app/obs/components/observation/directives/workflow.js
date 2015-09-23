@@ -92,7 +92,7 @@ angular.module('reportingApp')
 		$scope.$watch('observation',function(newValue,oldValue) {
 		
 	if(newValue && newValue._id) {
-		console.log(newValue);
+
 		
 		RestService.getWorkflowState($scope.observation._id)
 				   .then(function (response) {
@@ -101,8 +101,8 @@ angular.module('reportingApp')
 			var btns = [];
 			var btnss = '';
 			var btn_class = 'default';
-			console.log(response);
-			for(k in response.actions) {
+
+			for(var k in response.actions) {
 				var side = 'left';
 				
 				if(response.actions[k].resource == 'approve') {
