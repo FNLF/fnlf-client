@@ -75,8 +75,6 @@
 
 		$rootScope.saveObservation = function () {
 
-			console.log("When before save: "+$scope.observation.when);
-			console.log("Version, Etag: "+$scope.observation._version+', '+$scope.observation._etag);
 
 			ObservationService.updateObservation($scope.observation)
 				.then(function(updated){
@@ -89,7 +87,7 @@
 						$timeout(function(){
 							$scope.observationChanges = false;
 							$window.onbeforeunload = null;
-						console.log("When: "+$scope.observation.when);
+
 						},100);
 					})
 				.catch(function(error){
