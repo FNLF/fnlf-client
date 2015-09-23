@@ -16,6 +16,11 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 		return types[type];
 	};
 	
+	this.resolveObservationFlag= function(type) {
+		
+		var types = {'aviation': 'Luftfartshendelse', 'insurance': 'Forsikringssak'};
+		return types[type];
+	};
 	
 	this.getClub = function(clubid) {
 		

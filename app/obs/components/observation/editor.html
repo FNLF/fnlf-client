@@ -5,7 +5,7 @@
 
 		<!-- Workflows, show current status. Click dropdown show actions -->
 		<span class="pull-right"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
-<!-- 		<span class="pull-right"><workingcomments observation="observation"></workingcomments>&nbsp;</span> -->
+		<!-- <span class="pull-right"><workingcomments observation="observation"></workingcomments>&nbsp;</span> -->
 
 		<h1>#{{observation.id}}  {{observation.tags.join('/')}}</h1>
 
@@ -62,7 +62,7 @@
 				<div class="col-xs-12 col-md-4">
 				<div class="form-group">
 					<label class="control-label">Observasjonstidspunkt</label>
-					<inlinehelp>Dato og gjerne klokkeslett</inlinehelp>
+					<inlinehelp>Dato og gjerne klokkeslett når dette skjedde</inlinehelp>
 					<br />
 					<observationdateselector observation="observation"></observationdateselector>
 					</div>
@@ -76,7 +76,20 @@
 
 					<div class="form-group">
 						<label class="control-label">Alvorlighetsgrad</label>
-						<inlinehelp>Hvor galt kunne det ha gått, og hvor alvorlig ble faktisk utfallet i observasjonen</inlinehelp>
+						<inlinehelp><p>Hvor galt kunne det ha gått (worst case), og hvor alvorlig ble faktisk utfallet i observasjonen</p>
+						<ol>
+							<li>Alt OK</li>
+							<li>Til ettertanke/gjennomgang</li>
+							<li>Mindre skade på person/utstyr</li>
+							<li>Middels skade</li>
+							<li>Alvorlig skade eller restriksjoner i aktivitet (LT eller NLF)</li>
+							<li>Skade med alvorlig men, mulig død</li>
+							<li>Død</li>
+							<li>Flere døde</li>
+						</ol>
+						
+						
+						</inlinehelp>
 						<br />
 						<p>
 						<rating-actual observation="observation"></rating-actual>
@@ -84,6 +97,11 @@
 						<p>
 						<rating-potential observation="observation"></rating-potential>
 						</p>
+						
+						<p>
+						<observationflags observation="observation"></observationflags>
+						</p>
+						
 					</div>
 				</div>
 				</p>
