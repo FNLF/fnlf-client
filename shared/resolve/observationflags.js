@@ -18,15 +18,19 @@ angular.module('resolve').directive('resolveobservationflags', function (Resolve
 		
 		console.log($scope.flags);
 		
-		    
-		if($scope.flags.insurance) {
-			$scope.observationflags.push('Forsikringssak');
-		}
-		
-		if($scope.flags.aviation) {
-			$scope.observationflags.push('Luftfartshendelse');
-		}
+		if(!$scope.flags || $scope.flags.length == 0) {
 			
+			$scope.observationflags.push('Ingen');
+		}
+		else {   
+			if($scope.flags.insurance) {
+				$scope.observationflags.push('Forsikringssak');
+			}
+			
+			if($scope.flags.aviation) {
+				$scope.observationflags.push('Luftfartshendelse');
+			}
+		}
 		
 
 	};
