@@ -32,7 +32,7 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 			observation: '='
 		};
 		
-		directive.controller = function ($scope, $rootScope, $location, $aside) {
+		directive.controller = function ($scope, $rootScope, $location, $aside,RestService) {
 			
 			$scope.openInvolvedAside = function() {
 				$location.path('/observation/modal-route', false);
@@ -62,15 +62,26 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 			$scope.$on('aside.hide', function() {
 			  if($location.path().indexOf('/modal-route') != -1) {
 				  $window.history.back();
-			  };
+			  }
 			});
 
 			$scope.onSelect = function(item,model){
-				console.log("OnSelect "+item)
-				item.open=true;
-			}
+				RestService.getUser(item.id)
+					.then(function(user){
+						var settings = user.settings;
+						if(settings.total_jumps) {
+							item.numberOfJumps = settings.total_jumps;
+						}
+						if(settings.gear){
+							item.gear = settings.gear;
+						}
+					});
 
-		}
+
+				item.open=true;
+			};
+
+		};
 
 		directive.link = function ($scope, element, attrs) {
 			
