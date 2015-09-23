@@ -476,6 +476,19 @@ img {
     color:white;
 }
 
+.img-public {
+  border: 1px solid red;
+}
 
+.img-restricted {
+  border: 1px solid green;
+}
 
+.thumbnail i {
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	margin-left: -10px;
+	margin-top: -20px;
+}
 

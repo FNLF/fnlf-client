@@ -45,23 +45,23 @@ angular.module('reportingApp')
 			 return $scope.files;
 		 };
 		 
-		 
 		 $scope.buildFileList = function() {
 			 
-			 for(k in $scope.observation.files) {
+			 for(var k in $scope.observation.files) {
 				 
-				 $scope.fetchFileInfo($scope.observation.files[k]).then(function(response) {
+				 $scope.fetchFileInfo($scope.observation.files[k]['f']).then(function(response) {
 
 					 var fileObj = {'name': response.name,
 						 'type': response.content_type,'size': bytesToSize(response.size),
 						 'url': urlBase + '/download/' + response._id + '?token=' + $window.sessionStorage.token,
 						 '_id': response._id};
-
-					   $scope.filelist.push(fileObj);
+					 
+					 $scope.filelist.push(fileObj);
 					 
 					 if(response.content_type.match(/image/g) != null) {
 						 $scope.getImageFile(response._id,fileObj.name, fileObj.size);
-					 }else{
+					 }
+					 else {
 						 $scope.nonimages.push(fileObj);
 					 }
 				 });
@@ -107,19 +107,32 @@ angular.module('reportingApp')
 		};
 		
 		$scope.removeFile = function(objectid) {
-			
-			var index = $scope.observation.files.indexOf(objectid);
+
+			//var index = $scope.observation.files.indexOf(objectid);
+			var index = $scope.getIndexIfObjWithOwnAttr($scope.observation.files, 'f', objectid);
 			
 			if (index > -1) {
+				
 				$scope.observation.files.splice(index, 1);
+				
 				if($scope.fileAside) {
 					$scope.fileAside.hide();
-				}
+				};
+				
 				$scope.save(); //Calls $scope.saveObservation()
 			};
 			
 		};
 		
+		
+		$scope.getIndexIfObjWithOwnAttr = function(array, attr, value) {
+		    for(var i = 0; i < array.length; i++) {
+		        if(array[i].hasOwnProperty(attr) && array[i][attr] === value) {
+		            return i;
+		        }
+		    }
+		    return -1;
+		};
 		
 		
 		function handleError(response) {
@@ -201,6 +214,7 @@ angular.module('reportingApp')
 				$scope.nonimages = [];
 				$scope.buildFileList();
 		};
+		
 	});
 		
 	};
