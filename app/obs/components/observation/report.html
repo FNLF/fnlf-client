@@ -9,9 +9,13 @@
 				<div class="col-xs-12  col-md-12">
 
 					<div class="pull-right">
-						<span class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]"> 
+						<span ng-if="::observation.workflow.state!='closed'"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
+						
+						<span ng-if="::observation.workflow.state=='closed'" class="label" ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]"> 
 							<resolveobservationtype type="::observation.type"></resolveobservationtype>
-						</span> <span ng-if="::observation.workflow.state=='closed'"> &nbsp; <comments observation="observation"></comments> &nbsp; <share observation="observation"></share> &nbsp; <!-- Watchers - am I watching, click to show who's watching -->
+						</span>
+						
+						<span ng-if="::observation.workflow.state=='closed'"> &nbsp; <comments observation="observation"></comments> &nbsp; <share observation="observation"></share> &nbsp; <!-- Watchers - am I watching, click to show who's watching -->
 							<watchers observation="observation"></watchers>
 						</span>
 					</div>
@@ -61,7 +65,8 @@
 						</tr>
 						<tr>
 							<td>Lukket</td>
-							<td>{{::observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}}</td>
+							<td ng-if="::observation.workflow.state=='closed'">{{::observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}}</td>
+							<td ng-if="::observation.workflow.state!='closed'"><span class="text-danger">Ikke lukket</span></td>
 						</tr>
 						<tr>
 							<td>Behandlingstid</td>
