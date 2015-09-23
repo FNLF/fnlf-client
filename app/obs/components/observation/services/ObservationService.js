@@ -91,7 +91,16 @@
 				angular.forEach(observation.involved,clearFullname);
 
 				angular.forEach(observation.involved,function(p){
-					clearFullname(p.gear.rigger);
+					if(p){
+						if(p.gear){
+							if(p.gear.rigger){
+								clearFullname(p.gear.rigger);
+							}
+						}
+					}
+
+
+
 				});
 
 				angular.forEach(observation.organization.hl,clearFullname);
@@ -106,9 +115,46 @@
 			};
 
 
+			var populateUserObject = function(involved){
+				var userObj = {};
+				userObj.id=involved.id;
+				userObj.settings={};
+				if(involved.numberOfJumps) {
+					userObj.settings.total_jumps = involved.numberOfJumps;
+				}
+				if(involved.gear){
+					userObj.settings.gear = involved.gear;
+				}
+				return userObj;
+			};
+
+
+			var updateUserData = function(involved){
+				if(involved.id >0 ) {
+					RestService.getUser(involved.id)
+						.then(function (user) {
+							var userObj = populateUserObject(involved);
+							var _id = user._id;
+							var _etag = user._etag;
+							RestService.updateUserData(_id,_etag,userObj);
+						})
+						.catch(function(){
+							//Not possible. Can't create user.
+							//var userObj = populateUserObject(involved);
+							//RestService.createUser(involved.id,userObj);
+						});
+				}
+			};
+
 			this.updateObservation = function (observation) {
 
 				clearFullnameFromObservation(observation);
+
+
+				angular.forEach(observation.involved,function(p){
+					updateUserData(p);
+				});
+
 
 				var _id = observation._id;
 				var id = observation.id;
@@ -134,6 +180,8 @@
 				delete observationDto._status;
 				delete observationDto._etag;
 				delete observationDto._id;
+
+
 
 				$rootScope.error = null;
 
@@ -263,6 +311,8 @@
 				var where = 'where='+JSON.stringify(attrs);
 				return RestService.getAllObservations(page,maxResults,sort,where);
 			};
+
+
 
 
 		});
