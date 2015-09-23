@@ -89,6 +89,7 @@
 				gear_malfunction:true,
 				damage:true,
 				gear_failure:true,
+				gear_error:true,
 				packing_error:true,
 				wilfull:true,
 				violation:true,
