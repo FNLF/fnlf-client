@@ -49,7 +49,7 @@
 							<td>Type</td>
 							<td><resolveobservationtype type="::observation.type"></resolveobservationtype></td>
 						</tr>
-						<tr>
+						<tr ng-if="::observation.flags">
 							<td>Flagg</td>
 							<td><resolveobservationflags flags="::observation.flags"></resolveobservationflags></td>
 						</tr>
@@ -84,9 +84,9 @@
 							<td>Kjennelser</td>
 							<td>
 								<div ng-repeat="v in ::observation.involved">
-									<div ng-if="::v.verdict.fu">FU</div>
-									<div ng-if="::v.verdict.mh">MH</div>
-									<div ng-if="::v.verdict.ph">PH</div>
+									<div ng-if="::v.verdict.fu">Farlig Ukontrollert </div>
+									<div ng-if="::v.verdict.mh">Permanent Hoppforbud </div>
+									<div ng-if="::v.verdict.ph">Midlertidig Hoppforbud</div>
 								</div>
 							</td>
 						</tr>
@@ -172,13 +172,15 @@
 
 
 							<div class="timeline-badge"
-								ng-class="{'default': c.flags.barrier, 
-																	'info': c.flags.incident,
-																	'warning': c.flags.cause,
-																	'warning': c.flags.root_cause,
-																	'danger': c.flags.consequence,
-																	'danger': c.flags.final_consequence,
-																	}">
+								ng-class="{ 'default': 	c.flags.barrier, 
+											'info': 	c.flags.incident,
+											'warning': 	c.flags.cause || c.flags.root_cause,
+											'danger': 	c.flags.consequence || c.flags.final_consequence,
+											
+											}">
+											
+<!-- 											'warning': 	c.flags.root_cause, -->
+<!-- 											'danger': 	c.flags.final_consequence -->
 								{{$index+1}}
 								<!-- 									<small> -->
 								<!-- 										<span ng-if="::c.flags.barrier" class="label label-default">{{::$index+1}} Barriære</span> -->
@@ -193,15 +195,17 @@
 							<div class="timeline-panel">
 								<div class="timeline-heading">
 									<h4 class="timeline-title">
-										<small> <span ng-if="::c.flags.barrier" class="label label-default">Barriære</span> <span ng-if="::c.flags.incident" class="label label-info">Hendelse</span> <span
-											ng-if="::c.flags.cause" class="label label-warning">Årsak</span> <span ng-if="::c.flags.root_cause" class="label label-warning">Rot Årsak</span> <span ng-if="::c.flags.consequence"
-											class="label label-danger">Konsekvens</span> <span ng-if="::c.flags.final_consequence" class="label label-danger">Sluttkonsekvens</span>
+										<small class="pull-right">
+										<span ng-if="::c.flags.barrier" class="label label-default">Barriære</span>
+										<span ng-if="::c.flags.incident" class="label label-info">Hendelse</span>
+										<span ng-if="::c.flags.cause" class="label label-warning">Årsak</span>
+										<span ng-if="::c.flags.root_cause" class="label label-warning">Rot Årsak</span>
+										<span ng-if="::c.flags.consequence" class="label label-danger">Konsekvens</span>
+										<span ng-if="::c.flags.final_consequence" class="label label-danger">Sluttkonsekvens</span>
 										</small>
 									</h4>
 									<h4 class="timeline-title">
 										<tags tag="::c.what"></tags>
-
-										<flags attributes="::c.attributes"></flags>
 
 									</h4>
 								</div>
@@ -212,7 +216,7 @@
 										<dt>Hvem:</dt>
 										<dd>
 											<div ng-repeat="p in ::c.involved">
-												<resolveuser userid="::p.id"></resolveuser>
+												<resolveuser userid="::p.id" tmpname="::p.tmpname"></resolveuser>
 											</div>
 										</dd>
 										<dt>Hva:</dt>
@@ -227,14 +231,12 @@
 										<dt>Hvordan:</dt>
 										<dd>
 											<tags tags="::c.tags"></tags>
-											<br>
+											<br ng-if="::c.tags">
 											<small><i>{{::c.how}}</i></small>
 										</dd>
 										<dt>Flagg:</dt>
 										<dd>
-											<!-- 									<flag ng-if="::c.flags.wilfull" attribute="Med vilje"></flag> -->
-											<!-- 									<flag ng-if="::c.flags.violation" attribute="Regelbrudd"></flag> -->
-											<span ng-if="::c.flags.wilfull" class="label label-danger">Med vilje</span> <span ng-if="::c.flags.violation" class="label label-warning">Regelbrudd</span>
+											<flags attributes="::c.attributes"></flags>
 										</dd>
 									</dl>
 
@@ -267,19 +269,19 @@
 					<dl class="dl-horizontal">
 						<dt>HL:</dt>
 						<dd>
-							<span ng-repeat="k in ::observation.organization.hl"><resolveuser userid="::k.id"></resolveuser></span>
+							<span ng-repeat="k in ::observation.organization.hl"><resolveuser userid="::k.id" tmpname="::k.tmpname"></resolveuser></span>
 						</dd>
 						<dt>HFL:</dt>
 						<dd>
-							<span ng-repeat="k in ::observation.organization.hfl"><resolveuser userid="::k.id"></resolveuser></span>
+							<span ng-repeat="k in ::observation.organization.hfl"><resolveuser userid="::k.id" tmpname="::k.tmpname"></resolveuser></span>
 						</dd>
 						<dt>HM:</dt>
 						<dd>
-							<span ng-repeat="k in ::observation.organization.hm"><resolveuser userid="::k.id"></resolveuser></span>
+							<span ng-repeat="k in ::observation.organization.hm"><resolveuser userid="::k.id" tmpname="::k.tmpname"></resolveuser></span>
 						</dd>
 						<dt>Pilot:</dt>
 						<dd>
-							<span ng-repeat="k in ::observation.organization.pilot"><resolveuser userid="::k.id"></resolveuser></span>
+							<span ng-repeat="k in ::observation.organization.pilot"><resolveuser userid="::k.id" tmpname="::k.tmpname"></resolveuser></span>
 						</dd>
 					</dl>
 				</div>
@@ -396,150 +398,3 @@
 		<!-- END -->
 	</div>
 </div>
-
-<style>
-.timeline {
-	list-style: none;
-	padding: 20px 0 20px;
-	position: relative;
-}
-
-.timeline:before {
-	top: 0;
-	bottom: 0;
-	position: absolute;
-	content: " ";
-	width: 3px;
-	background-color: #eeeeee;
-	left: 25px;
-	margin-right: -1.5px;
-}
-
-.timeline>li {
-	margin-bottom: 20px;
-	position: relative;
-}
-
-.timeline>li:before,.timeline>li:after {
-	content: " ";
-	display: table;
-}
-
-.timeline>li:after {
-	clear: both;
-}
-
-.timeline>li:before,.timeline>li:after {
-	content: " ";
-	display: table;
-}
-
-.timeline>li:after {
-	clear: both;
-}
-
-.timeline>li>.timeline-panel {
-	width: calc(100% - 75px);
-	float: right;
-	border: 1px solid #d4d4d4;
-	border-radius: 2px;
-	padding: 20px;
-	position: relative;
-	-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-}
-
-.timeline>li>.timeline-panel:before {
-	position: absolute;
-	top: 26px;
-	left: -15px;
-	display: inline-block;
-	border-top: 15px solid transparent;
-	border-right: 15px solid #ccc;
-	border-left: 0 solid #ccc;
-	border-bottom: 15px solid transparent;
-	content: " ";
-}
-
-.timeline>li>.timeline-panel:after {
-	position: absolute;
-	top: 27px;
-	left: -14px;
-	display: inline-block;
-	border-top: 14px solid transparent;
-	border-right: 14px solid #fff;
-	border-left: 0 solid #fff;
-	border-bottom: 14px solid transparent;
-	content: " ";
-}
-
-.timeline>li>.timeline-badge {
-	color: #fff;
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	font-size: 1.4em;
-	text-align: center;
-	position: absolute;
-	top: 16px;
-	left: 0px;
-	margin-right: -25px;
-	background-color: #999999;
-	z-index: 100;
-	border-top-right-radius: 50%;
-	border-top-left-radius: 50%;
-	border-bottom-right-radius: 50%;
-	border-bottom-left-radius: 50%;
-}
-
-.timeline>li.timeline-inverted>.timeline-panel {
-	float: left;
-}
-
-.timeline>li.timeline-inverted>.timeline-panel:before {
-	border-right-width: 0;
-	border-left-width: 15px;
-	right: -15px;
-	left: auto;
-}
-
-.timeline>li.timeline-inverted>.timeline-panel:after {
-	border-right-width: 0;
-	border-left-width: 14px;
-	right: -14px;
-	left: auto;
-}
-
-.timeline-badge.primary {
-	background-color: #2e6da4 !important;
-}
-
-.timeline-badge.success {
-	background-color: #3f903f !important;
-}
-
-.timeline-badge.warning {
-	background-color: #f0ad4e !important;
-}
-
-.timeline-badge.danger {
-	background-color: #d9534f !important;
-}
-
-.timeline-badge.info {
-	background-color: #5bc0de !important;
-}
-
-.timeline-title {
-	margin-top: 0;
-	color: inherit;
-}
-
-.timeline-body>p,.timeline-body>ul {
-	margin-bottom: 0;
-}
-
-.timeline-body>p+p {
-	margin-top: 5px;
-}
-</style>

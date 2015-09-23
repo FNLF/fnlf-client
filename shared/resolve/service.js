@@ -12,7 +12,7 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 	
 	this.resolveObservationType = function(type) {
 		
-		var types = {'sharing': 'Erfaringsdeling', 'unwanted_act': 'Uønsket hending', 'near_miss': 'Næruhell', 'incident': 'Uhell', 'accident': 'Ulykke'};
+		var types = {'sharing': 'Erfaringsdeling', 'unsafe_act': 'Uønsket hending', 'near_miss': 'Næruhell', 'incident': 'Uhell', 'accident': 'Ulykke'};
 		return types[type];
 	};
 	
