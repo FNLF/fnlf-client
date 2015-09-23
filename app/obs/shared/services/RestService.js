@@ -98,8 +98,23 @@
 				return $http.get(urlBase + '/users/' + userId)
 					.then(handleSuccess, handleError);
 			};
-			
-			
+
+
+			this.createUser = function(id,user){
+				return $http.post(urlBase + '/users/'+id,user)
+					.then(handleSuccess, handleError);
+			};
+
+
+			this.updateUserData = function (_id,_etag,user) {
+				var config = {};
+				config.headers = {};
+				config.headers['If-Match'] = _etag;
+				var url = urlBase + '/users/' + _id;
+				return $http({ method: 'PATCH', url: url, data: user, headers: config.headers})
+					.then(handleSuccess, handleError);
+			};
+
 			/**
 			 * Workflows here!
 			 */

@@ -10,7 +10,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope) {
+		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope,Functions) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -24,6 +24,14 @@
 
 			$scope.ui=$routeParams.ui;
 
+			var addMenusAndToolbar = function(){
+				$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
+				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
+				if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
+					$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+				}
+			};
+
 			$scope.loadObservation = function(){
 				$scope.observation = {};
 				ObservationService.getObservationById(observationId)
@@ -35,14 +43,9 @@
 							$scope.observationChanges = false;
 						},10);
 
-						// Menus
-						$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
+						addMenusAndToolbar();
 
-						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
 
-						if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
-							$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
-						}
 				}).catch(function(error){
 						console.log("Catched in ObservationController: "+error);
 						$rootScope.error = "Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke";
@@ -75,8 +78,6 @@
 
 		$rootScope.saveObservation = function () {
 
-			console.log("When before save: "+$scope.observation.when);
-			console.log("Version, Etag: "+$scope.observation._version+', '+$scope.observation._etag);
 
 			ObservationService.updateObservation($scope.observation)
 				.then(function(updated){
@@ -89,7 +90,7 @@
 						$timeout(function(){
 							$scope.observationChanges = false;
 							$window.onbeforeunload = null;
-						console.log("When: "+$scope.observation.when);
+							addMenusAndToolbar();
 						},100);
 					})
 				.catch(function(error){
@@ -118,6 +119,7 @@
 				});
 		};
 
+
 		
 		/**
 		 * Triggers saved/unsaved label
@@ -125,11 +127,18 @@
 		$scope.observationChanges = false;
 		$scope.$watch('observation', function(changedObs,oldObs) {
 			if(oldObs._id) {
-				
+
+				//var diff = Functions.objectDifference(oldObs,changedObs,'observation');
+				//console.log('observation changed, diff:');
+				//angular.forEach(diff,function(o){
+				//	console.log(o);
+				//});
+
+
 				$window.onbeforeunload = function(){
 			        return 'You have unsaved observation data';
 			      };
-				
+				$rootScope.nav.menus = [];
 				$scope.observationChanges = true;
 			}
 		},true);
@@ -180,12 +189,13 @@
 				 
 				 };
 		 };
-		var disabledFn = function(){
+
+		$rootScope.disabledFn = function(){
 			return !$scope.observationChanges;
 		};
 
 
-		$rootScope.nav.toolbar[1] = {disabled:disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
+		$rootScope.nav.toolbar[1] = {disabled:$rootScope.disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
 
 		});
 
