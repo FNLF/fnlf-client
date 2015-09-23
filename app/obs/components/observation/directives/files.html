@@ -1,7 +1,7 @@
 <div ng-repeat="f in thumbnails">
 	<div class="col-xs-6 col-md-2">
 		<a ng-click="openFileAside(f.objectid,f.filename,f.filesize)" class="thumbnail"> <img ng-src="{{f.src}}" class="img-responsive"> <i ng-if="editmode" class="fa fa-3x"
-			ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', f.objectid)]['r'] ? 'fa-lock text-success' : 'fa-unlock text-danger'"></i>
+			ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', f.objectid)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i>
 
 
 		</a>
@@ -28,7 +28,7 @@
 
 				<td>&nbsp; <i class="fa fa-fw"
 					ng-click="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', file._id)]['r'] = !observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', file._id)]['r']"
-					ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', file._id)]['r'] ? 'fa-lock text-success' : 'fa-unlock text-danger'"></i> &nbsp;&nbsp; <a ng-href="{{file.url}}">{{file.name}}</a>
+					ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', file._id)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i> &nbsp;&nbsp; <a ng-href="{{file.url}}">{{file.name}}</a>
 				</td>
 				<td>{{file.size}}</td>
 				<td>{{file.type}}&nbsp;</td>
