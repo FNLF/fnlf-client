@@ -24,6 +24,14 @@
 
 			$scope.ui=$routeParams.ui;
 
+			var addMenusAndToolbar = function(){
+				$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
+				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
+				if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
+					$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+				}
+			};
+
 			$scope.loadObservation = function(){
 				$scope.observation = {};
 				ObservationService.getObservationById(observationId)
@@ -35,14 +43,9 @@
 							$scope.observationChanges = false;
 						},10);
 
-						// Menus
-						$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
+						addMenusAndToolbar();
 
-						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
 
-						if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
-							$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
-						}
 				}).catch(function(error){
 						console.log("Catched in ObservationController: "+error);
 						$rootScope.error = "Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke";
@@ -87,7 +90,7 @@
 						$timeout(function(){
 							$scope.observationChanges = false;
 							$window.onbeforeunload = null;
-
+							addMenusAndToolbar();
 						},100);
 					})
 				.catch(function(error){
@@ -135,7 +138,7 @@
 				$window.onbeforeunload = function(){
 			        return 'You have unsaved observation data';
 			      };
-				
+				$rootScope.nav.menus = [];
 				$scope.observationChanges = true;
 			}
 		},true);
