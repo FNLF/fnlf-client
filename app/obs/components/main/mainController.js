@@ -60,7 +60,8 @@
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				RestService.getWorkflowTodo(params.page(), params.count(), sortString)
 					.then(function(data){
-						params.total(data._items.length);
+						var meta = data._meta;
+						params.total(meta.total);
 						$defer.resolve(data._items);
 					});
 
