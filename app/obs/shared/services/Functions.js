@@ -51,5 +51,36 @@
             	return string.charAt(0).toUpperCase() + string.slice(1);
             };
 
+			var difference = function(o1, o2,pre) {
+				pre = pre + '.';
+
+				var k, kDiff,
+					diff = {};
+				for (k in o1) {
+					if (!o1.hasOwnProperty(k)) {
+					} else if (typeof o1[k] != 'object' || typeof o2[k] != 'object') {
+						if (!(k in o2) || o1[k] !== o2[k]) {
+							diff[pre+k] = o2[k];
+						}
+					} else if (kDiff = difference(o1[k], o2[k],pre+k)) {
+						diff[pre+k] = kDiff;
+					}
+				}
+				for (k in o2) {
+					if (o2.hasOwnProperty(k) && !(k in o1)) {
+						diff[pre+k] = o2[k];
+					}
+				}
+				for (k in diff) {
+					if (diff.hasOwnProperty(k)) {
+						return diff;
+					}
+				}
+				return false;
+			};
+			this.objectDifference = function(o1,o2,objectLabel){
+				return difference(angular.fromJson(angular.toJson(o1)),angular.fromJson(angular.toJson(o2)),objectLabel);
+			};
+
 	});
 })();

@@ -10,7 +10,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope) {
+		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope,Functions) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -41,7 +41,7 @@
 						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
 
 						if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
-							$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+							$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
 						}
 				}).catch(function(error){
 						console.log("Catched in ObservationController: "+error);
@@ -118,6 +118,7 @@
 				});
 		};
 
+
 		
 		/**
 		 * Triggers saved/unsaved label
@@ -125,7 +126,14 @@
 		$scope.observationChanges = false;
 		$scope.$watch('observation', function(changedObs,oldObs) {
 			if(oldObs._id) {
-				
+
+				//var diff = Functions.objectDifference(oldObs,changedObs,'observation');
+				//console.log('observation changed, diff:');
+				//angular.forEach(diff,function(o){
+				//	console.log(o);
+				//});
+
+
 				$window.onbeforeunload = function(){
 			        return 'You have unsaved observation data';
 			      };
@@ -180,12 +188,13 @@
 				 
 				 };
 		 };
-		var disabledFn = function(){
+
+		$rootScope.disabledFn = function(){
 			return !$scope.observationChanges;
 		};
 
 
-		$rootScope.nav.toolbar[1] = {disabled:disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
+		$rootScope.nav.toolbar[1] = {disabled:$rootScope.disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
 
 		});
 

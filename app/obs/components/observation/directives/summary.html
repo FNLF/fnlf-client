@@ -5,7 +5,7 @@
 	<label>Id</label>
 	<pre>{{observation.id}}</pre>
 	<pre>{{observation._id}}</pre>
-	
+
 	<label>Created</label>
 	<pre>{{observation._created | date:'yyyy-MM-dd HH:mm'}}</pre>
 	
@@ -47,5 +47,8 @@
 
 	<label>Actions</label>
 	<pre>{{observation.actions | json}}</pre>
-	
+
+	<label>Workflow</label>
+	<pre>{{observation.workflow | json}}</pre>
+
 </div>
