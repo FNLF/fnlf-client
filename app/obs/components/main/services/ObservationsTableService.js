@@ -31,7 +31,8 @@
 
 					var items = data._items;
 					var clubs = items.map(function (club) {
-						return {id: club.id, title: club.name};
+						club.name = club.name.replace(' Fallskjermklubb', '')
+						return {id: club.id, title: club.name };
 					});
 
 					def.resolve(clubs);
