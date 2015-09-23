@@ -10,13 +10,15 @@ angular.module('resolve').directive('resolveclub', function (ResolveService) {
 	directive.scope = {
 			
 			clubid: '=',
+			long:	'=',
 	};
 	
 	directive.link = function ($scope, element, attrs) {
 	
 		ResolveService.getClub($scope.clubid).then(function(club) {
 			
-			$scope.name = club.name;
+			if($scope.long) $scope.name = club.name
+			else $scope.name = club.name.replace(' Fallskjermklubb', '');
 		});
 	};
 	
