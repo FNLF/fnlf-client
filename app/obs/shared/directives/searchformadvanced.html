@@ -4,7 +4,7 @@
 
 		<div class="col-xs-12">
 			<label>Søk etter flere ting</label>
-			<ui-select multiple tagging-label="()" ng-model="model.all" theme="bootstrap" on-select="onSelect(tag, $model)">
+			<ui-select tagging-tokens="ENTER|,|/|."  multiple tagging-label="()" ng-model="model.all" theme="bootstrap" on-select="onSelect(tag, $model)">
 				<ui-select-match placeholder="Søk etter alt">{{$item}}</ui-select-match>
 				<ui-select-choices refresh="refresh($select.search)" refresh-delay="100" repeat="tag in tags | filter:$select.search">
 					{{tag}}
@@ -15,7 +15,7 @@
 
 		<div class="col-md-4 col-xs-12">
 			<label>Søk i forløp</label>
-			<ui-select multiple tagging-label="()" ng-model="model.incident" theme="bootstrap" >
+			<ui-select tagging-tokens="ENTER|,|/|."  multiple tagging-label="()" ng-model="model.incident" theme="bootstrap" >
 				<ui-select-match placeholder="Forløp">{{$item}}</ui-select-match>
 				<ui-select-choices refresh-delay="100" repeat="tag in incidentTags | filter:$select.search">
 					{{tag}}
@@ -24,7 +24,7 @@
 		</div>
 		<div class="col-md-4 col-xs-12">
 			<label>Søk etter utstyr</label>
-			<ui-select multiple tagging-label="()" ng-model="model.gear" theme="bootstrap" >
+			<ui-select tagging-tokens="ENTER|,|/|."  multiple tagging-label="()" ng-model="model.gear" theme="bootstrap" >
 				<ui-select-match placeholder="Utstyr">{{$item}}</ui-select-match>
 				<ui-select-choices  refresh-delay="100" repeat="tag in gearTags | filter:$select.search">
 					{{tag}}
@@ -34,7 +34,7 @@
 
 		<div class="col-md-4 col-xs-12">
 			<label>Søk etter sted/situasjon/hopptype</label>
-			<ui-select multiple tagging-label="()" ng-model="model.situation" theme="bootstrap" >
+			<ui-select tagging-tokens="ENTER|,|/|."  multiple tagging-label="()" ng-model="model.situation" theme="bootstrap" >
 				<ui-select-match placeholder="Sted og situasjon">{{$item}}</ui-select-match>
 				<ui-select-choices  refresh-delay="100" repeat="tag in situationTags | filter:$select.search">
 					{{tag}}
@@ -49,7 +49,7 @@
 		<div class="col-md-12">
 			<h3></h3>
 			<span class="btn btn-primary btn-block" ng-disabled="!model.search" type="button" ng-click="go()" >
-				Søk
+				Avansert søk
 			</span>
 			<h1></h1>
 		</div>

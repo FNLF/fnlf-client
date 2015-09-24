@@ -4,18 +4,19 @@
 		<div class="col-xs-12">
 			<flagsearch></flagsearch>
 		</div>
+
+
 		<div class="col-xs-12">
-			<a class="pull-right" ng-if="collapsed" ng-click="toggleAdvanced()">Avansert søk</a>
-			<a class="pull-right" ng-if="!collapsed" ng-click="toggleAdvanced()">Enkelt søk</a>
+			<searchform query="tag"></searchform>
 		</div>
 
-		<div class="col-xs-12" ng-if="collapsed">
-			<searchform></searchform>
-		</div>
+		<br>
+		<br>
+		<br>
+		<br>
 
-
-		<div ng-if="!collapsed">
-			<searchformadvanced></searchformadvanced>
+		<div>
+			<searchformadvanced query="tag"></searchformadvanced>
 		</div>
 
 		<div class="col-xs-12">

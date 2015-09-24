@@ -25,22 +25,25 @@
 
 			}
 
-			$scope.collapsed=true;
 
-			$scope.toggleAdvanced = function(){
-				$scope.collapsed = !$scope.collapsed;
-			};
 
 
 			var flattenComponentWhat = function(observation){
+				if(angular.isUndefined(observation.components)){
+					return [];
+				}
+
 				return observation.components.map(function(c){
 					return Functions.capitalizeFirstLetter(c.what);
 				});
 			};
 
 			var flattenComponentTags = function(observation){
-				var tags = [];
+				if(angular.isUndefined(observation.components)){
+					return [];
+				}
 
+				var tags = [];
 				angular.forEach(observation.components, function(c){
 					angular.forEach(c.tags,function(t){
 						tags.push(Functions.capitalizeFirstLetter(t));
@@ -52,6 +55,9 @@
 
 
 			var flattenAttributes = function(observation){
+				if(angular.isUndefined(observation.components)){
+					return [];
+				}
 
 				var attributes = {};
 				angular.forEach(observation.components, function(c){
