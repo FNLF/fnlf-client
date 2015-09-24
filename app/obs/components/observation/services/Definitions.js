@@ -57,12 +57,19 @@
 			}; 
 
 
-			this.getObservationTypeOptions = function () {
-				var observationTypeOptions = [];
-				observationTypeOptions.push(new ObservationTypeOption('injury', 'Personskade'));
-				observationTypeOptions.push(new ObservationTypeOption('reserveCanopyUsed', 'Reserveskjerm benyttet'));
-				observationTypeOptions.push(new ObservationTypeOption('willful', 'Bevisst handling'));
-				return observationTypeOptions;
+
+			this.getComponentAttributes = function(){
+			    return [{attribute:'reserve_ride',color:'info',label:'Reserve benyttet'},
+                        {attribute:'aad_fire',color:'warning',label:'Nødåpner fyrt'},
+                        {attribute:'packing_error',color:'default',label:'Pakkefeil'},
+                        {attribute:'gear_malfunction',color:'default',label:'Feilfunksjon'},
+                        {attribute:'damage',color:'default',label:'Matriell skade'},
+                        {attribute:'gear_failure',color:'default',label:'Utstyrsvikt'},
+                        {attribute:'rigger_error',color:'warning',label:'MK/MR Feil'},
+                        {attribute:'violation',color:'default',label:'Regelbrudd'},
+                        {attribute:'injury',color:'warning',label:'Personskade'},
+                        {attribute:'death',color:'warning',label:'Død'}];
+
 			};
 
 		});
