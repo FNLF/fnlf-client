@@ -1,30 +1,18 @@
 <div>
 
 	<div class="">
-
-		<div class="col-xs-12">
-			<label>Søk etter flere ting</label>
-			<ui-select tagging-tokens="ENTER|,|/|."  multiple tagging-label="()" ng-model="model.all" theme="bootstrap" on-select="onSelect(tag, $model)">
-				<ui-select-match placeholder="Søk etter alt">{{$item}}</ui-select-match>
-				<ui-select-choices refresh="refresh($select.search)" refresh-delay="100" repeat="tag in tags | filter:$select.search">
-					{{tag}}
-				</ui-select-choices>
-			</ui-select>
-		</div>
-		<h3></h3>
-
 		<div class="col-md-4 col-xs-12">
 			<label>Søk i forløp</label>
-			<ui-select tagging-tokens="ENTER|,|/|."  multiple tagging-label="()" ng-model="model.incident" theme="bootstrap" >
+			<ui-select tagging-tokens="ENTER|,|/|."  multiple  tagging-label="()" ng-model="model.what" theme="bootstrap" >
 				<ui-select-match placeholder="Forløp">{{$item}}</ui-select-match>
-				<ui-select-choices refresh-delay="100" repeat="tag in incidentTags | filter:$select.search">
+				<ui-select-choices refresh-delay="100" repeat="tag in whatTags | filter:$select.search">
 					{{tag}}
 				</ui-select-choices>
 			</ui-select>
 		</div>
 		<div class="col-md-4 col-xs-12">
 			<label>Søk etter utstyr</label>
-			<ui-select tagging-tokens="ENTER|,|/|."  multiple tagging-label="()" ng-model="model.gear" theme="bootstrap" >
+			<ui-select tagging-tokens="ENTER|,|/|."   multiple tagging-label="()" ng-model="model.gear" theme="bootstrap" >
 				<ui-select-match placeholder="Utstyr">{{$item}}</ui-select-match>
 				<ui-select-choices  refresh-delay="100" repeat="tag in gearTags | filter:$select.search">
 					{{tag}}
@@ -34,9 +22,9 @@
 
 		<div class="col-md-4 col-xs-12">
 			<label>Søk etter sted/situasjon/hopptype</label>
-			<ui-select tagging-tokens="ENTER|,|/|."  multiple tagging-label="()" ng-model="model.situation" theme="bootstrap" >
+			<ui-select tagging-tokens="ENTER|,|/|."   multiple tagging-label="()" ng-model="model.at" theme="bootstrap" >
 				<ui-select-match placeholder="Sted og situasjon">{{$item}}</ui-select-match>
-				<ui-select-choices  refresh-delay="100" repeat="tag in situationTags | filter:$select.search">
+				<ui-select-choices  refresh-delay="100" repeat="tag in atTags | filter:$select.search">
 					{{tag}}
 				</ui-select-choices>
 			</ui-select>
@@ -48,7 +36,7 @@
 	<span class="">
 		<div class="col-md-12">
 			<h3></h3>
-			<span class="btn btn-primary btn-block" ng-disabled="!model.search" type="button" ng-click="go()" >
+			<span class="btn btn-primary btn-block" ng-disabled="searchDisabled()" type="button" ng-click="go()" >
 				Avansert søk
 			</span>
 			<h1></h1>
