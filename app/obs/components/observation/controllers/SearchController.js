@@ -84,7 +84,7 @@
 					searchParam = $scope.flag;
 					searchFn = ObservationService.searchByFlag;
 				}
-                if($scope.queryObj){
+                if($scope.query){
                     searchParam = $scope.queryObj;
                     searchFn = ObservationService.searchAdvanced;
                 }
