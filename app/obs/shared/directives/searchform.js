@@ -9,7 +9,7 @@
 		directive.templateUrl = "/app/obs/shared/directives/searchform.html";
 
 		directive.scope = {
-
+			query : '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
@@ -19,6 +19,12 @@
 			$scope.model = {};
 			$scope.model.search = '';
 
+			var unbind = $scope.$watch('query',function(){
+				if($scope.query){
+					$scope.model.search = $scope.query;
+					unbind();
+				}
+			});
 
 
 			var groups = ObservationService.getObservationTagGroups();
@@ -35,34 +41,14 @@
 						}));
 				});
 
-			$scope.refresh = function(search){
-
-				//$scope.model.text = Functions.capitalizeFirstLetter(search);
 
 
-			};
 
-			$scope.onSelect = function(tag){
-				console.log('onSelect '+tag);
-
-
-				if($scope.model.search) {
-					var path = '/search/tag/' + encodeURIComponent($scope.model.search);
-					console.log(path);
-					$location.path(path);
-				}
-
-			};
 
 			$scope.go = function(){
-
 				var text = $scope.model.search;
-				if(text) {
-					var path = '/search/tag/' + encodeURIComponent(text);
-					console.log(path);
-					$location.path(path);
-				}
-
+				var path = '/search/tag/' + encodeURIComponent(Functions.capitalizeFirstLetter(text));
+				$location.path(path);
 			};
 
 		};
@@ -112,8 +98,10 @@
 		directive.templateUrl = "/app/obs/shared/directives/searchformadvanced.html";
 
 		directive.scope = {
-
+			query : '='
 		};
+
+
 
 		directive.link = function ($scope, element, attrs) {
 
@@ -125,6 +113,13 @@
 			$scope.model.incident = [];
 			$scope.model.situation = [];
 			$scope.model.gear = [];
+
+			var unbind = $scope.$watch('query',function(){
+				if($scope.query){
+					$scope.model.search.push($scope.query);
+					unbind();
+				}
+			});
 
 
 

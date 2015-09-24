@@ -24,6 +24,10 @@
 						templateUrl: 'components/observation/search.html',
 						controller: 'SearchController'
 					})
+					.when('/search/tag/', {
+						templateUrl: 'components/observation/search.html',
+						controller: 'SearchController'
+					})
 					.when('/search/flag/:flag', {
 						templateUrl: 'components/observation/search.html',
 						controller: 'SearchController'

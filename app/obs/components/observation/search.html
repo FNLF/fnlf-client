@@ -4,18 +4,19 @@
 		<div class="col-xs-12">
 			<flagsearch></flagsearch>
 		</div>
+
+
 		<div class="col-xs-12">
-			<a class="pull-right" ng-if="collapsed" ng-click="toggleAdvanced()"><i class="fa fa-fw fa-angle-down"></i>Avansert søk</a>
-			<a class="pull-right" ng-if="!collapsed" ng-click="toggleAdvanced()"><i class="fa fa-fw fa-angle-up"></i>Enkelt søk</a>
+			<searchform query="tag"></searchform>
 		</div>
 
-		<div class="col-xs-12" ng-if="collapsed">
-			<searchform></searchform>
-		</div>
+		<br>
+		<br>
+		<br>
+		<br>
 
-
-		<div ng-if="!collapsed">
-			<searchformadvanced></searchformadvanced>
+		<div>
+			<searchformadvanced query="tag"></searchformadvanced>
 		</div>
 
 		<div class="col-xs-12">
@@ -43,7 +44,6 @@
 				<tr ng-repeat="observation in $data">
 
 					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{::observation.id}}</a></td>
-					<td data-title="'Tittel'" sortable="'tags'"><a  ng-click="editObservation(observation._id)">{{::observation.tags.join('/') | cut:true:50:' ...'}}</a></td>
 					<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
 					<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="::observation.club"></resolveclub></td>
 					<td data-title="'Forløp'"><tags tags="::observation.flattenedWhats"></tags></td>

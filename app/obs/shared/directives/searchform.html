@@ -1,15 +1,12 @@
-<div>
+<form ng-submit="go()">
 	<div class="input-group">
-		<ui-select  ng-model="model.search" theme="bootstrap" search-enabled="false"  on-select="onSelect(tag, $model)">
-			<ui-select-match placeholder="Søk...">{{$select.selected}}</ui-select-match>
-			<ui-select-choices refresh="refresh($select.search)" refresh-delay="100" repeat="tag in tags | filter:$select.search">
-				{{tag}}
-			</ui-select-choices>
-		</ui-select>
+
+		<input placeholder="Søk" class="form-control" type="text" ng-model="model.search" typeahead="tag for tag in tags | filter:$viewValue" typeahead-min-length="2">
+		<!-- tag in tags | filter:$select.search -->
 		<span class="input-group-btn">
-			<span class="btn btn-primary" ng-disabled="!model.search" type="button" ng-click="go()" >
+			<span class="btn btn-primary" type="button" ng-click="go()" >
 				Søk
 			</span>
 		</span>
 	</div>
-</div>
+</form>

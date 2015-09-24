@@ -299,8 +299,12 @@
 
 				});
 				whereObj.$and = andArr;
-
+				if(!tags){
+					whereObj = {};
+				}
 				var whereString = JSON.stringify(whereObj);
+
+
 
 				return RestService.getAllObservations(page,maxResults,sort,'where='+whereString);
 			};
