@@ -267,17 +267,36 @@
 				return arr;
 			};
 
-			this.getIncidentTagGroups = function(){
-				return [].concat(mapping['components.tags'],mapping['components.what']);
+			var whatParams = ['components.tags','components.what'];
+
+			this.getWhatTagGroups = function(){
+				var groups = [];
+				whatParams.forEach(function(k){
+					groups = groups.concat(mapping[k]);
+				});
+				return groups;
 			};
+
+			var gearParams = ['involved.gear.mainCanopyType','involved.gear.reserveCanopyType','involved.gear.harnessType','involved.gear.aadType','involved.gear.other'];
 
 			this.getGearTagGroups = function(){
-				return [].concat(mapping['involved.gear.mainCanopyType'],mapping['involved.gear.reserveCanopyType'],mapping['involved.gear.harnessType'],mapping['involved.gear.aadType'],mapping['involved.gear.other']);
+				var groups = [];
+				gearParams.forEach(function(k){
+					groups = groups.concat(mapping[k]);
+				});
+				return groups;
 			};
 
-			this.getSituationTagGroups = function(){
-				return [].concat(mapping['components.where.at'],mapping['involved.jumptypeTags'],mapping['involved.aircraft']);
+			var atParams = ['components.where.at','involved.jumptypeTags','involved.aircraft'];
+
+			this.getAtTagGroups = function(){
+				var groups = [];
+				atParams.forEach(function(k){
+					groups = groups.concat(mapping[k]);
+				});
+				return groups;
 			};
+
 
 
 			this.searchByTag = function(page,maxResults,sort,tags){
@@ -316,6 +335,75 @@
 				return RestService.getAllObservations(page,maxResults,sort,where);
 			};
 
+
+			var getBigOrArray = function(params,tags){
+				var outerOrArray = [];
+				angular.forEach(params,function(p){
+							var obj = {};
+							obj[p] = {$in:tags};
+							outerOrArray.push(obj);
+						});
+
+				return outerOrArray;
+			};
+
+            this.searchAdvanced = function(page,maxResults,sort,queryObj){
+
+
+                var whereObj = {};
+               	var andArr = [];
+               	whereObj.$and=andArr;
+
+				if(queryObj.gear.length>0){
+					andArr.push({$or:getBigOrArray(gearParams,queryObj.gear)});
+				}
+
+				if(queryObj.what.length>0){
+					andArr.push({$or:getBigOrArray(whatParams,queryObj.what)});
+				}
+
+				if(queryObj.at.length>0){
+					andArr.push({$or:getBigOrArray(atParams,queryObj.at)});
+				}
+
+                var where = 'where='+JSON.stringify(whereObj);
+
+				return RestService.getAllObservations(page,maxResults,sort,where);
+
+            };
+
+
+
+            this.queryToQueryObj = function(query){
+
+                var queryObj = {};
+                queryObj.what=[];
+                queryObj.gear=[];
+                queryObj.at=[];
+                var queryParts=query.split(';');
+                queryParts.forEach(function(p){
+                    var split = p.split('=');
+                    if(split.length==2){
+
+
+                        if(split[0]=='what' && split[1]){
+                        	queryObj.what = split[1].split(',')
+                        		.map(function(t){return Functions.capitalizeFirstLetter(t)});
+                        }
+                        if(split[0]=='gear' && split[1]){
+                            queryObj.gear = split[1].split(',')
+                            	.map(function(t){return Functions.capitalizeFirstLetter(t)});
+                        }
+                        if(split[0]=='at' && split[1]){
+                            queryObj.at = split[1].split(',')
+                            	.map(function(t){return Functions.capitalizeFirstLetter(t)});
+                        }
+                    }
+                });
+
+            return queryObj;
+
+            };
 
 
 

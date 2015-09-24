@@ -85,21 +85,17 @@
 		directive.templateUrl = "/app/obs/shared/directives/searchformadvanced.html";
 
 		directive.scope = {
-			query : '='
+			model : '='
+
 		};
 
 
 
 		directive.link = function ($scope, element, attrs) {
 
-			$scope.model = {};
-			$scope.model.search = [];
-
-
-			$scope.model.all = [];
-			$scope.model.incident = [];
-			$scope.model.situation = [];
-			$scope.model.gear = [];
+			if(!$scope.model){
+				$scope.model = {};
+			}
 
 			var unbind = $scope.$watch('query',function(){
 				if($scope.query){
@@ -127,10 +123,10 @@
 				});
 
 
-			$scope.incidentTags=[];
-			getTags(ObservationService.getIncidentTagGroups())
+			$scope.whatTags=[];
+			getTags(ObservationService.getWhatTagGroups())
 				.then(function(data){
-					$scope.incidentTags=data;
+					$scope.whatTags=data;
 				});
 
 			$scope.gearTags=[];
@@ -140,10 +136,10 @@
 				});
 
 
-			$scope.situationTags=[];
-			getTags(ObservationService.getSituationTagGroups())
+			$scope.atTags=[];
+			getTags(ObservationService.getAtTagGroups())
 				.then(function(data){
-					$scope.situationTags=data;
+					$scope.atTags=data;
 				});
 
 
@@ -160,17 +156,41 @@
 
 			};
 
-			$scope.go = function(){
-
-
-				if($scope.model.text) {
-					$scope.model.search.push($scope.model.text);
+			$scope.searchDisabled = function(){
+				if(angular.isUndefined($scope.model)){
+					return true;
 				}
-				$scope.model.search = $scope.model.search.concat($scope.model.all,$scope.model.gear,$scope.model.incident,$scope.model.situation);
 
-				var text = $scope.model.search.join(',');
+				if(angular.isUndefined($scope.model.what)){
+					return true;
+				}
+
+				if(angular.isUndefined($scope.model.gear)){
+					return true;
+				}
+
+				if(angular.isUndefined($scope.model.at)){
+					return true;
+				}
+
+				return ($scope.model.what.length+$scope.model.gear.length+$scope.model.at)==0;
+			};
+
+			$scope.go = function(){
+				var text = '';
+				if($scope.model.what){
+					text+='what='+$scope.model.what.join(',')+';';
+				}
+				if($scope.model.gear){
+					text+='gear='+$scope.model.gear.join(',')+';';
+				}
+				if($scope.model.at){
+					text+='at='+$scope.model.at.join(',')+';';
+				}
+				
+				
 				if(text) {
-					var path = '/search/tag/' + encodeURIComponent(text);
+					var path = '/search/advanced/' + text;
 					console.log(path);
 					$location.path(path);
 				}

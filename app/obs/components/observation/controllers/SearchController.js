@@ -15,6 +15,7 @@
 					});
 			}
 			$scope.flag = $routeParams.flag;
+			$scope.query = $routeParams.q;
 			$scope.observations = [];
 			$scope.total = 0;
 
@@ -22,10 +23,12 @@
 			if($scope.flag) {
 				$scope.attributes={};
 				$scope.attributes[$scope.flag]=true;
-
 			}
 
+            if($scope.query){
+                $scope.queryObj = ObservationService.queryToQueryObj($scope.query);
 
+            }
 
 
 			var flattenComponentWhat = function(observation){
@@ -81,6 +84,10 @@
 					searchParam = $scope.flag;
 					searchFn = ObservationService.searchByFlag;
 				}
+                if($scope.query){
+                    searchParam = $scope.queryObj;
+                    searchFn = ObservationService.searchAdvanced;
+                }
 
 				searchFn(params.page(), params.count(),sortString,searchParam)
 					.then(function(data){

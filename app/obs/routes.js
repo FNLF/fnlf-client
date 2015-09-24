@@ -32,6 +32,10 @@
 						templateUrl: 'components/observation/search.html',
 						controller: 'SearchController'
 					})
+                    .when('/search/advanced/:q', {
+                        templateUrl: 'components/observation/search.html',
+                        controller: 'SearchController'
+                    })
 					.when('/observation/modal-route', {
 					})
 					.otherwise({redirectTo: '/'});
