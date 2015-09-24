@@ -57,7 +57,7 @@
 	});
 
 
-	angular.module('reportingApp').directive('flagsearch', function (RestService,Functions,$location,ObservationService) {
+	angular.module('reportingApp').directive('flagsearch', function (RestService,Functions,$location,ObservationService,Definitions) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -68,22 +68,10 @@
 		};
 
 		directive.link = function ($scope, element, attrs) {
-
-
-			$scope.all = {reserve_ride:true,
-				aad_fire:true,
-				gear_malfunction:true,
-				damage:true,
-				gear_failure:true,
-				packing_error:true,
-				wilfull:true,
-				violation:true,
-				injury:true,
-				death:true
-			};
-
-
-
+            $scope.all = {};
+            angular.forEach(Definitions.getComponentAttributes(),function(a){
+                $scope.all[a.attribute]=true;
+                });
 		};
 
 		return directive;

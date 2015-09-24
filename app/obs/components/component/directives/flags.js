@@ -1,6 +1,6 @@
 
 (function () {
-	angular.module('reportingApp').directive('flags', function () {
+	angular.module('reportingApp').directive('flags', function (Definitions) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -11,6 +11,7 @@
 		};
 
 		directive.link = function ($scope, element, attrs) {
+            $scope.allAttributes  = Definitions.getComponentAttributes();
 
 		};
 
@@ -18,6 +19,29 @@
 	});
 
 })();
+
+
+(function () {
+	angular.module('reportingApp').directive('flagseditor', function (Definitions) {
+		var directive = {};
+
+		directive.restrict = 'E';
+		directive.templateUrl = "/app/obs/components/component/directives/flagseditor.html";
+
+		directive.scope = {
+			attributes: '='
+		};
+
+		directive.link = function ($scope, element, attrs) {
+            $scope.allAttributes  = Definitions.getComponentAttributes();
+
+		};
+
+		return directive;
+	});
+
+})();
+
 
 
 (function () {
