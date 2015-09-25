@@ -11,6 +11,7 @@
 			$scope.total = 0;
 
 			if($routeParams.tag) {
+				$scope.tag = $routeParams.tag;
 				$scope.tags = SearchService.parseTagQuery($routeParams.tag);
 			}
 
