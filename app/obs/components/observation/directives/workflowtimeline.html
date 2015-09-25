@@ -1,0 +1,122 @@
+
+<div class="streamline b-l m-b">
+
+	<div ng-repeat="w in audit">
+
+		<div class="sl-item b-l" ng-class="workflowColors[w.a]">
+			<div class="m-l">
+				<div class="text-muted">{{w.t | date:'yyyy-MM-dd HH:mm'}} {{workflowActions[w.a]}}</div> 
+				<p>
+					<a class="text-info"><resolveuser userid="w.u"></resolveuser></a> <span ng-if="w.c!=null && w.c!='Initialized workflow'">: {{w.c}}</span>
+				</p>
+			</div>
+		</div>
+
+	</div>
+
+
+<style>
+.m-b {
+	margin-bottom: 15px
+}
+
+.m-l {
+	margin-left: 15px
+}
+
+.b-l {
+	border-left: 1px solid #dee5e7
+}
+
+.text-md {
+	font-size: 16px
+}
+
+.streamline {
+	position: relative;
+	border-color: #dee5e7
+}
+
+.streamline .sl-item:after,.streamline:after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 9px;
+	height: 9px;
+	margin-left: -5px;
+	background-color: #fff;
+	border-color: inherit;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	content: ''
+}
+
+.sl-item {
+	position: relative;
+	padding-bottom: 1px;
+	border-color: #dee5e7
+}
+
+.sl-item:before,.sl-item:after {
+	display: table;
+	content: " "
+}
+
+.sl-item:after {
+	clear: both
+}
+
+.sl-item:after {
+	top: 6px;
+	bottom: auto
+}
+
+.sl-item.b-l {
+	margin-left: -1px
+}
+
+.sl-item.b-lighter {
+	border-color: #eee
+}
+
+.sl-item.b-light {
+	border-color: #777
+}
+
+.sl-item.b-dark {
+	border-color: #333
+}
+
+.sl-item.b-black {
+	border-color: #222
+}
+
+.sl-item.b-primary {
+	border-color: #337ab7
+}
+
+.b-success {
+	border-color: #5cb85c
+}
+
+.sl-item.b-info {
+	border-color: #5bc0de;
+}
+
+.sl-item.b-warning {
+	border-color: #f0ad4e;
+}
+
+.sl-item.b-danger {
+	border-color: #d9534f;
+}
+
+.sl-item.b-white {
+	border-color: #fff
+}
+
+.sl-item.b-dashed {
+	border-style: dashed !important
+}
+</style>

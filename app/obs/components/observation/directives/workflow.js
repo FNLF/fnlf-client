@@ -159,7 +159,7 @@ angular.module('reportingApp')
 			$scope.btn_descr = response.description;
 			$scope.btns = btns;
 			$scope.username = +$rootScope.username;
-			$scope.title = 'Workflow for #' + $scope.observation.id;
+			$scope.title = 'Arbeidsflyt for #' + $scope.observation.id;
 			
 			var disabledFn = function(){
 				if(!$scope.workflowpermission || $scope.observationChanges) return true;

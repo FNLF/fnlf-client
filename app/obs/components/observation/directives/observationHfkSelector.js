@@ -6,6 +6,7 @@ angular.module('reportingApp').directive('observationHfkSelector', function (Def
 
 	directive.scope = {
 		model: '=',
+		verbose: '@',
 		editmode: '@'
 	};
 

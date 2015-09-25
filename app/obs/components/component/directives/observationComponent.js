@@ -14,10 +14,10 @@
 		directive.link = function ($scope, element, attrs) {
 
 			$scope.flags = ['incident','cause','consequence','barrier'];
-
-
-
-
+			
+			//Backwards compatibility
+			if(!$scope.component.ask) $scope.component.ask = {attitude: 0, skills: 0, knowledge: 0};
+			
 			$scope.incidentOrElse = function(flags){
 				var isIncident = true;
 				Object.keys(flags).forEach(function(k){
@@ -54,6 +54,10 @@
 								angular.copy(t.where, $scope.component.where);
 								$scope.component.how="";
 								angular.copy(t.how, $scope.component.how);
+								
+								$scope.component.ask = {attitude: 0, skills: 0, knowledge: 0}; //@see: observationHfkSelector for backward compatibility
+								angular.copy(t.ask, $scope.component.ask);
+								
 								console.log(t);
 								console.log($scope.component);
 							}
