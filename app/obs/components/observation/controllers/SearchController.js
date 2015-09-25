@@ -22,8 +22,9 @@
 
 			if($routeParams.query){
 				$scope.query = $routeParams.query;
-				$scope.queryObj = SearchService.parseAdvancedSearchQuery($scope.query);
+
 			}
+			$scope.queryObj = SearchService.parseAdvancedSearchQuery($scope.query);
 
 			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
 				var sortString = ObservationsTableService.sortStringFromParams(params);
