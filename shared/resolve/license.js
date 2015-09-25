@@ -15,11 +15,18 @@ angular.module('resolve').directive('resolvelicense', function (ResolveService) 
 
 		var unbind = $scope.$watch('licenseid', function () {
 			if ($scope.licenseid) {
-				$scope.name = $scope.licenseid;
-				ResolveService.getLicense($scope.licenseid).then(function (license) {
-					$scope.name = license.name;
-				});
-				unbind();
+				
+				//Only F-xyz 
+				if($scope.licenseid.charAt(0) == 'F') {
+					
+					$scope.name = $scope.licenseid;
+				
+					ResolveService.getLicense($scope.licenseid).then(function (license) {
+						$scope.name = license.name;
+					});
+					
+					unbind();
+				}
 			}
 
 		});
