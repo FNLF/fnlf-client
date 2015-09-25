@@ -38,17 +38,19 @@
 				<p class="list-group-item-text">
 				<div class="col-xs-12  col-md-6">
 
-					<table class="table table-condensed">
-						<caption>Sammendrag</caption>
+					<table class="table table-condensed table-hover table-responsive">
+						
+						<tr style="border-top: none !important">
+							<td style="border-top: none !important">Klubb</td>
+							<td style="border-top: none !important"><resolveclub long=true clubid="::observation.club"></resolveclub></td>
+						</tr>
+						
 						<tr>
 							<td>Hovedinstruktør</td>
 							<td><span ng-repeat="person in ::observation.organization.hi"> <span><resolveuser userid="::person"></resolveuser></span> &nbsp;
 							</span></td>
 						</tr>
-						<tr>
-							<td>Klubb</td>
-							<td><resolveclub clubid="::observation.club"></resolveclub></td>
-						</tr>
+						
 						<tr>
 							<td>Type</td>
 							<td><resolveobservationtype type="::observation.type"></resolveobservationtype></td>
@@ -133,7 +135,7 @@
 			<li class="list-group-item">
 				<div class="col-xs-12  col-md-12">
 					<label class="control-label"> Involverte </label>
-					<table class="table table-condensed">
+					<table class="table table-condensed table-hover table-responsive">
 						<tr>
 							<th>Hopper</th>
 							<th>Lisenser</th>
