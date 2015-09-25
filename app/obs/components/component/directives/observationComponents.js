@@ -193,6 +193,7 @@
 				var template = {};
 				template.flags={consequence:true};
 				template.attributes={};
+				template.ask = {attitude: 0, skills: 0, knowledge: 0};
 				$scope.newComponent(template);
 			};
 
@@ -200,6 +201,7 @@
 				var template = {};
 				template.flags={incident:true};
 				template.attributes={};
+				template.ask = {attitude: 0, skills: 0, knowledge: 0};
 				$scope.newComponent(template);
 			};
 
@@ -209,12 +211,24 @@
 				template.flags={cause:true};
 				template.attributes={};
 				template.order = parentOrder - 0.5;
+				template.ask = {attitude: 0, skills: 0, knowledge: 0};
 				$scope.newComponent(template);
 			};
 
 			$scope.deleteComponent = function(component){
 				var index = $scope.observation.components.indexOf(component);
-				$scope.observation.components.splice(index,1);
+				
+				console.log("INDEX!!!");
+				console.log(index);
+				console.log($scope.observation.components.length);
+				
+				if($scope.observation.components.length == (index + 1)) {
+					$scope.observation.components.splice(-1,1);
+				}
+				else {
+					$scope.observation.components.splice(index,1);
+				}
+				
 				reorderFunc($scope.observation.components);
 			};
 
