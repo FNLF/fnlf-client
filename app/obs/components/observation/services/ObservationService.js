@@ -20,6 +20,7 @@
 				this.comments = [];
 				this.actions = {};
 				this.type = 'near_miss';
+				this.ask = {skills:0,knowledge:0,attitude:0};
 			};
 
 			

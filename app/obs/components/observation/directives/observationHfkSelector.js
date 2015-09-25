@@ -5,23 +5,34 @@ angular.module('reportingApp').directive('observationHfkSelector', function (Def
 	directive.templateUrl = "components/observation/directives/observationHfkSelector.html";
 
 	directive.scope = {
-		observation: '='
+		model: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
-		$scope.model={};
 
-		$scope.flip = function(what){
-			 if(angular.isUndefined($scope.model[what]) || $scope.model[what] == 0 ){
-				$scope.model[what]=-1;
+		$scope.isPositive = function (what) {
+			return ($scope.model[what] > 0);
+		};
+		$scope.isNegative = function (what) {
+			return ($scope.model[what] < 0);
+		};
+		$scope.isNeutral = function (what) {
+			return ($scope.model[what] == 0);
+		};
 
-			}else if($scope.model[what] > 0){
-				$scope.model[what]=0;
+		$scope.flip = function (what) {
 
-			} else if($scope.model[what] < 0){
-				 $scope.model[what]=1;
 
-			 }
+			if (angular.isUndefined($scope.model[what]) || $scope.model[what] == 0) {
+				$scope.model[what] = -1;
+
+			} else if ($scope.model[what] > 0) {
+				$scope.model[what] = 0;
+
+			} else if ($scope.model[what] < 0) {
+				$scope.model[what] = 1;
+
+			}
 		};
 
 	};
