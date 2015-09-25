@@ -86,6 +86,7 @@
 
 			if (!$scope.model) {
 				$scope.model = {};
+
 			}
 
 			var unbind = $scope.$watch('query', function () {
@@ -145,25 +146,12 @@
 			};
 
 			$scope.searchDisabled = function () {
-				if (angular.isUndefined($scope.model)||angular.isUndefined($scope.model.what)||angular.isUndefined($scope.model.gear)||angular.isUndefined($scope.model.at)) {
-					return true;
-				}
-				return ($scope.model.what.length + $scope.model.gear.length + $scope.model.at) == 0;
+
+				return ($scope.model.what.length + $scope.model.gear.length + $scope.model.at+ $scope.model.jumps) == 0;
 			};
 
 			$scope.go = function () {
-				var text = '';
-				['what','gear','at'].forEach(function(category){
-					if ($scope.model[category]) {
-						text += category+'=' + $scope.model[category].join(',') + ';';
-					}
-				});
-
-				if (text) {
-					var path = '/search/advanced/' + text;
-					console.log(path);
-					$location.path(path);
-				}
+				SearchService.goSearchAdvanced($scope.model);
 
 			};
 
