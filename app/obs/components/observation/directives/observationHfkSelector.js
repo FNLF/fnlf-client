@@ -7,16 +7,11 @@ angular.module('reportingApp').directive('observationHfkSelector', function (Def
 	directive.scope = {
 		model: '=',
 		verbose: '@',
+		editmode: '@'
 	};
 
 	directive.link = function ($scope, element, attrs) {
-		
-		if($scope.verbose=='true') $scope.verbose = true;
-		else $scope.verbose = false;
-		
-		//Backward compatible!
-		if(!$scope.model) $scope.model = {a: 0, s: 0, k: 0};
-		
+
 		$scope.isPositive = function (what) {
 			return ($scope.model[what] > 0);
 		};

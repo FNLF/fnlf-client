@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('SearchService', function (RestService, Definitions, Functions) {
+		.service('SearchService', function (RestService, Definitions, Functions,$location) {
 
 
 			var mapping = {};
@@ -100,7 +100,23 @@
 			};
 
 
+			this.goSearchAdvanced = function(model){
 
+				var text = '';
+				['what','gear','at','jumps'].forEach(function(category){
+					if (model[category]) {
+						console.log(category);
+						text += category+'=' + model[category].join(',') + ';';
+					}
+				});
+
+				if (text) {
+					var path = '/search/advanced/' + text;
+					console.log(path);
+					$location.path(path);
+				}
+
+			};
 
 			this.searchAdvanced = function (page, maxResults, sort, queryObj) {
 
@@ -118,11 +134,36 @@
 				var whereObj = {};
 				var andArr = [];
 				whereObj.$and = andArr;
+
+				var queryParams = {what: whatParams,gear:gearParams,at:atParams};
+
 				['what','gear','at'].forEach(function(category){
 					if (queryObj[category].length > 0) {
-						andArr.push({$or: getBigOrArray(gearParams, queryObj[category])});
+						andArr.push({$or: getBigOrArray(queryParams[category], queryObj[category])});
 					}
 				});
+
+
+				if(queryObj.jumps&&queryObj.jumps.length==2){
+					var lessThanJumps = queryObj.jumps.length[0];
+					var greaterThanJumps = queryObj.jumps.length[1];
+					if(lessThanJumps) {
+						var obj = {};
+						obj['involved.numberOfJumps'] = {$lte:lessThanJumps};
+						andArr.push(obj);
+					}
+
+					if(greaterThanJumps) {
+						var obj = {};
+						obj['involved.numberOfJumps'] = {$gte:greaterThanJumps}
+						andArr.push(obj);
+					}
+				}
+
+				if (!(queryObj.what&&queryObj.gear&&queryObj.at&&queryObj.jumps)) {
+					whereObj = {};
+				}
+
 				var where = 'where=' + JSON.stringify(whereObj);
 				return RestService.getAllObservations(page, maxResults, sort, where);
 
@@ -130,12 +171,16 @@
 
 
 			this.parseAdvancedSearchQuery = function (query) {
-				var queryObj = {what:[],gear:[],at:[]};
+				var queryObj = {what:[],gear:[],at:[],jumps:[0,0]};
+				if(!query){
+					return queryObj;
+				}
+
 				var queryParts = query.split(';');
 				queryParts.forEach(function (part) {
 					var keyValueArr = part.split('=');
 					if (keyValueArr.length == 2) {
-						['what','gear','at'].forEach(function(category){
+						['what','gear','at','jumps'].forEach(function(category){
 							if (keyValueArr[0] == category && keyValueArr[1]) {
 								queryObj[category] = keyValueArr[1].split(',')
 									.map(function (tag) {
@@ -151,6 +196,8 @@
 				return queryObj;
 
 			};
+
+
 
 			this.parseTagQuery = function(query){
 				query = decodeURIComponent(query);
