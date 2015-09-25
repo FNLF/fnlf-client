@@ -32,7 +32,7 @@
 						templateUrl: 'components/observation/search.html',
 						controller: 'SearchController'
 					})
-                    .when('/search/advanced/:q', {
+                    .when('/search/advanced/:query', {
                         templateUrl: 'components/observation/search.html',
                         controller: 'SearchController'
                     })

@@ -1,92 +1,42 @@
 (function () {
 
-	
+
 	angular.module('reportingApp')
-		.controller('SearchController', function ($scope,$rootScope, ObservationService,ObservationsTableService,Definitions,Functions,$routeParams,ngTableParams) {
+		.controller('SearchController', function ($scope,$rootScope, ObservationService,SearchService,ObservationsTableService,Definitions,Functions,$routeParams,ngTableParams) {
 
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
 
-			if($routeParams.tag) {
-				$scope.tag = decodeURIComponent($routeParams.tag);
-				$scope.tags = $scope.tag.split(',')
-					.map(function(t){
-						return Functions.capitalizeFirstLetter(t)
-					});
-			}
-			$scope.flag = $routeParams.flag;
-			$scope.query = $routeParams.q;
 			$scope.observations = [];
 			$scope.total = 0;
 
+			if($routeParams.tag) {
+				$scope.tags = SearchService.parseTagQuery($routeParams.tag);
+			}
 
-			if($scope.flag) {
+			if($routeParams.flag){
+				$scope.flag = $routeParams.flag;
 				$scope.attributes={};
 				$scope.attributes[$scope.flag]=true;
 			}
 
-            if($scope.query){
-                $scope.queryObj = ObservationService.queryToQueryObj($scope.query);
-
-            }
-
-
-			var flattenComponentWhat = function(observation){
-				if(angular.isUndefined(observation.components)){
-					return [];
-				}
-
-				return observation.components.map(function(c){
-					return Functions.capitalizeFirstLetter(c.what);
-				});
-			};
-
-			var flattenComponentTags = function(observation){
-				if(angular.isUndefined(observation.components)){
-					return [];
-				}
-
-				var tags = [];
-				angular.forEach(observation.components, function(c){
-					angular.forEach(c.tags,function(t){
-						tags.push(Functions.capitalizeFirstLetter(t));
-					});
-				});
-
-				return tags;
-			};
-
-
-			var flattenAttributes = function(observation){
-				if(angular.isUndefined(observation.components)){
-					return [];
-				}
-
-				var attributes = {};
-				angular.forEach(observation.components, function(c){
-					angular.forEach(c.attributes,function(v,k){
-						if(v){
-							attributes[k]=v;
-						}
-
-					});
-				});
-				return attributes;
-			};
-
+			if($routeParams.query){
+				$scope.query = $routeParams.query;
+				$scope.queryObj = SearchService.parseAdvancedSearchQuery($scope.query);
+			}
 
 			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 
 				var searchParam = $scope.tags;
-				var searchFn = ObservationService.searchByTag;
+				var searchFn = SearchService.searchByTag;
 				if($scope.flag){
 					searchParam = $scope.flag;
-					searchFn = ObservationService.searchByFlag;
+					searchFn = SearchService.searchByFlag;
 				}
                 if($scope.query){
                     searchParam = $scope.queryObj;
-                    searchFn = ObservationService.searchAdvanced;
+                    searchFn = SearchService.searchAdvanced;
                 }
 
 				searchFn(params.page(), params.count(),sortString,searchParam)
@@ -96,9 +46,9 @@
 						$scope.total = meta.total;
 
 						angular.forEach(data._items,function(obs){
-							obs.flattenedWhats = flattenComponentWhat(obs);
-							obs.flattenedFlags = flattenAttributes(obs);
-							obs.flattenedTags = flattenComponentTags(obs);
+							obs.flattenedWhats = SearchService.flattenComponentWhat(obs);
+							obs.flattenedFlags = SearchService.flattenAttributes(obs);
+							obs.flattenedTags = SearchService.flattenComponentTags(obs);
 						});
 
 						$defer.resolve(data._items);
@@ -134,5 +84,5 @@
 
 
 		});
-	
+
 })();
