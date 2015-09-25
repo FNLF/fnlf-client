@@ -1,5 +1,5 @@
 <div>
-	<div class="btn-group btn-group">
+	<div class="btn-group btn-group" ng-if="editmode">
 		<button type="button"
 				ng-class="{'btn':true, 'btn-danger': isNegative('knowledge'), 'btn-default': isNeutral('knowledge'), 'btn-success': isPositive('knowledge')}"
 				ng-click="flip('knowledge')">Kunnskaper

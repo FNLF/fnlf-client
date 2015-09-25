@@ -5,7 +5,8 @@ angular.module('reportingApp').directive('observationHfkSelector', function (Def
 	directive.templateUrl = "components/observation/directives/observationHfkSelector.html";
 
 	directive.scope = {
-		model: '='
+		model: '=',
+		editmode: '@'
 	};
 
 	directive.link = function ($scope, element, attrs) {
