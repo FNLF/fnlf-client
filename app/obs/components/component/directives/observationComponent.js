@@ -14,10 +14,10 @@
 		directive.link = function ($scope, element, attrs) {
 
 			$scope.flags = ['incident','cause','consequence','barrier'];
-
-
-
-
+			
+			//Backwards compatibility
+			if(!$scope.component.ask) $scope.component.ask = {attitude: 0, skills: 0, knowledge: 0};
+			
 			$scope.incidentOrElse = function(flags){
 				var isIncident = true;
 				Object.keys(flags).forEach(function(k){

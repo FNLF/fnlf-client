@@ -13,21 +13,23 @@
 				ng-click="flip('attitude')">Holdninger
 		</button>
 	</div>
-
-	<li>
-		<span ng-if="isPositive('knowledge')">Eksempel til etterfølgelse på grunn av mye <b>god</b> kunnskaper</span>
-		<span ng-if="isNeutral('knowledge')">Kunnskapen til de involverte hadde <b>ingen</b> innvirkning</span>
-		<span ng-if="isNegative('knowledge')"><b>Mangelfulle</b> kunnskaper hadde betydning</span>
-	</li>
-	<li>
-		<span ng-if="isPositive('skills')">Eksempel til etterfølgelse på grunn av <b>gode</b> ferdigheter</span>
-		<span ng-if="isNeutral('skills')">Ferdighetene til de involverte hadde <b>ingen</b> innvirkning</span>
-		<span ng-if="isNegative('skills')"><b>Mangelfulle</b> ferdigheter hadde betydning</span>
-	</li>
-	<li>
-		<span ng-if="isPositive('attitude')">Eksempel til etterfølgelse på grunn av <b>gode</b> holdninger</span>
-		<span ng-if="isNeutral('attitude')">Holdningene til de involverte hadde <b>ingen</b> innvirkning</span>
-		<span ng-if="isNegative('attitude')"><b>Dårlige</b> holdninger hadde betydning</span>
-	</li>
+	<div ng-if="verbose=='true'">
+	<ul class="list-unstyled">
+		<li>
+			<span ng-if="isPositive('knowledge')">Eksempel til etterfølgelse på grunn av mye <b>god</b> kunnskaper</span>
+			<span ng-if="isNeutral('knowledge')">Kunnskapen til de involverte hadde <b>ingen</b> innvirkning</span>
+			<span ng-if="isNegative('knowledge')"><b>Mangelfulle</b> kunnskaper hadde betydning</span>
+		</li>
+		<li>
+			<span ng-if="isPositive('skills')">Eksempel til etterfølgelse på grunn av <b>gode</b> ferdigheter</span>
+			<span ng-if="isNeutral('skills')">Ferdighetene til de involverte hadde <b>ingen</b> innvirkning</span>
+			<span ng-if="isNegative('skills')"><b>Mangelfulle</b> ferdigheter hadde betydning</span>
+		</li>
+		<li>
+			<span ng-if="isPositive('attitude')">Eksempel til etterfølgelse på grunn av <b>gode</b> holdninger</span>
+			<span ng-if="isNeutral('attitude')">Holdningene til de involverte hadde <b>ingen</b> innvirkning</span>
+			<span ng-if="isNegative('attitude')"><b>Dårlige</b> holdninger hadde betydning</span>
+		</li>
 	</ul>
+	</div>
 </div>
