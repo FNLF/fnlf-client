@@ -74,6 +74,11 @@
                         {attribute:'death',color:'warning',label:'Død'}];
 
 			};
+			
+			this.getRatingScale = function() {
+				
+				return [null, 'Alt OK','Til ettertanke', 'Mindre skade', 'Middels skade', 'Alvorlig skade', 'Alvorlig skade/men', 'Død', 'Flere døde'];
+			};
 
 		});
 

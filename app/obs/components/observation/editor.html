@@ -170,19 +170,6 @@
 				<div class="clearfix"></div>
 			</li>
 
-			<li class="list-group-item">
-				<label class="control-label">Vurdering</label>
-					<inlinehelp>
-					Hvordan vurderer du holdninger, kunnskaper og ferdigheter opp mot forløpet av denne observasjonen?
-					</inlinehelp>
-				<p class="list-group-item-text">
-					
-				<observation-hfk-selector editmode="true" verbose="true" model="observation.ask"></observation-hfk-selector>
-
-				</p>
-				<div class="clearfix"></div>
-			</li>
-
 			<!-- Weather; should be more intelligent and using weather icons? -->
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Været</h4>
@@ -201,8 +188,6 @@
 				</p>
 				<div class="clearfix"></div>
 			</li>
-
-
 
 			<!-- Actions! -->
 			<li class="list-group-item">
@@ -233,6 +218,36 @@
 				</p>
 				<div class="clearfix"></div>
 			</li>
+			
+			<!-- Holdninger, kunnskap og ferdigheter -->
+			<li class="list-group-item">
+				<div class="col-md-4 col-xs-12">
+					<label class="control-label">Vurdering</label>
+					<inlinehelp>
+						Hvordan vurderer du holdninger, kunnskaper og ferdigheter opp mot forløpet av denne observasjonen?
+					</inlinehelp>
+					<p class="list-group-item-text">
+						<observation-hfk-selector editmode="true" verbose="true" model="observation.ask"></observation-hfk-selector>
+					</p>
+				</div>
+				
+				<div class="col-md-8 col-xs-12">
+					<label class="control-label">Kommenter vurdering</label>
+						<inlinehelp>
+						Skriv korte kommentarer og vurderinger om du har skrivekløe. Husk at dette kun vil være gjenstand for manuell gjennomlesning.
+						</inlinehelp>
+					<p class="list-group-item-text">
+						<textarea class="form-control" rows="4" disabled>Nuvel, Jarl, Frank og alle dere andre som peiser inn fritekst all mass hvordetnåennskullevære - SU har kommet med løsningen, et fritekstfelt!
+Dog, det er bare et dummy-felt som dere kan se på inntil logikken er på plass) 
+						</textarea>
+					</p>
+				
+				</div>
+				
+				<div class="clearfix"></div>
+			</li>
+			
+			
 			<!-- 
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Relaterte</h4>
