@@ -32,6 +32,10 @@
 				}
 			};
 
+			var disableOpenInReportLink = function(){
+				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: ''}];
+			};
+
 			$scope.loadObservation = function(){
 				$scope.observation = {};
 				ObservationService.getObservationById(observationId)
@@ -138,7 +142,7 @@
 				$window.onbeforeunload = function(){
 			        return 'You have unsaved observation data';
 			      };
-				$rootScope.nav.menus = [];
+				disableOpenInReportLink();
 				$scope.observationChanges = true;
 			}
 		},true);
