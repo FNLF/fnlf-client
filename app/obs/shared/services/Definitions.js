@@ -59,9 +59,9 @@
 
 
 			this.getComponentAttributes = function(){
-			    return [{attribute:'attitude',color:'default',label:'Holdninger'},
-						{attribute:'skills',color:'default',label:'Ferdigheter'},
-						{attribute:'knowledge',color:'default',label:'Kunnskap'},
+			    return [{attribute:'attitude',color:'primary',label:'Holdninger'},
+						{attribute:'skills',color:'primary',label:'Ferdigheter'},
+						{attribute:'knowledge',color:'primary',label:'Kunnskap'},
 						{attribute:'reserve_ride',color:'info',label:'Reserve benyttet'},
                         {attribute:'aad_fire',color:'warning',label:'Nødåpner fyrt'},
                         {attribute:'packing_error',color:'default',label:'Pakkefeil'},
