@@ -163,25 +163,16 @@
 				var observationDto = {};
 				Functions.copy(observation,observationDto);
 
-				delete observationDto.id;
-				delete observationDto.reporter;
-				delete observationDto.owner;
-				delete observationDto.wilfull;
+				['id','reporter','owner','watchers','workflow'].forEach(function(k){
+					delete observationDto[k];
+				});
 
-				delete observationDto.title;
-				delete observationDto._updated;
-				delete observationDto._latest_version;
-				delete observationDto.audit;
-				delete observationDto.watchers;
-				delete observationDto._version;
-				delete observationDto.workflow;
-				delete observationDto._links;
-				delete observationDto._created;
-				delete observationDto._status;
-				delete observationDto._etag;
-				delete observationDto._id;
+				Object.keys(observationDto).forEach(function(k){
+					if(k.indexOf('_')==0){
+						delete observationDto[k];
+					}
 
-
+				});
 
 				$rootScope.error = null;
 
