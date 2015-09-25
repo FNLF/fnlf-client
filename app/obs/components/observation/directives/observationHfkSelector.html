@@ -1,0 +1,8 @@
+<div>
+
+	<div class="btn-group btn-group-lg">
+		<button type="button" class="btn" ng-class="{'btn-danger': (model['k']<0), 'btn-default': (model['k']==0), 'btn-success': (model['k']>0) }" ng-click="flip('k')">Kunnskaper</button>
+		<button type="button" class="btn" ng-class="{'btn-danger': (model['f']<0), 'btn-default': (model['f']==0), 'btn-success': (model['f']>0) }" ng-click="flip('f')">Ferdigheter</button>
+		<button type="button" class="btn" ng-class="{'btn-danger': (model['h']<0), 'btn-default': (model['h']==0), 'btn-success': (model['h']>0) }" ng-click="flip('h')">Holdninger</button>
+	</div>
+</div>
