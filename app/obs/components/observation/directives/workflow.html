@@ -9,10 +9,6 @@
 		<label for="comment">Kommentarer:</label>
 		<textarea tooltip-placement="top" tooltip="Legg inn relevante kommentarer for å endre status på observasjonen" ng-model="workflow.comment" name="comment" class="form-control" rows="3" id="comment"></textarea>
 	</div>
-	<p>
-		Siste kommentar: <strong>{{observation.workflow.comment}}</strong> @ {{observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}} av
-		<resolveuser userid="observation.workflow.audit[0].u"></resolveuser>
-	</p>
 
 	<div ng-repeat="value in btns">
 		<div ng-if="value.permission">
