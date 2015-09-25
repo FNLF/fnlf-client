@@ -59,7 +59,7 @@
 						</tr>
 						<tr>
 							<td>Alvorlighetsgrad</td>
-							<td>{{::observation.rating.actual}} / {{::observation.rating.potential}}</td>
+							<td>{{::observation.rating.actual}} av {{::observation.rating.potential}}</td>
 						</tr>
 
 
@@ -75,6 +75,10 @@
 							<td>Lukket</td>
 							<td ng-if="::observation.workflow.state=='closed'">{{::observation.workflow.last_transition | date:'yyyy-MM-dd HH:mm'}}</td>
 							<td ng-if="::observation.workflow.state!='closed'"><span class="text-danger">Ikke lukket</span></td>
+						</tr>
+						<tr>
+							<td>Versjon</td>
+							<td>{{observation._version}}</td>
 						</tr>
 						<tr>
 							<td>Behandlingstid</td>
@@ -113,8 +117,10 @@
 			<li class="list-group-item">
 				<div class="col-xs-12  col-md-12">
 					<!-- streamline -->
-					<label class="control-label">Audit</label>
-					<workflowtimeline audit="::observation.workflow.audit"></workflowtimeline>
+					<label class="control-label" ng-click="isCollapsed = !isCollapsed">Arbeidsflyt<i class="fa fa-fw" ng-class="{'fa-angle-up': isCollapsed, 'fa-angle-down': !isCollapsed}"></i></label>
+					<div collapse="!isCollapsed">
+						<workflowtimeline audit="::observation.workflow.audit"></workflowtimeline>
+					</div>
 				</div>
 			<div class="clearfix"></div>
 			</li>
