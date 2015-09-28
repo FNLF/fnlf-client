@@ -13,6 +13,12 @@ angular.module('reportingApp').directive('summary', function (ObservationService
 	};
 	
 	directive.controller = function($scope, $rootScope, $location, $aside) {
+
+		RestService.getWorkflowState($scope.observation._id)
+			.then(function (response) {
+				$scope.workflowState = response;
+			});
+
 		$scope.openSummaryAside = function() {
 			$location.path('/observation/modal-route', false);
 		    $scope.summaryAside = $aside({

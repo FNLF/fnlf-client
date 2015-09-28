@@ -229,6 +229,9 @@
 				
 			};
 
+			this.getAcl = function(id){
+				return RestService.getObservationAcl(id);
+			};
 
 		});
 

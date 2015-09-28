@@ -132,7 +132,13 @@
 				return $http.post(urlBase + '/observations/workflow/' + objectId + '/' + action, {'comment': comment})
 					.then(handleSuccess, handleError);
 			};
-			
+
+			this.getObservationAcl = function (id){
+				return $http.get(urlBase + '/users/acl/observation/' + id)
+					.then(handleSuccess, handleError);
+			};
+
+
 			/**
 			 * Watching/watchers
 			 * 

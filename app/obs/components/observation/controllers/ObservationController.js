@@ -24,6 +24,14 @@
 
 			$scope.ui=$routeParams.ui;
 
+			$scope.acl={x:false,r:false,w:false};
+			$scope.getAcl = function(){
+				ObservationService.getAcl(observationId)
+					.then(function(acl){
+						$scope.acl=acl;
+					});
+			};
+
 			var addMenusAndToolbar = function(){
 				$rootScope.nav.brand = 'FNLF ORS #' + $scope.observation.id;
 				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
@@ -36,10 +44,13 @@
 				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: ''}];
 			};
 
+
+
 			$scope.loadObservation = function(){
 				$scope.observation = {};
 				ObservationService.getObservationById(observationId)
 					.then(function(obs){
+						$scope.getAcl();
 						$scope.observation = obs;
 
 						$scope.observationChanges = false;
@@ -48,8 +59,6 @@
 						},10);
 
 						addMenusAndToolbar();
-
-
 				}).catch(function(error){
 						console.log("Catched in ObservationController: "+error);
 						$rootScope.error = "Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke";
@@ -87,7 +96,7 @@
 				.then(function(updated){
 					$rootScope.error = '';
 					$scope.observation = updated;
-
+					$scope.getAcl();
 
 				})
 				.then(function(){
@@ -137,13 +146,16 @@
 				//angular.forEach(diff,function(o){
 				//	console.log(o);
 				//});
-
-
-				$window.onbeforeunload = function(){
-			        return 'You have unsaved observation data';
-			      };
-				disableOpenInReportLink();
-				$scope.observationChanges = true;
+				if(!$scope.acl.x){
+					var msg = 'Du vil ikke kunne lagre fordi du mangler skrivetilgang';
+					$rootScope.error = msg;
+				}else{
+					$window.onbeforeunload = function(){
+						return 'You have unsaved observation data';
+					};
+					disableOpenInReportLink();
+					$scope.observationChanges = true;
+				}
 			}
 		},true);
 

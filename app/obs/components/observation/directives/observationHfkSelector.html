@@ -1,36 +1,40 @@
-<div>
+
 	<div class="btn-group btn-group" ng-if="editmode">
-		<button type="button"
-				ng-class="{'btn':true, 'btn-danger': isNegative('knowledge'), 'btn-default': isNeutral('knowledge'), 'btn-success': isPositive('knowledge')}"
-				ng-click="flip('knowledge')">Kunnskaper
-		</button>
-		<button type="button"
-				ng-class="{'btn':true, 'btn-danger': isNegative('skills')  , 'btn-default': isNeutral('skills')    , 'btn-success': isPositive('skills')   }"
-				ng-click="flip('skills')">Ferdigheter
-		</button>
-		<button type="button"
-				ng-class="{'btn':true, 'btn-danger': isNegative('attitude'), 'btn-default': isNeutral('attitude')  , 'btn-success': isPositive('attitude') }"
-				ng-click="flip('attitude')">Holdninger
-		</button>
+		<span ng-repeat="ask in askValues">
+			<button type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" ng-click="flip(ask.key)">
+				{{ask.label}}
+			</button>
+
+		</span>
 	</div>
+	<span ng-if="!editmode">
+		<span ng-repeat="ask in askValues">
+			<span ng-if="!isNeutral(ask.key)">
+				<i ng-class="{'label':true, 'label-danger': isNegative(ask.key), 'label-default': isNeutral(ask.key), 'label-success': isPositive(ask.key)}">
+					{{ask.label}}
+				</i>
+			</span>
+		</span>
+	</span>
+
 	<div ng-if="verbose=='true'">
 	<br />
 	<ul class="list-unstyled">
 		<li>
-			<span ng-if="isPositive('knowledge')">Eksempel til etterfølgelse på grunn av mye <b>god</b> kunnskaper</span>
+			<span ng-if="isPositive('knowledge')"><b>Gode</b> kunnskaper hadde innvirkning</span>
 			<span ng-if="isNeutral('knowledge')">Kunnskapen til de involverte hadde <b>ingen</b> innvirkning</span>
 			<span ng-if="isNegative('knowledge')"><b>Mangelfulle</b> kunnskaper hadde betydning</span>
 		</li>
 		<li>
-			<span ng-if="isPositive('skills')">Eksempel til etterfølgelse på grunn av <b>gode</b> ferdigheter</span>
+			<span ng-if="isPositive('skills')"><b>Gode</b> ferdigheter hadde innvirkning</span>
 			<span ng-if="isNeutral('skills')">Ferdighetene til de involverte hadde <b>ingen</b> innvirkning</span>
 			<span ng-if="isNegative('skills')"><b>Mangelfulle</b> ferdigheter hadde betydning</span>
 		</li>
 		<li>
-			<span ng-if="isPositive('attitude')">Eksempel til etterfølgelse på grunn av <b>gode</b> holdninger</span>
+			<span ng-if="isPositive('attitude')"><b>Gode</b> holdninger hadde innvirkning</span>
 			<span ng-if="isNeutral('attitude')">Holdningene til de involverte hadde <b>ingen</b> innvirkning</span>
 			<span ng-if="isNegative('attitude')"><b>Dårlige</b> holdninger hadde betydning</span>
 		</li>
 	</ul>
 	</div>
-</div>
+	<div class="clearfix"></div>
