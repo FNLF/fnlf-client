@@ -24,6 +24,7 @@
 
 			$scope.ui=$routeParams.ui;
 
+			$scope.acl={x:false,r:false,w:false};
 			$scope.getAcl = function(){
 				ObservationService.getAcl(observationId)
 					.then(function(acl){
@@ -58,8 +59,6 @@
 						},10);
 
 						addMenusAndToolbar();
-
-						ObservationService.getAcl(obs._id);
 				}).catch(function(error){
 						console.log("Catched in ObservationController: "+error);
 						$rootScope.error = "Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke";
@@ -147,13 +146,15 @@
 				//angular.forEach(diff,function(o){
 				//	console.log(o);
 				//});
-
-
-				$window.onbeforeunload = function(){
-			        return 'You have unsaved observation data';
-			      };
-				disableOpenInReportLink();
-				$scope.observationChanges = true;
+				if(!$scope.acl.x){
+					$rootScope.error = 'Du vil ikke kunne lagre fordi du mangler skrivetilgang';
+				}else{
+					$window.onbeforeunload = function(){
+						return 'You have unsaved observation data';
+					};
+					disableOpenInReportLink();
+					$scope.observationChanges = true;
+				}
 			}
 		},true);
 
