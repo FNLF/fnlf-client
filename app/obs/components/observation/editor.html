@@ -22,8 +22,8 @@
 		</span> <span class="pull-left"><span class="label label-default">Opprettet: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span> <span class="pull-left"><span
 			class="label label-default">Eier: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
 
-		<span ng-if="acl.w" class="pull-left"><span class="label label-danger">Skrivetilgang</span>&nbsp;</span>
-		<span ng-if="!acl.w" class="pull-left"><span class="label label-info">Lesetilgang</span>&nbsp;</span>
+		<span ng-if="acl.x" class="pull-left"><span class="label label-danger">Skrivetilgang</span>&nbsp;</span>
+		<span ng-if="(acl.r && !acl.x)" class="pull-left"><span class="label label-info">Lesetilgang</span>&nbsp;</span>
 
 		<!-- If changes, show warning include a "leaving page are you sure?"  -->
 		<span ng-if="observationChanges" class="pull-left"><span ng-click="saveObservation()" class="label label-danger">{{observationChanges ? 'Endringer' : 'Lagret'}}</span>&nbsp;</span>

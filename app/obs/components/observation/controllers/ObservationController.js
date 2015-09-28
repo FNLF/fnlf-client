@@ -24,12 +24,11 @@
 
 			$scope.ui=$routeParams.ui;
 
-			$scope.getAcl = function(observation){
-				ObservationService.getAcl(observation._id)
+			$scope.getAcl = function(){
+				ObservationService.getAcl(observationId)
 					.then(function(acl){
 						$scope.acl=acl;
 					});
-
 			};
 
 			var addMenusAndToolbar = function(){
@@ -50,7 +49,7 @@
 				$scope.observation = {};
 				ObservationService.getObservationById(observationId)
 					.then(function(obs){
-						$scope.getAcl(obs);
+						$scope.getAcl();
 						$scope.observation = obs;
 
 						$scope.observationChanges = false;
@@ -98,7 +97,7 @@
 				.then(function(updated){
 					$rootScope.error = '';
 					$scope.observation = updated;
-
+					$scope.getAcl();
 
 				})
 				.then(function(){

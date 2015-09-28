@@ -229,20 +229,8 @@
 				
 			};
 
-			this.getAcl = function(_id){
-				return RestService.getWorkflowState(_id)
-					.then(function (response) {
-						var acl = {r:true,w:false,x:false};
-						var actions = response.actions;
-						if(actions.length>0){
-							var action = actions[0];
-							if(action.permission){
-								acl.w=true;
-								acl.x=true;
-							}
-						}
-						return acl;
-					});
+			this.getAcl = function(id){
+				return RestService.getObservationAcl(id);
 			};
 
 		});
