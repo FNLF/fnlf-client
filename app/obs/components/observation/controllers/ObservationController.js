@@ -24,6 +24,14 @@
 
 			$scope.ui=$routeParams.ui;
 
+			$scope.getAcl = function(observation){
+				ObservationService.getAcl(observation._id)
+					.then(function(acl){
+						$scope.acl=acl;
+					});
+
+			};
+
 			var addMenusAndToolbar = function(){
 				$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
 				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
@@ -36,10 +44,13 @@
 				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: ''}];
 			};
 
+
+
 			$scope.loadObservation = function(){
 				$scope.observation = {};
 				ObservationService.getObservationById(observationId)
 					.then(function(obs){
+						$scope.getAcl(obs);
 						$scope.observation = obs;
 
 						$scope.observationChanges = false;
@@ -49,7 +60,7 @@
 
 						addMenusAndToolbar();
 
-
+						ObservationService.getAcl(obs._id);
 				}).catch(function(error){
 						console.log("Catched in ObservationController: "+error);
 						$rootScope.error = "Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke";
