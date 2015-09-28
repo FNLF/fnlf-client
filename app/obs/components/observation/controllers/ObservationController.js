@@ -25,7 +25,7 @@
 			$scope.ui=$routeParams.ui;
 
 			var addMenusAndToolbar = function(){
-				$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
+				$rootScope.nav.brand = 'FNLF ORS #' + $scope.observation.id;
 				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
 				if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
 					$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
