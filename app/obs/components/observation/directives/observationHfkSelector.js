@@ -30,7 +30,7 @@ angular.module('reportingApp').directive('observationHfkSelector', function (Def
 			return ($scope.model[what] < 0);
 		};
 		$scope.isNeutral = function (what) {
-			if(!$scope.model){return false;}
+			if(!$scope.model){return true;}
 			return ($scope.model[what] == 0);
 		};
 

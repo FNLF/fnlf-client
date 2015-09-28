@@ -147,7 +147,8 @@
 				//	console.log(o);
 				//});
 				if(!$scope.acl.x){
-					$rootScope.error = 'Du vil ikke kunne lagre fordi du mangler skrivetilgang';
+					var msg = 'Du vil ikke kunne lagre fordi du mangler skrivetilgang';
+					$rootScope.error = msg;
 				}else{
 					$window.onbeforeunload = function(){
 						return 'You have unsaved observation data';

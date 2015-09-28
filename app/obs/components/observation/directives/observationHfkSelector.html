@@ -1,4 +1,4 @@
-<span>
+
 	<div class="btn-group btn-group" ng-if="editmode">
 		<span ng-repeat="ask in askValues">
 			<button type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" ng-click="flip(ask.key)">
@@ -9,8 +9,8 @@
 	</div>
 	<span ng-if="!editmode">
 		<span ng-repeat="ask in askValues">
-			<span>
-				<i ng-hide="isNeutral(ask.key)" ng-class="{'label':true, 'label-danger': isNegative(ask.key), 'label-default': isNeutral(ask.key), 'label-success': isPositive(ask.key)}">
+			<span ng-if="!isNeutral(ask.key)">
+				<i ng-class="{'label':true, 'label-danger': isNegative(ask.key), 'label-default': isNeutral(ask.key), 'label-success': isPositive(ask.key)}">
 					{{ask.label}}
 				</i>
 			</span>
@@ -38,4 +38,3 @@
 	</ul>
 	</div>
 	<div class="clearfix"></div>
-</span>
