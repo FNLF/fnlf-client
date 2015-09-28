@@ -12,13 +12,25 @@ angular.module('reportingApp').directive('observationHfkSelector', function (Def
 
 	directive.link = function ($scope, element, attrs) {
 
+
+
+		$scope.askValues = [
+			{key:'knowledge',label:'Kunnskaper',},
+			{key:'skills',label:'Ferdigheter'},
+			{key:'attitude',label:'Holdninger'}
+		];
+
+
 		$scope.isPositive = function (what) {
+			if(!$scope.model){return false;}
 			return ($scope.model[what] > 0);
 		};
 		$scope.isNegative = function (what) {
+			if(!$scope.model){return false;}
 			return ($scope.model[what] < 0);
 		};
 		$scope.isNeutral = function (what) {
+			if(!$scope.model){return false;}
 			return ($scope.model[what] == 0);
 		};
 
