@@ -1,4 +1,4 @@
-<div>
+<div class="row">
 	<div>
 		<div class="form-group col-xs-12">
 			<label>Lisenser registrert i MelWin:</label><br>
@@ -29,7 +29,7 @@
 	<div class="col-xs-12"><label></label>
 	</div>
 	<div class="form-group col-lg-3 col-md-4 col-xs-12">
-		<inlinehelp title="Hopptype og erfaring">Offisiell hopptype definert av F/NLF</inlinehelp>
+		<inlinehelp title="Hopptype">Offisiell hopptype definert av F/NLF</inlinehelp>
 		<select id="jumptype" class="form-control" data-placeholder="Hopptype"
 				ng-model="person.jumptypeSelected"
 				ng-options="jumptype.id as jumptype.name for jumptype in jumptypes">
@@ -38,7 +38,7 @@
 
 
 
-	<div class="form-group col-lg-2 col-md-3 col-xs-6">
+	<div class="form-group col-lg-2 col-md-3 col-xs-6" ng-if="person.jumptypeSelected">
 		<inlinehelp title="År i sporten">År i sporten</inlinehelp>
 		<input placeholder="År i sporten" id="years" class="form-control" type="number"
 			   ng-model="person.yearsOfExperience"/>
@@ -46,7 +46,7 @@
 	</div>
 
 
-	<div class="form-group col-lg-2 col-md-3 col-xs-6">
+	<div class="form-group col-lg-2 col-md-3 col-xs-6" ng-if="person.jumptypeSelected">
 		<inlinehelp title="Antall hopp">Antall hopp totalt</inlinehelp>
 		<input placeholder="Hopp totalt" id="numberofjumps" class="form-control" type="number"
 			   ng-model="person.numberOfJumps"/>
@@ -62,14 +62,14 @@
 
 
 
-	<div class="form-group col-lg-2 col-md-4 col-xs-12">
+	<div class="form-group col-lg-2 col-md-4 col-xs-12" ng-if="person.jumptypeSelected">
 		<inlinehelp title="Flytype">Flytype personen hoppet fra</inlinehelp>
 		<tagtypeahead model="person.aircraft" noun="Flytype"
 					  group="aircraftTypes"></tagtypeahead>
 	</div>
 
 
-	<div class="form-group col-lg-2 col-md-4 col-xs-12">
+	<div class="form-group col-lg-2 col-md-4 col-xs-12" ng-if="person.jumptypeSelected">
 		<inlinehelp title="Utsprangshøyde">Utsprangshøyde</inlinehelp>
 		<input placeholder="Utsprangshøyde" id="altitude" class="form-control" type="number"
 			   ng-model="person.jumpAltitude"/>
@@ -85,7 +85,7 @@
 
 	</div>
 
-	<div class="form-group col-md-2 col-xs-6">
+	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.mainCanopyType">
 		<inlinehelp title="Størrelse" >Størrelse på hovedskjerm</inlinehelp>
 		<input type="number" class="form-control" id="mainCanopySize"
 			   ng-model="person.gear.mainCanopySize"
@@ -93,7 +93,7 @@
 
 	</div>
 
-	<div class="form-group col-md-2 col-xs-6">
+	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.mainCanopyType">
 		<inlinehelp title="Erfaring">Antall hopp på denne hovedskjermen</inlinehelp>
 		<input type="number" class="form-control" id="mainCanopyExperience"
 			   ng-model="person.gear.mainCanopyExperience"
@@ -109,7 +109,7 @@
 					  group="reserveCanopies"></tagtypeahead>
 
 	</div>
-	<div class="form-group col-md-2 col-xs-6">
+	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.reserveCanopyType">
 		<inlinehelp title="Størrelse">Størrelse på reserveskjerm</inlinehelp>
 		<input type="number" class="form-control" id="reserveCanopySize"
 			   ng-model="person.gear.reserveCanopySize"
@@ -117,7 +117,7 @@
 
 	</div>
 
-	<div class="form-group col-md-3 col-xs-12">
+	<div class="form-group col-md-3 col-xs-12" ng-if="person.gear.reserveCanopyType">
 		<inlinehelp title="MK">MK som sist tok hovedkontroll eller brukskontroll</inlinehelp>
 		<ui-select tagging="tagTransform" ng-model="person.gear.rigger" theme="bootstrap" on-select="onSelect($item, $model)">
 			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$select.selected.id" tmpname="$select.selected.tmpname"></resolveuser></ui-select-match>
@@ -128,7 +128,7 @@
 		</ui-select>
 	</div>
 
-	<div class="form-group col-md-3 col-xs-12">
+	<div class="form-group col-md-3 col-xs-12" ng-if="person.gear.reserveCanopyType">
 		<inlinehelp title="Pakkedato">Dato for siste hovedkontroll eller brukskontroll</inlinehelp>
 		<div class="input-group">
 			<datetimepicker
@@ -153,7 +153,7 @@
 
 	</div>
 
-	<div class="form-group col-md-2 col-xs-6">
+	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.harnessType">
 		<inlinehelp title="Erfaring">Antall hopp på dette seletøyet</inlinehelp>
 		<input type="number" class="form-control" id="harnessExperience"
 			   ng-model="person.gear.harnessExperience"
@@ -166,7 +166,7 @@
 
 	</div>
 
-	<div class="form-group col-md-3 col-xs-12">
+	<div class="form-group col-md-3 col-xs-12" ng-if="person.gear.aadType">
 		<inlinehelp title="Fabrikkontrolldato">Dato for siste fabrikk-kontroll</inlinehelp>
 		<div class="input-group">
 			<datetimepicker
