@@ -7,7 +7,8 @@
 		<span class="pull-right"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
 		<!-- <span class="pull-right"><workingcomments observation="observation"></workingcomments>&nbsp;</span> -->
 
-		<h1>#{{observation.id}}  {{observation.tags.join('/')}} [<resolveclub clubid="observation.club"></resolveclub>]</h1>
+		<h1 class="hidden-xs">#{{observation.id}}  {{observation.tags.join('/')}} [<resolveclub clubid="observation.club"></resolveclub>]</h1>
+		<h3 class="visible-xs">#{{observation.id}}  {{observation.tags.join('/')}} [<resolveclub clubid="observation.club"></resolveclub>]</h3>
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->
