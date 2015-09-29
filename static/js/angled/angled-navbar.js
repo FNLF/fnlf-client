@@ -65,7 +65,8 @@
  				 * @param		string		action
  				 */
  				$scope.navAction = function(action){
- 					$scope.navfn({'action' : action});
+ 					$scope.navbarCollapsed=false;
+					$scope.navfn({'action' : action});
  				}; // end navAction
 
  				/**
