@@ -23,7 +23,10 @@ angular.module('reportingApp')
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<button ng-disabled="observationChanges" tooltip-placement="top" tooltip="{{btn_descr}}" type="button" class="btn btn-{{tt}} btn-block" ng-click="openWorkflowAside()"><span ng-transclude></span> <i class="fa fa-random fa-fw"></i> {{btn_title}}</button>';
+		return '<button ng-disabled="disabledFn()" \
+				popover-trigger="mouseenter" tooltip="{{btn_descr}}" type="button" \
+				class="btn btn-{{tt}} btn-block" ng-click="openWorkflowAside()"> \
+				<span ng-transclude></span> <i class="fa fa-random fa-fw"></i> {{btn_title}}</button>';
 	};
 	
 	
@@ -156,7 +159,10 @@ angular.module('reportingApp')
 			$scope.wf = {btns: '', title: '', comment: ''};
 	
 			$scope.btn_title = response.title;
-			$scope.btn_descr = response.description;
+			
+			if(!$scope.workflowpermission) $scope.btn_descr = 'Du har ikke tilgang til arbeidsflyten';
+			else $scope.btn_descr = response.description;
+			
 			$scope.btns = btns;
 			$scope.username = +$rootScope.username;
 			$scope.title = 'Arbeidsflyt for #' + $scope.observation.id;
@@ -166,7 +172,7 @@ angular.module('reportingApp')
 				
 				return false;
 			 };
-			var toolbarbutton = {disabled:disabledFn,tooltip:response.description,text:response.title,btn_class:$scope.tt,icon:'random',onclick:$scope.openWorkflowAside};
+			var toolbarbutton = {disabled:disabledFn, tooltip:response.description, text:response.title,btn_class:$scope.tt,icon:'random', onclick:$scope.openWorkflowAside};
 			
 			$rootScope.nav.toolbar[1] = toolbarbutton;
 		});
