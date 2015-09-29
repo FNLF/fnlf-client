@@ -15,9 +15,9 @@ angular.module('reportingApp').directive('observationHfkSelector', function (Def
 
 
 		$scope.askValues = [
-			{key:'knowledge',label:'Kunnskaper',},
-			{key:'skills',label:'Ferdigheter'},
-			{key:'attitude',label:'Holdninger'}
+			{key:'knowledge',label:'Kunnskaper', nick: 'K'},
+			{key:'skills',label:'Ferdigheter', nick: 'F'},
+			{key:'attitude',label:'Holdninger', nick: 'H'}
 		];
 
 
