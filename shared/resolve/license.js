@@ -19,7 +19,7 @@ angular.module('resolve').directive('resolvelicense', function (ResolveService) 
 				//Only F-xyz 
 				if($scope.licenseid.charAt(0) == 'F') {
 
-					if(['F-SPO','F-ADM','F-PORTO','F-3F-A','F-UF2'].indexOf($scope.licenseid)>-1){
+					if(['F-SPO','F-ADM','F-PORTO','F-3F-A','F-UF2','F-UF'].indexOf($scope.licenseid)>-1){
 						return;
 					}
 
