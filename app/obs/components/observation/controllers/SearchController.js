@@ -7,24 +7,30 @@
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
 
+			
 			$scope.observations = [];
 			$scope.total = 0;
 
 			if($routeParams.tag) {
 				$scope.tag = $routeParams.tag;
 				$scope.tags = SearchService.parseTagQuery($routeParams.tag);
+				$rootScope.title = 'ORS søk: ' + $scope.tag;
 			}
 
 			if($routeParams.flag){
 				$scope.flag = $routeParams.flag;
 				$scope.attributes={};
 				$scope.attributes[$scope.flag]=true;
+				$rootScope.title = 'ORS søk: ' + $scope.flag;
 			}
 
 			if($routeParams.query){
 				$scope.query = $routeParams.query;
-
+				$rootScope.title = 'ORS søk: ' + $scope.query;
 			}
+			
+			
+			
 			$scope.queryObj = SearchService.parseAdvancedSearchQuery($scope.query);
 
 			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){

@@ -16,7 +16,9 @@
 			DoNotReloadCurrentTemplate($scope);
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
-			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
+			$rootScope.nav.brand = 'FNLF Observasjon #' + $routeParams.id;
+			
+			
 			
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
@@ -24,6 +26,8 @@
 
 			$scope.ui=$routeParams.ui;
 
+			$rootScope.title = 'ORS editor #' + $scope.observation.id;
+			
 			$scope.acl={x:false,r:false,w:false};
 			$scope.getAcl = function(){
 				ObservationService.getAcl(observationId)
@@ -211,7 +215,7 @@
 		};
 
 
-		$rootScope.nav.toolbar[1] = {disabled:$rootScope.disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
+		$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
 
 		});
 
