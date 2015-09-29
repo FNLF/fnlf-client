@@ -231,6 +231,7 @@
 										<span ng-if="::c.flags.root_cause" class="label label-warning">Rot Årsak</span>
 										<span ng-if="::c.flags.consequence" class="label label-danger">Konsekvens</span>
 										<span ng-if="::c.flags.final_consequence" class="label label-danger">Sluttkonsekvens</span>
+										<observation-hfk-selector model="c.ask"></observation-hfk-selector>
 										</small>
 									</h4>
 									<h4 class="timeline-title">
@@ -266,10 +267,6 @@
 										<dt>Flagg:</dt>
 										<dd>
 											<flags attributes="::c.attributes"></flags>
-										</dd>
-										<dt>Vurdering:</dt>
-										<dd>
-											<observation-hfk-selector model="c.ask"></observation-hfk-selector>
 										</dd>
 									</dl>
 
