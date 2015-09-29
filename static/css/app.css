@@ -385,4 +385,10 @@ img {
         padding-left:0px;
         padding-right:0px;
     }
+    .aside-full-width-on-sm{
+        margin-left:-15px;
+        margin-right:-15px;
+        padding-left:0px;
+        padding-right:0px;
+    }
 }
