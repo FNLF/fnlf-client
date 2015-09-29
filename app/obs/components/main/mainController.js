@@ -17,6 +17,8 @@
 			
 			$rootScope.nav.search.show_ors = true; // = '<searchform></searchform>';
 			
+			$rootScope.title = 'ORS oversikt';
+			
 			$scope.observation = {};
 			
 			$scope.observations = {};

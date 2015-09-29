@@ -35,6 +35,8 @@
 
 					return configs[key];
 				};
+				
+				$rootScope.title = 'Login';
 
 				return service;
 
