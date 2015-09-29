@@ -1,7 +1,5 @@
 <span ng-init="order=0"> 
 
-	<span class="small">{{component.order}} </span> &nbsp;
-
     <small>
         <span ng-if="component.flags.barrier" class="label label-default">Barriære</span>
         <span ng-if="component.flags.incident" class="label label-info">Hendelse</span>
@@ -11,12 +9,9 @@
     <strong>{{component.what}} </strong>
     <flags attributes="component.attributes"></flags>
 
-
-	<span ng-repeat="tag in component.tags"> 
-		<span class="label label-default">{{tag}} </span> &nbsp;
-	</span>
-	<small>{{component.how}} &nbsp;</small>
+    <span ng-if="component.tags" class="label label-default">{{component.tags.join(', ')}} </span> &nbsp;
     <observation-hfk-selector model="component.ask"></observation-hfk-selector>
+    <small>{{component.how}} &nbsp;</small>
 
 	<div class="clearfix"></div>
 

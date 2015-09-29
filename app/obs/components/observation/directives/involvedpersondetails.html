@@ -3,12 +3,8 @@
 		<accordion-group is-open="open[person.id]" ng-repeat="person in observation.involved">
 
 			<accordion-heading ng-init="open[person.id]=true">
-				<div>
-					<span class="col-xs-1 glyphicon"
-						  ng-class="{'glyphicon-chevron-up': open[person.id], 'glyphicon-chevron-down': !open[person.id]}"></span>
+					<i class="fa fa-fw" ng-class="{'fa-minus-square-o': open[person.id], 'fa-plus-square-o': !open[person.id]}"></i>
 					<involvedpersonsummary person="person"></involvedpersonsummary>
-
-				</div>
 			</accordion-heading>
 			<div ng-if="open[person.id]">
 				<involvedperson person="person" jumptypes="jumptypes"

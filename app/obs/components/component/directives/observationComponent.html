@@ -1,132 +1,123 @@
-<div class="">
-    <div class="col-xs-12 col-md-12">
+<div class="row">
+	<div class="col-xs-12 col-md-12">
 
-        <h3 ng-show="!component.editTitle">
-            {{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
-        </h3>
-
-
-        <div ng-show="component.editTitle">
-
-            <div class="form-group">
-                <div class="btn-group-xs">
-                    <label class="btn btn-default" ng-model="component.flags.cause" btn-checkbox>Årsak</label>
-                    <inlinehelp>Direkte eller indirekte årsak til hendelsen</inlinehelp>
-                    <label class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
-                    <inlinehelp>Sikkerhetsbarriære som har blitt brutt eller som har fungert som den skulle</inlinehelp>
-                    <label class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hendelse</label>
-                    <inlinehelp>Det som gjorde at du nå skriver i ORS</inlinehelp>
-                    <label class="btn btn-default" ng-model="component.flags.consequence" btn-checkbox>Konsekvens</label>
-                    <inlinehelp>Direkte og indirekte konsekvenser av hendelsen</inlinehelp>
-                </div>
-            </div>
-	    <div class="form-group">
-            <div class="input-group">
-                <tagtypeahead ng-if="component.flags.root_cause || component.flags.cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
-                <tagtypeahead ng-if="component.flags.final_consequence||component.flags.consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
-                <tagtypeahead ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv brutt barriære" ></tagtypeahead>
-                <tagtypeahead ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv selve hendelse" ></tagtypeahead>
+		<h3 ng-show="!component.editTitle">
+			{{component.what}} <span class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
+		</h3>
 
 
-				
-                <small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere komponenter i stedet for å skrive lang tekst her</small>
+		<div ng-show="component.editTitle">
+
+			<div class="form-group">
+				<div class="btn-group-xs">
+					<label class="btn btn-default" ng-model="component.flags.cause" btn-checkbox>Årsak</label>
+					<inlinehelp>Direkte eller indirekte årsak til hendelsen</inlinehelp>
+					<label class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
+					<inlinehelp>Sikkerhetsbarriære som har blitt brutt eller som har fungert som den skulle</inlinehelp>
+					<label class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hendelse</label>
+					<inlinehelp>Det som gjorde at du nå skriver i ORS</inlinehelp>
+					<label class="btn btn-default" ng-model="component.flags.consequence" btn-checkbox>Konsekvens</label>
+					<inlinehelp>Direkte og indirekte konsekvenser av hendelsen</inlinehelp>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group">
+					<tagtypeahead ng-if="component.flags.root_cause || component.flags.cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
+					<tagtypeahead ng-if="component.flags.final_consequence||component.flags.consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
+					<tagtypeahead ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv brutt barriære" ></tagtypeahead>
+					<tagtypeahead ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv selve hendelse" ></tagtypeahead>
+
+
+
+					<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere komponenter i stedet for å skrive lang tekst her</small>
                     <span class="input-group-btn">
                         <button class="btn btn-default" ng-disabled="!component.what" type="button" ng-click="whatEdited(component)">
-                            Ok
-                        </button>
+							Ok
+						</button>
                     </span>
-            </div>
- 	    </div>
-<!--             <button type="button" class="btn btn-default pull-right" ng-click="deleteComponent(component)"> <span class="fa fa-trash-o"> Slett komponent</span></button> -->
-        </div>
-    </div>
-    <div class="col-xs-12"></div>
-
-    <div ng-hide="component.editTitle">
-
-		
-        <div class="col-xs-12 col-md-12">
-	    <div class="form-group">
-            <inlinehelp title="Flagg">Bruk flagg slik at det blir lett å lage god statistikk</inlinehelp>
-            <flagseditor attributes="component.attributes"></flagseditor>
-		</div>
-        </div>
-
-        <p></p>
-
-        <div class="col-xs-12 col-md-6 col-lg-4 hideInTemplateEditor">
-            <div class="form-group">
-	    <inlinehelp title="Involvert">Personer som var involvert i akkurat denne komponenten i forløpet</inlinehelp>
-            <ui-select multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blant involverte personer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
-                <ui-select-choices repeat="person in persons track by person.id"> {{person.fullname}} </ui-select-choices> </ui-select>
-        </div>
-	</div>
-
-        <div class="col-xs-8 col-md-4 col-lg-3">
-	<div class="form-group">
-            <inlinehelp title="Sted eller situasjon">Fyll ut denne slik at det blir mulig å se fellestrekk over tid hvor ting typisk skjer</inlinehelp>
-            <tagtypeahead model="component.where.at" group="where-at" noun="på/i"></tagtypeahead>
-        </div>
-	</div>
-
-        <div class="col-xs-4 col-md-2">
-	<div class="form-group">
-            <inlinehelp title="Høyde i fot">Høyde over bakken der dette er relevant</inlinehelp>
-            <input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
-        </div>
-	</div>
-
-        <div class="clearfix"></div>
-
-
-        <div class="col-xs-12 col-md-6 col-lg-7">
-	<div class="form-group">
-                <inlinehelp title="Hvordan (Tagger)">Tagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
-                    Det er viktig at det viktigste i friteksten og er utrykt i form av tagger.
-                </inlinehelp>
-            <tagging model="component.tags" group="component" noun="Tagger"></tagging>
-        </div>
-	</div>
-	
-	<div class="col-xs-12 col-md-6 col-lg-3">
-		<div class="form-group">
-		<inlinehelp title="Vurdering">Hvordan vurderer du holdninger, kunnskaper og ferdigheter opp mot forløpet av denne observasjonen?</inlinehelp><br />
-		<observation-hfk-selector verbose="false" editmode="true" model="component.ask"></observation-hfk-selector>
+				</div>
+			</div>
 		</div>
 	</div>
-	
-        <div class="col-xs-12 hideInTemplateEditor">
-	 <div class="form-group">
-            <inlinehelp title="Hvordan (Fritekst)"> Kort tekst som forklarer komponenten. Bruk heller flagg, tagger eller flere komponenter enn å skrive mye her. Viss du kun skriver her vil aldri kunne lage fornuftig statistikk av observasjonen din.</inlinehelp> </label>
-            <textarea type="text" rows="4" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true"></textarea>
-            <span class="label label-info" ng-show="howTextClicked && component.how.length > 10">{{(160 - component.how.length)}} tegn igjen</span>&nbsp;
-            <span class="label label-warning" ng-show="howTextClicked && component.how.length > 80">Legg gjerne til de viktigste nøkkel-ordene i teksten som tagger</span>&nbsp;
-            <span class="label label-danger" ng-show="howTextClicked && component.how.length > 120">Legg gjerne til flere komponenter i stedet for å skrive alt som skjedde her</span>
+	<div class="col-xs-12"></div>
+
+	<div ng-hide="component.editTitle" class="aside-full-width-on-sm">
+
+
+		<div class="col-xs-12 col-md-12">
+			<div class="form-group">
+				<inlinehelp title="Flagg">Bruk flagg slik at det blir lett å lage god statistikk</inlinehelp>
+				<flagseditor attributes="component.attributes"></flagseditor>
+			</div>
+		</div>
+
+		<p></p>
+
+		<div class="col-xs-12 col-md-6 col-lg-4 hideInTemplateEditor">
+			<div class="form-group">
+				<inlinehelp title="Involvert">Personer som var involvert i akkurat denne komponenten i forløpet</inlinehelp>
+				<ui-select multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blant involverte personer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+					<ui-select-choices repeat="person in persons track by person.id"> {{person.fullname}} </ui-select-choices> </ui-select>
+			</div>
+		</div>
+
+		<div class="col-xs-8 col-md-4 col-lg-3">
+			<div class="form-group">
+				<inlinehelp title="Sted eller situasjon">Fyll ut denne slik at det blir mulig å se fellestrekk over tid hvor ting typisk skjer</inlinehelp>
+				<tagtypeahead model="component.where.at" group="where-at" noun="på/i"></tagtypeahead>
+			</div>
+		</div>
+
+		<div class="col-xs-4 col-md-2">
+			<div class="form-group">
+				<inlinehelp title="Høyde i fot">Høyde over bakken der dette er relevant</inlinehelp>
+				<input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+
+		<div class="col-xs-12 col-md-6 col-lg-7">
+			<div class="form-group">
+				<inlinehelp title="Hvordan (Tagger)">Tagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
+					Det er viktig at det viktigste i friteksten og er utrykt i form av tagger.
+				</inlinehelp>
+				<tagging model="component.tags" group="component" noun="Tagger"></tagging>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-md-6 col-lg-3">
+			<div class="form-group">
+				<inlinehelp title="Vurdering">Hvordan vurderer du holdninger, kunnskaper og ferdigheter opp mot forløpet av denne observasjonen?</inlinehelp><br />
+				<observation-hfk-selector verbose="false" editmode="true" model="component.ask"></observation-hfk-selector>
+			</div>
+		</div>
+
+		<div class="col-xs-12 hideInTemplateEditor">
+			<div class="form-group">
+				<inlinehelp title="Hvordan (Fritekst)"> Kort tekst som forklarer komponenten. Bruk heller flagg, tagger eller flere komponenter enn å skrive mye her. Viss du kun skriver her vil aldri kunne lage fornuftig statistikk av observasjonen din.</inlinehelp> </label>
+				<textarea type="text" rows="4" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true"></textarea>
+				<span class="label label-info" ng-show="howTextClicked && component.how.length > 10">{{(160 - component.how.length)}} tegn igjen</span>&nbsp;
+				<span class="label label-warning" ng-show="howTextClicked && component.how.length > 80">Legg gjerne til de viktigste nøkkel-ordene i teksten som tagger</span>&nbsp;
+				<span class="label label-danger" ng-show="howTextClicked && component.how.length > 120">Legg gjerne til flere komponenter i stedet for å skrive alt som skjedde her</span>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="col-xs-12"></div>
+
+
+		<div class="form-group col-xs-12">
+			<button type="button" class="btn btn-primary" ng-click="newCause(component.order)"><i class="fa fa-fw fa-plus"></i> Hvorfor skjedde dette? Ny årsak</button>
+			&nbsp;&nbsp;
+			<button type="button" class="btn btn-info" ng-click="incrementOrder(component)"><i class="fa fa-fw fa-chevron-down"></i>Flytt ned</button>
+			<button type="button" class="btn btn-info" ng-click="decrementOrder(component)"><i class="fa fa-fw fa-chevron-up"></i>Flytt opp</button>
+			<span>&nbsp;</span>
+			<button type="button" class="btn btn-info" ng-click="deleteComponent(component)"> <i class="fa fa-fw fa-trash-o"></i> Slett komponent</button>
+		</div>
+
 	</div>
-        </div>
-        <div class="clearfix"></div>
-<!--         <div class="col-xs-12"></div> -->
-<!-- 	<div class="form-group"> -->
-<!--         <button type="button" class="btn btn-primary" ng-click="newCause()"> -->
-<!--             <span class="fa fa-plus"></span> Hvorfor skjedde dette? Hva var årsaken? -->
-<!--         </button> -->
-<!-- 	</div> -->
-        <div class="pull-right">
-            <br>
+	<div class="clearfix"></div>
 
-	<div class="form-group">
-<!-- 	Kommentert ut for å forenkle om ikke kan sette inn rett over (mellom) -->
-<!-- 				<button type="button" class="btn btn-primary" ng-click="newCause()"><i class="fa fa-fw fa-plus"></i> Hvorfor skjedde dette? Ny årsak</button> -->
-<!-- 				&nbsp;&nbsp; -->
-	            <button type="button" class="btn btn-info" ng-click="incrementOrder(component)"><i class="fa fa-fw fa-chevron-down"></i>Flytt ned</button>
-	            <button type="button" class="btn btn-info" ng-click="decrementOrder(component)"><i class="fa fa-fw fa-chevron-up"></i>Flytt opp</button>
-	            <span>&nbsp;</span>
-	            <button type="button" class="btn btn-info" ng-click="deleteComponent(component)"> <i class="fa fa-fw fa-trash-o"></i> Slett komponent</button>
-	</div>
-
-        </div>
-        <div class="clearfix"></div>
-
-    </div>
 </div>
 <div class="clearfix"></div>
