@@ -378,3 +378,11 @@ img {
 	margin-top: 5px;
 }
 
+@media(max-width:992px){
+    .aside .aside-dialog .aside-body{
+        margin-left:-15px;
+        margin-right:-15px;
+        padding-left:0px;
+        padding-right:0px;
+    }
+}

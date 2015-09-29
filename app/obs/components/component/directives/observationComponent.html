@@ -1,4 +1,4 @@
-<div class="">
+<div class="row">
     <div class="col-xs-12 col-md-12">
 
         <h3 ng-show="!component.editTitle">
@@ -37,12 +37,11 @@
                     </span>
             </div>
  	    </div>
-<!--             <button type="button" class="btn btn-default pull-right" ng-click="deleteComponent(component)"> <span class="fa fa-trash-o"> Slett komponent</span></button> -->
         </div>
     </div>
     <div class="col-xs-12"></div>
 
-    <div ng-hide="component.editTitle">
+    <div ng-hide="component.editTitle" >
 
 		
         <div class="col-xs-12 col-md-12">
@@ -62,25 +61,25 @@
         </div>
 	</div>
 
-        <div class="col-xs-8 col-md-4 col-lg-3">
-	<div class="form-group">
+    <div class="col-xs-8 col-md-4 col-lg-3">
+        <div class="form-group">
             <inlinehelp title="Sted eller situasjon">Fyll ut denne slik at det blir mulig å se fellestrekk over tid hvor ting typisk skjer</inlinehelp>
             <tagtypeahead model="component.where.at" group="where-at" noun="på/i"></tagtypeahead>
         </div>
-	</div>
+    </div>
 
-        <div class="col-xs-4 col-md-2">
-	<div class="form-group">
+    <div class="col-xs-4 col-md-2">
+	    <div class="form-group">
             <inlinehelp title="Høyde i fot">Høyde over bakken der dette er relevant</inlinehelp>
             <input type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
         </div>
 	</div>
 
-        <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
 
-        <div class="col-xs-12 col-md-6 col-lg-7">
-	<div class="form-group">
+    <div class="col-xs-12 col-md-6 col-lg-7">
+	    <div class="form-group">
                 <inlinehelp title="Hvordan (Tagger)">Tagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
                     Det er viktig at det viktigste i friteksten og er utrykt i form av tagger.
                 </inlinehelp>
@@ -105,19 +104,13 @@
 	</div>
         </div>
         <div class="clearfix"></div>
-<!--         <div class="col-xs-12"></div> -->
-<!-- 	<div class="form-group"> -->
-<!--         <button type="button" class="btn btn-primary" ng-click="newCause()"> -->
-<!--             <span class="fa fa-plus"></span> Hvorfor skjedde dette? Hva var årsaken? -->
-<!--         </button> -->
-<!-- 	</div> -->
-        <div class="pull-right">
-            <br>
+         <div class="col-xs-12"></div>
+
 
 	<div class="form-group">
 <!-- 	Kommentert ut for å forenkle om ikke kan sette inn rett over (mellom) -->
-<!-- 				<button type="button" class="btn btn-primary" ng-click="newCause()"><i class="fa fa-fw fa-plus"></i> Hvorfor skjedde dette? Ny årsak</button> -->
-<!-- 				&nbsp;&nbsp; -->
+ 				<button type="button" class="btn btn-primary" ng-click="newCause()"><i class="fa fa-fw fa-plus"></i> Hvorfor skjedde dette? Ny årsak</button>
+ 				&nbsp;&nbsp;
 	            <button type="button" class="btn btn-info" ng-click="incrementOrder(component)"><i class="fa fa-fw fa-chevron-down"></i>Flytt ned</button>
 	            <button type="button" class="btn btn-info" ng-click="decrementOrder(component)"><i class="fa fa-fw fa-chevron-up"></i>Flytt opp</button>
 	            <span>&nbsp;</span>
