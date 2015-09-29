@@ -16,7 +16,7 @@
 			DoNotReloadCurrentTemplate($scope);
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
-			$rootScope.nav.brand = 'FNLF Observasjon #' + $routeParams.id;
+			$rootScope.nav.brand = 'FNLF ORS #' + $routeParams.id;
 			
 			
 			
