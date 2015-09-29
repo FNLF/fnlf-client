@@ -48,13 +48,11 @@
 					<fnlf-logout></fnlf-logout>
 				</li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<form ng-if="nav.search.show" class="navbar-form navbar-right" role="search">
+			<!-- ORS SEARCH -->
+			<ul ng-if="search.show_ors" class="nav navbar-nav navbar-right">
+				<form class="navbar-form navbar-right" role="search">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search" ng-model="search.terms">
-						<button class="btn btn-default" type="button" ng-click="searchfn()">
-							<span class="fa fa-search fa-fw"></span>
-						</button>
+						<searchform></searchform>
 					</div>
 				</form>
 			</ul>

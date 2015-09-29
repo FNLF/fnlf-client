@@ -10,6 +10,8 @@
 			$scope.observationChanges = false;
 
 			$scope.ui=$routeParams.ui;
+			
+			$rootScope.title = 'ORS rapportvisning #' + $scope.observation.id;
 
 			$scope.loadObservation = function(){
 				$scope.observation = {};

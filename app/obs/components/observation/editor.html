@@ -7,23 +7,35 @@
 		<span class="pull-right"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
 		<!-- <span class="pull-right"><workingcomments observation="observation"></workingcomments>&nbsp;</span> -->
 
-		<h1 class="hidden-xs">#{{observation.id}}  {{observation.tags.join('/')}} [<resolveclub clubid="observation.club"></resolveclub>]</h1>
-		<h3 class="visible-xs">#{{observation.id}}  {{observation.tags.join('/')}} [<resolveclub clubid="observation.club"></resolveclub>]</h3>
+		<h1 class="hidden-xs text-muted">#{{observation.id}}  {{observation.tags.join('/')}} <small><resolveclub clubid="observation.club"></resolveclub></small></h1>
+		<h3 class="visible-xs "text-muted">#{{observation.id}}  {{observation.tags.join('/')}} <small><resolveclub clubid="observation.club"></resolveclub></small></h3>
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->
 		<span class="pull-left"> <span class="label label-default">{{observation.when | date:'yyyy-MM-dd HH:mm'}}</span> 
+		
 		<span class="label"	ng-class="{sharing:'label-success', unsafe_act:'label-default', near_miss:'label-info', incident:'label-warning', accident:'label-danger'}[observation.type]" class="label">
 				{{observationTypesArray[observation.type]}}</span> &nbsp;
 		</span>
 
 		<!-- Just show which version, click to show all versions? -->
-		<span class="pull-left"><span class="label label-default">Versjon {{observation._version}}</span>&nbsp;</span> <span class="pull-left"> <span class="label label-default"><resolveclub
-					clubid="observation.club"></resolveclub></span>&nbsp;
-		</span> <span class="pull-left"><span class="label label-default">Opprettet: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;</span> <span class="pull-left"><span
-			class="label label-default">Eier: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;</span>
+		<span class="pull-left">
+			<span class="label label-default">Versjon {{observation._version}}</span>&nbsp;
+		</span>
+		
+		<span class="pull-left">
+			<span class="label label-default"><resolveclub clubid="observation.club"></resolveclub></span>&nbsp;
+		</span>
+		
+		<span class="pull-left">
+			<span class="label label-default">Opprettet: <resolveuser userid="observation.reporter"></resolveuser></span>&nbsp;
+		</span>
+		<span class="pull-left">
+			<span class="label label-default">Eier: <resolveuser userid="observation.owner"></resolveuser></span>&nbsp;
+		</span>
 
-		<span ng-if="acl.x" class="pull-left"><span class="label label-danger">Skrivetilgang</span>&nbsp;</span>
+		<span ng-if="(acl.x && acl.w)" class="pull-left"><span class="label label-danger">Skrivetilgang</span>&nbsp;</span>
+		<span ng-if="(acl.x)" class="pull-left"><span class="label label-warning">Arbeidsflyttilgang</span>&nbsp;</span>
 		<span ng-if="(acl.r && !acl.x)" class="pull-left"><span class="label label-info">Lesetilgang</span>&nbsp;</span>
 
 		<!-- If changes, show warning include a "leaving page are you sure?"  -->
@@ -242,9 +254,8 @@
 						Skriv korte kommentarer og vurderinger om du har skrivekløe. Husk at dette kun vil være gjenstand for manuell gjennomlesning.
 						</inlinehelp>
 					<p class="list-group-item-text">
-						<textarea class="form-control" rows="4" disabled>Nuvel, Jarl, Frank og alle dere andre som peiser inn fritekst all mass hvordetnåennskullevære - her er en mulig løsning, et fritekstfelt!
-(Dog, det er bare et dummy-felt som dere kan se på inntil logikken er på plass)
-Men dette kan sammen med holdninger, kunnskaper og ferdigheter til venstre bli en HL, HI, FSJ og SU vurdering. 
+						<textarea class="form-control" rows="4" disabled>Dummy felt inntil logikken er på plass.
+Men dette kan sammen med holdninger, kunnskaper og ferdigheter til venstre bli en HL, HI, FSJ og SU vurdering av observasjonen som helhet. 
 						</textarea>
 					</p>
 				

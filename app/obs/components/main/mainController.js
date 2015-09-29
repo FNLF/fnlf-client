@@ -12,7 +12,10 @@
 		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions,ObservationsTableService) {
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
+			$rootScope.nav.search = {show_ors: false, form: '', show: false}; //reset
 			$rootScope.nav.brand = "FNLF Observasjoner";
+			
+			$rootScope.nav.search.show_ors = true; // = '<searchform></searchform>';
 			
 			$scope.observation = {};
 			

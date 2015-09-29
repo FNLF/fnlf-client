@@ -38,9 +38,6 @@
 			<!-- ng-table all observations -->
 			<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
 
-
-
-
 				<tr ng-repeat="observation in $data">
 
 					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{::observation.id}}</a></td>
