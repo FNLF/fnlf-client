@@ -1,9 +1,3 @@
 <div>
-
-	<ui-select tagging-tokens="ENTER|,|/|." tagging-label="false" tagging ng-model="$parent.model" theme="bootstrap" on-select="onSelect(tag, $model)" ng-blur="onSelect(tag, $model)">
-		<ui-select-match placeholder="{{noun}}...">{{$select.selected}}</ui-select-match>
-		<ui-select-choices repeat="tag in tags | filter:$select.search">
-			{{tag}}
-		</ui-select-choices>
-	</ui-select>
+	<input placeholder="Søk" class="form-control" type="text" ng-model="model" typeahead="tag for tag in tags | filter:$viewValue" typeahead-min-length="2" typeahead-on-select="onSelect(tag, model)" ng-blur="onSelect(tag, model)">
 </div>
