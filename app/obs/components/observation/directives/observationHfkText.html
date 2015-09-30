@@ -1,5 +1,5 @@
 <div>
-	<tabset justified="true" type="pills">
+	<tabset justified="true">
 		<tab ng-repeat="t in tabs" heading="{{t.title}}" active="t.active">
 
 			<textarea class="form-control" rows="4" style="width:100%" ng-model="askmodel.text[t.state]" ng-disabled="!enabled(t.state)">
