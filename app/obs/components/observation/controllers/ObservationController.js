@@ -10,7 +10,7 @@
 	 *
 	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope,Functions) {
+		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -36,16 +36,29 @@
 					});
 			};
 
+			$rootScope.disabledFn = function(){
+				return !$scope.observationChanges;
+			};
+
+			$rootScope.openInReport = function(){
+				$location.path('/observation/report/'+ $scope.observation.id);
+			};
+			$rootScope.openInReportdisabledFn = function(){
+				return $scope.observationChanges;
+			};
+
+
 			var addMenusAndToolbar = function(){
 				$rootScope.nav.brand = 'FNLF ORS #' + $scope.observation.id;
-				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
+				//$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
 				if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
 					$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+					$rootScope.nav.toolbar[2] = {disabled:$rootScope.openInReportdisabledFn,tooltip:'Åpne i rapport',text:'Åpne i rapport',btn_class:'default',icon:'square-o', onclick:$rootScope.openInReport};
 				}
 			};
 
 			var disableOpenInReportLink = function(){
-				$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: ''}];
+			//	$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: ''}];
 			};
 
 
@@ -213,12 +226,7 @@
 				 };
 		 };
 
-		$rootScope.disabledFn = function(){
-			return !$scope.observationChanges;
-		};
 
-
-		$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
 
 		});
 
