@@ -12,8 +12,8 @@
 			$scope.total = 0;
 
 			if($routeParams.tag) {
-				$scope.tag = $routeParams.tag;
-				$scope.tags = SearchService.parseTagQuery($routeParams.tag);
+				$scope.tag = decodeURIComponent($routeParams.tag);
+				$scope.tags = SearchService.parseTagQuery($scope.tag);
 				$rootScope.title = 'ORS søk: ' + $scope.tag;
 			}
 
@@ -25,7 +25,7 @@
 			}
 
 			if($routeParams.query){
-				$scope.query = $routeParams.query;
+				$scope.query = decodeURIComponent($routeParams.query);
 				$rootScope.title = 'ORS søk: ' + $scope.query;
 			}
 			
