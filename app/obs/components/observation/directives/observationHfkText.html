@@ -1,11 +1,7 @@
-<div>
-	<tabset justified="true" type="pills">
-		<tab ng-repeat="t in tabs" heading="{{t.title}}" active="t.active">
+<tabset justified="true" type="tabs">
+	<tab ng-repeat="t in tabs" heading="{{t.title}}" active="t.active">
 
-			<textarea class="form-control" rows="4" style="width:100%" ng-model="askmodel.text[t.state]" ng-disabled="!enabled(t.state)">
-
-			</textarea>
-		</tab>
-	</tabset>
-</div>
-<div class="clearfix"></div>
+		<textarea class="form-control" rows="4" ng-model="askmodel.text[t.state]" ng-disabled="!enabled(t.state)"></textarea>
+		
+	</tab>
+</tabset>

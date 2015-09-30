@@ -53,7 +53,7 @@
 						
 						<tr>
 							<td>Type</td>
-							<td><resolveobservationtype type="::observation.type"></resolveobservationtype></td>
+							<td><resolveobservationtype type="::observation.type"></resolveobservationtype> <observation-hfk-selector model="observation.ask"></observation-hfk-selector></td>
 						</tr>
 						<tr ng-if="::observation.flags">
 							<td>Flagg</td>
@@ -117,13 +117,19 @@
 
 			<!--  WORKFLOW -->
 			<li class="list-group-item">
-				<div class="col-xs-12  col-md-12">
+				<div class="col-xs-12  col-md-6">
 					<!-- streamline -->
 					<label class="control-label" ng-click="isCollapsed = !isCollapsed">Arbeidsflyt<i class="fa fa-fw" ng-class="{'fa-angle-up': isCollapsed, 'fa-angle-down': !isCollapsed}"></i></label>
 					<div collapse="!isCollapsed">
 						<workflowtimeline audit="::observation.workflow.audit"></workflowtimeline>
 					</div>
 				</div>
+				
+				<div class="clearfix"></div>
+			</li>
+				
+				
+				
 			<div class="clearfix"></div>
 			</li>
 			
@@ -191,14 +197,16 @@
 			<li class="list-group-item">
 				<p class="list-group-item-text">
 				<div class="col-xs-12  col-md-12">
-					<label class="control-label">Forløp</label> <span ng-if="::observation.components.length == 0">Intent forløp</span>
+					<label class="control-label">Forløp</label> 
+					
+					<div ng-show="::observation.components.length == 0" class="text-danger"><strong><i class="fa fa-fw fa-warning"></i>Intent forløp</strong></div>
+					
 					<div class="clearfix"></div>
 
 					<ul class="timeline" ng-if="::observation.components.length > 0">
 
 
 						<li ng-repeat="c in ::observation.components">
-
 
 							<div class="timeline-badge"
 								ng-class="{ 'default': 	c.flags.barrier, 
@@ -207,18 +215,7 @@
 											'danger': 	c.flags.consequence || c.flags.final_consequence,
 											
 											}">
-											
-<!-- 											'warning': 	c.flags.root_cause, -->
-<!-- 											'danger': 	c.flags.final_consequence -->
 								{{$index+1}}
-								<!-- 									<small> -->
-								<!-- 										<span ng-if="::c.flags.barrier" class="label label-default">{{::$index+1}} Barriære</span> -->
-								<!-- 										<span ng-if="::c.flags.incident" class="label label-info">{{::$index+1}} Hendelse</span> -->
-								<!-- 										<span ng-if="::c.flags.cause" class="label label-warning">{{::$index+1}} Årsak</span> -->
-								<!-- 										<span ng-if="::c.flags.root_cause" class="label label-warning">{{::$index+1}} Rot Årsak</span> -->
-								<!-- 										<span ng-if="::c.flags.consequence" class="label label-danger">{{::$index+1}} Konsekvens</span> -->
-								<!-- 										<span ng-if="::c.flags.final_consequence" class="label label-danger">{{::$index+1}} Sluttkonsekvens</span> -->
-								<!-- 									</small> -->
 							</div>
 
 							<div class="timeline-panel">
@@ -280,8 +277,8 @@
 			</li>
 
 			<!-- FILES -->
-			<li class="list-group-item">
-
+			<li class="list-group-item" ng-show="::observation.files.length>0">
+			{{::observation.files.length}}
 				<p class="list-group-item-text">
 					<label class="control-label">Vedlegg</label>
 
@@ -296,6 +293,9 @@
 				<div class="col-xs-12  col-md-6">
 					<label class="control-label">Hoppfeltorganisering</label>
 					<div class="clearfix"></div>
+					
+					<div ng-show="::observation.organization.length > 0"><strong><i class="fa fa-fw fa-warning"></i>Ingen organisasjon</strong></div>
+					
 					<dl class="dl-horizontal">
 						<dt>HL:</dt>
 						<dd>
@@ -318,6 +318,8 @@
 				</p>
 				<div class="clearfix"></div>
 			</li>
+			
+			<!-- WEATHER -->
 			<li class="list-group-item">
 				<p class="list-group-item-text">
 				<div class="col-xs-12  col-md-12">
@@ -327,34 +329,56 @@
 						<dl class="dl-horizontal">
 							<dt>Vind</dt>
 							<dd></dd>
-							<dt ng-show="observation.weather.manual.wind.max">Maks:</dt>
-							<dd>{{::observation.weather.manual.wind.max}} knop</dd>
-							<dt>Gjennomsnitt:</dt>
-							<dd>{{::observation.weather.manual.wind.avg}} knop</dd>
-							<dt>Minimum:</dt>
-							<dd>{{::observation.weather.manual.wind.min}} knop</dd>
-							<dt>Turbulens:</dt>
-							<dd>{{::observation.weather.manual.wind.tubulence ? 'JA' : 'NEI'}}</dd>
-							<dt>Gusting:</dt>
-							<dd>{{::observation.weather.manual.wind.gusting ? 'JA' : 'NEI'}}</dd>
+							<div ng-show="observation.weather.manual.wind.max">
+								<dt>Maks:</dt>
+								<dd>{{::observation.weather.manual.wind.max}} knop</dd>
+							</div>
+							<div ng-show="observation.weather.manual.wind.avg">
+								<dt>Snitt:</dt>
+								<dd>{{::observation.weather.manual.wind.avg}} knop</dd>
+							</div>
+							<div ng-show="observation.weather.manual.wind.min">
+								<dt>Min:</dt>
+								<dd>{{::observation.weather.manual.wind.min}} knop</dd>
+							</div>
+							<div ng-show="observation.weather.manual.wind.turbulence">
+								<dt>Turbulens:</dt>
+								<dd>{{::observation.weather.manual.wind.tubulence ? 'JA' : 'NEI'}}</dd>
+							</div>
+							<div ng-show="observation.weather.manual.wind.gusting">
+								<dt>Gusting:</dt>
+								<dd>{{::observation.weather.manual.wind.gusting ? 'JA' : 'NEI'}}</dd>
+							</div>
 						</dl>
 					</div>
 					<div class="col-xs-4  col-md-4">
 						<dl class="dl-horizontal">
 							<dt>Skyer</dt>
 							<dd></dd>
-							<dt>Skybase:</dt>
-							<dd>{{::observation.weather.manual.clouds.base}} fot</dd>
-							<dt>Regn:</dt>
-							<dd>{{::observation.weather.manual.clouds.rain ? 'JA' : 'NEI'}}</dd>
-							<dt>Tåke:</dt>
-							<dd>{{::observation.weather.manual.clouds.fog ? 'JA' : 'NEI'}}</dd>
-							<dt>Hagl:</dt>
-							<dd>{{::observation.weather.manual.clouds.hail ? 'JA' : 'NEI'}}</dd>
-							<dt>Snø:</dt>
-							<dd>{{::observation.weather.manual.clouds.snow ? 'JA' : 'NEI'}}</dd>
-							<dt>Torden:</dt>
-							<dd>{{::observation.weather.manual.clouds.thunder ? 'JA' : 'NEI'}}</dd>
+							<div ng-show="observation.weather.manual.clouds.base">
+								<dt>Skybase:</dt>
+								<dd>{{::observation.weather.manual.clouds.base}} fot</dd>
+							</div>
+							<div ng-show="observation.weather.manual.clouds.rain">
+								<dt>Regn:</dt>
+								<dd>{{::observation.weather.manual.clouds.rain ? 'JA' : 'NEI'}}</dd>
+							</div>
+							<div ng-show="observation.weather.manual.clouds.fog">
+								<dt>Tåke:</dt>
+								<dd>{{::observation.weather.manual.clouds.fog ? 'JA' : 'NEI'}}</dd>
+							</div>
+							<div ng-show="observation.weather.manual.clouds.hail">
+								<dt>Hagl:</dt>
+								<dd>{{::observation.weather.manual.clouds.hail ? 'JA' : 'NEI'}}</dd>
+							</div>
+							<div ng-show="observation.weather.manual.clouds.snow">
+								<dt>Snø:</dt>
+								<dd>{{::observation.weather.manual.clouds.snow ? 'JA' : 'NEI'}}</dd>
+							</div>
+							<div ng-show="observation.weather.manual.clouds.thunder">
+								<dt>Torden:</dt>
+								<dd>{{::observation.weather.manual.clouds.thunder ? 'JA' : 'NEI'}}</dd>
+							</div>
 						</dl>
 					</div>
 
@@ -362,80 +386,106 @@
 						<dl class="dl-horizontal">
 							<dt>Temperatur</dt>
 							<dd></dd>
-							<dt>Bakken:</dt>
-							<dd>{{::observation.weather.manual.temp.ground}}&deg;C</dd>
-							<dt>Høyden:</dt>
-							<dd>{{::observation.weather.manual.temp.altitude}}&deg;C</dd>
+							<div ng-show="observation.weather.manual.temp.ground">
+								<dt>Bakken:</dt>
+								<dd>{{::observation.weather.manual.temp.ground}}&deg;C</dd>
+							</div>
+							<div ng-show="observation.weather.manual.temp.altitude">
+								<dt>Høyden:</dt>
+								<dd>{{::observation.weather.manual.temp.altitude}}&deg;C</dd>
+							</div>
+							
 							<div class="col-xs-12  col-md-4"></div>
 						</dl>
 					</div>
 					<div class="col-xs-12  col-md-12">
-						<strong>{{::observation.weather.manual.description}}</strong>
-						<p>Yr: {{::observation.weather.auto.yr['@from']}}-{{::observation.weather.auto.yr['@to']}} {{::observation.weather.auto.yr.windDirection['@deg']}}&deg;
+						<div ng-show="observation.weather.manual.description">
+							<strong>{{::observation.weather.manual.description}}</strong>
+						</div>
+						
+						<p ng-show="observation.weather.auto.yr">Yr: {{::observation.weather.auto.yr['@from']}}-{{::observation.weather.auto.yr['@to']}} {{::observation.weather.auto.yr.windDirection['@deg']}}&deg;
 							{{::observation.weather.auto.yr.windSpeed['@mps']*1.81}} knop</p>
-						<p>{{::observation.weather.auto.metar}}</p>
-						<p>{{::observation.weather.auto.taf}}</p>
+						<p ng-show="observation.weather.auto.metar">METAR: {{::observation.weather.auto.metar}}</p>
+						<p ng-show="observation.weather.auto.tag">TAF: {{::observation.weather.auto.taf}}</p>
 					</div>
 
 				</div>
 				</p>
 				<div class="clearfix"></div>
 			</li>
-
+			
+			<!-- ACTIONS -->
 			<li class="list-group-item">
 				<p class="list-group-item-text">
 					<div class="col-xs-12  col-md-12">
-						<label class="control-label">Vurdering</label>
-						<div>
-							<observation-hfk-selector model="observation.ask"></observation-hfk-selector>
-						</div>
+						<label class="control-label">Tiltak</label>
+						<div class="clearfix"></div>
+						
+							<div class="col-xs-12 col-md-6" ng-show="::observation.actions.local">
+								<strong>Lokale:</strong>
+								<ol>
+									<div ng-if="::observation.actions.local.length==0">Ingen</div>
+									<li ng-repeat="a in ::observation.actions.local">{{a}}</li>
+								</ol>
+							</div>
+							
+							<div class="col-xs-12 col-md-6" ng-show="::observation.actions.central">
+								<strong>Sentrale:</strong>
+								<ol>
+									<div ng-if="::observation.actions.central.length==0">Ingen</div>
+									<li ng-repeat="a in ::observation.actions.central">{{::a}}</li>
+								</ol>
+							</div>
+						
+						<div class="clearfix"></div>
+					</div> 
+					<!-- RELATED
+					<div class="col-xs-12  col-md-6">
+						<label class="control-label">Relaterte</label>
+						<div class="clearfix"></div>
+						{{observation.related.join(' ')}}
 					</div>
-				<div class="clearfix"></div>
+				 	-->
 				</p>
 				<div class="clearfix"></div>
 			</li>
-
-
 
 			<li class="list-group-item">
 				<p class="list-group-item-text">
-				<div class="col-xs-12  col-md-12">
-					<label class="control-label">Tiltak</label>
-					<div class="clearfix"></div>
-					<div class="col-xs-12 col-md-6" ng-show="observation.actions.local">
-						<strong>Lokale:</strong>
-						<ol>
-							<li ng-repeat="a in ::observation.actions.local">{{a}}</li>
-						</ol>
+					<div class="col-xs-12  col-md-4">
+						<label class="control-label">Vurdering</label>
+						<div>
+							<observation-hfk-selector editmode="false" verbose="true" model="observation.ask"></observation-hfk-selector>
+						</div>
 					</div>
-					<div class="col-xs-12 col-md-6" ng-show="::observation.actions.central">
-						<strong>Sentrale:</strong>
-						<ol>
-							<li ng-repeat="a in ::observation.actions.central">{{::a}}</li>
-						</ol>
+					<div class="col-xs-12  col-md-8">
+						<label class="control-label">Vurdering(er)</label>
+						
+						<dl ng-if="::observation.ask.text.draft.length>2">
+							<dt>Reporter</dt>
+							<dd>{{::observation.ask.text.draft}}</dd>
+						</dl>
+						<dl ng-if="::observation.ask.text.pending_review_hi.length>2">
+							<dt>HI</dt>
+							<dd>{{::observation.ask.text.pending_review_hi}}</dd>
+						</dl>
+						<dl ng-if="::observation.ask.text.pending_review_fsj.length>2">
+							<dt>FSJ</dt>
+							<dd>{{::observation.ask.text.pending_review_fsj}}</dd>
+						</dl>
+						<dl ng-if="::observation.ask.text.pending_review_su.length>2">
+							<dt>SU</dt>
+							<dd>{{::observation.ask.text.pending_review_su}}</dd>
+						</dl>
+						
+						<div ng-show="::observation.ask.text.pending_review_su.length<3 && ::observation.ask.text.pending_review_fsj.length<3 && ::observation.ask.text.pending_review_hi.length<3 && ::observation.ask.text.draft.length<3">
+						Ingen
+						</div>
+<!-- 						<observation-hfk-text editmode=false></observation-hfk-text> -->
 					</div>
-					<div class="clearfix"></div>
-				</div> <!-- 
-				<div class="col-xs-12  col-md-6">
-					<label class="control-label">Relaterte</label>
-					<div class="clearfix"></div>
-					{{observation.related.join(' ')}}
-				</div>
-				 -->
 				</p>
 				<div class="clearfix"></div>
 			</li>
-
-			<!-- 			<li class="list-group-item"> -->
-			<!-- 				<p class="list-group-item-text"> -->
-			<!-- 				<div class="col-xs-12  col-md-12"> -->
-			<!-- 					<label class="control-label">DUMP</label> -->
-			<!-- 					<div class="clearfix"></div> -->
-			<!-- 					{{observation | json }} -->
-			<!-- 				</div> -->
-			<!-- 				</p> -->
-			<!-- 				<div class="clearfix"></div> -->
-			<!-- 			</li> -->
 
 		</div>
 
