@@ -65,9 +65,7 @@
 				$http.post(GlobalsService.get('baseUrl') + 'user/authenticate', {
 					username: username,
 					password: password
-				})
-
-					.success(function (response) {
+				}).success(function (response) {
 						console.log(response);
 
 						if (response.success) {
@@ -94,6 +92,16 @@
 
 							$rootScope.error = response.message;
 						}
+					}).error(function (data, status, headers, config) {
+
+						//Show login form
+						$rootScope.currentUserSignedIn = false;
+						//Abort all buffers
+						authService.loginCancelled(data, status);
+
+						$rootScope.error = 'Login experienced some difficulties. Maybe the backend did not respond?';
+						return false;
+
 					});
 			};
 
