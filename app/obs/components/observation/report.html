@@ -107,7 +107,7 @@
 				<div class="col-xs-12  col-md-6">
 					<label class="control-label">{{::observation.location.municipality}}, {{::observation.location.name}}</label>
 					<div ng-if="::observation.location.geo.coordinates">
-						<map center="{{::observation.location.geo.coordinates}}" zoom="8">
+						<map center="{{::observation.location.geo.coordinates}}" zoom="11">
 							<marker position="{{::observation.location.geo.coordinates}}" title="{{::observation.location.name}}" draggable="false" visible="true"></marker>
 						</map>
 					</div>
