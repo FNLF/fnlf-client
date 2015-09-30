@@ -13,7 +13,7 @@
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.search = {show_ors: false, form: '', show: false}; //reset
-			$rootScope.nav.brand = "FNLF Observasjoner";
+			$rootScope.nav.brand = "FNLF ORS";
 			
 			$rootScope.nav.search.show_ors = true; // = '<searchform></searchform>';
 			

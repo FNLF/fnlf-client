@@ -5,7 +5,7 @@
 		.controller('SearchController', function ($scope,$rootScope, ObservationService,SearchService,ObservationsTableService,Definitions,Functions,$routeParams,ngTableParams) {
 
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
-			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
+			$rootScope.nav.brand = "FNLF ORS";
 
 			
 			$scope.observations = [];
