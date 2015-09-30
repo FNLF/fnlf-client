@@ -402,6 +402,7 @@
 						<div ng-show="observation.weather.manual.description">
 							<strong>{{::observation.weather.manual.description}}</strong>
 						</div>
+						<div class="clearfix"></div>
 						
 						<p ng-show="observation.weather.auto.yr">Yr: {{::observation.weather.auto.yr['@from']}}-{{::observation.weather.auto.yr['@to']}} {{::observation.weather.auto.yr.windDirection['@deg']}}&deg;
 							{{::observation.weather.auto.yr.windSpeed['@mps']*1.81}} knop</p>
@@ -455,20 +456,20 @@
 						<label class="control-label">Vurdering(er)</label>
 						
 						<dl ng-if="::observation.ask.text.draft.length>2">
-							<dt>Reporter</dt>
-							<dd>{{::observation.ask.text.draft}}</dd>
+							<dt>Reporter:</dt>
+							<dd ng-bind-html="::observation.ask.text.draft | nl2br"></dd>
 						</dl>
 						<dl ng-if="::observation.ask.text.pending_review_hi.length>2">
-							<dt>HI</dt>
-							<dd>{{::observation.ask.text.pending_review_hi}}</dd>
+							<dt>HI:</dt>
+							<dd ng-bind-html="::observation.ask.text.pending_review_hi | nl2br"></dd>
 						</dl>
 						<dl ng-if="::observation.ask.text.pending_review_fsj.length>2">
-							<dt>FSJ</dt>
-							<dd>{{::observation.ask.text.pending_review_fsj}}</dd>
+							<dt>FSJ:</dt>
+							<dd ng-bind-html="::observation.ask.text.pending_review_fsj | nl2br"></dd>
 						</dl>
 						<dl ng-if="::observation.ask.text.pending_review_su.length>2">
-							<dt>SU</dt>
-							<dd>{{::observation.ask.text.pending_review_su}}</dd>
+							<dt>SU:</dt>
+							<dd ng-bind-html="::observation.ask.text.pending_review_su | nl2br"></dd>
 						</dl>
 						
 						<div ng-show="::observation.ask.text.pending_review_su.length<3 && ::observation.ask.text.pending_review_fsj.length<3 && ::observation.ask.text.pending_review_hi.length<3 && ::observation.ask.text.draft.length<3">
