@@ -1,25 +1,25 @@
 
-	<span ng-if="editmode=='true'">
+	<span ng-if="editmode">
 		<div class="btn-group" role="group">
 			<span ng-repeat="ask in askValues">
 				<button type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" ng-click="flip(ask.key)">{{ask.label}}</button>
 			</span>
 		</div>
 	</span>
-	<span ng-if="editmode=='false'">
+	<span ng-if="!editmode">
 		<span ng-repeat="ask in askValues">
 			<small>
-				<span ng-if="!isNeutral(ask.key) && verbose=='false'">
+				<span ng-if="!isNeutral(ask.key) && !verbose">
 					<span ng-class="{'label':true, 'label-danger': isNegative(ask.key), 'label-default': isNeutral(ask.key), 'label-success': isPositive(ask.key)}">{{ ask.nick }}</span>
 				</span>
-				<span ng-if="verbose=='true'">
+				<span ng-if="verbose">
 					<button type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" disabled>{{ask.label}}</button>
 				</span>
 			</small>
 		</span>
 	</span>
 
-	<div ng-if="verbose=='true'">
+	<div ng-if="verbose">
 	<br />
 	<ul class="list-unstyled">
 		<li>
