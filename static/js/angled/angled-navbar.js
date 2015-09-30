@@ -69,6 +69,11 @@
 					$scope.navfn({'action' : action});
  				}; // end navAction
 
+				$scope.btnAction = function(onclick){
+					$scope.navbarCollapsed=false;
+					onclick();
+				}; // end navAction
+
  				/**
  				 * Have Branding
  				 * Checks to see if the brand attibute was passed, if not use the default.

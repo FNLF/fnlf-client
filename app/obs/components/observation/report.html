@@ -474,7 +474,7 @@
 							</div>
 							
 							<!-- Multiple and statements not working? -->
-							<div ng-show="(::observation.ask.text.pending_review_su.length<3) && (::observation.ask.text.pending_review_fsj.length<3) && (::observation.ask.text.pending_review_hi.length<3) && (::observation.ask.text.draft.length<3)">
+							<div ng-show="::!observation.ask.text">
 								<dt>Ingen vurderinger</dt>
 								<dd></dd>
 							</div>
