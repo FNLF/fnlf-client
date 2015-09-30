@@ -16,7 +16,7 @@
 			DoNotReloadCurrentTemplate($scope);
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
-			$rootScope.nav.brand = 'FNLF Observasjon #' + $routeParams.id;
+			$rootScope.nav.brand = 'FNLF ORS #' + $routeParams.id;
 			
 			
 			
@@ -136,7 +136,13 @@
 				});
 		};
 
-
+		var printDiff = function(changedObs,oldObs){
+			var diff = Functions.objectDifference(oldObs,changedObs,'observation');
+			console.log('observation changed, diff:');
+			angular.forEach(diff,function(o){
+				console.log(o);
+			});
+		};
 		
 		/**
 		 * Triggers saved/unsaved label
@@ -144,12 +150,9 @@
 		$scope.observationChanges = false;
 		$scope.$watch('observation', function(changedObs,oldObs) {
 			if(oldObs._id) {
-
-				//var diff = Functions.objectDifference(oldObs,changedObs,'observation');
-				//console.log('observation changed, diff:');
-				//angular.forEach(diff,function(o){
-				//	console.log(o);
-				//});
+				if(false) {
+					printDiff(changedObs, oldObs);
+				}
 				if(!$scope.acl.x){
 					var msg = 'Du vil ikke kunne lagre fordi du mangler skrivetilgang';
 					$rootScope.error = msg;

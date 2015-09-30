@@ -1,6 +1,19 @@
 (function () {
 	angular.module('reportingApp')
-		.service('Functions',  function () {
+		.service('Functions',  function ($q) {
+
+			this.waitForIt = function($scope,it){
+
+				var deferred = $q.defer();
+				var unbind = $scope.$watch(it,function(){
+					if($scope[it]){
+						deferred.resolve($scope[it]);
+						unbind();
+					}
+
+				});
+				return deferred.promise;
+			};
 
 			this.mapDistance = function(lat1,lon1,lat2,lon2){
 				var toRad = (Math.PI /180);

@@ -262,7 +262,13 @@
 				// server error), then we
 				// may have to normalize it on our end, as best
 				// we can.
-				if (!angular.isObject(response.data) || !response.data._error.message) {
+
+				if(response.status==422){
+					if(response.data._issues){
+						return ($q.reject("Feil i dataformat fra klienten: "+JSON.stringify(response.data._issues)));
+					}
+				}
+				if (!angular.isObject(response.data) || angular.isUndefined(response.data._error) || !response.data._error.message) {
 					console.log(response);
 					return ($q.reject("An unknown error occurred. "+response.statusText));
 				}
