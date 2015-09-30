@@ -250,14 +250,11 @@
 				
 				<div class="col-md-8 col-xs-12">
 					<label class="control-label">Kommenter vurdering</label>
-						<inlinehelp>
-						Skriv korte kommentarer og vurderinger om du har skrivekløe. Husk at dette kun vil være gjenstand for manuell gjennomlesning.
-						</inlinehelp>
-					<p class="list-group-item-text">
-						<textarea class="form-control" rows="4" disabled>Dummy felt inntil logikken er på plass.
-Men dette kan sammen med holdninger, kunnskaper og ferdigheter til venstre bli en HL, HI, FSJ og SU vurdering av observasjonen som helhet. 
-						</textarea>
-					</p>
+					<inlinehelp>
+					Skriv korte kommentarer og vurderinger om du har skrivekløe. Husk at dette kun vil være gjenstand for manuell gjennomlesning.
+					</inlinehelp>
+					<observation-hfk-text askmodel="observation.ask" acl="acl" state="{{observation.workflow.state}}"></observation-hfk-text>
+
 				
 				</div>
 				
