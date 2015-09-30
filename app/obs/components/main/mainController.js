@@ -15,7 +15,7 @@
 			$rootScope.nav.search = {show_ors: false, form: '', show: false}; //reset
 			$rootScope.nav.brand = "FNLF ORS";
 			
-			$rootScope.nav.search.show_ors = true; // = '<searchform></searchform>';
+			$rootScope.nav.search.show_ors = false; // = '<searchform></searchform>';
 			
 			$rootScope.title = 'ORS oversikt';
 			

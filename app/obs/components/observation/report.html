@@ -117,8 +117,8 @@
 
 			<!--  WORKFLOW -->
 			<li class="list-group-item">
+				
 				<div class="col-xs-12  col-md-6">
-					<!-- streamline -->
 					<label class="control-label" ng-click="isCollapsed = !isCollapsed">Arbeidsflyt<i class="fa fa-fw" ng-class="{'fa-angle-up': isCollapsed, 'fa-angle-down': !isCollapsed}"></i></label>
 					<div collapse="!isCollapsed">
 						<workflowtimeline audit="::observation.workflow.audit"></workflowtimeline>
@@ -278,7 +278,6 @@
 
 			<!-- FILES -->
 			<li class="list-group-item" ng-show="::observation.files.length>0">
-			{{::observation.files.length}}
 				<p class="list-group-item-text">
 					<label class="control-label">Vedlegg</label>
 

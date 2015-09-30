@@ -19,7 +19,7 @@
 			$rootScope.openInEditMode = function(){
 				$location.path('/observation/'+ $routeParams.id);
 			};
-			$rootScope.nav.toolbar[2] = {tooltip:'Åpne i editor',text:'Åpne i editor',btn_class:'default',icon:'square-o',onclick:$rootScope.openInEditMode};
+			$rootScope.nav.toolbar[2] = {tooltip:'Åpne i editor',text:'Åpne i editor',btn_class:'default',icon:'edit',onclick:$rootScope.openInEditMode};
 
 			$scope.loadObservation = function(){
 				$scope.observation = {};
