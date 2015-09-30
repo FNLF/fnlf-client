@@ -13,7 +13,7 @@
 					<span ng-class="{'label':true, 'label-danger': isNegative(ask.key), 'label-default': isNeutral(ask.key), 'label-success': isPositive(ask.key)}">{{ ask.nick }}</span>
 				</span>
 				<span ng-if="verbose">
-					<button type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" disabled>{{ask.label}}</button>
+					<button type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" readonly>{{ask.label}}</button>
 				</span>
 			</small>
 		</span>
