@@ -27,6 +27,10 @@
 - Datetimepicker start week on mondays in observation [\#209](https://github.com/FNLF/fnlf-client/issues/209)
 - Sorting in tables for observation main page [\#204](https://github.com/FNLF/fnlf-client/issues/204)
 - Reserve packed by, airworthy date, 4-year control in observation involved [\#203](https://github.com/FNLF/fnlf-client/issues/203)
+- Observation components in observation remove \_\* meta data before copy into \(except \_id\) [\#184](https://github.com/FNLF/fnlf-client/issues/184)
+- Properties for users should be used in observation.involved as default values [\#138](https://github.com/FNLF/fnlf-client/issues/138)
+- Better notification when getting a 404 when no access to resource item [\#125](https://github.com/FNLF/fnlf-client/issues/125)
+- Inline help [\#34](https://github.com/FNLF/fnlf-client/issues/34)
 
 **Fixed bugs:**
 
@@ -47,6 +51,9 @@
 - Component.how length limit in componentSummary is annoying [\#216](https://github.com/FNLF/fnlf-client/issues/216)
 - Mumbai map bug [\#215](https://github.com/FNLF/fnlf-client/issues/215)
 - Observ ation report not showing name of tmpname [\#214](https://github.com/FNLF/fnlf-client/issues/214)
+- File upload button throws exception when list of files in observation is empty [\#199](https://github.com/FNLF/fnlf-client/issues/199)
+- On observation creation observation changes and requires save but toolbar save button is disabled [\#198](https://github.com/FNLF/fnlf-client/issues/198)
+- Open registered observation cases doesn't work - iphone safari [\#144](https://github.com/FNLF/fnlf-client/issues/144)
 
 **Closed issues:**
 
@@ -62,6 +69,29 @@
 - Implement filtering in mainpage [\#220](https://github.com/FNLF/fnlf-client/issues/220)
 - Start using inline-help directive [\#218](https://github.com/FNLF/fnlf-client/issues/218)
 - Not showing more than 50 observations in main page [\#217](https://github.com/FNLF/fnlf-client/issues/217)
+- Location should update if club is changed. [\#147](https://github.com/FNLF/fnlf-client/issues/147)
+
+**Merged pull requests:**
+
+- Hotfix for \_fsj to \_fs for report verdict [\#289](https://github.com/FNLF/fnlf-client/pull/289) ([einarhuseby](https://github.com/einarhuseby))
+- Final cleanups [\#288](https://github.com/FNLF/fnlf-client/pull/288) ([einarhuseby](https://github.com/einarhuseby))
+- Even more report cleanup [\#287](https://github.com/FNLF/fnlf-client/pull/287) ([einarhuseby](https://github.com/einarhuseby))
+- Additional fixes [\#286](https://github.com/FNLF/fnlf-client/pull/286) ([einarhuseby](https://github.com/einarhuseby))
+- Fixing broken hfk/ask directive for editmode/verbose [\#285](https://github.com/FNLF/fnlf-client/pull/285) ([einarhuseby](https://github.com/einarhuseby))
+- Misc fixes and tweaks [\#284](https://github.com/FNLF/fnlf-client/pull/284) ([einarhuseby](https://github.com/einarhuseby))
+- Closes \#279 [\#280](https://github.com/FNLF/fnlf-client/pull/280) ([einarhuseby](https://github.com/einarhuseby))
+- Closes \#263 and Closes \#277 [\#278](https://github.com/FNLF/fnlf-client/pull/278) ([einarhuseby](https://github.com/einarhuseby))
+- Minor tweaks [\#273](https://github.com/FNLF/fnlf-client/pull/273) ([einarhuseby](https://github.com/einarhuseby))
+- Minor last minute tweaks [\#272](https://github.com/FNLF/fnlf-client/pull/272) ([einarhuseby](https://github.com/einarhuseby))
+- Added simple collapse for audit trail [\#271](https://github.com/FNLF/fnlf-client/pull/271) ([einarhuseby](https://github.com/einarhuseby))
+- Minor tweaks [\#270](https://github.com/FNLF/fnlf-client/pull/270) ([einarhuseby](https://github.com/einarhuseby))
+- Towards v0.4.0 [\#269](https://github.com/FNLF/fnlf-client/pull/269) ([einarhuseby](https://github.com/einarhuseby))
+- Misc fixes [\#266](https://github.com/FNLF/fnlf-client/pull/266) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes and some template renaming and observationflags [\#265](https://github.com/FNLF/fnlf-client/pull/265) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes for \#248 and color scheme for restricted [\#264](https://github.com/FNLF/fnlf-client/pull/264) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes for observation report and for observation files [\#258](https://github.com/FNLF/fnlf-client/pull/258) ([einarhuseby](https://github.com/einarhuseby))
+- Multiple fixes [\#243](https://github.com/FNLF/fnlf-client/pull/243) ([einarhuseby](https://github.com/einarhuseby))
+- Remaining changes from prod Fixes \#236 \#237 [\#239](https://github.com/FNLF/fnlf-client/pull/239) ([einarhuseby](https://github.com/einarhuseby))
 
 ## [v0.3.0](https://github.com/fnlf/fnlf-client/tree/v0.3.0) (2015-04-14)
 [Full Changelog](https://github.com/fnlf/fnlf-client/compare/v0.2.1...v0.3.0)
@@ -91,6 +121,7 @@
 
 **Fixed bugs:**
 
+- Not possible to choose or set involved person in chain of events [\#146](https://github.com/FNLF/fnlf-client/issues/146)
 - Title in reportingApp is reporting should be registering [\#190](https://github.com/FNLF/fnlf-client/issues/190)
 - Observation location sets wrong type - string [\#183](https://github.com/FNLF/fnlf-client/issues/183)
 - Save button in observation editor deactivated even if changes done [\#182](https://github.com/FNLF/fnlf-client/issues/182)
@@ -104,17 +135,41 @@
 
 **Closed issues:**
 
+- Save button in aside [\#38](https://github.com/FNLF/fnlf-client/issues/38)
 - Weather summary missing in observation editor [\#177](https://github.com/FNLF/fnlf-client/issues/177)
 - Actions \(tiltak\) [\#48](https://github.com/FNLF/fnlf-client/issues/48)
 
+**Merged pull requests:**
+
+- \#299, \#201, \#205, \#206 and added watchers to report [\#208](https://github.com/FNLF/fnlf-client/pull/208) ([einarhuseby](https://github.com/einarhuseby))
+- Moved br above weather description [\#197](https://github.com/FNLF/fnlf-client/pull/197) ([einarhuseby](https://github.com/einarhuseby))
+- Added weather description to summary [\#196](https://github.com/FNLF/fnlf-client/pull/196) ([einarhuseby](https://github.com/einarhuseby))
+- Minor fixes in layout, adding reserve\_ride and aad\_fire to component attributes [\#195](https://github.com/FNLF/fnlf-client/pull/195) ([einarhuseby](https://github.com/einarhuseby))
+- Removed ng-show which caused actions to only show after save [\#194](https://github.com/FNLF/fnlf-client/pull/194) ([einarhuseby](https://github.com/einarhuseby))
+- Actions, weather summary, wind direction, minor enhancements [\#193](https://github.com/FNLF/fnlf-client/pull/193) ([einarhuseby](https://github.com/einarhuseby))
+- Summaries update [\#191](https://github.com/FNLF/fnlf-client/pull/191) ([einarhuseby](https://github.com/einarhuseby))
+- Some minor adjustments following test release [\#176](https://github.com/FNLF/fnlf-client/pull/176) ([einarhuseby](https://github.com/einarhuseby))
+- Added description to startpage for observations [\#175](https://github.com/FNLF/fnlf-client/pull/175) ([einarhuseby](https://github.com/einarhuseby))
+- Minor fixes in layout and navigation [\#174](https://github.com/FNLF/fnlf-client/pull/174) ([einarhuseby](https://github.com/einarhuseby))
+- Closes \#109 [\#172](https://github.com/FNLF/fnlf-client/pull/172) ([einarhuseby](https://github.com/einarhuseby))
+- Added style to navbar adding Beta! to brand and bottom border Closes \#17 [\#171](https://github.com/FNLF/fnlf-client/pull/171) ([einarhuseby](https://github.com/einarhuseby))
+- Closes \#168 [\#169](https://github.com/FNLF/fnlf-client/pull/169) ([einarhuseby](https://github.com/einarhuseby))
+
 ## [v0.2.1](https://github.com/fnlf/fnlf-client/tree/v0.2.1) (2015-03-16)
 [Full Changelog](https://github.com/fnlf/fnlf-client/compare/v0.2.0...v0.2.1)
+
+**Merged pull requests:**
+
+- Hotfix v0.2.1 [\#166](https://github.com/FNLF/fnlf-client/pull/166) ([einarhuseby](https://github.com/einarhuseby))
+- Hotfix for nl2br filter missing [\#165](https://github.com/FNLF/fnlf-client/pull/165) ([einarhuseby](https://github.com/einarhuseby))
 
 ## [v0.2.0](https://github.com/fnlf/fnlf-client/tree/v0.2.0) (2015-03-16)
 [Full Changelog](https://github.com/fnlf/fnlf-client/compare/v0.1.0...v0.2.0)
 
 **Implemented enhancements:**
 
+- Observation component reordering/sorting/sortable [\#91](https://github.com/FNLF/fnlf-client/issues/91)
+- Handling of large files like video [\#51](https://github.com/FNLF/fnlf-client/issues/51)
 - Observation comments need length \> 0 before post allowed [\#160](https://github.com/FNLF/fnlf-client/issues/160)
 - Observation components should be ordered as index of list/array not as seperate property order [\#149](https://github.com/FNLF/fnlf-client/issues/149)
 - Navbar directive [\#136](https://github.com/FNLF/fnlf-client/issues/136)
@@ -172,6 +227,7 @@
 
 **Closed issues:**
 
+- Observation reverted on save [\#119](https://github.com/FNLF/fnlf-client/issues/119)
 - Show observations requiring action from you [\#115](https://github.com/FNLF/fnlf-client/issues/115)
 - Acl frontend [\#110](https://github.com/FNLF/fnlf-client/issues/110)
 - View observation \(non-edit\) [\#76](https://github.com/FNLF/fnlf-client/issues/76)
@@ -181,6 +237,68 @@
 - Observation component administration [\#40](https://github.com/FNLF/fnlf-client/issues/40)
 - Share observation [\#30](https://github.com/FNLF/fnlf-client/issues/30)
 - Club administration [\#27](https://github.com/FNLF/fnlf-client/issues/27)
+
+**Merged pull requests:**
+
+- Merging develop to master for 0.2.0 [\#164](https://github.com/FNLF/fnlf-client/pull/164) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes \#162 [\#163](https://github.com/FNLF/fnlf-client/pull/163) ([einarhuseby](https://github.com/einarhuseby))
+- Bugfixes Closes \#160 \#126 \#54 and nl2br filter fix [\#161](https://github.com/FNLF/fnlf-client/pull/161) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes \#158 - workaround for runaway error messages [\#159](https://github.com/FNLF/fnlf-client/pull/159) ([einarhuseby](https://github.com/einarhuseby))
+- Hotfix disable save toolbar button not on draft but closed [\#157](https://github.com/FNLF/fnlf-client/pull/157) ([einarhuseby](https://github.com/einarhuseby))
+- Hotfix wrong path for organization directive [\#156](https://github.com/FNLF/fnlf-client/pull/156) ([einarhuseby](https://github.com/einarhuseby))
+- Comments and sharing in report, nl2br filter, sorting of components [\#154](https://github.com/FNLF/fnlf-client/pull/154) ([einarhuseby](https://github.com/einarhuseby))
+- Hotfix for failed merge [\#153](https://github.com/FNLF/fnlf-client/pull/153) ([einarhuseby](https://github.com/einarhuseby))
+- Added missing reportcontroller [\#152](https://github.com/FNLF/fnlf-client/pull/152) ([einarhuseby](https://github.com/einarhuseby))
+- Navbar for all apps and report for observation [\#151](https://github.com/FNLF/fnlf-client/pull/151) ([einarhuseby](https://github.com/einarhuseby))
+- Navbar directive [\#148](https://github.com/FNLF/fnlf-client/pull/148) ([einarhuseby](https://github.com/einarhuseby))
+- Minor cleanup and added draft resolve to workflow [\#134](https://github.com/FNLF/fnlf-client/pull/134) ([einarhuseby](https://github.com/einarhuseby))
+- Adding missing file from previous pr [\#133](https://github.com/FNLF/fnlf-client/pull/133) ([einarhuseby](https://github.com/einarhuseby))
+- Fix for files \#51 \#43 [\#132](https://github.com/FNLF/fnlf-client/pull/132) ([einarhuseby](https://github.com/einarhuseby))
+- Removed html from padding-top [\#131](https://github.com/FNLF/fnlf-client/pull/131) ([einarhuseby](https://github.com/einarhuseby))
+- Workflow state in tables, table headings left aligned [\#130](https://github.com/FNLF/fnlf-client/pull/130) ([einarhuseby](https://github.com/einarhuseby))
+- Simple update to users table [\#129](https://github.com/FNLF/fnlf-client/pull/129) ([einarhuseby](https://github.com/einarhuseby))
+- Added simple user management app [\#128](https://github.com/FNLF/fnlf-client/pull/128) ([einarhuseby](https://github.com/einarhuseby))
+- Anonimizing support for user resolver [\#127](https://github.com/FNLF/fnlf-client/pull/127) ([einarhuseby](https://github.com/einarhuseby))
+- Html cleanup and navbar [\#124](https://github.com/FNLF/fnlf-client/pull/124) ([einarhuseby](https://github.com/einarhuseby))
+- Closes \#121 [\#122](https://github.com/FNLF/fnlf-client/pull/122) ([einarhuseby](https://github.com/einarhuseby))
+- Minor html cleanup [\#120](https://github.com/FNLF/fnlf-client/pull/120) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes \#117 [\#118](https://github.com/FNLF/fnlf-client/pull/118) ([einarhuseby](https://github.com/einarhuseby))
+- Observations todo list [\#116](https://github.com/FNLF/fnlf-client/pull/116) ([einarhuseby](https://github.com/einarhuseby))
+- Acl implementation and new features [\#112](https://github.com/FNLF/fnlf-client/pull/112) ([einarhuseby](https://github.com/einarhuseby))
+- Fix for clearFullnameFromObservation and sort by id [\#107](https://github.com/FNLF/fnlf-client/pull/107) ([einarhuseby](https://github.com/einarhuseby))
+- Ng-table and location and club fixes [\#106](https://github.com/FNLF/fnlf-client/pull/106) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes for profile app [\#101](https://github.com/FNLF/fnlf-client/pull/101) ([einarhuseby](https://github.com/einarhuseby))
+- Misc enhancements [\#98](https://github.com/FNLF/fnlf-client/pull/98) ([einarhuseby](https://github.com/einarhuseby))
+- Adding missing location directive and template [\#86](https://github.com/FNLF/fnlf-client/pull/86) ([einarhuseby](https://github.com/einarhuseby))
+- Location in aside, club locations, misc [\#85](https://github.com/FNLF/fnlf-client/pull/85) ([einarhuseby](https://github.com/einarhuseby))
+- Misc fixes and additions [\#79](https://github.com/FNLF/fnlf-client/pull/79) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes \#74 [\#75](https://github.com/FNLF/fnlf-client/pull/75) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes \#70 [\#72](https://github.com/FNLF/fnlf-client/pull/72) ([einarhuseby](https://github.com/einarhuseby))
+- Weather and confirmation dialogue directive [\#71](https://github.com/FNLF/fnlf-client/pull/71) ([einarhuseby](https://github.com/einarhuseby))
+- Layout and pilot to organisation [\#69](https://github.com/FNLF/fnlf-client/pull/69) ([einarhuseby](https://github.com/einarhuseby))
+- Added weather aside Fixes \#44 [\#68](https://github.com/FNLF/fnlf-client/pull/68) ([einarhuseby](https://github.com/einarhuseby))
+- Layout changes, Fixes \#65 [\#67](https://github.com/FNLF/fnlf-client/pull/67) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes \#58 \#42 [\#64](https://github.com/FNLF/fnlf-client/pull/64) ([einarhuseby](https://github.com/einarhuseby))
+- Misc fixes \#59 \#61 \#62 [\#63](https://github.com/FNLF/fnlf-client/pull/63) ([einarhuseby](https://github.com/einarhuseby))
+- Including google map api via // [\#25](https://github.com/FNLF/fnlf-client/pull/25) ([einarhuseby](https://github.com/einarhuseby))
+- Forgot to add ng-map js file [\#24](https://github.com/FNLF/fnlf-client/pull/24) ([einarhuseby](https://github.com/einarhuseby))
+- Initial ng-map for locationsummary [\#23](https://github.com/FNLF/fnlf-client/pull/23) ([einarhuseby](https://github.com/einarhuseby))
+- Updated all directives using aside to support aside with browser back button aside.hide [\#21](https://github.com/FNLF/fnlf-client/pull/21) ([einarhuseby](https://github.com/einarhuseby))
+- Aside and modal browser back button hack and bootstrap update [\#19](https://github.com/FNLF/fnlf-client/pull/19) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes \#1 [\#17](https://github.com/FNLF/fnlf-client/pull/17) ([einarhuseby](https://github.com/einarhuseby))
+- Misc enhancements [\#15](https://github.com/FNLF/fnlf-client/pull/15) ([einarhuseby](https://github.com/einarhuseby))
+- Fixes for resolvers and some cleanup [\#14](https://github.com/FNLF/fnlf-client/pull/14) ([einarhuseby](https://github.com/einarhuseby))
+- File upload for observation, profile image, cleanups etc [\#13](https://github.com/FNLF/fnlf-client/pull/13) ([einarhuseby](https://github.com/einarhuseby))
+- Rating for observation [\#12](https://github.com/FNLF/fnlf-client/pull/12) ([einarhuseby](https://github.com/einarhuseby))
+- Resolve test cleanup [\#11](https://github.com/FNLF/fnlf-client/pull/11) ([einarhuseby](https://github.com/einarhuseby))
+- Resolve usernames, clubs etc by id [\#10](https://github.com/FNLF/fnlf-client/pull/10) ([einarhuseby](https://github.com/einarhuseby))
+- Merging aside into develop [\#9](https://github.com/FNLF/fnlf-client/pull/9) ([einarhuseby](https://github.com/einarhuseby))
+- Fixed workflow using aside [\#8](https://github.com/FNLF/fnlf-client/pull/8) ([einarhuseby](https://github.com/einarhuseby))
+- Hotfixing with aside template deleted by mistake [\#6](https://github.com/FNLF/fnlf-client/pull/6) ([einarhuseby](https://github.com/einarhuseby))
+- Develop [\#5](https://github.com/FNLF/fnlf-client/pull/5) ([einarhuseby](https://github.com/einarhuseby))
+- Develop [\#4](https://github.com/FNLF/fnlf-client/pull/4) ([einarhuseby](https://github.com/einarhuseby))
+- Massive refacotoring and cleanups [\#3](https://github.com/FNLF/fnlf-client/pull/3) ([einarhuseby](https://github.com/einarhuseby))
+- Locationservice [\#1](https://github.com/FNLF/fnlf-client/pull/1) ([einarhuseby](https://github.com/einarhuseby))
 
 ## [v0.1.0](https://github.com/fnlf/fnlf-client/tree/v0.1.0) (2015-01-08)
 
