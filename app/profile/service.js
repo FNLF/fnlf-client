@@ -66,6 +66,22 @@ angular.module("profileApp")
 
 		};
 
+
+		this.getAcl = function(where){
+			if(!where){
+				where = {};
+			}
+			return $http.get(urlBase+'/users/acl/?where='+JSON.stringify(where)).then(handleSuccess, handleError);
+		};
+
+		this.getRole = function(_id){
+			return $http.get(urlBase+'/acl/roles/'+_id).then(handleSuccess, handleError);
+		};
+
+		this.getGroup = function(_id){
+			return $http.get(urlBase+'/acl/groups/'+_id).then(handleSuccess, handleError);
+		};
+
 		// updating person - no $scope, no injection allowable???
 		this.updateInfo = function(personIndex, obj) {
 			$scope.userArray.splice(personIndex, 1, obj);
@@ -88,6 +104,7 @@ angular.module("profileApp")
 			// server error), then we
 			// may have to normalize it on our end, as best
 			// we can.
+			console.log(response);
 			if (!angular.isObject(response.data) || !response.data.message) {
 				return ($q.reject("An unknown error occurred."));
 			}
@@ -98,7 +115,6 @@ angular.module("profileApp")
 		// the application data
 		// from the API response payload.
 		function handleSuccess(response) {
-			console.log(response.data);
 			return (response.data);
 		}
 

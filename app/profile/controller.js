@@ -11,6 +11,29 @@ angular.module("profileApp").controller("userController",
 			$rootScope.nav = {toolbar: [], menus: []}; //reset
 			$rootScope.nav.brand = 'FNLF Profil';
 
+			var where = {id:Number($rootScope.username)};
+
+			$scope.roles = [];
+			$scope.groups = [];
+
+
+			userService.getAcl(where)
+				.then(function(response){
+					response._items.forEach(function(item){
+						item.acl.groups.forEach(function(_id){
+							userService.getGroup(_id).then(function(g){
+								$scope.groups.push(g);
+							});
+						});
+						item.acl.roles.forEach(function(_id){
+							userService.getRole(_id).then(function(r){
+								$scope.roles.push(r);
+							});
+						});
+					});
+				});
+
+
 
 			$scope.loadUser = function() {
 
