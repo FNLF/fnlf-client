@@ -34,13 +34,14 @@
 		</div>
 
 
-		<div class="col-xs-12 col-md-12 table-responsive">
+
+
+		<div class="col-xs-12 col-md-12 table-responsive" ng-show="!observation">
 			<!-- ng-table all observations -->
 			<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
 
 				<tr ng-repeat="observation in $data">
-
-					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{::observation.id}}</a></td>
+					<td data-title="'Id     '" sortable="'id'"><a  ng-click="viewObservation(observation)">#{{::observation.id}}</a></td>
 					<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
 					<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="::observation.club"></resolveclub></td>
 					<td data-title="'Forløp'"><tags tags="::observation.flattenedWhats"></tags></td>
@@ -52,7 +53,23 @@
 			</table>
 
 		</div>
+
+		<div class="col-xs-12 col-md-12" ng-if="observation">
+			<br>
+
+			<span> <span ng-repeat="observation in tableData" ><a ng-click="viewObservation(observation)"><span class="h4">#{{::observation.id}}</span></a> </span> </span>
+			<br>
+			<br>
+			<a ng-click="hideObservation()"><h4><<< Tilbake til søkeresultater </h4></a>
+		</div>
+
 	</div>
+<div>
+	<ng-include src="'components/observation/report.html'">
+
+	</ng-include>
+</div>
+
 
 
 </div>
