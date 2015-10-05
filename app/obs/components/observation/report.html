@@ -166,7 +166,7 @@
 							<td>{{::p.numberOfJumps}}</td>
 							<td>{{::p.yearsOfExperience}}</td>
 
-							<td>{{::p.jumptypeSelected}}</td>
+							<td>{{::p.jumptypeSelected}}<br> {{::p.jumptypeTags.join(', ')}}</td>
 							<td>
 								<div ng-if="::p.verdict.fu">
 									<span class="label label-warning">Farlig Ukontrollert</span>
