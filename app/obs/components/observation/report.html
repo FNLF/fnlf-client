@@ -1,5 +1,5 @@
 <div>
-	<div ng-if="::observation._id">
+	<div ng-if="observation._id">
 		
 		
 		
@@ -425,7 +425,7 @@
 								<strong>Lokale:</strong>
 								<ol>
 									<div ng-if="::observation.actions.local.length==0">Ingen</div>
-									<li ng-repeat="a in ::observation.actions.local">{{a}}</li>
+									<li ng-repeat="a in ::observation.actions.local track by $index">{{a}}</li>
 								</ol>
 							</div>
 							
@@ -433,7 +433,7 @@
 								<strong>Sentrale:</strong>
 								<ol>
 									<div ng-if="::observation.actions.central.length==0">Ingen</div>
-									<li ng-repeat="a in ::observation.actions.central">{{::a}}</li>
+									<li ng-repeat="a in ::observation.actions.central track by $index">{{::a}}</li>
 								</ol>
 							</div>
 						
