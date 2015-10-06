@@ -63,8 +63,8 @@ angular.module("clubApp").controller("locationsController",
 
 	$scope.dragMarker = function(event,location){
 		console.log(location);
-		$scope.loc.geo.coordinates[0]=event.latLng.k;
-		$scope.loc.geo.coordinates[1]=event.latLng.D;
+		$scope.loc.geo.coordinates[0]=event.latLng.lat();
+		$scope.loc.geo.coordinates[1]=event.latLng.lng();
 		$scope.coords=[$scope.loc.geo.coordinates[0],$scope.loc.geo.coordinates[1]];
 
 
