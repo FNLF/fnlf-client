@@ -9,7 +9,8 @@
 		directive.scope = {
 			model: '=',
 			group: '@',
-			noun: '@'
+			noun: '@',
+			acl: '=',
 		};
 
 		directive.link = function ($scope, element, attrs) {

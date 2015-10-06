@@ -10,7 +10,8 @@ angular.module('reportingApp').directive('observationdateselector', function ($t
 	directive.templateUrl = "components/observation/directives/observationdateselector.html";
 
 	directive.scope = {
-		observation: '='
+		observation: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {

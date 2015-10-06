@@ -16,7 +16,8 @@ angular.module('reportingApp').directive('location', function (LocationService) 
 	directive.scope = {
 		observation: '=',
 		loadObservation: '@',
-		saveObservation: '@'
+		saveObservation: '@',
+		acl: '='
 		
 	};
 	

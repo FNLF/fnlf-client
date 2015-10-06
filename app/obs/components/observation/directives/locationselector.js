@@ -8,7 +8,8 @@ angular.module('reportingApp').directive('locationsummary', function ($window) {
 
 
 	directive.scope = {
-		location: '='
+		location: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
@@ -46,7 +47,8 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 	directive.scope = {
 		observation: '=',
 		clublocations: '=',
-		locationAside: '='
+		locationAside: '=',
+		acl: '='
 
 	};
 

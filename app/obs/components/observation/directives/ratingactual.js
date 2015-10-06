@@ -19,6 +19,7 @@ angular.module('reportingApp').directive('ratingActual', function (Definitions) 
 
 		directive.scope = {
 			observation: '=',
+			acl: '='
 		};
 
 		

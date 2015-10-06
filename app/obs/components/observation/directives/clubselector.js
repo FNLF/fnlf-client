@@ -7,7 +7,8 @@
 		directive.templateUrl = "components/observation/directives/clubselector.html";
 
 		directive.scope = {
-			observation: '='
+			observation: '=',
+			acl: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {

@@ -18,7 +18,8 @@ angular.module('reportingApp')
 	
 	directive.scope = {
 		observation: '=',
-		observationChanges: '='
+		observationChanges: '=',
+		acl: '='
 	};
 	
 	directive.template = function(tElement, tAttrs) { 

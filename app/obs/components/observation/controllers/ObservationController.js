@@ -19,20 +19,22 @@
 
 			$rootScope.title = 'ORS editor #' + $scope.observation.id;
 			
-
+			$rootScope.haspee = function() {
+				return 1;
+			};
+			
+			$rootScope.haswritepermission = 1;
 			$scope.getAcl = function(){
 				ObservationService.getAcl(observationId)
 					.then(function(acl){
 						$scope.acl=acl;
-						
-						if(!$scope.acl.w) {
-							$rootScope.editorreadonly = true;
-						}
-						
-						console.log("Read only?");
-						console.log($rootScope.readOnly);
 					});
 			};
+			
+//			$scope.!acl.w = function() {
+//				
+//				return false; //return $scope.acl['type'];
+//			}
 
 			$rootScope.disabledFn = function(){
 				return !$scope.observationChanges;

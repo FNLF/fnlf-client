@@ -9,7 +9,8 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 	directive.templateUrl = "components/observation/directives/involvedpersondetails.html";
 
 	directive.scope = {
-		observation: '='
+		observation: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
@@ -59,7 +60,8 @@ angular.module('reportingApp').directive('involvedperson', function (RestService
 	directive.scope = {
 		person: '=',
 		jumptypes: '=',
-		licensesFromMelwin: '='
+		licensesFromMelwin: '=',
+		acl: '='
 
 	};
 
@@ -103,7 +105,7 @@ angular.module('reportingApp').directive('involvedpersonsummary', function (Rest
 	directive.templateUrl = "components/observation/directives/involvedpersonsummary.html";
 
 	directive.scope = {
-		person: '='
+		person: '=',
 	};
 
 	directive.link = function ($scope, element, attrs) {

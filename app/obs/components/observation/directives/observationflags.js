@@ -5,7 +5,8 @@ angular.module('reportingApp').directive('observationflags', function (Definitio
 	directive.templateUrl = "components/observation/directives/observationflags.html";
 
 	directive.scope = {
-		observation: '='
+		observation: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {

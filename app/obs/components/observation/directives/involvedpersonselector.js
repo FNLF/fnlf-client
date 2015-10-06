@@ -6,7 +6,8 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 	directive.template = '<table class="table"><tr ng-repeat="person in observation.involved"><td><span><involvedpersonsummary person="person"></involvedpersonsummary> &nbsp;</span> </td></tr></table>';
 
 	directive.scope = {
-		observation: '='
+		observation: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
@@ -29,7 +30,8 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 		};
 
 		directive.scope = {
-			observation: '='
+			observation: '=',
+			acl: '='
 		};
 		
 		directive.controller = function ($scope, $rootScope, $location, $aside,RestService) {
