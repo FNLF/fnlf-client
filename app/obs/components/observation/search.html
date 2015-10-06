@@ -16,10 +16,11 @@
 			<br>
 			<br>
 			<br>
-
+			<!--
 			<div class="col-xs-12 hidden-xs hidden-sm">
 				<searchformadvanced model="queryObj"></searchformadvanced>
 			</div>
+			-->
 
 			<div class="col-xs-12">
 				<caption>
@@ -43,13 +44,40 @@
 				<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
 
 					<tr ng-repeat="observation in $data">
-						<td data-title="'Id     '" sortable="'id'"><a  ng-click="viewObservation(observation)">#{{::observation.id}}</a></td>
+						<td data-title="'Observasjon'" sortable="'id'"><a  ng-click="viewObservation(observation)">#{{::observation.id}} {{::observation.tags.join(', ')| cut:true:20:' ...'}} </a></td>
 						<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
 						<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="::observation.club"></resolveclub></td>
-						<td data-title="'Forløp'"><tags tags="::observation.flattenedWhats"></tags></td>
-						<td data-title="'Flagg'"><flags attributes="::observation.flattenedFlags"></flags></td>
-						<td data-title="'Tagger'"><tags tags="::observation.flattenedTags"></tags></td>
-						<td data-title="'Type'" sortable="'type'" filter="{ 'type': 'select'}" filter-data="getTypes()"><resolveobservationtypelabel type="::observation.type"></resolveobservationtypelabel> </td>
+						<td data-title="'Forløp'">
+							<span class="table table-condensed">
+								<span ng-repeat="c in observation.components">
+
+										<b>{{c.what}}</b>
+
+										<flags attributes="::c.attributes"></flags>
+
+										{{c.tags.join(', ')}}
+									<br>
+								</span>
+							</span>
+						</td>
+						<td data-title="'Innvolvert'">
+							<span class="table table-condensed">
+
+								<span ng-repeat="person in observation.involved">
+										<resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser>
+										<br>
+									<small>
+										{{::person.jumptypeSelected}} {{person.jumptypeTags.join(', ')}} <br>
+										{{person.numberOfJumps}} hopp
+										{{person.yearsOfExperience}} år <br>
+										{{person.gear.harnessType}}<br> {{person.gear.mainCanopyType}}<br> {{person.gear.other.join(', ')}}
+									</small>
+
+								</span>
+
+							</span>
+
+						</td>
 
 					</tr>
 				</table>
