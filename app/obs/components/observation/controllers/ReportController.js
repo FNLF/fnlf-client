@@ -21,6 +21,13 @@
 			};
 			$rootScope.nav.toolbar[2] = {tooltip:'Åpne i editor',text:'Åpne i editor',btn_class:'default',icon:'edit',onclick:$rootScope.openInEditMode};
 
+			$scope.getAcl = function(){
+				ObservationService.getAcl(observationId)
+					.then(function(acl){
+						$scope.acl=acl;
+					});
+			};
+			
 			$scope.loadObservation = function(){
 				$scope.observation = {};
 				ObservationService.getObservationById(observationId)
@@ -39,12 +46,13 @@
 						var start = moment($scope.observation._created);
 						var stop = moment($scope.observation.workflow.last_transition);
 						$scope.timeTaken = moment.duration(stop - start).humanize();
-
+						
+						$scope.getAcl();
 
 					})
 					.catch(function(error){
 						console.log(error);
-						$rootScope.error='Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke';
+						$rootScope.error='Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke. Prøv igjen <a href="/app/obs/#!/observation/report/' + observationId +'">#'+observationId+'</a>';
 					});
 
 
