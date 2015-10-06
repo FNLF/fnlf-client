@@ -51,11 +51,11 @@
 							<span class="table table-condensed">
 								<span ng-repeat="c in observation.components">
 
-										<b>{{c.what}}</b>
+										<b>{{::c.what}}</b>
 
 										<flags attributes="::c.attributes"></flags>
 
-										{{c.tags.join(', ')}}
+										{{::c.tags.join(', ')}}
 									<br>
 								</span>
 							</span>
@@ -68,9 +68,9 @@
 										<br>
 									<small>
 										{{::person.jumptypeSelected}} {{person.jumptypeTags.join(', ')}} <br>
-										{{person.numberOfJumps}} hopp
-										{{person.yearsOfExperience}} år <br>
-										{{person.gear.harnessType}} {{person.gear.mainCanopyType}} {{person.gear.other.join(', ')}} <br>
+										{{::person.numberOfJumps}} <span ng-if="::person.numberOfJumps">hopp</span>
+										{{::person.yearsOfExperience}} <span ng-if="::person.yearsOfExperience">år</span> <br>
+										{{::person.gear.harnessType}} {{::person.gear.mainCanopyType}} {{::person.gear.other.join(', ')}} <br>
 									</small>
 
 								</span>
