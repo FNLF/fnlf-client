@@ -7,7 +7,8 @@
 		directive.templateUrl = "/app/obs/components/component/directives/flags.html";
 
 		directive.scope = {
-			attributes: '='
+			attributes: '=',
+			acl: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
@@ -29,7 +30,8 @@
 		directive.templateUrl = "/app/obs/components/component/directives/flagseditor.html";
 
 		directive.scope = {
-			attributes: '='
+			attributes: '=',
+			acl: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {

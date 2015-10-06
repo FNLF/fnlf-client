@@ -14,6 +14,7 @@ angular.module('reportingApp').directive('ratingPotential', function (Definition
 
 		directive.scope = {
 			observation: '=',
+			acl: '='
 		};
 
 		

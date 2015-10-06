@@ -10,7 +10,8 @@
 			model:'=',
 			group: '@',
 			noun: '@',
-			selectfn: '='
+			selectfn: '=',
+			acl: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {

@@ -8,7 +8,8 @@ angular.module('reportingApp').directive('observationHfkText', function (Definit
 		askmodel: '=',
 		acl:'=',
 		state:'@',
-		editmode: '@'
+		editmode: '@',
+		acl: '='
 	};
 
 	directive.controller = function($scope){

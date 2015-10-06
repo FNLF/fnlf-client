@@ -56,7 +56,7 @@
 
 	<div class="form-group col-lg-3 col-md-4 col-xs-12">
 		<inlinehelp title="Aktivitet eller rolle">Type hoppaktivitet eller rolle i det som skjedde</inlinehelp>
-		<tagging model="person.jumptypeTags" noun="hoppaktivitet/rolle"
+		<tagging acl="acl" model="person.jumptypeTags" noun="hoppaktivitet/rolle"
 				 group="jumptype"></tagging>
 	</div>
 
@@ -64,7 +64,7 @@
 
 	<div class="form-group col-lg-2 col-md-4 col-xs-12" ng-if="person.jumptypeSelected">
 		<inlinehelp title="Flytype">Flytype personen hoppet fra</inlinehelp>
-		<tagtypeahead model="person.aircraft" noun="Flytype"
+		<tagtypeahead acl="acl" model="person.aircraft" noun="Flytype"
 					  group="aircraftTypes"></tagtypeahead>
 	</div>
 
@@ -80,7 +80,7 @@
 
 	<div class="form-group col-md-3 col-xs-12">
 		<inlinehelp title="Hovedskjerm">Type hovedskjerm</inlinehelp>
-		<tagtypeahead model="person.gear.mainCanopyType" noun="Type hovedskjerm"
+		<tagtypeahead acl="acl" model="person.gear.mainCanopyType" noun="Type hovedskjerm"
 					  group="maincanopies"></tagtypeahead>
 
 	</div>
@@ -105,7 +105,7 @@
 
 	<div class="form-group col-md-3 col-xs-12">
 		<inlinehelp title="Reserveskjerm">Type reserveskjerm</inlinehelp>
-		<tagtypeahead model="person.gear.reserveCanopyType" noun="Type reserveskjerm"
+		<tagtypeahead acl="acl" model="person.gear.reserveCanopyType" noun="Type reserveskjerm"
 					  group="reserveCanopies"></tagtypeahead>
 
 	</div>
@@ -132,7 +132,7 @@
 		<inlinehelp title="Pakkedato">Dato for siste hovedkontroll eller brukskontroll</inlinehelp>
 		<div class="input-group">
 			<datetimepicker
-					ng-disabled="!acl.w" 
+					acl="acl"  
 					ng-model="person.gear.riggerdate"
 					date-format="yyyy-MM-dd"
 					date-options="{startingDay:1,showWeeks: true}"
@@ -149,7 +149,7 @@
 
 	<div class="form-group col-md-3 col-xs-12">
 		<inlinehelp title="Seletøy">Type seletøy</inlinehelp>
-		<tagtypeahead model="person.gear.harnessType" noun="Type seletøy"
+		<tagtypeahead acl="acl" model="person.gear.harnessType" noun="Type seletøy"
 					  group="harnessTypes"></tagtypeahead>
 
 	</div>
@@ -163,7 +163,7 @@
 	</div>
 	<div class="form-group col-md-2 col-xs-12">
 		<inlinehelp title="Nødåpner">Type nødåpner</inlinehelp>
-		<tagtypeahead model="person.gear.aadType" noun="Type nødåpner" group="aadType" placeholder="Type nødåpner"></tagtypeahead>
+		<tagtypeahead acl="acl" model="person.gear.aadType" noun="Type nødåpner" group="aadType" placeholder="Type nødåpner"></tagtypeahead>
 
 	</div>
 
@@ -171,7 +171,7 @@
 		<inlinehelp title="Fabrikkontrolldato">Dato for siste fabrikk-kontroll</inlinehelp>
 		<div class="input-group">
 			<datetimepicker
-					ng-disabled="!acl.w" 
+					acl="acl" 
 					ng-model="person.gear.aadControlDate"
 					date-format="yyyy-MM"
 					date-options="{startingDay:1,showWeeks: true}"
@@ -189,7 +189,7 @@
 	</div>
 
 	<div class="form-group col-md-11 col-xs-12">
-		<tagging model="person.gear.other" noun="Annet utstyr" group="otherEquipment" placeholder="Annet utstyr"></tagging>
+		<tagging acl="acl" model="person.gear.other" noun="Annet utstyr" group="otherEquipment" placeholder="Annet utstyr"></tagging>
 
 	</div>
 

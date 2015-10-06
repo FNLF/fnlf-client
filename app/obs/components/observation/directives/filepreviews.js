@@ -16,7 +16,8 @@ angular.module('reportingApp')
 	directive.scope = {
 		observation: '=',
 		save: '&',
-		editmode: '@'
+		editmode: '@',
+		acl: '='
 	};
 	
 	directive.transcluded = true;

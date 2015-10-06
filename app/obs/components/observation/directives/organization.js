@@ -6,7 +6,8 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 	directive.templateUrl = "components/observation/directives/organizationSummary.html";
 
 	directive.scope = {
-		observation: '='
+		observation: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
@@ -30,7 +31,8 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 		};
 
 		directive.scope = {
-			observation: '='
+			observation: '=',
+			acl: '='
 		};
 
 		directive.controller = function ($scope, $rootScope, $location, $aside) {

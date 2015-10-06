@@ -7,6 +7,17 @@
 	
 	<div class="form-group">
 		<label for="comment">Kommentarer:</label>
+		
+		<inlinehelp>
+		Dette feltet er forbeholdt kommentarer som omfatter ARBEIDSFLYTEN, feks:
+		<ul>
+		<li>at du trenger mer informasjon</li>
+		<li>at du ønsker felter fylt ut</li>
+		<li>at innsender korrigere noe</li>
+		</ul>
+		Kommentarene skal ikke inneholde personopplysninger, ei heller ytterligere beskrivelser eller vurderinger av observasjonen - altså skal kun omhandle arbeidsflyten!
+		</inlinehelp>
+		
 		<textarea tooltip-placement="top" tooltip="Legg inn relevante kommentarer for å endre status på observasjonen" ng-model="workflow.comment" name="comment" class="form-control" rows="3" id="comment"></textarea>
 	</div>
 

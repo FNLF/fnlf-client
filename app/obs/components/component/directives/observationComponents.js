@@ -31,7 +31,8 @@
 		directive.templateUrl = "/app/obs/components/component/directives/observationComponentSummary.html";
 
 		directive.scope = {
-			component: '='
+			component: '=',
+			acl: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
@@ -50,7 +51,8 @@
 		directive.templateUrl = "/app/obs/components/component/directives/observationComponentsSummary.html";
 		
 		directive.scope = {
-			observation: '='
+			observation: '=',
+			acl: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
@@ -88,7 +90,8 @@
 		};
 
 		directive.scope = {
-			observation: '='
+			observation: '=',
+			acl: '='
 		};
 
 		directive.controller = function ($scope, $rootScope, $location, $aside) {
