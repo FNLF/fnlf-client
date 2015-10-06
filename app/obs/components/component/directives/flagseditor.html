@@ -1,12 +1,12 @@
 <span>
     <span class="hidden-sm hidden-xs hidden-md" class="btn-group-md">
       <span ng-repeat="a in allAttributes">
-          <button class="btn btn-{{a.color}}" ng-model="attributes[a.attribute]" btn-checkbox>{{a.label}}</button>
+          <button ng-disabled="!acl.w" class="btn btn-{{a.color}}" ng-model="attributes[a.attribute]" btn-checkbox>{{a.label}}</button>
       </span>
     </span>
     <span class="visible-sm visible-xs visible-md" class="btn-group-xs">
         <span ng-repeat="a in allAttributes">
-            <button class="btn btn-{{a.color}} btn-xs" ng-model="attributes[a.attribute]" btn-checkbox>{{a.label}}</button>
+            <button ng-disabled="!acl.w" class="btn btn-{{a.color}} btn-xs" ng-model="attributes[a.attribute]" btn-checkbox>{{a.label}}</button>
         </span>
     </span>
 </span>

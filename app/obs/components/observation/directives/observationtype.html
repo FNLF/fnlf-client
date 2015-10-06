@@ -49,7 +49,7 @@
 
 	<div class="radio" ng-repeat="observationType in observationTypes">
 		<label>
-			<input ng-model="observation.type" tooltip-placement="right" tooltip="{{observationType.descr}}"
+			<input ng-disabled="!acl.w" ng-model="observation.type" tooltip-placement="right" tooltip="{{observationType.descr}}"
 				   type="radio" name="observationType" ng-value="observationType.id"> {{observationType.name}}
 		</label>
 	</div>

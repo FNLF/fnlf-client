@@ -11,7 +11,8 @@
 			<tr>
 				<td>
 				&nbsp;
-					<i ng-if="editmode" class="fa fa-fw" ng-click="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r'] = !observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r']" ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i>
+					<i ng-if="acl.w" ng-disabled="!acl.w" class="fa fa-fw" ng-click="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r'] = !observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r']" ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i>
+					<i ng-if="!acl.w" class="fa fa-fw" ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i>
 					&nbsp;
 					<a ng-href="{{file.url}}">{{filename}}</a>
 				</td>
@@ -20,7 +21,7 @@
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td ng-if="editmode">
-					<a ng-if="editmode" class="" ng-confirm-message="Er du sikker at du vil slette bildet?" ng-confirm-click="removeFile(fileid)">
+					<a ng-if="acl.w" ng-if="editmode" class="" ng-confirm-message="Er du sikker at du vil slette bildet?" ng-confirm-click="removeFile(fileid)">
 						<i class="fa fa-times fa-fw"></i>Slett fil
 					</a>
 				</td>

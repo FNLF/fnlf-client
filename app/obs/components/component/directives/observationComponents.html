@@ -19,7 +19,7 @@
 		</div>
 
 		<div class="clearfix"></div>
-			<button ng-show="observation.components.length>0" type="button" class="btn btn-warning btn-block" ng-click="newCause(-1)">
+			<button ng-disabled="!acl.w" ng-show="observation.components.length>0" type="button" class="btn btn-warning btn-block" ng-click="newCause(-1)">
 				<span class="fa fa-fw fa-plus"></span> Ny årsak
 			</button>
 			<p></p>
@@ -34,10 +34,11 @@
 				<accordion-heading>
 					
 					<div>
-						<i title="Slett komponent" ng-click="deleteComponent(component)" class="fa fa-fw fa-trash-o pull-right">&nbsp;&nbsp;</i>
-						<i title="Flytt ned" ng-click="incrementOrder(component)" class="fa fa-fw fa-angle-down pull-right"></i>
-			            <i title="Flytt opp" ng-click="decrementOrder(component)" class="fa fa-fw fa-angle-up pull-right"></i>
-			            
+						<div ng-if="acl.w">
+							<i title="Slett komponent" ng-click="deleteComponent(component)" class="fa fa-fw fa-trash-o pull-right">&nbsp;&nbsp;</i>
+							<i title="Flytt ned" ng-click="incrementOrder(component)" class="fa fa-fw fa-angle-down pull-right"></i>
+				            <i title="Flytt opp" ng-click="decrementOrder(component)" class="fa fa-fw fa-angle-up pull-right"></i>
+			            </div>
 			            
 						<i class="fa fa-fw" ng-class="{'fa-minus-square-o': component.open, 'fa-plus-square-o': !component.open}"></i>
 						<observation-component-summary component="component"></observation-component-summary>
@@ -56,13 +57,13 @@
 
 	</div>
 	<div>
-		<button ng-show="observation.components.length==0" type="button" class="btn btn-primary btn-block" ng-click="newIncident()">
+		<button ng-disabled="!acl.w" ng-show="observation.components.length==0" type="button" class="btn btn-primary btn-block" ng-click="newIncident()">
 			<span class="fa fa-plus"></span> Ny {{observationTypeName}}
 		</button>
 
 
 
-		<button ng-show="observation.components.length>2" type="button" class="btn btn-danger btn-block" ng-click="newConsequence()">
+		<button ng-disabled="!acl.w" ng-show="observation.components.length>2" type="button" class="btn btn-danger btn-block" ng-click="newConsequence()">
 			<span class="fa fa-plus"></span> Ny konsekvens/sluttresultat
 		</button>
 	</div>
