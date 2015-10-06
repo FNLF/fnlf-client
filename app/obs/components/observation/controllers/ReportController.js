@@ -44,7 +44,7 @@
 					})
 					.catch(function(error){
 						console.log(error);
-						$rootScope.error=error;
+						$rootScope.error='Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke';
 					});
 
 

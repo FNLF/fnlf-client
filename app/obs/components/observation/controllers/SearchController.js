@@ -2,14 +2,15 @@
 
 
 	angular.module('reportingApp')
-		.controller('SearchController', function ($scope,$rootScope, ObservationService,SearchService,ObservationsTableService,Definitions,Functions,$routeParams,ngTableParams) {
+		.controller('SearchController', function ($scope,$rootScope, ObservationService,SearchService,ObservationsTableService,Definitions,Functions,$routeParams,ngTableParams,$timeout) {
 
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.brand = "FNLF ORS";
 
-			
+
 			$scope.observations = [];
 			$scope.total = 0;
+			$scope.tableData=[];
 
 			if($routeParams.tag) {
 				$scope.tag = decodeURIComponent($routeParams.tag);
@@ -28,9 +29,9 @@
 				$scope.query = decodeURIComponent($routeParams.query);
 				$rootScope.title = 'ORS søk: ' + $scope.query;
 			}
-			
-			
-			
+
+
+
 			$scope.queryObj = SearchService.parseAdvancedSearchQuery($scope.query);
 
 			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
@@ -58,8 +59,9 @@
 							obs.flattenedFlags = SearchService.flattenAttributes(obs);
 							obs.flattenedTags = SearchService.flattenComponentTags(obs);
 						});
-
+						$scope.tableData = data._items;
 						$defer.resolve(data._items);
+
 					},
 					function(error){
 						console.log(error);
@@ -67,9 +69,17 @@
 
 			}});
 
-			$scope.editObservation = function (_id) {
-				ObservationService.editObservation(_id);
+			$scope.viewObservation = function (observation) {
+				$scope.observation = undefined;
+				$timeout(function(){
+					$scope.observation=observation;
+				},20);
 			};
+
+			$scope.hideObservation = function(){
+				$scope.observation = undefined;
+			};
+
 
 			$scope.componentTitles = {};
 

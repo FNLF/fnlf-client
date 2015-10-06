@@ -8,7 +8,7 @@
 		<!-- <span class="pull-right"><workingcomments observation="observation"></workingcomments>&nbsp;</span> -->
 
 		<h1 class="hidden-xs text-muted">#{{observation.id}}  {{observation.tags.join('/')}} <small><resolveclub clubid="observation.club"></resolveclub></small></h1>
-		<h3 class="visible-xs text-muted">#{{observation.id}}  {{observation.tags.join('/')}}</h3>
+		<h3 class="visible-xs text-muted">#{{observation.id}}  {{observation.tags.join('/')}} <small><resolveclub clubid="observation.club"></resolveclub></small></h3>
 
 		<!-- Row with tags -->
 		<!-- A label showing type of observation -->
@@ -231,13 +231,13 @@
 					<div class="col-xs-12 col-md-6">
 						<strong>Lokale:</strong>
 						<ol>
-							<li ng-repeat="a in observation.actions.local">{{a}}</li>
+							<li ng-repeat="a in observation.actions.local track by $index">{{a}}</li>
 						</ol>
 					</div>
 					<div class="col-xs-12 col-md-6">
 						<strong>Sentrale:</strong>
 						<ol>
-							<li ng-repeat="a in observation.actions.central">
+							<li ng-repeat="a in observation.actions.central track by $index">
 								{{a}}
 							</li>
 						</ol>

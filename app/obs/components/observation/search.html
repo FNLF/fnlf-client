@@ -1,58 +1,79 @@
-<div ng-controller="SearchController">
+<div>
 
 	<div class="row">
-		<div class="col-xs-12">
-			<flagsearch></flagsearch>
+		<div ng-show="!observation">
+
+			<div class="col-xs-12">
+				<flagsearch></flagsearch>
+			</div>
+
+
+			<div class="col-xs-12">
+				<searchform query="tag"></searchform>
+			</div>
+
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<div class="col-xs-12 hidden-xs hidden-sm">
+				<searchformadvanced model="queryObj"></searchformadvanced>
+			</div>
+
+			<div class="col-xs-12">
+				<caption>
+					<h3 ng-if="tag" ng-bind="tag"></h3>
+				</caption>
+				<caption>
+					<h3 ng-if=flag><flags attributes="attributes"></flags></h3>
+				</caption>
+
+				<caption>
+					<span class="h4">Totalt: </span><span class="h4" ng-bind="total"></span>
+				</caption>
+
+			</div>
+
+
+
+
+			<div class="col-xs-12 col-md-12 table-responsive" >
+				<!-- ng-table all observations -->
+				<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
+
+					<tr ng-repeat="observation in $data">
+						<td data-title="'Id     '" sortable="'id'"><a  ng-click="viewObservation(observation)">#{{::observation.id}}</a></td>
+						<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
+						<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="::observation.club"></resolveclub></td>
+						<td data-title="'Forløp'"><tags tags="::observation.flattenedWhats"></tags></td>
+						<td data-title="'Flagg'"><flags attributes="::observation.flattenedFlags"></flags></td>
+						<td data-title="'Tagger'"><tags tags="::observation.flattenedTags"></tags></td>
+						<td data-title="'Type'" sortable="'type'" filter="{ 'type': 'select'}" filter-data="getTypes()"><resolveobservationtypelabel type="::observation.type"></resolveobservationtypelabel> </td>
+
+					</tr>
+				</table>
+
+			</div>
 		</div>
 
+		<div class="col-xs-12 col-md-12" ng-if="observation">
+			<br>
 
-		<div class="col-xs-12">
-			<searchform query="tag"></searchform>
-		</div>
+			<span> <span ng-repeat="obs in tableData" ><a ng-click="viewObservation(obs)"><span ng-class="{h3:obs.id==observation.id,h4:obs.id!=observation.id}">#{{::obs.id}}</span></a> </span> </span>
 
-		<br>
-		<br>
-		<br>
-		<br>
-
-		<div class="col-xs-12 hidden-xs hidden-sm">
-			<searchformadvanced model="queryObj"></searchformadvanced>
-		</div>
-
-		<div class="col-xs-12">
-			<caption>
-				<h3 ng-if="tag" ng-bind="tag"></h3>
-			</caption>
-			<caption>
-				<h3 ng-if=flag><flags attributes="attributes"></flags></h3>
-			</caption>
-
-			<caption>
-				<span class="h4">Totalt: </span><span class="h4" ng-bind="total"></span>
-			</caption>
+			<a ng-click="hideObservation()"><h4><<< Tilbake til søkeresultater </h4></a>
+			<a class="pull-right" href="#!/observation/report/{{::observation.id}}"><h4>Åpne #{{::observation.id}} i rapport</h4></a>
 
 		</div>
 
-
-		<div class="col-xs-12 col-md-12 table-responsive">
-			<!-- ng-table all observations -->
-			<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
-
-				<tr ng-repeat="observation in $data">
-
-					<td data-title="'Id'" sortable="'id'"><a  ng-click="editObservation(observation._id)">#{{::observation.id}}</a></td>
-					<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
-					<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="::observation.club"></resolveclub></td>
-					<td data-title="'Forløp'"><tags tags="::observation.flattenedWhats"></tags></td>
-					<td data-title="'Flagg'"><flags attributes="::observation.flattenedFlags"></flags></td>
-					<td data-title="'Tagger'"><tags tags="::observation.flattenedTags"></tags></td>
-					<td data-title="'Type'" sortable="'type'" filter="{ 'type': 'select'}" filter-data="getTypes()"><resolveobservationtypelabel type="::observation.type"></resolveobservationtypelabel> </td>
-
-				</tr>
-			</table>
-
-		</div>
 	</div>
+<div>
+	<ng-include src="'components/observation/report.html'">
+
+	</ng-include>
+</div>
+
 
 
 </div>
