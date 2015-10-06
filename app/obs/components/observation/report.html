@@ -146,9 +146,8 @@
 						<tr>
 							<th>Hopper</th>
 							<th>Lisenser</th>
+							<th>Erfaring</th>
 							<th>Hopp</th>
-							<th>År</th>
-							<th>Hopptype</th>
 							<th>Kjennelse</th>
 							<th>Utstyr</th>
 						</tr>
@@ -163,10 +162,21 @@
 								</small>
 
 							</td>
-							<td>{{::p.numberOfJumps}}</td>
-							<td>{{::p.yearsOfExperience}}</td>
+							<td>
+								<span>
+									<label>Antall hopp:&nbsp;</label><span>{{::p.numberOfJumps}}</span><br>
+									<label>År i sporten:&nbsp;</label><span>{{::p.yearsOfExperience}}</span><br>
+								</span>
+							</td>
 
-							<td>{{::p.jumptypeSelected}}<br> {{::p.jumptypeTags.join(', ')}}</td>
+							<td>
+								<span>
+									<span ng-if="::p.jumptypeSelected"><label>Hopptype:&nbsp;</label><span>{{::p.jumptypeSelected}}</span><br></span>
+									<span ng-if="::p.jumptypeTags"><label>Aktivitet:&nbsp;</label><span>{{::p.jumptypeTags.join(', ')}}</span><br></span>
+									<span ng-if="::p.aircraft"><label>Flytype:&nbsp;</label><span>{{::p.aircraft}}</span><br></span>
+									<span ng-if="::p.jumpAltitude"><label>Utsprangshøyde:&nbsp;</label><span>{{::p.jumpAltitude}}</span><br></span>
+								</span>
+							</td>
 							<td>
 								<div ng-if="::p.verdict.fu">
 									<span class="label label-warning">Farlig Ukontrollert</span>
@@ -179,13 +189,23 @@
 								</div>
 							</td>
 
-							<td><label ng-if="::p.gear.harnessType || p.gear.harnessExperience">Seletøy: </label> <span ng-if="::p.gear.harnessType">{{::p.gear.harnessType}}</span> <span
-								ng-if="::p.gear.harnessExperience">{{::p.gear.harnessExperience}} hopp</span> <br ng-if="::p.gear.harnessType || p.gear.harnessExperience"> <label
-								ng-if="::p.gear.mainCanopyType||p.gear.mainCanopyExperience||p.gear.mainCanopySize">Hovedskjerm: </label> <span ng-if="::p.gear.mainCanopyType">{{::p.gear.mainCanopyType}}</span> <span
-								ng-if="::p.gear.mainCanopySize">{{::p.gear.mainCanopySize}} sqft</span> <span ng-if="::p.gear.mainCanopyExperience">{{::p.gear.mainCanopyExperience}} hopp</span> <br
-								ng-if="::p.gear.mainCanopyType||p.gear.mainCanopyExperience||p.gear.mainCanopySize"> <label ng-if="::p.gear.reserveCanopyType ||p.gear.reserveCanopySize">Reserveskjerm: </label> <span
-								ng-if="::p.gear.reserveCanopyType">{{::p.gear.reserveCanopyType}}</span> <span ng-if="::p.gear.reserveCanopySize">{{::p.gear.reserveCanopySize}}</span> <br
-								ng-if="::p.gear.reserveCanopyType ||p.gear.reserveCanopySize"></td>
+							<td>
+								<label ng-if="::p.gear.harnessType || p.gear.harnessExperience">Seletøy: </label>
+								<span ng-if="::p.gear.harnessType">{{::p.gear.harnessType}}</span>
+								<span ng-if="::p.gear.harnessExperience">{{::p.gear.harnessExperience}} hopp</span><br ng-if="::p.gear.harnessType || p.gear.harnessExperience">
+
+								<label ng-if="::p.gear.mainCanopyType||p.gear.mainCanopyExperience||p.gear.mainCanopySize">Hovedskjerm: </label>
+								<span ng-if="::p.gear.mainCanopyType">{{::p.gear.mainCanopyType}}</span>
+								<span ng-if="::p.gear.mainCanopySize">{{::p.gear.mainCanopySize}} sqft</span>
+								<span ng-if="::p.gear.mainCanopyExperience">{{::p.gear.mainCanopyExperience}} hopp</span><br ng-if="::p.gear.mainCanopyType||p.gear.mainCanopyExperience||p.gear.mainCanopySize">
+
+								<label ng-if="::p.gear.reserveCanopyType ||p.gear.reserveCanopySize">Reserveskjerm: </label>
+								<span ng-if="::p.gear.reserveCanopyType">{{::p.gear.reserveCanopyType}}</span>
+								<span ng-if="::p.gear.reserveCanopySize">{{::p.gear.reserveCanopySize}}</span><br ng-if="::p.gear.reserveCanopyType ||p.gear.reserveCanopySize">
+
+								<label ng-if="::p.gear.other">Annet utstyr: </label>
+								<span ng-if="::p.gear.other">{{::p.gear.other.join(', ')}}</span><br ng-if="::p.gear.other">
+							</td>
 						</tr>
 					</table>
 					</div>
