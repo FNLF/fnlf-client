@@ -3,9 +3,9 @@
 <h3>Lokale</h3>
 <form>
 <div class="input-group">
-   <input type="text" ng-model="$parent.actionLocal" class="form-control">
+   <input ng-disabled="!acl.w" type="text" ng-model="$parent.actionLocal" class="form-control">
    <span class="input-group-btn">
-        <button ng-click="addActionLocal(actionLocal)" class="btn btn-primary" type="submit"><i class="fa fa-plus fa-fw"></i> Legg til</button>
+        <button ng-disabled="!acl.w" ng-click="addActionLocal(actionLocal)" class="btn btn-primary" type="submit"><i class="fa fa-plus fa-fw"></i> Legg til</button>
    </span>
 </div>
 </form>
@@ -15,7 +15,7 @@
 	<tr ng-repeat="a in observation.actions.local track by $index">
 		<td>{{$index+1}}</td>
 		<td>{{a}}</td>
-		<td class="text-right"><i class="fa fa-times fa-fw" ng-click="removeActionLocal($index)"></i></td>
+		<td class="text-right"><i class="fa fa-times fa-fw" ng-if="acl.w" ng-click="removeActionLocal($index)"></i></td>
 		</tr>
 </table>
 </div>
@@ -25,9 +25,9 @@
 <h3>Sentrale</h3>
 <form>
 <div class="input-group">
-   <input type="text" ng-model="$parent.actionCentral" class="form-control">
+   <input ng-disabled="!acl.w" type="text" ng-model="$parent.actionCentral" class="form-control">
    <span class="input-group-btn">
-        <button ng-click="addActionCentral(actionCentral)" class="btn btn-primary" type="submit"><i class="fa fa-plus fa-fw"></i> Legg til</button>
+        <button ng-disabled="!acl.w" ng-click="addActionCentral(actionCentral)" class="btn btn-primary" type="submit"><i class="fa fa-plus fa-fw"></i> Legg til</button>
    </span>
 </div>
 </form>
@@ -37,7 +37,7 @@
 	<tr ng-repeat="a in observation.actions.central track by $index">
 		<td>{{$index+1}}</td>
 		<td>{{a}}</td>
-		<td class="text-right"><i class="fa fa-times fa-fw" ng-click="removeActionCentral($index)"></i></td>
+		<td class="text-right"><i class="fa fa-times fa-fw" ng-if="acl.w" ng-click="removeActionCentral($index)"></i></td>
 		</tr>
 </table>
 </div>

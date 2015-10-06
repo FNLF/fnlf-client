@@ -109,31 +109,27 @@
 					<div class="form-group">
 						<label class="control-label">Alvorlighetsgrad</label>
 						<inlinehelp><p>Hvor galt kunne det ha gått (worst case), og hvor alvorlig ble faktisk utfallet i observasjonen</p>
-						<ol>
-							<li>Alt OK</li>
-							<li>Til ettertanke/gjennomgang</li>
-							<li>Mindre skade på person/utstyr</li>
-							<li>Middels skade</li>
-							<li>Alvorlig skade eller restriksjoner i aktivitet (LT eller NLF)</li>
-							<li>Skade med alvorlig men, mulig død</li>
-							<li>Død</li>
-							<li>Flere døde</li>
-						</ol>
-						
-						
+							<ol>
+								<li>Alt OK</li>
+								<li>Til ettertanke/gjennomgang</li>
+								<li>Mindre skade på person/utstyr</li>
+								<li>Middels skade</li>
+								<li>Alvorlig skade eller restriksjoner i aktivitet (LT eller NLF)</li>
+								<li>Skade med alvorlig men, mulig død</li>
+								<li>Død</li>
+								<li>Flere døde</li>
+							</ol>
 						</inlinehelp>
 						<br />
 						<p>
-						<rating-actual observation="observation"></rating-actual>
+							<rating-actual observation="observation"></rating-actual>
 						</p>
 						<p>
-						<rating-potential observation="observation"></rating-potential>
+							<rating-potential observation="observation"></rating-potential>
 						</p>
-						
 						<p>
-						<observationflags observation="observation"></observationflags>
+							<observationflags observation="observation"></observationflags>
 						</p>
-						
 					</div>
 				</div>
 				</p>
@@ -149,12 +145,12 @@
 				</div>
 
 
-				<div >
+				<div ng-if="acl.w">
 					<div ng-file-drop ng-model="files" ng-file-change="upload($files)" class="drop-box" drag-over-class="dragover" ng-multiple="true" allow-dir="true" accept="*">Dra og slipp filer her</div>
 					<div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
 				</div>
 
-				<button class="btn btn-block btn-primary" ng-file-select ng-multiple="true" ng-file-change="upload($files)">
+				<button ng-disabled="!acl.w" class="btn btn-block btn-primary" ng-file-select ng-multiple="true" ng-file-change="upload($files)">
 					<i class="fa fa-plus fa-fw"></i> Legg til fil
 				</button>
 

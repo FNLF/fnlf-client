@@ -5,7 +5,7 @@ angular.module('reportingApp').directive('location', function (LocationService) 
 	directive.template = function(tElement, tAttrs) { 
 		
 		return '<div class="form-group"> \
-				<select class="form-control" ng-model="observation.location" \
+				<select ng-disabled="!acl.w" class="form-control" ng-model="observation.location" \
         		ng-options="opt as opt.nickname for opt in clublocations track by opt.nickname" ng-change="locationSelected()"> \
         		</select> \
 				</div> \

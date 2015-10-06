@@ -1,14 +1,5 @@
 (function () {
 
-	/**
-	 *
-	 * @author: Tore Buer, s180346
-	 * @author: Eivind Jacobsen, s173466
-	 * @author: Morten Kristoffersen, s169440
-	 *
-	 * @since may.26.2014
-	 *
-	 */
 	angular.module('reportingApp')
 		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
 			
@@ -18,7 +9,7 @@
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.brand = 'FNLF ORS #' + $routeParams.id;
 			
-			
+			//$rootScope.readOnly = false;
 			
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
@@ -33,6 +24,13 @@
 				ObservationService.getAcl(observationId)
 					.then(function(acl){
 						$scope.acl=acl;
+						
+						if(!$scope.acl.w) {
+							$rootScope.editorreadonly = true;
+						}
+						
+						console.log("Read only?");
+						console.log($rootScope.readOnly);
 					});
 			};
 

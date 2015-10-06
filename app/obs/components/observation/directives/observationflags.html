@@ -19,20 +19,20 @@
 	<div class="form-group">
 		<div class="checkbox">
 		<label>
-	  		<input type="checkbox" ng-model="observation.flags.aviation"> Luftfartshendelse
+	  		<input ng-disabled="!acl.w" type="checkbox" ng-model="observation.flags.aviation"> Luftfartshendelse
 		</label>
 		</div>
 		
 		<div class="checkbox">
 		<label>
-	  		<input type="checkbox" ng-model="observation.flags.insurance"> Forsikringssak
+	  		<input ng-disabled="!acl.w" type="checkbox" ng-model="observation.flags.insurance"> Forsikringssak
 		</label>
 		</div>
 	</div>
 
 	<div class="radio" ng-repeat="flag in observationTypes">
 		<label>
-			<input ng-model="observation.type" tooltip-placement="right" tooltip="{{observationType.descr}}"
+			<input ng-disabled="!acl.w" ng-model="observation.type" tooltip-placement="right" tooltip="{{observationType.descr}}"
 				   type="radio" name="observationType" ng-value="observationType.id"> {{observationType.name}}
 		</label>
 	</div>

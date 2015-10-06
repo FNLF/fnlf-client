@@ -2,7 +2,7 @@
 	<span ng-if="editmode">
 		<div class="btn-group" role="group">
 			<span ng-repeat="ask in askValues">
-				<button type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" ng-click="flip(ask.key)">{{ask.label}}</button>
+				<button ng-disabled="!acl.w" type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" ng-click="flip(ask.key)">{{ask.label}}</button>
 			</span>
 		</div>
 	</span>

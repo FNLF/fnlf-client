@@ -1,6 +1,7 @@
 <div>
 	<div class="input-group">
 		<datetimepicker 
+		ng-disabled="!acl.w"
 		ng-model="observation.when" 
 		min-date="minDate"
 		max-date="maxDate"

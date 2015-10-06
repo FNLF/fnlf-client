@@ -15,13 +15,13 @@
 
 		<div class="checkbox">
 			<label>
-				<input type="checkbox" value="" ng-model="person.verdict.fu">
+				<input ng-disabled="!acl.w" type="checkbox" value="" ng-model="person.verdict.fu">
 				Farlig Ukontrollert (FU)
 			</label>
 		</div>
 		<div class="checkbox">
 			<label>
-				<input type="checkbox" value="" ng-model="person.verdict.ph">
+				<input ng-disabled="!acl.w" type="checkbox" value="" ng-model="person.verdict.ph">
 				Permanent Hoppforbud
 			</label>
 		</div>
@@ -30,7 +30,7 @@
 	</div>
 	<div class="form-group col-lg-3 col-md-4 col-xs-12">
 		<inlinehelp title="Hopptype">Offisiell hopptype definert av F/NLF</inlinehelp>
-		<select id="jumptype" class="form-control" data-placeholder="Hopptype"
+		<select ng-disabled="!acl.w" id="jumptype" class="form-control" data-placeholder="Hopptype"
 				ng-model="person.jumptypeSelected"
 				ng-options="jumptype.id as jumptype.name for jumptype in jumptypes">
 		</select>
@@ -40,7 +40,7 @@
 
 	<div class="form-group col-lg-2 col-md-3 col-xs-6" ng-if="person.jumptypeSelected">
 		<inlinehelp title="År i sporten">År i sporten</inlinehelp>
-		<input placeholder="År i sporten" id="years" class="form-control" type="number"
+		<input ng-disabled="!acl.w" placeholder="År i sporten" id="years" class="form-control" type="number"
 			   ng-model="person.yearsOfExperience"/>
 
 	</div>
@@ -48,7 +48,7 @@
 
 	<div class="form-group col-lg-2 col-md-3 col-xs-6" ng-if="person.jumptypeSelected">
 		<inlinehelp title="Antall hopp">Antall hopp totalt</inlinehelp>
-		<input placeholder="Hopp totalt" id="numberofjumps" class="form-control" type="number"
+		<input ng-disabled="!acl.w" placeholder="Hopp totalt" id="numberofjumps" class="form-control" type="number"
 			   ng-model="person.numberOfJumps"/>
 
 	</div>
@@ -71,7 +71,7 @@
 
 	<div class="form-group col-lg-2 col-md-4 col-xs-12" ng-if="person.jumptypeSelected">
 		<inlinehelp title="Utsprangshøyde">Utsprangshøyde</inlinehelp>
-		<input placeholder="Utsprangshøyde" id="altitude" class="form-control" type="number"
+		<input ng-disabled="!acl.w" placeholder="Utsprangshøyde" id="altitude" class="form-control" type="number"
 			   ng-model="person.jumpAltitude"/>
 	</div>
 
@@ -87,7 +87,7 @@
 
 	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.mainCanopyType">
 		<inlinehelp title="Størrelse" >Størrelse på hovedskjerm</inlinehelp>
-		<input type="number" class="form-control" id="mainCanopySize"
+		<input ng-disabled="!acl.w" type="number" class="form-control" id="mainCanopySize"
 			   ng-model="person.gear.mainCanopySize"
 			   placeholder="Hovedskjermstørrelse">
 
@@ -95,7 +95,7 @@
 
 	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.mainCanopyType">
 		<inlinehelp title="Erfaring">Antall hopp på denne hovedskjermen</inlinehelp>
-		<input type="number" class="form-control" id="mainCanopyExperience"
+		<input ng-disabled="!acl.w" type="number" class="form-control" id="mainCanopyExperience"
 			   ng-model="person.gear.mainCanopyExperience"
 			   placeholder="Erfaring hovedskjerm">
 	</div>
@@ -111,7 +111,7 @@
 	</div>
 	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.reserveCanopyType">
 		<inlinehelp title="Størrelse">Størrelse på reserveskjerm</inlinehelp>
-		<input type="number" class="form-control" id="reserveCanopySize"
+		<input ng-disabled="!acl.w" type="number" class="form-control" id="reserveCanopySize"
 			   ng-model="person.gear.reserveCanopySize"
 			   placeholder="Reserveskjermstørrelse">
 
@@ -119,7 +119,7 @@
 
 	<div class="form-group col-md-3 col-xs-12" ng-if="person.gear.reserveCanopyType">
 		<inlinehelp title="MK">MK som sist tok hovedkontroll eller brukskontroll</inlinehelp>
-		<ui-select tagging="tagTransform" ng-model="person.gear.rigger" theme="bootstrap" on-select="onSelect($item, $model)">
+		<ui-select ng-disabled="!acl.w" tagging="tagTransform" ng-model="person.gear.rigger" theme="bootstrap" on-select="onSelect($item, $model)">
 			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$select.selected.id" tmpname="$select.selected.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search track by person.id"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
@@ -132,6 +132,7 @@
 		<inlinehelp title="Pakkedato">Dato for siste hovedkontroll eller brukskontroll</inlinehelp>
 		<div class="input-group">
 			<datetimepicker
+					ng-disabled="!acl.w" 
 					ng-model="person.gear.riggerdate"
 					date-format="yyyy-MM-dd"
 					date-options="{startingDay:1,showWeeks: true}"
@@ -155,7 +156,7 @@
 
 	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.harnessType">
 		<inlinehelp title="Erfaring">Antall hopp på dette seletøyet</inlinehelp>
-		<input type="number" class="form-control" id="harnessExperience"
+		<input ng-disabled="!acl.w" type="number" class="form-control" id="harnessExperience"
 			   ng-model="person.gear.harnessExperience"
 			   placeholder="Erfaring seletøy">
 
@@ -170,6 +171,7 @@
 		<inlinehelp title="Fabrikkontrolldato">Dato for siste fabrikk-kontroll</inlinehelp>
 		<div class="input-group">
 			<datetimepicker
+					ng-disabled="!acl.w" 
 					ng-model="person.gear.aadControlDate"
 					date-format="yyyy-MM"
 					date-options="{startingDay:1,showWeeks: true}"

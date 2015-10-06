@@ -32,15 +32,15 @@
 	<h3>Klubb <resolveclub clubid="observation.club"></resolveclub></h3>
 	<form >
 	<div class="form-group">
-	<input type="text" typeahead-on-select="locationSelectedFn($item, $model, $label)" typeahead-editable="false" typeahead-wait-ms=50 ng-model="model.location" placeholder="Stedsnavn"
+	<input ng-disabled="!acl.w" type="text" typeahead-on-select="locationSelectedFn($item, $model, $label)" typeahead-editable="false" typeahead-wait-ms=50 ng-model="model.location" placeholder="Stedsnavn"
 		typeahead="l as formatter(l) for l in getLocations($viewValue)" typeahead-input-formatter="formatter($model)" class="form-control">
 		</div>
 		<div class="form-group"> 
-		<input ng-model="model.nickname" type="text" placeholder="Fyll inn nickname" class="form-control">
+		<input ng-disabled="!acl.w" ng-model="model.nickname" type="text" placeholder="Fyll inn nickname" class="form-control">
 		</div>
 		<div class="form-group">
 	<div>
-		<label> <input type="checkbox" value="" ng-model="model.isdefault"> Default sted
+		<label> <input ng-disabled="!acl.w" type="checkbox" value="" ng-model="model.isdefault"> Default sted
 		</label>
 		</div>
 		<div class="form-group">
@@ -48,8 +48,8 @@
 			<span>{{model.icao.name}}</span>
         </div>
         <div class="form-group">		
-        <button ng-if="!existingClubLocationUsed" ng-disabled="!model.nickname" class="btn btn-primary" ng-click="saveLocation()"><i class="fa fa-plus fa-fw"></i> Legg til nytt sted</button>
-		<button ng-if="existingClubLocationUsed" ng-disabled="!model.nickname" class="btn btn-primary" ng-click="useLocation()"><i class="fa fa-plus fa-fw"></i> Bruk eksisterende sted</button>
+        <button ng-disabled="!acl.w" ng-if="!existingClubLocationUsed" ng-disabled="!model.nickname" class="btn btn-primary" ng-click="saveLocation()"><i class="fa fa-plus fa-fw"></i> Legg til nytt sted</button>
+		<button ng-disabled="!acl.w" ng-if="existingClubLocationUsed" ng-disabled="!model.nickname" class="btn btn-primary" ng-click="useLocation()"><i class="fa fa-plus fa-fw"></i> Bruk eksisterende sted</button>
 		</div>
 	</div>
 	</form>
