@@ -216,13 +216,13 @@
 					<div class="col-xs-12 col-md-6">
 						<strong>Lokale:</strong>
 						<ol>
-							<li ng-repeat="a in observation.actions.local">{{a}}</li>
+							<li ng-repeat="a in observation.actions.local track by $index">{{a}}</li>
 						</ol>
 					</div>
 					<div class="col-xs-12 col-md-6">
 						<strong>Sentrale:</strong>
 						<ol>
-							<li ng-repeat="a in observation.actions.central">
+							<li ng-repeat="a in observation.actions.central track by $index">
 								{{a}}
 							</li>
 						</ol>
