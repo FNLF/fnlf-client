@@ -167,7 +167,7 @@
 				if(false) {
 					printDiff(changedObs, oldObs);
 				}
-				if(!$scope.acl.x){
+				if(!$scope.acl.w){
 					var msg = 'Du vil ikke kunne lagre fordi du mangler skrivetilgang';
 					$rootScope.error = msg;
 				}else{
