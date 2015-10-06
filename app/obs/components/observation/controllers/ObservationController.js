@@ -28,7 +28,7 @@
 
 			$rootScope.title = 'ORS editor #' + $scope.observation.id;
 			
-			$scope.acl={x:false,r:false,w:false};
+
 			$scope.getAcl = function(){
 				ObservationService.getAcl(observationId)
 					.then(function(acl){
@@ -167,7 +167,7 @@
 				if(false) {
 					printDiff(changedObs, oldObs);
 				}
-				if(!$scope.acl.w){
+				if($scope.acl && !$scope.acl.w){
 					var msg = 'Du vil ikke kunne lagre fordi du mangler skrivetilgang';
 					$rootScope.error = msg;
 				}else{
