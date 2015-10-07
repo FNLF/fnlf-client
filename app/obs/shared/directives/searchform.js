@@ -8,7 +8,8 @@
 		directive.templateUrl = "/app/obs/shared/directives/searchform.html";
 
 		directive.scope = {
-			query: '='
+			query: '=',
+			filter: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
@@ -23,7 +24,6 @@
 					unbind();
 				}
 			});
-
 
 			var groups = SearchService.getObservationTagGroups();
 
@@ -41,7 +41,22 @@
 
 			$scope.go = function () {
 				var text = $scope.model.search;
-				var path = '/search/tag/' + encodeURIComponent(Functions.capitalizeFirstLetter(text));
+
+				var filterString = '';
+
+				var filteredFilter = {};
+
+				Object.keys($scope.filter).forEach(function(k){
+					if($scope.filter[k]){
+						filteredFilter[k]=$scope.filter[k];
+					}
+				});
+
+				if(Object.keys(filteredFilter).length>0){
+					filterString=','+JSON.stringify(filteredFilter);
+				}
+				console.log('Sending: /search/tag/' + Functions.capitalizeFirstLetter(text)+filterString);
+				var path = '/search/tag/' + encodeURIComponent(Functions.capitalizeFirstLetter(text)+filterString);
 				$location.path(path);
 			};
 

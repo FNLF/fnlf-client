@@ -23,7 +23,7 @@
 
 
 (function () {
-	angular.module('reportingApp').directive('flagseditor', function (Definitions) {
+	angular.module('reportingApp').directive('flagseditor', function (Definitions,Functions) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -36,7 +36,18 @@
 
 		directive.link = function ($scope, element, attrs) {
             $scope.allAttributes  = Definitions.getComponentAttributes();
+/*
+			Functions.waitForIt($scope,'attributes')
+				.then(function(){
+					$scope.allAttributes.forEach(function(a){
+						if(angular.isUndefined($scope.attributes[a.attribute])){
+							$scope.attributes[a.attribute]=false;
+						}
 
+					});
+
+				});
+*/
 		};
 
 		return directive;

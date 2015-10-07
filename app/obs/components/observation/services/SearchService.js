@@ -64,7 +64,7 @@
 			};
 
 
-			this.searchByTag = function (page, maxResults, sort, tags) {
+			this.searchByTag = function (page, maxResults, sort, tags,filter) {
 
 				var params = getObservationParamsFn();
 				var whereObj = {};
@@ -79,13 +79,27 @@
 						orArr.push(obj);
 
 					});
-					andArr.push({$or: orArr});
+					if(orArr) {
+						andArr.push({$or: orArr});
+					}
 
 				});
 				whereObj.$and = andArr;
+
+				var allAttributes  = Definitions.getComponentAttributes();
+				allAttributes.forEach(function(a){
+					if(filter[a.attribute]){
+						var atr = {};
+						atr['components.attributes.' + a.attribute] = true;
+						whereObj.$and.push(atr);
+					}
+				});
+
+/*
 				if (!tags) {
 					whereObj = {};
 				}
+				*/
 				var whereString = JSON.stringify(whereObj);
 
 
@@ -98,7 +112,6 @@
 				var where = 'where=' + JSON.stringify(attrs);
 				return RestService.getAllObservations(page, maxResults, sort, where);
 			};
-
 
 			this.goSearchAdvanced = function(model){
 
@@ -201,56 +214,33 @@
 
 			this.parseTagQuery = function(query){
 				query = decodeURIComponent(query);
+				query = query.replace(/\{.*\}/g,'');
+				query = query.replace(/(^,)|(,$)/g, "");
 				var tags = query.split(',')
 					.map(function(t){
-						return Functions.capitalizeFirstLetter(t)
+						return Functions.capitalizeFirstLetter(t.trim());
 					});
 				return tags;
 			};
 
-
-			this.flattenComponentWhat = function(observation){
-				if(angular.isUndefined(observation.components)){
-					return [];
+			this.parseFilter = function(query){
+				var filter = {};
+				query = decodeURIComponent(query);
+				var match = query.match(/\{.*\}/g);
+				if(match){
+					try {
+						return JSON.parse(match[0]);
+					}catch(e){
+						console.log(e);
+						console.log(query);
+						console.log(match[0])
+					}
 				}
 
-				return observation.components.map(function(c){
-					return Functions.capitalizeFirstLetter(c.what);
-				});
-			};
-
-			this.flattenComponentTags = function(observation){
-				if(angular.isUndefined(observation.components)){
-					return [];
-				}
-
-				var tags = [];
-				angular.forEach(observation.components, function(c){
-					angular.forEach(c.tags,function(t){
-						tags.push(Functions.capitalizeFirstLetter(t));
-					});
-				});
-
-				return tags;
+				return filter;
 			};
 
 
-			this.flattenAttributes = function(observation){
-				if(angular.isUndefined(observation.components)){
-					return [];
-				}
-
-				var attributes = {};
-				angular.forEach(observation.components, function(c){
-					angular.forEach(c.attributes,function(v,k){
-						if(v){
-							attributes[k]=v;
-						}
-
-					});
-				});
-				return attributes;
-			};
 
 		});
 

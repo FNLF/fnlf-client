@@ -3,24 +3,28 @@
 	<div class="row">
 		<div ng-show="!observation">
 
+			<pre>
+				{{filter|json}}
+			</pre>
+
 			<div class="col-xs-12">
-				<flagsearch></flagsearch>
+				<flagseditor acl="allacl" attributes="filter"></flagseditor>
 			</div>
 
 
 			<div class="col-xs-12">
-				<searchform query="tag"></searchform>
+				<searchform query="tag" filter="filter"></searchform>
 			</div>
 
 			<br>
 			<br>
 			<br>
 			<br>
-			<!--
+
 			<div class="col-xs-12 hidden-xs hidden-sm">
 				<searchformadvanced model="queryObj"></searchformadvanced>
 			</div>
-			-->
+
 
 			<div class="col-xs-12">
 				<caption>
@@ -46,7 +50,7 @@
 					<tr ng-repeat="observation in $data">
 						<td data-title="'Observasjon'" sortable="'id'"><a  ng-click="viewObservation(observation)">#{{::observation.id}} {{::observation.tags.join(', ')| cut:true:20:' ...'}} </a></td>
 						<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
-						<td data-title="'Klubb'" filter="{ 'club': 'select' }" filter-data="getClubs()"><resolveclub clubid="::observation.club"></resolveclub></td>
+						<td data-title="'Klubb'"><resolveclub clubid="::observation.club"></resolveclub></td>
 						<td data-title="'Forløp'">
 							<span class="table table-condensed">
 								<span ng-repeat="c in observation.components">

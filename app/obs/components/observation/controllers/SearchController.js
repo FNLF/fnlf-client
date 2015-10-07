@@ -12,10 +12,16 @@
 			$scope.total = 0;
 			$scope.tableData=[];
 
+			$scope.allacl={w:true};
+
 			if($routeParams.tag) {
-				$scope.tag = decodeURIComponent($routeParams.tag);
-				$scope.tags = SearchService.parseTagQuery($scope.tag);
+				$scope.tags = SearchService.parseTagQuery($routeParams.tag);
+				$scope.tag = $scope.tags.join(',');
 				$rootScope.title = 'ORS søk: ' + $scope.tag;
+				$scope.filter = SearchService.parseFilter($routeParams.tag);
+
+				console.log('Getting from '+$routeParams.tag);
+				console.log($scope.filter);
 			}
 
 			if($routeParams.flag){
@@ -29,6 +35,7 @@
 				$scope.query = decodeURIComponent($routeParams.query);
 				$rootScope.title = 'ORS søk: ' + $scope.query;
 			}
+
 
 
 
@@ -48,17 +55,11 @@
                     searchFn = SearchService.searchAdvanced;
                 }
 
-				searchFn(params.page(), params.count(),sortString,searchParam)
+				searchFn(params.page(), params.count(),sortString,searchParam,$scope.filter)
 					.then(function(data){
 						var meta = data._meta;
 						params.total(meta.total);
 						$scope.total = meta.total;
-
-						angular.forEach(data._items,function(obs){
-							obs.flattenedWhats = SearchService.flattenComponentWhat(obs);
-							obs.flattenedFlags = SearchService.flattenAttributes(obs);
-							obs.flattenedTags = SearchService.flattenComponentTags(obs);
-						});
 						$scope.tableData = data._items;
 						$defer.resolve(data._items);
 
