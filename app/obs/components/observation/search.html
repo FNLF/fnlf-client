@@ -3,14 +3,13 @@
 	<div class="row">
 		<div ng-show="!observation">
 
-			<pre>
-				{{filter|json}}
-			</pre>
+
 
 			<div class="col-xs-12">
-				<flagseditor acl="allacl" attributes="filter"></flagseditor>
+				<searchfilters filter="filter"></searchfilters>
 			</div>
-
+			<br>
+			<br>
 
 			<div class="col-xs-12">
 				<searchform query="tag" filter="filter"></searchform>
@@ -21,9 +20,6 @@
 			<br>
 			<br>
 
-			<div class="col-xs-12 hidden-xs hidden-sm">
-				<searchformadvanced model="queryObj"></searchformadvanced>
-			</div>
 
 
 			<div class="col-xs-12">
@@ -55,8 +51,11 @@
 							<span class="table table-condensed">
 								<span ng-repeat="c in observation.components">
 
+										<span ng-if="::c.flags.barrier" class="label label-default">&nbsp;</span>
+										<span ng-if="::c.flags.incident" class="label label-info">&nbsp;</span>
+        								<span ng-if="::c.flags.cause || c.flags.root_cause" class="label label-warning">&nbsp;</span>
+        								<span ng-if="::c.flags.consequence || c.flags.final_consequence" class="label label-danger">&nbsp;</span>
 										<b>{{::c.what}}</b>
-
 										<flags attributes="::c.attributes"></flags>
 
 										{{::c.tags.join(', ')}}
@@ -74,7 +73,7 @@
 										{{::person.jumptypeSelected}} {{person.jumptypeTags.join(', ')}} <br>
 										{{::person.numberOfJumps}} <span ng-if="::person.numberOfJumps">hopp</span>
 										{{::person.yearsOfExperience}} <span ng-if="::person.yearsOfExperience">år</span> <br>
-										{{::person.gear.harnessType}} {{::person.gear.mainCanopyType}} {{::person.gear.other.join(', ')}} <br>
+										{{::person.gear.harnessType}} {{::person.gear.mainCanopyType}} {{::person.gear.mainCanopySize}} {{::person.gear.other.join(', ')}} <br>
 									</small>
 
 								</span>

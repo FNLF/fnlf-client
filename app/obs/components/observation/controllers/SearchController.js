@@ -12,8 +12,8 @@
 			$scope.total = 0;
 			$scope.tableData=[];
 
-			$scope.allacl={w:true};
 
+			$scope.filter={};
 			if($routeParams.tag) {
 				$scope.tags = SearchService.parseTagQuery($routeParams.tag);
 				$scope.tag = $scope.tags.join(',');

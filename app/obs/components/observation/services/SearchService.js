@@ -72,36 +72,62 @@
 				var andArr = [];
 
 				angular.forEach(tags, function (tag) {
-					var orArr = [];
-					angular.forEach(params, function (p) {
-						var obj = {};
-						obj[p] = tag;
-						orArr.push(obj);
+					if(tag) {
+						var orArr = [];
+						angular.forEach(params, function (p) {
+							var obj = {};
+							obj[p] = tag;
+							orArr.push(obj);
 
-					});
-					if(orArr) {
-						andArr.push({$or: orArr});
+						});
+						if (orArr) {
+							andArr.push({$or: orArr});
+						}
 					}
-
 				});
-				whereObj.$and = andArr;
+
 
 				var allAttributes  = Definitions.getComponentAttributes();
 				allAttributes.forEach(function(a){
 					if(filter[a.attribute]){
 						var atr = {};
 						atr['components.attributes.' + a.attribute] = true;
-						whereObj.$and.push(atr);
+						andArr.push(atr);
 					}
 				});
 
-/*
-				if (!tags) {
-					whereObj = {};
+
+				var addNumberFilterFn = function(dbField,filterField1,filterField2){
+					if(filterField1){
+						var obj = {};
+						obj[dbField]={$gte:filterField1};
+						andArr.push(obj);
+					}
+
+					if(filterField2){
+						var obj = {};
+						obj[dbField]={$lte:filterField2};
+						andArr.push(obj);
+					}
+				};
+
+				var date1 = (filter['year1'] ? new Date(Date.UTC(filter['year1'], 0, 0, 0, 0)):null);
+				var date2 = (filter['year2'] ? new Date(Date.UTC(filter['year2'], 12, 30, 0, 0)):null);
+				addNumberFilterFn('when',date1,date2);
+				addNumberFilterFn('involved.numberOfJumps',filter['jumps1'],filter['jumps2']);
+				addNumberFilterFn('involved.yearsOfExperience',filter['years1'],filter['years2']);
+				addNumberFilterFn('involved.gear.mainCanopySize',filter['mainsize1'],filter['mainsize2']);
+				addNumberFilterFn('involved.gear.mainCanopyExperience',filter['mainExperience1'],filter['mainExperience2']);
+				addNumberFilterFn('involved.gear.harnessExperience',filter['harnessExperience1'],filter['harnessExperience2']);
+
+
+				if(andArr.length>0) {
+					whereObj.$and = andArr;
 				}
-				*/
+
 				var whereString = JSON.stringify(whereObj);
 
+				console.log('WHERE:'+whereString);
 
 				return RestService.getAllObservations(page, maxResults, sort, 'where=' + whereString);
 			};
