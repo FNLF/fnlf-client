@@ -61,7 +61,8 @@
 							</span>
 						</td>
 						<td data-title="'Involvert'">
-							<span class="table table-condensed">
+							<span ng-show="observation.involved.length>1"><a ng-click="observation.showInvolved=!observation.showInvolved">{{observation.involved.length}} involverte <i class="fa fa-fw" ng-class="{'fa-angle-up': observation.showInvolved, 'fa-angle-down': !observation.showInvolved}"></i></a><br></span>
+							<span class="table table-condensed" collapse="observation.involved.length>1 && !observation.showInvolved">
 
 								<span ng-repeat="person in observation.involved">
 										<resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser>
