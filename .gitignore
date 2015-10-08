@@ -5,4 +5,5 @@
 *.iml
 .idea
 .directory
+changelog.sh
 bower_components/*

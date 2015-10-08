@@ -2,10 +2,22 @@
 
 ## [Unreleased](https://github.com/fnlf/fnlf-client/tree/HEAD)
 
-[Full Changelog](https://github.com/fnlf/fnlf-client/compare/v0.3.0...HEAD)
+[Full Changelog](https://github.com/fnlf/fnlf-client/compare/v0.4.0...HEAD)
 
 **Implemented enhancements:**
 
+- Remove most console.log statements  [\#305](https://github.com/FNLF/fnlf-client/issues/305)
+
+## [v0.4.0](https://github.com/fnlf/fnlf-client/tree/v0.4.0) (2015-10-08)
+[Full Changelog](https://github.com/fnlf/fnlf-client/compare/v0.3.0...v0.4.0)
+
+**Implemented enhancements:**
+
+- Observation editor all input fields to readonly/disabled when !acl.w [\#299](https://github.com/FNLF/fnlf-client/issues/299)
+- Improve search result page to make it easier to browse a large number of observations [\#296](https://github.com/FNLF/fnlf-client/issues/296)
+- Observationdateselector [\#237](https://github.com/FNLF/fnlf-client/issues/237)
+- Datetimepicker start week on mondays in observation [\#209](https://github.com/FNLF/fnlf-client/issues/209)
+- Sorting in tables for observation main page [\#204](https://github.com/FNLF/fnlf-client/issues/204)
 - Observation report view ask align right [\#279](https://github.com/FNLF/fnlf-client/issues/279)
 - ORS change page title  [\#277](https://github.com/FNLF/fnlf-client/issues/277)
 - Minor tweaks for mobile [\#276](https://github.com/FNLF/fnlf-client/issues/276)
@@ -16,7 +28,6 @@
 - Show acl's for observation [\#253](https://github.com/FNLF/fnlf-client/issues/253)
 - Observation files public or restricted [\#252](https://github.com/FNLF/fnlf-client/issues/252)
 - Change colour for workflow states - draft should be more visible \(info\) and closed \(success\) [\#242](https://github.com/FNLF/fnlf-client/issues/242)
-- Observationdateselector [\#237](https://github.com/FNLF/fnlf-client/issues/237)
 - Change "hopper n" to resolve name using the serverside anon for anon [\#236](https://github.com/FNLF/fnlf-client/issues/236)
 - Replace \# in title with / [\#229](https://github.com/FNLF/fnlf-client/issues/229)
 - Cache club and name in resolve directives [\#225](https://github.com/FNLF/fnlf-client/issues/225)
@@ -24,8 +35,6 @@
 - Button with workflow action at bottom of editor [\#222](https://github.com/FNLF/fnlf-client/issues/222)
 - Add component flag \(cause, incident, final result\) buttons again [\#221](https://github.com/FNLF/fnlf-client/issues/221)
 - Observation location  [\#213](https://github.com/FNLF/fnlf-client/issues/213)
-- Datetimepicker start week on mondays in observation [\#209](https://github.com/FNLF/fnlf-client/issues/209)
-- Sorting in tables for observation main page [\#204](https://github.com/FNLF/fnlf-client/issues/204)
 - Reserve packed by, airworthy date, 4-year control in observation involved [\#203](https://github.com/FNLF/fnlf-client/issues/203)
 - Observation components in observation remove \_\* meta data before copy into \(except \_id\) [\#184](https://github.com/FNLF/fnlf-client/issues/184)
 - Properties for users should be used in observation.involved as default values [\#138](https://github.com/FNLF/fnlf-client/issues/138)
@@ -34,6 +43,19 @@
 
 **Fixed bugs:**
 
+- Most controllers loaded twice [\#297](https://github.com/FNLF/fnlf-client/issues/297)
+- Add seperator between multiple persons in organization in report view [\#295](https://github.com/FNLF/fnlf-client/issues/295)
+- Location club editor still suffering from mumbay map bug [\#293](https://github.com/FNLF/fnlf-client/issues/293)
+- Jump type tags not visible in report [\#292](https://github.com/FNLF/fnlf-client/issues/292)
+- Helpfull error message on obsrevation 404 is broken.  [\#291](https://github.com/FNLF/fnlf-client/issues/291)
+- Duplicates in a repeater are not allowed. Probably in Actions [\#290](https://github.com/FNLF/fnlf-client/issues/290)
+- Observation components newIncident\(\) inserts new component on top not above current component [\#246](https://github.com/FNLF/fnlf-client/issues/246)
+- Resolve user when anon \(id \< 0\) [\#240](https://github.com/FNLF/fnlf-client/issues/240)
+- Observationdateselector [\#237](https://github.com/FNLF/fnlf-client/issues/237)
+- Component.how length limit in componentSummary is annoying [\#216](https://github.com/FNLF/fnlf-client/issues/216)
+- Mumbai map bug [\#215](https://github.com/FNLF/fnlf-client/issues/215)
+- File upload button throws exception when list of files in observation is empty [\#199](https://github.com/FNLF/fnlf-client/issues/199)
+- On observation creation observation changes and requires save but toolbar save button is disabled [\#198](https://github.com/FNLF/fnlf-client/issues/198)
 - Toolbar buttons doesn't work with navbar menu on xs devices [\#283](https://github.com/FNLF/fnlf-client/issues/283)
 - Search form on mainpage not shown on small devices [\#275](https://github.com/FNLF/fnlf-client/issues/275)
 - Component attitude skill knowledge \(ask\) not shown in summary and report [\#274](https://github.com/FNLF/fnlf-client/issues/274)
@@ -41,24 +63,22 @@
 - Do not activate "Show in report" before observation is saved [\#259](https://github.com/FNLF/fnlf-client/issues/259)
 - Observation image thumbnails \(files preview\) breaks weirdly  [\#254](https://github.com/FNLF/fnlf-client/issues/254)
 - Too many results in "Til min behandling" table [\#248](https://github.com/FNLF/fnlf-client/issues/248)
-- Observation components newIncident\(\) inserts new component on top not above current component [\#246](https://github.com/FNLF/fnlf-client/issues/246)
 - Icon for observations editor/report shortcut in menubar [\#241](https://github.com/FNLF/fnlf-client/issues/241)
-- Resolve user when anon \(id \< 0\) [\#240](https://github.com/FNLF/fnlf-client/issues/240)
-- Observationdateselector [\#237](https://github.com/FNLF/fnlf-client/issues/237)
 - Change "hopper n" to resolve name using the serverside anon for anon [\#236](https://github.com/FNLF/fnlf-client/issues/236)
 - aad\_fire flag not shown in component summary when selected in editor [\#223](https://github.com/FNLF/fnlf-client/issues/223)
 - Implement pagination in main page [\#219](https://github.com/FNLF/fnlf-client/issues/219)
-- Component.how length limit in componentSummary is annoying [\#216](https://github.com/FNLF/fnlf-client/issues/216)
-- Mumbai map bug [\#215](https://github.com/FNLF/fnlf-client/issues/215)
 - Observ ation report not showing name of tmpname [\#214](https://github.com/FNLF/fnlf-client/issues/214)
-- File upload button throws exception when list of files in observation is empty [\#199](https://github.com/FNLF/fnlf-client/issues/199)
-- On observation creation observation changes and requires save but toolbar save button is disabled [\#198](https://github.com/FNLF/fnlf-client/issues/198)
+- Not possible to choose or set involved person in chain of events [\#146](https://github.com/FNLF/fnlf-client/issues/146)
 - Open registered observation cases doesn't work - iphone safari [\#144](https://github.com/FNLF/fnlf-client/issues/144)
 
 **Closed issues:**
 
-- Attitude Skills Knowledge text comments for all roles in workflow [\#282](https://github.com/FNLF/fnlf-client/issues/282)
+- Version tag in .js file links to help IE with caching [\#303](https://github.com/FNLF/fnlf-client/issues/303)
+- Loading non-minified angular.js [\#298](https://github.com/FNLF/fnlf-client/issues/298)
 - HL text [\#281](https://github.com/FNLF/fnlf-client/issues/281)
+- Not showing more than 50 observations in main page [\#217](https://github.com/FNLF/fnlf-client/issues/217)
+- Location should update if club is changed. [\#147](https://github.com/FNLF/fnlf-client/issues/147)
+- Attitude Skills Knowledge text comments for all roles in workflow [\#282](https://github.com/FNLF/fnlf-client/issues/282)
 - Upgrade libs [\#233](https://github.com/FNLF/fnlf-client/issues/233)
 - Show send button at bottom of editor only if in draft [\#232](https://github.com/FNLF/fnlf-client/issues/232)
 - Search page [\#231](https://github.com/FNLF/fnlf-client/issues/231)
@@ -68,11 +88,14 @@
 - Replace $http.success with $http.then for easier chaining of promises and cleaner code [\#226](https://github.com/FNLF/fnlf-client/issues/226)
 - Implement filtering in mainpage [\#220](https://github.com/FNLF/fnlf-client/issues/220)
 - Start using inline-help directive [\#218](https://github.com/FNLF/fnlf-client/issues/218)
-- Not showing more than 50 observations in main page [\#217](https://github.com/FNLF/fnlf-client/issues/217)
-- Location should update if club is changed. [\#147](https://github.com/FNLF/fnlf-client/issues/147)
 
 **Merged pull requests:**
 
+- Draft as Utkast also for resolver [\#306](https://github.com/FNLF/fnlf-client/pull/306) ([einarhuseby](https://github.com/einarhuseby))
+- Norwegian and cleanup wording [\#304](https://github.com/FNLF/fnlf-client/pull/304) ([einarhuseby](https://github.com/einarhuseby))
+- Adding acl to report to be able to correctly show workflow button [\#302](https://github.com/FNLF/fnlf-client/pull/302) ([einarhuseby](https://github.com/einarhuseby))
+- Fix for \#299 which became broen by pr  \#300 [\#301](https://github.com/FNLF/fnlf-client/pull/301) ([einarhuseby](https://github.com/einarhuseby))
+- Mobile cleanup and Closes \#299 [\#300](https://github.com/FNLF/fnlf-client/pull/300) ([einarhuseby](https://github.com/einarhuseby))
 - Hotfix for \_fsj to \_fs for report verdict [\#289](https://github.com/FNLF/fnlf-client/pull/289) ([einarhuseby](https://github.com/einarhuseby))
 - Final cleanups [\#288](https://github.com/FNLF/fnlf-client/pull/288) ([einarhuseby](https://github.com/einarhuseby))
 - Even more report cleanup [\#287](https://github.com/FNLF/fnlf-client/pull/287) ([einarhuseby](https://github.com/einarhuseby))
@@ -121,7 +144,6 @@
 
 **Fixed bugs:**
 
-- Not possible to choose or set involved person in chain of events [\#146](https://github.com/FNLF/fnlf-client/issues/146)
 - Title in reportingApp is reporting should be registering [\#190](https://github.com/FNLF/fnlf-client/issues/190)
 - Observation location sets wrong type - string [\#183](https://github.com/FNLF/fnlf-client/issues/183)
 - Save button in observation editor deactivated even if changes done [\#182](https://github.com/FNLF/fnlf-client/issues/182)
