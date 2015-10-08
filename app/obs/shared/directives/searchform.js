@@ -45,13 +45,13 @@
 				var filterString = '';
 
 				var filteredFilter = {};
-
-				Object.keys($scope.filter).forEach(function(k){
-					if($scope.filter[k]){
-						filteredFilter[k]=$scope.filter[k];
-					}
-				});
-
+				if($scope.filter) {
+					Object.keys($scope.filter).forEach(function (k) {
+						if ($scope.filter[k]) {
+							filteredFilter[k] = $scope.filter[k];
+						}
+					});
+				}
 				if(Object.keys(filteredFilter).length>0){
 					filterString=','+JSON.stringify(filteredFilter);
 				}

@@ -36,18 +36,15 @@
 
 		directive.link = function ($scope, element, attrs) {
             $scope.allAttributes  = Definitions.getComponentAttributes();
-/*
-			Functions.waitForIt($scope,'attributes')
-				.then(function(){
-					$scope.allAttributes.forEach(function(a){
-						if(angular.isUndefined($scope.attributes[a.attribute])){
-							$scope.attributes[a.attribute]=false;
-						}
 
-					});
+			$scope.toggle = function(attribute){
+				if($scope.attributes[attribute]){
+					delete $scope.attributes[attribute];
+				}else{
+					$scope.attributes[attribute]=true;
+				}
+			};
 
-				});
-*/
 		};
 
 		return directive;
