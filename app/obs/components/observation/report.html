@@ -476,15 +476,15 @@
 						
 						<dl class="dl-horizontal">
 							<div ng-if="::observation.ask.text.draft.length>2">
-								<dt>Reporter:</dt>
+								<dt>Opprinnelig:</dt>
 								<dd ng-bind-html="observation.ask.text.draft | nl2br"></dd>
 							</div>
 							<div ng-if="::observation.ask.text.pending_review_hi.length>2">
-								<dt>HI:</dt>
+								<dt>Hovedinstruktør:</dt>
 								<dd ng-bind-html="observation.ask.text.pending_review_hi | nl2br"></dd>
 							</div>
 							<div ng-if="::observation.ask.text.pending_review_fs.length>2">
-								<dt>FSJ:</dt>
+								<dt>Fagsjef:</dt>
 								<dd ng-bind-html="observation.ask.text.pending_review_fs | nl2br"></dd>
 							</div>
 							<div ng-if="::observation.ask.text.pending_review_su.length>2">
