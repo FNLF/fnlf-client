@@ -12,8 +12,11 @@
 			$scope.total = 0;
 			$scope.tableData=[];
 
-
 			$scope.filter={};
+			$scope.showFilter=false;
+			$rootScope.title = 'ORS søk';
+
+
 			if($routeParams.tag) {
 				$scope.tags = SearchService.parseTagQuery($routeParams.tag);
 				$scope.tag = $scope.tags.join(',');
@@ -22,14 +25,20 @@
 
 				console.log('Getting from '+$routeParams.tag);
 				console.log($scope.filter);
+				if(Object.keys($scope.filter).length>0){
+					$scope.showFilter=true;
+				}
 			}
 
 			if($routeParams.flag){
 				$scope.flag = $routeParams.flag;
 				$scope.attributes={};
 				$scope.attributes[$scope.flag]=true;
+				$scope.filter[$scope.flag]=true;
 				$rootScope.title = 'ORS søk: ' + $scope.flag;
+				$scope.showFilter=true;
 			}
+
 
 			if($routeParams.query){
 				$scope.query = decodeURIComponent($routeParams.query);

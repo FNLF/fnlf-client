@@ -4,8 +4,10 @@
 		<div ng-show="!observation">
 
 
-
 			<div class="col-xs-12">
+				<label><a ng-click="showFilter=!showFilter">Filter<i class="fa fa-fw" ng-class="{'fa-angle-up': showFilter, 'fa-angle-down': !showFilter}"></i></a></label>
+			</div>
+			<div class="col-xs-12" collapse="!showFilter">
 				<searchfilters filter="filter"></searchfilters>
 			</div>
 			<br>
@@ -27,13 +29,8 @@
 					<h3 ng-if="tag" ng-bind="tag"></h3>
 				</caption>
 				<caption>
-					<h3 ng-if=flag><flags attributes="attributes"></flags></h3>
-				</caption>
-
-				<caption>
 					<span class="h4">Totalt: </span><span class="h4" ng-bind="total"></span>
 				</caption>
-
 			</div>
 
 
@@ -99,12 +96,9 @@
 		</div>
 
 	</div>
-<div>
-	<ng-include src="'components/observation/report.html'">
+	<div>
+		<ng-include src="'components/observation/report.html'">
 
-	</ng-include>
-</div>
-
-
-
+		</ng-include>
+	</div>
 </div>
