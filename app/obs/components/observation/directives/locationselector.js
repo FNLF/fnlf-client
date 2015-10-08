@@ -15,8 +15,6 @@ angular.module('reportingApp').directive('locationsummary', function ($window) {
 	directive.link = function ($scope, element, attrs) {
 
 				$scope.dragMarker = function(event){
-					console.log("DragMarker");
-					console.log(event);
 					$scope.location.geo.coordinates[0]=event.latLng.lat();
 					$scope.location.geo.coordinates[1]=event.latLng.lng();
 					$scope.markerDragged=true;
@@ -98,9 +96,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 				}
 
 			});
-			if(selected) {
-				console.log("Closest icao within 30000: " + selected.name + " dist: " + minDist);
-			}
+
 			return selected;
 
 		};
@@ -126,17 +122,14 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 			$scope.showMarker=true;
 			$scope.zoom=13;
 			var coords = $scope.model.location.geo.coordinates;
-			console.log("selected with coords "+coords);
 			$scope.model.icao = selectIcaoFn(coords[0],coords[1]);
 			checkIfLocationEdited();
 		};
 
 		$scope.dragMarker = function(event){
-			console.log(event);
 			$scope.showMarker=true;
 			$scope.model.location.geo.coordinates[0]=event.latLng.lat();
 			$scope.model.location.geo.coordinates[1]=event.latLng.lng();
-			console.log($scope.model.location.geo);
 			$scope.existingClubLocationUsed=false;
 			var coords = $scope.model.location.geo.coordinates;
 			$scope.model.icao = selectIcaoFn(coords[0],coords[1]);
@@ -167,7 +160,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 			if(Object.keys(obj).length==0){
 				return '';
 			}
-			console.log(obj);
+
 
 			return obj.name+' '+obj.geo_type+' '+obj.municipality;
 		};
@@ -330,7 +323,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 
 				LocationService.saveClubLocations($scope.observation.club, locations, response._etag, response._id)
 					.then(function(response) {
-						console.log(response);
+
 						$scope.clublocations = response.locations;
 						$scope.observation.location = obj;
 				});

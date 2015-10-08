@@ -55,7 +55,7 @@
 				if(Object.keys(filteredFilter).length>0){
 					filterString=','+JSON.stringify(filteredFilter);
 				}
-				console.log('Sending: /search/tag/' + Functions.capitalizeFirstLetter(text)+filterString);
+
 				var path = '/search/tag/' + encodeURIComponent(Functions.capitalizeFirstLetter(text)+filterString);
 				$location.path(path);
 			};

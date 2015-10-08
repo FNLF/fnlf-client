@@ -23,8 +23,6 @@
 				$rootScope.title = 'ORS søk: ' + $scope.tag;
 				$scope.filter = SearchService.parseFilter($routeParams.tag);
 
-				console.log('Getting from '+$routeParams.tag);
-				console.log($scope.filter);
 				if(Object.keys($scope.filter).length>0){
 					$scope.showFilter=true;
 				}

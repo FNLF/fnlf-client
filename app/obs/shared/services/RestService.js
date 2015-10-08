@@ -208,15 +208,12 @@
 						if (data._meta.total == 0) {
 
 						} else {
-							console.log("Decrementing tag " + tag + " freq ("+group+")");
 							for(var i =0; i < 10; i++) {
 								$http.delete(urlBase + '/tags/freq/' + data._items[0]._id, {tag: tag, group: group});
 							}
 						}
 
 					});
-				}else{
-					console.log("Tag or group was undefined");
 				}
 
 			};
@@ -227,16 +224,14 @@
 					getExistingTags(tag, group)
 						.then(function (data) {
 						if (data._meta.total == 0) {
-							console.log("Adding new tag " + tag+ ' ('+group+')');
+
 							$http.post(urlBase + '/tags', {tag: tag, group: group});
 						} else {
-							console.log("Incrementing tag " + tag + " freq ("+group+")");
+
 							$http.post(urlBase + '/tags/freq/' + data._items[0]._id, {tag: tag, group: group});
 						}
 
 					});
-				}else{
-					console.log("Tag or group was undefined");
 				}
 
 			};

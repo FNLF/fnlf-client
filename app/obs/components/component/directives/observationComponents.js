@@ -165,7 +165,6 @@
 				});
 
 			$scope.newComponent = function(selectedTemplate){
-				console.log(selectedTemplate);
 				$scope.selectedTemplate ={};
 				angular.copy(selectedTemplate,$scope.selectedTemplate);
 				$scope.resolvePersonsFn();
@@ -209,7 +208,6 @@
 			};
 
 			$scope.newCause = function(parentOrder){
-				console.log("New cause bwfore component with order "+parentOrder);
 				var template = {};
 				template.flags={cause:true};
 				template.attributes={};
@@ -220,11 +218,7 @@
 
 			$scope.deleteComponent = function(component){
 				var index = $scope.observation.components.indexOf(component);
-				
-				console.log("INDEX!!!");
-				console.log(index);
-				console.log($scope.observation.components.length);
-				
+
 				if($scope.observation.components.length == (index + 1)) {
 					$scope.observation.components.splice(-1,1);
 				}

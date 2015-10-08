@@ -104,7 +104,7 @@ angular.module("usersApp").service("usersService",['$http',	'$q', '$rootScope', 
 					
 
 					function handleError(response) {
-
+						console.log(response);
 						if (!angular.isObject(response.data)
 								|| !response.data.message) {
 							return ($q.reject("An unknown error occurred."));
@@ -113,7 +113,6 @@ angular.module("usersApp").service("usersService",['$http',	'$q', '$rootScope', 
 						return ($q.reject(response.data.message));
 					}
 					function handleSuccess(response) {
-						console.log(response.data);
 						return (response.data);
 					}
 

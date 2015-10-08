@@ -28,8 +28,6 @@
 
 			$scope.createObservation = function(){
 
-
-				console.log($scope.observation);
 				RestService.createObservation($scope.observation)
 					.then(function(metadata){
 

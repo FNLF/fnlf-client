@@ -127,7 +127,7 @@
 
 				var whereString = JSON.stringify(whereObj);
 
-				console.log('WHERE:'+whereString);
+
 
 				return RestService.getAllObservations(page, maxResults, sort, 'where=' + whereString);
 			};
@@ -144,14 +144,14 @@
 				var text = '';
 				['what','gear','at','jumps'].forEach(function(category){
 					if (model[category]) {
-						console.log(category);
+
 						text += category+'=' + model[category].join(',') + ';';
 					}
 				});
 
 				if (text) {
 					var path = '/search/advanced/' + text;
-					console.log(path);
+
 					$location.path(path);
 				}
 
