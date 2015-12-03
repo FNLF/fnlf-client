@@ -392,3 +392,13 @@ img {
         padding-right:0px;
     }
 }
+
+/*The underline text decoration on the panel heading title is annoying and clutters the interface.*/
+
+.panel-title > a,
+.panel-title > small,
+.panel-title > .small,
+.panel-title > small > a,
+.panel-title > .small > a {
+  text-decoration: none!important;
+}
