@@ -179,6 +179,12 @@
 					   $window.onbeforeunload = undefined;
 					});
 
+					$scope.$on('$locationChangeStart', function(event, next, current) {
+					   if(!confirm('You have unsaved observation data\nAre you sure you want to leave the page?')) {
+						  event.preventDefault();
+					   }
+					});
+
 					disableOpenInReportLink();
 					$scope.observationChanges = true;
 				}
