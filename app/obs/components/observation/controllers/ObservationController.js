@@ -174,11 +174,18 @@
 					$window.onbeforeunload = function(){
 						return 'You have unsaved observation data';
 					};
+
+					$scope.$on('$destroy', function() {
+					   $window.onbeforeunload = undefined;
+					});
+
 					disableOpenInReportLink();
 					$scope.observationChanges = true;
 				}
 			}
 		},true);
+
+
 
 		/******************************************************
 		 * File upload!
