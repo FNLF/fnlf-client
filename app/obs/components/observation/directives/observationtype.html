@@ -1,10 +1,57 @@
-
 <div class="form-group">
-	<label class="control-label">Type observasjon:</label><br /> 
+	<label class="control-label">Type observasjon</label>
+
+	<inlinehelp>
+		<h4>Erfaring</h4>
+
+		<p>
+			Erfaringer, både positive og negative som ønskes delt med andre
+		</p>
+		<h4>Uønsket</h4>
+
+		<p>
+			Ikke rapporteringspliktig men fortsatt uønskede hendelser. F.eks utelanding.
+		</p>
+		<h4>
+			Næruhell
+		</h4>
+
+		<p>
+			Utilsiktet skjermåpning, utløsning av reserveskjerm, feilfunksjoner, utilsiktet
+			vannlanding eller andre forhold som nær hadde forårsaket uhell/ulykke. Som
+			næruhell regnes også brudd på F/NLFs bestemmelser.
+		</p>
+		<h4>
+			Uhell
+		</h4>
+
+		<p>
+			Hendelse hvor hopper er påført skade som medfører behandling av lege
+			og/eller av sykehus og/eller påfølgende sykefravær i kortere eller lengre tid.
+			Skaden må ha inntruffet mellom avgang med fly og fullført landing. Som uhell
+			regnes også større skader på materiell.
+		</p>
+
+		<h4>
+			Ulykke
+		</h4>
+
+		<p>
+			Hendelse som har medført død for en eller flere personer mellom avgang med
+			fly og landing i fallskjerm. Som ulykke regnes også store skader der
+			situasjonen er uavklart eller at skaden er så alvorlig at det er risiko for store
+			varige mén.
+		</p>
+
+
+	</inlinehelp>
+	<br/>
+
 	<div class="radio" ng-repeat="observationType in observationTypes">
-	<label> 
-	<input ng-model="observation.type" tooltip-placement="right" tooltip="{{observationType.descr}}" type="radio" name="observationType" ng-value="observationType.id"> {{observationType.name}}
-	</label>
+		<label>
+			<input ng-disabled="!acl.w" ng-model="observation.type" tooltip-placement="right" tooltip="{{observationType.descr}}"
+				   type="radio" name="observationType" ng-value="observationType.id"> {{observationType.name}}
+		</label>
 	</div>
 
 </div>

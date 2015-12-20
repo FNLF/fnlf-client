@@ -12,6 +12,7 @@
 			 'mgcrea.ngStrap.modal', 'mgcrea.ngStrap.aside',
 			 'fnlf-login', 
 			 'resolve',
+			 'inlinehelp',
 			 'angularFileUpload',
 			 'ui.bootstrap.datetimepicker',
 			 'ngMap',
@@ -65,7 +66,6 @@
 		    var lastRoute = $route.current;
 		    scope.$on('$locationChangeSuccess', function() {
 		      if (lastRoute.$$route.templateUrl === $route.current.$$route.templateUrl) {
-		        console.log('DoNotReloadCurrentTemplate not reloading template: ' + $route.current.$$route.templateUrl);
 		        $route.current = lastRoute;
 		      }
 		    });

@@ -9,13 +9,17 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 	directive.templateUrl = "components/observation/directives/involvedpersondetails.html";
 
 	directive.scope = {
-		observation: '='
+		observation: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
+
+		$scope.open={};
+
 		$scope.getUserDetails = function (user){
 			RestService.getUserDetails(user.id)
-				.success(function(data){
+				.then(function(data){
 					user.membership = data.membership;
 					user.licenses = data.licenses;
 				});
@@ -25,7 +29,7 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 
 		var getJumpTypes = function(){
 			RestService.getJumpTypes()
-				.success(function(data){
+				.then(function(data){
 					$scope.jumptypes = data._items;
 				});
 		};
@@ -35,7 +39,7 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 
 		var getLicensesFromMelwin = function(){
 			RestService.getLicenses()
-				.success(function(data){
+				.then(function(data){
 					$scope.licensesFromMelwin = data._items;
 				});
 		};
@@ -56,7 +60,8 @@ angular.module('reportingApp').directive('involvedperson', function (RestService
 	directive.scope = {
 		person: '=',
 		jumptypes: '=',
-		licensesFromMelwin: '='
+		licensesFromMelwin: '=',
+		acl: '='
 
 	};
 
@@ -64,11 +69,30 @@ angular.module('reportingApp').directive('involvedperson', function (RestService
 
 		if($scope.person.id){
 			RestService.getUserDetails($scope.person.id)
-				.success(function(data){
+				.then(function(data){
 					$scope.person.membership = data.membership;
 					$scope.person.licenses = data.licenses;
 				});
 		}
+
+
+		$scope.personsFromDb = [];
+
+		$scope.getPersonsByName = function (name) {
+			RestService.getUserByName(name)
+				.then(function (response) {
+					$scope.personsFromDb = response._items;
+				});
+		};
+
+		var nonMemberId = function(){
+			return Math.floor(Math.random()*10000)*-1;
+		};
+
+		$scope.tagTransform = function(itemText){
+			return {fullname:itemText,tmpname:itemText,id:nonMemberId()}
+		};
+
 	};
 
 	return directive;
@@ -81,7 +105,7 @@ angular.module('reportingApp').directive('involvedpersonsummary', function (Rest
 	directive.templateUrl = "components/observation/directives/involvedpersonsummary.html";
 
 	directive.scope = {
-		person: '='
+		person: '=',
 	};
 
 	directive.link = function ($scope, element, attrs) {

@@ -31,11 +31,13 @@ angular.module("editorApp").controller("editorController",[
 					// Menus
 					$rootScope.nav = {toolbar: [], menus: []}; //reset
 					$rootScope.nav.brand = 'FNLF Editor';
-					
-					
+
+					$scope.resolvePersonsFn = function(){
+
+					};
 					$scope.templates=[];
 					RestService.getObservationComponentTemplates()
-						.success(function(data){
+						.then(function(data){
 							$scope.templates = data._items;
 
 
@@ -58,7 +60,7 @@ angular.module("editorApp").controller("editorController",[
 									t.tags=[];
 								}
 								if(!t.involved){
-							//		t.involved=[];
+									//		t.involved=[];
 								}
 
 								if(!t.sort){
@@ -73,89 +75,12 @@ angular.module("editorApp").controller("editorController",[
 							});
 
 						});
+
+					$scope.page=1;
+					$scope.sort = "group,-freq";
 					$scope.allTags = [];
-					RestService.getAllTags(1)
-						.success(function(data){
-							$scope.allTags = data._items;
-						});
 
 
-					$scope.newTemplate = function(){
-						var component = {};
-						component.what='ny';
-
-						RestService.createObservationComponentTemplate(component)
-							.success(function(data){
-								console.log('Created new template');
-								console.log(data);
-								data.flags={};
-								data.attributes={};
-								data.where={};
-								data.tags=[];
-								data.active=true;
-								$scope.templates.push(data);
-
-
-								data.sort = $scope.templates.length;
-							});
-					};
-
-					var saveFn = function(component){
-
-						var dto = {};
-						angular.copy(component,dto);
-
-
-						var _id = component._id;
-						var _etag = component._etag;
-
-
-						delete dto.editTitle;
-						delete dto.open;
-
-						delete dto._updated;
-						delete dto._latest_version;
-						delete dto._version;
-						delete dto.workflow;
-						delete dto._links;
-						delete dto._created;
-						delete dto._status;
-						delete dto._etag;
-						delete dto._id;
-
-
-						RestService.updateObservationComponentTemplate(dto,_id,_etag)
-								.success(function(data){
-									console.log(data);
-									angular.copy(data,component);
-								});
-					};
-
-
-					$scope.incrementSort = function(component){
-						component.sort++;
-						//saveFn(component);
-					};
-
-					$scope.decrementSort = function(component){
-						component.sort--;
-						//saveFn(component);
-
-					};
-
-					$scope.hideTemplate = function(component){
-						component.active=false;
-						saveFn(component);
-					};
-
-					$scope.showTemplate = function(component){
-						component.active=true;
-						saveFn(component);
-					};
-
-					$scope.saveTemplate = function(component){
-						saveFn(component);
-					};
 
 
 					$scope.tagUp = function(tag){
@@ -169,8 +94,7 @@ angular.module("editorApp").controller("editorController",[
 						RestService.removeTag(tag.tag,tag.group);
 						tag.freq-=10;
 					};
-					$scope.page=1;
-					$scope.sort = "group,-freq";
+
 
 					$scope.sortByTag = function(){
 						$scope.sort = "tag,-freq";
@@ -190,12 +114,57 @@ angular.module("editorApp").controller("editorController",[
 
 					$scope.getTags = function(page){
 						$scope.page=page;
-						RestService.getAllTags(page,$scope.sort)
-							.success(function(data){
+
+						var filterString = '{}';
+
+						if(!angular.isUndefined($scope.filter)){
+							filterString = '{"group":"'+$scope.filter+'"}';
+						}
+
+						RestService.getAllTags(page,$scope.sort,filterString)
+							.then(function(data){
 								$scope.allTags = data._items;
 							});
+
 					};
 
+					$scope.getTags($scope.page);
+
+
+
+					$scope.groups = [];
+					var distinctGroups = {};
+					$scope.setFilter = function(filter){
+						$scope.filter = filter;
+						$scope.page = 1;
+						$scope.getTags($scope.page);
+
+					}
+
+					$scope.getTagGroups = function(){
+
+						for(var i = 1; i < 3; i++) {
+							RestService.getTagGroups(i)
+								.then(function (data) {
+									$scope.groups = [];
+
+									var meta = data._meta;
+
+
+									data._items.forEach(function (t) {
+										distinctGroups[t.group] = t;
+									});
+
+									Object.keys(distinctGroups).forEach(function (k) {
+										$scope.groups.push(distinctGroups[k].group);
+									});
+
+								});
+						}
+
+					};
+
+					$scope.getTagGroups();
 				} ]);
 
 

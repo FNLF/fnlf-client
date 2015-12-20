@@ -13,6 +13,11 @@
 */
 		directive.link = function ($scope, element, attrs) {
 
+			$scope.flags = ['incident','cause','consequence','barrier'];
+			
+			//Backwards compatibility
+			if(!$scope.component.ask) $scope.component.ask = {attitude: 0, skills: 0, knowledge: 0};
+			
 			$scope.incidentOrElse = function(flags){
 				var isIncident = true;
 				Object.keys(flags).forEach(function(k){
@@ -37,7 +42,6 @@
 			$scope.copyFromTemplate = function() {
 
 				if ($scope.component.what) {
-					console.log("Copying from template");
 						$scope.templates.forEach(function (t) {
 						if ($scope.component.what == t.what) {
 							if (!$scope.component.tags && !$scope.component.how && !$scope.component.where) {
@@ -49,8 +53,10 @@
 								angular.copy(t.where, $scope.component.where);
 								$scope.component.how="";
 								angular.copy(t.how, $scope.component.how);
-								console.log(t);
-								console.log($scope.component);
+								
+								$scope.component.ask = {attitude: 0, skills: 0, knowledge: 0}; //@see: observationHfkSelector for backward compatibility
+								angular.copy(t.ask, $scope.component.ask);
+
 							}
 						}
 					});

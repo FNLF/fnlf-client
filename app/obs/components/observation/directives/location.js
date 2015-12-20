@@ -5,18 +5,19 @@ angular.module('reportingApp').directive('location', function (LocationService) 
 	directive.template = function(tElement, tAttrs) { 
 		
 		return '<div class="form-group"> \
-				<select class="form-control" ng-model="observation.location" \
+				<select ng-disabled="!acl.w" class="form-control" ng-model="observation.location" \
         		ng-options="opt as opt.nickname for opt in clublocations track by opt.nickname" ng-change="locationSelected()"> \
         		</select> \
 				</div> \
 				<div class="clearfix"></div> \
-				<button type="button" class="btn btn-default btn-block" ng-click="openLocationAside()"><i class="fa fa-plus fa-fw"></i> Legg til annet sted</button>';
+				<button type="button" class="btn btn-default btn-block" ng-click="openLocationAside()"><i class="fa fa-plus fa-fw"></i> Lagre nytt sted</button>';
 	};
 
 	directive.scope = {
 		observation: '=',
 		loadObservation: '@',
-		saveObservation: '@'
+		saveObservation: '@',
+		acl: '='
 		
 	};
 	

@@ -50,14 +50,14 @@ angular.module('reportingApp')
 			$scope.is_watching = true;
 			$scope.button_watching = 'success';
 			$scope.icon_watching = 'eye';
-			$scope.button_title = 'Stop watching';
+			$scope.button_title = 'Følger';
 		};
 		
 		$scope.setNotWatching = function() {
 			$scope.is_watching = false;
 			$scope.button_watching = 'default';
 			$scope.icon_watching = 'eye-slash';
-			$scope.button_title = 'Start watching';
+			$scope.button_title = 'Følg';
 		};
 		
 		function watching(objectid, action) {
@@ -88,7 +88,6 @@ angular.module('reportingApp')
 			return ($q.reject(response.data.message));
 		}
 		function handleSuccess(response) {
-			console.log(response.data);
 			return (response.data);
 		};
 		

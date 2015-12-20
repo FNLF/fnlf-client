@@ -1,5 +1,5 @@
 
-F/NLF Client v0.1
+F/NLF Client
 =======================
 
 An Angular client for  [fnlf-backend]
@@ -27,9 +27,6 @@ git clone https://github.com/fnlf/fnlf-client.git
 ### Running
 @todo
 Use your favorite webserver
-
-
-
 
 
 Backend
@@ -230,6 +227,7 @@ Licensed under the MIT License
 
 <!-- links to third party projects -->
 [Angular]: https://angularjs.org/
+[Bootstrap]: https://getbootstrap.com/
 [Ui-Bootstrap]: http://angular-ui.github.io/bootstrap/
 [Ui-select]: https://github.com/angular-ui/ui-select
 

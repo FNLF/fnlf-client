@@ -31,13 +31,12 @@
 		directive.templateUrl = "/app/obs/components/component/directives/observationComponentSummary.html";
 
 		directive.scope = {
-			component: '='
+			component: '=',
+			acl: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
-			$scope.getAttributesAsTags = function(component){
-				return Definitions.componentTagsFromAttributes(component.attributes);
-			};
+
 
 		};
 
@@ -52,7 +51,8 @@
 		directive.templateUrl = "/app/obs/components/component/directives/observationComponentsSummary.html";
 		
 		directive.scope = {
-			observation: '='
+			observation: '=',
+			acl: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
@@ -90,7 +90,8 @@
 		};
 
 		directive.scope = {
-			observation: '='
+			observation: '=',
+			acl: '='
 		};
 
 		directive.controller = function ($scope, $rootScope, $location, $aside) {
@@ -99,7 +100,7 @@
 				$location.path('/observation/modal-route', false);
 			    $scope.incidentAside = $aside({
 			        scope: $scope,
-			        title: 'Hendinger i forløpet',
+			        title: 'Komponenter i forløpet',
 			        show: true,
 			        contentTemplate: '/app/obs/components/component/directives/observationComponents.html',
 			        template: '/shared/partials/aside.html',
@@ -159,18 +160,19 @@
 
 			$scope.templates=[];
 			RestService.getObservationComponentTemplates()
-				.success(function(data){
+				.then(function(data){
 					$scope.templates = data._items.filter(function(t){return t.active}).sort(function(a,b){return a.sort-b.sort});
 				});
 
 			$scope.newComponent = function(selectedTemplate){
-				console.log(selectedTemplate);
 				$scope.selectedTemplate ={};
 				angular.copy(selectedTemplate,$scope.selectedTemplate);
 				$scope.resolvePersonsFn();
 				$scope.selectedTemplate.involved = [].concat($scope.persons);
 				if($scope.selectedTemplate.flags.cause){
-					$scope.selectedTemplate.order = -1;
+					if(!$scope.selectedTemplate.order) {
+						$scope.selectedTemplate.order = -1;
+					}
 				}else{
 					$scope.selectedTemplate.order = $scope.observation.components.length+1;
 				}
@@ -193,6 +195,7 @@
 				var template = {};
 				template.flags={consequence:true};
 				template.attributes={};
+				template.ask = {attitude: 0, skills: 0, knowledge: 0};
 				$scope.newComponent(template);
 			};
 
@@ -200,19 +203,29 @@
 				var template = {};
 				template.flags={incident:true};
 				template.attributes={};
+				template.ask = {attitude: 0, skills: 0, knowledge: 0};
 				$scope.newComponent(template);
 			};
 
-			$scope.newCause = function(){
+			$scope.newCause = function(parentOrder){
 				var template = {};
 				template.flags={cause:true};
 				template.attributes={};
+				template.order = parentOrder - 0.5;
+				template.ask = {attitude: 0, skills: 0, knowledge: 0};
 				$scope.newComponent(template);
 			};
 
 			$scope.deleteComponent = function(component){
 				var index = $scope.observation.components.indexOf(component);
-				$scope.observation.components.splice(index,1);
+
+				if($scope.observation.components.length == (index + 1)) {
+					$scope.observation.components.splice(-1,1);
+				}
+				else {
+					$scope.observation.components.splice(index,1);
+				}
+				
 				reorderFunc($scope.observation.components);
 			};
 

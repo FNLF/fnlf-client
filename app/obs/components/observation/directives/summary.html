@@ -5,21 +5,33 @@
 	<label>Id</label>
 	<pre>{{observation.id}}</pre>
 	<pre>{{observation._id}}</pre>
-	
+
 	<label>Created</label>
 	<pre>{{observation._created | date:'yyyy-MM-dd HH:mm'}}</pre>
 	
 	<label>Club</label>
 	<pre>{{observation.club | json}}</pre>
 
+	<label>Acl</label>
+	<pre>{{observation.acl | json}}</pre>
+
 	<label>Type</label>
 	<pre>{{observation.type | json}}</pre>
+	
+	<label>Flags</label>
+	<pre>{{observation.flags | json}}</pre>
 
 	<label>Rating</label>
 	<pre>{{observation.rating | json}}</pre>
 
+	<label>Kunnskap ferdigheter holdning</label>
+	<pre>{{observation.ask | json}}</pre>
+
 	<label>Location</label>
 	<pre>{{observation.location | json}}</pre>
+
+	<label>Files</label>
+	<pre>{{observation.files | json}}</pre>
 
 	<label>When</label>
 	<pre>{{observation.when | json}}</pre>
@@ -33,16 +45,22 @@
 	<label>Involved</label>
 	<pre>{{observation.involved | json}}</pre>
 
-	<label>Files</label>
-	<pre>{{observation.files | json}}</pre>
-
 	<label>Components</label>
 	<pre>{{observation.components | json}}</pre>
 
 	<label>Weather</label>
 	<pre>{{observation.weather | json}}</pre>
 
+	<label>Vurdering</label>
+	<pre>{{observation.ask | json}}</pre>
+
 	<label>Actions</label>
 	<pre>{{observation.actions | json}}</pre>
-	
+
+	<label>Workflow</label>
+	<pre>{{observation.workflow | json}}</pre>
+
+	<label>Workflowstate</label>
+	<pre>{{workflowState | json}}</pre>
+
 </div>

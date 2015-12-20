@@ -48,9 +48,8 @@ angular.module("aclApp").controller("aclController",[
 					
 					$scope.getPersonsByName = function (name) {
 						aclService.getUserByName(name)
-						.success(function (response) {
+						.then(function (response) {
 							$scope.personsFromDb = response._items;
-							console.log($scope.personsFromDb);
 						});
 					};
 					
@@ -141,7 +140,6 @@ angular.module("aclApp").controller("aclController",[
 					
 					// Roles
 					$scope.createRole = function() {
-						console.log($scope.role);
 						$scope.role.group =$scope.group._id;
 						aclService.createRole($scope.role).then(function(r) {
 							
@@ -170,8 +168,6 @@ angular.module("aclApp").controller("aclController",[
 					};
 					
 					$scope.getPersonsInRole = function() {
-						console.log("Getting thos roles");
-						console.log($scope.roleId);
 						aclService.getPersonsInRole($scope.roleId).then(function(r) {
 							$scope.rolepersons = r._items;
 						});
@@ -186,7 +182,8 @@ angular.module("aclApp").service("aclService",['$http',	'$q', '$rootScope', func
 					var urlBase = '/api/v1';
 					
 					this.getUserByName = function (name) {
-						return $http.get(urlBase + '/melwin/users/search?q=' + name);
+						return $http.get(urlBase + '/melwin/users/search?q=' + name,{cache:true})
+							.then(handleSuccess, handleError);
 					};
 					
 					this.getUserById = function(username) {
@@ -345,6 +342,7 @@ angular.module("aclApp").service("aclService",['$http',	'$q', '$rootScope', func
 						// server error), then we
 						// may have to normalize it on our end, as best
 						// we can.
+						console.log(response);
 						if (!angular.isObject(response.data)
 								|| !response.data.message) {
 							return ($q.reject("An unknown error occurred."));
@@ -356,7 +354,6 @@ angular.module("aclApp").service("aclService",['$http',	'$q', '$rootScope', func
 					// the application data
 					// from the API response payload.
 					function handleSuccess(response) {
-						console.log(response.data);
 						return (response.data);
 					}
 

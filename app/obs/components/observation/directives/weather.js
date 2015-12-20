@@ -6,7 +6,8 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 	directive.templateUrl = "components/observation/directives/weatherSummary.html";
 
 	directive.scope = {
-		observation: '='
+		observation: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
@@ -32,6 +33,7 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 
 		directive.scope = {
 			observation: '=',
+			acl: '='
 		};
 
 		directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q) {
@@ -114,7 +116,6 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 				return ($q.reject(response.data.message));
 			}
 			function handleSuccess(response) {
-				console.log(response.data);
 				return (response.data);
 			};
 			

@@ -1,11 +1,36 @@
 <!-- Image in Aside -->
 <div class="col-xs-12 col-md-12">
 	<img class="img-responsive" data-ng-src="{{filesrc}}">
-
+	
 <div class="clearfix"></div>
 <br />
-<button class="btn btn-danger col-xs-12 col-md-4" ng-confirm-message="Er du sikker at du vil slette bildet?" ng-confirm-click="removeFile(fileid)">
-	<i class="fa fa-times fa-fw"></i>Delete file
-</button>
+
+	<div class="table-responsive">
+		<table class="table table-condensed" style="margin:auto 0">
+			<tbody>
+			<tr>
+				<td>
+				&nbsp;
+					<i ng-if="acl.w" ng-disabled="!acl.w" class="fa fa-fw" ng-click="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r'] = !observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r']" ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i>
+					<i ng-if="!acl.w" class="fa fa-fw" ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i>
+					&nbsp;
+					<a ng-href="{{file.url}}">{{filename}}</a>
+				</td>
+				<td>{{filesize}}</td>
+				<td>{{filetype}}&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td ng-if="editmode">
+					<a ng-if="acl.w" ng-if="editmode" class="" ng-confirm-message="Er du sikker at du vil slette bildet?" ng-confirm-click="removeFile(fileid)">
+						<i class="fa fa-times fa-fw"></i>Slett fil
+					</a>
+				</td>
+
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+
 </div>
 <div class="clearfix"></div>

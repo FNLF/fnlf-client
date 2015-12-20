@@ -13,15 +13,21 @@ angular.module('reportingApp')
 	var directive = {};
 
 	directive.restrict = 'E';
+
+	directive.transclude=true;
 	
 	directive.scope = {
 		observation: '=',
-		observationChanges: '='
+		observationChanges: '=',
+		acl: '='
 	};
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<button ng-disabled="observationChanges" tooltip-placement="top" tooltip="{{btn_descr}}" type="button" class="btn btn-{{tt}}" ng-click="openWorkflowAside()"><i class="fa fa-random fa-fw"></i> {{btn_title}}</button>';
+		return '<button ng-disabled="disabledFn()" \
+				popover-trigger="mouseenter" tooltip="{{btn_descr}}" type="button" \
+				class="btn btn-{{tt}}" ng-click="openWorkflowAside()"> \
+				<span ng-transclude></span> <i class="fa fa-random fa-fw"></i> {{btn_title}}</button>';
 	};
 	
 	
@@ -90,17 +96,17 @@ angular.module('reportingApp')
 		$scope.$watch('observation',function(newValue,oldValue) {
 		
 	if(newValue && newValue._id) {
-		console.log(newValue);
+
 		
 		RestService.getWorkflowState($scope.observation._id)
-				   .success(function (response) {
+				   .then(function (response) {
 			
 			var icon = '';
 			var btns = [];
 			var btnss = '';
 			var btn_class = 'default';
-			console.log(response);
-			for(k in response.actions) {
+
+			for(var k in response.actions) {
 				var side = 'left';
 				
 				if(response.actions[k].resource == 'approve') {
@@ -145,26 +151,29 @@ angular.module('reportingApp')
 			$scope.tt = 'default';
 			if(['pending_review_hi','pending_review_fs','pending_review_su'].indexOf(response.state) > -1) $scope.tt = 'warning';
 			else if(response.state == 'ready') $scope.tt = 'primary';
-			else if(response.state == 'closed') $scope.tt = 'info';
+			else if(response.state == 'closed') $scope.tt = 'success';
 			else if(response.state == 'withdrawn') $scope.tt = 'danger';
-			else if(response.state == 'draft') $scope.tt = 'default';
+			else if(response.state == 'draft') $scope.tt = 'info';
 	        
 			$scope.tooltip = response.description;
 			
 			$scope.wf = {btns: '', title: '', comment: ''};
 	
 			$scope.btn_title = response.title;
-			$scope.btn_descr = response.description;
+			
+			if(!$scope.workflowpermission) $scope.btn_descr = 'Du har ikke tilgang til arbeidsflyten';
+			else $scope.btn_descr = response.description;
+			
 			$scope.btns = btns;
 			$scope.username = +$rootScope.username;
-			$scope.title = 'Workflow for #' + $scope.observation.id;
+			$scope.title = 'Arbeidsflyt for #' + $scope.observation.id;
 			
 			var disabledFn = function(){
 				if(!$scope.workflowpermission || $scope.observationChanges) return true;
 				
 				return false;
 			 };
-			var toolbarbutton = {disabled:disabledFn,tooltip:response.description,text:response.title,btn_class:$scope.tt,icon:'random',onclick:$scope.openWorkflowAside};
+			var toolbarbutton = {disabled:disabledFn, tooltip:response.description, text:response.title,btn_class:$scope.tt,icon:'random', onclick:$scope.openWorkflowAside};
 			
 			$rootScope.nav.toolbar[1] = toolbarbutton;
 		});

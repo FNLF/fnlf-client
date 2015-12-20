@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ObservationController">
+<div class="container">
 	<div ng-if="observation._id">
 		<h3></h3>
 		<div class="list-group" style="padding: 50px -15px; margin-left: -15px; margin-right: -15px;">
@@ -9,6 +9,16 @@
 				<div class="col-xs-12  col-md-12">
 
 					<div ng-switch="ui">
+
+						<div ng-switch-when="table">
+							<observationstable kind="all"></observationstable>
+
+							<observationstable kind="my"></observationstable>
+
+							<observationstable kind="todo"></observationstable>
+
+						</div>
+
 						<div ng-switch-when="tags">
 
 
@@ -18,12 +28,17 @@
 
 
 							<p></p>
+
+
+							<p></p>
 							<populartags group="testTags" noun="seletøy"></populartags>
 							<p></p>
 <!--
 							<tagging model="testtags.tags" group="testTags"  noun="Testtagger" ></tagging>
-	-->
-							<tagtypeahead selectfn="myonselect" model="testtags.select" group="testTags"  noun="Testtagger" ></tagtypeahead>
+-->
+
+
+							<tagtypeahead selectfn="myonselect" model="testtags.select" group="testTags"  noun="Testtypeahead" ></tagtypeahead>
 							<p></p>
 							<pre> {{testtags | json}}</pre>
 

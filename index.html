@@ -19,10 +19,9 @@
 <script src="/static/js/angular-route.js"></script>
 <script src="/static/js/http-auth-interceptor.js"></script>
 
-<script src="/static/js/ui-bootstrap/ui-bootstrap.min.js"></script>
 <script src="/static/js/ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="/static/js/angular-loading-bar/loading-bar.min.js"></script>
-<script src="/static/js/angular-cookies-1.2.3.js"></script>
+<script src="/static/js/angular-cookies.js"></script>
 <script src="/static/js/angular-sanitize.js"></script>
 <!--
 	<script src="angular/angular-mocks.js"></script>
@@ -39,7 +38,7 @@
 <script src="/shared/auth/loginServices.js"></script>
 
 </head>
-<body>
+<body class="ng-cloak" ng-cloak>
 
 	<!-- Navigationbar -->
 	<angled-navbar menus="nav.menus" search="false" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
@@ -81,7 +80,7 @@
 
 				<div class="col-md-9 col-xs-12">
 					<div class="jumbotron">
-						<h1>Nytt system</h1>
+						<h1>ORS</h1>
 						
 						<p>Dette systemet skal erstatte dagens "hendelsesrapportering" og vil i tillegg kunne gi flere tjenester på sikt.</p>
 						<p>Systemet skal fra 22. mars etter fagseminaret være i bruk av samtlige klubber og vil erstatte dagens papirskjema og "Elektronisk hendelsesrapportering".</p>

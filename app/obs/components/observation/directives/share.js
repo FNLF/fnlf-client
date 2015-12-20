@@ -78,7 +78,6 @@ angular.module('reportingApp')
 			return ($q.reject(response.data.message));
 		}
 		function handleSuccess(response) {
-			console.log(response.data);
 			return (response.data);
 		};
 		
@@ -93,7 +92,7 @@ angular.module('reportingApp')
 		
 		$scope.getPersonsByName = function (name) {
 				RestService.getUserByName(name)
-				.success(function (response) {
+				.then(function (response) {
 					$scope.personsFromDb = response._items;
 				});
 		};
@@ -117,7 +116,7 @@ angular.module('reportingApp')
 		
 		$scope.shareObservation = function() {
 			if($scope.share.recepients.length > 0) {
-				$scope._share($scope.share.recepients, $scope.share.comment, $scope.observation.tags.join(' ')).then(function(r) {
+				$scope._share($scope.share.recepients, $scope.share.comment, $scope.observation.tags.join('/')).then(function(r) {
 					$scope.share.comment='';
 					$scope.share.persons = [];
 					$scope.share.recepients = [];

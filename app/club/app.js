@@ -39,7 +39,6 @@ angular.module("clubApp").controller("locationsController",
 
 		clubService.getClubLocations().then(function(response){
 			clubService.saveClubLocations($scope.clubLocations, response._etag,response._id).then(function(response) {
-				console.log(response);
 				$scope.loc = null;
 			});
     	});
@@ -54,7 +53,7 @@ angular.module("clubApp").controller("locationsController",
 	};
 
 	$scope.rowClicked = function(location){
-		console.log(location);
+
 		$scope.loc=location;
 		$scope.coords=[$scope.loc.geo.coordinates[0],$scope.loc.geo.coordinates[1]];
 		$scope.zoom=13;
@@ -62,9 +61,9 @@ angular.module("clubApp").controller("locationsController",
 
 
 	$scope.dragMarker = function(event,location){
-		console.log(location);
-		$scope.loc.geo.coordinates[0]=event.latLng.k;
-		$scope.loc.geo.coordinates[1]=event.latLng.D;
+
+		$scope.loc.geo.coordinates[0]=event.latLng.lat();
+		$scope.loc.geo.coordinates[1]=event.latLng.lng();
 		$scope.coords=[$scope.loc.geo.coordinates[0],$scope.loc.geo.coordinates[1]];
 
 
@@ -76,7 +75,7 @@ angular.module("clubApp").controller("locationsController",
 	};
 
 	$scope.clickMarker = function(event,location){
-		console.log(location);
+
 		$scope.loc=location;
 		$scope.zoom=13;
 		$scope.coords=[$scope.loc.geo.coordinates[0],$scope.loc.geo.coordinates[1]];
@@ -142,6 +141,7 @@ angular.module("clubApp")
 				// server error), then we
 				// may have to normalize it on our end, as best
 				// we can.
+				console.log(response);
 				if (!angular.isObject(response.data) || !response.data.message) {
 					return ($q.reject("An unknown error occurred."));
 				}
@@ -152,7 +152,6 @@ angular.module("clubApp")
 			// the application data
 			// from the API response payload.
 			function handleSuccess(response) {
-				console.log(response.data);
 				return (response.data);
 			}
 	

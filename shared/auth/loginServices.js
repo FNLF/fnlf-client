@@ -35,6 +35,8 @@
 
 					return configs[key];
 				};
+				
+				$rootScope.title = 'Login';
 
 				return service;
 
@@ -57,15 +59,11 @@
 
 
 			this.login = function (username, password) {
-				console.log('Manual login');
-				console.log(username + ' ' + password);
 
 				$http.post(GlobalsService.get('baseUrl') + 'user/authenticate', {
 					username: username,
 					password: password
-				})
-
-					.success(function (response) {
+				}).success(function (response) {
 						console.log(response);
 
 						if (response.success) {
@@ -92,6 +90,16 @@
 
 							$rootScope.error = response.message;
 						}
+					}).error(function (data, status, headers, config) {
+
+						//Show login form
+						$rootScope.currentUserSignedIn = false;
+						//Abort all buffers
+						authService.loginCancelled(data, status);
+
+						$rootScope.error = 'Login experienced some difficulties. Maybe the backend did not respond?';
+						return false;
+
 					});
 			};
 
@@ -103,8 +111,6 @@
 			 */
 			this.tryLoginFromSession = function () {
 
-				console.log('Sessionstorage');
-				console.log($window.sessionStorage);
 				var authToken = $window.sessionStorage.token; //$cookieStore.get('authToken');
 				var username = $window.sessionStorage.username; //$cookieStore.get('username');
 
@@ -118,8 +124,7 @@
 					$rootScope.currentUserSignedIn = true;
 					
 
-					console.log('Trying to verify token ' + authToken + ' for username ' + username);
-					console.log(username);
+
 
 					$http.defaults.headers.common.Authorization = 'Basic ' + authToken;
 

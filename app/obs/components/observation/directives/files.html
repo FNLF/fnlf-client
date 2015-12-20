@@ -1,19 +1,51 @@
 <div ng-repeat="f in thumbnails">
-	<div class="col-xs-6 col-md-2 thumb">
-		<a ng-click="openFileAside(f.objectid)" class="thumbnail"> <img ng-src="{{f.src}}" class="img-responsive">
+	<div class="col-xs-6 col-md-2">
+		<a ng-click="openFileAside(f.objectid,f.filename,f.filesize)" class="thumbnail"> <img ng-src="{{f.src}}" class="img-responsive"> <i ng-if="editmode" class="fa fa-3x"
+			ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', f.objectid)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i>
+
+
 		</a>
 	</div>
 </div>
 <div class="clearfix"></div>
 
-<div>
-<table class="table table-condensed">
-<tbody>
-		<tr ng-repeat="file in filelist">
-		<td>&nbsp;&nbsp;&nbsp;<a ng-href="{{file.url}}">{{file.name}}</a></td>
-		<td>{{file.size}}</td>
-		<td>{{file.type}}</td>
-		</tr>
-</tbody>
-</table>
+<div class="table-responsive">
+	<table class="table table-condensed">
+		<tbody>
+			<!-- filelist=all files, noimage=not images -->
+			<tr ng-if="!editmode" ng-repeat="file in nonimages">
+
+				<td>&nbsp;&nbsp; <a ng-href="{{file.url}}">{{file.name}}</a>
+				</td>
+				<td>{{file.size}}</td>
+				<td>{{file.type}}&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+
+
+			<tr ng-if="editmode" ng-repeat="file in filelist">
+
+				<td>&nbsp; 
+				
+				
+					<i ng-if="!acl.w" class="fa fa-fw" ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', fileid)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i>
+					<i ng-if="acl.w" class="fa fa-fw"
+					ng-click="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', file._id)]['r'] = !observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', file._id)]['r']"
+					ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', file._id)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i> &nbsp;&nbsp; 
+					<a ng-href="{{file.url}}">{{file.name}}</a>
+				</td>
+				<td>{{file.size}}</td>
+				<td>{{file.type}}&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td><a ng-if="acl.w" class="" ng-confirm-message="Er du sikker at du vil slette bildet?" ng-confirm-click="removeFile(file._id)"> <i class="fa fa-times fa-fw"></i>Slett fil
+				</a></td>
+			</tr>
+
+
+
+
+		</tbody>
+	</table>
 </div>

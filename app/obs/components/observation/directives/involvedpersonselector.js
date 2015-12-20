@@ -6,7 +6,8 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 	directive.template = '<table class="table"><tr ng-repeat="person in observation.involved"><td><span><involvedpersonsummary person="person"></involvedpersonsummary> &nbsp;</span> </td></tr></table>';
 
 	directive.scope = {
-		observation: '='
+		observation: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
@@ -25,14 +26,15 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 //		directive.templateUrl = "components/observation/directives/involvedpersonselector.html";
 		directive.template = function(tElement, tAttrs) { 
 			
-			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openInvolvedAside()"><i class="fa fa-plus fa-fw"></i>Involverte personer</button>';
+			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openInvolvedAside()"><i class="fa fa-plus fa-fw"></i>Involverte personer og utstyr</button>';
 		};
 
 		directive.scope = {
-			observation: '='
+			observation: '=',
+			acl: '='
 		};
 		
-		directive.controller = function ($scope, $rootScope, $location, $aside) {
+		directive.controller = function ($scope, $rootScope, $location, $aside,RestService) {
 			
 			$scope.openInvolvedAside = function() {
 				$location.path('/observation/modal-route', false);
@@ -62,15 +64,26 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 			$scope.$on('aside.hide', function() {
 			  if($location.path().indexOf('/modal-route') != -1) {
 				  $window.history.back();
-			  };
+			  }
 			});
 
 			$scope.onSelect = function(item,model){
-				console.log("OnSelect "+item)
-				item.open=true;
-			}
+				RestService.getUser(item.id)
+					.then(function(user){
+						var settings = user.settings;
+						if(settings.total_jumps) {
+							item.numberOfJumps = settings.total_jumps;
+						}
+						if(settings.gear){
+							item.gear = settings.gear;
+						}
+					});
 
-		}
+
+				item.open=true;
+			};
+
+		};
 
 		directive.link = function ($scope, element, attrs) {
 			
@@ -79,7 +92,7 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 
 			$scope.getPersonsByName = function (name) {
 					RestService.getUserByName(name)
-					.success(function (response) {
+					.then(function (response) {
 						$scope.personsFromDb = response._items;
 					});
 			};

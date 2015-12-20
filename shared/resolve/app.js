@@ -1,2 +1,4 @@
 
-var resolve = angular.module('resolve', []);
+var resolve = angular.module('resolve', []).config(['$httpProvider', function ($httpProvider) {
+
+}])

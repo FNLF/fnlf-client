@@ -8,6 +8,7 @@ angular.module('reportingApp')
 	
 	directive.scope = {
 		observation: '=',
+		acl: '='
 	};
 	
 //	directive.templateUrl = 'components/observation/directives/actions.html';

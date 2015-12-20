@@ -8,7 +8,7 @@
 						controller: 'MainController'
 					})
 					.when('/observation/:id', {
-						templateUrl: 'components/observation/1.html',
+						templateUrl: 'components/observation/editor.html',
 						controller: 'ObservationController'
 					})
 					.when('/observation/report/:id', {
@@ -17,9 +17,25 @@
 
 					})
 					.when('/observation/:id/:ui', {
-						templateUrl: 'components/observation/2.html',
+						templateUrl: 'components/observation/sandbox.html',
 						controller: 'ObservationController'
 					})
+					.when('/search/tag/:tag', {
+						templateUrl: 'components/observation/search.html',
+						controller: 'SearchController'
+					})
+					.when('/search/tag/', {
+						templateUrl: 'components/observation/search.html',
+						controller: 'SearchController'
+					})
+					.when('/search/flag/:flag', {
+						templateUrl: 'components/observation/search.html',
+						controller: 'SearchController'
+					})
+                    .when('/search/advanced/:query', {
+                        templateUrl: 'components/observation/search.html',
+                        controller: 'SearchController'
+                    })
 					.when('/observation/modal-route', {
 					})
 					.otherwise({redirectTo: '/'});

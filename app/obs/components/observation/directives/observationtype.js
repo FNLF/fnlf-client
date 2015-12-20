@@ -5,13 +5,14 @@ angular.module('reportingApp').directive('observationtype', function (Definition
 	directive.templateUrl = "components/observation/directives/observationtype.html";
 
 	directive.scope = {
-		observation: '='
+		observation: '=',
+		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
 
 		$scope.observationTypes = Definitions.getObservationTypes();
-		$scope.observationTypeOptions = Definitions.getObservationTypeOptions();
+		
 		
 	};
 

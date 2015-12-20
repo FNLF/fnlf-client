@@ -36,7 +36,7 @@
 					return ($q.reject(response.data.message));
 				}
 				function handleSuccess(response) {
-					console.log(response.data);
+
 					return (response.data);
 				};
 

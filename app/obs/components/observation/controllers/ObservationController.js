@@ -1,22 +1,15 @@
 (function () {
 
-	/**
-	 *
-	 * @author: Tore Buer, s180346
-	 * @author: Eivind Jacobsen, s173466
-	 * @author: Morten Kristoffersen, s169440
-	 *
-	 * @since may.26.2014
-	 *
-	 */
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope, $sce) {
+		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
-			$rootScope.nav.brand = "FNLF Observasjonsregistrering";
+			$rootScope.nav.brand = 'FNLF ORS #' + $routeParams.id;
+			
+			//$rootScope.readOnly = false;
 			
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
@@ -24,29 +17,70 @@
 
 			$scope.ui=$routeParams.ui;
 
+			$rootScope.title = 'ORS editor #' + $scope.observation.id;
+			
+			$rootScope.haspee = function() {
+				return 1;
+			};
+			
+			$rootScope.haswritepermission = 1;
+			$scope.getAcl = function(){
+				ObservationService.getAcl(observationId)
+					.then(function(acl){
+						$scope.acl=acl;
+					});
+			};
+			
+//			$scope.!acl.w = function() {
+//				
+//				return false; //return $scope.acl['type'];
+//			}
+
+			$rootScope.disabledFn = function(){
+				return !$scope.observationChanges;
+			};
+
+			$rootScope.openInReport = function(){
+				$location.path('/observation/report/'+ $scope.observation.id);
+			};
+			$rootScope.openInReportdisabledFn = function(){
+				return $scope.observationChanges;
+			};
+
+
+			var addMenusAndToolbar = function(){
+				$rootScope.nav.brand = 'FNLF ORS #' + $scope.observation.id;
+				//$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
+				if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
+					$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+				}
+				
+				$rootScope.nav.toolbar[2] = {disabled:$rootScope.openInReportdisabledFn,tooltip:'Åpne i rapport',text:'Åpne i rapport',btn_class:'default',icon:'file-text-o', onclick:$rootScope.openInReport};
+			};
+
+			var disableOpenInReportLink = function(){
+			//	$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: ''}];
+			};
+
+
+
 			$scope.loadObservation = function(){
 				$scope.observation = {};
-				ObservationService.getObservationById(observationId, function(obs){
+				ObservationService.getObservationById(observationId)
+					.then(function(obs){
+						$scope.getAcl();
+						$scope.observation = obs;
 
-					$scope.observation = obs;
-					ObservationService.initObservation($scope.observation);
-					$scope.observationChanges = false;
-					$timeout(function(){
 						$scope.observationChanges = false;
-					},10);
-					
-					// Menus
-					$rootScope.nav.brand = 'FNLF Observasjon #' + $scope.observation.id;
-					if($scope.observation.workflow.state == 'closed') {
-						$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-text', link: '#!/observation/report/'+ $scope.observation.id}];
-					};
-					
-					 
-					if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
-						$rootScope.nav.toolbar[0] = {disabled:disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
-					}
-					
-				});
+						$timeout(function(){
+							$scope.observationChanges = false;
+						},10);
+
+						addMenusAndToolbar();
+				}).catch(function(error){
+						console.log("Catched in ObservationController: "+error);
+						$rootScope.error = "Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke";
+					});
 			};
 			$scope.loadObservation();
 			
@@ -75,20 +109,54 @@
 
 		$rootScope.saveObservation = function () {
 
-			ObservationService.updateObservation($scope.observation,function(updated){
-				$scope.observation = updated;
-				ObservationService.initObservation($scope.observation);
-				/**
-				 * Reset saved/unsaved label
-				 */
-				$timeout(function(){
-					$scope.observationChanges = false;
-					$window.onbeforeunload = null;
-				},100);
 
-			});
+			ObservationService.updateObservation($scope.observation)
+				.then(function(updated){
+					$rootScope.error = '';
+					$scope.observation = updated;
+					$scope.getAcl();
+
+				})
+				.then(function(){
+						$timeout(function(){
+							$scope.observationChanges = false;
+							$window.onbeforeunload = null;
+							addMenusAndToolbar();
+						},100);
+					})
+				.catch(function(error){
+
+					if(error.indexOf("PRECONDITION FAILED")>-1){
+							var yourVersion = $scope.observation._latest_version;
+							var yourUpdated = $scope.observation._updated;
+							ObservationService.getObservationById(observationId)
+								.then(function(r){
+									var theirVersion = r._latest_version;
+									var theirUpdated = r._updated;
+									$rootScope.error = 'Kunne ikke lagre fordi versjonen på serveren, versjon '+theirVersion+' (oppdatert '+theirUpdated+') , er nyere enn din versjon '+yourVersion+'';
+
+								});
+
+
+					}else if(error.indexOf("The requested URL was not found on the server.")>-1){
+						$rootScope.error = "Du mangler skrivetilgang til #"+$scope.observation.id+". Kunne ikke lagre.";
+					} else{
+						console.log("Catch error in ObservationController. Reloading observation"+error);
+						$rootScope.error = error;
+					}
+
+
+					$scope.loadObservation();
+				});
 		};
 
+		var printDiff = function(changedObs,oldObs){
+			var diff = Functions.objectDifference(oldObs,changedObs,'observation');
+			console.log('observation changed, diff:');
+			angular.forEach(diff,function(o){
+				console.log(o);
+			});
+		};
 		
 		/**
 		 * Triggers saved/unsaved label
@@ -96,14 +164,34 @@
 		$scope.observationChanges = false;
 		$scope.$watch('observation', function(changedObs,oldObs) {
 			if(oldObs._id) {
-				
-				$window.onbeforeunload = function(){
-			        return 'You have unsaved observation data';
-			      };
-				
-				$scope.observationChanges = true;
+				if(false) {
+					printDiff(changedObs, oldObs);
+				}
+				if($scope.acl && !$scope.acl.w){
+					var msg = 'Du vil ikke kunne lagre fordi du mangler skrivetilgang';
+					$rootScope.error = msg;
+				}else{
+					$window.onbeforeunload = function(){
+						return 'You have unsaved observation data';
+					};
+
+					$scope.$on('$destroy', function() {
+					   $window.onbeforeunload = undefined;
+					});
+					/*
+					$scope.$on('$locationChangeStart', function(event, next, current) {
+					   if(!confirm('You have unsaved observation data\nAre you sure you want to leave the page?')) {
+						  event.preventDefault();
+					   }
+					});
+					*/
+					disableOpenInReportLink();
+					$scope.observationChanges = true;
+				}
 			}
 		},true);
+
+
 
 		/******************************************************
 		 * File upload!
@@ -139,7 +227,7 @@
 							 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 						 }).success(function (data, status, headers, config) {
 							 if(data._status == 'OK') {
-								 $scope.observation.files.push(data._id);
+								 $scope.observation.files.push({'f': data._id, 'r': true});
 							 }
 						 
 						 }).then(function(success, error, progress) {
@@ -151,14 +239,12 @@
 				 
 				 };
 		 };
-		var disabledFn = function(){
-			return !$scope.observationChanges;
-		};
 
 
-		$rootScope.nav.toolbar[1] = {disabled:disabledFn,text:'Lagre',btn_class:'primary',icon:'save',onclick:$scope.saveObservation};
 
 		});
-	
+
+
+
 
 })();

@@ -1,0 +1,105 @@
+<div>
+
+	<div class="row">
+		<div ng-show="!observation">
+
+
+			<div class="col-xs-12">
+				<label><a ng-click="showFilter=!showFilter">Filter<i class="fa fa-fw" ng-class="{'fa-angle-up': showFilter, 'fa-angle-down': !showFilter}"></i></a></label>
+			</div>
+			<div class="col-xs-12" collapse="!showFilter">
+				<searchfilters filter="filter"></searchfilters>
+			</div>
+			<br>
+			<br>
+
+			<div class="col-xs-12">
+				<searchform query="tag" filter="filter"></searchform>
+			</div>
+
+			<br>
+			<br>
+			<br>
+			<br>
+
+
+
+			<div class="col-xs-12">
+				<caption>
+					<h3 ng-if="tag" ng-bind="tag"></h3>
+				</caption>
+				<caption>
+					<span class="h4">Totalt: </span><span class="h4" ng-bind="total"></span>
+				</caption>
+			</div>
+
+
+
+
+			<div class="col-xs-12 col-md-12 table-responsive" >
+				<!-- ng-table all observations -->
+				<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
+
+					<tr ng-repeat="observation in $data">
+						<td data-title="'Observasjon'" sortable="'id'"><a  ng-click="viewObservation(observation)">#{{::observation.id}} {{::observation.tags.join(', ')| cut:true:20:' ...'}} </a></td>
+						<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
+						<td data-title="'Klubb'"><resolveclub clubid="::observation.club"></resolveclub></td>
+						<td data-title="'Forløp'">
+							<span class="table table-condensed">
+								<span ng-repeat="c in observation.components">
+
+										<span ng-if="::c.flags.barrier" class="label label-default">&nbsp;</span>
+										<span ng-if="::c.flags.incident" class="label label-info">&nbsp;</span>
+        								<span ng-if="::c.flags.cause || c.flags.root_cause" class="label label-warning">&nbsp;</span>
+        								<span ng-if="::c.flags.consequence || c.flags.final_consequence" class="label label-danger">&nbsp;</span>
+										<b>{{::c.what}}</b>
+										<flags attributes="::c.attributes"></flags>
+
+										{{::c.tags.join(', ')}}
+									<br>
+								</span>
+							</span>
+						</td>
+						<td data-title="'Involvert'">
+							<span ng-show="observation.involved.length>1"><a ng-click="observation.showInvolved=!observation.showInvolved">{{observation.involved.length}} involverte <i class="fa fa-fw" ng-class="{'fa-angle-up': observation.showInvolved, 'fa-angle-down': !observation.showInvolved}"></i></a><br></span>
+							<span class="table table-condensed" collapse="observation.involved.length>1 && !observation.showInvolved">
+
+								<span ng-repeat="person in observation.involved">
+										<resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser>
+										<br>
+									<small>
+										{{::person.jumptypeSelected}} {{person.jumptypeTags.join(', ')}} <br>
+										{{::person.numberOfJumps}} <span ng-if="::person.numberOfJumps">hopp</span>
+										{{::person.yearsOfExperience}} <span ng-if="::person.yearsOfExperience">år</span> <br>
+										{{::person.gear.harnessType}} {{::person.gear.mainCanopyType}} {{::person.gear.mainCanopySize}} {{::person.gear.other.join(', ')}} <br>
+									</small>
+
+								</span>
+
+							</span>
+
+						</td>
+
+					</tr>
+				</table>
+
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-md-12" ng-if="observation">
+			<br>
+
+			<span> <span ng-repeat="obs in tableData" ><a ng-click="viewObservation(obs)"><span ng-class="{h3:obs.id==observation.id,h4:obs.id!=observation.id}">#{{::obs.id}}</span></a> </span> </span>
+
+			<a ng-click="hideObservation()"><h4><<< Tilbake til søkeresultater </h4></a>
+			<a class="pull-right" href="#!/observation/report/{{::observation.id}}"><h4>Åpne #{{::observation.id}} i rapport</h4></a>
+
+		</div>
+
+	</div>
+	<div>
+		<ng-include src="'components/observation/report.html'">
+
+		</ng-include>
+	</div>
+</div>

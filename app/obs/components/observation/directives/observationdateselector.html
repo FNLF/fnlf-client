@@ -1,6 +1,7 @@
 <div>
 	<div class="input-group">
 		<datetimepicker 
+		ng-disabled="!acl.w"
 		ng-model="observation.when" 
 		min-date="minDate"
 		max-date="maxDate"
@@ -8,7 +9,7 @@
 		minute-step="mstep" 
 		show-meridian="false" 
 		date-format="yyyy-MM-dd" 
-		date-options="{startingDay:1}"
+		date-options="{startingDay:1,showWeeks: true}"
 		readonly-time="false"></datetimepicker>
 	</div>
 </div>

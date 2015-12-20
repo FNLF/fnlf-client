@@ -6,7 +6,7 @@
 	<div ng-init="getGroup()">
 		<h2>
 			Gruppe: {{group.name}}
-			</h1>
+			</h2>
 
 			<ui-select multiple ng-model="grouppersons" theme="bootstrap" on-select="onSelectGroup($item, $model)" on-remove="onRemovedGroup($item, $model)"> <ui-select-match
 				placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id"></resolveuser></ui-select-match> <ui-select-choices
@@ -43,5 +43,5 @@
 			</div>
 	</div>
 	<div class="clearfix"></div>
-	<br /> <a class="btn btn-primary" ng-href="#!">Tilbake til oversikt</a>
+	<br /> <a class="btn btn-primary" ng-href="/app/acl/#!">Tilbake til oversikt</a>
 </div>

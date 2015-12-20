@@ -1,0 +1,42 @@
+
+	<span ng-if="editmode">
+		<div class="btn-group" role="group">
+			<span ng-repeat="ask in askValues">
+				<button ng-disabled="!acl.w" type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" ng-click="flip(ask.key)">{{ask.label}}</button>
+			</span>
+		</div>
+	</span>
+	<span ng-if="!editmode">
+		<span ng-repeat="ask in askValues">
+			<small>
+				<span ng-if="!isNeutral(ask.key) && !verbose">
+					<span ng-class="{'label':true, 'label-danger': isNegative(ask.key), 'label-default': isNeutral(ask.key), 'label-success': isPositive(ask.key)}">{{ ask.nick }}</span>
+				</span>
+				<span ng-if="verbose">
+					<button type="button" ng-class="{'btn':true, 'btn-danger': isNegative(ask.key), 'btn-default': isNeutral(ask.key), 'btn-success': isPositive(ask.key)}" readonly>{{ask.label}}</button>
+				</span>
+			</small>
+		</span>
+	</span>
+
+	<div ng-if="verbose">
+	<br />
+	<ul class="list-unstyled">
+		<li>
+			<span ng-if="isPositive('knowledge')"><b>Gode</b> kunnskaper hadde innvirkning</span>
+			<span ng-if="isNeutral('knowledge')">Kunnskapen til de involverte hadde <b>ingen</b> innvirkning</span>
+			<span ng-if="isNegative('knowledge')"><b>Mangelfulle</b> kunnskaper hadde betydning</span>
+		</li>
+		<li>
+			<span ng-if="isPositive('skills')"><b>Gode</b> ferdigheter hadde innvirkning</span>
+			<span ng-if="isNeutral('skills')">Ferdighetene til de involverte hadde <b>ingen</b> innvirkning</span>
+			<span ng-if="isNegative('skills')"><b>Mangelfulle</b> ferdigheter hadde betydning</span>
+		</li>
+		<li>
+			<span ng-if="isPositive('attitude')"><b>Gode</b> holdninger hadde innvirkning</span>
+			<span ng-if="isNeutral('attitude')">Holdningene til de involverte hadde <b>ingen</b> innvirkning</span>
+			<span ng-if="isNegative('attitude')"><b>Dårlige</b> holdninger hadde betydning</span>
+		</li>
+	</ul>
+	</div>
+	<div class="clearfix"></div>

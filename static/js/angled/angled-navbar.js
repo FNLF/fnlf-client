@@ -65,8 +65,14 @@
  				 * @param		string		action
  				 */
  				$scope.navAction = function(action){
- 					$scope.navfn({'action' : action});
+ 					$scope.navbarCollapsed=false;
+					$scope.navfn({'action' : action});
  				}; // end navAction
+
+				$scope.btnAction = function(onclick){
+					$scope.navbarCollapsed=false;
+					onclick();
+				}; // end navAction
 
  				/**
  				 * Have Branding

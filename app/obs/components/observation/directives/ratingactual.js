@@ -2,7 +2,7 @@
   
 
 
-angular.module('reportingApp').directive('ratingActual', function () {
+angular.module('reportingApp').directive('ratingActual', function (Definitions) {
 		
 		   var directive = {};
 
@@ -10,14 +10,16 @@ angular.module('reportingApp').directive('ratingActual', function () {
 		//directive.templateUrl = "components/observation/directives/organization.html";
 		directive.template = function(tElement, tAttrs) { 
 			
-			return '{{ratingType}}&nbsp;&nbsp;&nbsp;&nbsp;: <rating ng-model="observation.rating.actual" max="10" readonly="false" state-on="\'fa fa-bullseye\'" state-off="\'fa fa-circle-o\'" on-hover="hoveringOver(value)" on-leave="overStar = null"> \
+			return '{{ratingType}}&nbsp;&nbsp;&nbsp;&nbsp;: \
+					<rating ng-disabled="!acl.w" ng-model="observation.rating.actual" max="8" readonly="false" state-on="\'fa fa-bullseye\'" state-off="\'fa fa-circle-o\'" on-hover="hoveringOver(value)" on-leave="overStar = null"> \
 					</rating> \
-					<span class="label" ng-class="{\'label-success\': overStar<3, \'label-info\': overStar>=3 && overStar<5,\'label-warning\': overStar>=5 && overStar<7, \'label-danger\': overStar>=7}" \
-					ng-show="overStar && !isReadonly">{{overStar}}</span>';
+					<span class="label" ng-class="{\'label-success\': overStar<3, \'label-info\': overStar>=3 && overStar<6,\'label-warning\': overStar>=5 && overStar<7, \'label-danger\': overStar>=7}" \
+					ng-show="overStar && !isReadonly">{{overStar}} {{scaling[overStar]}}</span>';
 		};
 
 		directive.scope = {
 			observation: '=',
+			acl: '='
 		};
 
 		
@@ -31,6 +33,7 @@ angular.module('reportingApp').directive('ratingActual', function () {
 		
 		directive.link = function ($scope, element, attrs) {
 
+			$scope.scaling = Definitions.getRatingScale();
 			$scope.ratingType = 'Faktisk';
 			
 			$scope.observation.rating.actual = $scope.observation.rating.actual || 1;
