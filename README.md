@@ -188,6 +188,13 @@ project:
    force push to your remote feature branch. You may also be asked to squash
    commits.
 
+10. Update CHANGELOG.md:
+    Install github-changelog-generator: (https://github.com/skywinder/github-changelog-generator)
+    ```bash
+    github_changelog_generator.ruby2.1 -t [your-40-digit-token]
+    ```
+
+
 
 Authors
 -------

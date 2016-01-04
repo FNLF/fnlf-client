@@ -1,23 +1,38 @@
 # Change Log
 
-## [Unreleased](https://github.com/fnlf/fnlf-client/tree/HEAD)
+## [v0.4.1](https://github.com/fnlf/fnlf-client/tree/HEAD)
 
 [Full Changelog](https://github.com/fnlf/fnlf-client/compare/v0.4.0...HEAD)
 
 **Implemented enhancements:**
 
-- Remove most console.log statements  [\#305](https://github.com/FNLF/fnlf-client/issues/305)
+- Ors google map consider disabling scrolling for zooming [\#315](https://github.com/FNLF/fnlf-client/issues/315)
+- Ors components reconsider "add consequence"/"add cause" logic [\#314](https://github.com/FNLF/fnlf-client/issues/314)
+- Ors components remove underline text decoration on hover [\#313](https://github.com/FNLF/fnlf-client/issues/313)
+- ORS component editor [\#310](https://github.com/FNLF/fnlf-client/issues/310)
+
+**Fixed bugs:**
+
+- Adding data after case is rejected - error 404 on save [\#318](https://github.com/FNLF/fnlf-client/issues/318)
+- Ors alert on obervation changed when not changed [\#316](https://github.com/FNLF/fnlf-client/issues/316)
+- Profile app [\#308](https://github.com/FNLF/fnlf-client/issues/308)
+
+**Merged pull requests:**
+
+- Remove author part [\#320](https://github.com/FNLF/fnlf-client/pull/320) ([einarhuseby](https://github.com/einarhuseby))
 
 ## [v0.4.0](https://github.com/fnlf/fnlf-client/tree/v0.4.0) (2015-10-08)
 [Full Changelog](https://github.com/fnlf/fnlf-client/compare/v0.3.0...v0.4.0)
 
 **Implemented enhancements:**
 
-- Observation editor all input fields to readonly/disabled when !acl.w [\#299](https://github.com/FNLF/fnlf-client/issues/299)
-- Improve search result page to make it easier to browse a large number of observations [\#296](https://github.com/FNLF/fnlf-client/issues/296)
 - Observationdateselector [\#237](https://github.com/FNLF/fnlf-client/issues/237)
 - Datetimepicker start week on mondays in observation [\#209](https://github.com/FNLF/fnlf-client/issues/209)
 - Sorting in tables for observation main page [\#204](https://github.com/FNLF/fnlf-client/issues/204)
+- Remove most console.log statements  [\#305](https://github.com/FNLF/fnlf-client/issues/305)
+- Observation editor all input fields to readonly/disabled when !acl.w [\#299](https://github.com/FNLF/fnlf-client/issues/299)
+- Improve search result page to make it easier to browse a large number of observations [\#296](https://github.com/FNLF/fnlf-client/issues/296)
+- Add inline help to workflow window explaining purpose of comment field [\#294](https://github.com/FNLF/fnlf-client/issues/294)
 - Observation report view ask align right [\#279](https://github.com/FNLF/fnlf-client/issues/279)
 - ORS change page title  [\#277](https://github.com/FNLF/fnlf-client/issues/277)
 - Minor tweaks for mobile [\#276](https://github.com/FNLF/fnlf-client/issues/276)
@@ -39,16 +54,11 @@
 - Observation components in observation remove \_\* meta data before copy into \(except \_id\) [\#184](https://github.com/FNLF/fnlf-client/issues/184)
 - Properties for users should be used in observation.involved as default values [\#138](https://github.com/FNLF/fnlf-client/issues/138)
 - Better notification when getting a 404 when no access to resource item [\#125](https://github.com/FNLF/fnlf-client/issues/125)
+- Observation component reordering/sorting/sortable [\#91](https://github.com/FNLF/fnlf-client/issues/91)
 - Inline help [\#34](https://github.com/FNLF/fnlf-client/issues/34)
 
 **Fixed bugs:**
 
-- Most controllers loaded twice [\#297](https://github.com/FNLF/fnlf-client/issues/297)
-- Add seperator between multiple persons in organization in report view [\#295](https://github.com/FNLF/fnlf-client/issues/295)
-- Location club editor still suffering from mumbay map bug [\#293](https://github.com/FNLF/fnlf-client/issues/293)
-- Jump type tags not visible in report [\#292](https://github.com/FNLF/fnlf-client/issues/292)
-- Helpfull error message on obsrevation 404 is broken.  [\#291](https://github.com/FNLF/fnlf-client/issues/291)
-- Duplicates in a repeater are not allowed. Probably in Actions [\#290](https://github.com/FNLF/fnlf-client/issues/290)
 - Observation components newIncident\(\) inserts new component on top not above current component [\#246](https://github.com/FNLF/fnlf-client/issues/246)
 - Resolve user when anon \(id \< 0\) [\#240](https://github.com/FNLF/fnlf-client/issues/240)
 - Observationdateselector [\#237](https://github.com/FNLF/fnlf-client/issues/237)
@@ -56,6 +66,12 @@
 - Mumbai map bug [\#215](https://github.com/FNLF/fnlf-client/issues/215)
 - File upload button throws exception when list of files in observation is empty [\#199](https://github.com/FNLF/fnlf-client/issues/199)
 - On observation creation observation changes and requires save but toolbar save button is disabled [\#198](https://github.com/FNLF/fnlf-client/issues/198)
+- Most controllers loaded twice [\#297](https://github.com/FNLF/fnlf-client/issues/297)
+- Add seperator between multiple persons in organization in report view [\#295](https://github.com/FNLF/fnlf-client/issues/295)
+- Location club editor still suffering from mumbay map bug [\#293](https://github.com/FNLF/fnlf-client/issues/293)
+- Jump type tags not visible in report [\#292](https://github.com/FNLF/fnlf-client/issues/292)
+- Helpfull error message on obsrevation 404 is broken.  [\#291](https://github.com/FNLF/fnlf-client/issues/291)
+- Duplicates in a repeater are not allowed. Probably in Actions [\#290](https://github.com/FNLF/fnlf-client/issues/290)
 - Toolbar buttons doesn't work with navbar menu on xs devices [\#283](https://github.com/FNLF/fnlf-client/issues/283)
 - Search form on mainpage not shown on small devices [\#275](https://github.com/FNLF/fnlf-client/issues/275)
 - Component attitude skill knowledge \(ask\) not shown in summary and report [\#274](https://github.com/FNLF/fnlf-client/issues/274)
@@ -73,11 +89,11 @@
 
 **Closed issues:**
 
-- Version tag in .js file links to help IE with caching [\#303](https://github.com/FNLF/fnlf-client/issues/303)
-- Loading non-minified angular.js [\#298](https://github.com/FNLF/fnlf-client/issues/298)
 - HL text [\#281](https://github.com/FNLF/fnlf-client/issues/281)
 - Not showing more than 50 observations in main page [\#217](https://github.com/FNLF/fnlf-client/issues/217)
 - Location should update if club is changed. [\#147](https://github.com/FNLF/fnlf-client/issues/147)
+- Version tag in .js file links to help IE with caching [\#303](https://github.com/FNLF/fnlf-client/issues/303)
+- Loading non-minified angular.js [\#298](https://github.com/FNLF/fnlf-client/issues/298)
 - Attitude Skills Knowledge text comments for all roles in workflow [\#282](https://github.com/FNLF/fnlf-client/issues/282)
 - Upgrade libs [\#233](https://github.com/FNLF/fnlf-client/issues/233)
 - Show send button at bottom of editor only if in draft [\#232](https://github.com/FNLF/fnlf-client/issues/232)
@@ -190,7 +206,6 @@
 
 **Implemented enhancements:**
 
-- Observation component reordering/sorting/sortable [\#91](https://github.com/FNLF/fnlf-client/issues/91)
 - Handling of large files like video [\#51](https://github.com/FNLF/fnlf-client/issues/51)
 - Observation comments need length \> 0 before post allowed [\#160](https://github.com/FNLF/fnlf-client/issues/160)
 - Observation components should be ordered as index of list/array not as seperate property order [\#149](https://github.com/FNLF/fnlf-client/issues/149)
