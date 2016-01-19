@@ -3,6 +3,8 @@ module.exports = function(grunt) {
   // Project configuration.
 	grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+
 	bowerInstall: {
 
 		  target: {
@@ -23,13 +25,20 @@ module.exports = function(grunt) {
 			ignorePath: '',
 			overrides: {}
 		  }
+		},
+		wiredep: {
+		  task: {
+			src: ['index.html']
+		  }
 		}
+
 
   });
 
+ grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-bower-install');
 
   // Default task(s).
-  grunt.registerTask('default', ['bowerInstall']);
+  grunt.registerTask('default', ['bowerInstall','wiredep']);
 
 };
