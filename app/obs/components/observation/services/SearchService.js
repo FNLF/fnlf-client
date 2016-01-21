@@ -111,7 +111,7 @@
 					}
 				};
 
-				var addSimpleAttrFilterFn = function(filter,modelParam,filterParam){
+				var addSimpleAttrFilterFn = function(filter,filterParam,modelParam){
 					if(filter[filterParam]){
 						var atr = {};
                     	atr[modelParam] = filter[filterParam];
