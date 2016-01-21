@@ -2,7 +2,7 @@ angular.module('reportingApp').directive('searchfilters', function () {
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "/app/obs/shared/directives/searchfilters.html";
+	directive.templateUrl = "/app/obs/components/search/directives/searchfilters.html";
 
 	directive.scope = {
 		filter:'='

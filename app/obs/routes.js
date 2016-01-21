@@ -21,19 +21,19 @@
 						controller: 'ObservationController'
 					})
 					.when('/search/tag/:tag', {
-						templateUrl: 'components/observation/search.html',
+						templateUrl: 'components/search/search.html',
 						controller: 'SearchController'
 					})
 					.when('/search/tag/', {
-						templateUrl: 'components/observation/search.html',
+						templateUrl: 'components/search/search.html',
 						controller: 'SearchController'
 					})
 					.when('/search/flag/:flag', {
-						templateUrl: 'components/observation/search.html',
+						templateUrl: 'components/search/search.html',
 						controller: 'SearchController'
 					})
                     .when('/search/advanced/:query', {
-                        templateUrl: 'components/observation/search.html',
+                        templateUrl: 'components/search/search.html',
                         controller: 'SearchController'
                     })
 					.when('/observation/modal-route', {
