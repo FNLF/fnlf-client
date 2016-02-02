@@ -18,24 +18,14 @@
     "tests"
   ],
   "dependencies": {
-    "angular-http-auth": "~1.2.3",
-    "angular-route": "v1.4.5",
-    "angular-sanitize": "v1.4.5",
-    "angular-strap": "v2.1.6",
-    "fileapi": "v2.0.10",
-    "bootstrap": "v3.3.5",
-    "angular": "v1.4.5",
-    "highcharts-ng": "v0.0.8",
-    "ng-maps": "ng-map#*",
-    "taylorcode-angular-file-upload": "3.0.1",
-    "ng-popover-button": "*",
+    "angular": "1.4.9",
+    "angular-route": "1.4.9",
+    "angular-http-auth": "^1.2.3",
+    "angular-bootstrap": "~0.13.4",
+    "bootstrap-css-only": "3.3.6",
     "angular-loading-bar": "~0.8.0",
-    "angular-navbar": "*",
-    "angular-moment": "~0.10.3",
-    "angular-ui-bootstrap-datetimepicker": "~0.14.4",
-    "ng-table": "~0.8.3",
-    "ui-bootstrap": "~1.1.0",
-    "angular-ui-select3": "ui-select#*",
-    "angular-cookies": "~1.4.8"
+    "angular-cookies": "1.4.9",
+    "angular-sanitize": "1.4.9",
+    "font-awesome": "fontawesome#4.2.0"
   }
 }

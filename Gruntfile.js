@@ -30,13 +30,24 @@ module.exports = function(grunt) {
 		  task: {
 			src: ['index.html']
 		  }
-		}
+		},
+		bower_concat: {
+          all: {
+            dest: 'build/_bower.js',
+            cssDest: 'build/_bower.css',
+            bowerOptions: {
+              relative: false
+            }
+          }
+        }
 
 
   });
 
- grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-bower-install');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-bower-concat');
 
   // Default task(s).
   grunt.registerTask('default', ['bowerInstall','wiredep']);
