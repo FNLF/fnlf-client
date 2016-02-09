@@ -1,5 +1,5 @@
 {
-  "name": "fnlf-client",
+  "name": "fnlf-client-acl",
   "homepage": "https://github.com/FNLF/fnlf-client",
   "authors": [
     "haakon-soegnen",
@@ -26,11 +26,19 @@
     "angular-cookies": "1.4.9",
     "angular-sanitize": "1.4.9",
     "font-awesome": "fontawesome#4.2.0",
-    "angy-auth2": "einarhuseby/angry-auth2"
+    "angy-auth2": "einarhuseby/angry-auth2",
+    "ui-select": "angular-ui-select#~0.14.2",
+    "ng-table": "~0.8.3",
+    "angled-navbar": "m-e-conroy/angled"
   },
   "overrides": {
     "angy-auth2": {
-      "main": ["./lib/http-auth-interceptor.js"],
+      "main": [
+        "./lib/http-auth-interceptor.js"
+      ],
+      "dependencies": {}
+    },"angled-navbar": {
+      "main": ["./Modules/angled-navbar.js","./Modules/css/angled-navbar.css"],
       "dependencies": {}
     }
   }

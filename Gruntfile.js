@@ -1,55 +1,40 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
-  // Project configuration.
-	grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-
-
-	bowerInstall: {
-
-		  target: {
-
-			// Point to the files that should be updated when
-			// you run `grunt bower-install`
-			src: [
-			  'app/*/index.html'   // .html support...
-			],
-
-			// Optional:
-			// ---------
-			cwd: '',
-			dependencies: true,
-			devDependencies: false,
-			exclude: [],
-			fileTypes: {},
-			ignorePath: '',
-			overrides: {}
-		  }
-		},
-		wiredep: {
-		  task: {
-			src: ['index.html']
-		  }
-		},
-		bower_concat: {
-          all: {
-            dest: 'build/_bower.js',
-            cssDest: 'build/_bower.css',
-            bowerOptions: {
-              relative: false
+    // Project configuration.
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        wiredep: {
+            main: {
+                src: ['index.html'],
+                directory:'bower_components'
+            },
+            acl: {
+                src:['app/acl/index.html'],
+                cwd:'app/acl/',
+                directory:'app/acl/bower_components/'
             }
-          }
+        },
+        "bower-install-simple": {
+            options: {
+                color: true
+
+            },
+            "main": {
+                options: {}
+            },
+            "acl": {
+                options: {
+                    cwd: 'app/acl'
+                }
+            }
         }
+    });
+
+    grunt.loadNpmTasks("grunt-bower-install-simple");
+    grunt.loadNpmTasks('grunt-wiredep');
 
 
-  });
-
-  grunt.loadNpmTasks('grunt-wiredep');
-  grunt.loadNpmTasks('grunt-bower-install');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-bower-concat');
-
-  // Default task(s).
-  grunt.registerTask('default', ['bowerInstall','wiredep']);
+    // Default task(s).
+    grunt.registerTask('default', ['bower-install-simple', 'wiredep']);
 
 };
