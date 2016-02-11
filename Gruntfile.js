@@ -9,7 +9,12 @@ module.exports = function (grunt) {
                 directory:'bower_components'
             },
             acl: {
-                src:['app/acl/index.html','app/club/index.html'],
+                src:['app/acl/index.html',
+                'app/club/index.html',
+                'app/editor/index.html',
+                'app/obs/index.html',
+                'app/profile/index.html'
+                ],
                 ignorePath: /^(\/|\.+(?!\/[^\.]))+\.+/,
             },
 

@@ -30,7 +30,8 @@
     "ui-select": "angular-ui-select#~0.14.2",
     "ng-table": "~0.8.3",
     "angular-strap": "^2.3.7",
-    "bootstrap-additions": "^0.3.1"
+    "bootstrap-additions": "^0.3.1",
+    "ngmap": "^1.16.7"
   },
   "overrides": {
     "angy-auth2": {
@@ -42,8 +43,7 @@
     "angular-strap": {
       "main": [
         "dist/angular-strap.js",
-        "dist/angular-strap.tpl.js",
-        "dist/bootstrap.less"
+        "dist/angular-strap.tpl.js"
       ]
     }
   }
