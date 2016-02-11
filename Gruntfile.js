@@ -27,14 +27,46 @@ module.exports = function (grunt) {
             "main": {
                 options: {}
             }
-        }
+        },
+        ngconstant: {
+          // Options for all targets
+          options: {
+            space: '  ',
+            wrap: '"use strict";\n\n {%= __ngModule %}',
+            name: 'config',
+          },
+          // Environment targets
+          development: {
+            options: {
+              dest: 'config.js'
+            },
+            constants: {
+              ENV: {
+                name: 'development'
+
+              }
+            }
+          },
+          production: {
+            options: {
+              dest: 'config.js'
+            },
+            constants: {
+              ENV: {
+                name: 'production'
+              }
+            }
+          }
+        },
+
+
     });
 
     grunt.loadNpmTasks("grunt-bower-install-simple");
     grunt.loadNpmTasks('grunt-wiredep');
-
+	grunt.loadNpmTasks('grunt-ng-constant');
 
     // Default task(s).
-    grunt.registerTask('default', ['bower-install-simple', 'wiredep']);
+    grunt.registerTask('default', ['bower-install-simple', 'wiredep','ngconstant:development']);
 
 };
