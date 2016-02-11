@@ -9,10 +9,10 @@ module.exports = function (grunt) {
                 directory:'bower_components'
             },
             acl: {
-                src:['app/acl/index.html'],
-                cwd:'app/acl/',
-                directory:'app/acl/bower_components/'
-            }
+                src:['app/acl/index.html','app/club/index.html'],
+                ignorePath: /^(\/|\.+(?!\/[^\.]))+\.+/,
+            },
+
         },
         "bower-install-simple": {
             options: {
@@ -21,11 +21,6 @@ module.exports = function (grunt) {
             },
             "main": {
                 options: {}
-            },
-            "acl": {
-                options: {
-                    cwd: 'app/acl'
-                }
             }
         }
     });
