@@ -1,6 +1,6 @@
 {
   "name": "fnlf-client",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "F/NLF Client =======================",
   "main": "index.js",
   "scripts": {
