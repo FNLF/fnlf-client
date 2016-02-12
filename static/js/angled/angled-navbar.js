@@ -2,7 +2,7 @@
  * Angled Navbar
  */
 
- angular.module('angled-navbar.directives',['ngSanitize', 'ui.bootstrap'])
+ angular.module('angled-navbar.directives',['ngSanitize', 'ui.bootstrap','config'])
 
  	.directive('angledNavbar',[function(){
  		return {
@@ -19,10 +19,10 @@
  				toolbar : '='
  			},
  			templateUrl : '/static/js/angled/template.html',
- 			controller : function($scope,$element,$attrs){
+ 			controller : function($scope,$element,$attrs,ENV){
 
  				//== Scope/Attributes Defaults ==//
-
+				$scope.ENVname = ENV.name;
  				$scope.defaults = {
  					brand : '<span class="glyphicon glyphicon-certificate"></span>',
  					menus : [],

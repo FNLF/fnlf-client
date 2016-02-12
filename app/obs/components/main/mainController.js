@@ -1,7 +1,7 @@
 (function () {
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions,ObservationsTableService) {
-			
+		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions,ObservationsTableService,ENV) {
+
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.search = {show_ors: false, form: '', show: false}; //reset
 			$rootScope.nav.brand = "FNLF ORS";

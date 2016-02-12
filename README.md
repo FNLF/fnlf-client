@@ -15,6 +15,9 @@ Getting Started
 ### Requirements
 @todo
 * git
+* npm
+* grunt
+* bower
 * nginx or similar webserver/reverse proxy
 
 
@@ -22,6 +25,14 @@ Download or clone the repository
 
 ```
 git clone https://github.com/fnlf/fnlf-client.git
+npm install
+grunt
+
+```
+
+If in production:
+```
+grunt production
 ```
 
 ### Running

@@ -1,6 +1,6 @@
 (function() {
 
-	var main = angular.module('main', [ 'ngRoute', 'ui.bootstrap', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login', 'angled-navbar.directives' ]);
+	var main = angular.module('main', [ 'ngRoute', 'ui.bootstrap', 'ngSanitize', 'ngCookies', 'angular-loading-bar','fnlf-login', 'angled-navbar.directives','config' ]);
 
 	main.config([ 'cfpLoadingBarProvider',
 			function(cfpLoadingBarProvider) {

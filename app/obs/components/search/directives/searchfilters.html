@@ -38,7 +38,28 @@
 			<input placeholder="til" id="mainsize2" class="form-control" type="number" ng-model="filter.mainsize2">
 		</div>
 
+		<label for="jumptype" class="col-sm-2 control-label">Hopptype</label>
+		<div class="col-sm-2">
+			<select id="jumptype" class="form-control" data-placeholder="Hopptype"
+					ng-model="filter.jumptypeSelected"
+					ng-options="jumptype.id as jumptype.name for jumptype in jumptypes">
 
+			</select>
+		</div>
+
+		<label for="club" class="col-sm-2 control-label">Klubb</label>
+			<div class="col-sm-2">
+			<select id="club" ng-options="club.id as club.name for club in clubs" ng-model="filter.club"  class="form-control">
+
+			</select>
+		</div>
+
+		<label for="type" class="col-sm-2 control-label">Type</label>
+		<div class="col-sm-2">
+			<select id="type" ng-options="t.id as t.name for t in observationTypes" ng-model="filter.type"  class="form-control">
+
+			</select>
+		</div>
 
 
 	</div>

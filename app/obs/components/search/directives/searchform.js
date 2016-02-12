@@ -5,7 +5,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/obs/shared/directives/searchform.html";
+		directive.templateUrl = "/app/obs/components/search/directives/searchform.html";
 
 		directive.scope = {
 			query: '=',

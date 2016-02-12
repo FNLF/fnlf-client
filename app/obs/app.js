@@ -20,8 +20,9 @@
 			 'ngTable',
 			 'truncate','nl2br',
 			 'angularMoment',
-			 'angled-navbar.directives'
-			 /*,'ngMockE2E'*/
+			 'angled-navbar.directives',
+			 'config'
+
 			 ]);
 
 	reportingApp.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
@@ -29,8 +30,8 @@
 		cfpLoadingBarProvider.includeSpinner = true;
 	}]);
 	
-	reportingApp.run(function ($rootScope, $location, $cookieStore, amMoment) {
-
+	reportingApp.run(function ($rootScope, $location, $cookieStore, amMoment,ENV) {
+		$rootScope.ENVname = ENV.name;
 		amMoment.changeLocale('nb');
 		
 		$rootScope.$on('$viewContentLoaded', function () {

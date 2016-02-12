@@ -1,0 +1,27 @@
+{
+  "name": "fnlf-client",
+  "version": "0.4.1",
+  "description": "F/NLF Client =======================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FNLF/fnlf-client.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FNLF/fnlf-client/issues"
+  },
+  "homepage": "https://github.com/FNLF/fnlf-client#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bower-install-simple": "^1.2.1",
+    "grunt-ng-constant": "^2.0.0",
+    "grunt-subgrunt": "^1.1.0",
+    "grunt-wiredep": "^2.0.0",
+    "matchdep": "^1.0.0"
+  }
+}

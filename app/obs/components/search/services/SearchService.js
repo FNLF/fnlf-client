@@ -4,7 +4,7 @@
 		.service('SearchService', function (RestService, Definitions, Functions,$location) {
 
 
-			var mapping = {};
+			var mapping = {}; //mapping from db-model param name to list of tag group names
 			mapping['tags'] = ['observation'];
 			mapping['components.tags'] = ['component'];
 			mapping['components.what'] = ['component.what.cause', 'component.what.consequence', 'component.what.incident'];
@@ -111,6 +111,14 @@
 					}
 				};
 
+				var addSimpleAttrFilterFn = function(filter,filterParam,modelParam){
+					if(filter[filterParam]){
+						var atr = {};
+                    	atr[modelParam] = filter[filterParam];
+                    	andArr.push(atr);
+					}
+				};
+
 				var date1 = (filter['year1'] ? new Date(Date.UTC(filter['year1'], 0, 0, 0, 0)):null);
 				var date2 = (filter['year2'] ? new Date(Date.UTC(filter['year2'], 12, 30, 0, 0)):null);
 				addNumberFilterFn('when',date1,date2);
@@ -119,7 +127,9 @@
 				addNumberFilterFn('involved.gear.mainCanopySize',filter['mainsize1'],filter['mainsize2']);
 				addNumberFilterFn('involved.gear.mainCanopyExperience',filter['mainExperience1'],filter['mainExperience2']);
 				addNumberFilterFn('involved.gear.harnessExperience',filter['harnessExperience1'],filter['harnessExperience2']);
-
+				addSimpleAttrFilterFn(filter,'jumptypeSelected','involved.jumptypeSelected');
+				addSimpleAttrFilterFn(filter,'club','club');
+				addSimpleAttrFilterFn(filter,'type','type');
 
 				if(andArr.length>0) {
 					whereObj.$and = andArr;

@@ -7,3 +7,4 @@
 .directory
 changelog.sh
 bower_components/*
+config.js

@@ -1,5 +1,5 @@
 
-<div class="" ng-controller="MainController">
+<div class="">
 	<div class="row">
 		<div class="col-md-6 col-xs-12">
 			<div class="">
@@ -21,7 +21,18 @@
 			</div>
 		</div>
 		<div class="col-md-6 col-xs-12">
-			<div class="well hidden-sm hidden-xs">
+			<div class="well hidden-sm hidden-xs" ng-if="ENVname=='development'">
+				<h2 class="text-danger" style="color:#FF3333">Beta!</h2>
+				<p class="lead">
+					Dette er betaversjonen av ORS. Her kan du herje akkurat som du vil for å utforske systemet.
+					<inlinehelp title="">
+						Gratulerer. Du har funne hjelpeteksten i ORS.
+						<br>
+						Viss hjelpeteksten rundt omkring i ORS er utilstrekkelig, se <a href="https://doc.nlf.no/confluence/display/FETDOC">Brukermanualen</a>
+					</inlinehelp>
+				</p>
+			</div>
+			<div class="well hidden-sm hidden-xs" ng-if="ENVname=='production'">
 				<h2 class="text-info">Skarpt!</h2>
 				<p class="lead">
 					Dette er det skarpe observasjonssystemet! Her skal faktiske observasjoner registreres.
