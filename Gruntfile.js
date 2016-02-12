@@ -68,5 +68,5 @@ module.exports = function (grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['bower-install-simple', 'wiredep','ngconstant:development']);
-
+ 	grunt.registerTask('production', ['default','ngconstant:production']);
 };
