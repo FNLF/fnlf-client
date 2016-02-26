@@ -57,7 +57,6 @@
 			}; 
 
 
-
 			this.getComponentAttributes = function(){
 			    return [//{attribute:'attitude',color:'primary',label:'Holdninger'},
 						//{attribute:'skills',color:'primary',label:'Ferdigheter'},
