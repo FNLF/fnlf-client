@@ -203,6 +203,12 @@
 								<span ng-if="::p.gear.reserveCanopyType">{{::p.gear.reserveCanopyType}}</span>
 								<span ng-if="::p.gear.reserveCanopySize">{{::p.gear.reserveCanopySize}}</span><br ng-if="::p.gear.reserveCanopyType ||p.gear.reserveCanopySize">
 
+								<label ng-if="::p.gear.rigger">MK: </label>
+								<span ng-if="::p.gear.rigger"><resolveuser userid="::p.gear.rigger.id" tmpname="::p.gear.rigger.tmpname"></resolveuser></span><br ng-if="::p.gear.rigger">
+
+								<label ng-if="::p.gear.rigger">Pakkedato: </label>
+								<span ng-if="::p.gear.rigger">{{::p.gear.riggerdate|date:'yyyy-MM-dd'}}</span><br ng-if="::p.gear.riggerdate">
+
 								<label ng-if="::p.gear.other">Annet utstyr: </label>
 								<span ng-if="::p.gear.other">{{::p.gear.other.join(', ')}}</span><br ng-if="::p.gear.other">
 							</td>
