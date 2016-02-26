@@ -64,6 +64,7 @@
 						//{attribute:'knowledge',color:'primary',label:'Kunnskap'},
 						{attribute:'reserve_ride',color:'info',label:'Reserve benyttet'},
                         {attribute:'aad_fire',color:'warning',label:'Nødåpner fyrt'},
+						{attribute:'aad_rescue',color:'warning',label:'Nødåpner-redning'},
                         {attribute:'packing_error',color:'default',label:'Pakkefeil'},
                         {attribute:'gear_malfunction',color:'default',label:'Feilfunksjon'},
                         {attribute:'damage',color:'default',label:'Matriell skade'},
