@@ -1,12 +1,8 @@
 (function() {
 
-	var reportingApp = angular.module('reportingApp', [ 'ngRoute', 'ui.bootstrap',
-			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
-			'fnlf-login', 'resolve', 'ngTable' ]);
-
 	var editorApp = angular.module('editorApp', [ 'ngRoute', 'ui.bootstrap',
 			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
-			'fnlf-login', 'resolve', 'ngTable','reportingApp','angled-navbar.directives' ]);
+			'fnlf-login', 'resolve','fnlf-services', 'ngTable','angled-navbar.directives' ]);
 
 	editorApp.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeBar = true;

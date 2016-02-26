@@ -1,4 +1,4 @@
-angular.module('reportingApp', ['ngMockE2E'])
+angular.module('fnlf-services', ['ngMockE2E'])
   .run(function($httpBackend) {
 
 

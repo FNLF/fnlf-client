@@ -1,5 +1,5 @@
 (function () {
-	angular.module('reportingApp')
+	angular.module('fnlf-services')
 		.service('Functions',  function ($q) {
 
 			this.waitForIt = function($scope,it){

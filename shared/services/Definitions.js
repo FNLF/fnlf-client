@@ -1,6 +1,6 @@
 (function () {
 
-	angular.module('reportingApp')
+	angular.module('fnlf-services')
 		.service('Definitions', function () {
 
 

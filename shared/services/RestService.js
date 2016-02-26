@@ -1,6 +1,6 @@
 (function () {
 
-	angular.module('reportingApp')
+	angular.module('fnlf-services')
 		.service('RestService', ['$http','$q', function ($http,$q) {
 			var urlBase = '/api/v1';
 

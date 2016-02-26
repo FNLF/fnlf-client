@@ -4,7 +4,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/obs/shared/directives/tagging.html";
+		directive.templateUrl = "/shared/directives/tagging.html";
 
 		directive.scope = {
 			model: '=',
@@ -49,7 +49,7 @@
 		return directive;
 	};
 
-	angular.module('reportingApp').directive('tagging', tagging);
+	angular.module('fnlf-directives').directive('tagging', tagging);
 
 })();
 
@@ -60,7 +60,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/obs/shared/directives/populartags.html";
+		directive.templateUrl = "/shared/directives/populartags.html";
 
 		directive.scope = {
 			group: '@',
@@ -84,7 +84,7 @@
 		return directive;
 	};
 
-	angular.module('reportingApp').directive('populartags', populartags);
+	angular.module('fnlf-directives').directive('populartags', populartags);
 
 })();
 
@@ -95,9 +95,9 @@
 
 		directive.restrict = 'E';
 		directive.template = '<span> \
-			<span ng-if="::tag"><a href="/app/obs/#!/search/tag/{{::tag}}">{{::tag}} </a></span>\
+			<span ng-if="::tag"><a href="/app/obs#!/search/tag/{{::tag}}">{{::tag}} </a></span>\
 			<span ng-if="::tags" ng-repeat="tag in ::tags track by $index"> \
-			<a href="/app/obs/#!/search/tag/{{::tag}}">{{::tag}}</a> <span ng-show="!$last">/ </span> \
+			<a href="/app/obs#!/search/tag/{{::tag}}">{{::tag}}</a> <span ng-show="!$last">/ </span> \
 			</span> \
 			';
 
@@ -116,7 +116,7 @@
 		return directive;
 	};
 
-	angular.module('reportingApp').directive('tags', tagsDirective);
+	angular.module('fnlf-directives').directive('tags', tagsDirective);
 
 })();
 

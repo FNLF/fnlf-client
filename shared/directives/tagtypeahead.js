@@ -4,7 +4,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/obs/shared/directives/tagtypeahead.html";
+		directive.templateUrl = "/directives/tagtypeahead.html";
 
 		directive.scope = {
 			model:'=',
@@ -52,6 +52,6 @@
 		return directive;
 	};
 
-	angular.module('reportingApp').directive('tagtypeahead', tagtypeahead);
+	angular.module('fnlf-directives').directive('tagtypeahead', tagtypeahead);
 
 })();
