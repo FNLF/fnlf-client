@@ -8,7 +8,7 @@
 			
 			$rootScope.nav.search.show_ors = false; // = '<searchform></searchform>';
 			
-			$rootScope.title = 'ORS oversikt';
+			$rootScope.title = 'F/NLF - ORS oversikt';
 			
 			$scope.observation = {};
 			

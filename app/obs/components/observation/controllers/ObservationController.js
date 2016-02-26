@@ -17,7 +17,7 @@
 
 			$scope.ui=$routeParams.ui;
 
-			$rootScope.title = 'ORS editor #' + $scope.observation.id;
+			$rootScope.title = 'F/NLF - ORS editor #' + $scope.observation.id;
 			
 			$rootScope.haspee = function() {
 				return 1;

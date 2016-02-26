@@ -14,13 +14,13 @@
 
 			$scope.filter={};
 			$scope.showFilter=false;
-			$rootScope.title = 'ORS søk';
+			$rootScope.title = 'F/NLF - ORS søk';
 
 
 			if($routeParams.tag) {
 				$scope.tags = SearchService.parseTagQuery($routeParams.tag);
 				$scope.tag = $scope.tags.join(',');
-				$rootScope.title = 'ORS søk: ' + $scope.tag;
+				$rootScope.title = 'F/NLF - ORS søk: ' + $scope.tag;
 				$scope.filter = SearchService.parseFilter($routeParams.tag);
 
 				if(Object.keys($scope.filter).length>0){
@@ -33,14 +33,14 @@
 				$scope.attributes={};
 				$scope.attributes[$scope.flag]=true;
 				$scope.filter[$scope.flag]=true;
-				$rootScope.title = 'ORS søk: ' + $scope.flag;
+				$rootScope.title = 'F/NLF - ORS søk: ' + $scope.flag;
 				$scope.showFilter=true;
 			}
 
 
 			if($routeParams.query){
 				$scope.query = decodeURIComponent($routeParams.query);
-				$rootScope.title = 'ORS søk: ' + $scope.query;
+				$rootScope.title = 'F/NLF - ORS søk: ' + $scope.query;
 			}
 
 

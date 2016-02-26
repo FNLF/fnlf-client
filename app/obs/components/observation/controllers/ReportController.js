@@ -11,7 +11,7 @@
 
 			$scope.ui=$routeParams.ui;
 			
-			$rootScope.title = 'ORS rapportvisning #' + $routeParams.id;
+			$rootScope.title = 'F/NLF - ORS rapportvisning #' + $routeParams.id;
 
 			$rootScope.nav = {toolbar: [], menus: []}; //reset
 			$rootScope.nav.brand = 'FNLF ORS #' + $routeParams.id;
