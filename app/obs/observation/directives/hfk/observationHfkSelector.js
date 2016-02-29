@@ -2,7 +2,7 @@ angular.module('reportingApp').directive('observationHfkSelector', function (Def
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "observation/directives/observationHfkSelector.html";
+	directive.templateUrl = "observation/directives/hfk/observationHfkSelector.html";
 
 	directive.scope = {
 		model: '=',
