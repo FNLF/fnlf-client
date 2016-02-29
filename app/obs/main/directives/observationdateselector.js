@@ -7,7 +7,7 @@ angular.module('reportingApp').directive('observationdateselector', function ($t
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "observation/directives/observationdateselector.html";
+	directive.templateUrl = "main/directives/observationdateselector.html";
 
 	directive.scope = {
 		observation: '=',
