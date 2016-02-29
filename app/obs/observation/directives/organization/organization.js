@@ -1,23 +1,3 @@
-angular.module('reportingApp').directive('organizationSummary', function () {
-
-	var directive = {};
-
-	directive.restrict = 'E';
-	directive.templateUrl = "observation/directives/organizationSummary.html";
-
-	directive.scope = {
-		observation: '=',
-		acl: '='
-	};
-
-	directive.link = function ($scope, element, attrs) {
-
-	};
-
-	return directive;
-});
-
-
 (function () {
 
 	var organization = function (RestService, $aside, $rootScope, $window) {
@@ -43,7 +23,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			        title: 'Hoppfeltorganiseringen',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/obs/observation/directives/organization.html',
+			        contentTemplate: '/app/obs/observation/directives/organization/organization.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
