@@ -59,7 +59,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.template = '<span><a href="/app/obs/#!/search/flag/{{attribute}}"><span ng-transclude></span></a></span>';
+		directive.template = '<span><a href="/app/obs#!/search/flag/{{attribute}}"><span ng-transclude></span></a></span>';
 		directive.transclude=true;
 		directive.scope = {
 			attribute: '@'

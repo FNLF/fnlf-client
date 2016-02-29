@@ -52,7 +52,7 @@
 					})
 					.catch(function(error){
 						console.log(error);
-						$rootScope.error='Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke. Prøv igjen <a href="/app/obs/#!/observation/report/' + observationId +'">#'+observationId+'</a>';
+						$rootScope.error='Enten så mangler du tilgang til observasjonen, eller så eksisterer den ikke. Prøv igjen <a href="/app/obs#!/observation/report/' + observationId +'">#'+observationId+'</a>';
 					});
 
 
