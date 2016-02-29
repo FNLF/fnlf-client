@@ -22,7 +22,7 @@ angular.module('reportingApp')
 	
 	directive.transcluded = true;
 	
-	directive.templateUrl = "components/observation/directives/files.html";
+	directive.templateUrl = "observation/directives/files.html";
 //	directive.template = function(tElement, tAttrs) { 
 		
 //		return '<div ng-repeat="f in thumbnails"> \

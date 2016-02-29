@@ -3,7 +3,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "components/observation/directives/organizationSummary.html";
+	directive.templateUrl = "observation/directives/organizationSummary.html";
 
 	directive.scope = {
 		observation: '=',

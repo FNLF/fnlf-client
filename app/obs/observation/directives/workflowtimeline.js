@@ -21,7 +21,7 @@ angular.module('reportingApp')
 		audit: '='
 	};
 	
-	directive.templateUrl = "components/observation/directives/workflowtimeline.html";
+	directive.templateUrl = "observation/directives/workflowtimeline.html";
 	
 	
 	directive.controller = function ($scope, $rootScope, $location, $aside) {

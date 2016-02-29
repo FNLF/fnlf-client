@@ -4,7 +4,7 @@ angular.module('reportingApp').directive('locationsummary', function ($window) {
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "components/observation/directives/locationsummary.html";
+	directive.templateUrl = "observation/directives/locationsummary.html";
 
 
 	directive.scope = {
@@ -40,7 +40,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "components/observation/directives/locationselector.html";
+	directive.templateUrl = "observation/directives/locationselector.html";
 
 	directive.scope = {
 		observation: '=',

@@ -6,7 +6,7 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "components/observation/directives/involvedpersondetails.html";
+	directive.templateUrl = "persondetails/directives/involvedpersondetails.html";
 
 	directive.scope = {
 		observation: '=',
@@ -55,7 +55,7 @@ angular.module('reportingApp').directive('involvedperson', function (RestService
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "components/observation/directives/involvedperson.html";
+	directive.templateUrl = "persondetails/directives/involvedperson.html";
 
 	directive.scope = {
 		person: '=',
@@ -102,7 +102,7 @@ angular.module('reportingApp').directive('involvedpersonsummary', function (Rest
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "components/observation/directives/involvedpersonsummary.html";
+	directive.templateUrl = "persondetails/directives/involvedpersonsummary.html";
 
 	directive.scope = {
 		person: '=',

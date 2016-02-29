@@ -4,7 +4,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/obs/components/component/directives/flags.html";
+		directive.templateUrl = "/app/obs/component/directives/flags.html";
 
 		directive.scope = {
 			attributes: '=',
@@ -27,7 +27,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/obs/components/component/directives/flagseditor.html";
+		directive.templateUrl = "/app/obs/component/directives/flagseditor.html";
 
 		directive.scope = {
 			attributes: '=',

@@ -43,7 +43,7 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 			        title: 'Involverte personer',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/obs/components/observation/directives/involvedpersonselector.html',
+			        contentTemplate: '/app/obs/persondetails/directives/involvedpersonselector.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',

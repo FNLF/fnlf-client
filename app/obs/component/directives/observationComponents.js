@@ -28,7 +28,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/obs/components/component/directives/observationComponentSummary.html";
+		directive.templateUrl = "/app/obs/component/directives/observationComponentSummary.html";
 
 		directive.scope = {
 			component: '=',
@@ -48,7 +48,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/app/obs/components/component/directives/observationComponentsSummary.html";
+		directive.templateUrl = "/app/obs/component/directives/observationComponentsSummary.html";
 		
 		directive.scope = {
 			observation: '=',
@@ -102,7 +102,7 @@
 			        scope: $scope,
 			        title: 'Komponenter i forløpet',
 			        show: true,
-			        contentTemplate: '/app/obs/components/component/directives/observationComponents.html',
+			        contentTemplate: '/app/obs/component/directives/observationComponents.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
