@@ -4,7 +4,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.templateUrl = "/directives/tagtypeahead.html";
+		directive.templateUrl = "/shared/directives/tagtypeahead.html";
 
 		directive.scope = {
 			model:'=',
