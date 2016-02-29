@@ -26,7 +26,7 @@ angular.module('reportingApp').directive('summary', function (ObservationService
 		        title: 'Datamodellen',
 		        //content: 'My Content', //Static custom content
 		        show: true,
-		        contentTemplate: '/app/obs/components/observation/directives/summary.html',
+		        contentTemplate: '/app/obs/observation/directives/summary.html',
 		        template: '/shared/partials/aside.html',
 		        placement: 'full-left',
 		        container: 'body',

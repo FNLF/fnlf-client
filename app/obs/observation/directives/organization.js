@@ -24,7 +24,6 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 		var directive = {};
 
 		directive.restrict = 'E';
-		//directive.templateUrl = "components/observation/directives/organization.html";
 		directive.template = function(tElement, tAttrs) { 
 			
 			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openOrganizationAside()"><i class="fa fa-plus fa-fw"></i>Endre Organisasjon</button>';
@@ -44,7 +43,7 @@ angular.module('reportingApp').directive('organizationSummary', function () {
 			        title: 'Hoppfeltorganiseringen',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/obs/components/observation/directives/organization.html',
+			        contentTemplate: '/app/obs/observation/directives/organization.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',

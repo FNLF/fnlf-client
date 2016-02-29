@@ -82,7 +82,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-//		directive.templateUrl = "components/observation/directives/observationComponents.html";
+
 		
 		directive.template = function(tElement, tAttrs) { 
 			

@@ -7,7 +7,7 @@ angular.module('reportingApp').directive('ratingActual', function (Definitions) 
 		   var directive = {};
 
 		directive.restrict = 'E';
-		//directive.templateUrl = "components/observation/directives/organization.html";
+
 		directive.template = function(tElement, tAttrs) { 
 			
 			return '{{ratingType}}&nbsp;&nbsp;&nbsp;&nbsp;: \

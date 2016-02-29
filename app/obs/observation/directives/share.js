@@ -35,7 +35,7 @@ angular.module('reportingApp')
 					scope: $scope,
 					title: 'Del observasjon #' + $scope.observation.id, 
 					show: true,
-					contentTemplate: '/app/obs/components/observation/directives/share.html',
+					contentTemplate: '/app/obs/observation/directives/share.html',
 					template: '/shared/partials/aside.html',
 					placement: 'full-left',
 					container: 'body',

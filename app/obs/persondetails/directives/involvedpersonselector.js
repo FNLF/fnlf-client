@@ -23,7 +23,7 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 		var directive = {};
 
 		directive.restrict = 'E';
-//		directive.templateUrl = "components/observation/directives/involvedpersonselector.html";
+
 		directive.template = function(tElement, tAttrs) { 
 			
 			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openInvolvedAside()"><i class="fa fa-plus fa-fw"></i>Involverte personer og utstyr</button>';

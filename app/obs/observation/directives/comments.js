@@ -31,7 +31,7 @@ angular.module('reportingApp')
 					title: 'Kommenter #'+$scope.observation.id, 
 					//content: 'My Content', 
 					show: true,
-					contentTemplate: '/app/obs/components/observation/directives/comments.html',
+					contentTemplate: '/app/obs/observation/directives/comments.html',
 					template: '/shared/partials/aside.html',
 					placement: 'full-left',
 					container: 'body',

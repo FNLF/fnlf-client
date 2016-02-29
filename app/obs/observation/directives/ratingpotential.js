@@ -3,7 +3,7 @@ angular.module('reportingApp').directive('ratingPotential', function (Definition
 		   var directive = {};
 
 		directive.restrict = 'E';
-		//directive.templateUrl = "components/observation/directives/organization.html";
+
 		directive.template = function(tElement, tAttrs) { 
 			
 			return '{{ratingType}}: <rating ng-model="observation.rating.potential" max="8" readonly="false" state-on="\'fa fa-bullseye\'" state-off="\'fa fa-circle-o\'" on-hover="hoveringOver(value)" on-leave="overStar = null"> \

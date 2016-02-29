@@ -11,7 +11,7 @@ angular.module('reportingApp')
 		acl: '='
 	};
 	
-//	directive.templateUrl = 'components/observation/directives/actions.html';
+
 	directive.template = function(tElement, tAttrs) { 
 		
 		return '<button type="button" class="btn btn-default btn-block" ng-click="openActionsAside()"><i class="fa fa-plus fa-fw"></i> Legg til tiltak</button>';
@@ -51,7 +51,7 @@ angular.module('reportingApp')
 					scope: $scope,
 					title: 'Tiltak for observasjon #' + $scope.observation.id, 
 					show: true,
-					contentTemplate: '/app/obs/components/observation/directives/actions.html',
+					contentTemplate: '/app/obs/observation/directives/actions.html',
 					template: '/shared/partials/aside.html',
 					placement: 'full-left',
 					container: 'body',

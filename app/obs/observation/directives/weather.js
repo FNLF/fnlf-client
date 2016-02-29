@@ -25,7 +25,7 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 		
 
 		directive.restrict = 'E';
-		//directive.templateUrl = "components/observation/directives/organization.html";
+
 		directive.template = function(tElement, tAttrs) { 
 			
 			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openWeatherAside()"><i class="fa fa-plus fa-fw"></i>Endre Været</button>';
@@ -47,7 +47,7 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 			        title: 'Værforholdene',
 			        //content: 'My Content', //Static custom content
 			        show: true,
-			        contentTemplate: '/app/obs/components/observation/directives/weather.html',
+			        contentTemplate: '/app/obs/observation/directives/weather.html',
 			        template: '/shared/partials/aside.html',
 			        placement: 'full-left',
 			        container: 'body',
