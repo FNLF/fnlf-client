@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-	<title ng-cloak>F/NLF - {{title}}</title>
+	<title ng-bind="title">F/NLF - ORS</title>
 
 
 	<!--AngularJS-->
@@ -39,26 +39,37 @@
 	<!-- endbower -->
 
 	<!-- Auth -->
-	<script src="/shared/auth/loginServices.js?v041"></script>
+	<script src="/shared/auth/loginServices.js?v043"></script>
 	
 	<!-- Resolvers -->
-	<script src="/shared/resolve/app.js?v041"></script>
-	<script src="/shared/resolve/service.js?v041"></script>
-	<script src="/shared/resolve/user.js?v041"></script>
-	<script src="/shared/resolve/useravatar.js?v041"></script>
-	<script src="/shared/resolve/club.js?v041"></script>
-	<script src="/shared/resolve/observationtype.js?v041"></script>
-	<script src="/shared/resolve/license.js?v041"></script>
-	<script src="/shared/resolve/workflowstate.js?v041"></script>
-	<script src="/shared/resolve/observationflags.js?v041"></script>
+	<script src="/shared/resolve/app.js?v043"></script>
+	<script src="/shared/resolve/service.js?v043"></script>
+	<script src="/shared/resolve/user.js?v043"></script>
+	<script src="/shared/resolve/useravatar.js?v043"></script>
+	<script src="/shared/resolve/club.js?v043"></script>
+	<script src="/shared/resolve/observationtype.js?v043"></script>
+	<script src="/shared/resolve/license.js?v043"></script>
+	<script src="/shared/resolve/workflowstate.js?v043"></script>
+	<script src="/shared/resolve/observationflags.js?v043"></script>
 
 	
 	<!-- Shared directives -->
-	<script src="/shared/directives/ngconfirmation.js?v041"></script>
-	<script src="/shared/directives/inlinehelp.js?v041"></script>
+	<script src="/shared/directives/app.js?v043"></script>
+	<script src="/shared/directives/tagging.js?v043"></script>
+	<script src="/shared/directives/tagtypeahead.js?v043"></script>
+	<script src="/shared/directives/ngconfirmation.js?v043"></script>
+	<script src="/shared/directives/inlinehelp.js?v043"></script>
+
+
 	<!-- shared filters -->
-	<script src="/shared/filters/truncate.js?v041"></script>
-	<script src="/shared/filters/nl2br.js?v041"></script>
+	<script src="/shared/filters/truncate.js?v043"></script>
+	<script src="/shared/filters/nl2br.js?v043"></script>
+
+	<!-- shared services -->
+	<script src="/shared/services/app.js?v043"></script>
+	<script src="/shared/services/Functions.js?v043"></script>
+	<script src="/shared/services/RestService.js?v043"></script>
+	<script src="/shared/services/Definitions.js?v043"></script>
 
 	<!-- Config -->
 	<script src="/config.js"></script>
@@ -66,18 +77,18 @@
 
 	<!-- Mgcrea AngularStrap! -->
 	<link href="/static/css/bootstrap-additions.min.css" rel="stylesheet">
-	<script src="/static/js/angular-strap.min.js?v041"></script>
-	<script src="/static/js/angular-strap.tpl.min.js?v041"></script>
+	<script src="/static/js/angular-strap.min.js?v043"></script>
+	<script src="/static/js/angular-strap.tpl.min.js?v043"></script>
 
 	<!-- Anagularui datetimepicker -->
-	<script src="/static/js/angular-ui-bootstrap-datetimepicker/datetimepicker.js?v041"></script>
-	<script src="/static/js/angular-ui-bootstrap-datetimepicker/datetimepicker-tpls-0.11.js?v041"></script>
+	<script src="/static/js/angular-ui-bootstrap-datetimepicker/datetimepicker.js?v043"></script>
+	<script src="/static/js/angular-ui-bootstrap-datetimepicker/datetimepicker-tpls-0.11.js?v043"></script>
     <link href="/static/js/angular-ui-bootstrap-datetimepicker/datetimepicker.css" type="text/css" rel="stylesheet">  
 	
 	<!-- File upload -->
-	<script src="/static/js/FileAPI.min.js?v041"></script> 
-	<script src="/static/js/angular-file-upload-shim.min.js?v041"></script> 
-	<script src="/static/js/angular-file-upload.min.js?v041"></script> 
+	<script src="/static/js/FileAPI.min.js?v043"></script> 
+	<script src="/static/js/angular-file-upload-shim.min.js?v043"></script> 
+	<script src="/static/js/angular-file-upload.min.js?v043"></script> 
 	
 	<!-- ngmap -->
 	<script src="//maps.google.com/maps/api/js"></script>
@@ -86,77 +97,78 @@
 
 	
 	<!-- Moment -->
-	<script src="/static/js/angular-moment/moment.min.js?v041"></script>
-	<script src="/static/js/angular-moment/angular-moment.min.js?v041"></script>
-	<script src="/static/js/angular-moment/nb.js?v041"></script>
+	<script src="/static/js/angular-moment/moment.min.js?v043"></script>
+	<script src="/static/js/angular-moment/angular-moment.min.js?v043"></script>
+	<script src="/static/js/angular-moment/nb.js?v043"></script>
 	
 	<!-- Angled navbar -->
 	<link href="/static/js/angled/angled-navbar.css" rel="stylesheet">
-	<script src="/static/js/angled/angled-navbar.js?v041"></script>
+	<script src="/static/js/angled/angled-navbar.js?v043"></script>
 
 	<!-- Drag drop sort list -->
-<!-- 	<script src="/static/js/angular-drag-and-drop-lists.min.js?v041"></script> -->
+<!-- 	<script src="/static/js/angular-drag-and-drop-lists.min.js?v043"></script> -->
 
 	<!-- App -->
-	<script src="app.js?v041?v=041rc0_blablabla"></script>
-	<script src="routes.js?v041?v=041rc0_blablabla"></script>
+	<script src="app.js?v043?v=041rc0_blablabla"></script>
+	<script src="routes.js?v043?v=041rc0_blablabla"></script>
 
-	<script src="shared/services/Functions.js?v041"></script>
-	<script src="shared/services/RestService.js?v041"></script>
-	<script src="shared/directives/tagging.js?v041"></script>
-	<script src="shared/directives/tagtypeahead.js?v041"></script>
+
+
 
 
 	<!-- Search -->
-	<script src="components/search/SearchController.js?v041"></script>
-	<script src="components/search/directives/searchfilters.js?v041"></script>
-	<script src="components/search/directives/searchform.js?v041"></script>
-	<script src="components/search/services/SearchService.js?v041"></script>
+	<script src="search/SearchController.js?v043"></script>
+	<script src="search/directives/searchfilters.js?v043"></script>
+	<script src="search/directives/searchform.js?v043"></script>
+	<script src="search/directives/flagsearch.js?v043"></script>
+	<script src="search/services/SearchService.js?v043"></script>
 
 	<!-- Main -->
-	<script src="components/main/services/ObservationsTableService.js?v041"></script>
-	<script src="components/main/mainController.js?v041"></script>
-
-
-	<!-- location -->
-	<script src="components/location/locationService.js?v041"></script>
-	
-
+	<script src="main/services/ObservationsTableService.js?v043"></script>
+	<script src="main/mainController.js?v043"></script>
+	<script src="main/directives/clubselector.js?v043"></script>
+	<script src="main/directives/observationdateselector.js?v043"></script>
 
 	<!-- Observation -->
-	<script src="shared/services/Definitions.js?v041"></script>
-	<script src="components/observation/controllers/ObservationController.js?v041"></script>
-	<script src="components/observation/controllers/ReportController.js?v041"></script>
-	<script src="components/observation/services/ObservationService.js?v041"></script>
+	<script src="observation/controllers/ObservationController.js?v043"></script>
+	<script src="observation/controllers/ReportController.js?v043"></script>
+	<script src="observation/services/ObservationService.js?v043"></script>
+	<script src="observation/services/locationService.js?v043"></script>
 
 	<!-- Directives -->
-	<script src="components/observation/directives/observationtype.js?v041"></script>
-	<script src="components/observation/directives/clubselector.js?v041"></script>
-	<script src="components/observation/directives/locationselector.js?v041"></script>
-	<script src="components/observation/directives/location.js?v041"></script>
-	<script src="components/observation/directives/observationdateselector.js?v041"></script>
-	<script src="components/observation/directives/observationHfkSelector.js?v041"></script>
-	<script src="components/observation/directives/observationHfkText.js?v041"></script>
-	<script src="components/observation/directives/involvedpersonselector.js?v041"></script>
-	<script src="components/observation/directives/involvedpersondetails.js?v041"></script>
-	<script src="components/observation/directives/summary.js?v041"></script>
-	<script src="components/observation/directives/organization.js?v041"></script>
-	<script src="components/observation/directives/workflow.js?v041"></script>
-	<script src="components/observation/directives/workflowtimeline.js?v041"></script>
-	<script src="components/observation/directives/watchers.js?v041"></script>
-	<script src="components/observation/directives/ratingactual.js?v041"></script>
-	<script src="components/observation/directives/ratingpotential.js?v041"></script>
-	<script src="components/observation/directives/observationflags.js?v041"></script>
-	<script src="components/observation/directives/filepreviews.js?v041"></script>
-	<script src="components/observation/directives/weather.js?v041"></script>
-	<script src="components/observation/directives/share.js?v041"></script>
-	<script src="components/observation/directives/comments.js?v041"></script>
-	<script src="components/observation/directives/actions.js?v041"></script>
+	<script src="persondetails/directives/involvedpersonselector.js?v043"></script>
+	<script src="persondetails/directives/involvedpersondetails.js?v043"></script>
+	<script src="persondetails/directives/involvedperson.js?v043"></script>
+	<script src="persondetails/directives/involvedpersonsummary.js?v043"></script>
+	<script src="persondetails/directives/involvedSummary.js?v043"></script>
+
+
+	<script src="observation/directives/location/locationselector.js?v043"></script>
+	<script src="observation/directives/location/location.js?v043"></script>
+	<script src="observation/directives/location/locationsummary.js?v043"></script>
+	<script src="observation/directives/hfk/observationHfkSelector.js?v043"></script>
+	<script src="observation/directives/hfk/observationHfkText.js?v043"></script>
+	<script src="observation/directives/organization/organization.js?v043"></script>
+	<script src="observation/directives/organization/organizationSummary.js?v043"></script>
+	<script src="observation/directives/observationtype.js?v043"></script>
+	<script src="observation/directives/summary.js?v043"></script>
+	<script src="observation/directives/workflow.js?v043"></script>
+	<script src="observation/directives/workflowtimeline.js?v043"></script>
+	<script src="observation/directives/watchers.js?v043"></script>
+	<script src="observation/directives/ratingactual.js?v043"></script>
+	<script src="observation/directives/ratingpotential.js?v043"></script>
+	<script src="observation/directives/observationflags.js?v043"></script>
+	<script src="observation/directives/filepreviews.js?v043"></script>
+	<script src="observation/directives/weather.js?v043"></script>
+	<script src="observation/directives/share.js?v043"></script>
+	<script src="observation/directives/comments.js?v043"></script>
+	<script src="observation/directives/actions.js?v043"></script>
 	
 	<!-- Observationcomponent -->
-	<script src="components/component/directives/observationComponent.js?v041"></script>
-	<script src="components/component/directives/observationComponents.js?v041"></script>
-	<script src="components/component/directives/flags.js?v041"></script>
+	<script src="component/directives/observationComponent.js?v043"></script>
+	<script src="component/directives/observationComponents.js?v043"></script>
+	<script src="component/directives/flags.js?v043"></script>
+	<script src="component/directives/flagseditor.js?v043"></script>
 
 
 

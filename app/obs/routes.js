@@ -4,36 +4,36 @@
 			function ($routeProvider, $locationProvider, $httpProvider) {
 				$routeProvider
 					.when('/', {
-						templateUrl: 'components/main/startPage.html',
+						templateUrl: 'main/startPage.html',
 						controller: 'MainController'
 					})
 					.when('/observation/:id', {
-						templateUrl: 'components/observation/editor.html',
+						templateUrl: 'observation/editor.html',
 						controller: 'ObservationController'
 					})
 					.when('/observation/report/:id', {
-						templateUrl: 'components/observation/report.html',
+						templateUrl: 'observation/report.html',
 						controller: 'ReportController'
 
 					})
 					.when('/observation/:id/:ui', {
-						templateUrl: 'components/observation/sandbox.html',
+						templateUrl: 'observation/sandbox.html',
 						controller: 'ObservationController'
 					})
 					.when('/search/tag/:tag', {
-						templateUrl: 'components/search/search.html',
+						templateUrl: 'search/search.html',
 						controller: 'SearchController'
 					})
 					.when('/search/tag/', {
-						templateUrl: 'components/search/search.html',
+						templateUrl: 'search/search.html',
 						controller: 'SearchController'
 					})
 					.when('/search/flag/:flag', {
-						templateUrl: 'components/search/search.html',
+						templateUrl: 'search/search.html',
 						controller: 'SearchController'
 					})
                     .when('/search/advanced/:query', {
-                        templateUrl: 'components/search/search.html',
+                        templateUrl: 'search/search.html',
                         controller: 'SearchController'
                     })
 					.when('/observation/modal-route', {
