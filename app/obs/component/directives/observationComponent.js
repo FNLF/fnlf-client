@@ -35,8 +35,8 @@
 			};
 
 			$scope.componentWhatSelected = function(){
-				$scope.component.editTitle=false;
 				$scope.copyFromTemplate();
+				$scope.whatEdited($scope.component);
 			};
 
 			$scope.copyFromTemplate = function() {

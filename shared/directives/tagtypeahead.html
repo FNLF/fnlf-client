@@ -1,3 +1,13 @@
 <div>
-	<input ng-disabled="!acl.w" placeholder="{{noun}}" class="form-control" type="text" ng-model="model" typeahead="tag for tag in tags | filter:$viewValue" typeahead-min-length="2" typeahead-on-select="onSelect(tag, model)" ng-blur="onSelect(tag, model)">
+	<input ng-disabled="!acl.w"
+		   placeholder="{{noun}}"
+		   class="form-control"
+		   type="text"
+		   ng-model="model"
+		   ng-change="capitalize()"
+		   typeahead="tag for tag in tags | filter:$viewValue"
+		   typeahead-min-length="2"
+		   typeahead-on-select="onSelect(tag, model)"
+		   typeahead-focus-first="false"
+		   typeahead-select-on-blur="true">
 </div>

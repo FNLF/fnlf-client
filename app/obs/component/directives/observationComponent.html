@@ -20,22 +20,23 @@
 					<inlinehelp>Direkte og indirekte konsekvenser av hendelsen</inlinehelp>
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="input-group">
-					<tagtypeahead acl="acl" ng-if="component.flags.root_cause || component.flags.cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
-					<tagtypeahead acl="acl" ng-if="component.flags.final_consequence||component.flags.consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
-					<tagtypeahead acl="acl" ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv barriære" ></tagtypeahead>
-					<tagtypeahead acl="acl" ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv selve hendelsen" ></tagtypeahead>
-
-
-
-					<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere komponenter i stedet for å skrive lang tekst her</small>
-                    <span class="input-group-btn">
-                        <button ng-disabled="!acl.w" class="btn btn-default" ng-disabled="!component.what" type="button" ng-click="whatEdited(component)">
-							Ok
-						</button>
-                    </span>
+			<form>
+				<div class="form-group">
+					<div class="input-group">
+						<tagtypeahead acl="acl" ng-if="component.flags.root_cause || component.flags.cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
+						<tagtypeahead acl="acl" ng-if="component.flags.final_consequence||component.flags.consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
+						<tagtypeahead acl="acl" ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv barriære" ></tagtypeahead>
+						<tagtypeahead acl="acl" ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv selve hendelsen" ></tagtypeahead>
+						<span class="input-group-btn">
+							<button ng-disabled="!acl.w" class="btn btn-default" ng-disabled="!component.what" type="submit" ng-click="whatEdited(component)">
+								Ok
+							</button>
+						</span>
+					</div>
 				</div>
+			</form>
+			<div>
+				<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere komponenter i stedet for å skrive lang tekst her</small>
 			</div>
 		</div>
 	</div>

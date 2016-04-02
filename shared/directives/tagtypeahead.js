@@ -20,14 +20,17 @@
 				$scope.model = "";
 			}
 
-			$scope.onSelect = function(item, model,label){
+			$scope.capitalize = function(){
 				$scope.model = Functions.capitalizeFirstLetter($scope.model);
+			};
+
+			$scope.onSelect = function(item, model,label){
+				$scope.model = Functions.capitalizeFirstLetter(model);
 				RestService.addTag($scope.model,$scope.group);
 
 				if($scope.selectfn){
 					$scope.selectfn();
 				}
-				$scope.refresh();
 			};
 
 			$scope.tags = [];
