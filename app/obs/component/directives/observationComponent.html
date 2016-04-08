@@ -85,7 +85,13 @@
 				<inlinehelp title="Hvordan (Tagger)">Tagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
 					Det er viktig at det viktigste i friteksten og er utrykt i form av tagger.
 				</inlinehelp>
+
+				<small ng-if="autoTags">Taggeforslag: {{autoTags.join(', ')}}</small>
+
 				<tagging acl="acl" model="component.tags" group="component" noun="Tagger"></tagging>
+
+
+
 			</div>
 		</div>
 

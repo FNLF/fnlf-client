@@ -1,6 +1,6 @@
 (function () {
 
-	var observationComponent = function (RestService, Definitions) {
+	var observationComponent = function (RestService, Definitions,Functions) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -66,10 +66,30 @@
 
 
 			$scope.resolvePersonsFn();
+			$scope.autoTags=[];
+			$scope.autoTags=Functions.autoTag($scope.component.what);
 
+			$scope.autoTag = function(tagSrc){
+				$scope.autoTags=Functions.autoTag(tagSrc);
+
+				if(angular.isUndefined($scope.component.tags)){
+					$scope.component.tags = [];
+				}
+
+				angular.forEach($scope.autoTags,function(t){
+
+					if($scope.component.tags.indexOf(t)==-1){
+						$scope.component.tags.push(t);
+					}
+				});
+			};
+			if($scope.acl.w){
+				$scope.autoTag($scope.component.how);
+			}
 			$scope.whatEdited = function(component){
 				component.editTitle=false;
 				$scope.copyFromTemplate();
+				$scope.autoTag(component.what);
 			};
 		};
 		return directive;
