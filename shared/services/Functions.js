@@ -131,8 +131,8 @@
 
 				inputString = inputString.substr(0);
 				inputString = inputString.toLowerCase();
-				inputString.replace(',','');
-				inputString.replace('.','');
+				inputString = inputString.replace(',','');
+				inputString = inputString.replace('.','');
 
 				var split = inputString.split(' ');
 				if(split.length < 2){

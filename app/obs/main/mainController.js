@@ -1,6 +1,6 @@
 (function () {
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions,ObservationsTableService,ENV) {
+		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions,Functions,ObservationsTableService,ENV) {
 
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.search = {show_ors: false, form: '', show: false}; //reset
@@ -61,6 +61,67 @@
 
 			}});
 
+			$scope.autoTags ={};
+			$scope.tagsArr = [];
+
+			$scope.setAll = function(observations){
+
+
+				angular.forEach(observations,function(obs){
+
+					angular.forEach(obs.tags,function(comp){
+						var tags = Functions.autoTag(comp);
+						angular.forEach(tags,function(t){
+							if(!$scope.autoTags[t]){
+								$scope.autoTags[t]=1;
+							}else{
+								$scope.autoTags[t]=$scope.autoTags[t]+1;
+							}
+
+						});
+					});
+
+					angular.forEach(obs.components,function(comp){
+						var tags = Functions.autoTag(comp.what);
+						angular.forEach(tags,function(t){
+							if(!$scope.autoTags[t]){
+								$scope.autoTags[t]=1;
+							}else{
+								$scope.autoTags[t]=$scope.autoTags[t]+1;
+							}
+
+						});
+
+						tags = Functions.autoTag(comp.how);
+						angular.forEach(tags,function(t){
+							if(!$scope.autoTags[t]){
+								$scope.autoTags[t]=1;
+							}else{
+								$scope.autoTags[t]=$scope.autoTags[t]+1;
+							}
+
+						});
+					});
+
+					angular.forEach(obs.components,function(comp){
+						var tags = Functions.autoTag(comp.what);
+						angular.forEach(tags,function(t){
+							if(!$scope.autoTags[t]){
+								$scope.autoTags[t]=1;
+							}else{
+								$scope.autoTags[t]=$scope.autoTags[t]+1;
+							}
+
+						});
+					});
+
+
+				});
+
+			$scope.tagsArr = Object.keys($scope.autoTags).sort(function(a,b){return $scope.autoTags[b]-$scope.autoTags[a]})
+
+			};
+
 			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}, filter:{state:'closed'} } , {total: 1, getData: function($defer, params){
 
 				var sortString = ObservationsTableService.sortStringFromParams(params);
@@ -69,6 +130,7 @@
 					.then(function(data){
 						var meta = data._meta;
 						params.total(meta.total);
+						$scope.setAll(data._items);
 						$defer.resolve(data._items);
 					},
 				function(error){
