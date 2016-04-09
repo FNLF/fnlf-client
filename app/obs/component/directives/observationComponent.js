@@ -80,12 +80,14 @@
 
 					if($scope.component.tags.indexOf(t)==-1){
 						$scope.component.tags.push(t);
+						RestService.addTag(t,"component");
 					}
 				});
 			};
-			if($scope.acl.w){
-				$scope.autoTag($scope.component.how);
-			}
+			//Disable freetext autotagging for now
+			//if($scope.acl.w){
+			//	$scope.autoTag($scope.component.how);
+			//}
 			$scope.whatEdited = function(component){
 				component.editTitle=false;
 				$scope.copyFromTemplate();
