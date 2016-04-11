@@ -113,7 +113,7 @@
 			'hjå','ho','hoe','henne','hennar','hennes','hoss','hossen','ikkje','ingi','inkje',
 			'korleis','korso','kva','kvar','kvarhelst','kven','kvi','kvifor','me','medan','mi','mine',
 			'mykje','no','nokon','noka','nokor','noko','nokre','si','sia','sidan','so','somt','somme',
-			'um','upp','vere','vore','verte','vort','varte','vart'];
+			'um','upp','vere','vore','verte','vort','varte','vart','mens','under','kort','lang','annen'];
 
 			var stopWordsObj = {};
 
@@ -131,8 +131,13 @@
 
 				inputString = inputString.substr(0);
 				inputString = inputString.toLowerCase();
-				inputString = inputString.replace(',','');
-				inputString = inputString.replace('.','');
+				inputString = inputString.replace(/[,.!?]/g,' ');
+				inputString = inputString.replace(/[/()]/g,' ');
+				inputString = inputString.replace('"',' ');
+				inputString = inputString.replace(/\s+/g," ");
+				inputString = inputString.replace(/\d+/g," ");
+
+				inputString = inputString.trim();
 
 				var split = inputString.split(' ');
 				if(split.length < 2){
@@ -141,7 +146,8 @@
 
 				var washed = [];
 				angular.forEach(split,function(s){
-					if(!stopWordsObj[s]){
+					s = s.trim();
+					if(s.length > 3 && !stopWordsObj[s]){
 						washed.push(cfl(s));
 					}
 				});
