@@ -402,3 +402,5 @@ img {
 .panel-title > .small > a {
   text-decoration: none!important;
 }
+
+ .ors-invalid-input { border:1px solid red }

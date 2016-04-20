@@ -9,8 +9,18 @@
 				<div class="form-group">
 					<clubselector ng-if="observation" observation="observation"></clubselector>
 
-					<observationdateselector ng-if="observation" observation="observation"></observationdateselector>
 
+					<observationdateselector class="invalid-input" ng-if="observation" observation="observation"></observationdateselector>
+					<h4>Hva har skjedd?</h4>
+					<div ng-show="invalid">
+						<p>Hva er det som gjør at du vil opprette en observasjon?</p>
+						<p>Eksempel: Reservetrekk, Hard landing</p>
+					</div>
+					<div ng-class="{'ors-invalid-input':invalid}" >
+
+							<tagtypeahead selectfn="onSelect" acl="{w:true}" group="component.what.incident" model="whatHappened" noun="1-3 ord for forteller hva observasjonen skal handle om"></tagtypeahead>
+					</div>
+					<br>
 					<button type="submit" class="btn btn-primary form-control" ng-disabled="!observation.club || !observation.when" ng-click="createObservation()">
 						<i class="fa fa-plus fa-fw"></i>Registrer ny observasjon
 					</button>

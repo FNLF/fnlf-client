@@ -17,20 +17,52 @@
 			
 			$scope.observationTypes = Definitions.getObservationTypes();
 
+			$scope.whatHappened ='';
+			$scope.invalid=false;
+
+			$scope.onSelect = function(){
+				if($scope.whatHappened){
+					$scope.invalid=false;
+				}
+
+			};
+
 			$scope.createObservation = function(){
 
-				RestService.createObservation($scope.observation)
-					.then(function(metadata){
+				if(!$scope.whatHappened){
+					$scope.invalid=true;
+				}else{
+					if($scope.whatHappened.trim().length<2){
+						$scope.invalid=true;
+					}else{
+						$scope.invalid=false;
+					}
+				}
 
-						RestService.getObservation(metadata._id)
-							.then(function(item){
+				if(!$scope.invalid){
 
-							$scope.observation = item;
 
-							$location.path("/observation/"+item.id);
-						});
+					RestService.createObservation($scope.observation)
+						.then(function(metadata){
+							RestService.getObservation(metadata._id)
+								.then(function(item){
+									$scope.observation = item;
+									$scope.observation.tags=[];
+									$scope.observation.tags.push($scope.whatHappened);
+									$scope.observation.components = [{what:$scope.whatHappened,sort:0,flags:{incident:true}}];
 
-				});
+									ObservationService.updateObservation($scope.observation).then(function(){
+										$location.path("/observation/"+item.id);
+									});
+
+
+							});
+
+					});
+
+				}
+
+
 			};
 
 			$scope.editObservation = function (_id) {
