@@ -18,11 +18,23 @@
 			$scope.observationTypes = Definitions.getObservationTypes();
 
 			$scope.whatHappened ='';
-			$scope.invalid=false;
+			$scope.whatEmpty=false;
+			$scope.whatTooLong=false;
 
-			$scope.onSelect = function(){
+			$scope.$watch('whatHappened',function(){
+				$scope.whatOnSelect();
+			});
+
+			$scope.whatOnSelect = function(){
+				console.log($scope.whatHappened+" updated");
 				if($scope.whatHappened){
-					$scope.invalid=false;
+					$scope.whatEmpty=false;
+					if($scope.whatHappened.split(' ').length >3){
+						$scope.whatTooLong=true;
+					}else{
+						$scope.whatTooLong=false;
+					}
+
 				}
 
 			};
@@ -30,37 +42,36 @@
 			$scope.createObservation = function(){
 
 				if(!$scope.whatHappened){
-					$scope.invalid=true;
+					$scope.whatEmpty=true;
 				}else{
 					if($scope.whatHappened.trim().length<2){
-						$scope.invalid=true;
+						$scope.whatEmpty=true;
 					}else{
-						$scope.invalid=false;
+						$scope.whatEmpty=false;
 					}
 				}
-
-				if(!$scope.invalid){
-
-
 					RestService.createObservation($scope.observation)
 						.then(function(metadata){
 							RestService.getObservation(metadata._id)
 								.then(function(item){
-									$scope.observation = item;
-									$scope.observation.tags=[];
-									$scope.observation.tags.push($scope.whatHappened);
-									$scope.observation.components = [{what:$scope.whatHappened,sort:0,flags:{incident:true}}];
+									if(!$scope.whatEmpty){
+										$scope.observation = item;
+										$scope.observation.tags=[];
+										$scope.observation.tags.push($scope.whatHappened);
+										$scope.observation.components = [{what:$scope.whatHappened,sort:0,flags:{incident:true}}];
 
-									ObservationService.updateObservation($scope.observation).then(function(){
-										$location.path("/observation/"+item.id);
-									});
-
+										ObservationService.updateObservation($scope.observation).then(function(){
+											$location.path("/observation/"+item.id);
+										});
+										}else{
+											$location.path("/observation/"+item.id);
+										}
 
 							});
 
 					});
 
-				}
+
 
 
 			};
