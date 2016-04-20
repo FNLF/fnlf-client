@@ -44,39 +44,6 @@
 			}
 
 
-
-
-			$scope.queryObj = SearchService.parseAdvancedSearchQuery($scope.query);
-
-			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
-				var sortString = ObservationsTableService.sortStringFromParams(params);
-
-				var searchParam = $scope.tags;
-				var searchFn = SearchService.searchByTag;
-				if($scope.flag){
-					searchParam = $scope.flag;
-					searchFn = SearchService.searchByFlag;
-				}
-                if($scope.query){
-                    searchParam = $scope.queryObj;
-                    searchFn = SearchService.searchAdvanced;
-                }
-
-				searchFn(params.page(), params.count(),sortString,searchParam,$scope.filter)
-					.then(function(data){
-						var meta = data._meta;
-						params.total(meta.total);
-						$scope.total = meta.total;
-						$scope.tableData = data._items;
-						$defer.resolve(data._items);
-
-					},
-					function(error){
-						console.log(error);
-					});
-
-			}});
-
 			$scope.viewObservation = function (observation) {
 				$scope.observation = undefined;
 				$timeout(function(){
@@ -87,27 +54,6 @@
 			$scope.hideObservation = function(){
 				$scope.observation = undefined;
 			};
-
-
-			$scope.componentTitles = {};
-
-			$scope.components = function(observation){
-				if($scope.componentTitles[observation.id]){
-					return $scope.componentTitles[observation.id];
-				}
-				angular.forEach(observation.components,function(c){
-					$scope.componentTitles.push(c.what);
-				});
-				return $scope.componentTitles;
-			};
-
-			$scope.flags = function(observation){
-				var attributes = {};
-
-
-				return attributes;
-			};
-
 
 		});
 
