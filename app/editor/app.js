@@ -22,7 +22,7 @@ angular.module("editorApp").controller("editorController",[
 				'$filter',
 				'$routeParams',
 				'RestService',
-				function($scope, $http, editorService, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams, RestService) {
+				function($scope, $http, editorService, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams, RestService, Definitions) {
 
 					// Menus
 					$rootScope.nav = {toolbar: [], menus: []}; //reset
@@ -72,12 +72,14 @@ angular.module("editorApp").controller("editorController",[
 
 						});
 
+
+
+
+
+
 					$scope.page=1;
 					$scope.sort = "group,-freq";
 					$scope.allTags = [];
-
-
-
 
 					$scope.tagUp = function(tag){
 						for(var i=0; i < 10; i++) {
@@ -124,6 +126,8 @@ angular.module("editorApp").controller("editorController",[
 
 					};
 
+					$scope.filter='observation';
+					$scope.filterText = "Observasjonstittel";
 					$scope.getTags($scope.page);
 
 
@@ -134,31 +138,62 @@ angular.module("editorApp").controller("editorController",[
 						$scope.filter = filter;
 						$scope.page = 1;
 						$scope.getTags($scope.page);
-
+						$scope.filterText = $scope.groupTexts[filter];
 					}
 
+					var textMapping = function(){
+						var mapping = {};
+						mapping['observation'] = 'Observasjonstittel';
+						mapping['component'] = 'Tagger (forløp)';
+						mapping['component.what.cause'] = 'Årsak (forløp)';
+						mapping['component.what.consequence'] = 'Konsekvens (forløp)';
+						mapping['component.what.incident'] = 'Hendelse (forløp)';
+						mapping['where-at'] = 'Sted/situasjon';
+						mapping['jumptypes'] = 'Hopptype-tagg';
+						mapping['aircraftTypes'] = 'Flytype';
+						mapping['maincanopies'] = 'Hovedskjermtype';
+						mapping['reserveCanopies'] = 'Reserveskjermtype';
+						mapping['harnessTypes'] = 'Seletøytype';
+						mapping['aadType'] = 'Nødåpnertype';
+						mapping['otherEquipment'] = 'Ymse utstyr';
+						return mapping;
+					};
+
+					$scope.groupTexts = textMapping();
+
+					var tagsMapping = function(){
+
+						var mapping = {}; //mapping from db-model param name to list of tag group names
+						mapping['tags'] = ['observation'];
+						mapping['components.tags'] = ['component'];
+						mapping['components.what'] = ['component.what.cause', 'component.what.consequence', 'component.what.incident'];
+						mapping['components.where.at'] = ['where-at'];
+						mapping['involved.jumptypeTags'] = ['jumptypes'];
+						mapping['involved.aircraft'] = ['aircraftTypes'];
+						mapping['involved.gear.mainCanopyType'] = ['maincanopies'];
+						mapping['involved.gear.reserveCanopyType'] = ['reserveCanopies'];
+						mapping['involved.gear.harnessType'] = ['harnessTypes'];
+						mapping['involved.gear.aadType'] = ['aadType'];
+						mapping['involved.gear.other'] = ['otherEquipment'];
+
+						return mapping;
+					};
+
+
 					$scope.getTagGroups = function(){
+						console.log('getTagGroups');
 
-						for(var i = 1; i < 3; i++) {
-							RestService.getTagGroups(i)
-								.then(function (data) {
-									$scope.groups = [];
-
-									var meta = data._meta;
-
-
-									data._items.forEach(function (t) {
-										distinctGroups[t.group] = t;
-									});
-
-									Object.keys(distinctGroups).forEach(function (k) {
-										$scope.groups.push(distinctGroups[k].group);
-									});
-
+						var mapping = tagsMapping();
+							angular.forEach(mapping,function(v,k){
+								angular.forEach(v,function(t){
+									$scope.groups.push(t);
 								});
-						}
+
+						});
 
 					};
+
+
 
 					$scope.getTagGroups();
 				} ]);

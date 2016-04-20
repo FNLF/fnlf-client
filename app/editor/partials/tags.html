@@ -1,14 +1,14 @@
 <div>
 
-	<h1>Tags</h1>
+	<h1>Tagge-editor</h1>
 
-	<h3>Filter</h3>
+	<h3>Gruppe: {{filterText}}</h3>
 	<div>
 
 
 		<div>
-			<span ng-repeat="group in groups">
-				<a ng-click="setFilter(group)">{{group}}</a> &nbsp;
+			<span ng-repeat="(group,text) in groupTexts">
+				<a ng-click="setFilter(group)">{{text}}</a> &nbsp;
 			</span>
 		</div>
 
@@ -17,20 +17,27 @@
 	<br>
 	<br>
 
+	<div>
+		Prioriten til en tagg øker med 1 hver gang den blir lagt til i en observasjon.
+		<br>
+	</div>
 
+	<div>
+		Tagger med prioritet under 0 vises ikke i ORS. Bruk + og - for å vekte tagger opp og ned.<br>
+	</div>
 
-	<button class="btn btn-default" ng-show="page>1" ng-click="getTags(page-1)">Side {{page-1}}</button>
-<span>Side {{page}}</span>
-	<button class="btn btn-default" ng-click="getTags(page+1)">Side {{page+1}}</button>
-
+	<!-- div>
+		<button class="btn btn-default" ng-show="page>1" ng-click="getTags(page-1)">Side {{page-1}}</button>
+		<span>Side {{page}}</span>
+		<button class="btn btn-default" ng-click="getTags(page+1)">Side {{page+1}}</button>
+	</div-->
 	<table class="table">
 		<tr>
-			<td><button class="btn btn-default" ng-click='sortByGroup()'>Group</button> </td> <td><button class="btn btn-default" ng-click='sortByTag()'>Tag</button></td> <td><button class="btn btn-default" ng-click='sortByFreq()'>Freq</button></td>
+			<td><button class="btn btn-default" ng-click='sortByTag()'>Tag</button></td> <td><button class="btn btn-default" ng-click='sortByFreq()'>Prioritet</button></td>
 		</tr>
 
 		<tr ng-repeat="tag in allTags">
-			<td><small> {{tag.group}}</small></td> <td><small>{{tag.tag}}</small></td> <td><small>{{tag.freq}} <span ng-click="tagUp(tag)" class="fa fa-plus"></span> <span ng-click="tagDown(tag)" class="fa fa-minus"></span></small></td>
-
+			<td><small>{{tag.tag}}</small></td> <td><small>{{tag.freq}} <span ng-click="tagUp(tag)" class="fa fa-plus"></span> <span ng-click="tagDown(tag)" class="fa fa-minus"></span></small></td>
 		</tr>
 
 	</table>
