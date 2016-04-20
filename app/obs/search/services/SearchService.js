@@ -4,19 +4,7 @@
 		.service('SearchService', function (RestService, Definitions, Functions,$location) {
 
 
-			var mapping = {}; //mapping from db-model param name to list of tag group names
-			mapping['tags'] = ['observation'];
-			mapping['components.tags'] = ['component'];
-			mapping['components.what'] = ['component.what.cause', 'component.what.consequence', 'component.what.incident'];
-			mapping['components.where.at'] = ['where-at'];
-			mapping['involved.jumptypeTags'] = ['jumptypes'];
-			mapping['involved.aircraft'] = ['aircraftTypes'];
-			mapping['involved.gear.mainCanopyType'] = ['maincanopies'];
-			mapping['involved.gear.reserveCanopyType'] = ['reserveCanopies'];
-			mapping['involved.gear.harnessType'] = ['harnessTypes'];
-			mapping['involved.gear.aadType'] = ['aadType'];
-			mapping['involved.gear.other'] = ['otherEquipment'];
-
+			var mapping = Definitions.tagsMapping(); //mapping from db-model param name to list of tag group names
 
 			this.getObservationParams = function () {
 				return Object.keys(mapping);

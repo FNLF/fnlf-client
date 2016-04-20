@@ -80,6 +80,25 @@
 				return [null, 'Alt OK','Til ettertanke', 'Mindre skade', 'Middels skade', 'Alvorlig skade', 'Alvorlig skade/men', 'Død', 'Flere døde'];
 			};
 
+			this.tagsMapping = function(){
+
+				var mapping = {}; //mapping from db-model param name to list of tag group names
+				mapping['tags'] = ['observation'];
+				mapping['components.tags'] = ['component'];
+				mapping['components.what'] = ['component.what.cause', 'component.what.consequence', 'component.what.incident'];
+				mapping['components.where.at'] = ['where-at'];
+				mapping['involved.jumptypeTags'] = ['jumptypes'];
+				mapping['involved.aircraft'] = ['aircraftTypes'];
+				mapping['involved.gear.mainCanopyType'] = ['maincanopies'];
+				mapping['involved.gear.reserveCanopyType'] = ['reserveCanopies'];
+				mapping['involved.gear.harnessType'] = ['harnessTypes'];
+				mapping['involved.gear.aadType'] = ['aadType'];
+				mapping['involved.gear.other'] = ['otherEquipment'];
+
+				return mapping;
+			};
+
+
 		});
 
 
