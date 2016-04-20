@@ -1,6 +1,6 @@
 (function () {
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope,$rootScope,ObservationService,RestService,$location, ngTableParams, Definitions,Functions,ObservationsTableService,ENV) {
+		.controller('MainController', function ($scope, $rootScope, ObservationService,RestService,$location, ngTableParams, Definitions,Functions,ObservationsTableService,ENV) {
 
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.search = {show_ors: false, form: '', show: false}; //reset
@@ -38,7 +38,9 @@
 			};
 
 
-			$scope.tableMyObservations = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
+
+			var myTableParams = ObservationsTableService.restoreParams({page: 1, count: 10, sorting: {id: 'desc'}},'myTableParams');
+			$scope.tableMyObservations = new ngTableParams(myTableParams , {total: 1, getData: function($defer, params){
 
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				RestService.getObservations(params.page(), params.count(), sortString,$rootScope.username)
@@ -46,23 +48,27 @@
 						var meta = data._meta;
 						params.total(meta.total);
 						$defer.resolve(data._items);
+						ObservationsTableService.storeParams(params,'myTableParams');
 					});
 
 			}});
 
-			$scope.todoTable = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}} , {total: 1, getData: function($defer, params){
+			var todoTableParams = ObservationsTableService.restoreParams({page: 1, count: 10, sorting: {id: 'desc'}},'todoTableParams');
+
+			$scope.todoTable = new ngTableParams(todoTableParams , {total: 1, getData: function($defer, params){
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				RestService.getWorkflowTodo(params.page(), params.count(), sortString)
 					.then(function(data){
 						var meta = data._meta;
 						params.total(meta.total);
 						$defer.resolve(data._items);
+						ObservationsTableService.storeParams(params,'todoTableParams');
 					});
 
 			}});
 
-
-			$scope.tableParams = new ngTableParams({page: 1, count: 10, sorting: {id: 'desc'}, filter:{state:'closed'} } , {total: 1, getData: function($defer, params){
+			var allTableParams = ObservationsTableService.restoreParams({page: 1, count: 10, sorting: {id: 'desc'}, filter:{state:'closed'}},'allObservationsTable');
+			$scope.tableParams = new ngTableParams( allTableParams , {total: 1, getData: function($defer, params){
 
 				var sortString = ObservationsTableService.sortStringFromParams(params);
 				var whereString = ObservationsTableService.whereStringFromParams(params);
@@ -71,6 +77,7 @@
 						var meta = data._meta;
 						params.total(meta.total);
 						$defer.resolve(data._items);
+						ObservationsTableService.storeParams(params,'allObservationsTable');
 					},
 				function(error){
 					console.log(error);

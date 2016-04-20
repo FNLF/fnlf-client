@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.service('ObservationsTableService', function (ngTableParams,RestService,$q,Definitions) {
+		.service('ObservationsTableService', function (ngTableParams,RestService,$q,$cookies,Definitions) {
 
 			this.getTags = function () {
 				var def = $q.defer();
@@ -18,9 +18,9 @@
 
 			this.getYears = function(){
 				var arr = [];
-				arr.push({id:2016,title:'2016'});
-				arr.push({id:2015,title:'2015'});
-				arr.push({id:2014,title:'2014'});
+				for(var y=new Date().getFullYear(); y >2014; y--){
+					arr.push({id:y,title:y+''});
+				}
 				arr.unshift({title: ''});
 				return arr;
 			};
@@ -121,6 +121,22 @@
 				}
 
 				return "where="+JSON.stringify(whereObj);
+			};
+
+			this.storeParams = function(params,tableName){
+				var toStore = {page: params.page(), count: params.count(), sorting: params.sorting(), filter:params.filter()};
+            	$cookies.putObject(tableName,toStore);
+			};
+
+			this.restoreParams = function(defaultParams,tableName){
+				var allTableParams = {};
+				var stored = $cookies.getObject(tableName);
+				if(angular.isUndefined(stored)){
+					allTableParams = defaultParams;
+				}else{
+					allTableParams = stored;
+				}
+				return allTableParams;
 			};
 
 
