@@ -11,8 +11,8 @@ html { height: 100%; }
 
 body {
 	height: 100%;
- 	padding-top: 70px;
-  /* The html and body elements cannot have any padding or margin. */
+	padding-top: 70px;
+	/* The html and body elements cannot have any padding or margin. */
 }
 
 /* Responsive toolset for viewport
@@ -32,105 +32,105 @@ body::before {
 
 /* Wrapper for page content to push down footer */
 #wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	/* Negative indent footer by it's height */
+	margin: 0 auto -60px;
 }
 
 /* Set the fixed height of the footer here */
 #push,
 #footer {
-  height: 60px;
+	height: 60px;
 }
 #footer {
-  background-color: #f5f5f5;
+	background-color: #f5f5f5;
 }
 
 /* Lastly, apply responsive CSS fixes as necessary */
 @media (max-width: 767px) {
-  #footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+	#footer {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 }
 
 /** Angular ng-cloak**/
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
+	display: none !important;
 }
 
 /** Angular mouse pointer on ng-click **/
 [ng-click],
 [data-ng-click],
 [x-ng-click] {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 /** ALERTS **/
 hr.message-inner-separator
 {
-    clear: both;
-    margin-top: 10px;
-    margin-bottom: 13px;
-    border: 0;
-    height: 1px;
-    background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
-    background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
-    background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
-    background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	clear: both;
+	margin-top: 10px;
+	margin-bottom: 13px;
+	border: 0;
+	height: 1px;
+	background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+	background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 }
 
 /** Dropzone for file upload **/
 .drop-box {
-    background: #F8F8F8;
-    border: 5px dashed #DDD;
-    width: 100%;
-    height: auto;
-    text-align: center;
-    padding: 10px;
-    margin: 10px 0px 10px 0px;
+	background: #F8F8F8;
+	border: 5px dashed #DDD;
+	width: 100%;
+	height: auto;
+	text-align: center;
+	padding: 10px;
+	margin: 10px 0px 10px 0px;
 }
 .dragover {
-    border: 5px dashed blue;
+	border: 5px dashed blue;
 }
 
 /** TIMELINE **/
 
 img {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .img-responsive {
-    display: block;
-    height: auto;
-    max-width: 100%;
+	display: block;
+	height: auto;
+	max-width: 100%;
 }
 
 .img-rounded {
-    border-radius: 3px;
+	border-radius: 3px;
 }
 
 .img-thumbnail {
-    background-color: #fff;
-    border: 1px solid #ededf0;
-    border-radius: 3px;
-    display: inline-block;
-    height: auto;
-    line-height: 1.428571429;
-    max-width: 100%;
-    moz-transition: all .2s ease-in-out;
-    o-transition: all .2s ease-in-out;
-    padding: 2px;
-    transition: all .2s ease-in-out;
-    webkit-transition: all .2s ease-in-out;
+	background-color: #fff;
+	border: 1px solid #ededf0;
+	border-radius: 3px;
+	display: inline-block;
+	height: auto;
+	line-height: 1.428571429;
+	max-width: 100%;
+	moz-transition: all .2s ease-in-out;
+	o-transition: all .2s ease-in-out;
+	padding: 2px;
+	transition: all .2s ease-in-out;
+	webkit-transition: all .2s ease-in-out;
 }
 
 .img-circle {
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
 
@@ -139,90 +139,90 @@ img {
 
 .form-signin
 {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
 }
 .form-signin .form-signin-heading, .form-signin .checkbox
 {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 .form-signin .checkbox
 {
-    font-weight: normal;
+	font-weight: normal;
 }
 .form-signin .form-control
 {
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+	position: relative;
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 .form-signin .form-control:focus
 {
-    z-index: 2;
+	z-index: 2;
 }
 .form-signin input[type="text"]
 {
-    margin-bottom: -1px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+	margin-bottom: -1px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
 .form-signin input[type="password"]
 {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 .account-wall
 {
-    margin-top: 10px;
-    padding: 20px 0px 20px 0px;
-    background-color: #f7f7f7;
-    -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+	margin-top: 10px;
+	padding: 20px 0px 20px 0px;
+	background-color: #f7f7f7;
+	-moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 .login-title
 {
-    color: #555;
-    font-size: 18px;
-    font-weight: 400;
-    display: block;
+	color: #555;
+	font-size: 18px;
+	font-weight: 400;
+	display: block;
 }
 .profile-img
 {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 10px;
+	display: block;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
 }
 .need-help
 {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 .new-account
 {
-    display: block;
-    margin-top: 10px;
+	display: block;
+	margin-top: 10px;
 }
 
 .label .ng-isolate-scope a {
-    color:white;
+	color:white;
 }
 
 .img-public {
-  border: 1px solid red;
+	border: 1px solid red;
 }
 
 .img-restricted {
-  border: 1px solid green;
+	border: 1px solid green;
 }
 
 .thumbnail i {
@@ -379,18 +379,18 @@ img {
 }
 
 @media(max-width:992px){
-    .aside .aside-dialog .aside-body{
-        margin-left:-15px;
-        margin-right:-15px;
-        padding-left:0px;
-        padding-right:0px;
-    }
-    .aside-full-width-on-sm{
-        margin-left:-15px;
-        margin-right:-15px;
-        padding-left:0px;
-        padding-right:0px;
-    }
+	.aside .aside-dialog .aside-body{
+		margin-left:-15px;
+		margin-right:-15px;
+		padding-left:0px;
+		padding-right:0px;
+	}
+	.aside-full-width-on-sm{
+		margin-left:-15px;
+		margin-right:-15px;
+		padding-left:0px;
+		padding-right:0px;
+	}
 }
 
 /*The underline text decoration on the panel heading title is annoying and clutters the interface.*/
@@ -400,11 +400,5 @@ img {
 .panel-title > .small,
 .panel-title > small > a,
 .panel-title > .small > a {
-  text-decoration: none!important;
+	text-decoration: none!important;
 }
-
- .ors-invalid-input { border:1px solid red }
-
- .air1{ margin-bottom: 4px}
- .air2{ margin-bottom: 8px}
- .air3{ margin-bottom: 16px}

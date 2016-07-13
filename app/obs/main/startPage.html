@@ -9,16 +9,7 @@
 				<div class="form-group">
 					<clubselector ng-if="observation" observation="observation"></clubselector>
 
-
-					<observationdateselector class="invalid-input" ng-if="observation" observation="observation"></observationdateselector>
-					<h4>Hva har skjedd?</h4>
-					<div class="air1">
-						<small>Eksempel: Skade, Reservetrekk, Hard landing eller Regelbrudd</small>
-					</div>
-					<div><small ng-show="whatTooLong" style="color:red">Holder med 1-3 generelle ord om selve hendelsen</small></div>
-					<div ng-class="{'ors-invalid-input':whatTooLong}" class="air2">
-						<tagtypeahead selectfn="whatOnSelect" acl="{w:true}" group="component.what.incident" model="whatHappened" noun="1-3 ord for forteller hva observasjonen skal handle om"></tagtypeahead>
-					</div>
+					<observationdateselector ng-if="observation" observation="observation"></observationdateselector>
 
 					<button type="submit" class="btn btn-primary form-control" ng-disabled="!observation.club || !observation.when" ng-click="createObservation()">
 						<i class="fa fa-plus fa-fw"></i>Registrer ny observasjon
@@ -62,18 +53,18 @@
 		</div>
 	</div>
 
-<!-- 	<div class="row"> -->
-<!-- 		<br> -->
-<!-- 		<div class="col-xs-12"> -->
+	<!-- 	<div class="row"> -->
+	<!-- 		<br> -->
+	<!-- 		<div class="col-xs-12"> -->
 
-<!-- 			<flagsearch></flagsearch> -->
+	<!-- 			<flagsearch></flagsearch> -->
 
-<!-- 		</div> -->
-<!-- 		<div class="col-xs-12 col-md-12"> -->
-			
-<!-- 		</div> -->
-<!-- 		<br> -->
-<!-- 	</div> -->
+	<!-- 		</div> -->
+	<!-- 		<div class="col-xs-12 col-md-12"> -->
+
+	<!-- 		</div> -->
+	<!-- 		<br> -->
+	<!-- 	</div> -->
 
 	<div class="row">
 		<div class="col-xs-12 col-md-6 table-responsive">
