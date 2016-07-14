@@ -48,6 +48,12 @@
 
 			$scope.refresh();
 
+			$scope.tooManyWordsInTag = false;
+
+			$scope.$watch('model',function(){
+				$scope.tooManyWordsInTag = ($scope.model.split(' ').length >= 5);
+			});
+
 		};
 
 		return directive;

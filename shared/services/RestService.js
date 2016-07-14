@@ -232,6 +232,10 @@
 						}
 
 					});
+				}else{
+					if(!angular.isUndefined(tag) && tag.split(' ').length >= 5){
+						console.log("Skipping "+tag+". Too many words");
+					}
 				}
 
 			};

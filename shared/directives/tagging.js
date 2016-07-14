@@ -29,6 +29,22 @@
 					$scope.tags = Functions.prepareTags(r);
 				});
 
+			$scope.tooManyWordsInTag = false;
+
+			$scope.$watch('model',function(){
+
+				var allTagsShortEnough = true;
+
+				angular.forEach($scope.model,function(t){
+
+					if(t.split(' ').length>=5){
+						allTagsShortEnough = false;
+					}
+
+				});
+				$scope.tooManyWordsInTag = !allTagsShortEnough;
+			});
+
 
 			$scope.refresh = function(search){
 /*
