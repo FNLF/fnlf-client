@@ -51,7 +51,9 @@
 			$scope.tooManyWordsInTag = false;
 
 			$scope.$watch('model',function(){
-				$scope.tooManyWordsInTag = ($scope.model.split(' ').length >= 5);
+				if(!angular.isUndefined($scope.model)) {
+					$scope.tooManyWordsInTag = ($scope.model.split(' ').length >= 5);
+				}
 			});
 
 		};
