@@ -84,10 +84,10 @@
 		directive.restrict = 'E';
 
 		
-		directive.template = function(tElement, tAttrs) { 
-			
-			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openIncidentAside()"><i class="fa fa-plus fa-fw"></i>Endre forløpet</button>';
-		};
+		directive.templateUrl = '/app/obs/component/directives/observationComponents.html';
+
+			//return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openIncidentAside()"><i class="fa fa-plus fa-fw"></i>Endre forløpet</button>';
+
 
 		directive.scope = {
 			observation: '=',
@@ -95,35 +95,6 @@
 		};
 
 		directive.controller = function ($scope, $rootScope, $location, $aside) {
-			
-			$scope.openIncidentAside = function() {
-				$location.path('/observation/modal-route', false);
-			    $scope.incidentAside = $aside({
-			        scope: $scope,
-			        title: 'Komponenter i forløpet',
-			        show: true,
-			        contentTemplate: '/app/obs/component/directives/observationComponents.html',
-			        template: '/shared/partials/aside.html',
-			        placement: 'full-left',
-			        container: 'body',
-			        backdrop: 'static',
-			        animation: 'am-slide-left'
-			        });   
-			};
-			// Needs to manually close aside on back button
-			$rootScope.$on('$routeChangeStart', function(event, next, current) {
-				if($scope.incidentAside) {
-				  if($scope.incidentAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
-					  $scope.incidentAside.hide(); 
-				  }
-				}
-			});
-			
-			$scope.$on('aside.hide', function() {
-			  if($location.path().indexOf('/modal-route') != -1) {
-				  $window.history.back();
-			  };
-			});
 			
 		};
 		directive.link = function ($scope, element, attr) {

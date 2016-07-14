@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
+		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -16,6 +16,22 @@
 			$scope.observationChanges = false;
 
 			$scope.ui=$routeParams.ui;
+			$scope.fullscreen=$scope.ui;
+
+			$scope.hideFullscreen = function(){
+				$scope.fullscreen='';
+				$location.search('ui','');
+			};
+
+			$scope.setFullscreen = function(fullscreenName){
+				$scope.fullscreen=fullscreenName;
+				$location.search('ui',fullscreenName);
+			};
+
+			$scope.$watch('$routeUpdate', function(){
+				$scope.fullscreen = $location.search().ui;
+			});
+
 
 			$rootScope.title = 'F/NLF - ORS editor #' + $scope.observation.id;
 			

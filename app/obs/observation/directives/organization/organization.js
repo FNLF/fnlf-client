@@ -4,11 +4,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.template = function(tElement, tAttrs) { 
-			
-			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openOrganizationAside()"><i class="fa fa-plus fa-fw"></i>Endre Organisasjon</button>';
-		};
-
+		directive.templateUrl = '/app/obs/observation/directives/organization/organization.html';
 		directive.scope = {
 			observation: '=',
 			acl: '='
