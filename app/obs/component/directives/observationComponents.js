@@ -237,7 +237,18 @@
 				});
 				component.open=true;
 			};
-
+			
+			
+			$scope.toggleComponent = function(component) {
+				
+				if(component.open == true) {
+					component.open = false;
+				}
+				else {
+					$scope.closeOthers(component);
+				};
+			};
+			
 			$scope.decrementOrder = function(component){
 				decrementOrderFunc($scope.observation.components,component);
 			};
