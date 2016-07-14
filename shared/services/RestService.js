@@ -220,7 +220,7 @@
 
 
 			this.addTag = function(tag,group){
-				if(!angular.isUndefined(tag) && !angular.isUndefined(group)) {
+				if(!angular.isUndefined(tag) && !angular.isUndefined(group) && tag.split(' ').length < 5) {
 					getExistingTags(tag, group)
 						.then(function (data) {
 						if (data._meta.total == 0) {
