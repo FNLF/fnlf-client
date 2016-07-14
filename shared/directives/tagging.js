@@ -26,8 +26,24 @@
 			$scope.tags = [];
 			RestService.getTags($scope.group)
 				.then(function(r){
-					$scope.tags = Functions.deduplicate(r._items.filter(function(t){return t.freq>=0}).map(function(t){return t.tag}));
+					$scope.tags = Functions.prepareTags(r);
 				});
+
+			$scope.tooManyWordsInTag = false;
+
+			$scope.$watch('model',function(){
+
+				var allTagsShortEnough = true;
+
+				angular.forEach($scope.model,function(t){
+
+					if(t.split(' ').length>=5){
+						allTagsShortEnough = false;
+					}
+
+				});
+				$scope.tooManyWordsInTag = !allTagsShortEnough;
+			});
 
 
 			$scope.refresh = function(search){

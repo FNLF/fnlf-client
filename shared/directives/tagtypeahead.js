@@ -42,17 +42,17 @@
 			$scope.refresh = function(){
 				RestService.getTags($scope.group)
 					.then(function(data){
-						$scope.tags = Functions.deduplicate(data._items
-							.filter(function(t){
-								return t.freq>=0
-							})
-							.map(function(t){
-								return Functions.capitalizeFirstLetter(t.tag);
-							}));
+						$scope.tags = Functions.prepareTags(data);
 					});
 			};
 
 			$scope.refresh();
+
+			$scope.tooManyWordsInTag = false;
+
+			$scope.$watch('model',function(){
+				$scope.tooManyWordsInTag = ($scope.model.split(' ').length >= 5);
+			});
 
 		};
 
