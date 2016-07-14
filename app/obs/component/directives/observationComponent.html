@@ -82,13 +82,13 @@
 
 		<div class="col-xs-12 col-md-6 col-lg-7">
 			<div class="form-group">
-				<inlinehelp title="Hvordan (Tagger)">Tagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
-					Det er viktig at det viktigste i friteksten og er utrykt i form av tagger.
+				<inlinehelp title="Søketagger">Søketagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
+					Det viktigste i friteksten bør vere utrykt i form av tagger.
 				</inlinehelp>
 
-				<small ng-if="autoTags">Taggeforslag: {{autoTags.join(', ')}}</small>
+				<small ng-if="autoTags">Taggeforslag: <span ng-repeat="t in autoTags"> <a ng-click="addAutoTag(t)">{{t}} </a></span> </small>
 
-				<tagging acl="acl" model="component.tags" group="component" noun="Tagger"></tagging>
+				<tagging acl="acl" model="component.tags" group="component" noun="Søketagger"></tagging>
 
 
 
