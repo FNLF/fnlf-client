@@ -165,6 +165,7 @@
 	<script src="observation/directives/share.js?v043"></script>
 	<script src="observation/directives/comments.js?v043"></script>
 	<script src="observation/directives/actions.js?v043"></script>
+	<script src="observation/directives/fullscreen.js?v043"></script>
 	
 	<!-- Observationcomponent -->
 	<script src="component/directives/observationComponent.js?v043"></script>
@@ -182,7 +183,7 @@
 
 
 	<!-- Navigationbar -->
-	<angled-navbar menus="nav.menus" search="nav.search" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
+	<angled-navbar ng-hide="navBarHidden" menus="nav.menus" search="nav.search" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
 	<!-- END OF Navigationbar -->
 
 	<!--Contains data from /pages appears in ng-view-->

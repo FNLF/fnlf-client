@@ -1,25 +1,43 @@
 <div >
 	<div ng-if="observation._id">
-		{{aside}}
+
 		<div ng-switch="fullscreen" class="aside-content">
 
 			<div ng-switch-when="components">
-				<ng-include src="'/shared/partials/fullscreenHeader.html'"></ng-include>
-				<observation-components acl="acl" observation="observation"></observation-components>
-				<ng-include src="'/shared/partials/fullscreenFooter.html'"></ng-include>
-
+				<fullscreen acl="acl" observation="observation" title="Komponenter i forløpet">
+					<observation-components acl="acl" observation="observation"></observation-components>
+				</fullscreen>
 			</div>
 			<div ng-switch-when="involved">
-				<ng-include src="'/shared/partials/fullscreenHeader.html'"></ng-include>
-				<involvedpersonselector acl="acl" observation="observation"></involvedpersonselector>
-				<ng-include src="'/shared/partials/fullscreenFooter.html'"></ng-include>
+				<fullscreen acl="acl" observation="observation" title="Involverte personer og utstyr">
+					<involvedpersonselector acl="acl" observation="observation"></involvedpersonselector>
+				</fullscreen>
 			</div>
 
 			<div ng-switch-when="organization">
-				<ng-include src="'/shared/partials/fullscreenHeader.html'"></ng-include>
-				<organization acl="acl" observation="observation"></organization>
-				<ng-include src="'/shared/partials/fullscreenFooter.html'"></ng-include>
+				<fullscreen acl="acl" observation="observation" title="Hoppfeltorganiseringen">
+					<organization acl="acl" observation="observation"></organization>
+				</fullscreen>
 			</div>
+
+			<div ng-switch-when="location">
+				<fullscreen acl="acl" observation="observation" title="Legg til nytt sted">
+					<location acl="acl" observation="observation"></location>
+				</fullscreen>
+			</div>
+
+			<div ng-switch-when="weather">
+				<fullscreen acl="acl" observation="observation" title="Beskriv værforholda">
+					<weather acl="acl" observation="observation"></weather>
+				</fullscreen>
+			</div>
+
+			<div ng-switch-when="actions">
+				<fullscreen acl="acl" observation="observation" title="Legg til tiltak">
+					<actions acl="acl" observation="observation"></actions>
+				</fullscreen>
+			</div>
+
 
 
 
@@ -188,7 +206,8 @@
 						<div ng-if="observation.location.geo.coordinates">
 							<locationsummary acl="acl" location="observation.location"></locationsummary>
 						</div>
-						<location acl="acl" observation="observation"></location>
+						<button type="button" class="btn btn-default btn-block" ng-click="setFullscreen('location')"><i class="fa fa-plus fa-fw"></i> Lagre nytt sted</button>';
+
 						</p>
 						<div class="clearfix"></div>
 					</li>
@@ -235,7 +254,8 @@
 						<p>{{observation.weather.manual.description}}</p>
 						<div class="clearfix"></div>
 
-						<weather acl="acl" observation="observation"></weather>
+						<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="setFullscreen('weather')"><i class="fa fa-plus fa-fw"></i>Endre Været</button>
+
 						</p>
 						<div class="clearfix"></div>
 					</li>
@@ -265,7 +285,8 @@
 
 
 						<div class="clearfix"></div>
-						<actions acl="acl" observation="observation"></actions>
+						<button type="button" class="btn btn-default btn-block" ng-click="setFullscreen('actions')"><i class="fa fa-plus fa-fw"></i> Legg til tiltak</button>
+
 						</p>
 						<div class="clearfix"></div>
 					</li>

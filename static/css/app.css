@@ -402,3 +402,30 @@ img {
 .panel-title > .small > a {
 	text-decoration: none!important;
 }
+
+
+.fullscreen-header {
+
+	border-bottom: 1px solid #e5e5e5;
+	min-height: 16.43px;
+	padding: 6px 15px;
+	background: #428bca;
+	color: #fff;
+	margin-bottom: 15px;
+
+}
+
+.fullscreen-header .close{
+
+	color: #fff;
+	font-size: 25px;
+	opacity: .8;
+	padding: 4px 8px;
+	margin-right: -8px;
+
+}
+.fullscreen-footer {
+	margin-top: 15px;
+	text-align: right;
+	border-top: 1px solid #e5e5e5;
+}

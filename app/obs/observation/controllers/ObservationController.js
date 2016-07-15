@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
+		.controller('ObservationController', function ($scope,$rootScope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -24,13 +24,25 @@
 			};
 
 			$scope.setFullscreen = function(fullscreenName){
-				$scope.fullscreen=fullscreenName;
+
 				$location.search('ui',fullscreenName);
+
+
 			};
 
+			if($scope.fullscreen){
+				$rootScope.navBarHidden=true;
+			}else{
+				$rootScope.navBarHidden=false;
+			}
+
 			$rootScope.$on('$routeChangeStart', function (event, next, current) {
-				console.log("$routeChangeStart "+$location.search().ui)
 				$scope.fullscreen = $location.search().ui;
+				if($scope.fullscreen){
+					$rootScope.navBarHidden=true;
+				}else{
+					$rootScope.navBarHidden=false;
+				}
 			});
 
 

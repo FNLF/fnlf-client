@@ -25,11 +25,8 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 		
 
 		directive.restrict = 'E';
+		directive.templateUrl = '/app/obs/observation/directives/weather.html';
 
-		directive.template = function(tElement, tAttrs) { 
-			
-			return '<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="openWeatherAside()"><i class="fa fa-plus fa-fw"></i>Endre Været</button>';
-		};
 
 		directive.scope = {
 			observation: '=',

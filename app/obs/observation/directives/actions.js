@@ -10,13 +10,9 @@ angular.module('reportingApp')
 		observation: '=',
 		acl: '='
 	};
-	
 
-	directive.template = function(tElement, tAttrs) { 
-		
-		return '<button type="button" class="btn btn-default btn-block" ng-click="openActionsAside()"><i class="fa fa-plus fa-fw"></i> Legg til tiltak</button>';
-	};
-	
+	directive.templateUrl = '/app/obs/observation/directives/actions.html';
+
 	
 	
 	directive.controller = function ($scope, $rootScope, $location, $aside, $window) {
