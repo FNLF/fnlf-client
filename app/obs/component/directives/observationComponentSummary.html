@@ -7,12 +7,12 @@
         <span ng-if="component.flags.consequence || component.flags.final_consequence" class="label label-danger">Konsekvens</span>
     </small>
     <strong>{{component.what}} </strong>
-    <flags attributes="component.attributes"></flags>
+    <flags class="hidden-xs" attributes="component.attributes"></flags>
 
 	<span ng-show="component.where.at">({{component.where.at}})</span> <span ng-show="!component.where.at"><i>(på/i ikke angitt)</i></span>
 
     <small ng-if="component.how"><br>{{component.how}}</small>
-	<span ng-if="component.tags.length > 0" class="label label-default">{{component.tags.join(', ')}}</span>&nbsp;
-	<observation-hfk-selector model="component.ask"></observation-hfk-selector>
+	<span class="hidden-xs" ng-if="component.tags.length > 0" class="label label-default">{{component.tags.join(', ')}}</span>&nbsp;
+	<observation-hfk-selector class="hidden-xs" model="component.ask"></observation-hfk-selector>
 	<br>
 </span>
