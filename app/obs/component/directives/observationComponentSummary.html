@@ -9,10 +9,10 @@
     <strong>{{component.what}} </strong>
     <flags attributes="component.attributes"></flags>
 
-    <small>på/i</small>&nbsp; <span>{{component.where.at}}</span> <span ng-show="!component.where.at"><i>(ikke angitt)</i></span>  &nbsp;
-    <observation-hfk-selector model="component.ask"></observation-hfk-selector>
-    <small>{{component.how}} &nbsp;</small>
+	<span ng-show="component.where.at">({{component.where.at}})</span> <span ng-show="!component.where.at"><i>(på/i ikke angitt)</i></span>
 
-	<div class="clearfix"></div>
-
+    <small ng-if="component.how"><br>{{component.how}}</small>
+	<span ng-if="component.tags.length > 0" class="label label-default">{{component.tags.join(', ')}}</span>&nbsp;
+	<observation-hfk-selector model="component.ask"></observation-hfk-selector>
+	<br>
 </span>
