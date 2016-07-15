@@ -28,7 +28,8 @@
 				$location.search('ui',fullscreenName);
 			};
 
-			$scope.$watch('$routeUpdate', function(){
+			$rootScope.$on('$routeChangeStart', function (event, next, current) {
+				console.log("$routeChangeStart "+$location.search().ui)
 				$scope.fullscreen = $location.search().ui;
 			});
 
