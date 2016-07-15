@@ -9,7 +9,7 @@
     <strong>{{component.what}} </strong>
     <flags attributes="component.attributes"></flags>
 
-    <span ng-if="component.tags" class="label label-default">{{component.tags.join(', ')}} </span> &nbsp;
+    <small>på/i</small>&nbsp; <span>{{component.where.at}}</span> <span ng-show="!component.where.at"><i>(ikke angitt)</i></span>  &nbsp;
     <observation-hfk-selector model="component.ask"></observation-hfk-selector>
     <small>{{component.how}} &nbsp;</small>
 

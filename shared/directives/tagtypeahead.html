@@ -1,4 +1,6 @@
 <div>
+	<span ng-show="tooManyWordsInTag" class="bg-warning">Vær så snill å bruk færre ord! Da kan andre lettere søke etter det du skriver inn.</span>
+
 	<input ng-disabled="!acl.w"
 		   placeholder="{{noun}}"
 		   class="form-control"
