@@ -4,36 +4,36 @@
 		<div ng-switch="fullscreen" class="aside-content">
 
 			<div ng-switch-when="components">
-				<fullscreen acl="acl" observation="observation" title="Komponenter i forløpet">
+				<fullscreen acl="acl" observation="observation" title="Komponenter i forløpet" fullscreen="fullscreen">
 					<observation-components acl="acl" observation="observation"></observation-components>
 				</fullscreen>
 			</div>
 			<div ng-switch-when="involved">
-				<fullscreen acl="acl" observation="observation" title="Involverte personer og utstyr">
+				<fullscreen acl="acl" observation="observation" title="Involverte personer og utstyr" fullscreen="fullscreen">
 					<involvedpersonselector acl="acl" observation="observation"></involvedpersonselector>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="organization">
-				<fullscreen acl="acl" observation="observation" title="Hoppfeltorganiseringen">
+				<fullscreen acl="acl" observation="observation" title="Hoppfeltorganiseringen" fullscreen="fullscreen">
 					<organization acl="acl" observation="observation"></organization>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="location">
-				<fullscreen acl="acl" observation="observation" title="Legg til nytt sted">
+				<fullscreen acl="acl" observation="observation" title="Legg til nytt sted" fullscreen="fullscreen">
 					<location acl="acl" observation="observation"></location>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="weather">
-				<fullscreen acl="acl" observation="observation" title="Beskriv værforholda">
+				<fullscreen acl="acl" observation="observation" title="Beskriv værforholda" fullscreen="fullscreen">
 					<weather acl="acl" observation="observation"></weather>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="actions">
-				<fullscreen acl="acl" observation="observation" title="Legg til tiltak">
+				<fullscreen acl="acl" observation="observation" title="Legg til tiltak" fullscreen="fullscreen">
 					<actions acl="acl" observation="observation"></actions>
 				</fullscreen>
 			</div>
@@ -199,20 +199,20 @@
 						<div class="clearfix"></div>
 					</li>
 
-					<li class="list-group-item">
+					<li id="location" class="list-group-item">
 						<h4 class="list-group-item-heading">Sted</h4>
 						<p class="list-group-item-text">
 
 						<div ng-if="observation.location.geo.coordinates">
 							<locationsummary acl="acl" location="observation.location"></locationsummary>
 						</div>
-						<button type="button" class="btn btn-default btn-block" ng-click="setFullscreen('location')"><i class="fa fa-plus fa-fw"></i> Lagre nytt sted</button>';
+						<button type="button" class="btn btn-default btn-block" ng-click="setFullscreen('location')"><i class="fa fa-plus fa-fw"></i> Lagre nytt sted</button>
 
 						</p>
 						<div class="clearfix"></div>
 					</li>
 
-					<li class="list-group-item">
+					<li id="organization" class="list-group-item">
 						<h4 class="list-group-item-heading">Hoppfeltorganisasjon</h4>
 						<p class="list-group-item-text">
 							<organization-summary observation="observation"></organization-summary>
@@ -221,7 +221,7 @@
 						<div class="clearfix"></div>
 					</li>
 
-					<li class="list-group-item">
+					<li id="involved" class="list-group-item">
 						<h4 class="list-group-item-heading">Involverte personer og utstyr</h4>
 						<p class="list-group-item-text">
 							<involved-summary observation="observation"></involved-summary>
@@ -230,7 +230,7 @@
 						<div class="clearfix"></div>
 					</li>
 
-					<li class="list-group-item">
+					<li id="components" class="list-group-item">
 						<h4 class="list-group-item-heading">Komponenter i forløpet</h4>
 						<p class="list-group-item-text">
 							<observation-components-summary observation="observation"></observation-components-summary>
@@ -241,7 +241,7 @@
 					</li>
 
 					<!-- Weather; should be more intelligent and using weather icons? -->
-					<li class="list-group-item">
+					<li id="weather" class="list-group-item">
 						<h4 class="list-group-item-heading">Været</h4>
 						<p class="list-group-item-text">
 							<span ng-show="observation.weather.manual.wind.max"><span class="label label-default">Max {{observation.weather.manual.wind.max}} knop </span>&nbsp;</span>
@@ -261,7 +261,7 @@
 					</li>
 
 					<!-- Actions! -->
-					<li class="list-group-item">
+					<li id="actions" class="list-group-item">
 						<h4 class="list-group-item-heading">Tiltak</h4>
 						<p class="list-group-item-text">
 

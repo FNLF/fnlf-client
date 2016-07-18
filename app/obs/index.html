@@ -180,7 +180,12 @@
 
 </head>
 <body>
+<style ng-if="navBarHidden">
+	body {
+		padding-top:0px;
+	}
 
+</style>
 
 	<!-- Navigationbar -->
 	<angled-navbar ng-hide="navBarHidden" menus="nav.menus" search="nav.search" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
