@@ -81,7 +81,6 @@ angular.module('reportingApp')
 
 					ObservationService.getWorkflowState($scope.observation._id, $scope.observation.id)
 						.then(function (workflowState) {
-							console.log(workflowState);
 							$scope.workflowpermission = workflowState.workflowpermission;
 							$scope.tt = workflowState.tt;
 							$scope.tooltip = workflowState.tooltip;

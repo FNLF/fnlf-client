@@ -27,7 +27,35 @@
 						$scope.acl=acl;
 					});
 			};
-			
+
+			$scope.ui=$routeParams.ui;
+			$scope.fullscreen=$scope.ui;
+			if($scope.fullscreen){
+				$rootScope.navBarHidden=true;
+			}else{
+				$rootScope.navBarHidden=false;
+			}
+			$rootScope.setFullscreen = function(fullscreenName){
+
+				$location.search('ui',fullscreenName);
+			};
+
+			$rootScope.$on('$routeChangeStart', function (event, next, current) {
+				if(!$location.search().ui){
+					$scope.fullscreen='';
+				}else{
+					$scope.fullscreen = $location.search().ui;
+				}
+
+
+				if($scope.fullscreen){
+					$rootScope.navBarHidden=true;
+				}else{
+					$rootScope.navBarHidden=false;
+				}
+			});
+
+
 			$scope.loadObservation = function(){
 				$scope.observation = {};
 				ObservationService.getObservationById(observationId)
@@ -58,7 +86,10 @@
 
 			};
 			$scope.loadObservation();
-			
+
+			$rootScope.loadObservation = function() {
+				$scope.loadObservation();
+			};
 			
 		});
 	
