@@ -215,7 +215,117 @@
 							});
 					});
 			};
-			
+
+			this.getWorkflowState = function (observation_id,observationId) {
+
+				var deferred = $q.defer();
+
+				RestService.getWorkflowState(observation_id)
+					.then(function (response) {
+
+						var workflowState = {};
+
+
+						var icon = '';
+						var btns = [];
+						var btnss = '';
+						var btn_class = 'default';
+
+						for (var k in response.actions) {
+							var side = 'left';
+
+							if (response.actions[k].resource == 'approve') {
+								btn_class = 'success';
+								icon = 'check';
+							}
+
+							else if (response.actions[k].resource == 'withdraw') {
+								btn_class = 'warning';
+								side = 'right';
+								icon = 'ban';
+							}
+							else if (response.actions[k].resource == 'reopen') {
+								btn_class = 'primary';
+								side = 'left';
+								icon = 'reply';
+							}
+							else if (response.actions[k].resource == 'reject') {
+								btn_class = 'danger';
+								side = 'right';
+								icon = 'close';
+							}
+							else btn_class = 'default';
+
+							btnss += '<button class="pull-' + side + ' btn btn-' + btn_class + '" ng-click="changeWorkflowState("' + response.actions[k].resource + '","Kommentaren") ">' + response.actions[k].action + '</button>';
+
+							btns.push({
+								permission: response.actions[k].permission,
+								action: response.actions[k].action,
+								title: response.actions[k].title,
+								resource: response.actions[k].resource,
+								side: side,
+								btn_class: btn_class,
+								icon: icon
+							});
+
+							workflowState.workflowpermission = response.actions[k].permission;
+						}
+						;
+
+
+						workflowState.tt = 'default';
+						if (['pending_review_hi', 'pending_review_fs', 'pending_review_su'].indexOf(response.state) > -1) {
+							workflowState.tt = 'warning';
+						} else if (response.state == 'ready') {
+							workflowState.tt = 'primary';
+						} else if (response.state == 'closed') {
+							workflowState.tt = 'success';
+						} else if (response.state == 'withdrawn') {
+							workflowState.tt = 'danger';
+						} else if (response.state == 'draft') {
+							workflowState.tt = 'info';
+						}
+
+						workflowState.tooltip = response.description;
+
+						workflowState.wf = {btns: '', title: '', comment: ''};
+
+						workflowState.btn_title = response.title;
+
+						if (!workflowState.workflowpermission) {
+							workflowState.btn_descr = 'Du har ikke tilgang til arbeidsflyten';
+						}else{
+							workflowState.btn_descr = response.description;
+						}
+
+						workflowState.btns = btns;
+						workflowState.username = +$rootScope.username;
+						workflowState.title = 'Arbeidsflyt for #' + observationId;
+
+						var disabledFn = function () {
+							if (!workflowState.workflowpermission || workflowState.observationChanges) return true;
+
+							return false;
+						};
+						var toolbarbutton = {
+							disabled: disabledFn,
+							tooltip: response.description,
+							text: response.title,
+							btn_class: workflowState.tt,
+							icon: 'random'
+						};
+						workflowState.toolbarbutton = toolbarbutton;
+
+						deferred.resolve(workflowState);
+					})
+					.catch(function(error){
+						deferred.reject(error);
+					});
+
+				return deferred.promise;
+			};
+
+
 			/**
 			 * Watching start/stop
 			 */
@@ -232,6 +342,9 @@
 			this.getAcl = function(id){
 				return RestService.getObservationAcl(id);
 			};
+
+
+
 
 		});
 

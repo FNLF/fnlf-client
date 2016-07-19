@@ -1,4 +1,4 @@
-angular.module('reportingApp').directive('fullscreen', function ($location,$window,$timeout,$document) {
+angular.module('reportingApp').directive('fullscreen', function ($location,$window,$timeout,$document,$rootScope) {
 	var directive = {};
 
 	directive.restrict = 'E';
@@ -8,20 +8,34 @@ angular.module('reportingApp').directive('fullscreen', function ($location,$wind
 	directive.scope = {
 		observation: '=',
 		acl: '=',
+		fullscreen: '=',
 		title: '@',
-		fullscreen: '='
+		observationChanges:'='
 	};
 
 	directive.link = function ($scope, element, attrs) {
 
+		$scope.isFinished=false;
+
 		$scope.hideFullscreen = function(){
-			$location.search('ui','');
+			$scope.isFinished=true;
+			$timeout(function(){
+				if($scope.isFinished){
+					if ($location.$$search.ui) {
+						delete $location.$$search.ui;
+						$location.$$compose();
+					}
+				}
+			},10);
 		};
 
-		$window.scrollTo(0, 0);
 
+
+
+
+		$window.scrollTo(0, 0);
+		var fullscreen = $scope.fullscreen;
 		$scope.$on("$destroy", function() {
-			var fullscreen = $scope.fullscreen;
 			$timeout(function(){
 				var elem = $document[0].getElementById(fullscreen);
 					if(elem){

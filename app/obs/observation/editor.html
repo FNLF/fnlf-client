@@ -38,6 +38,12 @@
 				</fullscreen>
 			</div>
 
+			<div ng-switch-when="workflow">
+				<fullscreen acl="acl" observation="observation" title="Arbeidsflyt for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+					<workflow acl="acl" observation="observation" observation-changes="observationChanges" is-finished="isFinished"></workflow>
+				</fullscreen>
+			</div>
+
 
 
 
@@ -46,7 +52,7 @@
 				<!-- Placeholders for status stuff -->
 
 				<!-- Workflows, show current status. Click dropdown show actions -->
-				<span class="pull-right"><workflow observation-changes="observationChanges" observation="observation"></workflow>&nbsp;</span>
+				<span class="pull-right"><workflow-button observation-changes="observationChanges" observation="observation"></workflow-button>&nbsp;</span>
 				<!-- <span class="pull-right"><workingcomments observation="observation"></workingcomments>&nbsp;</span> -->
 
 				<h1 class="hidden-xs text-muted">#{{observation.id}}  {{observation.tags.join('/')}} <small><resolveclub clubid="observation.club"></resolveclub></small></h1>
@@ -341,7 +347,7 @@
 					<i class="fa fa-save fa-fw"></i> Lagre
 				</button>
 				<br>
-				<span class="block" ng-if="observation.workflow.state=='draft'"><workflow observation-changes="observationChanges" observation="observation" btnclass="btn-block">Send til HI</workflow>&nbsp;</span>
+				<span class="block" ng-if="observation.workflow.state=='draft'"><workflow-button observation-changes="observationChanges" observation="observation" btnclass="btn-block">Send til HI</workflow-button>&nbsp;</span>
 			</div>
 		</div>
 

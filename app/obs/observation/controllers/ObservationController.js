@@ -18,17 +18,16 @@
 			$scope.ui=$routeParams.ui;
 			$scope.fullscreen=$scope.ui;
 
-			$scope.hideFullscreen = function(){
+			$rootScope.hideFullscreen = function(){
 				$scope.fullscreen='';
 				$location.search('ui','');
 			};
 
-			$scope.setFullscreen = function(fullscreenName){
+			$rootScope.setFullscreen = function(fullscreenName){
 
 				$location.search('ui',fullscreenName);
-
-
 			};
+
 
 			if($scope.fullscreen){
 				$rootScope.navBarHidden=true;
@@ -37,7 +36,13 @@
 			}
 
 			$rootScope.$on('$routeChangeStart', function (event, next, current) {
-				$scope.fullscreen = $location.search().ui;
+				if(!$location.search().ui){
+					$scope.fullscreen='';
+				}else{
+					$scope.fullscreen = $location.search().ui;
+				}
+
+
 				if($scope.fullscreen){
 					$rootScope.navBarHidden=true;
 				}else{
