@@ -15,7 +15,6 @@ angular.module('reportingApp')
 		directive.restrict = 'E';
 
 
-
 		directive.scope = {
 			observation: '=',
 			observationChanges: '=',
@@ -26,7 +25,7 @@ angular.module('reportingApp')
 		directive.templateUrl = '/app/obs/observation/directives/workflow.html';
 
 
-		directive.controller = function ($scope, $rootScope, $location,$timeout) {
+		directive.controller = function ($scope, $rootScope, $location, $timeout) {
 
 			$scope.workflowActions = {
 				init: 'Opprettet',
@@ -46,15 +45,15 @@ angular.module('reportingApp')
 
 			$scope.workflowTransition = function (action, comment) {
 				$scope.isFinished = true;
-				$timeout(function(){
-					if($scope.isFinished){
+				$timeout(function () {
+					if ($scope.isFinished) {
 						if ($location.$$search.ui) {
 							delete $location.$$search.ui;
 							$location.$$compose();
 						}
 					}
 
-				},0);
+				}, 0);
 				//If unsaved changes- save those first!
 				ObservationService.changeWorkflowState($scope.observation._id, action, comment, function (updated) {
 					$scope.observation = updated;
@@ -71,7 +70,7 @@ angular.module('reportingApp')
 
 		directive.link = function ($scope, element, attrs) {
 
-			$scope.isFinished=false;
+			$scope.isFinished = false;
 
 			$scope.observationTypes = Definitions.getObservationTypes();
 
