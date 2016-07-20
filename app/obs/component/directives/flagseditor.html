@@ -1,5 +1,5 @@
 <span>
-    <span class="hidden-sm hidden-xs hidden-md" class="btn-group-md">
+    <span class="hidden-sm hidden-xs hidden-md" class="btn-group-sm">
       <span ng-repeat="a in allAttributes">
           <button ng-disabled="!acl.w" class="btn btn-{{a.color}} " ng-click="toggle(a.attribute)" ng-show="attributes[a.attribute]" >{{a.label}}</button>
           <button ng-disabled="!acl.w" class="btn"                  ng-click="toggle(a.attribute)" ng-hide="attributes[a.attribute]" >{{a.label}}</button>
