@@ -10,3 +10,34 @@
 		<br>
 	</div>
 </div>
+<div ng-show="isFinished">
+	<style>
+		.glyphicon-refresh-animate {
+			-animation: spin .7s infinite linear;
+			-webkit-animation: spin2 .7s infinite linear;
+		}
+
+		@-webkit-keyframes spin2 {
+			from { -webkit-transform: rotate(0deg);}
+			to { -webkit-transform: rotate(360deg);}
+		}
+
+		@keyframes spin {
+			from { transform: scale(1) rotate(0deg);}
+			to { transform: scale(1) rotate(360deg);}
+		}
+
+		.spinner {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			font-size:400%;
+		}
+	</style>
+
+	<div class="spinner">
+	<span class="text-muted glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+	</div>
+</div>
