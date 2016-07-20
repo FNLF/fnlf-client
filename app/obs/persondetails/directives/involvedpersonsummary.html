@@ -1,15 +1,19 @@
 
-	<resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser>&nbsp;
-	<!--<span>{{person.jumptypeSelected}}</span>&nbsp;-->
-	<span ng-repeat="tag in person.jumptypeTags"><span class="label label-info">{{tag}}&nbsp;</span>&nbsp;</span>
-	<span class="label label-default" ng-if="person.gear.harnessType">{{person.gear.harnessType}}</span>&nbsp;
-	<span class="label label-default" ng-if="person.gear.mainCanopyType">{{person.gear.mainCanopyType}}</span>&nbsp;
-	<span ng-repeat="tag in person.gear.other"><span class="label label-default">{{tag}}&nbsp;</span>&nbsp;</span>
-	<span class="label label-info" ng-if="person.numberOfJumps">Antall hopp: {{person.numberOfJumps}}</span>&nbsp;
-	<span class="label label-info" ng-if="person.yearsOfExperience">År i sporten: {{person.yearsOfExperience}}</span>&nbsp;
+<span ng-repeat="tag in person.jumptypeTags"><span class="label label-info">{{tag}}&nbsp;</span>&nbsp;</span>
+<b><resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser></b>&nbsp;
+<!--<span>{{person.jumptypeSelected}}</span>&nbsp;-->
+<small>
+	<br>
+	<span ng-if="person.gear.harnessType">{{person.gear.harnessType}}</span>
+	<span ng-if="person.gear.mainCanopyType">{{person.gear.mainCanopyType}}</span>
+	<span ng-repeat="tag in person.gear.other"><span>{{tag}}&nbsp;</span></span>
+
+	<span class="bg-info" ng-if="person.numberOfJumps">Antall hopp: {{person.numberOfJumps}}</span>&nbsp;
+	<span class="bg-info" ng-if="person.yearsOfExperience">År i sporten: {{person.yearsOfExperience}}</span>&nbsp;
 	<span ng-if="person.verdict.fu" class="label label-warning">FU</span>
 	<span ng-if="person.verdict.mh" class="label label-warning">Midlertidig hoppforbud</span>
 	<span ng-if="person.verdict.ph" class="label label-danger">Permanent Hoppforbud</span>
+</small>
 
 
 

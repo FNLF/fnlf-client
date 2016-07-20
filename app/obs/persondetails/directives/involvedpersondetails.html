@@ -4,16 +4,7 @@
 
 			<accordion-heading ng-init="open[person.id]=true">
 					<i class="fa fa-fw" ng-class="{'fa-minus-square-o': open[person.id], 'fa-plus-square-o': !open[person.id]}"></i>
-
-
-				<resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser>&nbsp;
-
-				<span ng-repeat="tag in person.jumptypeTags"><span class="label label-info">{{tag}}&nbsp;</span>&nbsp;</span>
-
-				<span class="label label-default" ng-if="person.gear.harnessType">{{person.gear.harnessType}}</span>&nbsp;
-				<span class="label label-default" ng-if="person.gear.mainCanopyType">{{person.gear.mainCanopyType}}</span>&nbsp;
-				<span ng-repeat="tag in person.gear.other"><span class="label label-default">{{tag}}&nbsp;</span>&nbsp;</span>
-
+					<involvedpersonsummary person="person"></involvedpersonsummary>
 			</accordion-heading>
 			<div ng-if="open[person.id]">
 				<involvedperson acl="acl" person="person" jumptypes="jumptypes" licensesFromMelwin="licensesFromMelwin"></involvedperson>
