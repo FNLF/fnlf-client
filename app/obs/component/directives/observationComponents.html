@@ -27,9 +27,10 @@
 	</div>
 	<div>
 
-			
-			<div is-open="component.open" ng-repeat="component in observation.components | orderBy:'order' track by $index">
+			<table class="table-responsive table table-condensed">
 
+			<tr is-open="component.open" ng-repeat="component in observation.components | orderBy:'order' track by $index">
+<td>
 				<!-- Heding -->
 					
 					<div>
@@ -49,11 +50,11 @@
 				<div ng-if="component.open" class="col-xs-12 col-md-12">
 					<observation-component acl="acl" component="component" observation="observation"></observation-component>
 				</div>
-			
-			
-		
-		</div>
 
+
+</td>
+		</tr>
+			</table>
 	</div>
 	<div>
 		<button ng-disabled="!acl.w" ng-show="observation.components.length==0" type="button" class="btn btn-primary btn-block" ng-click="newIncident()">

@@ -1,5 +1,9 @@
-<div ng-repeat="component in observation.components | orderBy:'order'">
-
-	<observation-component-summary component="component"></observation-component-summary>
-
+<div class="table-responsive">
+	<table class="table table-responsive table-condensed">
+		<tr ng-repeat="component in observation.components | orderBy:'order'">
+			<td>
+				<observation-component-summary component="component"></observation-component-summary>
+			</td>
+		</tr>
+	</table>
 </div>
