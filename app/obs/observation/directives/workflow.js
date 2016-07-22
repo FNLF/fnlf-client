@@ -48,8 +48,7 @@ angular.module('reportingApp')
 				$timeout(function () {
 					if ($scope.isFinished) {
 						if ($location.$$search.ui) {
-							delete $location.$$search.ui;
-							$location.$$compose();
+							$location.search('ui','').replace();
 						}
 					}
 

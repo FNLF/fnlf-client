@@ -22,11 +22,10 @@ angular.module('reportingApp').directive('fullscreen', function ($location,$wind
 			$timeout(function(){
 				if($scope.isFinished){
 					if ($location.$$search.ui) {
-						delete $location.$$search.ui;
-						$location.$$compose();
+						$location.search('ui','').replace();
 					}
 				}
-			},10);
+			},0);
 		};
 
 
