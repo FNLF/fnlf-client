@@ -24,7 +24,7 @@ angular.module('reportingApp')
 
 		directive.template = function (tElement, tAttrs) {
 
-			return '<button ng-disabled="disabledFn()" \
+			return '<button ng-disabled="workflowDisabledFn()" \
 				popover-trigger="mouseenter" tooltip="{{btn_descr}}" type="button" \
 				class="btn btn-{{tt}}" ng-click="openWorkflowAside()"> \
 				<span ng-transclude></span> <i class="fa fa-random fa-fw"></i> {{btn_title}}</button>';
@@ -32,6 +32,10 @@ angular.module('reportingApp')
 
 
 		directive.controller = function ($scope, $rootScope) {
+
+			$scope.workflowDisabledFn = function(){
+				return $rootScope.observationIsChanged();
+			};
 
 			$scope.workflowActions = {
 				init: 'Opprettet',
@@ -71,7 +75,6 @@ angular.module('reportingApp')
 				if (newValue && newValue._id) {
 					ObservationService.getWorkflowState($scope.observation._id, $scope.observation.id)
 						.then(function (workflowState) {
-							console.log(workflowState);
 							$scope.workflowpermission = workflowState.workflowpermission;
 							$scope.tt = workflowState.tt;
 							$scope.tooltip = workflowState.tooltip;

@@ -74,6 +74,10 @@
 				return !$scope.observationChanges;
 			};
 
+			$rootScope.observationIsChanged = function(){
+				return $scope.observationChanges;
+			};
+
 			$rootScope.openInReport = function(){
 				$location.path('/observation/report/'+ $scope.observation.id);
 			};
