@@ -24,7 +24,7 @@ angular.module('reportingApp')
 	
 	directive.template = function(tElement, tAttrs) { 
 		
-		return '<button ng-disabled="disabledFn()" \
+		return '<button ng-disabled="workflowDisabledFn()" \
 				popover-trigger="mouseenter" tooltip="{{btn_descr}}" type="button" \
 				class="btn btn-{{tt}}" ng-click="openWorkflowAside()"> \
 				<span ng-transclude></span> <i class="fa fa-random fa-fw"></i> {{btn_title}}</button>';
@@ -90,6 +90,10 @@ angular.module('reportingApp')
 
 		
 	directive.link = function($scope, element, attrs) {
+
+		$scope.workflowDisabledFn = function(){
+			return !$rootScope.saveDisabledFn();
+		};
 
 		$scope.observationTypes = Definitions.getObservationTypes();
 	
@@ -170,11 +174,11 @@ angular.module('reportingApp')
 			
 			var disabledFn = function(){
 				if(!$scope.workflowpermission || $scope.observationChanges) return true;
-				
+
 				return false;
 			 };
 			var toolbarbutton = {disabled:disabledFn, tooltip:response.description, text:response.title,btn_class:$scope.tt,icon:'random', onclick:$scope.openWorkflowAside};
-			
+
 			$rootScope.nav.toolbar[1] = toolbarbutton;
 		});
 	};
