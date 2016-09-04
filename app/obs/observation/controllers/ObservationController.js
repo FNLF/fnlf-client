@@ -70,7 +70,7 @@
 //				return false; //return $scope.acl['type'];
 //			}
 
-			$rootScope.disabledFn = function(){
+			$rootScope.saveDisabledFn = function(){
 				return !$scope.observationChanges;
 			};
 
@@ -86,7 +86,7 @@
 				$rootScope.nav.brand = 'FNLF ORS #' + $scope.observation.id;
 				//$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
 				if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
-					$rootScope.nav.toolbar[0] = {disabled:$rootScope.disabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
+					$rootScope.nav.toolbar[0] = {disabled:$rootScope.saveDisabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
 				}
 				
 				$rootScope.nav.toolbar[2] = {disabled:$rootScope.openInReportdisabledFn,tooltip:'Åpne i rapport',text:'Åpne i rapport',btn_class:'default',icon:'file-text-o', onclick:$rootScope.openInReport};
@@ -126,10 +126,7 @@
 				$scope.saveObservation();
 			};
 			
-			//Toolbar!
-			var disabledFn = function(){
-				return !$scope.observationChanges;
-			 };
+
 			
 			
 			var observationTypes = Definitions.getObservationTypes();
