@@ -303,7 +303,9 @@
 						workflowState.title = 'Arbeidsflyt for #' + observationId;
 
 						var disabledFn = function () {
-							if (!workflowState.workflowpermission || workflowState.observationChanges) return true;
+							if (!workflowState.workflowpermission || $rootScope.observationIsChanged()){
+								return true;
+							}
 
 							return false;
 						};
