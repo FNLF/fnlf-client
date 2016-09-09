@@ -179,11 +179,10 @@
 
 				return RestService.updateObservation(observationDto, _id, _etag)
 					.then(function(obs){
-						return RestService.getObservation(id)
-							.then(function(updated){
-								clearFullnameFromObservation(updated);
-								return updated;
-							});
+						observation._version = obs._version;
+						observation._etag = obs._etag;
+						observation._updated = obs._updated;
+						return observation;
 					});
 			};
 

@@ -157,7 +157,7 @@
 							$scope.observationChanges = false;
 							$window.onbeforeunload = null;
 							addMenusAndToolbar();
-						},100);
+						},0);
 					})
 				.catch(function(error){
 
