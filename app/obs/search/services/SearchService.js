@@ -107,6 +107,14 @@
 					}
 				};
 
+				var addBoolAttrFilterFn = function(filter,filterParam,modelParam){
+					if(filter[filterParam]){
+						var atr = {};
+						atr[modelParam] = true;
+						andArr.push(atr);
+					}
+				};
+
 				var date1 = (filter['year1'] ? new Date(Date.UTC(filter['year1'], 0, 0, 0, 0)):null);
 				var date2 = (filter['year2'] ? new Date(Date.UTC(filter['year2'], 12, 30, 0, 0)):null);
 				addNumberFilterFn('when',date1,date2);
@@ -119,6 +127,10 @@
 				addSimpleAttrFilterFn(filter,'club','club');
 				addSimpleAttrFilterFn(filter,'type','type');
 
+				addBoolAttrFilterFn(filter,'fu','involved.verdict.fu');
+				addBoolAttrFilterFn(filter,'ph','involved.verdict.ph');
+				addBoolAttrFilterFn(filter,'aviation','flags.aviation');
+				addBoolAttrFilterFn(filter,'insurance','flags.insurance');
 
 
 				//Search by id
