@@ -119,8 +119,25 @@
 				addSimpleAttrFilterFn(filter,'club','club');
 				addSimpleAttrFilterFn(filter,'type','type');
 
-				if(andArr.length>0) {
-					whereObj.$and = andArr;
+
+
+				//Search by id
+				var idArr = [];
+				angular.forEach(tags, function (tag) {
+					var isInt = /^\+?\d+$/.test(tag);
+					if(isInt){
+                		var id = parseInt(tag,10);
+                		var obj = {};
+                		obj.id=id;
+                		idArr.push(obj);
+                	}
+				});
+				if(idArr.length>0){
+					whereObj.$or=idArr;
+				}else{
+					if(andArr.length>0) {
+						whereObj.$and = andArr;
+					}
 				}
 
 				var whereString = JSON.stringify(whereObj);
@@ -242,6 +259,7 @@
 				query = query.replace(/(^,)|(,$)/g, "");
 				var tags = query.split(',')
 					.map(function(t){
+						t = t.replace('#',''); // # makes the server return error
 						return Functions.capitalizeFirstLetter(t.trim());
 					});
 				return tags;
