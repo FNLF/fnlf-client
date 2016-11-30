@@ -15,6 +15,11 @@
 				</fullscreen>
 			</div>
 
+			<div ng-switch-when="share">
+				<fullscreen acl="acl" observation="observation" title="Kommenter for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+					<share acl="acl" observation="observation" observation-changes="observationChanges" is-finished="isFinished"></share>
+				</fullscreen>
+			</div>
 
 
 			<div ng-switch-default>
@@ -33,7 +38,7 @@
 							<resolveobservationtype type="::observation.type"></resolveobservationtype>
 						</span>
 						
-						<span ng-if="::observation.workflow.state=='closed'"> &nbsp; <comments-button observation="observation"></comments-button> &nbsp; <share observation="observation"></share> &nbsp; <!-- Watchers - am I watching, click to show who's watching -->
+						<span ng-if="::observation.workflow.state=='closed'"> &nbsp; <comments-button observation="observation"></comments-button> &nbsp; <share-button observation="observation"></share-button> &nbsp; <!-- Watchers - am I watching, click to show who's watching -->
 							<watchers observation="observation"></watchers>
 						</span>
 						

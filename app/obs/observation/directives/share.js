@@ -6,6 +6,31 @@
  * 
  */
 
+angular.module('reportingApp')
+	   .directive('shareButton', function ($rootScope ) {
+
+	var directive = {};
+
+	directive.restrict = 'E';
+
+	directive.scope = {
+		observation: '=',
+		observationChanges: '='
+	};
+
+	directive.template = '<button class="btn btn-sm btn-primary" ng-disabled="observationChanges" ng-click="openShareAside()"><i class="fa fa-envelope-o fa-fw"></i> Del</button>';
+
+
+	directive.link = function($scope, element, attrs) {
+
+	$scope.openShareAside = function() {
+		$rootScope.setFullscreen('share');
+	};
+
+	};
+
+	return directive;
+});
 
 angular.module('reportingApp')
 	   .directive('share', function (RestService, ObservationService, $aside, $rootScope, $window, $http, $q) {
@@ -19,46 +44,12 @@ angular.module('reportingApp')
 		observationChanges: '='
 	};
 	
-	directive.template = function(tElement, tAttrs) { 
-		
-		return '<button class="btn btn-sm btn-primary" ng-disabled="observationChanges" ng-click="openShareAside()"><i class="fa fa-envelope-o fa-fw"></i> Del</button>';
-	};
+	directive.templateUrl = '/app/obs/observation/directives/share.html';
 	
 	
 	directive.controller = function ($scope, $rootScope, $location, $aside) {
 		var urlBase = '/api/v1';
-		$scope.openShareAside = function() {
-			
-			$location.path('/observation/modal-route', false);
-			
-			  $scope.shareAside = $aside({
-					scope: $scope,
-					title: 'Del observasjon #' + $scope.observation.id, 
-					show: true,
-					contentTemplate: '/app/obs/observation/directives/share.html',
-					template: '/shared/partials/aside.html',
-					placement: 'full-left',
-					container: 'body',
-					backdrop: 'static',
-					animation: 'am-slide-left',
-					});
 
-		};
-			
-		// Needs to manually close aside on back button
-		$rootScope.$on('$routeChangeStart', function(event, next, current) {
-		  if($scope.shareAside) {
-			  if($scope.shareAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
-				  $scope.shareAside.hide();
-			  }
-		  }
-		});
-		
-		$scope.$on('aside.hide', function() {
-		  if($location.path().indexOf('/modal-route') != -1) {
-			  $window.history.back();
-		  };
-		});
 		
 		$scope._share = function(recepients, comment, title) {
 
