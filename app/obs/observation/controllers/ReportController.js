@@ -2,7 +2,7 @@
 
 	
 	angular.module('reportingApp')
-		.controller('ReportController', function ($scope, ObservationService,Definitions,$routeParams,$timeout, $rootScope, $location) {
+		.controller('ReportController', function ($scope,$rootScope, ObservationService,Definitions,$routeParams,$timeout, $rootScope, $location) {
 			
 			
 			var observationId = $routeParams.id;
@@ -90,7 +90,11 @@
 			$rootScope.loadObservation = function() {
 				$scope.loadObservation();
 			};
-			
+
+			$rootScope.observationIsChanged = function(){
+				return false;
+			};
+
 		});
 	
 })();

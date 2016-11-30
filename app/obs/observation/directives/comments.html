@@ -1,16 +1,17 @@
-<div class="col-xs-12 col-md-12" ng-init="getComments()">
+<div class="col-xs-12 col-md-12">
 <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
 	<form name="form">
 		<div class="form-group">
 			<label for="comment">Ny kommentar:</label>
-			<textarea ng-model="$parent.comment" name="comment" class="form-control" rows="3" id="comment"></textarea>
+			<textarea ng-model="comment" name="comment" class="form-control" rows="3" id="comment"></textarea>
 		</div>
 		<div class="form-group">
-			<button ng-click="saveComment();" class="btn btn-primary">Kommenter</button>
+			<button ng-click="saveComment(comment);" class="btn btn-primary">Kommenter</button>
 		</div>
 	</form>
 	<div class="clearfix"></div>
 	<div class="row" ng-repeat="c in comments">
+
 		<div class="col-sm-1 col-xs-4">
 			<div class="thumbnail">
 				<resolveuseravatar userid="c.user"></resolveuseravatar>
