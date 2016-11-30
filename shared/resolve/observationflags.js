@@ -16,7 +16,7 @@ angular.module('resolve').directive('resolveobservationflags', function (Resolve
 		
 		$scope.observationflags = [];
 		
-		console.log($scope.flags);
+
 		
 		if(!$scope.flags || $scope.flags.length == 0) {
 			
