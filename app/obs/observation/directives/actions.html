@@ -3,7 +3,7 @@
 <h3>Lokale</h3>
 <form>
 <div class="input-group">
-   <input ng-disabled="!acl.w" type="text" ng-model="$parent.actionLocal" class="form-control">
+   <input ng-disabled="!acl.w" type="text" ng-model="actionLocal" class="form-control">
    <span class="input-group-btn">
         <button ng-disabled="!acl.w" ng-click="addActionLocal(actionLocal)" class="btn btn-primary" type="submit"><i class="fa fa-plus fa-fw"></i> Legg til</button>
    </span>
@@ -25,7 +25,7 @@
 <h3>Sentrale</h3>
 <form>
 <div class="input-group">
-   <input ng-disabled="!acl.w" type="text" ng-model="$parent.actionCentral" class="form-control">
+   <input ng-disabled="!acl.w" type="text" ng-model="actionCentral" class="form-control">
    <span class="input-group-btn">
         <button ng-disabled="!acl.w" ng-click="addActionCentral(actionCentral)" class="btn btn-primary" type="submit"><i class="fa fa-plus fa-fw"></i> Legg til</button>
    </span>
