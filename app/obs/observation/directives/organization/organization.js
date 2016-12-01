@@ -1,6 +1,6 @@
 (function () {
 
-	var organization = function (RestService, $aside, $rootScope, $window) {
+	var organization = function (RestService, $rootScope, $window) {
 		var directive = {};
 
 		directive.restrict = 'E';

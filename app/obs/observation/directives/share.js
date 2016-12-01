@@ -33,7 +33,7 @@ angular.module('reportingApp')
 });
 
 angular.module('reportingApp')
-	   .directive('share', function (RestService, ObservationService, $aside, $rootScope, $window, $http, $q) {
+	   .directive('share', function (RestService, ObservationService, $rootScope, $window, $http, $q) {
   
 	var directive = {};
 
@@ -47,7 +47,7 @@ angular.module('reportingApp')
 	directive.templateUrl = '/app/obs/observation/directives/share.html';
 	
 	
-	directive.controller = function ($scope, $rootScope, $location, $aside) {
+	directive.controller = function ($scope, $rootScope, $location) {
 		var urlBase = '/api/v1';
 
 		

@@ -1,4 +1,4 @@
-angular.module('reportingApp').directive('involvedpersonselector', function (RestService, $aside, $rootScope, $window) {
+angular.module('reportingApp').directive('involvedpersonselector', function (RestService, $rootScope, $window) {
 		var directive = {};
 
 		directive.restrict = 'E';

@@ -26,7 +26,7 @@ angular.module('reportingApp')
 	};
 	
 	
-	directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q, $window) {
+	directive.controller = function ($scope, $rootScope, $location, $http, $q, $window) {
 
 		var urlBase = '/api/v1';
 		$scope.observationcomment = '';
