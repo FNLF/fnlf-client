@@ -1,5 +1,5 @@
 
-angular.module('reportingApp').directive('locationsummary', function ($window) {
+angular.module('reportingApp').directive('locationsummary', function ($window,$rootScope,LocationService) {
 
 	var directive = {};
 
@@ -8,15 +8,21 @@ angular.module('reportingApp').directive('locationsummary', function ($window) {
 
 
 	directive.scope = {
-		location: '=',
+		clublocations: '=',
+		observation: '=',
 		acl: '='
 	};
 
 	directive.link = function ($scope, element, attrs) {
 
+		$scope.editLocationsButtonClicked = function(){
+			$rootScope.setFullscreen('location')
+		};
+
+
 		$scope.dragMarker = function(event){
-			$scope.location.geo.coordinates[0]=event.latLng.lat();
-			$scope.location.geo.coordinates[1]=event.latLng.lng();
+			$scope.observation.location.geo.coordinates[0]=event.latLng.lat();
+			$scope.observation.location.geo.coordinates[1]=event.latLng.lng();
 			$scope.markerDragged=true;
 		};
 
@@ -24,11 +30,6 @@ angular.module('reportingApp').directive('locationsummary', function ($window) {
 			$scope.markerDragged=false;
 		});
 
-//		$scope.$on('mapInitialized', function (event, map) {
-//		    $window.setTimeout(function() {
-//		        map.setCenter(new google.maps.LatLng($scope.observation.north, $scope.observation.east));
-//		    }, 100);
-//		});
 
 	};
 

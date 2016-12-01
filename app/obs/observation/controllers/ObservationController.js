@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope,$rootScope, ObservationService,Definitions,$routeParams,$timeout, $upload, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
+		.controller('ObservationController', function ($scope,$rootScope, ObservationService,Definitions,LocationService,$routeParams,$timeout, $upload, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
 			
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -108,7 +108,7 @@
 					.then(function(obs){
 						$scope.getAcl();
 						$scope.observation = obs;
-
+						$scope.getClubLocations();
 						$scope.observationChanges = false;
 						$timeout(function(){
 							$scope.observationChanges = false;
@@ -274,6 +274,20 @@
 				 
 				 };
 		 };
+
+
+		$scope.getClubLocations = function() {
+
+			LocationService.getClubLocations($scope.observation.club).then(function(response) {
+
+				if(typeof $scope.observation.location.nickname == 'undefined' && response.locations.length > 0) {
+					$scope.observation.location = response.locations[0];
+				};
+
+				$scope.clublocations = response.locations;
+
+				});
+			};
 
 
 

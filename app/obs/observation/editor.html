@@ -21,8 +21,8 @@
 			</div>
 
 			<div ng-switch-when="location">
-				<fullscreen acl="acl" observation="observation" title="Legg til nytt sted" fullscreen="fullscreen">
-					<location acl="acl" observation="observation"></location>
+				<fullscreen acl="acl" observation="observation" title="Rediger klubben sine steder" fullscreen="fullscreen">
+					<locationselector clublocations="clublocations" acl="acl" observation="observation"></locationselector>
 				</fullscreen>
 			</div>
 
@@ -208,12 +208,7 @@
 					<li id="location" class="list-group-item">
 						<h4 class="list-group-item-heading">Sted</h4>
 						<p class="list-group-item-text">
-
-						<div ng-if="observation.location.geo.coordinates">
-							<locationsummary acl="acl" location="observation.location"></locationsummary>
-						</div>
-						<button type="button" class="btn btn-default btn-block" ng-click="setFullscreen('location')"><i class="fa fa-plus fa-fw"></i> Lagre nytt sted</button>
-
+							<locationsummary clublocations="clublocations" observation="observation" acl="acl"></locationsummary>
 						</p>
 						<div class="clearfix"></div>
 					</li>

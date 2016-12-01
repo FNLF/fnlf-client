@@ -1,19 +1,32 @@
 <div>
 
+	<div ng-if="observation.location.geo.coordinates">
+		<p>{{observation.location.nickname}}</p>
+		<map center="{{observation.location.geo.coordinates}}" scrollwheel="false">
+						  <marker
+							  position="{{observation.location.geo.coordinates}}"
+							  title="{{observation.location.name}}"
+							  draggable="true"
+							  visible="true"
+							  on-dragend="dragMarker()"
+							  ></marker>
+						</map>
 
-<map center="{{location.geo.coordinates}}" scrollwheel="false">
-				  <marker
-				      position="{{location.geo.coordinates}}"
-				      title="{{location.name}}"
-				      draggable="true"
-				      visible="true"
-					  on-dragend="dragMarker()"
-				      ></marker>
-				</map>
-	<p class="label label-default" ng-show="markerDragged">
-		<small>
-				{{location.geo.coordinates[0]}} {{location.geo.coordinates[1]}}
-		</small>
+		<p class="label label-default" ng-show="markerDragged">
+			<small>
+					{{observation.location.geo.coordinates[0]}} {{observation.location.geo.coordinates[1]}}
+			</small>
+		</p>
+	</div>
 
-	</p>
+	<h4>Velg blandt klubben sine steder</h4>
+	<div class="form-group">
+		<select ng-disabled="!acl.w" class="form-control" ng-model="observation.location"
+				ng-options="opt as opt.nickname for opt in clublocations track by opt.nickname" ng-change="locationSelected()"> \
+		</select>
+	</div>
+	<div class="clearfix"></div> \
+	<button type="button" class="btn btn-default btn-block" ng-click="editLocationsButtonClicked()"><i class="fa fa-plus fa-fw"></i>Rediger klubben sine steder</button>
+
+
 </div>

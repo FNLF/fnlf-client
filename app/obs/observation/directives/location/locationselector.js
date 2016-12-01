@@ -10,9 +10,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 	directive.scope = {
 		observation: '=',
 		clublocations: '=',
-		locationAside: '=',
 		acl: '='
-
 	};
 
 
@@ -29,22 +27,32 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 		$scope.existingClubLocationUsed = false;
 
 
-		if($scope.clublocations && $scope.clublocations[0] && $scope.clublocations[0].geo && $scope.clublocations[0].geo.coordinates){
 
-			var x = $scope.clublocations[0].geo.coordinates[0];
-			var y = $scope.clublocations[0].geo.coordinates[1];
-			$scope.model.location.geo.coordinates=[x,y];
-			$scope.zoom=7;
+		$scope.initClubLocations = function(){
 
-			$scope.clublocations.forEach(function(loc){
+			if($scope.clublocations && $scope.clublocations[0] && $scope.clublocations[0].geo && $scope.clublocations[0].geo.coordinates){
 
-				if(typeof loc.icao != 'string'){ //icao was accidentially object instead of string;
-					delete loc.icao;
-				}
+						var x = $scope.clublocations[0].geo.coordinates[0];
+						var y = $scope.clublocations[0].geo.coordinates[1];
+						$scope.model.location.geo.coordinates=[x,y];
+						$scope.zoom=7;
 
-			});
+						$scope.clublocations.forEach(function(loc){
 
-		}
+							if(typeof loc.icao != 'string'){ //icao was accidentially object instead of string;
+								delete loc.icao;
+							}
+
+						});
+
+					}
+
+		};
+
+		//Functions.waitForIt($scope,'clubLocations',function($scope){
+			$scope.initClubLocations();
+		//});
+
 
 		$scope.locations = [];
 
@@ -83,11 +91,14 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 			$scope.existingClubLocationUsed=!changed;
 		};
 
-		$scope.locationSelectedFn = function() {
+		$scope.locationSelectedFn = function(item,model) {
+
 			$scope.showMarker=true;
 			$scope.zoom=13;
+			$scope.model.location=item;
 			var coords = $scope.model.location.geo.coordinates;
 			$scope.model.icao = selectIcaoFn(coords[0],coords[1]);
+			$scope.model.nickname='';
 			checkIfLocationEdited();
 		};
 
@@ -154,16 +165,8 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 			});
 
 		};
-		
-		$scope.getClubLocations = function() {
-			
-			
-			return LocationService.getClubLocations($scope.observation.club).then(function(response) {
-				
-				
-				
-			});
-		};
+
+
 
 	};
 
@@ -252,7 +255,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 				obj.icao = $scope.model.icao.icao;
 			}
 			$scope.observation.location = obj;
-			$rootScope.hideLocationAside();
+			$rootScope.setFullscreen('');
 		};
 
 		$scope.saveLocation = function() {
@@ -294,7 +297,7 @@ angular.module('reportingApp').directive('locationselector', function (LocationS
 				});
 			});
 
-			$rootScope.hideLocationAside();
+			$rootScope.setFullscreen('');
 
 		};
 	};
