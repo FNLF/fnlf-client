@@ -44,6 +44,11 @@
 				</fullscreen>
 			</div>
 
+			<div ng-switch-when="summary">
+				<fullscreen acl="acl" observation="observation" title="Datamodell for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+					<observationsummary observation="observation"></observationsummary>
+				</fullscreen>
+			</div>
 
 
 
@@ -329,7 +334,7 @@
 					<li class="list-group-item">
 						<h4 class="list-group-item-heading">Datamodell<inlinehelp>Se hva som faktisk blir lagret</inlinehelp></h4>
 						<p class="list-group-item-text">
-							<summary observation="observation"></summary>
+							<summary-button observation="observation"></summary-button>
 						</p>
 						<div class="clearfix"></div>
 					</li>
