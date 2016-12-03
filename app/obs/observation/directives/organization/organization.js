@@ -10,39 +10,9 @@
 			acl: '='
 		};
 
-		directive.controller = function ($scope, $rootScope, $location, $aside) {
-			
-			$scope.openOrganizationAside = function() {
-				$location.path('/observation/modal-route', false);
-			    $scope.organizationAside = $aside({
-			        scope: $scope,
-			        title: 'Hoppfeltorganiseringen',
-			        //content: 'My Content', //Static custom content
-			        show: true,
-			        contentTemplate: '/app/obs/observation/directives/organization/organization.html',
-			        template: '/shared/partials/aside.html',
-			        placement: 'full-left',
-			        container: 'body',
-			        backdrop: 'static',
-			        animation: 'am-slide-left'
-			        });   
-			};
-			// Needs to manually close aside on back button
-			$rootScope.$on('$routeChangeStart', function(event, next, current) {
-			  if($scope.organizationAside) {
-				  if($scope.organizationAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
-					  $scope.organizationAside.hide(); 
-				  }
-			  }
-			});
-			
-			$scope.$on('aside.hide', function() {
-			  if($location.path().indexOf('/modal-route') != -1) {
-				  $window.history.back();
-			  };
-			});
-			
-			
+		directive.controller = function ($scope, $rootScope, $location) {
+
+
 		};
 		
 		
