@@ -15,7 +15,7 @@ angular.module('reportingApp')
 
 	
 	
-	directive.controller = function ($scope, $rootScope, $location, $aside, $window) {
+	directive.controller = function ($scope, $rootScope, $location, $window) {
 		var urlBase = '/api/v1';
 		
 		
@@ -38,39 +38,8 @@ angular.module('reportingApp')
 			
 			$scope.observation.actions.central.splice(index, 1);
 		};
-		
-		$scope.openActionsAside = function() {
-			
-			$location.path('/observation/modal-route', false);
-			
-			  $scope.actionsAside = $aside({
-					scope: $scope,
-					title: 'Tiltak for observasjon #' + $scope.observation.id, 
-					show: true,
-					contentTemplate: '/app/obs/observation/directives/actions.html',
-					template: '/shared/partials/aside.html',
-					placement: 'full-left',
-					container: 'body',
-					backdrop: 'static',
-					animation: 'am-slide-left',
-					});
 
-		};
-			
-		// Needs to manually close aside on back button
-		$rootScope.$on('$routeChangeStart', function(event, next, current) {
-		  if($scope.actionsAside) {
-			  if($scope.actionsAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
-				  $scope.actionsAside.hide();
-			  }
-		  }
-		});
-		
-		$scope.$on('aside.hide', function() {
-		  if($location.path().indexOf('/modal-route') != -1) {
-			  $window.history.back();
-		  };
-		});
+
 		
 	};
 

@@ -19,51 +19,20 @@ angular.module('reportingApp')
 	};
 	
 	directive.transcluded = true;
-	
+	directive.templateUrl='/app/obs/observation/directives/comments.html';
+	/*
 	directive.template = function(tElement, tAttrs) { 
 		
 		return '<button class="btn btn-default" ng-click="openCommentAside()"><i class="fa fa-comments fa-fw"></i>Arbeidskommentarer</button>';
 	};
+	*/
 	
-	
-	directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q, $window) {
+	directive.controller = function ($scope, $rootScope, $location, $http, $q, $window) {
 
 		var urlBase = '/api/v1';
 		$scope.observationcomment = '';
-		
-		$scope.openCommentAside = function() {
-			
-			$location.path('/observation/modal-route', false);
-			
-			  $scope.commentAside = $aside({
-					scope: $scope,
-					title: 'Kommenter #'+$scope.observation.id, 
-					//content: 'My Content', 
-					show: true,
-					contentTemplate: '/app/obs/observation/directives/comments.html',
-					template: '/shared/partials/aside.html',
-					placement: 'full-left',
-					container: 'body',
-					backdrop: 'static',
-					animation: 'am-slide-left',
-					});
 
-		};
-			
-		// Needs to manually close aside on back button
-		$rootScope.$on('$routeChangeStart', function(event, next, current) {
-		  if($scope.commentAside) {
-			  if($scope.commentAside.$scope.$isShown && $location.path().indexOf('/modal-route') == -1) {
-				  $scope.commentAside.hide();
-			  }
-		  }
-		});
-		
-		$scope.$on('aside.hide', function() {
-		  if($location.path().indexOf('/modal-route') != -1) {
-			  $window.history.back();
-		  };
-		});
+
 		
 		$scope.saveComment = function(c) {
 			

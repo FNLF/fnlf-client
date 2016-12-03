@@ -24,7 +24,7 @@ angular.module('reportingApp')
 	directive.templateUrl = "observation/directives/workflowtimeline.html";
 	
 	
-	directive.controller = function ($scope, $rootScope, $location, $aside) {
+	directive.controller = function ($scope, $rootScope, $location) {
 
 		$scope.workflowActions = {init: 'Opprettet', send_to_hi: 'Sendt til HI', approve_hi: 'Godkjent av HI', reject_hi: 'Avslått av HI', approve_fs: 'Godkjent av fagsjef',
 				reject_fs: 'Avslått av Fagsjef', approve_su: 'Godkjent av SU', reject_su: 'Avslått av SU', withdraw: 'Trekt tilbake', reopen: 'Gjenåpnet', reopen_su: 'Gjenåpnet av SU'};

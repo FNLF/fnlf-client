@@ -39,7 +39,7 @@ angular.module('reportingApp')
 	directive.templateUrl = '/app/obs/observation/directives/comments.html';
 
 	
-	directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q, $window) {
+	directive.controller = function ($scope, $rootScope, $location, $http, $q, $window) {
 
 		var urlBase = '/api/v1';
 
