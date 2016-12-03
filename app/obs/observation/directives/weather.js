@@ -33,7 +33,7 @@ angular.module('reportingApp').directive('weatherSummary', function () {
 			acl: '='
 		};
 
-		directive.controller = function ($scope, $rootScope, $location, $aside, $http, $q) {
+		directive.controller = function ($scope, $rootScope, $location, $http, $q) {
 			
 			var urlBase = '/api/v1';
 
