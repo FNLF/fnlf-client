@@ -50,6 +50,11 @@
 				</fullscreen>
 			</div>
 
+			<div ng-switch-when="file">
+				<fullscreen acl="acl" observation="observation" title="Fil" fullscreen="fullscreen" observation-changes="observationChanges">
+					<filepreviews observation="observation" acl="acl"></filepreviews>
+				</fullscreen>
+			</div>
 
 
 			<div ng-switch-default>
@@ -128,7 +133,7 @@
 						<p class="list-group-item-text">
 
 						<div class="row">
-							<filepreviews acl="acl" save="saveObservation()" editmode="true" observation="observation"></filepreviews>
+							<files acl="acl" save="saveObservation()" editmode="true" observation="observation"></files>
 						</div>
 
 						<button class="btn btn-block btn-primary" ng-file-select ng-multiple="true" ng-file-change="upload($files)">
@@ -192,7 +197,7 @@
 						<p class="list-group-item-text">
 
 						<div class="row">
-							<filepreviews acl="acl" save="saveObservation()" editmode="true" observation="observation"></filepreviews>
+							<files acl="acl" save="saveObservation()" editmode="true" observation="observation"></files>
 						</div>
 
 

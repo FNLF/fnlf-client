@@ -8,7 +8,7 @@
 			['ngRoute', 'ngSanitize', 'ngCookies',
 			 'ui.bootstrap', 'ui.select',
 			 'angular-loading-bar',
-			 'fnlf-login', 
+			 'fnlf-login',
 			 'resolve',
 			 'inlinehelp',
 			 'fnlf-services',

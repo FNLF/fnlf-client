@@ -3,7 +3,7 @@
 	angular.module('reportingApp')
 		.controller('ObservationController', function ($scope,$rootScope, ObservationService,Definitions,LocationService,$routeParams,$timeout, $upload, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
 			
-			//This is aside back button hack
+
 			DoNotReloadCurrentTemplate($scope);
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset

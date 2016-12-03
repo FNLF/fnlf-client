@@ -94,7 +94,7 @@
 			acl: '='
 		};
 
-		directive.controller = function ($scope, $rootScope, $location, $aside) {
+		directive.controller = function ($scope, $rootScope, $location) {
 			
 		};
 		directive.link = function ($scope, element, attr) {
