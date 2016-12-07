@@ -1,16 +1,17 @@
 (function () {
 
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope,$rootScope, ObservationService,Definitions,LocationService,$routeParams,$timeout, $upload, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
-			
+		.controller('ObservationController',  function ($scope, Upload, $rootScope, ObservationService,Definitions,LocationService,$routeParams,
+                                                       $timeout, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
+
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
-			
+
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.brand = 'FNLF ORS #' + $routeParams.id;
-			
+
 			//$rootScope.readOnly = false;
-			
+
 			var observationId = $routeParams.id;
 			$scope.observation = {id:observationId};
 			$scope.observationChanges = false;
@@ -52,11 +53,11 @@
 
 
 			$rootScope.title = 'F/NLF - ORS editor #' + $scope.observation.id;
-			
+
 			$rootScope.haspee = function() {
 				return 1;
 			};
-			
+
 			$rootScope.haswritepermission = 1;
 			$scope.getAcl = function(){
 				ObservationService.getAcl(observationId)
@@ -64,7 +65,7 @@
 						$scope.acl=acl;
 					});
 			};
-			
+
 //			$scope.!acl.w = function() {
 //				
 //				return false; //return $scope.acl['type'];
@@ -92,7 +93,7 @@
 				if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
 					$rootScope.nav.toolbar[0] = {disabled:$rootScope.saveDisabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',onclick:$rootScope.saveObservation};
 				}
-				
+
 				$rootScope.nav.toolbar[2] = {disabled:$rootScope.openInReportdisabledFn,tooltip:'Åpne i rapport',text:'Åpne i rapport',btn_class:'default',icon:'file-text-o', onclick:$rootScope.openInReport};
 			};
 
@@ -121,18 +122,18 @@
 					});
 			};
 			$scope.loadObservation();
-			
+
 			$rootScope.loadObservation = function() {
 				$scope.loadObservation();
 			};
-			
+
 			$rootScope.saveObservation = function() {
 				$scope.saveObservation();
 			};
-			
 
-			
-			
+
+
+
 			var observationTypes = Definitions.getObservationTypes();
 
 			$scope.observationTypesArray = {};
@@ -192,7 +193,7 @@
 				console.log(o);
 			});
 		};
-		
+
 		/**
 		 * Triggers saved/unsaved label
 		 */
@@ -232,26 +233,26 @@
 		 * File upload!
 		 *****************************************************/
 		//Watch changes on files
-//		$scope.$watch('files', function () {
-//	        $scope.upload($scope.files);
-//	    });
-		
-		
+		//$scope.$watch('observation.files', function (files) {
+	    //    $scope.upload($scope.observation.files);
+ 		//});
+
+
 		$scope.upload = function (files) {
-			
+
 			var urlBase = '/api/v1';
-			
+
 //			Only for patch/put
 			var config = {};
-		
+
 			if (files && files.length) {
-				
+
 				 for (var i = 0; i < files.length; i++) {
-				
+
 					 var file = files[i];
 					 var uploads = 0;
-					 
-					 $upload.upload({
+
+					 Upload.upload({
 						 url: urlBase + '/files/',
 						 fields: {'ref': 'observations', 'ref_id': $scope.observation._id, 'content_type': file.type, 'name': file.name, 'size': file.size, 'owner': $rootScope.username }, //additional form fields
 						 file: file,
@@ -264,14 +265,14 @@
 							 if(data._status == 'OK') {
 								 $scope.observation.files.push({'f': data._id, 'r': true});
 							 }
-						 
+
 						 }).then(function(success, error, progress) {
 							//Only save when last upload returns
 							uploads++;
 						 	if(files.length == uploads) $scope.saveObservation();
 					 	});
 					 }
-				 
+
 				 };
 		 };
 

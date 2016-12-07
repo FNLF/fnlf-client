@@ -208,7 +208,7 @@ angular.module('reportingApp')
 	directive.link = function($scope, element, attrs) {
 
 		$scope.$watch('observation',function(newValue,oldValue) {
-			
+
 			if(newValue) {
 				$scope.thumbnails = [];
 				$scope.filelist = [];
