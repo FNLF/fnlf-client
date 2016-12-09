@@ -8,7 +8,7 @@
 
 
 angular.module('reportingApp')
-	.directive('workflow', function (RestService, ObservationService, $aside, $rootScope, $window, Definitions) {
+	.directive('workflow', function (RestService, ObservationService, $rootScope, $window, Definitions) {
 
 		var directive = {};
 
