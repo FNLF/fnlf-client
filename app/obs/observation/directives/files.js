@@ -29,12 +29,33 @@ angular.module('reportingApp')
 	directive.controller = function ($scope, $rootScope, $location, $http, $q, $window) {
 		var urlBase = '/api/v1';
 
+		$scope.thumbnails = [];
+		$scope.filelist = [];
+		$scope.nonimages = [];
+
 		$scope.getFileList = function() {
 			 return $scope.files;
 		 };
 
 		 $scope.buildFileList = function() {
-			 FileService.buildFileList($scope.observation,$scope.filelist,$scope.nonimages,$scope.thumbnails,$window.sessionStorage.token);
+			$scope.thumbnails = [];
+			$scope.filelist = [];
+			$scope.nonimages = [];
+			 for(var file in $scope.observation.files) {
+					console.log("Build all "+file.f);
+					console.log(file);
+				if(!angular.isUndefined(file.f)){
+
+					FileService.buildFile(file,$scope.filelist,$scope.nonimages,$scope.thumbnails,$window.sessionStorage.token);
+			 	}
+			 }
+		 };
+
+		 $scope.buildFile = function(file) {
+		 	console.log("Buildfile "+file.f);
+		 	if(!angular.isUndefined(file.f)){
+				FileService.buildFile(file,$scope.filelist,$scope.nonimages,$scope.thumbnails,$window.sessionStorage.token);
+		 	}
 		 };
 
 		 $scope.getImageFile = function(objectid, filename, filesize) {
@@ -59,6 +80,8 @@ angular.module('reportingApp')
 				$scope.save(); //Calls $scope.saveObservation()
 				$scope.buildFileList();
 			};
+
+
 
 		};
 
@@ -88,10 +111,8 @@ angular.module('reportingApp')
 		var unbind = $scope.$watch('observation',function(newValue,oldValue) {
 
 			if(newValue) {
-				$scope.thumbnails = [];
-				$scope.filelist = [];
-				$scope.nonimages = [];
-				$scope.buildFileList();
+
+				//$scope.buildFileList();
 				unbind();
 			};
 

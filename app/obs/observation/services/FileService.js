@@ -36,28 +36,24 @@ angular.module('reportingApp')
 		};
 		var fetchFullsizeFileFn = this.fetchFullsizeFile;
 
+		this.buildFile = function(file,filelist,nonimages,thumbnails,token) {
+			fetchFileInfoFn(file['f'])
+				.then(function(response) {
+					var fileObj = {'name': response.name,
+					 'type': response.content_type,'size': bytesToSizeFn(response.size),
+					 'url': urlBase + '/download/' + response._id + '?token=' + token,
+					 '_id': response._id};
 
-		this.buildFileList = function(observation,filelist,nonimages,thumbnails,token) {
 
-			for(var k in observation.files) {
+					filelist.push(fileObj);
 
-				fetchFileInfoFn(observation.files[k]['f'])
-					.then(function(response) {
-						var fileObj = {'name': response.name,
-						 'type': response.content_type,'size': bytesToSizeFn(response.size),
-						 'url': urlBase + '/download/' + response._id + '?token=' + token,
-						 '_id': response._id};
-
-						filelist.push(fileObj);
-
-						if(response.content_type.match(/image/g) != null) {
-							getImageFileFn(response._id,fileObj.name, fileObj.size,thumbnails);
-						}else {
-							nonimages.push(fileObj);
-						}
-					});
-			};
-		};
+					if(response.content_type.match(/image/g) != null) {
+						getImageFileFn(response._id,fileObj.name, fileObj.size,thumbnails);
+					}else {
+						nonimages.push(fileObj);
+					}
+				});
+        };
 
 		this.getImageFile = function(objectid, filename, filesize,thumbnails) {
 				 fetchImageFileFn(objectid).then(function(response) {
