@@ -1,15 +1,7 @@
 
 
-<div class="table-responsive">
-	<table class="table table-condensed">
-		<tbody>
-		<!-- filelist=all files, noimage=not images -->
-		<tr ng-repeat="file in observation.files">
-			<td ng-init="buildFile(file)">ID {{file.f}}</td>
-			<td>R {{file.r}}</td>
-		</tr>
-		</tbody>
-	</table>
+<div ng-repeat="file in observation.files">
+	<span ng-init="buildFile(file)"><!--{{file.f}} --></span>
 </div>
 
 <div class="clearfix"></div>
@@ -18,7 +10,6 @@
 	<div class="col-xs-6 col-md-2">
 		<a ng-click="openFile(f.objectid,f.filename,f.filesize)" class="thumbnail"> <img ng-src="{{f.src}}" class="img-responsive"> <i ng-if="editmode" class="fa fa-3x"
 			ng-class="observation.files[getIndexIfObjWithOwnAttr(observation.files, 'f', f.objectid)]['r'] ? 'fa-lock text-danger' : 'fa-unlock text-success'"></i>
-
 
 		</a>
 	</div>
