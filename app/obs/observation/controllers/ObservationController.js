@@ -1,9 +1,10 @@
 (function () {
 
 	angular.module('reportingApp')
-		.controller('ObservationController', function ($scope,$rootScope, ObservationService,Definitions,LocationService,$routeParams,$timeout, $upload, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
-			
+		.controller('ObservationController',  function ($scope, Upload, $rootScope, ObservationService,Definitions,LocationService,$routeParams,
+                                                       $timeout, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
 
+			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
 			
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
@@ -250,8 +251,8 @@
 				
 					 var file = files[i];
 					 var uploads = 0;
-					 
-					 $upload.upload({
+
+					 Upload.upload({
 						 url: urlBase + '/files/',
 						 fields: {'ref': 'observations', 'ref_id': $scope.observation._id, 'content_type': file.type, 'name': file.name, 'size': file.size, 'owner': $rootScope.username }, //additional form fields
 						 file: file,

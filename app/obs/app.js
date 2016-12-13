@@ -13,7 +13,7 @@
 			 'inlinehelp',
 			 'fnlf-services',
 			 'fnlf-directives',
-			 'angularFileUpload',
+			 'ngFileUpload',
 			 'ui.bootstrap.datetimepicker',
 			 'ngMap',
 			 'angular-confirm',

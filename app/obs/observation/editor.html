@@ -201,12 +201,13 @@
 						</div>
 
 
+
 						<div ng-if="acl.w">
-							<div ng-file-drop ng-model="files" ng-file-change="upload($files)" class="drop-box" drag-over-class="dragover" ng-multiple="true" allow-dir="true" accept="*">Dra og slipp filer her</div>
-							<div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
+							<div type="file" ngf-drop ng-model="files" ngf-change="upload($files)" class="drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" ngf-pattern="*">Dra og slipp filer her</div>
+							<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
 						</div>
 
-						<button ng-disabled="!acl.w" class="btn btn-block btn-primary" ng-file-select ng-multiple="true" ng-file-change="upload($files)">
+						<button ng-disabled="!acl.w" class="btn btn-block btn-primary" ngf-select ngf-change="upload($files)" ngf-multiple="true">
 							<i class="fa fa-plus fa-fw"></i> Legg til fil
 						</button>
 
