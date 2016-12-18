@@ -453,9 +453,13 @@
 									<div class="clearfix"></div>
 
 						<p ng-show="observation.weather.auto.yr">Yr: {{::observation.weather.auto.yr['@from']}}-{{::observation.weather.auto.yr['@to']}} {{::observation.weather.auto.yr.windDirection['@deg']}}&deg;
-							{{::observation.weather.auto.yr.windSpeed['@mps']*1.81}} knop</p>
-						<p ng-show="observation.weather.auto.metar">METAR: {{::observation.weather.auto.metar}}</p>
-						<p ng-show="observation.weather.auto.tag">TAF: {{::observation.weather.auto.taf}}</p>
+                            {{ observation.weather.auto.yr.windSpeed['@mps']*1.81 }} knop</p>
+                        <p ng-show="observation.weather.auto.metar">METAR:
+                            {{ observation.weather.auto.metar_decoded ? observation.weather.auto.metar_decoded : observation.weather.auto.metar}}</p>
+                        <p ng-show="observation.weather.auto.taf">TAF:
+                            {{ observation.weather.auto.taf_decoded ? observation.weather.auto.taf_decoded : observation.weather.auto.taf}}</p>
+                        <p ng-show="observation.weather.auto.shorttaf">TAF:
+                            {{ observation.weather.auto.shorttaf_decoded ? observation.weather.auto.shorttaf_decoded : observation.weather.auto.shorttaf}}</p>
 				</div>
 
 			</div>
