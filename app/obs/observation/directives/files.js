@@ -41,7 +41,7 @@ angular.module('reportingApp')
 			$scope.thumbnails = [];
 			$scope.filelist = [];
 			$scope.nonimages = [];
-			console.log($scope.observation.files);
+
 
 			angular.forEach($scope.observation.files,function(file){
 				FileService.buildFile(file,$scope.filelist,$scope.nonimages,$scope.thumbnails,$window.sessionStorage.token);
@@ -94,7 +94,7 @@ angular.module('reportingApp')
 		};
 
 		$scope.openFile = function(objectid,filename,filesize) {
-			console.log(objectid+" "+filename+" "+filesize);
+
 			$location.search('ui','file');
 			$location.search('id',objectid);
 			$location.search('f',filename);

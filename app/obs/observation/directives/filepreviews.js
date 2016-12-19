@@ -53,7 +53,7 @@ angular.module('reportingApp')
 
 		var load = function(){
 			var objectid = $location.search().id;
-			console.log(objectid);
+
 
 			FileService.fetchFileInfo(objectid)
 				.then(function(response){

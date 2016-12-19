@@ -21,6 +21,12 @@
 				</fullscreen>
 			</div>
 
+			<div ng-switch-when="file">
+				<fullscreen acl="acl" observation="observation" title="Fil" fullscreen="fullscreen" observation-changes="observationChanges">
+					<filepreviews observation="observation" acl="acl"></filepreviews>
+				</fullscreen>
+			</div>
+
 
 			<div ng-switch-default>
 
@@ -330,7 +336,7 @@
 						<p class="list-group-item-text">
 							<label class="control-label">Vedlegg</label>
 
-							<filepreviews save="saveObservation()" observation="observation"></filepreviews>
+							<files save="saveObservation()" observation="observation"></files>
 						</p>
 						<div class="clearfix"></div>
 					</li>
