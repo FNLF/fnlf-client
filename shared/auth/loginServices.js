@@ -44,7 +44,7 @@
 
 
 	angular.module('fnlf-login')
-		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore) {
+		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore,$q) {
 
 			$rootScope.$on('event:auth-loginRequired', function () {
 				$rootScope.error = 'Login is required';
@@ -59,6 +59,8 @@
 
 
 			this.login = function (username, password) {
+
+				var deferred = $q.defer();
 
 				$http.post(GlobalsService.get('baseUrl') + 'user/authenticate', {
 					username: username,
@@ -84,23 +86,25 @@
 								return config;
 							});
 
-
+							deferred.resolve({status:200,message:response.message});
 						}
 						else {
-
-							$rootScope.error = response.message;
+							deferred.reject({status:401,message:response.message});
 						}
 					}).error(function (data, status, headers, config) {
-
+						console.log(data);
+						console.log(status);
 						//Show login form
 						$rootScope.currentUserSignedIn = false;
 						//Abort all buffers
 						authService.loginCancelled(data, status);
 
 						$rootScope.error = 'Login experienced some difficulties. Maybe the backend did not respond?';
+						deferred.reject({status:status,message:data});
 						return false;
 
 					});
+					return deferred.promise;
 			};
 
 			/**
@@ -214,8 +218,28 @@
 
 		directive.link = function ($scope, element, attrs) {
 
+			$scope.error = '';
+
 			$scope.login = function () {
-				loginService.login($scope.username, $scope.password);
+				loginService.login($scope.username, $scope.password)
+					.then(function(){
+							$scope.error = '';
+							$scope.info = '';
+						},
+						function(error){
+							if(error.status==401){
+								$scope.error = '';
+								$scope.info = 'Feil brukernavn eller passord';
+							}
+							if(error.status==503){
+								$scope.error = 'Melwin er nede. Prøv igjen senere';
+                            	console.log(error);
+							}
+							else{
+								$scope.error = 'Feil med serveren. Prøv igjen senere';
+								console.log(error);
+							}
+						});
 			};
 
 			$scope.tryLoginFromSession = function () {
