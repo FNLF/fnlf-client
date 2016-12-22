@@ -230,12 +230,10 @@
 							if(error.status==401){
 								$scope.error = '';
 								$scope.info = 'Feil brukernavn eller passord';
-							}
-							if(error.status==503){
+							}else if(error.status==503){
 								$scope.error = 'Melwin er nede. Prøv igjen senere';
                             	console.log(error);
-							}
-							else{
+							}else{
 								$scope.error = 'Feil med serveren. Prøv igjen senere';
 								console.log(error);
 							}
