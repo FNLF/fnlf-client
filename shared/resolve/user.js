@@ -21,12 +21,11 @@ angular.module('resolve')
 								$scope.lastname = user.lastname;
 							});
 					}
-					else {
-						$scope.firstname = 'Anonymisert';
-						$scope.lastname = '';
+					else if ($scope.userid < 0) {
+						$scope.firstname = 'Hopper';
+						$scope.lastname = -1 * $scope.userid;
 						if ($scope.tmpname) {
-							$scope.firstname = $scope.tmpname;
-							$scope.lastname = '';
+							delete $scope.tmpname;
 						}
 
 					}
