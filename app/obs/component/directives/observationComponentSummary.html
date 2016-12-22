@@ -6,7 +6,23 @@
         <span ng-if="component.flags.cause || component.flags.root_cause" class="label label-warning">Årsak</span>
         <span ng-if="component.flags.consequence || component.flags.final_consequence" class="label label-danger">Konsekvens</span>
     </small>
-    <strong>{{component.what}} </strong>
+
+				<form>
+					<div class="form-group">
+						<div class="input-group">
+							<tagtypeahead acl="acl" ng-if="component.flags.root_cause || component.flags.cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
+							<tagtypeahead acl="acl" ng-if="component.flags.final_consequence||component.flags.consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
+							<tagtypeahead acl="acl" ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv barriære" ></tagtypeahead>
+							<tagtypeahead acl="acl" ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv selve hendelsen" ></tagtypeahead>
+						<span class="input-group-btn">
+							<button ng-disabled="!acl.w" class="btn btn-default" ng-disabled="!component.what" type="submit" ng-click="editComponent(component)">
+								Rediger
+							</button>
+						</span>
+						</div>
+					</div>
+				</form>
+
     <flags class="hidden-xs" attributes="component.attributes"></flags>
 
 	<span ng-show="component.where.at">({{component.where.at}})</span> <span ng-show="!component.where.at"><i>(på/i ikke angitt)</i></span>

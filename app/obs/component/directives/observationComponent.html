@@ -1,49 +1,25 @@
 <div class="row">
 	<div class="col-xs-12 col-md-12">
 
-		<h3 ng-show="!component.editTitle">
-			{{component.what}} <span ng-if="acl.w" class="fa fa-edit" ng-click="component.editTitle=!component.editTitle"></span>
-		</h3>
 
 
-		<div ng-show="component.editTitle">
-
-			<div class="form-group">
-				<div class="btn-group-xs">
-					<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.cause" btn-checkbox>Årsak</label>
-					<inlinehelp>Direkte eller indirekte årsak til hendelsen</inlinehelp>
-					<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
-					<inlinehelp>Sikkerhetsbarriære som har blitt brutt eller som har fungert som den skulle</inlinehelp>
-					<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hendelse</label>
-					<inlinehelp>Det som gjorde at du nå skriver i ORS</inlinehelp>
-					<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.consequence" btn-checkbox>Konsekvens</label>
-					<inlinehelp>Direkte og indirekte konsekvenser av hendelsen</inlinehelp>
-				</div>
-			</div>
-			<form>
-				<div class="form-group">
-					<div class="input-group">
-						<tagtypeahead acl="acl" ng-if="component.flags.root_cause || component.flags.cause" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv årsak" ></tagtypeahead>
-						<tagtypeahead acl="acl" ng-if="component.flags.final_consequence||component.flags.consequence" selectfn="componentWhatSelected" model="component.what" group="component.what.consequence"  noun="Beskriv konsekvens" ></tagtypeahead>
-						<tagtypeahead acl="acl" ng-if="component.flags.barrier" selectfn="componentWhatSelected" model="component.what" group="component.what.cause"  noun="Beskriv barriære" ></tagtypeahead>
-						<tagtypeahead acl="acl" ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected" model="component.what" group="component.what.incident"  noun="Beskriv selve hendelsen" ></tagtypeahead>
-						<span class="input-group-btn">
-							<button ng-disabled="!acl.w" class="btn btn-default" ng-disabled="!component.what" type="submit" ng-click="whatEdited(component)">
-								Ok
-							</button>
-						</span>
-					</div>
-				</div>
-			</form>
-			<div>
-				<small ng-show="component.what.length > 20">{{(40 - component.what.length)}} tegn igjen. Bruk heller tagger og flere komponenter i stedet for å skrive lang tekst her</small>
-			</div>
-		</div>
 	</div>
 	<div class="col-xs-12"></div>
 
-	<div ng-hide="component.editTitle" class="aside-full-width-on-sm">
+	<div  class="aside-full-width-on-sm">
 
+		<div class="form-group">
+			<div class="btn-group-sm">
+				<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.cause" btn-checkbox>Årsak</label>
+				<inlinehelp>Direkte eller indirekte årsak til hendelsen</inlinehelp>
+				<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
+				<inlinehelp>Sikkerhetsbarriære som har blitt brutt eller som har fungert som den skulle</inlinehelp>
+				<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hendelse</label>
+				<inlinehelp>Det som gjorde at du nå skriver i ORS</inlinehelp>
+				<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.consequence" btn-checkbox>Konsekvens</label>
+				<inlinehelp>Direkte og indirekte konsekvenser av hendelsen</inlinehelp>
+			</div>
+		</div>
 
 		<div class="col-xs-12 col-md-12">
 			<div class="form-group">

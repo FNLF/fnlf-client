@@ -8,6 +8,11 @@
 					<observation-components acl="acl" observation="observation"></observation-components>
 				</fullscreen>
 			</div>
+			<div ng-switch-when="component">
+				<fullscreen acl="acl" observation="observation" title="Komponent" fullscreen="fullscreen">
+					<observation-component acl="acl" observation="observation"></observation-component>
+				</fullscreen>
+			</div>
 			<div ng-switch-when="involved">
 				<fullscreen acl="acl" observation="observation" title="Involverte personer og utstyr" fullscreen="fullscreen">
 					<involvedpersonselector acl="acl" observation="observation"></involvedpersonselector>
@@ -245,7 +250,7 @@
 					<li id="components" class="list-group-item">
 						<h4 class="list-group-item-heading">Komponenter i forløpet</h4>
 						<p class="list-group-item-text">
-							<observation-components-summary observation="observation"></observation-components-summary>
+							<observation-components-summary acl="acl" observation="observation"></observation-components-summary>
 							<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="setFullscreen('components')"><i class="fa fa-plus fa-fw"></i>Endre forløpet</button>
 
 						</p>

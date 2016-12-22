@@ -1,71 +1,47 @@
 (function () {
 
-	var observationComponent = function (RestService, Definitions,Functions) {
+	var observationComponent = function ($location,RestService, Definitions,Functions) {
 		var directive = {};
 
 		directive.restrict = 'E';
 		directive.templateUrl = "/app/obs/component/directives/observationComponent.html";
-/*
+
 		directive.scope = {
-			observation: '=',
-			component: '='
+			observation: '='
 		};
-*/
+
 		directive.link = function ($scope, element, attrs) {
 
+			var index = $location.search().index;
+
+			$scope.component = $scope.observation.components[index];
+
 			$scope.flags = ['incident','cause','consequence','barrier'];
-			
-			//Backwards compatibility
-			if(!$scope.component.ask) $scope.component.ask = {attitude: 0, skills: 0, knowledge: 0};
-			
-			$scope.incidentOrElse = function(flags){
-				var isIncident = true;
-				Object.keys(flags).forEach(function(k){
-					var v = flags[k];
-					if(v){
-						if(k=='incident'){
-							isIncident = true;
-						}
-						else{
-							isIncident = false;
-						}
+
+			$scope.resolvePersonsFn = function(){
+
+				$scope.persons = $scope.observation.involved.map(function(p){
+					return {id:p.id, fullname:p.fullname, tmpname:p.tmpname};
+				});
+
+				$scope.persons.forEach(function(p){
+					if(p.fullname){
+
+					}
+					else if(p.tmpname){
+						p.fullname=p.tmpname;
+					}
+					else{
+						ResolveService.getUser(p.id).then(function(u){
+							p.fullname=u.firstname+' '+u.lastname;
+						});
 					}
 				});
-				return isIncident;
+
 			};
-
-			$scope.componentWhatSelected = function(){
-				$scope.copyFromTemplate();
-				$scope.whatEdited($scope.component);
-			};
-
-			$scope.copyFromTemplate = function() {
-
-				if ($scope.component.what) {
-						$scope.templates.forEach(function (t) {
-						if ($scope.component.what == t.what) {
-							if (!$scope.component.tags && !$scope.component.how && !$scope.component.where) {
-								$scope.component.tags=[];
-								angular.copy(t.tags, $scope.component.tags);
-								$scope.component.attributes={};
-								angular.copy(t.attributes, $scope.component.attributes);
-								$scope.component.where = {};
-								angular.copy(t.where, $scope.component.where);
-								$scope.component.how="";
-								angular.copy(t.how, $scope.component.how);
-								
-								$scope.component.ask = {attitude: 0, skills: 0, knowledge: 0}; //@see: observationHfkSelector for backward compatibility
-								angular.copy(t.ask, $scope.component.ask);
-
-							}
-						}
-					});
-				}
-			};
-
-
-
 			$scope.resolvePersonsFn();
+
+
 			$scope.autoTags=[];
 			$scope.autoTags=Functions.autoTag($scope.component.what);
 

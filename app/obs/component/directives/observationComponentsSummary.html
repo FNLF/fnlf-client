@@ -2,7 +2,7 @@
 	<table class="table table-responsive table-condensed">
 		<tr ng-repeat="component in observation.components | orderBy:'order'">
 			<td>
-				<observation-component-summary component="component"></observation-component-summary>
+				<observation-component-summary acl="acl" components="observation.components" component="component"></observation-component-summary>
 			</td>
 		</tr>
 	</table>
