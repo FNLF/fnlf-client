@@ -25,7 +25,7 @@
 						<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Passord er påkrevd</span>
 
 						<div ng-show="error" class="alert alert-danger">{{error}}</div>
-
+						<div ng-show="info" class="alert alert-info">{{info}}</div>
 						<div class="form-actions">
 							<button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="form.$invalid" class="btn btn-danger">Logg inn</button>
 
