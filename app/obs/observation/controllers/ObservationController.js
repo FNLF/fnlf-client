@@ -282,16 +282,23 @@
 			LocationService.getClubLocations($scope.observation.club).then(function(response) {
 
 
-
+				$scope.clublocations = response.locations;
 				if(typeof $scope.observation.location.nickname == 'undefined' && response.locations.length > 0) {
-					$scope.observation.location = response.locations[0];
+					for(var i = 0; i < response.locations.length; i++){
+						if(typeof response.locations[i]  == 'object'){
+							if(typeof response.locations[i].nickname != 'undefined'){
+								$scope.observation.location = response.locations[i];
+								return;
+							}
+						}
+					}
 				}
 
 				if(typeof $scope.observation.location == 'undefined'){
 					$scope.observation.location = {};
 				}
 
-				$scope.clublocations = response.locations;
+
 
 				});
 			};

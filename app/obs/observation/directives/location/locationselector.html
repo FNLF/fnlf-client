@@ -45,7 +45,8 @@
 	<label>Klubben sine steder</label>
 	<ol>
 		<li ng-repeat="loc in clublocations track by $index">
-			<a ng-click="clickMarker(null,loc)">{{loc.nickname}}</a>
+			<a ng-if="loc.nickname" ng-click="clickMarker(null,loc)">{{loc.nickname}}</a>
+			<a ng-if="!loc.nickname" ng-click="clickMarker(null,loc)">(.....)</a>
 		</li>
 	</ol>
 
