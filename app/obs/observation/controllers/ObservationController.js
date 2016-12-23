@@ -281,9 +281,15 @@
 
 			LocationService.getClubLocations($scope.observation.club).then(function(response) {
 
+
+
 				if(typeof $scope.observation.location.nickname == 'undefined' && response.locations.length > 0) {
 					$scope.observation.location = response.locations[0];
-				};
+				}
+
+				if(typeof $scope.observation.location == 'undefined'){
+					$scope.observation.location = {};
+				}
 
 				$scope.clublocations = response.locations;
 
