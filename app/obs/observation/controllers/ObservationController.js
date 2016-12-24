@@ -281,17 +281,20 @@
 
 			LocationService.getClubLocations($scope.observation.club).then(function(response) {
 
+				var filteredLocations = response.locations
+				.filter(function(l){
+					return typeof l =='object'
+					&& typeof l.geo !='undefined'
+					&& typeof l.geo.coordinates != 'undefined'
+					&& typeof l.nickname!='undefined'
+					&& l.nickname.length >0;
+				});
 
-				$scope.clublocations = response.locations;
-				if(typeof $scope.observation.location.nickname == 'undefined' && response.locations.length > 0) {
-					for(var i = 0; i < response.locations.length; i++){
-						if(typeof response.locations[i]  == 'object'){
-							if(typeof response.locations[i].nickname != 'undefined'){
-								$scope.observation.location = response.locations[i];
-								return;
-							}
-						}
-					}
+
+				$scope.clublocations = filteredLocations;
+
+				if($scope.clublocations.length > 0){
+					$scope.observation.location  = filteredLocations[0];
 				}
 
 				if(typeof $scope.observation.location == 'undefined'){
