@@ -7,7 +7,8 @@
 		directive.templateUrl = "/app/obs/component/directives/observationComponent.html";
 
 		directive.scope = {
-			observation: '='
+			observation: '=',
+			acl: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
