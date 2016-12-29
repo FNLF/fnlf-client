@@ -1,6 +1,6 @@
 (function () {
 
-	var observationComponent = function ($location,RestService, Definitions,Functions) {
+	var observationComponent = function ($location,RestService, Definitions,Functions,ResolveService) {
 		var directive = {};
 
 		directive.restrict = 'E';
