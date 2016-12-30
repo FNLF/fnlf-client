@@ -90,6 +90,8 @@
 
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);
+					reorderFunc($scope.components);
+					$scope.component = {flags:{cause:true},order:-1};
 				};
 
     			$scope.incidentOrElse = function(flags){
@@ -117,9 +119,14 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.buttonLabel="Legg til ny konsekvens";
-    			$scope.component = {flags:{consequence:true}};
+    			$scope.component = {flags:{consequence:true},order:999};
     			$scope.component.what = '';
 
+				$scope.editComponent = function(component){
+					$scope.components.push($scope.component);
+					reorderFunc($scope.components);
+					$scope.component = {flags:{consequence:true},order:999};
+				};
 
     			$scope.incidentOrElse = function(flags){
     				return false;
@@ -145,9 +152,14 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.buttonLabel="Legg til ny hendelse";
-    			$scope.component = {flags:{incident:true}};
+    			$scope.component = {flags:{incident:true},order:0};
     			$scope.component.what = '';
 
+				$scope.editComponent = function(component){
+					$scope.components.push($scope.component);
+					reorderFunc($scope.components);
+					$scope.component = {flags:{incident:true},order:0};
+				};
 
     			$scope.incidentOrElse = function(flags){
 
