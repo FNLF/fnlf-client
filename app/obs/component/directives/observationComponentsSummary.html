@@ -1,8 +1,24 @@
 <div class="table-responsive">
 	<table class="table table-responsive table-condensed">
+		<tr ng-if="acl.w && observation.components.length > 0">
+			<td>
+				<observation-component-summary-new-cause acl="acl" components="observation.components"></observation-component-summary-new-cause>
+			</td>
+		</tr>
+		<tr ng-if="acl.w && observation.components.length ==0">
+			<td>
+				<observation-component-summary-new-incident acl="acl" components="observation.components"></observation-component-summary-new-incident>
+			</td>
+		</tr>
+
 		<tr ng-repeat="component in observation.components | orderBy:'order'">
 			<td>
 				<observation-component-summary acl="acl" components="observation.components" component="component"></observation-component-summary>
+			</td>
+		</tr>
+		<tr ng-if="acl.w && observation.components.length > 0">
+			<td>
+				<observation-component-summary-new-consequence acl="acl" components="observation.components"></observation-component-summary-new-consequence>
 			</td>
 		</tr>
 	</table>

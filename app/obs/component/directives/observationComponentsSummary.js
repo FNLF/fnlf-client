@@ -35,6 +35,10 @@
 		};
 
 		directive.link = function ($scope, element, attrs) {
+
+			$scope.newCause={flags:{cause:true}};
+			$scope.newConsequence={flags:{consequence:true}};
+
 			var i=0;
 			$scope.observation.components.forEach(function(c){
 				if(angular.isUndefined(c.order)){

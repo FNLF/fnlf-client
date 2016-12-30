@@ -36,6 +36,8 @@
 
 		directive.link = function ($scope, element, attrs) {
 
+			$scope.buttonLabel="Detaljer";
+
 			$scope.editComponent = function(component){
 
 				var index = $scope.components.indexOf(component);
@@ -67,3 +69,92 @@
 
 		return directive;
 	});
+
+
+	angular.module('reportingApp').directive('observationComponentSummaryNewCause', function ($location,Definitions) {
+
+    		var directive = {};
+
+    		directive.restrict = 'E';
+    		directive.templateUrl = "/app/obs/component/directives/observationComponentSummary.html";
+
+    		directive.scope = {
+    			components: '=',
+    			acl: '='
+    		};
+
+    		directive.link = function ($scope, element, attrs) {
+				$scope.buttonLabel="Legg til ny årsak";
+    			$scope.component = {flags:{cause:true},order:-1};
+    			$scope.component.what = '';
+
+				$scope.editComponent = function(component){
+					$scope.components.push($scope.component);
+				};
+
+    			$scope.incidentOrElse = function(flags){
+
+    				return false;
+    			};
+
+    		};
+
+    		return directive;
+    	});
+
+	angular.module('reportingApp').directive('observationComponentSummaryNewConsequence', function ($location,Definitions) {
+
+    		var directive = {};
+
+    		directive.restrict = 'E';
+    		directive.templateUrl = "/app/obs/component/directives/observationComponentSummary.html";
+
+    		directive.scope = {
+
+    			components: '=',
+    			acl: '='
+    		};
+
+    		directive.link = function ($scope, element, attrs) {
+				$scope.buttonLabel="Legg til ny konsekvens";
+    			$scope.component = {flags:{consequence:true}};
+    			$scope.component.what = '';
+
+
+    			$scope.incidentOrElse = function(flags){
+    				return false;
+    			};
+
+    		};
+
+    		return directive;
+    	});
+
+	angular.module('reportingApp').directive('observationComponentSummaryNewIncident', function ($location,Definitions) {
+
+    		var directive = {};
+
+    		directive.restrict = 'E';
+    		directive.templateUrl = "/app/obs/component/directives/observationComponentSummary.html";
+
+    		directive.scope = {
+
+    			components: '=',
+    			acl: '='
+    		};
+
+    		directive.link = function ($scope, element, attrs) {
+				$scope.buttonLabel="Legg til ny hendelse";
+    			$scope.component = {flags:{incident:true}};
+    			$scope.component.what = '';
+
+
+    			$scope.incidentOrElse = function(flags){
+
+    				return true;
+    			};
+
+    		};
+
+    		return directive;
+    	});
