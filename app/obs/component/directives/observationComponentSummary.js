@@ -145,7 +145,7 @@
     		directive.templateUrl = "/app/obs/component/directives/observationComponentSummary.html";
 
     		directive.scope = {
-
+				observationTitle: '=',
     			components: '=',
     			acl: '='
     		};
@@ -154,6 +154,13 @@
 				$scope.buttonLabel="Legg til ny hendelse";
     			$scope.component = {flags:{incident:true},order:0};
     			$scope.component.what = '';
+
+				var unbind = $scope.$watch('observationTitle',function(){
+					if(!$scope.component.what){
+						$scope.component.what = $scope.observationTitle;
+						unbind();
+					}
+				});
 
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);

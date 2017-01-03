@@ -7,7 +7,7 @@
 		</tr>
 		<tr ng-if="acl.w && observation.components.length ==0">
 			<td>
-				<observation-component-summary-new-incident acl="acl" components="observation.components"></observation-component-summary-new-incident>
+				<observation-component-summary-new-incident observation-title="observation.tags[0]" acl="acl" components="observation.components"></observation-component-summary-new-incident>
 			</td>
 		</tr>
 
