@@ -20,6 +20,14 @@
 		reorderFunc(components);
 	};
 
+	var newComponentFunc = function(flag,order){
+
+		var component = {flags:{},order:order,what:'',attributes:{}};
+		component.flags[flag]=true;
+		return component;
+
+	};
+
 
 	angular.module('reportingApp').directive('observationComponentSummary', function ($location,Definitions) {
 
@@ -85,13 +93,14 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.buttonLabel="Legg til ny årsak";
-    			$scope.component = {flags:{cause:true},order:-1};
-    			$scope.component.what = '';
+    			$scope.component = newComponentFunc('cause',-1);
+
+
 
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);
 					reorderFunc($scope.components);
-					$scope.component = {flags:{cause:true},order:-1};
+					$scope.component = newComponentFunc('cause',-1);
 				};
 
     			$scope.incidentOrElse = function(flags){
@@ -119,13 +128,14 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.buttonLabel="Legg til ny konsekvens";
-    			$scope.component = {flags:{consequence:true},order:999};
-    			$scope.component.what = '';
+    			$scope.component = newComponentFunc('consequence',999);
+
+
 
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);
 					reorderFunc($scope.components);
-					$scope.component = {flags:{consequence:true},order:999};
+					$scope.component = newComponentFunc('consequence',999);
 				};
 
     			$scope.incidentOrElse = function(flags){
@@ -152,8 +162,8 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.buttonLabel="Legg til ny hendelse";
-    			$scope.component = {flags:{incident:true},order:0};
-    			$scope.component.what = '';
+    			$scope.component = newComponentFunc('incident',0);
+
 
 				var unbind = $scope.$watch('observationTitle',function(){
 					if(!$scope.component.what){
@@ -165,7 +175,7 @@
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);
 					reorderFunc($scope.components);
-					$scope.component = {flags:{incident:true},order:0};
+					$scope.component = newComponentFunc('incident',0);
 				};
 
     			$scope.incidentOrElse = function(flags){

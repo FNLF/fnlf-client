@@ -1,6 +1,13 @@
-<div class="row">
+<div class="rxow">
 	<div class="col-xs-12 col-md-12">
-	<h1>{{component.what}}</h1>
+	<h1>
+
+		<span ng-if="component.flags.barrier" class="label label-default">Barriære</span>
+		<span ng-if="component.flags.incident" class="label label-info">Hendelse</span>
+		<span ng-if="component.flags.cause || component.flags.root_cause" class="label label-warning">Årsak</span>
+		<span ng-if="component.flags.consequence || component.flags.final_consequence" class="label label-danger">Konsekvens</span>
+		{{component.what}}
+	</h1>
 
 
 	</div>
@@ -8,18 +15,6 @@
 
 	<div  class="aside-full-width-on-sm">
 
-		<div class="form-group">
-			<div class="btn-group-sm">
-				<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.cause" btn-checkbox>Årsak</label>
-				<inlinehelp>Direkte eller indirekte årsak til hendelsen</inlinehelp>
-				<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.barrier" btn-checkbox>Sikkerhetsbarriære</label>
-				<inlinehelp>Sikkerhetsbarriære som har blitt brutt eller som har fungert som den skulle</inlinehelp>
-				<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.incident" btn-checkbox>Hendelse</label>
-				<inlinehelp>Det som gjorde at du nå skriver i ORS</inlinehelp>
-				<label ng-disabled="!acl.w" class="btn btn-default" ng-model="component.flags.consequence" btn-checkbox>Konsekvens</label>
-				<inlinehelp>Direkte og indirekte konsekvenser av hendelsen</inlinehelp>
-			</div>
-		</div>
 
 		<div class="col-xs-12 col-md-12">
 			<div class="form-group">
@@ -85,11 +80,14 @@
 
 
 		<div class="form-group col-xs-12">
+			<!--
 			<button ng-disabled="!acl.w" type="button" class="btn btn-warning" ng-click="newCause(component.order)"><i class="fa fa-fw fa-plus"></i> Hvorfor skjedde dette? Ny årsak</button>
 			&nbsp;&nbsp;
 			<button ng-disabled="!acl.w" type="button" class="btn btn-info" ng-click="incrementOrder(component)"><i class="fa fa-fw fa-chevron-down"></i>Flytt ned</button>
 			<button ng-disabled="!acl.w" type="button" class="btn btn-info" ng-click="decrementOrder(component)"><i class="fa fa-fw fa-chevron-up"></i>Flytt opp</button>
+			-->
 			<span>&nbsp;</span>
+
 			<button ng-disabled="!acl.w" type="button" class="btn btn-info" ng-click="deleteComponent(component)"> <i class="fa fa-fw fa-trash-o"></i> Slett komponent</button>
 		</div>
 

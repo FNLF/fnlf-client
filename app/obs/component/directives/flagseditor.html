@@ -1,11 +1,11 @@
 <span>
-    <span class="hidden-sm hidden-xs hidden-md" class="btn-group-sm">
+    <span class="hidden-sm hidden-xs hidden-md hidden-lg" class="btn-group-sm">
       <span ng-repeat="a in allAttributes">
           <button ng-disabled="!acl.w" class="btn btn-{{a.color}} " ng-click="toggle(a.attribute)" ng-show="attributes[a.attribute]" >{{a.label}}</button>
           <button ng-disabled="!acl.w" class="btn"                  ng-click="toggle(a.attribute)" ng-hide="attributes[a.attribute]" >{{a.label}}</button>
       </span>
     </span>
-    <span class="visible-sm visible-xs visible-md" class="btn-group-xs">
+    <span class="visible-sm visible-xs visible-md visible-lg" class="btn-group-xs">
         <span ng-repeat="a in allAttributes">
             <button ng-disabled="!acl.w" class="btn btn-{{a.color}} btn-xs" ng-click="toggle(a.attribute)" ng-show="attributes[a.attribute]" >{{a.label}}</button>
             <button ng-disabled="!acl.w" class="btn btn-xs"                 ng-click="toggle(a.attribute)" ng-hide="attributes[a.attribute]" >{{a.label}}</button>
