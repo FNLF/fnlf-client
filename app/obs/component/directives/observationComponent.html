@@ -1,4 +1,14 @@
-<div class="rxow">
+<div>
+
+	<style>
+
+		.air{
+			margin-bottom:16px;
+
+		}
+
+	</style>
+
 	<div class="col-xs-12 col-md-12">
 	<h1>
 
@@ -13,20 +23,19 @@
 	</div>
 	<div class="col-xs-12"></div>
 
-	<div  class="aside-full-width-on-sm">
+	<div class="aside-full-width-on-sm">
 
 
-		<div class="col-xs-12 col-md-12">
+		<div class="col-xs-12 air">
 			<div class="form-group">
-				<inlinehelp title="Flagg">Bruk flagg slik at det blir lett å lage god statistikk</inlinehelp>
 				<br>
+				<inlinehelp title="Flagg">Bruk flagg slik at det blir lett å lage god statistikk</inlinehelp>
 				<flagseditor acl="acl" attributes="component.attributes"></flagseditor>
 			</div>
+			<br>
 		</div>
 
-		<p></p>
-
-		<div class="col-xs-12 col-md-6 col-lg-4 hideInTemplateEditor">
+		<div class="col-xs-12 col-md-6 col-lg-4 air">
 			<div class="form-group">
 				<inlinehelp title="Involvert">Personer som var involvert i akkurat denne komponenten i forløpet</inlinehelp>
 				<ui-select ng-disabled="!acl.w" multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blant involverte personer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
@@ -34,14 +43,14 @@
 			</div>
 		</div>
 
-		<div class="col-xs-8 col-md-4 col-lg-3">
+		<div class="col-xs-8 col-md-4 col-lg-3 air">
 			<div class="form-group">
 				<inlinehelp title="Sted eller situasjon">Fyll ut denne slik at det blir mulig å se fellestrekk over tid hvor ting typisk skjer</inlinehelp>
 				<tagtypeahead acl="acl" model="component.where.at" group="where-at" noun="på/i"></tagtypeahead>
 			</div>
 		</div>
 
-		<div class="col-xs-4 col-md-2">
+		<div class="col-xs-4 col-md-2 air">
 			<div class="form-group">
 				<inlinehelp title="Høyde i fot">Høyde over bakken der dette er relevant</inlinehelp>
 				<input ng-disabled="!acl.w" type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
@@ -51,7 +60,7 @@
 		<div class="clearfix"></div>
 
 
-		<div class="col-xs-12 col-md-6 col-lg-7">
+		<div class="col-xs-12 col-md-6 col-lg-7 air">
 			<div class="form-group">
 				<inlinehelp title="Søketagger">Søketagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
 					Det viktigste i friteksten bør vere utrykt i form av tagger.
@@ -66,7 +75,7 @@
 			</div>
 		</div>
 
-		<div class="col-xs-12 hideInTemplateEditor">
+		<div class="col-xs-12 air">
 			<div class="form-group">
 				<inlinehelp title="Hvordan (Fritekst)"> Kort tekst som forklarer komponenten. Bruk heller flagg, tagger eller flere komponenter enn å skrive mye her. Viss du kun skriver her vil aldri kunne lage fornuftig statistikk av observasjonen din.</inlinehelp> </label>
 				<textarea ng-disabled="!acl.w" type="text" rows="4" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true"></textarea>
