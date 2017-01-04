@@ -1,13 +1,5 @@
 <div>
 
-	<style>
-
-		.air{
-			margin-bottom:16px;
-
-		}
-
-	</style>
 
 	<div class="col-xs-12 col-md-12">
 	<h1>
@@ -35,22 +27,27 @@
 			<br>
 		</div>
 
-		<div class="col-xs-12 col-md-6 col-lg-4 air">
+		<div class="col-xs-12 air" ng-if="persons.length>1">
 			<div class="form-group">
 				<inlinehelp title="Involvert">Personer som var involvert i akkurat denne komponenten i forløpet</inlinehelp>
-				<ui-select ng-disabled="!acl.w" multiple ng-model="component.involved" theme="bootstrap"> <ui-select-match placeholder="Velg blant involverte personer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
-					<ui-select-choices repeat="person in persons track by person.id"> {{person.fullname}} </ui-select-choices> </ui-select>
+
+				<div class="form-group">
+					<div ng-repeat="person in persons track by person.id" class="col-xs-6 col-md-3">
+						<input ng-disabled="!acl.w" ng-model="involved[person.id]" type="checkbox" ng-change="involvedChanged(person.id)">
+						<resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="col-xs-8 col-md-4 col-lg-3 air">
+		<div class="col-xs-8 col-md-5 col-lg-3 air">
 			<div class="form-group">
 				<inlinehelp title="Sted eller situasjon">Fyll ut denne slik at det blir mulig å se fellestrekk over tid hvor ting typisk skjer</inlinehelp>
 				<tagtypeahead acl="acl" model="component.where.at" group="where-at" noun="på/i"></tagtypeahead>
 			</div>
 		</div>
 
-		<div class="col-xs-4 col-md-2 air">
+		<div class="col-xs-4 col-md-5 col-lg-3 air">
 			<div class="form-group">
 				<inlinehelp title="Høyde i fot">Høyde over bakken der dette er relevant</inlinehelp>
 				<input ng-disabled="!acl.w" type="number" ng-model="component.where.altitude" class="form-control" placeholder="Høyde over bakken i fot">
@@ -60,7 +57,7 @@
 		<div class="clearfix"></div>
 
 
-		<div class="col-xs-12 col-md-6 col-lg-7 air">
+		<div class="col-xs-12 col-md-12 col-lg-7 air">
 			<div class="form-group">
 				<inlinehelp title="Søketagger">Søketagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
 					Det viktigste i friteksten bør vere utrykt i form av tagger.

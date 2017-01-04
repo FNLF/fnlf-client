@@ -1,29 +1,14 @@
-	var reorderFunc = function(components){
 
-		var orderedComponents = components.sort(function(a,b){return a.order-b.order});
-		var i = 1;
-		orderedComponents.forEach(function(c){
-			c.order = i;
-			i++;
-		});
 
-	};
+	var newComponentFunc = function(flag,order,involved){
 
-	var decrementOrderFunc = function(components,component){
-		component.order = component.order-1.1;
-		reorderFunc(components);
-	};
-
-	var incrementOrderFunc = function(components,component){
-
-		component.order = component.order+1.1;
-		reorderFunc(components);
-	};
-
-	var newComponentFunc = function(flag,order){
-
-		var component = {flags:{},order:order,what:'',attributes:{}};
+		var component = {flags:{},order:order,what:'',attributes:{},involved:[]};
 		component.flags[flag]=true;
+		if(involved){
+			involved.forEach(function(p){
+				component.involved.push(p.id);
+			});
+		}
 		return component;
 
 	};
@@ -79,7 +64,7 @@
 	});
 
 
-	angular.module('reportingApp').directive('observationComponentSummaryNewCause', function ($location,Definitions) {
+	angular.module('reportingApp').directive('observationComponentSummaryNewCause', function ($location,Definitions,ComponentService) {
 
     		var directive = {};
 
@@ -87,19 +72,20 @@
     		directive.templateUrl = "/app/obs/component/directives/observationComponentSummary.html";
 
     		directive.scope = {
+    			involved: '=',
     			components: '=',
     			acl: '='
     		};
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.buttonLabel="Legg til ny årsak";
-    			$scope.component = newComponentFunc('cause',-1);
+    			$scope.component = newComponentFunc('cause',-1,$scope.involved);
 
 
 
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);
-					reorderFunc($scope.components);
+					ComponentService.reorder($scope.components);
 					$scope.component = newComponentFunc('cause',-1);
 				};
 
@@ -113,7 +99,7 @@
     		return directive;
     	});
 
-	angular.module('reportingApp').directive('observationComponentSummaryNewConsequence', function ($location,Definitions) {
+	angular.module('reportingApp').directive('observationComponentSummaryNewConsequence', function ($location,Definitions,ComponentService) {
 
     		var directive = {};
 
@@ -121,20 +107,20 @@
     		directive.templateUrl = "/app/obs/component/directives/observationComponentSummary.html";
 
     		directive.scope = {
-
+				involved: '=',
     			components: '=',
     			acl: '='
     		};
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.buttonLabel="Legg til ny konsekvens";
-    			$scope.component = newComponentFunc('consequence',999);
+    			$scope.component = newComponentFunc('consequence',999,$scope.involved);
 
 
 
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);
-					reorderFunc($scope.components);
+					ComponentService.reorder($scope.components);
 					$scope.component = newComponentFunc('consequence',999);
 				};
 
@@ -147,7 +133,7 @@
     		return directive;
     	});
 
-	angular.module('reportingApp').directive('observationComponentSummaryNewIncident', function ($location,Definitions) {
+	angular.module('reportingApp').directive('observationComponentSummaryNewIncident', function ($location,Definitions,ComponentService) {
 
     		var directive = {};
 
@@ -156,13 +142,14 @@
 
     		directive.scope = {
 				observationTitle: '=',
+				involved: '=',
     			components: '=',
     			acl: '='
     		};
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.buttonLabel="Legg til ny hendelse";
-    			$scope.component = newComponentFunc('incident',0);
+    			$scope.component = newComponentFunc('incident',0,$scope.involved);
 
 
 				var unbind = $scope.$watch('observationTitle',function(){
@@ -174,7 +161,7 @@
 
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);
-					reorderFunc($scope.components);
+					ComponentService.reorder($scope.components);
 					$scope.component = newComponentFunc('incident',0);
 				};
 

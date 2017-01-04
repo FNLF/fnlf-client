@@ -1,6 +1,6 @@
 (function () {
 
-	var observationComponent = function ($location,RestService, Definitions,Functions,ResolveService) {
+	var observationComponent = function ($location,RestService, Definitions,Functions,ResolveService,ComponentService) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -16,6 +16,8 @@
 			var index = $location.search().index;
 
 			$scope.component = $scope.observation.components[index];
+
+
 
 			$scope.flags = ['incident','cause','consequence','barrier'];
 
@@ -38,6 +40,14 @@
 						});
 					}
 				});
+
+				$scope.involved = {};
+				if(!angular.isUndefined($scope.component) && !angular.isUndefined($scope.component.involved)){
+					$scope.component.involved.forEach(function(id){
+						$scope.involved[id]=true;
+					});
+				}
+
 
 			};
 			$scope.resolvePersonsFn();
@@ -63,15 +73,7 @@
 				$scope.autoTags=Functions.autoTag(tagSrc);
 
 			};
-			//Disable freetext autotagging for now
-			//if($scope.acl.w){
-			//	$scope.autoTag($scope.component.how);
-			//}
-			$scope.whatEdited = function(component){
-				component.editTitle=false;
-				$scope.copyFromTemplate();
-				$scope.autoTag(component.what);
-			};
+
 
 			$scope.deleteComponent = function(component){
 				var index = $scope.observation.components.indexOf(component);
@@ -83,10 +85,26 @@
 					$scope.observation.components.splice(index,1);
 				}
 
-				reorderFunc($scope.observation.components);
+				ComponentService.reorder($scope.observation.components);
 				if ($location.$$search.ui) {
                 	$location.search('ui','').replace();
 				}
+			};
+
+			$scope.involvedChanged = function(personId){
+				console.log(personId);
+				var add = $scope.involved[personId];
+				console.log(add);
+				if(add){
+					$scope.component.involved.push(personId);
+				}else{
+					var index = $scope.component.involved.indexOf(personId);
+					if(index > -1){
+						$scope.component.involved.splice(index,1);
+					}
+				}
+				$scope.involved[personId]=add;
+				console.log($scope.component.involved);
 			};
 		};
 		return directive;
