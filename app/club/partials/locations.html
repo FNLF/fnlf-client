@@ -4,16 +4,16 @@
 	<div class=" col-md-8 col-xs-12">
 
 			<label>
-				<resolveclub ng-if="default_club" clubid="default_club">{{default_club}}</resolveclub>
+				<resolveclub ng-if="selected_club" clubid="selected_club">{{selected_club}}</resolveclub>
 			</label>
 			<hr>
 
 	</div>
 
-	<div ng-if="default_club" ng-init="getClubLocations()">
+	<div ng-if="selected_club" ng-init="getClubLocations()">
 
 
-		<div class="col-xs-12">
+		<div ng-if="clubLocations" class="col-xs-12">
 			<map center="{{coords}}" zoom="{{zoom}}"  >
 
 				<marker ng-if="loc"
@@ -37,14 +37,17 @@
 
 			</map>
 		</div>
-<div class="clearfix"></div>
-
-		<div class="col-xs-12"></div>
-		<table class="table table-striped table-hover">
+		<div class="clearfix"></div>
+		<br>
+		<div class="col-xs-12">
+		<h3 ng-if="loc">Rediger sted</h3>
+		<table ng-if="loc" class="table table-striped table-hover">
 			<tr>
 				<th>Navn</th>
 				<th>Koordinater</th>
 				<th>Stednavn</th>
+				<th></th>
+				<th></th>
 			</tr>
 			<tr>
 				<td>
@@ -56,25 +59,34 @@
 				<td>
 					{{loc.name}}
 				</td>
-				<td>
-					<button class="btn btn-default" ng-click="removeLocation(loc)">Slett {{loc.nickname}}</button>
-				</td>
+
 
 			</tr>
 
 		</table>
 
+		</div>
 
 
-		<p>
-			<button class="btn btn-success" ng-click="saveClubLocations()"><span class="fa fa-save"></span> Lagre endringer</button>
+		<p ng-if="loc">
+			<button class="btn btn-default" ng-click="setAsDefault(loc)">Sett <b>{{loc.nickname}}</b> som standard sted</button>
+
+			<button class="btn btn-default" ng-click="removeLocation(loc)">Slett <b>{{loc.nickname}}</b></button>
 		</p>
 
 
-		<table  class="table table-striped table-hover">
+		<p ng-if="loc">
+			<button class="btn btn-success" ng-click="saveClubLocations()"><span class="fa fa-save"></span> Lagre endringer</button>
+
+			<button class="btn btn-default" ng-click="getClubLocations()"><span class="fa fa-save"></span> Skrote endringer</button>
+		</p>
+
+		<h3>Velg sted for redigering</h3>
+		<table class="table table-striped table-hover">
 			<tr>
 				<th>Navn</th>
 				<th>Stednavn</th>
+				<th>Stedstype</th>
 			</tr>
 				<tr ng-click="rowClicked(location)" ng-repeat="location in clubLocations">
 				<td>
@@ -82,7 +94,10 @@
 				</td>
 
 				<td>
-					{{location.name}} {{location.geo_type}} <small>{{location.geo.coordinates}}</small>
+					{{location.name}}
+				</td>
+				<td>
+					{{location.geo_type}}
 				</td>
 
 			</tr>
