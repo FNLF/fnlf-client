@@ -75,6 +75,8 @@
 			};
 
 
+
+
 			$scope.deleteComponent = function(component){
 				var index = $scope.observation.components.indexOf(component);
 

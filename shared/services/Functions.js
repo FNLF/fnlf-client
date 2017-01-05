@@ -136,6 +136,8 @@
 
 			var cfl = this.capitalizeFirstLetter;
 
+			var deduplicateFn = this.deduplicate;
+
 			this.autoTag = function (inputString) {
 				if (angular.isUndefined(inputString)) {
 					return [];
@@ -163,7 +165,7 @@
 						washed.push(cfl(s));
 					}
 				});
-				return washed;
+				return deduplicateFn(washed);
 			};
 
 		});
