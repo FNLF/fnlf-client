@@ -1,7 +1,7 @@
 <div ng-init="order=0" class="">
 
 
-	<div class="col-xs-6">
+	<div class="col-xs-7">
 		<form>
 			<div class="form-group">
 				<div class="input-group">
@@ -25,17 +25,20 @@
 					<tagtypeahead acl="acl" ng-if="incidentOrElse(component.flags)" selectfn="componentWhatSelected"
 								  model="component.what" group="component.what.incident"
 								  noun="Beskriv selve hendelsen"></tagtypeahead>
-						<span class="input-group-btn" ng-if="buttonLabel">
-							<button ng-disabled="!acl.w" class="btn btn-default" ng-disabled="!component.what"
+						<span class="input-group-btn">
+							<button ng-disabled="!acl.w || component.what.length==0" class="btn btn-default"
 									type="submit" ng-click="editComponent(component)">
 								{{buttonLabel}}
 							</button>
+							<button class="btn btn-default" ng-if="templateMode=='component' && canUp()" ng-click="moveUp()"><i class="fa fa-angle-double-up" ></i></button>
+							<button class="btn btn-default" ng-if="templateMode=='component' && canDown()" ng-click="moveDown()"><i class="fa fa-angle-double-down" ></i></button>
+							<button class="btn btn-default" ng-if="templateMode=='component' && canTrash()" ng-click="trash()"><i class="fa fa-trash" ></i></button>
 						</span>
 				</div>
 			</div>
 		</form>
 	</div>
-	<div class="col-xs-5" ng-if="buttonLabel">
+	<div class="col-xs-5" ng-if="templateMode=='component'">
 		<flags class="hidden-xs" attributes="component.attributes"></flags>
 
 		<span ng-show="component.where.at">({{component.where.at}})</span> <span ng-show="!component.where.at"><i>(på/i

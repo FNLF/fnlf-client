@@ -14,7 +14,7 @@
 	};
 
 
-	angular.module('reportingApp').directive('observationComponentSummary', function ($location,Definitions) {
+	angular.module('reportingApp').directive('observationComponentSummary', function ($location,Definitions,ComponentService) {
 
 		var directive = {};
 
@@ -29,6 +29,7 @@
 
 		directive.link = function ($scope, element, attrs) {
 
+			$scope.templateMode="component";
 			$scope.buttonLabel="Detaljer";
 
 			$scope.editComponent = function(component){
@@ -58,6 +59,40 @@
 				return isIncident;
 			};
 
+			$scope.canUp = function(){
+				var length = $scope.components.length;
+				if(length <2){
+					return false;
+				}
+				var index = $scope.components.indexOf($scope.component);
+				return index > 0;
+			};
+
+			$scope.moveUp = function(){
+				ComponentService.decrementOrder($scope.components,$scope.component);
+			};
+
+			$scope.canDown = function(){
+				var length = $scope.components.length;
+				if(length <2){
+					return false;
+				}
+				var index = $scope.components.indexOf($scope.component);
+				return index < length-1;
+			};
+
+			$scope.moveDown = function(){
+				ComponentService.incrementOrder($scope.components,$scope.component);
+			};
+
+			$scope.canTrash = function(){
+				return $scope.component.flags['incident']!=true;
+			};
+
+			$scope.trash = function(){
+				ComponentService.deleteComponent($scope.components,$scope.component);
+			};
+
 		};
 
 		return directive;
@@ -78,6 +113,7 @@
     		};
 
     		directive.link = function ($scope, element, attrs) {
+				$scope.templateMode="new";
 				$scope.buttonLabel="Legg til ny årsak";
     			$scope.component = newComponentFunc('cause',-1,$scope.involved);
 
@@ -113,6 +149,7 @@
     		};
 
     		directive.link = function ($scope, element, attrs) {
+				$scope.templateMode="new";
 				$scope.buttonLabel="Legg til ny konsekvens";
     			$scope.component = newComponentFunc('consequence',999,$scope.involved);
 
@@ -148,6 +185,7 @@
     		};
 
     		directive.link = function ($scope, element, attrs) {
+				$scope.templateMode="new";
 				$scope.buttonLabel="Legg til ny hendelse";
     			$scope.component = newComponentFunc('incident',0,$scope.involved);
 

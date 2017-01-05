@@ -78,16 +78,7 @@
 
 
 			$scope.deleteComponent = function(component){
-				var index = $scope.observation.components.indexOf(component);
-
-				if($scope.observation.components.length == (index + 1)) {
-					$scope.observation.components.splice(-1,1);
-				}
-				else {
-					$scope.observation.components.splice(index,1);
-				}
-
-				ComponentService.reorder($scope.observation.components);
+				ComponentService.deleteComponent($scope.observation.components,component);
 				if ($location.$$search.ui) {
                 	$location.search('ui','').replace();
 				}

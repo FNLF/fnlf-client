@@ -34,7 +34,15 @@
         	};
 
 
-
+			this.deleteComponent = function(components,component){
+				var index = components.indexOf(component);
+				if(components.length == (index + 1)) {
+					components.splice(-1,1);
+				}else {
+					components.splice(index,1);
+				}
+				reorderFunc(components);
+			};
 
 
 		});
