@@ -65,6 +65,18 @@
 					return false;
 				}
 				var index = $scope.components.indexOf($scope.component);
+
+				if($scope.component.flags.incident){
+					return false;
+				}
+
+				if($scope.component.flags.consequence){
+					var incidentIndex = ComponentService.incidentIndex($scope.components,$scope.component);
+					if(index-1==incidentIndex){
+						return false;
+					}
+				}
+
 				return index > 0;
 			};
 
@@ -78,6 +90,18 @@
 					return false;
 				}
 				var index = $scope.components.indexOf($scope.component);
+
+				if($scope.component.flags.incident){
+					return false;
+				}
+
+				if($scope.component.flags.cause){
+					var incidentIndex = ComponentService.incidentIndex($scope.components,$scope.component);
+
+					if(index+1==incidentIndex){
+						return false;
+					}
+				}
 				return index < length-1;
 			};
 

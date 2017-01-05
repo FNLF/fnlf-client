@@ -44,6 +44,15 @@
 				reorderFunc(components);
 			};
 
+			this.incidentIndex = function(components,component){
+				for(var i = 0; i < components.length;i++){
+					if(components[i].flags['incident']==true){
+						return i;
+					}
+				}
+				return -1;
+			};
+
 
 		});
 
