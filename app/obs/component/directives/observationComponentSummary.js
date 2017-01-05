@@ -30,7 +30,7 @@
 		directive.link = function ($scope, element, attrs) {
 
 			$scope.templateMode="component";
-			$scope.buttonLabel="Detaljer";
+			$scope.buttonLabel="Rediger";
 
 			$scope.editComponent = function(component){
 
