@@ -215,9 +215,8 @@
 
 
 				var unbind = $scope.$watch('observationTitle',function(){
-					if(!$scope.component.what){
+					if(!$scope.component.what && $scope.observationTitle){
 						$scope.component.what = $scope.observationTitle;
-						unbind();
 					}
 				});
 
