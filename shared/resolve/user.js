@@ -20,8 +20,9 @@ angular.module('resolve')
 								$scope.firstname = user.firstname;
 								$scope.lastname = user.lastname;
 							});
-					}
-					else if ($scope.userid < 0) {
+					}else if($scope.tmpname){
+						$scope.firstname = $scope.tmpname;
+					}else if ($scope.userid < 0) {
 						$scope.firstname = 'Hopper';
 						$scope.lastname = -1 * $scope.userid;
 						if ($scope.tmpname) {
