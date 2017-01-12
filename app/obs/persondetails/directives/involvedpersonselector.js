@@ -15,17 +15,18 @@ angular.module('reportingApp').directive('involvedpersonselector', function (Res
 
 
 			$scope.onSelect = function (item, model) {
-				RestService.getUser(item.id)
-					.then(function (user) {
-						var settings = user.settings;
-						if (settings.total_jumps) {
-							item.numberOfJumps = settings.total_jumps;
-						}
-						if (settings.gear) {
-							item.gear = settings.gear;
-						}
-					});
-
+				if(item.id && item.id > 0){
+					RestService.getUser(item.id)
+						.then(function (user) {
+							var settings = user.settings;
+							if (settings.total_jumps) {
+								item.numberOfJumps = settings.total_jumps;
+							}
+							if (settings.gear) {
+								item.gear = settings.gear;
+							}
+						});
+				}
 
 				item.open = true;
 			};
