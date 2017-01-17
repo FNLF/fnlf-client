@@ -293,12 +293,12 @@
 
 				$scope.clublocations = filteredLocations;
 
-				if($scope.clublocations.length > 0){
-					$scope.observation.location  = filteredLocations[0];
-				}
-
-				if(typeof $scope.observation.location == 'undefined'){
-					$scope.observation.location = {};
+				if(typeof $scope.observation.location.nickname == 'undefined'){
+					if($scope.clublocations.length > 0){
+						$scope.observation.location  = filteredLocations[0];
+					}else{
+						$scope.observation.location = {};
+					}
 				}
 
 
