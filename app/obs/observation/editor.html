@@ -4,54 +4,54 @@
 		<div ng-switch="fullscreen" class="aside-content">
 
 			<div ng-switch-when="components">
-				<fullscreen acl="acl" observation="observation" title="Komponenter i forløpet" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Komponenter i forløpet" fullscreen="fullscreen">
 					<observation-components acl="acl" observation="observation"></observation-components>
 				</fullscreen>
 			</div>
 			<div ng-switch-when="involved">
-				<fullscreen acl="acl" observation="observation" title="Involverte personer og utstyr" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Involverte personer og utstyr" fullscreen="fullscreen">
 					<involvedpersonselector acl="acl" observation="observation"></involvedpersonselector>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="organization">
-				<fullscreen acl="acl" observation="observation" title="Hoppfeltorganiseringen" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Hoppfeltorganiseringen" fullscreen="fullscreen">
 					<organization acl="acl" observation="observation"></organization>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="location">
-				<fullscreen acl="acl" observation="observation" title="Rediger klubben sine steder" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Rediger klubben sine steder" fullscreen="fullscreen">
 					<locationselector clublocations="clublocations" acl="acl" observation="observation"></locationselector>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="weather">
-				<fullscreen acl="acl" observation="observation" title="Beskriv værforholda" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Beskriv værforholda" fullscreen="fullscreen">
 					<weather acl="acl" observation="observation"></weather>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="actions">
-				<fullscreen acl="acl" observation="observation" title="Legg til tiltak" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Legg til tiltak" fullscreen="fullscreen">
 					<actions acl="acl" observation="observation"></actions>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="workflow">
-				<fullscreen acl="acl" observation="observation" title="Arbeidsflyt for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Arbeidsflyt for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
 					<workflow acl="acl" observation="observation" observation-changes="observationChanges" is-finished="isFinished"></workflow>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="summary">
-				<fullscreen acl="acl" observation="observation" title="Datamodell for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Datamodell for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
 					<observationsummary observation="observation"></observationsummary>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="file">
-				<fullscreen acl="acl" observation="observation" title="Fil" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Fil" fullscreen="fullscreen" observation-changes="observationChanges">
 					<filepreviews observation="observation" acl="acl"></filepreviews>
 				</fullscreen>
 			</div>

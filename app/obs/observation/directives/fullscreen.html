@@ -1,7 +1,7 @@
 <div ng-hide="isFinished" class="fullscreen">
-	<div class="fullscreen-header" ng-show="title">
+	<div class="fullscreen-header" ng-show="titleText">
 		<button type="button" class="close" ng-click="hideFullscreen()">&times;</button>
-		<h4 class="" ng-bind="title"></h4>
+		<h4 class="" ng-bind="titleText"></h4>
 	</div>
 	<ng-transclude></ng-transclude>
 	<div class = "fullscreen-footer">

@@ -9,7 +9,7 @@ angular.module('reportingApp').directive('fullscreen', function ($location,$wind
 		observation: '=',
 		acl: '=',
 		fullscreen: '=',
-		title: '@',
+		titleText: '@',
 		observationChanges:'='
 	};
 
