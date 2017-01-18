@@ -2,7 +2,7 @@
 
 	
 	angular.module('reportingApp')
-		.controller('ReportController', function ($scope,$rootScope, ObservationService,Definitions,$routeParams,$timeout, $rootScope, $location) {
+		.controller('ReportController', function ($scope,$rootScope, ObservationService,Definitions,$routeParams,$timeout, $rootScope, $location, Appswitcher) {
 			
 			
 			var observationId = $routeParams.id;
@@ -10,7 +10,8 @@
 			$scope.observationChanges = false;
 
 			$scope.ui=$routeParams.ui;
-			
+
+			Appswitcher.getApps();
 			$rootScope.title = 'F/NLF - ORS rapportvisning #' + $routeParams.id;
 
 			$rootScope.nav = {toolbar: [], menus: []}; //reset

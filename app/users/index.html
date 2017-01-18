@@ -1,91 +1,95 @@
 <!DOCTYPE html>
 <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="usersApp">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>F/NLF - Elektroniske Tjenester | Users</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>F/NLF - Elektroniske Tjenester | Users</title>
 
 
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap-css-only/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css"/>
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/bower_components/ui-select/dist/select.css"/>
+    <link rel="stylesheet" href="/bower_components/ng-table/dist/ng-table.min.css"/>
+    <link rel="stylesheet" href="/bower_components/bootstrap-additions/dist/bootstrap-additions.css"/>
+    <!-- endbower -->
+    <link href="/static/js/angled/angled-navbar.css" rel="stylesheet">
+    <link href="/static/css/app.css" rel="stylesheet">
 
-<!-- bower:css -->
-<link rel="stylesheet" href="/bower_components/bootstrap-css-only/css/bootstrap.css" />
-<link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css" />
-<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
-<link rel="stylesheet" href="/bower_components/ui-select/dist/select.css" />
-<link rel="stylesheet" href="/bower_components/ng-table/dist/ng-table.min.css" />
-<link rel="stylesheet" href="/bower_components/bootstrap-additions/dist/bootstrap-additions.css" />
-<!-- endbower -->
-<link href="/static/js/angled/angled-navbar.css" rel="stylesheet">
-<link href="/static/css/app.css" rel="stylesheet">
+    <!-- bower:js -->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/angy-auth2/lib/http-auth-interceptor.js"></script>
+    <script src="/bower_components/ui-select/dist/select.js"></script>
+    <script src="/bower_components/ng-table/dist/ng-table.min.js"></script>
+    <script src="/bower_components/angular-strap/dist/angular-strap.js"></script>
+    <script src="/bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="/bower_components/ngmap/build/scripts/ng-map.js"></script>
+    <!-- endbower -->
 
-<!-- bower:js -->
-<script src="/bower_components/angular/angular.js"></script>
-<script src="/bower_components/angular-route/angular-route.js"></script>
-<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
-<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="/bower_components/angy-auth2/lib/http-auth-interceptor.js"></script>
-<script src="/bower_components/ui-select/dist/select.js"></script>
-<script src="/bower_components/ng-table/dist/ng-table.min.js"></script>
-<script src="/bower_components/angular-strap/dist/angular-strap.js"></script>
-<script src="/bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
-<script src="/bower_components/ngmap/build/scripts/ng-map.js"></script>
-<!-- endbower -->
+    <!-- shared services -->
+    <script src="/shared/services/app.js?v050"></script>
+    <script src="/shared/services/Functions.js?v050"></script>
+    <script src="/shared/services/RestService.js?v050"></script>
+    <script src="/shared/services/Definitions.js?v050"></script>
+    <script src="/shared/services/Appswitcher.js?v050"></script>
 
+    <!-- Resolvers -->
+    <script src="/shared/resolve/app.js"></script>
+    <script src="/shared/resolve/service.js"></script>
+    <script src="/shared/resolve/user.js"></script>
+    <script src="/shared/resolve/club.js"></script>
 
+    <!-- Angled navbar -->
+    <link href="/static/js/angled/angled-navbar.css" rel="stylesheet">
+    <script src="/static/js/angled/angled-navbar.js"></script>
 
-<!-- Resolvers -->
-<script src="/shared/resolve/app.js"></script>
-<script src="/shared/resolve/service.js"></script>
-<script src="/shared/resolve/user.js"></script>
-<script src="/shared/resolve/club.js"></script>
+    <!-- Config -->
+    <script src="/config.js"></script>
 
+    <!-- APP -->
+    <script src="app.js" type="text/javascript"></script>
+    <script src="routes.js" type="text/javascript"></script>
 
-<!-- Angled navbar -->
-<link href="/static/js/angled/angled-navbar.css" rel="stylesheet">
-<script src="/static/js/angled/angled-navbar.js"></script>
-
-<!-- Config -->
-<script src="/config.js"></script>
-
-<!-- APP -->
-<script src="app.js" type="text/javascript"></script>
-<script src="routes.js" type="text/javascript"></script>
-
-<!-- Auth module -->
-<script src="/shared/auth/loginServices.js" type="text/javascript"></script>
+    <!-- Auth module -->
+    <script src="/shared/auth/loginServices.js" type="text/javascript"></script>
 
 
 </head>
 <body>
 
-	<!-- Navigationbar -->
-	<angled-navbar menus="nav.menus" search="false" inverse="false" brand="nav.brand" affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
-	<!-- END OF Navigationbar -->
+<!-- Navigationbar -->
+<angled-navbar menus="nav.menus" appswitcher="nav.appswitcher" search="false" inverse="false" brand="nav.brand"
+               affixed="top" loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
+<!-- END OF Navigationbar -->
 
-	<!--Contains data from /pages appears in ng-view-->
-	<div class="container">
+<!--Contains data from /pages appears in ng-view-->
+<div class="container">
 
-		<div class="row">
+    <div class="row">
 
-			<div ng-if="error" class="alert alert-info alert-dismissable">
-				<a class="panel-close close" data-dismiss="alert">×</a> <i class="fa fa-coffee"></i> {{error}}
-			</div>
-
-
-			<div ng-hide="currentUserSignedIn">
-				<fnlf-login></fnlf-login>
-			</div>
-
-			<div ng-if="currentUserSignedIn" ng-controller="usersLocalController" class="ng-cloak" ng-cloak ng-view>
-			
-			</div>
+        <div ng-if="error" class="alert alert-info alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a> <i class="fa fa-coffee"></i> {{error}}
+        </div>
 
 
-		</div>
+        <div ng-hide="currentUserSignedIn">
+            <fnlf-login></fnlf-login>
+        </div>
 
-	</div>
+        <div ng-if="currentUserSignedIn" ng-controller="usersLocalController" class="ng-cloak" ng-cloak ng-view>
+
+        </div>
+
+
+    </div>
+
+</div>
 </body>
 </html>
