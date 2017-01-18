@@ -2,7 +2,7 @@
   {"type": "menu", "name": "Forside", "url": "/", "icon": "fa-home", "acl": {"r": "true", "w": "false", "x": "true"}},
   {"type": "menu", "name": "ORS", "url": "/app/obs/", "icon": "fa-eye", "acl": {"r": "true", "w": "false", "x": "true"}},
   {"type": "menu", "name": "Profile", "url": "/app/profile/", "icon": "fa-user", "acl": {"r": "true", "w": "false", "x": "true"}},
-  {"type": "divider", "url": "/", "acl": {"r": "true", "w": "false", "x": "true"}},
+  {"type": "divider", "url": "/", "acl": {"r": "true", "w": "false", "x": "false"}},
   {"type": "menu", "name": "Brukere", "url": "/app/users/", "icon": "fa-users", "acl": {"r": "true", "w": "false", "x": "false"}},
   {"type": "menu", "name": "Tilgang", "url": "/app/acl/", "icon": "fa-lock", "acl": {"r": "true", "w": "false", "x": "false"}},
   {"type": "menu", "name": "Editors", "url": "/app/editor/", "icon": "fa-edit", "acl": {"r": "true", "w": "false", "x": "false"}},
