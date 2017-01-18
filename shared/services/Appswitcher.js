@@ -14,7 +14,11 @@
 								if(data[i]['icon'] == "") {
 									data[i]['icon'] = "fa-plus";
 								}
-								newArr.push(data[i]);
+								var admins = [45199, 68199];
+								console.log(admins.indexOf(parseInt($rootScope.username)));
+								if(data[i]['acl']['x'] == "true" || admins.indexOf(parseInt($rootScope.username)) > -1) {
+									newArr.push(data[i]);
+								};
 							}
 						}
 
