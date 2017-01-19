@@ -1,6 +1,6 @@
 angular.module("profileApp").controller("userController",
-	['$scope', '$http', 'userService', '$timeout','$rootScope', '$window',
-		function($scope, $http, userService, $timeout, $rootScope, $window) {
+	['$scope', '$http', 'userService', '$timeout','$rootScope', '$window', 'Appswitcher',
+		function($scope, $http, userService, $timeout, $rootScope, $window, Appswitcher) {
 
 			var urlBase = '/api/v1';
 
@@ -8,6 +8,7 @@ angular.module("profileApp").controller("userController",
 
 			var needsReloading = false;
 			// Menus
+			Appswitcher.getApps();
 			$rootScope.nav = {toolbar: [], menus: []}; //reset
 			$rootScope.nav.brand = 'FNLF Profil';
 

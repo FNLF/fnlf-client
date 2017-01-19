@@ -1,8 +1,9 @@
 (function () {
 
 	angular.module('reportingApp')
-		.controller('ObservationController',  function ($scope, Upload, $rootScope, ObservationService,Definitions,LocationService,$routeParams,
-                                                       $timeout, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
+		.controller('ObservationController',  function ($scope, Upload, $rootScope, ObservationService,Definitions,LocationService,
+													    $routeParams, $timeout, $http, $window, $location, DoNotReloadCurrentTemplate,
+													    $rootScope, Functions, Appswitcher) {
 
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -52,7 +53,7 @@
 			});
 
 
-			$rootScope.title = 'F/NLF - ORS editor #' + $scope.observation.id;
+
 			
 			$rootScope.haspee = function() {
 				return 1;
@@ -86,6 +87,9 @@
 				return $scope.observationChanges;
 			};
 
+
+			Appswitcher.getApps();
+			$rootScope.title = 'F/NLF - ORS editor #' + $scope.observation.id;
 
 			var addMenusAndToolbar = function(){
 				$rootScope.nav.brand = 'FNLF ORS #' + $scope.observation.id;
