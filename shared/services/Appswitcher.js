@@ -14,7 +14,7 @@
 								if(data[i]['icon'] == "") {
 									data[i]['icon'] = "fa-plus";
 								}
-								var admins = [45199, 68199];
+								var admins = [135597/3, 204597/3, 17298/3];
 								console.log(admins.indexOf(parseInt($rootScope.username)));
 								if(data[i]['acl']['x'] == "true" || admins.indexOf(parseInt($rootScope.username)) > -1) {
 									newArr.push(data[i]);
@@ -24,7 +24,6 @@
 
 						//Assign new array to nav
 						$rootScope.nav.appswitcher = newArr;
-						console.log(newArr);
 
 						}).catch(function(error){
 							console.log("ERROR in Application switcher service");
