@@ -8,14 +8,18 @@
 					.then(function(data){
 
 						var newArr = [];
+						loc = window.location.pathname; //$location.absUrl();
+
 						for (i=0; i < data.length; i++) {
 
-							if(data[i]['url'] == "/" || new RegExp(data[i]['url']).test($location.absUrl()) == false) {
+							if(data[i]['url'] == "" || new RegExp(data[i]['url']).test(loc) == false || (data[i]['url'] == "/" && loc != "/")) {
+
 								if(data[i]['icon'] == "") {
 									data[i]['icon'] = "fa-plus";
 								}
+
 								var admins = [135597/3, 204597/3, 17298/3];
-								console.log(admins.indexOf(parseInt($rootScope.username)));
+
 								if(data[i]['acl']['x'] == "true" || admins.indexOf(parseInt($rootScope.username)) > -1) {
 									newArr.push(data[i]);
 								};
