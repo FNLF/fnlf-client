@@ -9,6 +9,7 @@
  			restrict : 'AE',
  			scope : {
  				brand : '=',
+ 				appswitcher : '=',
  				menus : '=',
  				affixed : '=',
  				search : '=',

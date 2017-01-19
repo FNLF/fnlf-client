@@ -1,13 +1,13 @@
 (function () {
 	angular.module('reportingApp')
-		.controller('MainController', function ($scope, $rootScope, ObservationService,RestService,$location, ngTableParams, Definitions,Functions,ObservationsTableService,ENV) {
+		.controller('MainController', function ($scope, $rootScope, ObservationService,RestService,$location, ngTableParams, Definitions,Functions,ObservationsTableService,ENV, Appswitcher) {
 
 			$rootScope.nav = {toolbar: [], menus: [], brand: []}; //reset
 			$rootScope.nav.search = {show_ors: false, form: '', show: false}; //reset
 			$rootScope.nav.brand = "FNLF ORS";
 
 			$rootScope.nav.search.show_ors = false; // = '<searchform></searchform>';
-
+			Appswitcher.getApps();
 			$rootScope.title = 'F/NLF - ORS oversikt';
 
 			$scope.observation = {};

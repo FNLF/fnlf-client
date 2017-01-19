@@ -4,6 +4,15 @@
 		.service('RestService', ['$http','$q', function ($http,$q) {
 			var urlBase = '/api/v1';
 
+			/**
+			* Get the applications available to this user's acl
+			* @TODO refactor to api call when ready
+			**/
+			this.getApps = function () {
+				return $http.get('/applications.json').then(handleSuccess, handleError);
+			};
+
+
 			this.getClubs = function () {
 				return $http.get(urlBase + "/clubs?where={\"active\":true}",{ cache: true})
 					.then(handleSuccess, handleError);

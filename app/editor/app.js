@@ -15,6 +15,7 @@ angular.module("editorApp").controller("editorController",[
 				'$scope',
 				'$http',
 				'editorService',
+				'Appswitcher',
 				'$timeout',
 				'$rootScope',
 				'$window',
@@ -22,9 +23,10 @@ angular.module("editorApp").controller("editorController",[
 				'$filter',
 				'$routeParams',
 				'RestService',
-				function($scope, $http, editorService, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams, RestService, Definitions) {
+				function($scope, $http, editorService, Appswitcher, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams, RestService, Definitions) {
 
 					// Menus
+					Appswitcher.getApps();
 					$rootScope.nav = {toolbar: [], menus: []}; //reset
 					$rootScope.nav.brand = 'FNLF Editor';
 

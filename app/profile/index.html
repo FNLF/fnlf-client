@@ -39,6 +39,12 @@
 	<!-- Imageupload! -->
 	<script src="/static/js/imageupload.js"></script>
 
+	<!-- shared services -->
+	<script src="/shared/services/app.js?v050"></script>
+	<script src="/shared/services/Functions.js?v050"></script>
+	<script src="/shared/services/RestService.js?v050"></script>
+	<script src="/shared/services/Definitions.js?v050"></script>
+	<script src="/shared/services/Appswitcher.js?v050"></script>
 
 	<!--  CROP
 	<script src="/bower_components/ngImgCrop/compile/minified/ng-img-crop.js"></script>
@@ -69,7 +75,7 @@
 <body>
 
 <!-- Navigationbar -->
-<angled-navbar menus="nav.menus" search="false" inverse="false" brand="nav.brand" affixed="top"
+<angled-navbar menus="nav.menus" appswitcher="nav.appswitcher" search="false" inverse="false" brand="nav.brand" affixed="top"
 			   loggedin="currentUserSignedIn" toolbar="nav.toolbar"></angled-navbar>
 <!-- END OF Navigationbar -->
 
