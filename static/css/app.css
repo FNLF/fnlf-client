@@ -439,15 +439,17 @@ img {
 	margin-bottom: 16px;
 }
 
-.list-group-item{
-	padding-left: 0px !important;
-	padding-right: 0px !important;
-	padding-bottom: 16px !important;
-	padding-top: 16px !important;
+@media(max-width:992px){
 
+	.list-group-item{
+		padding-left: 0px !important;
+		padding-right: 0px !important;
 
-	border-left: 0px !important;
-	border-right: 0px !important;
-	border-bottom: 1px solid #ddd !important;
-	border-top: 1px solid #ddd !important;
+		border-left: 0px !important;
+		border-right: 0px !important;
+		border-bottom: 1px solid #ddd !important;
+		border-top: 1px solid #ddd !important;
+	}
+
 }
+
