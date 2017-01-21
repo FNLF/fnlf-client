@@ -1,7 +1,7 @@
 <form ng-submit="go()">
 	<div class="input-group">
 
-		<input placeholder="Søk" class="form-control" type="text" ng-model="model.search" typeahead="tag for tag in tags | filter:$viewValue" typeahead-min-length="2">
+		<input placeholder="Søketekst eller ors#" class="form-control" type="text" ng-model="model.search" typeahead="tag for tag in tags | filter:$viewValue" typeahead-min-length="2">
 		<!-- tag in tags | filter:$select.search -->
 		<span class="input-group-btn">
 			<span class="btn btn-primary" type="button" ng-click="go()" >
