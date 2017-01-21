@@ -42,10 +42,10 @@
 		<flags attributes="component.attributes"></flags>
 
 		<span ng-show="component.where.at">({{component.where.at}})</span> <span ng-show="!component.where.at"><i>(på/i
-		ikke angitt)</i></span>
+		ikke angitt)</i></span>&nbsp;
+		<span ng-show="component.where.altitude">({{component.where.altitude}} fot)</span>
 
 		<small ng-if="component.how"><br>{{component.how}}</small>
-		<span ng-if="component.tags.length > 0" class="label label-default">{{component.tags.join(', ')}}</span>&nbsp;
 
 	</div>
 </div>
