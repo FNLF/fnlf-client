@@ -138,7 +138,7 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.templateMode="new";
-				$scope.buttonLabel="Legg til ny årsak";
+				$scope.buttonLabel="Legg til";
     			$scope.component = newComponentFunc('cause',-1,$scope.involved);
 
 
@@ -174,7 +174,7 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.templateMode="new";
-				$scope.buttonLabel="Legg til ny konsekvens";
+				$scope.buttonLabel="Legg til";
     			$scope.component = newComponentFunc('consequence',999,$scope.involved);
 
 
@@ -210,7 +210,7 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.templateMode="new";
-				$scope.buttonLabel="Legg til ny hendelse";
+				$scope.buttonLabel="Legg til hendelse";
     			$scope.component = newComponentFunc('incident',0,$scope.involved);
 
 
