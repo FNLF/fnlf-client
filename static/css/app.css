@@ -385,12 +385,6 @@ img {
 		padding-left:0px;
 		padding-right:0px;
 	}
-	.aside-full-width-on-sm{
-		margin-left:-15px;
-		margin-right:-15px;
-		padding-left:0px;
-		padding-right:0px;
-	}
 }
 
 /*The underline text decoration on the panel heading title is annoying and clutters the interface.*/
@@ -406,18 +400,18 @@ img {
 
 .fullscreen-header {
 
-	border-bottom: 1px solid #e5e5e5;
+	border: 1px solid #e5e5e5;
 	min-height: 16.43px;
 	padding: 6px 15px;
-	background: #428bca;
-	color: #fff;
+	background: #f8f8f8;
+	color: #777;
 	margin-bottom: 15px;
 
 }
 
 .fullscreen-header .close{
 
-	color: #fff;
+	color: #777;
 	font-size: 25px;
 	opacity: .8;
 	padding: 4px 8px;
@@ -452,3 +446,5 @@ img {
 	}
 
 }
+
+
