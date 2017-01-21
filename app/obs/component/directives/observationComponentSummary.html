@@ -27,8 +27,8 @@
 								  noun="Beskriv selve hendelsen"></tagtypeahead>
 						<span class="input-group-btn">
 							<button ng-disabled="!acl.w || component.what.length==0" class="btn btn-default"
-									type="submit" ng-click="editComponent(component)">
-								{{buttonLabel}}
+									type="submit" ng-click="editComponent(component)" title="{{buttonLabel}}">
+								<i class="fa fa-{{buttonIcon}} fa-fw"></i>
 							</button>
 							<button class="btn btn-default" ng-if="templateMode=='component' && canUp()" ng-click="moveUp()"><i class="fa fa-angle-double-up" ></i></button>
 							<button class="btn btn-default" ng-if="templateMode=='component' && canDown()" ng-click="moveDown()"><i class="fa fa-angle-double-down" ></i></button>

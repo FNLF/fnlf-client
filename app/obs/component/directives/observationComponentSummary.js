@@ -31,6 +31,7 @@
 
 			$scope.templateMode="component";
 			$scope.buttonLabel="Rediger";
+			$scope.buttonIcon="edit";
 
 			$scope.editComponent = function(component){
 
@@ -138,7 +139,8 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.templateMode="new";
-				$scope.buttonLabel="Legg til";
+				$scope.buttonLabel="Legg til årsak";
+				$scope.buttonIcon="plus";
     			$scope.component = newComponentFunc('cause',-1,$scope.involved);
 
 
@@ -174,7 +176,9 @@
 
     		directive.link = function ($scope, element, attrs) {
 				$scope.templateMode="new";
-				$scope.buttonLabel="Legg til";
+				$scope.buttonLabel="Legg til konsekvens";
+				$scope.buttonIcon="plus";
+
     			$scope.component = newComponentFunc('consequence',999,$scope.involved);
 
 
@@ -211,6 +215,8 @@
     		directive.link = function ($scope, element, attrs) {
 				$scope.templateMode="new";
 				$scope.buttonLabel="Legg til hendelse";
+				$scope.buttonIcon="plus";
+
     			$scope.component = newComponentFunc('incident',0,$scope.involved);
 
 
