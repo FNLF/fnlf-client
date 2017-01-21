@@ -53,30 +53,6 @@
 			$scope.resolvePersonsFn();
 
 
-			$scope.autoTags=[];
-			$scope.autoTags=Functions.autoTag($scope.component.what);
-
-			$scope.addAutoTag = function(autoTag){
-				if(angular.isUndefined($scope.component.tags)){
-					$scope.component.tags = [];
-				}
-				if($scope.component.tags.indexOf(autoTag)==-1){
-					$scope.component.tags.push(autoTag);
-					RestService.addTag(autoTag,"component");
-				}
-				var index = $scope.autoTags.indexOf(autoTag);
-				$scope.autoTags.splice(index,1);
-
-			};
-
-			$scope.autoTag = function(tagSrc){
-				$scope.autoTags=Functions.autoTag(tagSrc);
-
-			};
-
-
-
-
 			$scope.deleteComponent = function(component){
 				ComponentService.deleteComponent($scope.observation.components,component);
 				if ($location.$$search.ui) {

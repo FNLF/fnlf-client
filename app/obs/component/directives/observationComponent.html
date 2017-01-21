@@ -54,40 +54,19 @@
 			</div>
 		</div>
 
-
-
 		<div class="clearfix"></div>
-
-
-
 
 		<div class="col-xs-12 air row">
 			<div class="form-group">
 				<inlinehelp title="Hvordan (Fritekst)"> Kort tekst som forklarer komponenten. Bruk heller flagg, tagger eller flere komponenter enn å skrive mye her. Viss du kun skriver her vil aldri kunne lage fornuftig statistikk av observasjonen din.</inlinehelp> </label>
-				<textarea ng-disabled="!acl.w" type="text" rows="4" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true" ng-blur="autoTag(component.what+' '+component.how)"></textarea>
+				<textarea ng-disabled="!acl.w" type="text" rows="4" maxlength="160" ng-model="component.how" class="form-control" ng-focus="howTextClicked=true"></textarea>
 				<span class="label label-info" ng-show="howTextClicked && component.how.length > 10">{{(160 - component.how.length)}} tegn igjen</span>&nbsp;
 				<span class="label label-warning" ng-show="howTextClicked && component.how.length > 80">Legg gjerne til de viktigste nøkkel-ordene i teksten som tagger</span>&nbsp;
 				<span class="label label-danger" ng-show="howTextClicked && component.how.length > 120">Legg gjerne til flere komponenter i stedet for å skrive alt som skjedde her</span>
 			</div>
 		</div>
 
-		<div class="col-xs-12 col-md-12 col-lg-7 air row">
-			<div class="form-group">
-				<inlinehelp title="Søketagger">Søketagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
-					Det viktigste i friteksten bør vere utrykt i form av tagger.
-				</inlinehelp>
-
-				<small ng-if="autoTags">Taggeforslag: <span ng-repeat="t in autoTags"> <a ng-click="addAutoTag(t)">{{t}} </a></span> </small>
-
-				<tagging acl="acl" model="component.tags" group="component" noun="Søketagger"></tagging>
-
-
-
-			</div>
-		</div>
-
 		<div class="clearfix"></div>
-
 
 	</div>
 	<div class="clearfix"></div>
