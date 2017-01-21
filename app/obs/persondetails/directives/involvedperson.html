@@ -120,7 +120,7 @@
 	<div class="form-group col-md-3 col-xs-12">
 		<inlinehelp title="MK">MK som sist tok hovedkontroll eller brukskontroll</inlinehelp>
 		<ui-select ng-disabled="!acl.w" tagging="tagTransform" ng-model="person.gear.rigger" theme="bootstrap" on-select="onSelect($item, $model)">
-			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$select.selected.id" tmpname="$select.selected.tmpname"></resolveuser></ui-select-match>
+			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser ng-if="!loading" userid="$select.selected.id" tmpname="$select.selected.tmpname"></resolveuser></ui-select-match>
 			<ui-select-choices repeat="person in personsFromDb | filter:$select.search track by person.id"
 							   refresh="getPersonsByName($select.search)" refresh-delay="100">
 				<span>{{person.fullname}}</span> <span ng-show="person.id>0">({{person.id}})</span>

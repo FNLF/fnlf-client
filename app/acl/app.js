@@ -2,7 +2,7 @@
 
 	var aclApp = angular.module('aclApp', [ 'ngRoute', 'ui.bootstrap',
 			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
-			'fnlf-login', 'resolve', 'ngTable', 'angled-navbar.directives' ]);
+			'fnlf-login','fnlf-services', 'resolve', 'ngTable', 'angled-navbar.directives' ]);
 
 	aclApp.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeBar = true;
@@ -15,13 +15,14 @@ angular.module("aclApp").controller("aclController",[
 				'$scope',
 				'$http',
 				'aclService',
+				'Appswitcher',
 				'$timeout',
 				'$rootScope',
 				'$window',
 				'ngTableParams',
 				'$filter',
 				'$routeParams',
-				function($scope, $http, aclService, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams) {
+				function($scope, $http, aclService, Appswitcher, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams) {
 					
 					if($routeParams.groupid) $scope.groupId = $routeParams.groupid;
 					if($routeParams.roleid) $scope.roleId = $routeParams.roleid;
@@ -33,6 +34,7 @@ angular.module("aclApp").controller("aclController",[
 					$scope.personsFromDb = [];
 					
 					// Menus
+					Appswitcher.getApps();
 					$rootScope.nav = {toolbar: [], menus: []}; //reset
 					$rootScope.nav.brand = 'FNLF Acl';
 					

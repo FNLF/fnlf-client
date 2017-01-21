@@ -1,8 +1,9 @@
 (function () {
 
 	angular.module('reportingApp')
-		.controller('ObservationController',  function ($scope, Upload, $rootScope, ObservationService,Definitions,LocationService,$routeParams,
-                                                       $timeout, $http, $window,$location, DoNotReloadCurrentTemplate, $rootScope,Functions,$location) {
+		.controller('ObservationController',  function ($scope, Upload, $rootScope, ObservationService,Definitions,LocationService,
+													    $routeParams, $timeout, $http, $window, $location, DoNotReloadCurrentTemplate,
+													    $rootScope, Functions, Appswitcher) {
 
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -52,7 +53,7 @@
 			});
 
 
-			$rootScope.title = 'F/NLF - ORS editor #' + $scope.observation.id;
+
 			
 			$rootScope.haspee = function() {
 				return 1;
@@ -86,6 +87,9 @@
 				return $scope.observationChanges;
 			};
 
+
+			Appswitcher.getApps();
+			$rootScope.title = 'F/NLF - ORS editor #' + $scope.observation.id;
 
 			var addMenusAndToolbar = function(){
 				$rootScope.nav.brand = 'FNLF ORS #' + $scope.observation.id;
@@ -281,11 +285,27 @@
 
 			LocationService.getClubLocations($scope.observation.club).then(function(response) {
 
-				if(typeof $scope.observation.location.nickname == 'undefined' && response.locations.length > 0) {
-					$scope.observation.location = response.locations[0];
-				};
+				var filteredLocations = response.locations
+				.filter(function(l){
+					return typeof l =='object'
+					&& typeof l.geo !='undefined'
+					&& typeof l.geo.coordinates != 'undefined'
+					&& typeof l.nickname!='undefined'
+					&& l.nickname.length >0;
+				});
 
-				$scope.clublocations = response.locations;
+
+				$scope.clublocations = filteredLocations;
+
+				if(typeof $scope.observation.location.nickname == 'undefined'){
+					if($scope.clublocations.length > 0){
+						$scope.observation.location  = filteredLocations[0];
+					}else{
+						$scope.observation.location = {};
+					}
+				}
+
+
 
 				});
 			};

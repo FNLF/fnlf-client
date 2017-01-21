@@ -1,28 +1,28 @@
-<div>
+<div class="col-xs-12">
 	<div ng-if="observation._id">
 
 		<div ng-switch="fullscreen" class="aside-content">
 
 			<div ng-switch-when="workflow">
-				<fullscreen acl="acl" observation="observation" title="Arbeidsflyt for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Arbeidsflyt for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
 					<workflow acl="acl" observation="observation" observation-changes="observationChanges" is-finished="isFinished"></workflow>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="comments">
-				<fullscreen acl="acl" observation="observation" title="Kommenter for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Kommenter for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
 					<comments acl="acl" observation="observation" observation-changes="observationChanges" is-finished="isFinished"></comments>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="share">
-				<fullscreen acl="acl" observation="observation" title="Kommenter for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Kommenter for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
 					<share acl="acl" observation="observation" observation-changes="observationChanges" is-finished="isFinished"></share>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="file">
-				<fullscreen acl="acl" observation="observation" title="Fil" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Fil" fullscreen="fullscreen" observation-changes="observationChanges">
 					<filepreviews observation="observation" acl="acl"></filepreviews>
 				</fullscreen>
 			</div>
@@ -561,5 +561,6 @@
 
 		<!-- END -->
 	</div>
-</div>
+		</div>
+	</div>
 </div>

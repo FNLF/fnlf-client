@@ -24,11 +24,14 @@ angular.module('reportingApp').directive('involvedperson', function (RestService
 
 
 		$scope.personsFromDb = [];
+		$scope.loading=false;
 
 		$scope.getPersonsByName = function (name) {
+			$scope.loading=true;
 			RestService.getUserByName(name)
 				.then(function (response) {
 					$scope.personsFromDb = response._items;
+					$scope.loading=false;
 				});
 		};
 

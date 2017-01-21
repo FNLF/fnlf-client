@@ -5,54 +5,54 @@
 
 
 			<div ng-switch-when="component">
-				<fullscreen acl="acl" observation="observation" title="Komponent" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Komponent" fullscreen="fullscreen">
 					<observation-component acl="acl" observation="observation"></observation-component>
 				</fullscreen>
 			</div>
 			<div ng-switch-when="involved">
-				<fullscreen acl="acl" observation="observation" title="Involverte personer og utstyr" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Involverte personer og utstyr" fullscreen="fullscreen">
 					<involvedpersonselector acl="acl" observation="observation"></involvedpersonselector>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="organization">
-				<fullscreen acl="acl" observation="observation" title="Hoppfeltorganiseringen" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Hoppfeltorganiseringen" fullscreen="fullscreen">
 					<organization acl="acl" observation="observation"></organization>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="location">
-				<fullscreen acl="acl" observation="observation" title="Rediger klubben sine steder" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Rediger klubben sine steder" fullscreen="fullscreen">
 					<locationselector clublocations="clublocations" acl="acl" observation="observation"></locationselector>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="weather">
-				<fullscreen acl="acl" observation="observation" title="Beskriv værforholda" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Beskriv værforholda" fullscreen="fullscreen">
 					<weather acl="acl" observation="observation"></weather>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="actions">
-				<fullscreen acl="acl" observation="observation" title="Legg til tiltak" fullscreen="fullscreen">
+				<fullscreen acl="acl" observation="observation" title-text="Legg til tiltak" fullscreen="fullscreen">
 					<actions acl="acl" observation="observation"></actions>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="workflow">
-				<fullscreen acl="acl" observation="observation" title="Arbeidsflyt for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Arbeidsflyt for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
 					<workflow acl="acl" observation="observation" observation-changes="observationChanges" is-finished="isFinished"></workflow>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="summary">
-				<fullscreen acl="acl" observation="observation" title="Datamodell for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Datamodell for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
 					<observationsummary observation="observation"></observationsummary>
 				</fullscreen>
 			</div>
 
 			<div ng-switch-when="file">
-				<fullscreen acl="acl" observation="observation" title="Fil" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="observation" title-text="Fil" fullscreen="fullscreen" observation-changes="observationChanges">
 					<filepreviews observation="observation" acl="acl"></filepreviews>
 				</fullscreen>
 			</div>
@@ -115,7 +115,7 @@
 				<!-- EDITABLE -->
 
 				<!-- LISTBOX -->
-				<div class="list-group" style="padding: 50px -15px; margin-left: -15px; margin-right: -15px;">
+				<div class="list-group air"  style="padding: 50px 0px">
 
 					<li class="list-group-item">
 						<p class="list-group-item-text">
@@ -243,10 +243,11 @@
 						<div class="clearfix"></div>
 					</li>
 
-					<li id="component" class="list-group-item">
+					<li id="components" class="list-group-item">
 						<h4 class="list-group-item-heading">Komponenter i forløpet</h4>
 						<p class="list-group-item-text">
-							<observation-components-summary acl="acl" observation="observation"></observation-components-summary>
+							<observation-components-summary observation="observation"></observation-components-summary>
+							<button type="button" class="btn btn-default pull-right col-xs-12" ng-click="setFullscreen('components')"><i class="fa fa-plus fa-fw"></i>Endre forløpet</button>
 
 						</p>
 						<div class="clearfix"></div>
@@ -337,7 +338,7 @@
 					</li>
 					 -->
 
-					<li class="list-group-item">
+					<li class="list-group-item" ng-hide="true">
 						<h4 class="list-group-item-heading">Datamodell<inlinehelp>Se hva som faktisk blir lagret</inlinehelp></h4>
 						<p class="list-group-item-text">
 							<summary-button observation="observation"></summary-button>

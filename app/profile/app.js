@@ -1,7 +1,7 @@
 (function() {
 
 	var profileApp = angular.module('profileApp', [ 'ngRoute', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngCookies', 
-	                                                'angular-loading-bar',
+	                                                'angular-loading-bar','fnlf-services',
 	                                                'fnlf-login','imageupload', 'resolve',
 	                                   			 'angled-navbar.directives']);
 

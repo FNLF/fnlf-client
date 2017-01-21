@@ -2,7 +2,7 @@
 
 	var usersApp = angular.module('usersApp', [ 'ngRoute', 'ui.bootstrap',
 			'ui.select', 'ngSanitize', 'ngCookies', 'angular-loading-bar',
-			'fnlf-login', 'resolve', 'ngTable',
+			'fnlf-login', 'resolve', 'ngTable', 'fnlf-services',
 			 'angled-navbar.directives' ]);
 
 	usersApp.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
@@ -16,16 +16,18 @@ angular.module("usersApp").controller("usersLocalController",[
 				'$scope',
 				'$http',
 				'usersService',
+				'Appswitcher',
 				'$timeout',
 				'$rootScope',
 				'$window',
 				'ngTableParams',
 				'$filter',
 				'$routeParams',
-				function($scope, $http, usersService, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams) {
+				function($scope, $http, usersService, Appswitcher, $timeout, $rootScope, $window, ngTableParams, $filter, $routeParams) {
 					
 					
 					// Menus
+					Appswitcher.getApps();
 					$rootScope.nav = {toolbar: [], menus: []}; //reset
 					$rootScope.nav.brand = 'FNLF Brukere';
 
