@@ -3,7 +3,7 @@
 	angular.module('reportingApp')
 		.controller('ObservationController',  function ($scope, Upload, $rootScope, ObservationService,Definitions,LocationService,
 													    $routeParams, $timeout, $http, $window, $location, DoNotReloadCurrentTemplate,
-													    $rootScope, Functions, Appswitcher) {
+													    $rootScope, Functions, Appswitcher, Idle, Keepalive, Title) {
 
 			//This is aside back button hack
 			DoNotReloadCurrentTemplate($scope);
@@ -52,8 +52,29 @@
 				}
 			});
 
+			/**
+			* Autosave via ng-idle
+			*/
 
 
+			$scope.$on('IdleStart', function() {
+				$scope.autosave = false;
+				Title.idleMessage("Autosave in {{minutes}}m {{seconds}}s");
+				Title.timedOutMessage("Autosaving...");
+      		});
+
+      		$scope.$on('IdleEnd', function() {
+        		$scope.autosave = false;
+      		});
+
+      		$scope.$on('IdleTimeout', function() {
+
+				if($scope.acl.w) {
+					$scope.autosave = true;
+					$rootScope.saveObservation();
+					$scope.autosave = false;
+				};
+      		});
 			
 			$rootScope.haspee = function() {
 				return 1;
@@ -162,6 +183,7 @@
 							$scope.observationChanges = false;
 							$window.onbeforeunload = null;
 							addMenusAndToolbar();
+							Idle.unwatch(); //Unwatch when no changes
 						},0);
 					})
 				.catch(function(error){
@@ -227,6 +249,9 @@
 					*/
 					disableOpenInReportLink();
 					$scope.observationChanges = true;
+					//Idle watch init
+					Idle.watch();
+					$scope.autosave = false;
 				}
 			}
 		},true);

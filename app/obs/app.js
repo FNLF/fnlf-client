@@ -21,13 +21,20 @@
 			 'truncate','nl2br',
 			 'angularMoment',
 			 'angled-navbar.directives',
-			 'config'
+			 'config',
+			 'ngIdle'
 
 			 ]);
 
-	reportingApp.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+	reportingApp.config(['cfpLoadingBarProvider', 'KeepaliveProvider', 'IdleProvider', function (cfpLoadingBarProvider,KeepaliveProvider, IdleProvider) {
+
 		cfpLoadingBarProvider.includeBar = true;
 		cfpLoadingBarProvider.includeSpinner = true;
+
+		var idleinterval = 5; //seconds
+		IdleProvider.idle(idleinterval);
+  		IdleProvider.timeout(idleinterval*2);
+  		KeepaliveProvider.interval(idleinterval*4);
 	}]);
 	
 	reportingApp.run(function ($rootScope, $location, $cookieStore, amMoment,ENV) {
