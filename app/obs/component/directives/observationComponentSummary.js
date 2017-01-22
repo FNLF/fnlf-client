@@ -61,6 +61,10 @@
 			};
 
 			$scope.canUp = function(){
+				if(!$scope.acl.w){
+					return false;
+				}
+
 				var length = $scope.components.length;
 				if(length <2){
 					return false;
@@ -86,6 +90,10 @@
 			};
 
 			$scope.canDown = function(){
+				if(!$scope.acl.w){
+					return false;
+				}
+
 				var length = $scope.components.length;
 				if(length <2){
 					return false;
@@ -111,7 +119,7 @@
 			};
 
 			$scope.canTrash = function(){
-				return $scope.component.flags['incident']!=true;
+				return $scope.acl.w && $scope.component.flags['incident']!=true;
 			};
 
 			$scope.trash = function(){
