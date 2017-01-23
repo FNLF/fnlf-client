@@ -26,14 +26,14 @@
 
 			 ]);
 
-	reportingApp.config(['cfpLoadingBarProvider', 'KeepaliveProvider', 'IdleProvider', function (cfpLoadingBarProvider,KeepaliveProvider, IdleProvider) {
+	reportingApp.config(['cfpLoadingBarProvider', 'KeepaliveProvider', 'IdleProvider', function (cfpLoadingBarProvider, KeepaliveProvider, IdleProvider) {
 
 		cfpLoadingBarProvider.includeBar = true;
 		cfpLoadingBarProvider.includeSpinner = true;
 
-		var idleinterval = 5; //seconds
+		var idleinterval = 15; //seconds
 		IdleProvider.idle(idleinterval);
-  		IdleProvider.timeout(idleinterval*2);
+  		IdleProvider.timeout(5);
   		KeepaliveProvider.interval(idleinterval*4);
 	}]);
 	
