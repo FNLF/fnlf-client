@@ -19,6 +19,9 @@ angular.module('reportingApp').directive('fullscreen', function ($location,$wind
 
 		$scope.hideFullscreen = function(){
 			$scope.isFinished=true;
+
+			$rootScope.$emit("fullscreen-closed");
+
 			$timeout(function(){
 				if($scope.isFinished){
 					if ($location.$$search.ui) {
