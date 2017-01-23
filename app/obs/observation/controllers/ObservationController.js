@@ -26,7 +26,9 @@
 				$location.search('ui',fullscreenName);
 			};
 
-
+			/**
+			* Listeners
+			**/
 			$rootScope.$on('$routeChangeStart', function (event, next, current) {
 				if(!$location.search().ui){
 					$scope.fullscreen='';
@@ -42,12 +44,18 @@
 				}
 			});
 
+			$rootScope.$on("fullscreen-closed", function(event, data) {
+				$scope.saveObservation();
+
+			});
+
 			/**
 			* Autosave via ng-idle
+			* Available {{minutes}} and {{seconds}} for title
 			*/
 			$scope.$on('IdleStart', function() {
 				$scope.autosave = false;
-				Title.idleMessage("Autosave in {{minutes}}m {{seconds}}s");
+				Title.idleMessage("Autosave in {{seconds}}s");
 				Title.timedOutMessage("Autosaving...");
       		});
 
@@ -59,12 +67,8 @@
 
 				if($scope.acl.w) {
 					$scope.autosave = true;
-					var old_btn = angular.element(document.getElementById('#ors_save_btn')).val();
-					console.log(old_btn);
-					angular.element(document.getElementById('#ors_save_btn')).val('<i class="fa fa-spinner fa-spin"></i>Autosave');
 					$rootScope.saveObservation();
 					$scope.autosave = false;
-					angular.element(document.getElementById('#ors_save_btn')).val(old_btn);
 				};
       		});
 			
@@ -104,10 +108,21 @@
 				$rootScope.nav.brand = 'FNLF ORS #' + $scope.observation.id;
 				//$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
 				if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
-					$rootScope.nav.toolbar[0] = {disabled:$rootScope.saveDisabledFn,tooltip:'Lagre observasjon',text:'Lagre',btn_class:'primary',icon:'save',id: 'ors_save_btn', onclick:$rootScope.saveObservation};
+					$rootScope.nav.toolbar[0] = {disabled:$rootScope.saveDisabledFn,
+												 tooltip: 'Lagre observasjon',
+												 text: 'Lagre',
+												 btn_class: 'primary',
+												 icon: 'save',
+												 id: 'ors_save_btn',
+												 onclick: $rootScope.saveObservation};
 				}
 				
-				$rootScope.nav.toolbar[2] = {disabled:$rootScope.openInReportdisabledFn,tooltip:'Åpne i rapport',text:'Åpne i rapport',btn_class:'default',icon:'file-text-o', onclick:$rootScope.openInReport};
+				$rootScope.nav.toolbar[2] = {disabled:$rootScope.openInReportdisabledFn,
+											 tooltip: 'Åpne i rapport',
+											 text: 'Åpne i rapport',
+											 btn_class: 'default',
+											 icon: 'file-text-o',
+											 onclick: $rootScope.openInReport};
 			};
 
 			var disableOpenInReportLink = function(){
@@ -115,7 +130,7 @@
 
 
 			/**
-			* Load and save observation
+			* Load observation
 			**/
 			$scope.loadObservation = function(){
 				$scope.observation = {};
@@ -136,9 +151,17 @@
 					});
 			};
 
+			/**
+			* Save observation
+			**/
 			$scope.saveObservation = function () {
 
-				if($scope.observationChanges == false) {
+				if($scope.observationChanges == false || !$scope.acl.w) {
+
+					if(!$scope.acl.w) {
+						$rootScope.error = "Du mangler skrivetilgang til #"+$scope.observation.id+". Kunne ikke lagre.";
+					}
+
 					return false;
 				}
 
