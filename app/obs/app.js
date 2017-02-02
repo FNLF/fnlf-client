@@ -39,9 +39,22 @@
 	
 
 	
-	reportingApp.run(['$route', '$rootScope', '$location','$cookieStore', 'amMoment','ENV', function ($route, $rootScope, $location,$cookieStore, amMoment,ENV) {
+	reportingApp.run(['$route', '$rootScope', '$location','$cookieStore','$window', 'amMoment','ENV', function ($route, $rootScope, $location,$cookieStore,$window, amMoment,ENV) {
 
-      	$rootScope.ENVname = ENV.name;
+
+			$window.ga('create', ENV.googleAnalyticsId, 'auto');
+
+			$rootScope.$on('$locationChangeSuccess', function (event) {
+				var page = $location.path();
+				page = page.replace(/\d+/g, "000");
+				if($location.search().ui){
+					page = page + '?ui='+$location.search().ui;
+				}
+
+				$window.ga('send', 'pageview', '/app/obs/#!'+page);
+			});
+
+      		$rootScope.ENVname = ENV.name;
       		amMoment.changeLocale('nb');
 
       		$rootScope.$on('$viewContentLoaded', function () {

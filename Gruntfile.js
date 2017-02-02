@@ -42,8 +42,8 @@ module.exports = function (grunt) {
             },
             constants: {
               ENV: {
-                name: 'development'
-
+                name: 'development',
+				googleAnalyticsId: 'UA-91309972-1'
               }
             }
           },
@@ -53,7 +53,8 @@ module.exports = function (grunt) {
             },
             constants: {
               ENV: {
-                name: 'production'
+                name: 'production',
+                googleAnalyticsId: 'UA-91309972-2'
               }
             }
           }

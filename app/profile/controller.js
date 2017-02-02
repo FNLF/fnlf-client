@@ -1,6 +1,10 @@
 angular.module("profileApp").controller("userController",
-	['$scope', '$http', 'userService', '$timeout','$rootScope', '$window', 'Appswitcher',
-		function($scope, $http, userService, $timeout, $rootScope, $window, Appswitcher) {
+	['$scope', '$http', 'userService', '$timeout','$rootScope', '$window', 'Appswitcher','ENV',
+		function($scope, $http, userService, $timeout, $rootScope, $window, Appswitcher,ENV) {
+
+			$window.ga('create', ENV.googleAnalyticsId, 'auto');
+			$window.ga('send', 'pageview', '/app/profile');
+
 
 			var urlBase = '/api/v1';
 

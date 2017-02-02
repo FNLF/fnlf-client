@@ -9,8 +9,12 @@
 			} ]);
 	
 	angular.module("main").controller("mainController", 
-			['$scope', '$rootScope', 'Appswitcher', 'RestService','$http',
-			function($scope, $rootScope, Appswitcher, RestService, $http) {
+			['$scope', '$rootScope','$window', 'Appswitcher', 'RestService','$http','ENV',
+			function($scope, $rootScope,$window, Appswitcher, RestService, $http,ENV) {
+
+			$window.ga('create', ENV.googleAnalyticsId, 'auto');
+			$window.ga('send', 'pageview', '/');
+
 
 		// Menus
 		Appswitcher.getApps();
