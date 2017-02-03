@@ -80,28 +80,6 @@
 		<div class="clearfix"></div>
 
 
-		<div class="col-xs-12 col-md-6 col-lg-7">
-			<div class="form-group">
-				<inlinehelp title="Søketagger">Søketagger kan vere alt mulig som kan relateres til denne delen av observasjonen. Gjerne faktorer, karakteristikker, særtrekk, fellestrekk osv.
-					Det viktigste i friteksten bør vere utrykt i form av tagger.
-				</inlinehelp>
-
-				<small ng-if="autoTags">Taggeforslag: <span ng-repeat="t in autoTags"> <a ng-click="addAutoTag(t)">{{t}} </a></span> </small>
-
-				<tagging acl="acl" model="component.tags" group="component" noun="Søketagger"></tagging>
-
-
-
-			</div>
-		</div>
-
-		<div class="col-xs-12 col-md-6 col-lg-3">
-			<div class="form-group">
-				<inlinehelp title="Vurdering">Hvordan vurderer du holdninger, kunnskaper og ferdigheter opp mot forløpet av denne observasjonen?</inlinehelp><br />
-				<observation-hfk-selector acl="acl" editmode="true" model="component.ask"></observation-hfk-selector>
-			</div>
-		</div>
-
 		<div class="col-xs-12 hideInTemplateEditor">
 			<div class="form-group">
 				<inlinehelp title="Hvordan (Fritekst)"> Kort tekst som forklarer komponenten. Bruk heller flagg, tagger eller flere komponenter enn å skrive mye her. Viss du kun skriver her vil aldri kunne lage fornuftig statistikk av observasjonen din.</inlinehelp> </label>
