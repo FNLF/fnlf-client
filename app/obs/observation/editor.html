@@ -3,10 +3,10 @@
 
         <div ng-switch="fullscreen" class="aside-content">
 
-            <div ng-switch-when="components">
-                <fullscreen acl="acl" observation="observation" title-text="Komponenter i forløpet"
+            <div ng-switch-when="component">
+                <fullscreen acl="acl" observation="observation" title-text="Komponent i forløpet"
                             fullscreen="fullscreen">
-                    <observation-components acl="acl" observation="observation"></observation-components>
+                    <observation-component acl="acl" observation="observation"></observation-component>
                 </fullscreen>
             </div>
             <div ng-switch-when="involved">
@@ -290,16 +290,11 @@
                         <div class="clearfix"></div>
                     </li>
 
-                    <li id="components" class="list-group-item">
-                        <h4 class="list-group-item-heading">Komponenter i forløpet</h4>
+                    <li id="component" class="list-group-item">
+                        <h4 class="list-group-item-heading">Forløpet</h4>
 
                         <p class="list-group-item-text">
-                            <observation-components-summary observation="observation"></observation-components-summary>
-                            <button type="button" class="btn btn-default pull-right col-xs-12"
-                                    ng-click="setFullscreen('components')"><i class="fa fa-plus fa-fw"></i>Endre
-                                forløpet
-                            </button>
-
+                            <observation-components-summary acl="acl" observation="observation"></observation-components-summary>
                         </p>
                         <div class="clearfix"></div>
                     </li>
