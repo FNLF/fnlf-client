@@ -21,42 +21,57 @@
 			 'truncate','nl2br',
 			 'angularMoment',
 			 'angled-navbar.directives',
-			 'config'
+			 'config',
+			 'ngIdle'
 
 			 ]);
 
-	reportingApp.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+	reportingApp.config(['cfpLoadingBarProvider', 'KeepaliveProvider', 'IdleProvider', function (cfpLoadingBarProvider, KeepaliveProvider, IdleProvider) {
+
 		cfpLoadingBarProvider.includeBar = true;
 		cfpLoadingBarProvider.includeSpinner = true;
+
+		var idleinterval = 15; //seconds
+		IdleProvider.idle(idleinterval);
+  		IdleProvider.timeout(5);
+  		KeepaliveProvider.interval(idleinterval*4);
 	}]);
 	
-	reportingApp.run(function ($rootScope, $location, $cookieStore, amMoment,ENV) {
-		$rootScope.ENVname = ENV.name;
-		amMoment.changeLocale('nb');
-		
-		$rootScope.$on('$viewContentLoaded', function () {
-			delete $rootScope.error;
-		});
 
-		$rootScope.initialized = true;
-	});
- 
 	
-	/**
-	 * Aside/modal route and back button hack
-	 * 
-	 */
-	
-	reportingApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
-        var original = $location.path;
-        $location.path = function (path, reload) {
-            if (reload === false) {
-                var lastRoute = $route.current;
-                var un = $rootScope.$on('$locationChangeSuccess', function () {
-                    $route.current = lastRoute;
-                    un();
-                });
-            }
+	reportingApp.run(['$route', '$rootScope', '$location','$cookieStore','$window', 'amMoment','ENV', function ($route, $rootScope, $location,$cookieStore,$window, amMoment,ENV) {
+
+
+			$window.ga('create', ENV.googleAnalyticsId, 'auto');
+
+			$rootScope.$on('$locationChangeSuccess', function (event) {
+				var page = $location.path();
+				page = page.replace(/\d+/g, "000");
+				if($location.search().ui){
+					page = page + '?ui='+$location.search().ui;
+				}
+
+				$window.ga('send', 'pageview', '/app/obs/#!'+page);
+			});
+
+      		$rootScope.ENVname = ENV.name;
+      		amMoment.changeLocale('nb');
+
+      		$rootScope.$on('$viewContentLoaded', function () {
+      			delete $rootScope.error;
+      		});
+
+      		$rootScope.initialized = true;
+
+			var original = $location.path;
+			$location.path = function (path, reload) {
+				if (reload === false) {
+					var lastRoute = $route.current;
+					var un = $rootScope.$on('$locationChangeSuccess', function () {
+						$route.current = lastRoute;
+						un();
+					});
+				}
 
             return original.apply($location, [path]);
         };

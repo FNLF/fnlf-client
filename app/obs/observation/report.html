@@ -10,7 +10,7 @@
 			</div>
 
 			<div ng-switch-when="comments">
-				<fullscreen acl="acl" observation="observation" title-text="Kommenter for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
+				<fullscreen acl="acl" observation="locobservation" title-text="Kommenter for #{{observation.id}}" fullscreen="fullscreen" observation-changes="observationChanges">
 					<comments acl="acl" observation="observation" observation-changes="observationChanges" is-finished="isFinished"></comments>
 				</fullscreen>
 			</div>
@@ -134,10 +134,10 @@
 
 						</div> <!-- MAP -->
 						<div class="col-xs-12  col-md-6">
-							<label class="control-label">{{::observation.location.municipality}}, {{::observation.location.name}}</label>
+							<label class="control-label">{{::observation.location.nickname}}</label>
 							<div ng-if="::observation.location.geo.coordinates">
 								<map center="{{::observation.location.geo.coordinates}}" zoom="11" scrollwheel="false">
-									<marker position="{{::observation.location.geo.coordinates}}" title="{{::observation.location.name}}" draggable="false" visible="true"></marker>
+									<marker position="{{::observation.location.geo.coordinates}}" title="{{::observation.location.nickname}}" draggable="false" visible="true"></marker>
 								</map>
 							</div>
 						</div>
