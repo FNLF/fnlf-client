@@ -1,18 +1,23 @@
 <div ng-init="order=0" class="">
 
+	<div class="col-xs-12">
+
+		<span>
+		<span ng-if="component.flags.barrier" class="label label-default">Barriære</span>
+		<span ng-if="component.flags.incident" class="label label-info">Hendelse</span>
+		<span ng-if="component.flags.cause || component.flags.root_cause"
+			  class="label label-warning">Årsak</span>
+		<span ng-if="component.flags.consequence || component.flags.final_consequence"
+			  class="label label-danger">Konsekvens</span>
+		</span>
+
+	</div>
 
 	<div class="col-xs-12 col-md-7">
 		<form>
 			<div class="form-group">
 				<div class="input-group">
-							<span class="input-group-addon" id="basic-addon3">
-								<span ng-if="component.flags.barrier" class="label label-default">Barriære</span>
-								<span ng-if="component.flags.incident" class="label label-info">Hendelse</span>
-								<span ng-if="component.flags.cause || component.flags.root_cause"
-									  class="label label-warning">Årsak</span>
-								<span ng-if="component.flags.consequence || component.flags.final_consequence"
-									  class="label label-danger">Konsekvens</span>
-							</span>
+
 					<tagtypeahead acl="acl" ng-if="component.flags.root_cause || component.flags.cause"
 								  selectfn="componentWhatSelected" model="component.what" group="component.what.cause"
 								  noun="Beskriv årsak"></tagtypeahead>
