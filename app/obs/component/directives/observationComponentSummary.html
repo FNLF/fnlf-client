@@ -1,6 +1,6 @@
-<div ng-init="order=0" class="">
+<div ng-init="order=0" class="row air">
 
-	<div class="col-xs-12">
+	<div class="col-xs-12 col-lg-1">
 
 		<span>
 		<span ng-if="component.flags.barrier" class="label label-default">Barriære</span>
@@ -13,7 +13,7 @@
 
 	</div>
 
-	<div class="col-xs-12 col-md-7">
+	<div class="col-xs-12 col-md-6 col-lg-5">
 		<form>
 			<div class="form-group">
 				<div class="input-group">
@@ -35,6 +35,19 @@
 									type="submit" ng-click="editComponent(component)" title="{{buttonLabel}}">
 								<i class="fa fa-{{buttonIcon}} fa-fw"></i>
 							</button>
+						</span>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="col-xs-12 col-md-2">
+		<form>
+			<div class="form-group">
+				<div class="input-group">
+
+
+						<span class="input-group-btn">
 							<button class="btn btn-default" ng-if="templateMode=='component' && canUp()" ng-click="moveUp()"><i class="fa fa-angle-double-up" ></i></button>
 							<button class="btn btn-default" ng-if="templateMode=='component' && canDown()" ng-click="moveDown()"><i class="fa fa-angle-double-down" ></i></button>
 							<button class="btn btn-default" ng-if="templateMode=='component' && canTrash()" ng-click="trash()"><i class="fa fa-trash" ></i></button>
@@ -43,7 +56,8 @@
 			</div>
 		</form>
 	</div>
-	<div class="col-xs-12 col-md-5" ng-if="templateMode=='component'">
+
+	<div class="col-xs-12 col-md-4" ng-if="templateMode=='component'">
 		<flags attributes="component.attributes"></flags>
 
 		<span ng-show="component.where.at">({{component.where.at}})</span> <span ng-show="!component.where.at"><i>(på/i
