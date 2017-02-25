@@ -220,7 +220,7 @@
 								<p>
 									<rating-potential acl="acl" observation="observation"></rating-potential>
 								</p>
-								<p>
+								<p ng-if="observation.workflow.state!='draft'">
 									<observationflags acl="acl" observation="observation"></observationflags>
 								</p>
 							</div>
