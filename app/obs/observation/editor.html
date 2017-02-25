@@ -16,12 +16,6 @@
 				</fullscreen>
 			</div>
 
-			<div ng-switch-when="organization">
-				<fullscreen acl="acl" observation="observation" title-text="Hoppfeltorganiseringen"
-							fullscreen="fullscreen">
-					<organization acl="acl" observation="observation"></organization>
-				</fullscreen>
-			</div>
 
 			<div ng-switch-when="location">
 				<fullscreen acl="acl" observation="observation" title-text="Rediger klubben sine steder"
@@ -270,11 +264,9 @@
 						<h4 class="list-group-item-heading">Hoppfeltorganisasjon</h4>
 
 						<p class="list-group-item-text">
-							<organization-summary observation="observation"></organization-summary>
-							<button type="button" class="btn btn-default pull-right col-xs-12"
-									ng-click="setFullscreen('organization')"><i class="fa fa-plus fa-fw"></i>Endre
-								Organisasjon
-							</button>
+
+							<organization observation="observation" acl="acl"></organization>
+
 						</p>
 						<div class="clearfix"></div>
 					</li>
