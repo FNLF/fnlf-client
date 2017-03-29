@@ -81,7 +81,6 @@ angular.module('reportingApp')
 						.then(function (workflowState) {
 							$scope.workflowpermission = workflowState.workflowpermission;
 							$scope.tt = workflowState.tt;
-							$scope.tooltip = workflowState.tooltip;
 							$scope.wf = workflowState.wf;
 							$scope.btn_title = workflowState.btn_title;
 							$scope.btn_descr = workflowState.btn_descr;

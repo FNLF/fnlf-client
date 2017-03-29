@@ -25,7 +25,7 @@ angular.module('reportingApp')
 		directive.template = function (tElement, tAttrs) {
 
 			return '<button ng-disabled="workflowDisabledFn()" \
-				popover-trigger="mouseenter" tooltip="{{btn_descr}}" type="button" \
+				popover-trigger="mouseenter" type="button" \
 				class="btn btn-{{tt}}" ng-click="openWorkflowAside()"> \
 				<span ng-transclude></span> <i class="fa fa-random fa-fw"></i> {{btn_title}}</button>';
 		};
@@ -77,7 +77,6 @@ angular.module('reportingApp')
 						.then(function (workflowState) {
 							$scope.workflowpermission = workflowState.workflowpermission;
 							$scope.tt = workflowState.tt;
-							$scope.tooltip = workflowState.tooltip;
 							$scope.wf = workflowState.wf;
 							$scope.btn_title = workflowState.btn_title;
 							$scope.btn_descr = workflowState.btn_descr;
