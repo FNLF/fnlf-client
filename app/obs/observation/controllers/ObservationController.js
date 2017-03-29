@@ -109,7 +109,6 @@
 				//$rootScope.nav.menus = [{title: 'Åpne i rapport', icon: 'fa-file-text-o', link: '#!/observation/report/'+ $scope.observation.id}];
 				if($scope.observation.workflow.state != 'closed' && $scope.observation.workflow.state !='withdrawn') {
 					$rootScope.nav.toolbar[0] = {disabled:$rootScope.saveDisabledFn,
-												 tooltip: 'Lagre observasjon',
 												 text: 'Lagre',
 												 btn_class: 'primary',
 												 icon: 'save',
@@ -118,7 +117,6 @@
 				}
 				
 				$rootScope.nav.toolbar[2] = {disabled:$rootScope.openInReportdisabledFn,
-											 tooltip: 'Åpne i rapport',
 											 text: 'Åpne i rapport',
 											 btn_class: 'default',
 											 icon: 'file-text-o',

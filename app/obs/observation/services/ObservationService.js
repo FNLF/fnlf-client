@@ -285,7 +285,7 @@
 							workflowState.tt = 'info';
 						}
 
-						workflowState.tooltip = response.description;
+
 
 						workflowState.wf = {btns: '', title: '', comment: ''};
 
@@ -310,7 +310,6 @@
 						};
 						var toolbarbutton = {
 							disabled: disabledFn,
-							tooltip: response.description,
 							text: response.title,
 							btn_class: workflowState.tt,
 							icon: 'random'
