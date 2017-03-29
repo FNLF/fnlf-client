@@ -429,8 +429,20 @@ img {
 	margin-right:1px;
 }
 
+.air0{
+	margin-bottom: 8px;
+}
+
 .air{
 	margin-bottom: 16px;
+}
+
+.air1{
+	margin-bottom: 24px;
+}
+
+.air2{
+	margin-bottom: 32px;
 }
 
 @media(max-width:992px){
