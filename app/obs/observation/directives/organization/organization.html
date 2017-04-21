@@ -17,54 +17,22 @@
 
 	<div class="col-xs-12 col-md-6 air">
 		<label>HL:</label>
-
-		<ui-select ng-disabled="!acl.w" multiple tagging="tagTransform" ng-model="observation.organization.hl" theme="bootstrap" spinner-enabled="true">
-			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
-			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
-							   refresh="getPersonsByName($select.search)" refresh-delay="50">
-				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
-			</ui-select-choices>
-		</ui-select>
-
+		<multipersonselector acl="acl" model="observation.organization.hl"></multipersonselector>
 	</div>
 
 	<div class="col-xs-12 col-md-6 air">
 		<label>HFL:</label>
-
-		<ui-select ng-disabled="!acl.w" multiple tagging="tagTransform" ng-model="observation.organization.hfl" theme="bootstrap">
-			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
-			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
-							   refresh="getPersonsByName($select.search)" refresh-delay="50">
-				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
-			</ui-select-choices>
-		</ui-select>
-
+		<multipersonselector acl="acl" model="observation.organization.hfl"></multipersonselector>
 	</div>
 
 	<div class="col-xs-12 col-md-6 air">
 		<label>HM:</label>
-
-		<ui-select ng-disabled="!acl.w" multiple tagging="tagTransform" ng-model="observation.organization.hm" theme="bootstrap">
-			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
-			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
-							   refresh="getPersonsByName($select.search)" refresh-delay="50">
-				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
-			</ui-select-choices>
-		</ui-select>
-
+		<multipersonselector acl="acl" model="observation.organization.hm"></multipersonselector>
 	</div>
 
 	<div class="col-xs-12 col-md-6 air">
 		<label>Pilot:</label>
-
-		<ui-select ng-disabled="!acl.w" multiple tagging="tagTransform" ng-model="observation.organization.pilot" theme="bootstrap">
-			<ui-select-match placeholder="Søk på navn eller medlemsnummer..."> <resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
-			<ui-select-choices repeat="person in personsFromDb | filter:$select.search"
-							   refresh="getPersonsByName($select.search)" refresh-delay="50">
-				{{person.fullname}} <span ng-show="person.id>0">({{person.id}})</span>
-			</ui-select-choices>
-		</ui-select>
-
+		<multipersonselector acl="acl" model="observation.organization.pilot"></multipersonselector>
 	</div>
 </form>
 </div>
