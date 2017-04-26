@@ -48,9 +48,9 @@
 
 
 						<span class="input-group-btn">
-							<button class="btn btn-default" ng-if="templateMode=='component' && canUp()" ng-click="moveUp()"><i class="fa fa-angle-double-up" ></i></button>
-							<button class="btn btn-default" ng-if="templateMode=='component' && canDown()" ng-click="moveDown()"><i class="fa fa-angle-double-down" ></i></button>
-							<button class="btn btn-default" ng-if="templateMode=='component' && canTrash()" ng-click="trash()"><i class="fa fa-trash" ></i></button>
+							<button class="btn btn-default" ng-if="templateMode=='component'" ng-disabled="!(canDown())" ng-click="moveDown()"><i class="fa fa-angle-double-down" ></i></button>
+							<button class="btn btn-default" ng-if="templateMode=='component'" ng-disabled="!(canUp())" ng-click="moveUp()"><i class="fa fa-angle-double-up" ></i></button>
+							<button class="btn btn-default" ng-if="templateMode=='component'" ng-disabled="!(canTrash())" ng-click="trash()"><i class="fa fa-trash" ></i></button>
 						</span>
 				</div>
 			</div>
