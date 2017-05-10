@@ -44,6 +44,8 @@
 
 			};
 
+
+
 			$scope.incidentOrElse = function(flags){
 				var isIncident = true;
 				Object.keys(flags).forEach(function(k){
@@ -141,7 +143,7 @@
 	});
 
 
-	angular.module('reportingApp').directive('observationComponentSummaryNewCause', function ($location,Definitions,ComponentService) {
+	angular.module('reportingApp').directive('observationComponentSummaryNewCause', function ($location,Definitions,Functions,ComponentService) {
 
     		var directive = {};
 
@@ -168,6 +170,12 @@
 					$scope.component = newComponentFunc('cause',-1);
 				};
 
+				$scope.componentWhatSelected = function(){
+					$scope.component.what = Functions.capitalizeFirstLetter($scope.component.what);
+					$scope.editComponent($scope.component);
+				};
+
+
     			$scope.incidentOrElse = function(flags){
 
     				return false;
@@ -178,7 +186,7 @@
     		return directive;
     	});
 
-	angular.module('reportingApp').directive('observationComponentSummaryNewConsequence', function ($location,Definitions,ComponentService) {
+	angular.module('reportingApp').directive('observationComponentSummaryNewConsequence', function ($location,Definitions,Functions,ComponentService) {
 
     		var directive = {};
 
@@ -206,6 +214,11 @@
 					$scope.component = newComponentFunc('consequence',999);
 				};
 
+				$scope.componentWhatSelected = function(){
+					$scope.component.what = Functions.capitalizeFirstLetter($scope.component.what);
+					$scope.editComponent($scope.component);
+				};
+
     			$scope.incidentOrElse = function(flags){
     				return false;
     			};
@@ -215,7 +228,7 @@
     		return directive;
     	});
 
-	angular.module('reportingApp').directive('observationComponentSummaryNewIncident', function ($location,Definitions,ComponentService) {
+	angular.module('reportingApp').directive('observationComponentSummaryNewIncident', function ($location,Definitions,Functions,ComponentService) {
 
     		var directive = {};
 
@@ -247,6 +260,11 @@
 					$scope.components.push($scope.component);
 					ComponentService.reorder($scope.components);
 					$scope.component = newComponentFunc('incident',0);
+				};
+
+				$scope.componentWhatSelected = function(){
+					$scope.component.what = Functions.capitalizeFirstLetter($scope.component.what);
+					$scope.editComponent($scope.component);
 				};
 
     			$scope.incidentOrElse = function(flags){
