@@ -242,7 +242,7 @@
 
 					});
 				}else{
-					if(!angular.isUndefined(tag) && tag.split(' ').length >= 5){
+					if(!angular.isUndefined(tag) && tag.split(' ').length >= 3){
 						console.log("Skipping "+tag+". Too many words");
 					}
 				}

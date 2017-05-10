@@ -6,11 +6,11 @@
 		   class="form-control"
 		   type="text"
 		   ng-model="model"
-		   ng-change="capitalize()"
+		   ng-blur="onBlur(tag,model)"
 		   typeahead="tag for tag in tags | filter:$viewValue"
 		   typeahead-min-length="0"
 		   typeahead-on-select="onSelect(tag, model)"
 		   typeahead-focus-first="false"
-		   typeahead-select-on-blur="true"
+		   typeahead-select-on-blur="false"
 		   typeahead-focus>
 </div>

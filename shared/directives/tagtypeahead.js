@@ -24,17 +24,20 @@
 				$scope.model = "";
 			}
 
-			$scope.capitalize = function(){
-				$scope.model = Functions.capitalizeFirstLetter($scope.model);
-			};
+
 
 			$scope.onSelect = function(item, model,label){
 				$scope.model = Functions.capitalizeFirstLetter(model);
 				RestService.addTag($scope.model,$scope.group);
 
 				if($scope.selectfn){
-					$scope.selectfn();
+					$scope.selectfn($scope.model);
 				}
+			};
+
+			$scope.onBlur = function(item,model){
+				$scope.model = Functions.capitalizeFirstLetter(model);
+				$scope.onSelect(item,$scope.model);
 			};
 
 			$scope.tags = [];
@@ -51,8 +54,8 @@
 			$scope.tooManyWordsInTag = false;
 
 			$scope.$watch('model',function(){
-				if(!angular.isUndefined($scope.model)) {
-					$scope.tooManyWordsInTag = ($scope.model.split(' ').length >= 5);
+				if(!angular.isUndefined($scope.model) && $scope.model!=null) {
+					$scope.tooManyWordsInTag = ($scope.model.split(' ').length >= 8);
 				}
 			});
 
