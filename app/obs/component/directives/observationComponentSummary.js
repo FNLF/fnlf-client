@@ -172,7 +172,12 @@
 
 				$scope.componentWhatSelected = function(){
 					$scope.component.what = Functions.capitalizeFirstLetter($scope.component.what);
-					$scope.editComponent($scope.component);
+					console.log($scope.component.what.length);
+					if($scope.component.what.trim().length > 0){
+						$scope.editComponent($scope.component);
+					}else{
+						console.log("zero length text. Skipping");
+					}
 				};
 
 
@@ -216,7 +221,12 @@
 
 				$scope.componentWhatSelected = function(){
 					$scope.component.what = Functions.capitalizeFirstLetter($scope.component.what);
-					$scope.editComponent($scope.component);
+					console.log($scope.component.what.length);
+					if($scope.component.what.trim().length > 0){
+						$scope.editComponent($scope.component);
+					}else{
+						console.log("zero length text. Skipping");
+					}
 				};
 
     			$scope.incidentOrElse = function(flags){
@@ -263,8 +273,7 @@
 				};
 
 				$scope.componentWhatSelected = function(){
-					$scope.component.what = Functions.capitalizeFirstLetter($scope.component.what);
-					$scope.editComponent($scope.component);
+
 				};
 
     			$scope.incidentOrElse = function(flags){
