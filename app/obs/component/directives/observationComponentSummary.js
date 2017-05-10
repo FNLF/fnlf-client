@@ -165,19 +165,17 @@
 
 
 				$scope.editComponent = function(component){
-					$scope.components.push($scope.component);
-					ComponentService.reorder($scope.components);
-					$scope.component = newComponentFunc('cause',-1);
+					if($scope.component.what.trim().length > 0){
+						$scope.components.push($scope.component);
+						ComponentService.reorder($scope.components);
+						$scope.component = newComponentFunc('cause',-1);
+					}
 				};
 
 				$scope.componentWhatSelected = function(){
 					$scope.component.what = Functions.capitalizeFirstLetter($scope.component.what);
-					console.log($scope.component.what.length);
-					if($scope.component.what.trim().length > 0){
-						$scope.editComponent($scope.component);
-					}else{
-						console.log("zero length text. Skipping");
-					}
+					$scope.editComponent($scope.component);
+
 				};
 
 
@@ -214,19 +212,17 @@
 
 
 				$scope.editComponent = function(component){
-					$scope.components.push($scope.component);
-					ComponentService.reorder($scope.components);
-					$scope.component = newComponentFunc('consequence',999);
+					if($scope.component.what.trim().length > 0){
+						$scope.components.push($scope.component);
+						ComponentService.reorder($scope.components);
+						$scope.component = newComponentFunc('consequence',999);
+					}
 				};
 
 				$scope.componentWhatSelected = function(){
 					$scope.component.what = Functions.capitalizeFirstLetter($scope.component.what);
-					console.log($scope.component.what.length);
-					if($scope.component.what.trim().length > 0){
-						$scope.editComponent($scope.component);
-					}else{
-						console.log("zero length text. Skipping");
-					}
+					$scope.editComponent($scope.component);
+
 				};
 
     			$scope.incidentOrElse = function(flags){
