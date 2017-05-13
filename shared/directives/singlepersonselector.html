@@ -1,0 +1,27 @@
+<div>
+
+	<script type="text/ng-template" id="itemTpl.html">
+		<a tabindex="-1">
+			<i ng-class="'icon-'+match.model.id">{{match.model.id}}</i>
+			<span>{{match.model.fullname}}</span>
+		</a>
+	</script>
+
+
+	<input ng-disabled="!acl.w"
+		   placeholder="{{noun}}"
+		   class="form-control"
+		   type="text"
+		   ng-model="model"
+		   ng-blur="onBlur(tag,model)"
+		   typeahead="person for person in getPersonsByName($viewValue)"
+		   typeahead-min-length="0"
+		   typeahead-on-select="onSelect(person, model)"
+		   typeahead-focus-first="false"
+		   typeahead-select-on-blur="false"
+		   typeahead-focus
+		   typeahead-template-url="itemTpl.html"
+		   typeahead-input-formatter="formatLabel($model)"
+			>
+
+</div>
