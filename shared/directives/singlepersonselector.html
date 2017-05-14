@@ -12,9 +12,9 @@
 		   placeholder="{{noun}}"
 		   class="form-control"
 		   type="text"
-		   ng-model="model"
+		   ng-model="personmodel"
 		   ng-blur="onBlur(tag,model)"
-		   typeahead="person for person in getPersonsByName($viewValue)"
+		   typeahead="person as person.fullname for person in getPersonsByName($viewValue)"
 		   typeahead-min-length="0"
 		   typeahead-on-select="onSelect(person, model)"
 		   typeahead-focus-first="false"
@@ -23,5 +23,5 @@
 		   typeahead-template-url="itemTpl.html"
 		   typeahead-input-formatter="formatLabel($model)"
 			>
-
+	<resolveuser userid="model.id" tmpname="model.tmpname"></resolveuser>
 </div>

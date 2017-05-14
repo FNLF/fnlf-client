@@ -4,14 +4,14 @@
 
 
 
-	var singlepersonselector = function (RestService,Functions) {
+	var singlepersonselector = function (RestService,Functions,ResolveService) {
 		var directive = {};
 
 		directive.restrict = 'E';
 		directive.templateUrl = "/shared/directives/singlepersonselector.html";
 
 		directive.scope = {
-			model:'=',
+			personmodel:'=',
 			noun: '@',
 			selectfn: '=',
 			acl: '='
@@ -19,27 +19,52 @@
 
 		directive.link = function ($scope, element, attrs, ctrl) {
 
+			$scope.selectedName = 'X';
+
+			if($scope.personmodel){
+					ResolveService.getUserName($scope.personmodel.id)
+						.then(function(username){
+							console.log('watch:  name '+username);
+							$scope.personmodel.fullname = username;
+							//$scope.selectedName=username;
+						});
+           		}
+
+			$scope.$watch('personmodel',function(){
+           		if($scope.personmodel){
+					ResolveService.getUserName($scope.personmodel.id)
+						.then(function(username){
+							console.log('watch:  name '+username);
+							$scope.personmodel.fullname = username;
+							$scope.selectedName=username;
+						});
+           		}
+            });
 
 			$scope.onSelect = function(item, model,label){
 
-				console.log("onselect: ")
-				console.log("item: "+item);
+				console.log("onselect: "+item+" "+label);
+
 				console.log(model);
-				console.log("label "+label);
+				//console.log($scope.selectedName);
+				$scope.personmodel=model;
 
 				if($scope.selectfn){
-					$scope.selectfn($scope.model);
+					$scope.selectfn($scope.personmodel);
 				}
 			};
 
 			$scope.onBlur = function(item,model){
 
-				$scope.onSelect(item,$scope.model);
+				//$scope.onSelect(item,$scope.model);
 			};
 
 
 			$scope.formatLabel = function(model){
+				console.log('format ');
+				console.log(model);
 				return model.fullname;
+				//return $scope.selectedName
 			};
 
 

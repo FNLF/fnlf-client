@@ -4,7 +4,7 @@ angular.module('resolve')
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.template = '<span>{{::firstname}} {{::lastname}}</span>';
+		directive.template = '<span>{{::name}}</span>';
 
 		directive.scope = {
 			userid: '=',
@@ -14,22 +14,10 @@ angular.module('resolve')
 		directive.link = function ($scope, element, attrs) {
 			var unbind = $scope.$watch('userid', function () {
 				if ($scope.userid) {
-					if ($scope.userid > 0) {
-						ResolveService.getUser($scope.userid).then(
-							function (user) {
-								$scope.firstname = user.firstname;
-								$scope.lastname = user.lastname;
-							});
-					}else if($scope.tmpname){
-						$scope.firstname = $scope.tmpname;
-					}else if ($scope.userid < 0) {
-						$scope.firstname = 'Hopper';
-						$scope.lastname = -1 * $scope.userid;
-						if ($scope.tmpname) {
-							delete $scope.tmpname;
-						}
-
-					}
+					ResolveService.getUserName($scope.userid,$scope.tmpname)
+						.then(function(name){
+							$scope.name = name;
+						});
 					unbind();
 				}
 			});

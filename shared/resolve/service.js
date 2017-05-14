@@ -2,7 +2,7 @@
 angular.module('resolve').service('ResolveService', function ($http, $q) {
 	
 	var urlBase = '/api/v1';
-
+	var self = this;
 
 	this.resolveObservationWorkflowState = function(state) {
 		var ows = {'draft': 'Utkast', 'ready': 'Klar', 'withdrawn': 'Trekt tilbake', 'closed': 'Lukket', 'pending_review_hi': 'Avventer HI', 'pending_review_fs': 'Avventer Fagsjef', 'pending_review_su': 'Avventer SU'};
@@ -52,6 +52,25 @@ angular.module('resolve').service('ResolveService', function ($http, $q) {
 		return (request.then(handleSuccess, handleError));
 
 	};
+
+	this.getUserName = function(userid, tmpname){
+		var deferred = $q.defer();
+		if (userid > 0) {
+			self.getUser(userid).then(
+				function (user) {
+					deferred.resolve(user.firstname+' '+user.lastname);
+				});
+		}else if(tmpname){
+			deferred.resolve(tmpname);
+			delete tmpname;
+		}else if (userid < 0) {
+			deferred.resolve('Hopper '+(-1 * userid));
+		}else{
+			deferred.reject('nope '+userid);
+		}
+		return deferred.promise;
+	};
+
 	this.getUserAvatar = function(userid) {
 		
 		var request = $http({
