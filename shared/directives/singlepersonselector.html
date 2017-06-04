@@ -1,27 +1,9 @@
-<div>
-
-	<script type="text/ng-template" id="itemTpl.html">
-		<a tabindex="-1">
-			<i ng-class="'icon-'+match.model.id">{{match.model.id}}</i>
-			<span>{{match.model.fullname}}</span>
-		</a>
-	</script>
-
-
-	<input ng-disabled="!acl.w"
-		   placeholder="{{noun}}"
-		   class="form-control"
-		   type="text"
-		   ng-model="personmodel"
-		   ng-blur="onBlur(tag,model)"
-		   typeahead="person as person.fullname for person in getPersonsByName($viewValue)"
-		   typeahead-min-length="0"
-		   typeahead-on-select="onSelect(person, model)"
-		   typeahead-focus-first="false"
-		   typeahead-select-on-blur="false"
-		   typeahead-focus
-		   typeahead-template-url="itemTpl.html"
-		   typeahead-input-formatter="formatLabel($model)"
-			>
-	<resolveuser userid="model.id" tmpname="model.tmpname"></resolveuser>
+<div ng-if="model" class="air">
+	<ui-select ng-disabled="!acl.w" multiple limit="1" tagging="tagTransform" ng-model="$parent.model" theme="bootstrap" on-select="onSelect($item, $model)" on-remove="onRemove($item,$model)">
+		<ui-select-match placeholder="{{noun}}"><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+		<ui-select-choices repeat="person in personsFromDb | filter:$select.search track by person.id"
+						   refresh="getPersonsByName($select.search)" refresh-delay="100">
+			<span>{{person.fullname}}</span> <span ng-show="person.id>0">({{person.id}})</span>
+		</ui-select-choices>
+	</ui-select>
 </div>
