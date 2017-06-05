@@ -1,0 +1,9 @@
+<div ng-if="model" class="air">
+	<ui-select ng-disabled="!acl.w" multiple limit="1" tagging="tagTransform" ng-model="$parent.model" theme="bootstrap" on-select="onSelect($item, $model)" on-remove="onRemove($item,$model)">
+		<ui-select-match placeholder="{{noun}}"><resolveuser userid="$item.id" tmpname="$item.tmpname"></resolveuser></ui-select-match>
+		<ui-select-choices repeat="person in personsFromDb | filter:$select.search track by person.id"
+						   refresh="getPersonsByName($select.search)" refresh-delay="100">
+			<span>{{person.fullname}}</span> <span ng-show="person.id>0">({{person.id}})</span>
+		</ui-select-choices>
+	</ui-select>
+</div>
