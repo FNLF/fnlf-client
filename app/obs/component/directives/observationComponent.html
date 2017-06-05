@@ -1,17 +1,16 @@
 <div>
 	<div class="col-xs-12 col-md-12 air row">
 	<h2>
-
-		<span ng-if="component.flags.barrier" class="label label-default">Barriære</span>
 		<span ng-if="component.flags.incident" class="label label-info">Hendelse</span>
 		<span ng-if="component.flags.cause || component.flags.root_cause" class="label label-warning">Årsak</span>
 		<span ng-if="component.flags.consequence || component.flags.final_consequence" class="label label-danger">Konsekvens</span>
+		<label class="btn btn-default" btn-checkbox ng-disabled="!acl.w" ng-model="component.flags.barrier">
+			 Barriære
+		</label>
 	</h2>
 		<h3>
 			{{component.what}}
 		</h3>
-
-
 	</div>
 	<div class="col-xs-12 air row">
 
@@ -32,8 +31,6 @@
 	</div>
 
 	<div>
-
-
 		<div class="col-xs-12 air row">
 			<div class="form-group">
 				<br>
