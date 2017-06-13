@@ -48,29 +48,51 @@ angular.module("usersApp").controller("usersLocalController",[
 					
 
 					
-					$scope.getAllUsers = function() {
-						usersService.getAllUsers().then(function(r) {
-							
-							$scope.users = r._items;
+
+
+
 							
 							$scope.usersTable = new ngTableParams({
 						        page: 1,            // show first page
 						        count: 10,           // count per page
 						        sorting: {
-						            name: 'asc'     // initial sorting
+						            _created: 'desc'     // initial sorting
 						        }
 						    }, {
 						        total: $scope.users.length, // length of data
 						        getData: function($defer, params) {
-						        	var filteredData = params.filter() ? $filter('filter')($scope.users, params.filter()) : $scope.users;
-						            var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-						            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-						            params.settings({ counts: orderedData.length > 10 ? [10, 25, 50] : []});
+
+
+
+										var page = params.page();
+										var count = params.count();
+
+										var sortString = "-_created";
+										angular.forEach(params.sorting(), function (v, k) {
+											if (v == 'desc') {
+												sortString = '-' + k;
+											}
+											if (v == 'asc') {
+												sortString = k;
+											}
+
+										});
+
+										params.settings({ counts:  [20, 50, 100]});
+										usersService.getAllUsers(page,count,sortString).then(function(r) {
+											$scope.users = r._items;
+   											$defer.resolve($scope.users);
+											var meta = r._meta;
+											params.total(meta.total);
+										});
+
+
+
+
 						        },
 						        $scope: $scope
 						    });
-						});
-					};
+
 					
 					
 
@@ -93,11 +115,13 @@ angular.module("usersApp").service("usersService",['$http',	'$q', '$rootScope', 
 						return (request.then(handleSuccess, handleError));
 					};
 					
-					this.getAllUsers = function() {
-						
+					this.getAllUsers = function(page,count,sorting) {
+						console.log(page);
+						console.log(count);
+						console.log(sorting);
 						var request = $http({
 							method : "get",
-							url : urlBase + '/users/?max_results=5000&sort=[("_created", -1)]',
+							url : urlBase + '/users/?page='+page+'&max_results='+count+'&sort='+sorting,
 							
 						});
 						return (request.then(handleSuccess, handleError));
