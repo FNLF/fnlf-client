@@ -14,11 +14,20 @@
 
 		directive.link = function ($scope, element, attrs) {
 
+
+			var initModelIfNull = function(){
+				if(!$scope.model){
+					$scope.model=[];
+				}
+			};
+
 			$scope.onSelect = function (item, model) {
+				initModelIfNull();
 				$scope.model.push(item);
 			};
 
 			$scope.onRemove = function(item,model){
+				initModelIfNull();
 				var index = $scope.model.indexOf(model);
 				if (index > -1) {
 					$scope.model.splice(index,1);
@@ -32,6 +41,7 @@
 				RestService.getUserByName(name)
 					.then(function (response) {
 						var persons = {};
+						initModelIfNull();
 						$scope.model.forEach(function(m){
 							persons[m.id]=true;
 						});
