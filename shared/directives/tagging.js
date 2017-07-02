@@ -37,7 +37,7 @@
 
 					angular.forEach($scope.model, function (t) {
 
-						if (t.split(' ').length >= 5) {
+						if (t.split(' ').length >= 7) {
 							allTagsShortEnough = false;
 						}
 

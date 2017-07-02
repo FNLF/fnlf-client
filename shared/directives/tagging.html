@@ -2,7 +2,7 @@
 	<span ng-show="tooManyWordsInTag" class="bg-warning">Vær så snill å bruk færre ord i en tag! Da kan andre lettere søke etter det du skriver inn.</span>
 
 
-	<ui-select ng-disabled="!acl.w" tagging-tokens="ENTER|,|/|." tagging-label="(Ny tagg)" multiple tagging ng-model="$parent.model" theme="bootstrap" on-select="onSelect($item, $model)">
+	<ui-select ng-disabled="!acl.w" tagging-tokens="ENTER|,|/|." tagging-label="" multiple tagging ng-model="$parent.model" theme="bootstrap" on-select="onSelect($item, $model)">
 		<ui-select-match placeholder="Legg til {{noun}}...">{{$item}}</ui-select-match>
 		<ui-select-choices refresh="refresh($select.search)" repeat="tag in tags | filter:$select.search">
 			{{tag}}
