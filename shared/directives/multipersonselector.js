@@ -23,7 +23,6 @@
 
 			$scope.onSelect = function (item, model) {
 				initModelIfNull();
-				$scope.model.push(item);
 			};
 
 			$scope.onRemove = function(item,model){
