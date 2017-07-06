@@ -53,6 +53,30 @@
 				return -1;
 			};
 
+			this.fixInvolved = function(component){
+					for(i=0; i < component.involved.length;i++){
+						var person = component.involved[i];
+						if(typeof person == 'number'){
+							var id = person;
+							component.involved[i]={id:id};	
+							involved[id]=true;	
+							console.log("Fixing involved from number to ");
+							console.log(component.involved[i]);
+						}
+					}
+			};
+
+			this.newComponent = function(flag,order,involved){
+				var component = {flags:{},order:order,what:'',attributes:{},involved:[]};
+				component.flags[flag]=true;
+				if(involved){
+					involved.forEach(function(p){
+						component.involved.push(p);
+					});
+				}
+				return component;
+			};
+
 
 		});
 

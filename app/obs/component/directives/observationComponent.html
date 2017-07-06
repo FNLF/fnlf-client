@@ -46,7 +46,7 @@
 
 				<div class="form-group">
 					<div ng-repeat="person in persons track by person.id" class="col-xs-6 col-md-3">
-						<input ng-disabled="!acl.w" ng-model="involved[person.id]" type="checkbox" ng-change="involvedChanged(person.id)">
+						<input ng-disabled="!acl.w" ng-model="involved[person.id]" type="checkbox" ng-change="involvedChanged(person)">
 						<resolveuser userid="person.id" tmpname="person.tmpname"></resolveuser>
 					</div>
 				</div>

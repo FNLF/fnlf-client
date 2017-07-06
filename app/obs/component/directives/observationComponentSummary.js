@@ -1,18 +1,5 @@
 
 
-	var newComponentFunc = function(flag,order,involved){
-
-		var component = {flags:{},order:order,what:'',attributes:{},involved:[]};
-		component.flags[flag]=true;
-		if(involved){
-			involved.forEach(function(p){
-				component.involved.push(p.id);
-			});
-		}
-		return component;
-
-	};
-
 
 	angular.module('reportingApp').directive('observationComponentSummary', function ($location,Definitions,ComponentService) {
 
@@ -160,7 +147,7 @@
 				$scope.templateMode="new";
 				$scope.buttonLabel="Legg til årsak";
 				$scope.buttonIcon="plus";
-    			$scope.component = newComponentFunc('cause',-1,$scope.involved);
+    			$scope.component = ComponentService.newComponent('cause',-1,$scope.involved);
 
 
 
@@ -168,7 +155,7 @@
 					if($scope.component.what.trim().length > 0){
 						$scope.components.push($scope.component);
 						ComponentService.reorder($scope.components);
-						$scope.component = newComponentFunc('cause',-1);
+						$scope.component = ComponentService.newComponent('cause',-1);
 					}
 				};
 
@@ -207,7 +194,7 @@
 				$scope.buttonLabel="Legg til konsekvens";
 				$scope.buttonIcon="plus";
 
-    			$scope.component = newComponentFunc('consequence',999,$scope.involved);
+    			$scope.component = ComponentService.newComponent('consequence',999,$scope.involved);
 
 
 
@@ -215,7 +202,7 @@
 					if($scope.component.what.trim().length > 0){
 						$scope.components.push($scope.component);
 						ComponentService.reorder($scope.components);
-						$scope.component = newComponentFunc('consequence',999);
+						$scope.component = ComponentService.newComponent('consequence',999);
 					}
 				};
 
@@ -253,7 +240,7 @@
 				$scope.buttonLabel="Legg til hendelse";
 				$scope.buttonIcon="plus";
 
-    			$scope.component = newComponentFunc('incident',0,$scope.involved);
+    			$scope.component = ComponentService.newComponent('incident',0,$scope.involved);
 
 
 				var unbind = $scope.$watch('observationTitle',function(){
@@ -265,7 +252,7 @@
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);
 					ComponentService.reorder($scope.components);
-					$scope.component = newComponentFunc('incident',0);
+					$scope.component = ComponentService.newComponent('incident',0);
 				};
 
 				$scope.componentWhatSelected = function(){

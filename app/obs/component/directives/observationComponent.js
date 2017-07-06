@@ -43,8 +43,9 @@
 
 				$scope.involved = {};
 				if(!angular.isUndefined($scope.component) && !angular.isUndefined($scope.component.involved)){
-					$scope.component.involved.forEach(function(id){
-						$scope.involved[id]=true;
+					ComponentService.fixInvolved($scope.component);
+					$scope.component.involved.forEach(function(person){
+						$scope.involved[person.id]=true;
 					});
 				}
 
@@ -60,19 +61,19 @@
 				}
 			};
 
-			$scope.involvedChanged = function(personId){
-				console.log(personId);
-				var add = $scope.involved[personId];
+			$scope.involvedChanged = function(person){
+				console.log(person);
+				var add = $scope.involved[person];
 				console.log(add);
 				if(add){
-					$scope.component.involved.push(personId);
+					$scope.component.involved.push(person);
 				}else{
-					var index = $scope.component.involved.indexOf(personId);
+					var index = $scope.component.involved.indexOf(person);
 					if(index > -1){
 						$scope.component.involved.splice(index,1);
 					}
 				}
-				$scope.involved[personId]=add;
+				$scope.involved[person.id]=add;
 				console.log($scope.component.involved);
 			};
 		};
