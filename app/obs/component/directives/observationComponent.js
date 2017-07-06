@@ -43,7 +43,7 @@
 
 				$scope.involved = {};
 				if(!angular.isUndefined($scope.component) && !angular.isUndefined($scope.component.involved)){
-					ComponentService.fixInvolved($scope.component);
+					ComponentService.fixInvolved($scope.component,$scope.persons);
 					$scope.component.involved.forEach(function(person){
 						$scope.involved[person.id]=true;
 					});
@@ -63,13 +63,15 @@
 
 			$scope.involvedChanged = function(person){
 				console.log(person);
-				var add = $scope.involved[person];
-				console.log(add);
+				var add = $scope.involved[person.id];
+
 				if(add){
+					console.log("adding "+person.id);
 					$scope.component.involved.push(person);
 				}else{
 					var index = $scope.component.involved.indexOf(person);
 					if(index > -1){
+						console.log("removing "+person.id);
 						$scope.component.involved.splice(index,1);
 					}
 				}

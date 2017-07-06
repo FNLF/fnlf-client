@@ -53,8 +53,8 @@
 				return -1;
 			};
 
-			this.fixInvolved = function(component){
-					for(i=0; i < component.involved.length;i++){
+			this.fixInvolved = function(component,persons){
+					for(var i=0; i < component.involved.length;i++){
 						var person = component.involved[i];
 						if(typeof person == 'number'){
 							var id = person;
@@ -62,6 +62,10 @@
 							involved[id]=true;	
 							console.log("Fixing involved from number to ");
 							console.log(component.involved[i]);
+
+							if(persons[id] && person[id].tmpname){
+								component.involved[i].tmpname=person[id].tmpname;
+							}
 						}
 					}
 			};
