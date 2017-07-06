@@ -62,21 +62,22 @@
 			};
 
 			$scope.involvedChanged = function(person){
-				console.log(person);
+
 				var add = $scope.involved[person.id];
 
 				if(add){
 					console.log("adding "+person.id);
+					console.log(person);
 					$scope.component.involved.push(person);
 				}else{
-					var index = $scope.component.involved.indexOf(person);
-					if(index > -1){
-						console.log("removing "+person.id);
-						$scope.component.involved.splice(index,1);
-					}
+					$scope.component.involved = $scope.component.involved.filter(function(p){
+						return p.id!=person.id;
+					});
+					console.log("removing "+person.id);
+					console.log($scope.component.involved);
+					$scope.involved[person.id]=add;
 				}
-				$scope.involved[person.id]=add;
-				console.log($scope.component.involved);
+
 			};
 		};
 		return directive;
