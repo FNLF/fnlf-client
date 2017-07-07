@@ -59,6 +59,17 @@ module.exports = function (grunt) {
             }
           }
         },
+        cachebreaker: {
+
+          development: {
+             options: {
+              match: ['.*.js', '.*.css'],
+             },
+            files: {
+                src: ['index.html','app/obs/index.html','app/profile/index.html']
+            }
+          }
+}
 
 
     });
@@ -66,8 +77,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-bower-install-simple");
     grunt.loadNpmTasks('grunt-wiredep');
 	grunt.loadNpmTasks('grunt-ng-constant');
+  grunt.loadNpmTasks('grunt-cache-breaker');
 
     // Default task(s).
-    grunt.registerTask('default', ['bower-install-simple', 'wiredep','ngconstant:development']);
+    grunt.registerTask('default', ['bower-install-simple', 'wiredep','ngconstant:development','cachebreaker']);
  	grunt.registerTask('production', ['default','ngconstant:production']);
 };
