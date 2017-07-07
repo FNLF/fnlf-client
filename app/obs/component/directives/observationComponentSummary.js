@@ -155,7 +155,7 @@
 					if($scope.component.what.trim().length > 0){
 						$scope.components.push($scope.component);
 						ComponentService.reorder($scope.components);
-						$scope.component = ComponentService.newComponent('cause',-1);
+						$scope.component = ComponentService.newComponent('cause',-1,$scope.involved);
 					}
 				};
 
@@ -202,7 +202,7 @@
 					if($scope.component.what.trim().length > 0){
 						$scope.components.push($scope.component);
 						ComponentService.reorder($scope.components);
-						$scope.component = ComponentService.newComponent('consequence',999);
+						$scope.component = ComponentService.newComponent('consequence',999,$scope.involved);
 					}
 				};
 
@@ -252,7 +252,7 @@
 				$scope.editComponent = function(component){
 					$scope.components.push($scope.component);
 					ComponentService.reorder($scope.components);
-					$scope.component = ComponentService.newComponent('incident',0);
+					$scope.component = ComponentService.newComponent('incident',0,$scope.involved);
 				};
 
 				$scope.componentWhatSelected = function(){

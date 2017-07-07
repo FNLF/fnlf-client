@@ -75,7 +75,7 @@
 				component.flags[flag]=true;
 				if(involved){
 					involved.forEach(function(p){
-						component.involved.push(p);
+						component.involved.push({id:p.id,tmpname:p.tmpname});
 					});
 				}
 				return component;
