@@ -1,5 +1,7 @@
 module.exports = function (grunt) {
 	
+	var versionTag = "056";
+
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -42,6 +44,7 @@ module.exports = function (grunt) {
 				},
 				constants: {
 					ENV: {
+						version:versionTag,
 						name: 'development',
 						googleAnalyticsId: 'UA-91309972-1'
 					}
@@ -53,6 +56,7 @@ module.exports = function (grunt) {
 				},
 				constants: {
 					ENV: {
+						version:versionTag,
 						name: 'production',
 						googleAnalyticsId: 'UA-91309972-2'
 					}
@@ -64,6 +68,9 @@ module.exports = function (grunt) {
 			development: {
 				options: {
 					match: ['.*.js', '.*.css'],
+					replacement: function(){
+						return versionTag;
+					}
 				},
 				files: {
 					src: ['index.html', 'app/obs/index.html', 'app/profile/index.html']
