@@ -1,9 +1,9 @@
-angular.module('reportingApp').directive('involvedSummary', function () {
+angular.module('reportingApp').directive('involvedSummary', function (RestService) {
 
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.template = '<div class="table-responsive"><table class="table table-condensed table-responsive"><tr ng-repeat="person in observation.involved"><td><span><involvedpersonsummary person="person"></involvedpersonsummary> &nbsp;</span> </td></tr></table></div>';
+	directive.templateUrl= '/app/obs/persondetails/directives/involvedSummary.html';
 
 	directive.scope = {
 		observation: '=',
@@ -11,6 +11,21 @@ angular.module('reportingApp').directive('involvedSummary', function () {
 	};
 
 	directive.link = function ($scope, element, attrs) {
+
+		$scope.oninvolvedselected=function(user){
+
+			$scope.getUserDetails(user);
+
+		};
+
+		$scope.getUserDetails = function (user) {
+			RestService.getUserDetails(user.id)
+				.then(function (data) {
+					user.membership = data.membership;
+					user.licenses = data.licenses;
+				
+				});
+		};
 
 	};
 

@@ -13,7 +13,8 @@
 		directive.scope = {
 			personmodel:'=',
 			noun: '@',
-			acl: '='
+			acl: '=',
+			selectfn: '='
 		};
 
 		directive.link = function ($scope, element, attrs, ctrl) {

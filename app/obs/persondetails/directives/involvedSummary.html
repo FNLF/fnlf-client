@@ -1,0 +1,11 @@
+<div>
+	<multipersonselector model="observation.involved" selectfn="oninvolvedselected" acl="acl" noun="Søk etter navn"></multipersonselector>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-condensed table-responsive">
+		<tr ng-repeat="person in observation.involved">
+			<td><span><involvedpersonsummary person="person"></involvedpersonsummary> &nbsp;</span> </td>
+		</tr>
+	</table>
+</div>

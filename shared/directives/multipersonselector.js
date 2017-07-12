@@ -10,6 +10,7 @@
 			model: '=',
 			noun: '@',
 			acl: '=',
+			selectfn: '='
 		};
 
 		directive.link = function ($scope, element, attrs) {
@@ -23,11 +24,18 @@
 
 			$scope.onSelect = function (item, model) {
 				initModelIfNull();
+				
+				if($scope.selectfn){
+					$scope.selectfn(item);
+				}
+
 			};
 
 			$scope.onRemove = function(item,model){
 				initModelIfNull();
-				var index = $scope.model.indexOf(model);
+				var index = $scope.model.indexOf(item);
+				console.log(item);
+				console.log(index);
 				if (index > -1) {
 					$scope.model.splice(index,1);
 				}
