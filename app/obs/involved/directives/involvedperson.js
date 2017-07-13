@@ -2,7 +2,7 @@ angular.module('reportingApp').directive('involvedperson', function (RestService
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl = "persondetails/directives/involvedperson.html";
+	directive.templateUrl = "involved/directives/involvedperson.html";
 
 	directive.scope = {
 		person: '=',

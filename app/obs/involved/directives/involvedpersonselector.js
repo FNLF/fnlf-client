@@ -3,7 +3,7 @@ angular.module('reportingApp').directive('involvedpersonselector', function (Res
 
 		directive.restrict = 'E';
 
-		directive.templateUrl= '/app/obs/persondetails/directives/involvedpersonselector.html';
+		directive.templateUrl= '/app/obs/involved/directives/involvedpersonselector.html';
 
 
 		directive.scope = {

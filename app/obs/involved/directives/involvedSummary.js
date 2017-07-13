@@ -3,7 +3,7 @@ angular.module('reportingApp').directive('involvedSummary', function (RestServic
 	var directive = {};
 
 	directive.restrict = 'E';
-	directive.templateUrl= '/app/obs/persondetails/directives/involvedSummary.html';
+	directive.templateUrl= '/app/obs/involved/directives/involvedSummary.html';
 
 	directive.scope = {
 		observation: '=',
