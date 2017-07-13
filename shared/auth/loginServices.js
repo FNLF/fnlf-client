@@ -1,7 +1,11 @@
 (function () {
 	'use strict';
-	angular.module('fnlf-login', ['http-auth-interceptor'])
+	angular.module('fnlf-login', ['http-auth-interceptor','config']);
+	
+})();
 
+(function () {
+	angular.module('fnlf-login')
 		.controller('LoginController', function ($scope, loginService) {
 
 
@@ -44,7 +48,7 @@
 
 
 	angular.module('fnlf-login')
-		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore,$q) {
+		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore,$q,ENV) {
 
 			$rootScope.$on('event:auth-loginRequired', function () {
 				$rootScope.error = 'Login is required';
@@ -64,7 +68,8 @@
 
 				$http.post(GlobalsService.get('baseUrl') + 'user/authenticate', {
 					username: username,
-					password: password
+					password: password,
+					version:ENV.version
 				}).success(function (response) {
 						console.log(response);
 
@@ -232,8 +237,11 @@
 								$scope.info = 'Feil brukernavn eller passord';
 							}else if(error.status==503){
 								$scope.error = 'Melwin er nede. Prøv igjen senere';
-                            	console.log(error);
-							}else{
+                console.log(error);
+							}else if(error.status==426){
+								$scope.error = 'Last siden på nytt (Ctrl+F5 på PC)';
+								console.log(error);
+							} else{
 								$scope.error = 'Feil med serveren. Prøv igjen senere';
 								console.log(error);
 							}
