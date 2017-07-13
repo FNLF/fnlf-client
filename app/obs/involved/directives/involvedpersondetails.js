@@ -8,21 +8,13 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 		observation: '=',
 		acl: '='
 	};
-
-	directive.link = function ($scope, element, attrs) {
-
+	
+	directive.controller = function ($scope) {
 		$scope.open = {};
-
-		$scope.getUserDetails = function (user) {
-			RestService.getUserDetails(user.id)
-				.then(function (data) {
-					user.membership = data.membership;
-					user.licenses = data.licenses;
-				});
-		};
-
+		
+		
 		$scope.jumptypes = [];
-
+		
 		var getJumpTypes = function () {
 			RestService.getJumpTypes()
 				.then(function (data) {
@@ -30,9 +22,9 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 				});
 		};
 		getJumpTypes();
-
+		
 		$scope.licensesFromMelwin = [];
-
+		
 		var getLicensesFromMelwin = function () {
 			RestService.getLicenses()
 				.then(function (data) {
@@ -40,7 +32,11 @@ angular.module('reportingApp').directive('involvedpersondetails', function (Rest
 				});
 		};
 		getLicensesFromMelwin();
-
+		
+	};
+	
+	directive.link = function ($scope, element, attrs) {
+	
 	};
 
 	return directive;

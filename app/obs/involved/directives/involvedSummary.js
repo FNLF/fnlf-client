@@ -1,4 +1,4 @@
-angular.module('reportingApp').directive('involvedSummary', function (RestService) {
+angular.module('reportingApp').directive('involvedSummary', function (InvolvedService) {
 
 	var directive = {};
 
@@ -9,24 +9,16 @@ angular.module('reportingApp').directive('involvedSummary', function (RestServic
 		observation: '=',
 		acl: '='
 	};
-
+	
+	directive.controller = function ($scope) {
+		$scope.oninvolvedselected = function (user) {
+			InvolvedService.getUserDetails(user);
+			InvolvedService.getUserGearAndjumps(user);
+		};
+	};
+	
 	directive.link = function ($scope, element, attrs) {
-
-		$scope.oninvolvedselected=function(user){
-
-			$scope.getUserDetails(user);
-
-		};
-
-		$scope.getUserDetails = function (user) {
-			RestService.getUserDetails(user.id)
-				.then(function (data) {
-					user.membership = data.membership;
-					user.licenses = data.licenses;
-				
-				});
-		};
-
+	
 	};
 
 	return directive;

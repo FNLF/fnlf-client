@@ -2,17 +2,17 @@
 	<div>
 		<div class="form-group col-xs-12">
 			<label>Lisenser registrert i MelWin:</label><br>
-
+			
 			<div ng-show="person.licenses.length == 0">Ingen lisenser registrert</div>
-				<span ng-repeat="license in person.licenses.rights">
+			<span ng-repeat="license in person.licenses.rights">
 					<span><resolvelicense licenseid="license"></resolvelicense> &nbsp;</span>
 				</span>
 		</div>
 	</div>
-
+	
 	<div class="form-group col-md-3 col-xs-6">
 		<strong>Kjennelse:</strong><br/>
-
+		
 		<div class="checkbox">
 			<label>
 				<input ng-disabled="!acl.w" type="checkbox" value="" ng-model="person.verdict.fu">
@@ -31,170 +31,172 @@
 	<div class="form-group col-lg-3 col-md-4 col-xs-12">
 		<inlinehelp title="Hopptype">Offisiell hopptype definert av F/NLF</inlinehelp>
 		<select ng-disabled="!acl.w" id="jumptype" class="form-control" data-placeholder="Hopptype"
-				ng-model="person.jumptypeSelected"
-				ng-options="jumptype.id as jumptype.name for jumptype in jumptypes">
+						ng-model="person.jumptypeSelected"
+						ng-options="jumptype.id as jumptype.name for jumptype in jumptypes">
 		</select>
 	</div>
-
-
-
+	
+	
 	<div class="form-group col-lg-2 col-md-3 col-xs-6" ng-if="person.jumptypeSelected">
 		<inlinehelp title="År i sporten">År i sporten</inlinehelp>
 		<input ng-disabled="!acl.w" placeholder="År i sporten" id="years" class="form-control" type="number"
-			   ng-model="person.yearsOfExperience"/>
-
+					 ng-model="person.yearsOfExperience"/>
+	
 	</div>
-
-
+	
+	
 	<div class="form-group col-lg-2 col-md-3 col-xs-6" ng-if="person.jumptypeSelected">
 		<inlinehelp title="Antall hopp">Antall hopp totalt</inlinehelp>
 		<input ng-disabled="!acl.w" placeholder="Hopp totalt" id="numberofjumps" class="form-control" type="number"
-			   ng-model="person.numberOfJumps"/>
-
+					 ng-model="person.numberOfJumps"/>
+	
 	</div>
 	<div class="col-md-12"></div>
-
+	
 	<div class="form-group col-lg-3 col-md-4 col-xs-12">
 		<inlinehelp title="Aktivitet eller rolle">Type hoppaktivitet eller rolle i det som skjedde</inlinehelp>
 		<tagging acl="acl" model="person.jumptypeTags" noun="hoppaktivitet/rolle"
-				 group="jumptype"></tagging>
+						 group="jumptype"></tagging>
 	</div>
-
-
-
+	
+	
 	<div class="form-group col-lg-2 col-md-4 col-xs-12" ng-if="person.jumptypeSelected">
 		<inlinehelp title="Flytype">Flytype personen hoppet fra</inlinehelp>
 		<tagtypeahead acl="acl" model="person.aircraft" noun="Flytype"
-					  group="aircraftTypes"></tagtypeahead>
+									group="aircraftTypes"></tagtypeahead>
 	</div>
-
-
+	
+	
 	<div class="form-group col-lg-2 col-md-4 col-xs-12" ng-if="person.jumptypeSelected">
 		<inlinehelp title="Utsprangshøyde">Utsprangshøyde</inlinehelp>
 		<input ng-disabled="!acl.w" placeholder="Utsprangshøyde" id="altitude" class="form-control" type="number"
-			   ng-model="person.jumpAltitude"/>
+					 ng-model="person.jumpAltitude"/>
 	</div>
-
-
+	
+	
 	<div class="col-xs-12"><label></label></div>
-
+	
 	<div class="form-group col-md-3 col-xs-12">
 		<inlinehelp title="Hovedskjerm">Type hovedskjerm</inlinehelp>
 		<tagtypeahead acl="acl" model="person.gear.mainCanopyType" noun="Type hovedskjerm"
-					  group="maincanopies"></tagtypeahead>
-
+									group="maincanopies"></tagtypeahead>
+	
 	</div>
-
+	
 	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.mainCanopyType">
-		<inlinehelp title="Størrelse" >Størrelse på hovedskjerm</inlinehelp>
+		<inlinehelp title="Størrelse">Størrelse på hovedskjerm</inlinehelp>
 		<input ng-disabled="!acl.w" type="number" class="form-control" id="mainCanopySize"
-			   ng-model="person.gear.mainCanopySize"
-			   placeholder="Hovedskjermstørrelse">
-
+					 ng-model="person.gear.mainCanopySize"
+					 placeholder="Hovedskjermstørrelse">
+	
 	</div>
-
+	
 	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.mainCanopyType">
 		<inlinehelp title="Erfaring">Antall hopp på denne hovedskjermen</inlinehelp>
 		<input ng-disabled="!acl.w" type="number" class="form-control" id="mainCanopyExperience"
-			   ng-model="person.gear.mainCanopyExperience"
-			   placeholder="Erfaring hovedskjerm">
+					 ng-model="person.gear.mainCanopyExperience"
+					 placeholder="Erfaring hovedskjerm">
 	</div>
-
+	
 	<div class="col-xs-12"><label></label></div>
-
-
+	
+	
 	<div class="form-group col-md-3 col-xs-12">
 		<inlinehelp title="Reserveskjerm">Type reserveskjerm</inlinehelp>
 		<tagtypeahead acl="acl" model="person.gear.reserveCanopyType" noun="Type reserveskjerm"
-					  group="reserveCanopies"></tagtypeahead>
-
+									group="reserveCanopies"></tagtypeahead>
+	
 	</div>
 	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.reserveCanopyType">
 		<inlinehelp title="Størrelse">Størrelse på reserveskjerm</inlinehelp>
 		<input ng-disabled="!acl.w" type="number" class="form-control" id="reserveCanopySize"
-			   ng-model="person.gear.reserveCanopySize"
-			   placeholder="Reserveskjermstørrelse">
-
+					 ng-model="person.gear.reserveCanopySize"
+					 placeholder="Reserveskjermstørrelse">
+	
 	</div>
-
+	
 	<div class="form-group col-md-3 col-xs-12">
 		<inlinehelp title="MK">MK som sist tok hovedkontroll eller brukskontroll</inlinehelp>
 		<singlepersonselector acl="acl" personmodel="person.gear.rigger"></singlepersonselector>
 	</div>
-
+	
 	<div class="form-group col-md-3 col-xs-12">
 		<inlinehelp title="Pakkedato">Dato for siste hovedkontroll eller brukskontroll</inlinehelp>
 		<div class="input-group">
 			<datetimepicker
-					acl="acl"  
-					ng-model="person.gear.riggerdate"
-					date-format="yyyy-MM-dd"
-					date-options="{startingDay:1,showWeeks: true}"
-					readonly-time="true"
-					show-meridian="showMeridian"
-					pick-time="false"
-					></datetimepicker>
+				acl="acl"
+				ng-model="person.gear.riggerdate"
+				date-format="yyyy-MM-dd"
+				date-options="{startingDay:1,showWeeks: true}"
+				readonly-time="true"
+				show-meridian="showMeridian"
+				pick-time="false"
+			></datetimepicker>
 		</div>
-
+	
 	</div>
-
-
+	
+	
 	<div class="col-xs-12"><label></label></div>
-
+	
 	<div class="form-group col-md-3 col-xs-12">
 		<inlinehelp title="Seletøy">Type seletøy</inlinehelp>
 		<tagtypeahead acl="acl" model="person.gear.harnessType" noun="Type seletøy"
-					  group="harnessTypes"></tagtypeahead>
-
+									group="harnessTypes"></tagtypeahead>
+	
 	</div>
-
+	
 	<div class="form-group col-md-2 col-xs-6" ng-if="person.gear.harnessType">
 		<inlinehelp title="Erfaring">Antall hopp på dette seletøyet</inlinehelp>
 		<input ng-disabled="!acl.w" type="number" class="form-control" id="harnessExperience"
-			   ng-model="person.gear.harnessExperience"
-			   placeholder="Erfaring seletøy">
-
+					 ng-model="person.gear.harnessExperience"
+					 placeholder="Erfaring seletøy">
+	
 	</div>
 	<div class="form-group col-md-2 col-xs-12">
 		<inlinehelp title="Nødåpner">Type nødåpner</inlinehelp>
-		<tagtypeahead acl="acl" model="person.gear.aadType" noun="Type nødåpner" group="aadType" placeholder="Type nødåpner"></tagtypeahead>
-
+		<tagtypeahead acl="acl" model="person.gear.aadType" noun="Type nødåpner" group="aadType"
+									placeholder="Type nødåpner"></tagtypeahead>
+	
 	</div>
-
+	
 	<div class="form-group col-md-3 col-xs-12" ng-if="person.gear.aadType">
 		<inlinehelp title="Fabrikkontrolldato">Dato for siste fabrikk-kontroll</inlinehelp>
 		<div class="input-group">
 			<datetimepicker
-					acl="acl" 
-					ng-model="person.gear.aadControlDate"
-					date-format="yyyy-MM"
-					date-options="{startingDay:1,showWeeks: true}"
-					readonly-time="true"
-					show-meridian="showMeridian"
-					pick-time="false"
-					></datetimepicker>
+				acl="acl"
+				ng-model="person.gear.aadControlDate"
+				date-format="yyyy-MM"
+				date-options="{startingDay:1,showWeeks: true}"
+				readonly-time="true"
+				show-meridian="showMeridian"
+				pick-time="false"
+			></datetimepicker>
 		</div>
-
+	
 	</div>
-
-
+	
+	
 	<div class="col-xs-12">
-		<inlinehelp title="Annet utstyr">Annet utstyr som ble brukt, eller spesielle varianter av utstyr. F.eks wingsuit, flytevest, blybelte eller selfiestang</inlinehelp>
+		<inlinehelp title="Annet utstyr">Annet utstyr som ble brukt, eller spesielle varianter av utstyr. F.eks wingsuit,
+			flytevest, blybelte eller selfiestang
+		</inlinehelp>
 	</div>
-
+	
 	<div class="form-group col-md-11 col-xs-12">
-		<tagging acl="acl" model="person.gear.other" noun="Annet utstyr" group="otherEquipment" placeholder="Annet utstyr"></tagging>
-
+		<tagging acl="acl" model="person.gear.other" noun="Annet utstyr" group="otherEquipment"
+						 placeholder="Annet utstyr"></tagging>
+	
 	</div>
-
+	
 	<div class="col-xs-12"></div>
-
+	
 	<style>
-
-		.datetimepicker-wrapper.ng-valid-time{
-			display:none !important;
+		
+		.datetimepicker-wrapper.ng-valid-time {
+			display: none !important;
 		}
-
+	
 	</style>
 
 </div>
