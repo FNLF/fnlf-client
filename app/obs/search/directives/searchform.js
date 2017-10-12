@@ -53,7 +53,7 @@
 					filterString=','+JSON.stringify(filteredFilter);
 				}
 
-				var path = '/search/tag/' + encodeURIComponent(Functions.capitalizeFirstLetter(text)+filterString);
+				var path = '/search/tag/' + Functions.capitalizeFirstLetter(text)+filterString;
 				$location.path(path);
 			};
 

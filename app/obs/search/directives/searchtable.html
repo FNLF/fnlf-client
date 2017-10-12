@@ -1,5 +1,8 @@
 <div class="col-xs-12 air">
 
+	<pre ng-if="searchError">
+		{{searchError | json}}
+	</pre>
 
 	<caption>
 		<h3 ng-if="tag" ng-bind="tag"></h3>

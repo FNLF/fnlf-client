@@ -44,7 +44,10 @@ angular.module('reportingApp').directive('searchtable', function () {
     				$scope.query = decodeURIComponent($routeParams.query);
     			}
 
-
+					if($routeParams.rawquery){
+    				$scope.rawquery = decodeURIComponent($routeParams.rawquery);
+    			}
+		
 
 
     			$scope.queryObj = SearchService.parseAdvancedSearchQuery($scope.query);
@@ -60,10 +63,15 @@ angular.module('reportingApp').directive('searchtable', function () {
     					searchParam = $scope.flag;
     					searchFn = SearchService.searchByFlag;
     				}
-                    if($scope.query){
-                        searchParam = $scope.queryObj;
-                        searchFn = SearchService.searchAdvanced;
-                    }
+						if($scope.query){
+								searchParam = $scope.queryObj;
+								searchFn = SearchService.searchAdvanced;
+						}
+
+						if($scope.rawquery){
+							searchParam = $scope.rawquery;
+							searchFn = SearchService.searchRaw;
+						}
 
     				searchFn(params.page(), params.count(),sortString,searchParam,$scope.filter)
     					.then(function(data){
@@ -72,10 +80,13 @@ angular.module('reportingApp').directive('searchtable', function () {
     						$scope.total = meta.total;
     						$scope.tableData = data._items;
     						$defer.resolve(data._items);
-							ObservationsTableService.storeParams(params,'searchTable');
+								ObservationsTableService.storeParams(params,'searchTable');
+								$scope.searchError = null;
     					},
     					function(error){
     						console.log(error);
+								$scope.searchError = error;
+
     					});
 
     			}});

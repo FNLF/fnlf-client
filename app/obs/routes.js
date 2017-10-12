@@ -20,6 +20,10 @@
 						templateUrl: 'observation/sandbox.html',
 						controller: 'ObservationController'
 					})
+					.when('/search/query/:rawquery', {
+						templateUrl: 'search/search.html',
+						controller: 'SearchController'
+					})
 					.when('/search/tag/:tag', {
 						templateUrl: 'search/search.html',
 						controller: 'SearchController'

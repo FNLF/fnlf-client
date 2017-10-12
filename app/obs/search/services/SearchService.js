@@ -235,6 +235,13 @@
 
 			};
 
+			this.searchRaw = function (page, maxResults, sort, rawquery) {
+				var where = 'where=' + rawquery;
+				console.log("Raw search "+where);
+				return RestService.getAllObservations(page, maxResults, sort, where);
+			};
+
+
 
 			this.parseAdvancedSearchQuery = function (query) {
 				var queryObj = {what:[],gear:[],at:[],jumps:[0,0]};
