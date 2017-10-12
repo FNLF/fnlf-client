@@ -154,7 +154,7 @@
 
 				var whereString = JSON.stringify(whereObj);
 
-
+				console.log(whereString);
 
 				return RestService.getAllObservations(page, maxResults, sort, 'where=' + whereString);
 			};
@@ -231,6 +231,7 @@
 				}
 
 				var where = 'where=' + JSON.stringify(whereObj);
+				console.log(where);
 				return RestService.getAllObservations(page, maxResults, sort, where);
 
 			};

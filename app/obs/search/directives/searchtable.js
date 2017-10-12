@@ -46,6 +46,7 @@ angular.module('reportingApp').directive('searchtable', function () {
 
 					if($routeParams.rawquery){
     				$scope.rawquery = decodeURIComponent($routeParams.rawquery);
+						$scope.rawquery = unescape($scope.rawquery);
     			}
 		
 
