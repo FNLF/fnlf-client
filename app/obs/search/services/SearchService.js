@@ -21,35 +21,6 @@
 				return arr;
 			};
 
-			var whatParams = ['components.tags', 'components.what'];
-
-			this.getWhatTagGroups = function () {
-				var groups = [];
-				whatParams.forEach(function (k) {
-					groups = groups.concat(mapping[k]);
-				});
-				return groups;
-			};
-
-			var gearParams = ['involved.gear.mainCanopyType', 'involved.gear.reserveCanopyType', 'involved.gear.harnessType', 'involved.gear.aadType', 'involved.gear.other'];
-
-			this.getGearTagGroups = function () {
-				var groups = [];
-				gearParams.forEach(function (k) {
-					groups = groups.concat(mapping[k]);
-				});
-				return groups;
-			};
-
-			var atParams = ['components.where.at', 'involved.jumptypeTags', 'involved.aircraft'];
-
-			this.getAtTagGroups = function () {
-				var groups = [];
-				atParams.forEach(function (k) {
-					groups = groups.concat(mapping[k]);
-				});
-				return groups;
-			};
 
 			this.go = function (text,filter) {
 			
