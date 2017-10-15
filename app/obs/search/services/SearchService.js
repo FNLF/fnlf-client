@@ -51,8 +51,28 @@
 				return groups;
 			};
 
+			this.go = function (text,filter) {
+			
+				var filterString = '';
 
-			this.searchByTag = function (page, maxResults, sort, tags,filter) {
+				var filteredFilter = {};
+				if(filter) {
+					Object.keys(filter).forEach(function (k) {
+						if (filter[k]) {
+							filteredFilter[k] = filter[k];
+						}
+					});
+				}
+				if(Object.keys(filteredFilter).length>0){
+					filterString=','+JSON.stringify(filteredFilter);
+				}
+
+				var path = '/search/tag/' + Functions.capitalizeFirstLetter(text)+filterString;
+				$location.path(path);
+			};
+
+
+			this.search = function (page, maxResults, sort, tags,filter) {
 
 				var params = getObservationParamsFn();
 				var whereObj = {};
@@ -166,109 +186,10 @@
 				return RestService.getAllObservations(page, maxResults, sort, where);
 			};
 
-			this.goSearchAdvanced = function(model){
-
-				var text = '';
-				['what','gear','at','jumps'].forEach(function(category){
-					if (model[category]) {
-
-						text += category+'=' + model[category].join(',') + ';';
-					}
-				});
-
-				if (text) {
-					var path = '/search/advanced/' + text;
-
-					$location.path(path);
-				}
-
-			};
-
-			this.searchAdvanced = function (page, maxResults, sort, queryObj) {
-
-				var getBigOrArray = function (params, tags) {
-					var outerOrArray = [];
-					angular.forEach(params, function (p) {
-						var obj = {};
-						obj[p] = {$in: tags};
-						outerOrArray.push(obj);
-					});
-
-					return outerOrArray;
-				};
-
-				var whereObj = {};
-				var andArr = [];
-				whereObj.$and = andArr;
-
-				var queryParams = {what: whatParams,gear:gearParams,at:atParams};
-
-				['what','gear','at'].forEach(function(category){
-					if (queryObj[category].length > 0) {
-						andArr.push({$or: getBigOrArray(queryParams[category], queryObj[category])});
-					}
-				});
-
-
-				if(queryObj.jumps&&queryObj.jumps.length==2){
-					var lessThanJumps = queryObj.jumps.length[0];
-					var greaterThanJumps = queryObj.jumps.length[1];
-					if(lessThanJumps) {
-						var obj = {};
-						obj['involved.numberOfJumps'] = {$lte:lessThanJumps};
-						andArr.push(obj);
-					}
-
-					if(greaterThanJumps) {
-						var obj = {};
-						obj['involved.numberOfJumps'] = {$gte:greaterThanJumps}
-						andArr.push(obj);
-					}
-				}
-
-				if (!(queryObj.what&&queryObj.gear&&queryObj.at&&queryObj.jumps)) {
-					whereObj = {};
-				}
-
-				var where = 'where=' + JSON.stringify(whereObj);
-				console.log(where);
-				return RestService.getAllObservations(page, maxResults, sort, where);
-
-			};
-
 			this.searchRaw = function (page, maxResults, sort, rawquery) {
 				var where = 'where=' + rawquery;
 				console.log("Raw search "+where);
 				return RestService.getAllObservations(page, maxResults, sort, where);
-			};
-
-
-
-			this.parseAdvancedSearchQuery = function (query) {
-				var queryObj = {what:[],gear:[],at:[],jumps:[0,0]};
-				if(!query){
-					return queryObj;
-				}
-
-				var queryParts = query.split(';');
-				queryParts.forEach(function (part) {
-					var keyValueArr = part.split('=');
-					if (keyValueArr.length == 2) {
-						['what','gear','at','jumps'].forEach(function(category){
-							if (keyValueArr[0] == category && keyValueArr[1]) {
-								queryObj[category] = keyValueArr[1].split(',')
-									.map(function (tag) {
-										return Functions.capitalizeFirstLetter(tag)
-									});
-							}
-
-						});
-
-					}
-				});
-
-				return queryObj;
-
 			};
 
 
