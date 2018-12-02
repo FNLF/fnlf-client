@@ -64,7 +64,7 @@
 			}
 			this.getAccessToken = function () {
 
-				return $location.search(); //.access_token;// ['access_token'];
+				return $location.search().access_token;// ['access_token'];
 
 
 				//return $window.path; //
