@@ -242,7 +242,7 @@
 			$scope.return_path = loginService.getPath();
 
 			// Allow access_token to be transported in same path as previous username/passwords
-			if ($scope.access_token != 'undefined') {
+			if (typeof $scope.access_token != 'undefined') {
 
 				loginService.login('access_token', $scope.access_token)
 					.then(function () {
