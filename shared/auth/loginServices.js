@@ -70,6 +70,10 @@
 				//return $window.path; //
 			}
 
+			this.removeUrlParams = function() {
+				$location.url($location.path());
+			}
+
 			this.login = function (username, password) {
 
 				var deferred = $q.defer();
@@ -235,6 +239,7 @@
 			$scope.error = '';
 
 			$scope.access_token = loginService.getAccessToken(); //$location.search(); //['access_token'];
+			$scope.return_path = loginService.getPath();
 
 			// Allow access_token to be transported in same path as previous username/passwords
 			if ($scope.access_token != 'undefined') {
@@ -257,8 +262,8 @@
 								console.log(error);
 							}
 						}).finally(function () {
-							$scope.return_path = loginService.getPath();
-							console.log($scope.token);
+							
+							loginService.removeUrlParams();
 						});
 			}
 
