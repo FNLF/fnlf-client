@@ -90,9 +90,9 @@
 						//$cookieStore.put('authToken', response.token64);
 						//$cookieStore.put('username', username);
 						$window.sessionStorage.token = response.token64;
-						$window.sessionStorage.username = username;
+						$window.sessionStorage.username = response.username;
 
-						$rootScope.username = username;
+						$rootScope.username = response.username;
 
 						$http.defaults.headers.common.Authorization = 'Basic ' + response.token64;
 						$rootScope.currentUserSignedIn = true;
