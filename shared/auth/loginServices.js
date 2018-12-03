@@ -240,10 +240,17 @@
 
 			$scope.access_token = loginService.getAccessToken(); //$location.search(); //['access_token'];
 			$scope.return_path = loginService.getPath();
+			//"http://127.0.0.1:5001/auth?client_id=qwkmwqoiuworwijjowe&shebang=1&redirect_url={{ return_path }}"
+			$scope._auth_service = 'http://127.0.0.1:5001/auth';
+			$scope._client_id = 'kgnkzakr10zsi3fgmk23';
+			$scope._scope = 'read';
+			$scope._shebang = 1;
+			$scope._response_type = 'token';
+			$scope._logging_in = false;
 
 			// Allow access_token to be transported in same path as previous username/passwords
 			if (typeof $scope.access_token != 'undefined') {
-
+				$scope._logging_in = true;
 				loginService.login('access_token', $scope.access_token)
 					.then(function () {
 						$scope.error = '';
@@ -264,10 +271,12 @@
 						}).finally(function () {
 							
 							loginService.removeUrlParams();
+							$scope._logging_in = false;
 						});
 			}
 
 			$scope.login = function () {
+				$scope._logging_in = true;
 				loginService.login($scope.username, $scope.password)
 					.then(function () {
 						$scope.error = '';
@@ -284,6 +293,8 @@
 								$scope.error = 'Feil med serveren. Prøv igjen senere';
 								console.log(error);
 							}
+						}).finally(function () {
+							$scope._logging_in = false;
 						});
 			};
 
