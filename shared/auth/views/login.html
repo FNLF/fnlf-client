@@ -6,7 +6,12 @@
 
 
 			<div class="col-xs-12 col-md-6 col-lg-4">
+				<div ng-if="!!_oauth_error">
+					<div class="alert alert-danger" role="alert">
+						Error: {{ _oauth_error_message }}
+					</div>
 
+				</div>
 				<div class="row">
 					<div ng-if="!!_logging_in">
 						<h3>Authenticating, please wait...</h3>
