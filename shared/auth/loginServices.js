@@ -68,9 +68,9 @@
 
 			}
 
-			this.queryQueryParams = function () {
+			this.getQueryParams = function () {
 
-				return $location.search()
+				return $location.search();
 
 			}
 
