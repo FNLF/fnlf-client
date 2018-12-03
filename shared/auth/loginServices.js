@@ -66,11 +66,15 @@
 
 				return $location.search().access_token;// ['access_token'];
 
-
-				//return $window.path; //
 			}
 
-			this.removeUrlParams = function() {
+			this.queryQueryParams = function () {
+
+				return $location.search()
+
+			}
+
+			this.removeUrlParams = function () {
 				$location.url($location.path());
 			}
 
@@ -238,7 +242,7 @@
 
 			$scope.error = '';
 
-			$scope.access_token = loginService.getAccessToken(); //$location.search(); //['access_token'];
+			$scope.access_token = loginService.getQueryParams().access_token; //$location.search(); //['access_token'];
 			$scope.return_path = loginService.getPath();
 			//"http://127.0.0.1:5001/auth?client_id=qwkmwqoiuworwijjowe&shebang=1&redirect_url={{ return_path }}"
 			$scope._auth_service = 'http://127.0.0.1:5001/auth';
@@ -247,7 +251,8 @@
 			$scope._shebang = 1;
 			$scope._response_type = 'token';
 			$scope._logging_in = false;
-
+			$scope._oauth_error = loginService.getQueryParams().error;
+			$scope._oauth_error_msg = loginService.getQueryParams().error_description;
 			// Allow access_token to be transported in same path as previous username/passwords
 			if (typeof $scope.access_token != 'undefined') {
 				$scope._logging_in = true;
@@ -269,7 +274,7 @@
 								console.log(error);
 							}
 						}).finally(function () {
-							
+
 							loginService.removeUrlParams();
 							$scope._logging_in = false;
 						});
