@@ -8,8 +8,10 @@
 			<div class="col-xs-12 col-md-6 col-lg-4">
 				<div ng-if="!!_oauth_error">
 					<div class="alert alert-danger" role="alert">
-						<h1>Error: {{ _oauth_error }}</h1>
+						<h1>Error: {{ _oauth_error }}
+						</h1>
 						<h3>{{ _oauth_error_msg }}</h3>
+						<h4 ng-if="_oauth_error=='access_denied'">Denne feilmeldingen betyr at du trolig ikke har riktig brukernavn eller passord</h4>
 						
 					</div>
 
