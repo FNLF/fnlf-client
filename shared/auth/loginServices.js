@@ -244,8 +244,8 @@
 
 			$scope.access_token = loginService.getQueryParams().access_token; //$location.search(); //['access_token'];
 			$scope.return_path = loginService.getPath();
-			//"http://127.0.0.1:5001/auth?client_id=qwkmwqoiuworwijjowe&shebang=1&redirect_url={{ return_path }}"
-			$scope._auth_service = 'http://127.0.0.1:5001/auth';
+			
+			$scope._auth_service = 'https://auth.nlf.no/auth';
 			$scope._client_id = 'kgnkzakr10zsi3fgmk23';
 			$scope._scope = 'read';
 			$scope._shebang = 1;
