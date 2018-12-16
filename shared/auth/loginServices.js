@@ -249,7 +249,7 @@
 			$scope._client_id = 'kgnkzakr10zsi3fgmk23';
 			$scope._scope = 'read';
 			$scope._shebang = 1;
-			$scope._response_type = 'token';
+			$scope._response_type = 'access_token';
 			$scope._logging_in = false;
 			$scope._oauth_error = loginService.getQueryParams().error;
 			$scope._oauth_error_msg = loginService.getQueryParams().error_description;
