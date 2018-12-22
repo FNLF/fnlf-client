@@ -27,7 +27,7 @@
 		['$cookieStore', '$rootScope',
 			function ($cookieStore, $rootScope) {
 
-				var configs = {baseUrl: '/api/v1/'};
+				var configs = { baseUrl: '/api/v1/' };
 
 				var service = {};
 
@@ -35,7 +35,7 @@
 
 					return configs[key];
 				};
-				
+
 				$rootScope.title = 'Login';
 
 				return service;
@@ -44,7 +44,7 @@
 
 
 	angular.module('fnlf-login')
-		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore,$q) {
+		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore, $q) {
 
 			$rootScope.$on('event:auth-loginRequired', function () {
 				$rootScope.error = 'Login is required';
@@ -57,6 +57,26 @@
 				$rootScope.currentUserSignedOut = false;
 			});
 
+			this.getPath = function () {
+				//return $location.path();
+				//return $window.location.protocol + '//' + $window.location.host + $window.location.path;
+				return $location.absUrl();
+			}
+			this.getAccessToken = function () {
+
+				return $location.search().access_token;// ['access_token'];
+
+			}
+
+			this.getQueryParams = function () {
+
+				return $location.search();
+
+			}
+
+			this.removeUrlParams = function () {
+				$location.url($location.path());
+			}
 
 			this.login = function (username, password) {
 
@@ -66,45 +86,47 @@
 					username: username,
 					password: password
 				}).success(function (response) {
-						console.log(response);
+					console.log(response);
+					//$location.url($location.path()); //remove tokens and stuff
+					if (response.success) {
 
-						if (response.success) {
+						//Store in cookie:
+						//$cookieStore.put('authToken', response.token64);
+						//$cookieStore.put('username', username);
+						$window.sessionStorage.token = response.token64;
+						$window.sessionStorage.username = response.username;
 
-							//Store in cookie:
-							//$cookieStore.put('authToken', response.token64);
-							//$cookieStore.put('username', username);
-							$window.sessionStorage.token = response.token64;
-							$window.sessionStorage.username = username;
-							
-							$rootScope.username = username;
+						$rootScope.username = response.username;
 
-							$http.defaults.headers.common.Authorization = 'Basic ' + response.token64;
-							$rootScope.currentUserSignedIn = true;
-							// Broadcast AND update tokens in buffers!
-							authService.loginConfirmed('success', function (config) {
-								config.headers["Authorization"] = 'Basic ' + response.token64;
-								return config;
-							});
+						$http.defaults.headers.common.Authorization = 'Basic ' + response.token64;
+						$rootScope.currentUserSignedIn = true;
+						// Broadcast AND update tokens in buffers!
+						authService.loginConfirmed('success', function (config) {
+							config.headers["Authorization"] = 'Basic ' + response.token64;
+							return config;
+						});
 
-							deferred.resolve({status:200,message:response.message});
-						}
-						else {
-							deferred.reject({status:401,message:response.message});
-						}
-					}).error(function (data, status, headers, config) {
-						console.log(data);
-						console.log(status);
-						//Show login form
-						$rootScope.currentUserSignedIn = false;
-						//Abort all buffers
-						authService.loginCancelled(data, status);
+						deferred.resolve({ status: 200, message: response.message });
+					}
+					else {
+						deferred.reject({ status: 401, message: response.message });
+					}
+				}).error(function (data, status, headers, config) {
+					//$location.url($location.path()); //remove tokens and stuff
+					console.log(data);
+					console.log(status);
+					//Show login form
+					$rootScope.currentUserSignedIn = false;
+					//Abort all buffers
+					authService.loginCancelled(data, status);
 
-						$rootScope.error = 'Login experienced some difficulties. Maybe the backend did not respond?';
-						deferred.reject({status:status,message:data});
-						return false;
+					$rootScope.error = 'Login experienced some difficulties. Maybe the backend did not respond?';
+					deferred.reject({ status: status, message: data });
 
-					});
-					return deferred.promise;
+					return false;
+
+				});
+				return deferred.promise;
 			};
 
 			/**
@@ -126,7 +148,7 @@
 					$rootScope.username = username;
 					$rootScope.authToken = authToken;
 					$rootScope.currentUserSignedIn = true;
-					
+
 
 
 
@@ -140,8 +162,8 @@
 						//Show content, hide login form
 						$rootScope.currentUserSignedIn = true;
 						console.log('Login from session - success');
-						
-						if(typeof response.settings.default_club !== 'undefined') {
+
+						if (typeof response.settings.default_club !== 'undefined') {
 							$rootScope.default_club = response.settings.default_club;
 						}
 						//Broadcast the success update buffers!
@@ -180,7 +202,7 @@
 				$rootScope.currentUserSignedIn = false;
 				//Abort all buffers
 				authService.loginCancelled();
-				
+
 				//Clean up menu!
 				$rootScope.nav.menus = [];
 				$rootScope.nav.tollbar = [];
@@ -188,8 +210,8 @@
 				//Now just make sure to force login
 				authService.loginRequired('Login is mandatory');
 
-        	            $location.path("/");
-        	        };
+				$location.path("/");
+			};
 
 			//Call this every time its started
 			// Should be a login from cookie first, then if that dont work, broadcast a loginRequired
@@ -220,23 +242,64 @@
 
 			$scope.error = '';
 
-			$scope.login = function () {
-				loginService.login($scope.username, $scope.password)
-					.then(function(){
-							$scope.error = '';
-							$scope.info = '';
-						},
-						function(error){
-							if(error.status==401){
+			$scope.access_token = loginService.getQueryParams().access_token; //$location.search(); //['access_token'];
+			$scope.return_path = loginService.getPath();
+			
+			$scope._auth_service = 'https://auth.nlf.no/auth';
+			$scope._client_id = 'kgnkzakr10zsi3fgmk23';
+			$scope._scope = 'read';
+			$scope._shebang = 1;
+			$scope._response_type = 'access_token';
+			$scope._logging_in = false;
+			$scope._oauth_error = loginService.getQueryParams().error;
+			$scope._oauth_error_msg = loginService.getQueryParams().error_description;
+			// Allow access_token to be transported in same path as previous username/passwords
+			if (typeof $scope.access_token != 'undefined') {
+				$scope._logging_in = true;
+				loginService.login('access_token', $scope.access_token)
+					.then(function () {
+						$scope.error = '';
+						$scope.info = '';
+
+					},
+						function (error) {
+							if (error.status == 401) {
 								$scope.error = '';
-								$scope.info = 'Feil brukernavn eller passord';
-							}else if(error.status==503){
-								$scope.error = 'Melwin er nede. Prøv igjen senere';
-                            	console.log(error);
-							}else{
+								$scope.info = 'Aksess token er ikke gyldig';
+							} else if (error.status == 503) {
+								$scope.error = 'Serveren fikk problemer';
+								console.log(error);
+							} else {
 								$scope.error = 'Feil med serveren. Prøv igjen senere';
 								console.log(error);
 							}
+						}).finally(function () {
+
+							loginService.removeUrlParams();
+							$scope._logging_in = false;
+						});
+			}
+
+			$scope.login = function () {
+				$scope._logging_in = true;
+				loginService.login($scope.username, $scope.password)
+					.then(function () {
+						$scope.error = '';
+						$scope.info = '';
+					},
+						function (error) {
+							if (error.status == 401) {
+								$scope.error = '';
+								$scope.info = 'Feil brukernavn eller passord';
+							} else if (error.status == 503) {
+								$scope.error = 'Melwin er nede. Prøv igjen senere';
+								console.log(error);
+							} else {
+								$scope.error = 'Feil med serveren. Prøv igjen senere';
+								console.log(error);
+							}
+						}).finally(function () {
+							$scope._logging_in = false;
 						});
 			};
 
@@ -254,22 +317,21 @@
 
 	angular.module('fnlf-login').directive('fnlfLogin', fnlfLogin);
 
-		var fnlfLogout = function (loginService) {
-    		var directive = {};
-    		directive.restrict = 'E';
-    		directive.replace=true;
-    		directive.scope = {};
-    		directive.template='<a href ng-click=\"logout()\"><i class=\"fa fa-power-off\"></i> Logg ut</a>';
-    		directive.link = function ($scope, element, attrs) {
-    			$scope.logout = function () {
-    				console.log("Logout");
-    				loginService.logout();
-    			};
-    		};
-    		return directive;
-    	};
+	var fnlfLogout = function (loginService) {
+		var directive = {};
+		directive.restrict = 'E';
+		directive.replace = true;
+		directive.scope = {};
+		directive.template = '<a href ng-click=\"logout()\"><i class=\"fa fa-power-off\"></i> Logg ut</a>';
+		directive.link = function ($scope, element, attrs) {
+			$scope.logout = function () {
+				console.log("Logout");
+				loginService.logout();
+			};
+		};
+		return directive;
+	};
 
-    	angular.module('fnlf-login').directive('fnlfLogout', fnlfLogout);
+	angular.module('fnlf-login').directive('fnlfLogout', fnlfLogout);
 
 })();
-
