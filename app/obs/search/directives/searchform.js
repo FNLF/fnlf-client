@@ -38,23 +38,7 @@
 
 			$scope.go = function () {
 				var text = $scope.model.search;
-
-				var filterString = '';
-
-				var filteredFilter = {};
-				if($scope.filter) {
-					Object.keys($scope.filter).forEach(function (k) {
-						if ($scope.filter[k]) {
-							filteredFilter[k] = $scope.filter[k];
-						}
-					});
-				}
-				if(Object.keys(filteredFilter).length>0){
-					filterString=','+JSON.stringify(filteredFilter);
-				}
-
-				var path = '/search/tag/' + encodeURIComponent(Functions.capitalizeFirstLetter(text)+filterString);
-				$location.path(path);
+				SearchService.go(text,$scope.filter);
 			};
 
 		};

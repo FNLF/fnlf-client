@@ -39,15 +39,13 @@ angular.module('reportingApp').directive('searchtable', function () {
     				$scope.showFilter=true;
     			}
 
-
-    			if($routeParams.query){
-    				$scope.query = decodeURIComponent($routeParams.query);
+					if($routeParams.rawquery){
+    				$scope.rawquery = decodeURIComponent($routeParams.rawquery);
+						$scope.rawquery = unescape($scope.rawquery);
     			}
+		
 
 
-
-
-    			$scope.queryObj = SearchService.parseAdvancedSearchQuery($scope.query);
 
 				var searchTableParams = ObservationsTableService.restoreParams({page: 1, count: 10, sorting: {id: 'desc'}},'searchTable');
 
@@ -55,15 +53,16 @@ angular.module('reportingApp').directive('searchtable', function () {
     				var sortString = ObservationsTableService.sortStringFromParams(params);
 
     				var searchParam = $scope.tags;
-    				var searchFn = SearchService.searchByTag;
+    				var searchFn = SearchService.search;
     				if($scope.flag){
     					searchParam = $scope.flag;
     					searchFn = SearchService.searchByFlag;
     				}
-                    if($scope.query){
-                        searchParam = $scope.queryObj;
-                        searchFn = SearchService.searchAdvanced;
-                    }
+
+						if($scope.rawquery){
+							searchParam = $scope.rawquery;
+							searchFn = SearchService.searchRaw;
+						}
 
     				searchFn(params.page(), params.count(),sortString,searchParam,$scope.filter)
     					.then(function(data){
@@ -72,10 +71,13 @@ angular.module('reportingApp').directive('searchtable', function () {
     						$scope.total = meta.total;
     						$scope.tableData = data._items;
     						$defer.resolve(data._items);
-							ObservationsTableService.storeParams(params,'searchTable');
+								ObservationsTableService.storeParams(params,'searchTable');
+								$scope.searchError = null;
     					},
     					function(error){
     						console.log(error);
+								$scope.searchError = error;
+
     					});
 
     			}});

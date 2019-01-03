@@ -1,5 +1,15 @@
 <div class="col-xs-12 air">
 
+	<pre ng-if="searchError">
+		{{searchError | json}}
+	</pre>
+
+	<div ng-if="rawquery">
+
+		<pre>
+			{{rawquery}}
+		</pre>
+	</div>
 
 	<caption>
 		<h3 ng-if="tag" ng-bind="tag"></h3>
