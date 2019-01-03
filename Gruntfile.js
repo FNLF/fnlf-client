@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
 	
-	var versionTag = "056";
+	var versionTag = "057";
 
 	// Project configuration.
 	grunt.initConfig({
