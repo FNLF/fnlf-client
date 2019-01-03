@@ -29,6 +29,23 @@
 				ComponentService.incrementOrder($scope.observation.components,component);
 			};
 
+			$scope.hasNoIncident = function(){
+				if($scope.observation){
+					if($scope.observation.components){
+						if($scope.observation.components.length == 0){
+							return true;
+						}else{
+							for(var i = 0; i < $scope.observation.components.length; i++){
+								if($scope.observation.components[i].flags['incident']){
+									return false;
+								}							
+							}
+						}
+					}
+				}
+				return true;
+			};
+
 		};
 
 		return directive;
