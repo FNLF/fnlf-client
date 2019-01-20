@@ -8,41 +8,42 @@
 			</div>
 			<div class="col-xs-12" collapse="!showFilter">
 				<searchfilters filter="filter"></searchfilters>
+				<br /><br />
 			</div>
 
-			<p></p>
-			<div class="row">
-				<div class="col-xs-12 clearfix">
-					<searchform query="tag" filter="filter"></searchform>
-				</div>
-			</div>
-			<p></p>
-			<searchtable viewfn="viewObservation"></searchtable>
 		</div>
-		<div class="row">
-			<div class="col-xs-12 col-md-12" ng-if="observation">
-				<br>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 clearfix">
+			<searchform query="tag" filter="filter"></searchform>
+		</div>
+	</div>
+	<div class="row">
+		<searchtable viewfn="viewObservation"></searchtable>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-md-12" ng-if="observation">
+		<br>
 
-				<span ng-repeat="obs in tableData">
-					<a ng-click="viewObservation(obs)">
-						<span ng-class="{h3:obs.id==observation.id,h4:obs.id!=observation.id}">#{{::obs.id}}
-						</span>
-					</a>
+		<span ng-repeat="obs in tableData">
+			<a ng-click="viewObservation(obs)">
+				<span ng-class="{h3:obs.id==observation.id,h4:obs.id!=observation.id}">#{{::obs.id}}
 				</span>
+			</a>
+		</span>
 
-				<a ng-click="hideObservation()">
-					<h4>
-						<<< Tilbake til søkeresultater </h4> </a> <a class="pull-right" href="#!/observation/report/{{::observation.id}}">
-							<h4>Åpne #{{::observation.id}} i rapport</h4>
-				</a>
-
-			</div>
-		</div>
+		<a ng-click="hideObservation()">
+			<h4>
+				<<< Tilbake til søkeresultater </h4> </a> <a class="pull-right" href="#!/observation/report/{{::observation.id}}">
+					<h4>Åpne #{{::observation.id}} i rapport</h4>
+		</a>
 
 	</div>
-	<div>
-		<ng-include src="'observation/report.html'">
 
-		</ng-include>
-	</div>
+</div>
+<div>
+	<ng-include src="'observation/report.html'">
+
+	</ng-include>
 </div>
