@@ -10,30 +10,33 @@
 				<searchfilters filter="filter"></searchfilters>
 			</div>
 
-
-			<div class="col-xs-12">
-				<searchform query="tag" filter="filter"></searchform>
+			<p></p>
+			<div class="row">
+				<div class="col-xs-12 clearfix">
+					<searchform query="tag" filter="filter"></searchform>
+				</div>
 			</div>
-
+			<p></p>
 			<searchtable viewfn="viewObservation"></searchtable>
 		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-12" ng-if="observation">
+				<br>
 
-		<div class="col-xs-12 col-md-12" ng-if="observation">
-			<br>
+				<span ng-repeat="obs in tableData">
+					<a ng-click="viewObservation(obs)">
+						<span ng-class="{h3:obs.id==observation.id,h4:obs.id!=observation.id}">#{{::obs.id}}
+						</span>
+					</a>
+				</span>
 
-			<span ng-repeat="obs in tableData">
-				<a ng-click="viewObservation(obs)">
-					<span ng-class="{h3:obs.id==observation.id,h4:obs.id!=observation.id}">#{{::obs.id}}
-					</span>
+				<a ng-click="hideObservation()">
+					<h4>
+						<<< Tilbake til søkeresultater </h4> </a> <a class="pull-right" href="#!/observation/report/{{::observation.id}}">
+							<h4>Åpne #{{::observation.id}} i rapport</h4>
 				</a>
-			</span>
 
-			<a ng-click="hideObservation()">
-				<h4>
-					<<< Tilbake til søkeresultater </h4> </a> <a class="pull-right" href="#!/observation/report/{{::observation.id}}">
-						<h4>Åpne #{{::observation.id}} i rapport</h4>
-			</a>
-
+			</div>
 		</div>
 
 	</div>
