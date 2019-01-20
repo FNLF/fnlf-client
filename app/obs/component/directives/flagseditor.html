@@ -1,11 +1,8 @@
-<div class="">
-    <div class="form-group">
-        <div ng-repeat="a in allAttributes" class="col-xs-6 col-md-3 row">
-			<input ng-disabled="!acl.w" ng-model="attributes[a.attribute]" type="checkbox" >
-			<span class="label label-{{a.color}} ">
-				{{a.label}}
-			</span>
-		</div>
-
+<div class="form-group">
+	<div ng-repeat="a in allAttributes" class="col-xs-6 col-md-3 row">
+		<input ng-disabled="!acl.w" ng-model="attributes[a.attribute]" type="checkbox">
+		<span class="label label-{{a.color}} ">
+			{{a.label}}
+		</span>
 	</div>
 </div>
