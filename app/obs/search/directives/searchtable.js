@@ -18,6 +18,8 @@ angular.module('reportingApp').directive('searchtable', function () {
 		$scope.filter = {};
 		$scope.showFilter = false;
 
+		$scope.searchDataUrl;
+
 
 
 		if ($routeParams.tag) {
@@ -71,6 +73,7 @@ angular.module('reportingApp').directive('searchtable', function () {
 						params.total(meta.total);
 						$scope.total = meta.total;
 						$scope.tableData = data._items;
+						$scope.searchDataUrl = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data._items));
 						$defer.resolve(data._items);
 						ObservationsTableService.storeParams(params, 'searchTable');
 						$scope.searchError = null;
@@ -84,15 +87,6 @@ angular.module('reportingApp').directive('searchtable', function () {
 			}
 		});
 
-		$scope.saveJSON = function () {
-			$scope.toJSON = '';
-			$scope.toJSON = angular.toJson($scope.tableData);
-			var blob = new Blob([$scope.toJSON], { type:"application/json;charset=utf-8;" });			
-			var downloadLink = angular.element('<a></a>');
-						downloadLink.attr('href',window.URL.createObjectURL(blob));
-						downloadLink.attr('download', 'fileName.json');
-			downloadLink[0].click();
-		};
 
 		$scope.viewObservation = function (observation) {
 			if (!angular.isUndefined($scope.viewfn)) {
