@@ -41,15 +41,7 @@
 				SearchService.go(text,$scope.filter);
 			};
 
-			$scope.saveJSON = function () {
-				$scope.toJSON = '';
-				$scope.toJSON = angular.toJson(SearchService.getTableData());
-				var blob = new Blob([$scope.toJSON], { type:"application/json;charset=utf-8;" });			
-				var downloadLink = angular.element('<a></a>');
-							downloadLink.attr('href',window.URL.createObjectURL(blob));
-							downloadLink.attr('download', 'fileName.json');
-				downloadLink[0].click();
-			};
+
 
 		};
 

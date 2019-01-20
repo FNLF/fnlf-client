@@ -84,10 +84,16 @@ angular.module('reportingApp').directive('searchtable', function () {
 			}
 		});
 
-		$scope.getTableData = function() {
-			return $scope.tableData;
-		}
-		
+		$scope.saveJSON = function () {
+			$scope.toJSON = '';
+			$scope.toJSON = angular.toJson($scope.tableData);
+			var blob = new Blob([$scope.toJSON], { type:"application/json;charset=utf-8;" });			
+			var downloadLink = angular.element('<a></a>');
+						downloadLink.attr('href',window.URL.createObjectURL(blob));
+						downloadLink.attr('download', 'fileName.json');
+			downloadLink[0].click();
+		};
+
 		$scope.viewObservation = function (observation) {
 			if (!angular.isUndefined($scope.viewfn)) {
 				$scope.viewfn()(observation);
