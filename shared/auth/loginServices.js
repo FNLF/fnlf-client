@@ -2,13 +2,7 @@
 	'use strict';
 	angular.module('fnlf-login', ['http-auth-interceptor'])
 
-		.controller('LoginController', function ($scope, loginService, ENV) {
-
-			if (ENV.name == 'development') {
-				$scope._client_id = 'kgnkzakr10zsi3fgmk23';
-			} else {
-				$scope._client_id = 'vekvwnndpezv4dqlr35c';
-			}
+		.controller('LoginController', function ($scope, loginService) {
 
 			$scope.login = function () {
 				loginService.login($scope.username, $scope.password);
