@@ -4,7 +4,6 @@
 
 		<div>
 
-
 			<div class="col-xs-12 col-md-6 col-lg-4">
 				<div ng-if="!!_oauth_error">
 					<div class="alert alert-danger" role="alert">
@@ -32,7 +31,7 @@
 					</div>
 
 					<div class="row">
-						<div ng-if="!_logging_in">
+						<div ng-if="_logging_in==false">
 							<h2 class="text-center">Logg inn</h2>
 							<div class="row">
 								<div class="form-signin">
