@@ -1,9 +1,16 @@
 (function () {
 	'use strict';
-	angular.module('fnlf-login', ['http-auth-interceptor'])
+	angular.module('fnlf-login', ['http-auth-interceptor', 'config'])
 
-		.controller('LoginController', function ($scope, loginService) {
+		.controller('LoginController', function ($scope, loginService, ENV) {
 
+			$scope._getClientId = function() {
+				if (ENV.name == 'development') {
+					return 'kgnkzakr10zsi3fgmk23';
+				} else {
+					return 'vekvwnndpezv4dqlr35c';
+				}
+			}
 
 			$scope.login = function () {
 				loginService.login($scope.username, $scope.password);
@@ -44,7 +51,7 @@
 
 
 	angular.module('fnlf-login')
-		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore, $q, ENV) {
+		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore, $q) {
 
 			$rootScope.$on('event:auth-loginRequired', function () {
 				$rootScope.error = 'Login is required';
@@ -57,13 +64,7 @@
 				$rootScope.currentUserSignedOut = false;
 			});
 
-			this.getClientId = function() {
-				if (ENV.name == 'development') {
-					return 'kgnkzakr10zsi3fgmk23';
-				} else {
-					return 'vekvwnndpezv4dqlr35c';
-				}
-			}
+
 			this.getPath = function () {
 				//return $location.path();
 				//return $window.location.protocol + '//' + $window.location.host + $window.location.path;
@@ -253,7 +254,7 @@
 
 			$scope._auth_service = 'https://auth.nlf.no/auth';
 
-			$scope._client_id = loginService.getClientId();
+			$scope._client_id = $scope._getClientId();
 			$scope._scope = 'read';
 			$scope._shebang = 1;
 			$scope._response_type = 'access_token';
