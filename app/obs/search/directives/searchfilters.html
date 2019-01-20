@@ -10,97 +10,125 @@
 		<flagseditor acl="allacl" attributes="filter"></flagseditor>
 	</div>
 	<div>
+		<hr />
+		<div class="row">
 
-		<label class="col-sm-2 control-label">FU</label>
-		<div class="col-sm-1">
-			<input type="checkbox" value="" ng-model="filter.fu">
-		</div>
-
-		<label class="col-sm-2 control-label">Hoppforbud</label>
-		<div class="col-sm-1">
-			<input type="checkbox" value="" ng-model="filter.ph">
-		</div>
-
-		<label class="col-sm-2 control-label">Forsikringssak</label>
-		<div class="col-sm-1">
-			<input type="checkbox" value="" ng-model="filter.insurance">
-		</div>
-
-		<label class="col-sm-2 control-label">Luftfartshendelse</label>
-		<div class="col-sm-1">
-			<input type="checkbox" value="" ng-model="filter.aviation">
-		</div>
-
-		<label for="year" class="col-sm-2 control-label">Årstall</label>
-		<div class="col-sm-1 ">
-			<input placeholder="fra" id="year" class="form-control" type="number" ng-model="filter.year1">
-		</div>
-		<div class="col-sm-1 ">
-			<input placeholder="til" id="year2" class="form-control" type="number" ng-model="filter.year2">
-		</div>
-
-		<label for="jumps" class="col-sm-2 control-label">Antall hopp</label>
-		<div class="col-sm-1">
-			<input placeholder="fra" id="jumps" class="form-control" type="number" ng-model="filter.jumps1">
-		</div>
-		<div class="col-sm-1 ">
-			<input placeholder="til" id="jumps2" class="form-control" type="number" ng-model="filter.jumps2">
-		</div>
-		<label for="years" class="col-sm-2 control-label">År i sporten</label>
-		<div class="col-sm-1">
-			<input placeholder="fra" id="years" class="form-control" type="number" ng-model="filter.years1">
-		</div>
-		<div class="col-sm-1 ">
-			<input placeholder="til" id="years2" class="form-control" type="number" ng-model="filter.years2">
-		</div>
-
-		<label for="mainexperience" class="col-sm-2 control-label">Erfaring hovedskjerm</label>
-		<div class="col-sm-1">
-			<input placeholder="fra" id="mainexperience" class="form-control" type="number" ng-model="filter.mainExperience1">
-		</div>
-		<div class="col-sm-1 ">
-			<input placeholder="til" id="mainexperience2" class="form-control" type="number" ng-model="filter.mainExperience2">
-		</div>
-
-		<label for="harnessexperience" class="col-sm-2 control-label">Erfaring seletøy</label>
-		<div class="col-sm-1">
-			<input placeholder="fra" id="harnessexperience" class="form-control" type="number" ng-model="filter.harnessExperience1">
-		</div>
-			<div class="col-sm-1 ">	<input placeholder="til" id="harnessexperience2" class="form-control" type="number" ng-model="filter.harnessExperience2">
-		</div>
-
-		<label for="mainsize" class="col-sm-2 control-label">Hovedskjermstørrelse</label>
-		<div class="col-sm-1">
-			<input placeholder="fra" id="mainsize" class="form-control" type="number" ng-model="filter.mainsize1">
-		</div>
-		<div class="col-sm-1 ">
-			<input placeholder="til" id="mainsize2" class="form-control" type="number" ng-model="filter.mainsize2">
-		</div>
-
-		<label for="jumptype" class="col-sm-2 control-label">Hopptype</label>
-		<div class="col-sm-2">
-			<select id="jumptype" class="form-control" data-placeholder="Hopptype"
-					ng-model="filter.jumptypeSelected"
-					ng-options="jumptype.id as jumptype.name for jumptype in jumptypes">
-
-			</select>
-		</div>
-
-		<label for="club" class="col-sm-2 control-label">Klubb</label>
-			<div class="col-sm-2">
-			<select id="club" ng-options="club.id as club.name for club in clubs" ng-model="filter.club"  class="form-control">
-
-			</select>
-		</div>
-
-		<label for="type" class="col-sm-2 control-label">Type</label>
-		<div class="col-sm-2">
-			<select id="type" ng-options="t.id as t.name for t in observationTypes" ng-model="filter.type"  class="form-control">
-
-			</select>
-		</div>
+			<div class="col-xs-6 col-md-3">
+				<input type="checkbox" value="" ng-model="filter.fu">
+				<label class="col-xs-2 control-label">FU</label>
+			</div>
 
 
+			<div class="col-xs-6 col-md-3">
+				<input type="checkbox" value="" ng-model="filter.ph">
+				<label class="col-xs-2 control-label">Hoppforbud</label>
+			</div>
+
+
+			<div class="ccol-xs-6 col-md-3">
+				<input type="checkbox" value="" ng-model="filter.insurance">
+				<label class="col-xs-2 control-label">Forsikringssak</label>
+			</div>
+
+
+			<div class="col-xs-6 col-md-3">
+				<input type="checkbox" value="" ng-model="filter.aviation">
+				<label class="col-xs-2 control-label">Luftfartshendelse</label>
+			</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-xs-6 col-md-2">
+				<label for="year" class="col-xs-2 control-label">Årstall</label>
+				<div class="col-xs-2">
+					<input placeholder="fra" id="year" class="form-control" type="number" ng-model="filter.year1">
+				</div>
+				<div class="col-xs-2">
+					<input placeholder="til" id="year2" class="form-control" type="number" ng-model="filter.year2">
+				</div>
+			</div>
+
+			<div class="col-xs-6 col-md-2">
+				<label for="jumps" class="col-xs-2 control-label">Antall hopp</label>
+				<div class="col-xs-2">
+					<input placeholder="fra" id="jumps" class="form-control" type="number" ng-model="filter.jumps1">
+				</div>
+				<div class="col-xs-2">
+					<input placeholder="til" id="jumps2" class="form-control" type="number" ng-model="filter.jumps2">
+				</div>
+			</div>
+
+			<div class="col-xs-6 col-md-2">
+				<label for="years" class="col-xs-2 control-label">År i sporten</label>
+				<div class="col-xs-2">
+					<input placeholder="fra" id="years" class="form-control" type="number" ng-model="filter.years1">
+				</div>
+				<div class="col-xs-2">
+					<input placeholder="til" id="years2" class="form-control" type="number" ng-model="filter.years2">
+				</div>
+
+			</div>
+
+			<div class="col-xs-6 col-md-2">
+
+				<label for="mainexperience" class="col-xs-2 control-label">Erfaring hovedskjerm</label>
+				<div class="col-xs-2">
+					<input placeholder="fra" id="mainexperience" class="form-control" type="number" ng-model="filter.mainExperience1">
+				</div>
+				<div class="col-xs-2">
+					<input placeholder="til" id="mainexperience2" class="form-control" type="number" ng-model="filter.mainExperience2">
+				</div>
+			</div>
+
+			<div class="col-xs-6 col-md-2">
+				<label for="harnessexperience" class="col-xs-2 control-label">Erfaring seletøy</label>
+				<div class="col-xs-2">
+					<input placeholder="fra" id="harnessexperience" class="form-control" type="number" ng-model="filter.harnessExperience1">
+				</div>
+				<div class="col-xs-2"> <input placeholder="til" id="harnessexperience2" class="form-control" type="number" ng-model="filter.harnessExperience2">
+				</div>
+			</div>
+
+			<div class="col-xs-6 col-md-2">
+				<label for="mainsize" class="col-xs-2 control-label">Hovedskjermstørrelse</label>
+				<div class="col-xs-2">
+					<input placeholder="fra" id="mainsize" class="form-control" type="number" ng-model="filter.mainsize1">
+				</div>
+				<div class="col-xs-2">
+					<input placeholder="til" id="mainsize2" class="form-control" type="number" ng-model="filter.mainsize2">
+				</div>
+			</div>
+
+
+		</div>
+		<dic class="row">
+
+			<div class="col-xs-12 col-md-4">
+				<label for="jumptype" class="col-xs-2 control-label">Hopptype</label>
+				<div class="col-xs-2">
+					<select id="jumptype" class="form-control" data-placeholder="Hopptype" ng-model="filter.jumptypeSelected"
+					 ng-options="jumptype.id as jumptype.name for jumptype in jumptypes">
+
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<label for="club" class="col-xs-2 control-label">Klubb</label>
+				<div class="col-xs-2">
+					<select id="club" ng-options="club.id as club.name for club in clubs" ng-model="filter.club" class="form-control">
+
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<label for="type" class="col-xs-2 control-label">Type</label>
+				<div class="col-xs-2">
+					<select id="type" ng-options="t.id as t.name for t in observationTypes" ng-model="filter.type" class="form-control">
+
+					</select>
+				</div>
+
+			</div>
 
 
 	</div>
