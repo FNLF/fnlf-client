@@ -4,7 +4,6 @@
 
 		.controller('LoginController', function ($scope, loginService) {
 
-
 			$scope.login = function () {
 				loginService.login($scope.username, $scope.password);
 			};
@@ -230,7 +229,7 @@
 
 (function () {
 
-	var fnlfLogin = function (loginService) {
+	var fnlfLogin = function (loginService, ENV) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -239,14 +238,18 @@
 		directive.scope = {};
 
 		directive.link = function ($scope, element, attrs) {
-
 			$scope.error = '';
 
 			$scope.access_token = loginService.getQueryParams().access_token; //$location.search(); //['access_token'];
 			$scope.return_path = loginService.getPath();
-			
+
 			$scope._auth_service = 'https://auth.nlf.no/auth';
-			$scope._client_id = 'vekvwnndpezv4dqlr35c';
+
+			if(ENV.name == 'development') {
+				$scope._client_id = 'kgnkzakr10zsi3fgmk23';
+			} else {
+				$scope._client_id = 'vekvwnndpezv4dqlr35c';
+			}
 			$scope._scope = 'read';
 			$scope._shebang = 1;
 			$scope._response_type = 'access_token';
@@ -256,10 +259,11 @@
 			// Allow access_token to be transported in same path as previous username/passwords
 			if (typeof $scope.access_token != 'undefined') {
 				$scope._logging_in = true;
+
 				loginService.login('access_token', $scope.access_token)
 					.then(function () {
-						$scope.error = '';
-						$scope.info = '';
+						$scope.error = null;
+						$scope.info = null;
 
 					},
 						function (error) {
@@ -274,34 +278,12 @@
 								console.log(error);
 							}
 						}).finally(function () {
-
 							loginService.removeUrlParams();
 							$scope._logging_in = false;
 						});
-			}
 
-			$scope.login = function () {
-				$scope._logging_in = true;
-				loginService.login($scope.username, $scope.password)
-					.then(function () {
-						$scope.error = '';
-						$scope.info = '';
-					},
-						function (error) {
-							if (error.status == 401) {
-								$scope.error = '';
-								$scope.info = 'Feil brukernavn eller passord';
-							} else if (error.status == 503) {
-								$scope.error = 'Melwin er nede. Prøv igjen senere';
-								console.log(error);
-							} else {
-								$scope.error = 'Feil med serveren. Prøv igjen senere';
-								console.log(error);
-							}
-						}).finally(function () {
-							$scope._logging_in = false;
-						});
-			};
+
+			}
 
 			$scope.tryLoginFromSession = function () {
 				loginService.tryLoginFromSession();
