@@ -244,7 +244,7 @@
 
 			$scope.access_token = loginService.getQueryParams().access_token; //$location.search(); //['access_token'];
 			$scope.return_path = loginService.getPath();
-			
+
 			$scope._auth_service = 'https://auth.nlf.no/auth';
 			$scope._client_id = 'vekvwnndpezv4dqlr35c';
 			$scope._scope = 'read';
@@ -256,10 +256,11 @@
 			// Allow access_token to be transported in same path as previous username/passwords
 			if (typeof $scope.access_token != 'undefined') {
 				$scope._logging_in = true;
+				
 				loginService.login('access_token', $scope.access_token)
 					.then(function () {
-						$scope.error = '';
-						$scope.info = '';
+						$scope.error = null;
+						$scope.info = null;
 
 					},
 						function (error) {
@@ -274,64 +275,42 @@
 								console.log(error);
 							}
 						}).finally(function () {
-
 							loginService.removeUrlParams();
 							$scope._logging_in = false;
 						});
-			}
 
-			$scope.login = function () {
-				$scope._logging_in = true;
-				loginService.login($scope.username, $scope.password)
-					.then(function () {
-						$scope.error = '';
-						$scope.info = '';
-					},
-						function (error) {
-							if (error.status == 401) {
-								$scope.error = '';
-								$scope.info = 'Feil brukernavn eller passord';
-							} else if (error.status == 503) {
-								$scope.error = 'Melwin er nede. Prøv igjen senere';
-								console.log(error);
-							} else {
-								$scope.error = 'Feil med serveren. Prøv igjen senere';
-								console.log(error);
-							}
-						}).finally(function () {
-							$scope._logging_in = false;
-						});
+				
+
+
+				$scope.tryLoginFromSession = function () {
+					loginService.tryLoginFromSession();
+				};
+
+				$scope.logout = function () {
+					loginService.logout();
+				};
+
 			};
-
-			$scope.tryLoginFromSession = function () {
-				loginService.tryLoginFromSession();
-			};
-
-			$scope.logout = function () {
-				loginService.logout();
-			};
-
+			return directive;
 		};
-		return directive;
-	};
 
-	angular.module('fnlf-login').directive('fnlfLogin', fnlfLogin);
+		angular.module('fnlf-login').directive('fnlfLogin', fnlfLogin);
 
-	var fnlfLogout = function (loginService) {
-		var directive = {};
-		directive.restrict = 'E';
-		directive.replace = true;
-		directive.scope = {};
-		directive.template = '<a href ng-click=\"logout()\"><i class=\"fa fa-power-off\"></i> Logg ut</a>';
-		directive.link = function ($scope, element, attrs) {
-			$scope.logout = function () {
-				console.log("Logout");
-				loginService.logout();
+		var fnlfLogout = function (loginService) {
+			var directive = {};
+			directive.restrict = 'E';
+			directive.replace = true;
+			directive.scope = {};
+			directive.template = '<a href ng-click=\"logout()\"><i class=\"fa fa-power-off\"></i> Logg ut</a>';
+			directive.link = function ($scope, element, attrs) {
+				$scope.logout = function () {
+					console.log("Logout");
+					loginService.logout();
+				};
 			};
+			return directive;
 		};
-		return directive;
-	};
 
-	angular.module('fnlf-login').directive('fnlfLogout', fnlfLogout);
+		angular.module('fnlf-login').directive('fnlfLogout', fnlfLogout);
 
-})();
+	})();

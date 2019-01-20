@@ -11,149 +11,121 @@
 						<h1>Error: {{ _oauth_error }}
 						</h1>
 						<h3>{{ _oauth_error_msg }}</h3>
-						<h4 ng-if="_oauth_error=='access_denied'">Denne feilmeldingen betyr at du trolig ikke har riktig brukernavn eller passord</h4>
-						
-					</div>
+						<h4 ng-if="_oauth_error=='access_denied'">Denne feilmeldingen betyr at du trolig ikke har benyttet riktig
+							brukernavn eller passord</h4>
 
-				</div>
-				<div class="row">
-					<div ng-if="!!_logging_in">
-						<h3>Authenticating, please wait...</h3>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"
-							 aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+						<div ng-if="!!error">
+							<div ng-show="error" class="alert alert-danger">{{error}}</div>
+							<div ng-show="info" class="alert alert-info">{{info}}</div>
 						</div>
-					</div>
-				</div>
 
-				<div class="row">
-					<h2 class="text-center">Logg inn</h2>
+					</div>
+
 					<div class="row">
-						<div class="form-signin">
-							<h3 class="text-center">Alternativ 1:</h3>
-							<a href="{{ _auth_service }}?client_id={{ _client_id }}&response_type={{ _response_type }}&scope={{ _scope }}&shebang={{ _shebang }}&redirect_uri={{ return_path }}"
-							 class="btn btn-lg btn-primary btn-block" type="submit" class="btn btn-danger">Logg
-								inn med NLF Auth</a>
-							<small class="text-center">Ved å benytte alternativ 1 logger du inn via https://auth.nlf.no hvor du benytter
-								samme brukernavn og passord som på Min Idrett (https://mi.nif.no)</small>
+						<div ng-if="!!_logging_in">
+							<h3>Authenticating, please wait...</h3>
+							<div class="progress">
+								<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"
+								 aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
 						</div>
 					</div>
 
-					<form id="loginForm" class="form-signin" name="form" ng-submit="login()" role="form">
-						<h3 class="text-center">Alternativ 2:</h3>
-
-						<h3 class="text-center">Logg inn via Melwin</h3>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span> <input placeholder="Medlemsnummer" type="text"
-							 name="username" id="username" class="form-control" ng-model="username" required autofocus />
+					<div class="row">
+						<div ng-if="!_logging_in">
+							<h2 class="text-center">Logg inn</h2>
+							<div class="row">
+								<div class="form-signin">
+									<a href="{{ _auth_service }}?client_id={{ _client_id }}&response_type={{ _response_type }}&scope={{ _scope }}&shebang={{ _shebang }}&redirect_uri={{ return_path }}"
+									 class="btn btn-lg btn-primary btn-block" type="submit" class="btn btn-danger">Logg
+										inn med NLF Auth</a>
+									<small class="text-center">Autentisering skjer via https://auth.nlf.no hvor du benytter
+										samme brukernavn og passord som på Min Idrett (https://mi.nif.no)</small>
+								</div>
+							</div>
 						</div>
-						<span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Medlemsnummer
-							er påkrevd</span>
-
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span> <input placeholder="Passord" type="password"
-							 name="password" id="password" class="form-control" ng-model="password" required />
-						</div>
-						<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Passord er påkrevd</span>
-
-						<div ng-show="error" class="alert alert-danger">{{error}}</div>
-						<div ng-show="info" class="alert alert-info">{{info}}</div>
-						<div class="form-actions">
-							<button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="form.$invalid" class="btn btn-danger">Logg
-								inn</button>
-
-						</div>
-
-						<!-- <a href="#" class="pull-right need-help">Hjelp? </a><span class="clearfix"></span> -->
-
-						<div class="clearfix"></div>
-						<small class="text-center">For å logge inn via Melwin benytter du ditt Melwin medlemsnummer som brukernavn og den
-							9-sifrede pin koden på ditt medlemskort
-							som passord. Mangler du koden kan du benytte <a href="http://melwin.nlf.no/4daction/w_nykode">ny kode</a></small>
+					</div>
 				</div>
-				</form>
+				<!-- Modal with help? -->
+
+
 			</div>
 		</div>
-		<!-- Modal with help? -->
+	</div>
+	<div id="login-holder" ng-hide="currentUserSignedIn">
 
 
 	</div>
-</div>
-</div>
-<div id="login-holder" ng-hide="currentUserSignedIn">
+	<style>
+		.input-group .form-control {
+			margin: 0px !important;
+		}
 
+		.form-signin {
+			padding: 15px;
+		}
 
-</div>
-<style>
-	.input-group .form-control {
-		margin: 0px !important;
-	}
+		.form-signin .form-signin-heading,
+		.form-signin .checkbox {
+			margin-bottom: 10px;
+		}
 
-	.form-signin {
-		padding: 15px;
-	}
+		.form-signin .checkbox {
+			font-weight: normal;
+		}
 
-	.form-signin .form-signin-heading,
-	.form-signin .checkbox {
-		margin-bottom: 10px;
-	}
+		.form-signin .form-control {
+			position: relative;
+			font-size: 16px;
+			height: auto;
+			padding: 10px;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
 
-	.form-signin .checkbox {
-		font-weight: normal;
-	}
+		.form-signin .form-control:focus {
+			z-index: 2;
+		}
 
-	.form-signin .form-control {
-		position: relative;
-		font-size: 16px;
-		height: auto;
-		padding: 10px;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-	}
+		.form-signin .input-group {
+			margin-bottom: 10px;
+		}
 
-	.form-signin .form-control:focus {
-		z-index: 2;
-	}
+		.account-wall {
+			padding: 10px 0px 20px 0px;
+			background-color: #f7f7f7;
+			-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		}
 
-	.form-signin .input-group {
-		margin-bottom: 10px;
-	}
+		.login-title {
+			color: #555;
+			font-size: 18px;
+			font-weight: 400;
+			display: block;
+		}
 
-	.account-wall {
-		padding: 10px 0px 20px 0px;
-		background-color: #f7f7f7;
-		-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-	}
-
-	.login-title {
-		color: #555;
-		font-size: 18px;
-		font-weight: 400;
-		display: block;
-	}
-
-	.profile-img {
-		margin: 0 auto 10px;
-		display: block;
-		/*
+		.profile-img {
+			margin: 0 auto 10px;
+			display: block;
+			/*
 			width: 96px;
 			height: 96px;
 			-moz-border-radius: 50%;
 			-webkit-border-radius: 50%;
 			border-radius: 50%;*/
-	}
+		}
 
-	.need-help {
-		margin-top: 10px;
-	}
+		.need-help {
+			margin-top: 10px;
+		}
 
-	.new-account {
-		display: block;
-		margin-top: 10px;
-	}
-</style>
+		.new-account {
+			display: block;
+			margin-top: 10px;
+		}
+	</style>
 
 </div>
