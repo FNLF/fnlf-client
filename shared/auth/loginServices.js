@@ -1,15 +1,13 @@
 (function () {
 	'use strict';
-	angular.module('fnlf-login', ['http-auth-interceptor', 'config'])
+	angular.module('fnlf-login', ['http-auth-interceptor'])
 
 		.controller('LoginController', function ($scope, loginService, ENV) {
 
-			$scope._getClientId = function() {
-				if (ENV.name == 'development') {
-					return 'kgnkzakr10zsi3fgmk23';
-				} else {
-					return 'vekvwnndpezv4dqlr35c';
-				}
+			if (ENV.name == 'development') {
+				$scope._client_id = 'kgnkzakr10zsi3fgmk23';
+			} else {
+				$scope._client_id = 'vekvwnndpezv4dqlr35c';
 			}
 
 			$scope.login = function () {
@@ -63,7 +61,6 @@
 				$rootScope.currentUserSignedIn = true;
 				$rootScope.currentUserSignedOut = false;
 			});
-
 
 			this.getPath = function () {
 				//return $location.path();
@@ -254,7 +251,7 @@
 
 			$scope._auth_service = 'https://auth.nlf.no/auth';
 
-			$scope._client_id = $scope._getClientId();
+
 			$scope._scope = 'read';
 			$scope._shebang = 1;
 			$scope._response_type = 'access_token';
@@ -288,37 +285,37 @@
 						});
 
 
+			}
 
-
-				$scope.tryLoginFromSession = function () {
-					loginService.tryLoginFromSession();
-				};
-
-				$scope.logout = function () {
-					loginService.logout();
-				};
-
+			$scope.tryLoginFromSession = function () {
+				loginService.tryLoginFromSession();
 			};
-			return directive;
-		};
 
-		angular.module('fnlf-login').directive('fnlfLogin', fnlfLogin);
-
-		var fnlfLogout = function (loginService) {
-			var directive = {};
-			directive.restrict = 'E';
-			directive.replace = true;
-			directive.scope = {};
-			directive.template = '<a href ng-click=\"logout()\"><i class=\"fa fa-power-off\"></i> Logg ut</a>';
-			directive.link = function ($scope, element, attrs) {
-				$scope.logout = function () {
-					console.log("Logout");
-					loginService.logout();
-				};
+			$scope.logout = function () {
+				loginService.logout();
 			};
-			return directive;
+
 		};
+		return directive;
+	};
 
-		angular.module('fnlf-login').directive('fnlfLogout', fnlfLogout);
+	angular.module('fnlf-login').directive('fnlfLogin', fnlfLogin);
 
-	})();
+	var fnlfLogout = function (loginService) {
+		var directive = {};
+		directive.restrict = 'E';
+		directive.replace = true;
+		directive.scope = {};
+		directive.template = '<a href ng-click=\"logout()\"><i class=\"fa fa-power-off\"></i> Logg ut</a>';
+		directive.link = function ($scope, element, attrs) {
+			$scope.logout = function () {
+				console.log("Logout");
+				loginService.logout();
+			};
+		};
+		return directive;
+	};
+
+	angular.module('fnlf-login').directive('fnlfLogout', fnlfLogout);
+
+})();
