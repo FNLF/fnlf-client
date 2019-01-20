@@ -41,6 +41,8 @@
 				SearchService.go(text,$scope.filter);
 			};
 
+
+
 		};
 
 		return directive;
