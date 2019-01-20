@@ -238,15 +238,19 @@
 
 		directive.scope = {};
 
-		directive.link = function ($scope, element, attrs) {
-
+		directive.link = function ($scope, element, attrs, ENV) {
 			$scope.error = '';
 
 			$scope.access_token = loginService.getQueryParams().access_token; //$location.search(); //['access_token'];
 			$scope.return_path = loginService.getPath();
 
 			$scope._auth_service = 'https://auth.nlf.no/auth';
-			$scope._client_id = 'vekvwnndpezv4dqlr35c';
+
+			if (ENV.name == 'development') {
+				$scope._client_id = 'kgnkzakr10zsi3fgmk23';
+			} else {
+				$scope._client_id = 'vekvwnndpezv4dqlr35c';
+			}
 			$scope._scope = 'read';
 			$scope._shebang = 1;
 			$scope._response_type = 'access_token';
@@ -256,7 +260,7 @@
 			// Allow access_token to be transported in same path as previous username/passwords
 			if (typeof $scope.access_token != 'undefined') {
 				$scope._logging_in = true;
-				
+
 				loginService.login('access_token', $scope.access_token)
 					.then(function () {
 						$scope.error = null;
@@ -279,7 +283,7 @@
 							$scope._logging_in = false;
 						});
 
-				
+
 
 
 				$scope.tryLoginFromSession = function () {
