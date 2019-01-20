@@ -44,7 +44,7 @@
 
 
 	angular.module('fnlf-login')
-		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore, $q) {
+		.service('loginService', function ($rootScope, $http, authService, GlobalsService, $window, $location, $cookieStore, $q, ENV) {
 
 			$rootScope.$on('event:auth-loginRequired', function () {
 				$rootScope.error = 'Login is required';
@@ -57,6 +57,13 @@
 				$rootScope.currentUserSignedOut = false;
 			});
 
+			this.getClientId = function() {
+				if (ENV.name == 'development') {
+					return 'kgnkzakr10zsi3fgmk23';
+				} else {
+					return 'vekvwnndpezv4dqlr35c';
+				}
+			}
 			this.getPath = function () {
 				//return $location.path();
 				//return $window.location.protocol + '//' + $window.location.host + $window.location.path;
@@ -238,7 +245,7 @@
 
 		directive.scope = {};
 
-		directive.link = function ($scope, element, attrs, ENV) {
+		directive.link = function ($scope, element, attrs) {
 			$scope.error = '';
 
 			$scope.access_token = loginService.getQueryParams().access_token; //$location.search(); //['access_token'];
@@ -246,11 +253,7 @@
 
 			$scope._auth_service = 'https://auth.nlf.no/auth';
 
-			if (ENV.name == 'development') {
-				$scope._client_id = 'kgnkzakr10zsi3fgmk23';
-			} else {
-				$scope._client_id = 'vekvwnndpezv4dqlr35c';
-			}
+			$scope._client_id = loginService.getClientId();
 			$scope._scope = 'read';
 			$scope._shebang = 1;
 			$scope._response_type = 'access_token';
