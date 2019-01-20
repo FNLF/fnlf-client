@@ -32,30 +32,30 @@
 <div class="row">
 	<div class="col-xs-6 col-md-4">
 		<label for="year" class="control-label">Årstall</label>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="fra" id="year" class="form-control" type="number" ng-model="filter.year1">
 		</div>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="til" id="year2" class="form-control" type="number" ng-model="filter.year2">
 		</div>
 	</div>
 
 	<div class="col-xs-6 col-md-4">
 		<label for="jumps" class="control-label">Antall hopp</label>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="fra" id="jumps" class="form-control" type="number" ng-model="filter.jumps1">
 		</div>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="til" id="jumps2" class="form-control" type="number" ng-model="filter.jumps2">
 		</div>
 	</div>
 
 	<div class="col-xs-6 col-md-4">
 		<label for="years" class="control-label">År i sporten</label>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="fra" id="years" class="form-control" type="number" ng-model="filter.years1">
 		</div>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="til" id="years2" class="form-control" type="number" ng-model="filter.years2">
 		</div>
 
@@ -65,29 +65,29 @@
 	<div class="col-xs-6 col-md-4">
 
 		<label for="mainexperience" class="control-label">Erfaring hovedskjerm</label>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="fra" id="mainexperience" class="form-control" type="number" ng-model="filter.mainExperience1">
 		</div>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="til" id="mainexperience2" class="form-control" type="number" ng-model="filter.mainExperience2">
 		</div>
 	</div>
 
 	<div class="col-xs-6 col-md-4">
 		<label for="harnessexperience" class="control-label">Erfaring seletøy</label>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="fra" id="harnessexperience" class="form-control" type="number" ng-model="filter.harnessExperience1">
 		</div>
-		<div class="col-xs-2"> <input placeholder="til" id="harnessexperience2" class="form-control" type="number" ng-model="filter.harnessExperience2">
+		<div class="col-xs-12"> <input placeholder="til" id="harnessexperience2" class="form-control" type="number" ng-model="filter.harnessExperience2">
 		</div>
 	</div>
 
 	<div class="col-xs-6 col-md-4">
 		<label for="mainsize" class="control-label">Hovedskjermstørrelse</label>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="fra" id="mainsize" class="form-control" type="number" ng-model="filter.mainsize1">
 		</div>
-		<div class="col-xs-2">
+		<div class="col-xs-12">
 			<input placeholder="til" id="mainsize2" class="form-control" type="number" ng-model="filter.mainsize2">
 		</div>
 	</div>
@@ -96,24 +96,27 @@
 <div class="row">
 
 	<div class="col-xs-12 col-md-4">
-		<label for="jumptype" class="control-label">Hopptype</label>
-		<div class="col-xs-2">
+
+		<div class="col-xs-12">
+			<label for="jumptype" class="control-label">Hopptype</label>
 			<select id="jumptype" class="form-control" data-placeholder="Hopptype" ng-model="filter.jumptypeSelected" ng-options="jumptype.id as jumptype.name for jumptype in jumptypes">
 
 			</select>
 		</div>
 	</div>
 	<div class="col-xs-12 col-md-4">
-		<label for="club" class="control-label">Klubb</label>
-		<div class="col-xs-2">
+
+		<div class="col-xs-12">
+			<label for="club" class="control-label">Klubb</label>
 			<select id="club" ng-options="club.id as club.name for club in clubs" ng-model="filter.club" class="form-control">
 
 			</select>
 		</div>
 	</div>
 	<div class="col-xs-12 col-md-4">
-		<label for="type" class="control-label">Type</label>
-		<div class="col-xs-2">
+
+		<div class="col-xs-12">
+			<label for="type" class="control-label">Type</label>
 			<select id="type" ng-options="t.id as t.name for t in observationTypes" ng-model="filter.type" class="form-control">
 
 			</select>
