@@ -229,7 +229,7 @@
 
 (function () {
 
-	var fnlfLogin = function (loginService) {
+	var fnlfLogin = function (loginService, ENV) {
 		var directive = {};
 
 		directive.restrict = 'E';
@@ -245,7 +245,11 @@
 
 			$scope._auth_service = 'https://auth.nlf.no/auth';
 
-
+			if(ENV.name == 'development') {
+				$scope._client_id = 'kgnkzakr10zsi3fgmk23';
+			} else {
+				$scope._client_id = 'vekvwnndpezv4dqlr35c';
+			}
 			$scope._scope = 'read';
 			$scope._shebang = 1;
 			$scope._response_type = 'access_token';
