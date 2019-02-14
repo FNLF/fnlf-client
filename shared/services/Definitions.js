@@ -28,7 +28,7 @@
 
 
 			this.getObservationTypeMap = function() {
-				var types = {'sharing': 'Erfaringsdeling', 'unwanted_act': 'Uønsket', 'near_miss': 'Næruhell', 'incident': 'Uhell', 'accident': 'Ulykke'};
+				var types = {'sharing': 'Erfaringsdeling', 'unsafe_act': 'Uønsket', 'near_miss': 'Næruhell', 'incident': 'Uhell', 'accident': 'Ulykke'};
 				return types;
 			};
 
