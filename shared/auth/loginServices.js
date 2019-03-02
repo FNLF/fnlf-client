@@ -66,7 +66,7 @@
 				if ($location.url().indexOf('access_token') > -1) {
 					return $location.search().access_token; // ['access_token'];
 				}
-				return null;
+				return undefined;
 
 			}
 
