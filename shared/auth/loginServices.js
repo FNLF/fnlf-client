@@ -62,9 +62,10 @@
 				return $location.absUrl();
 			}
 			this.getAccessToken = function () {
-				
+				$window.alert('Olbjørn, hva ser du: ' + $location.search());
 				if ($location.url().indexOf('access_token') > -1) {
-					return $location.search().access_token; // ['access_token'];
+					
+					return $location.search()['access_token']; // ['access_token'];
 				}
 				return undefined;
 
