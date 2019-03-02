@@ -62,7 +62,7 @@
 				return $location.absUrl();
 			}
 			this.getAccessToken = function () {
-				$window.alert('Olbjørn, hva ser du: ' + JSON.stringify($location.search()['access_token']));
+				$window.alert('Olbjørn, hva ser du: ' +$location.url().indexOf('access_token') + ' Token: ' + JSON.stringify($location.search()['access_token']));
 				if ($location.url().indexOf('access_token') > -1) {
 					
 					return $location.search()['access_token']; // ['access_token'];
