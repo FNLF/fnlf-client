@@ -62,8 +62,11 @@
 				return $location.absUrl();
 			}
 			this.getAccessToken = function () {
-
-				return $location.search().access_token;// ['access_token'];
+				
+				if ($location.url().indexOf('access_token') > -1) {
+					return $location.search().access_token; // ['access_token'];
+				}
+				return null;
 
 			}
 
@@ -240,7 +243,7 @@
 		directive.link = function ($scope, element, attrs) {
 			$scope.error = '';
 
-			$scope.access_token = loginService.getQueryParams().access_token; //$location.search(); //['access_token'];
+			$scope.access_token = loginService.getAccessToken(); //getQueryParams().access_token; //$location.search(); //['access_token'];
 			$scope.return_path = loginService.getPath();
 
 			$scope._auth_service = 'https://auth.nlf.no/auth';
