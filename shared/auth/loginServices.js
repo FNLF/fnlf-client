@@ -248,7 +248,7 @@
 			if(ENV.name == 'development') {
 				$scope._client_id = 'kgnkzakr10zsi3fgmk23';
 			} else {
-				$scope._client_id = 'vekvwnndpezv4dqlr35c';
+				$scope._client_id = 'lr100oyweu8ikebop8nq';
 			}
 			$scope._scope = 'read';
 			$scope._shebang = 1;
