@@ -25,7 +25,10 @@
 	<table ng-table="tableParams" show-filter="false" class="table table-condensed table-striped table-responsive table-bordered">
 
 		<tr ng-repeat="observation in $data">
-			<td data-title="'Observasjon'" sortable="'id'"><a  ng-click="viewObservation(observation)">#{{::observation.id}} {{::observation.tags.join(', ')| cut:true:20:' ...'}} </a></td>
+			<td data-title="'Observasjon'" sortable="'id'">
+				<!--<a ng-click="viewObservation(observation)">#{{::observation.id}} {{::observation.tags.join(', ')| cut:true:20:' ...'}} </a>-->
+				<a ng-href="/observation/{{observation.id}}">#{{::observation.id}} {{::observation.tags.join(', ')| cut:true:20:' ...'}} </a>
+			</td>
 			<td data-title="'Tid'" sortable="'date'">{{::observation.when | date:'yyyy-MM-dd'}}</td>
 			<td data-title="'Klubb'"><resolveclub clubid="::observation.club"></resolveclub></td>
 			<td data-title="'Forløp'">
